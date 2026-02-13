@@ -3,8 +3,204 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>The American Yawp Middle School Edition</title>
-<link rel="stylesheet" href="css/index.css">
+<title>The American Yawp — Middle School Edition</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:wght@400;600;700&display=swap');
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Libre Baskerville', Georgia, serif;
+  color: #2C2C2C;
+  background: #FAFAF8;
+  line-height: 1.6;
+}
+
+/* ---- Hero ---- */
+.hero {
+  text-align: center;
+  padding: 52px 24px 40px;
+  background: linear-gradient(170deg, #0D2137 0%, #1B3A5C 40%, #2B5A7C 100%);
+  color: white;
+}
+.hero h1 {
+  font-size: 52px;
+  margin-bottom: 4px;
+  line-height: 1.1;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+.hero .edition {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 15px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  opacity: .55;
+  margin-bottom: 18px;
+}
+.hero .divider {
+  width: 72px;
+  height: 2px;
+  background: #C4941D;
+  margin: 0 auto 14px;
+}
+.hero .tagline {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 14.5px;
+  opacity: .65;
+  max-width: 480px;
+  margin: 0 auto;
+  line-height: 1.5;
+}
+
+/* ---- Utility nav ---- */
+.util-links {
+  text-align: center;
+  padding: 12px 16px;
+  background: white;
+  border-bottom: 1px solid #ddd;
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 13px;
+}
+.util-links a {
+  color: #1B3A5C;
+  text-decoration: none;
+  margin: 0 6px;
+  padding: 3px 0;
+  border-bottom: 1px dotted transparent;
+  transition: border-color .2s;
+}
+.util-links a:hover { border-bottom-color: #C4941D; }
+.util-links .sep { color: #ccc; margin: 0 3px; }
+
+/* ---- Main ---- */
+.main {
+  max-width: 880px;
+  margin: 0 auto;
+  padding: 28px 28px 20px;
+}
+
+/* ---- Key links ---- */
+.key-links {
+  text-align: center;
+  margin-bottom: 24px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #E0E0E0;
+}
+.key-links a {
+  display: inline-block;
+  font-size: 16px;
+  color: #1B3A5C;
+  text-decoration: none;
+  margin: 0 18px;
+  padding: 3px 0;
+  border-bottom: 1px dotted #1B3A5C;
+  transition: color .2s, border-color .2s;
+}
+.key-links a:hover {
+  color: #C4941D;
+  border-bottom-color: #C4941D;
+}
+
+/* ---- Two-column volumes ---- */
+.volumes {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 36px;
+  margin-bottom: 24px;
+}
+.volume h2 {
+  font-size: 14px;
+  font-family: 'Source Sans 3', sans-serif;
+  color: #1B3A5C;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 3px;
+  font-weight: 700;
+}
+.volume .vol-sub {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 12px;
+  color: #999;
+  margin-bottom: 14px;
+}
+
+/* ---- Chapter list with dot leaders ---- */
+.toc-list {
+  list-style: none;
+  padding: 0;
+}
+.toc-list li { margin-bottom: 1px; }
+.toc-list a, .toc-list .upcoming {
+  display: flex;
+  align-items: baseline;
+  text-decoration: none;
+  font-size: 15px;
+  line-height: 1.55;
+  padding: 2px 0;
+  transition: color .15s;
+}
+.toc-list a { color: #2C2C2C; }
+.toc-list a:hover { color: #C4941D; }
+.toc-list .upcoming { color: #bbb; }
+.toc-list .ch-num {
+  flex-shrink: 0;
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 13px;
+  color: #999;
+  width: 24px;
+  text-align: right;
+  margin-right: 8px;
+}
+.toc-list .upcoming .ch-num { color: #ccc; }
+.toc-list .ch-title { white-space: nowrap; }
+.toc-list .dots {
+  flex: 1;
+  border-bottom: 1px dotted #ccc;
+  margin: 0 5px;
+  min-width: 16px;
+  position: relative;
+  top: -3px;
+}
+.toc-list .upcoming .dots { border-bottom-color: #e0e0e0; }
+
+/* Volume II placeholder */
+.vol-placeholder {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 13px;
+  color: #aaa;
+  font-style: italic;
+  padding: 8px 0;
+  line-height: 1.6;
+}
+
+/* ---- Footer ---- */
+footer {
+  border-top: 1px solid #E0E0E0;
+  padding: 16px 28px;
+  max-width: 880px;
+  margin: 0 auto;
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 12px;
+  color: #aaa;
+  line-height: 1.7;
+  text-align: center;
+}
+footer a { color: #2A7F8E; text-decoration: none; }
+footer a:hover { text-decoration: underline; }
+footer .license-line { margin-bottom: 6px; }
+footer .footer-links a { margin: 0 7px; }
+
+/* ---- Responsive ---- */
+@media (max-width: 700px) {
+  .hero h1 { font-size: 36px; }
+  .hero { padding: 36px 20px 28px; }
+  .volumes { grid-template-columns: 1fr; gap: 24px; }
+  .main { padding: 20px 16px 14px; }
+  .key-links a { display: block; margin: 6px 0; }
+  .util-links a { margin: 0 4px; font-size: 12px; }
+}
+</style>
 </head>
 <body>
 
@@ -12,160 +208,72 @@
   <h1>The American Yawp</h1>
   <div class="edition">Middle School Edition</div>
   <div class="divider"></div>
-  <p class="yawp-def"><strong>Yawp</strong> \yôp\ <em>n</em>: 1: a raucous noise 2: rough vigorous language</p>
-  <p class="whitman-quote">"I sound my barbaric yawp over the roofs of the world."<br>—Walt Whitman, 1855</p>
+  <p class="tagline">A free, open-source American history textbook for grades 6&ndash;8.<br>Adapted from <em>The American Yawp</em>, the collaboratively built college textbook.</p>
 </div>
 
-<nav class="nav-bar">
-  <a href="introduction.html">Introduction</a>
+<div class="util-links">
   <a href="about.html">About</a>
+  <span class="sep">|</span>
   <a href="contributors.html">Contributors</a>
+  <span class="sep">|</span>
   <a href="teaching.html">Teaching Materials</a>
+  <span class="sep">|</span>
   <a href="whopays.html">Who Pays for This?</a>
-</nav>
-
-<div class="container">
-
-<div class="intro-section">
-  <h2>Welcome</h2>
-  <p><strong>American Yawp MS</strong> is a free, open-source American history textbook for middle school students (grades 6–8). It's adapted from <em>The American Yawp</em>, the collaboratively built college textbook used by hundreds of thousands of students nationwide.</p>
-  <p>This project treats students like thinkers, not test-takers. Every chapter features storytelling, primary sources, multiple perspectives, and the voices history left out. <a href="introduction.html">Read more about the project →</a></p>
+  <span class="sep">|</span>
+  <a href="https://github.com/shiebenaderet/yawpms">GitHub</a>
 </div>
 
-<h2>Companion Resources</h2>
+<div class="main">
 
-<ul class="chapter-list">
-  <li>
-    <a href="primary-source-reader.html">
-      <div class="ch-title">Primary Source Reader</div>
-      <div class="ch-num">Under construction — A collection of historical documents to accompany each chapter</div>
-    </a>
-  </li>
-</ul>
-
-<h3 class="volume-header">Volume I: To 1877</h3>
-<p class="volume-subhead">Pre-Columbian America through Reconstruction (Chapters 1–15)</p>
-
-<ul class="chapter-list">
-  <li>
-    <a href="ch1.html">
-      <div class="ch-num">Chapter 1</div>
-      <div class="ch-title">Indigenous America</div>
-    </a>
-  </li>
-  <li>
-    <a href="ch2.html">
-      <div class="ch-num">Chapter 2</div>
-      <div class="ch-title">Colliding Cultures</div>
-    </a>
-  </li>
-  <li>
-    <a href="ch3.html">
-      <div class="ch-num">Chapter 3</div>
-      <div class="ch-title">British North America</div>
-    </a>
-  </li>
-  <li>
-    <a href="ch4.html">
-      <div class="ch-num">Chapter 4</div>
-      <div class="ch-title">Colonial Society</div>
-    </a>
-  </li>
-  <li>
-    <a href="ch5.html">
-      <div class="ch-num">Chapter 5</div>
-      <div class="ch-title">The American Revolution</div>
-    </a>
-  </li>
-  <li>
-    <a href="ch6.html">
-      <div class="ch-num">Chapter 6</div>
-      <div class="ch-title">A New Nation</div>
-    </a>
-  </li>
-  <li>
-    <a href="ch7.html">
-      <div class="ch-num">Chapter 7</div>
-      <div class="ch-title">The Early Republic</div>
-    </a>
-  </li>
-  <li>
-    <a href="ch8.html">
-      <div class="ch-num">Chapter 8</div>
-      <div class="ch-title">The Market Revolution</div>
-    </a>
-  </li>
-  <li>
-    <a href="ch9.html">
-      <div class="ch-num">Chapter 9</div>
-      <div class="ch-title">Democracy in America</div>
-    </a>
-  </li>
-  <li>
-    <a href="ch10.html">
-      <div class="ch-num">Chapter 10</div>
-      <div class="ch-title">Religion and Reform</div>
-    </a>
-  </li>
-  <li>
-    <a href="ch11.html">
-      <div class="ch-num">Chapter 11</div>
-      <div class="ch-title">The Cotton Revolution</div>
-    </a>
-  </li>
-  <li>
-    <a href="ch12.html">
-      <div class="ch-num">Chapter 12</div>
-      <div class="ch-title">Manifest Destiny</div>
-    </a>
-  </li>
-  <li>
-    <a href="ch13.html">
-      <div class="ch-num">Chapter 13</div>
-      <div class="ch-title">The Sectional Crisis</div>
-    </a>
-  </li>
-  <li>
-    <a href="ch14.html">
-      <div class="ch-num">Chapter 14</div>
-      <div class="ch-title">The Civil War</div>
-    </a>
-  </li>
-  <li>
-    <a href="ch15.html">
-      <div class="ch-num">Chapter 15</div>
-      <div class="ch-title">Reconstruction</div>
-    </a>
-  </li>
-</ul>
-
-<div class="volume-note">
-  <p><strong>Note:</strong> Volume I (Chapters 1–15) is the primary focus of this project. These chapters cover the period most commonly taught in middle school U.S. history courses.</p>
+<div class="key-links">
+  <a href="introduction.html">Introduction</a>
+  <a href="primary-source-reader.html">Primary Source Reader</a>
 </div>
 
-<h3 class="volume-header">Volume II: Since 1877</h3>
-<p class="volume-subhead">The Gilded Age through the 21st Century (Chapters 16–30) — <em>Planned for future development</em></p>
+<div class="volumes">
 
-<div class="volume-note">
-  <p>Volume II is planned for later development. Most middle school curricula end with Reconstruction, and most high schools start American history at or after this point. If there's demand for a middle school adaptation of Volume II, we'll build it.</p>
+  <div class="volume">
+    <h2>Volume I: To 1877</h2>
+    <div class="vol-sub">Pre-Columbian America through Reconstruction</div>
+
+    <ol class="toc-list">
+      <li><a href="ch1.html"><span class="ch-num">1.</span><span class="ch-title">Indigenous America</span><span class="dots"></span></a></li>
+      <li><a href="ch2.html"><span class="ch-num">2.</span><span class="ch-title">Colliding Cultures</span><span class="dots"></span></a></li>
+      <li><a href="ch3.html"><span class="ch-num">3.</span><span class="ch-title">British North America</span><span class="dots"></span></a></li>
+      <li><a href="ch4.html"><span class="ch-num">4.</span><span class="ch-title">Colonial Society</span><span class="dots"></span></a></li>
+      <li><a href="ch5.html"><span class="ch-num">5.</span><span class="ch-title">The American Revolution</span><span class="dots"></span></a></li>
+      <li><a href="ch6.html"><span class="ch-num">6.</span><span class="ch-title">A New Nation</span><span class="dots"></span></a></li>
+      <li><a href="ch7.html"><span class="ch-num">7.</span><span class="ch-title">The Early Republic</span><span class="dots"></span></a></li>
+      <li><span class="upcoming"><span class="ch-num">8.</span><span class="ch-title">The Market Revolution</span><span class="dots"></span></span></li>
+      <li><span class="upcoming"><span class="ch-num">9.</span><span class="ch-title">Democracy in America</span><span class="dots"></span></span></li>
+      <li><span class="upcoming"><span class="ch-num">10.</span><span class="ch-title">Religion and Reform</span><span class="dots"></span></span></li>
+      <li><span class="upcoming"><span class="ch-num">11.</span><span class="ch-title">The Cotton Revolution</span><span class="dots"></span></span></li>
+      <li><span class="upcoming"><span class="ch-num">12.</span><span class="ch-title">Manifest Destiny</span><span class="dots"></span></span></li>
+      <li><span class="upcoming"><span class="ch-num">13.</span><span class="ch-title">The Sectional Crisis</span><span class="dots"></span></span></li>
+      <li><span class="upcoming"><span class="ch-num">14.</span><span class="ch-title">The Civil War</span><span class="dots"></span></span></li>
+      <li><span class="upcoming"><span class="ch-num">15.</span><span class="ch-title">Reconstruction</span><span class="dots"></span></span></li>
+    </ol>
+  </div>
+
+  <div class="volume">
+    <h2>Volume II: Since 1877</h2>
+    <div class="vol-sub">The Gilded Age through the 21st Century</div>
+    <p class="vol-placeholder">Planned for future development. Most middle school curricula cover through Reconstruction. If there is demand for Volume II, we'll build it.</p>
+  </div>
+
 </div>
 
 <footer>
-  <div class="license-info">
-    <h3>License &amp; Attribution</h3>
-    <p><strong>American Yawp MS</strong> is licensed under <a href="https://creativecommons.org/licenses/by-sa/4.0/">Creative Commons BY-SA 4.0</a>. You are free to use, share, remix, and adapt this material for any purpose—including commercial use—as long as you give credit and share your adaptations under the same license. This ensures the material stays free and open forever.</p>
-    <p>Adapted from <em>The American Yawp</em>, edited by Joseph L. Locke and Ben Wright (Stanford University Press, 2018). Original images are used under their respective Creative Commons or public domain licenses.</p>
-    <p><strong>PDF versions:</strong> Each chapter includes a built-in Print / PDF tool. Click the "Aa" reader tools button on any chapter page, then select "Print / PDF" to choose which sections to print.</p>
-    <p><strong>Version:</strong> Draft (February 2026). This is a work in progress. Feedback, corrections, and contributions are welcome.</p>
+  <div class="license-line">
+    <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a> &mdash; Free forever. Adapted from <em>The American Yawp</em> (Locke &amp; Wright, Stanford UP, 2018). Draft, Feb. 2026.
   </div>
-
   <div class="footer-links">
-    <a href="https://github.com/shiebenaderet/yawpms">GitHub Repository</a> ·
-    <a href="introduction.html">Introduction</a> ·
-    <a href="about.html">About</a> ·
-    <a href="contributors.html">Contributors</a> ·
-    <a href="teaching.html">Teaching Materials</a> ·
+    <a href="introduction.html">Introduction</a>
+    <a href="about.html">About</a>
+    <a href="contributors.html">Contributors</a>
+    <a href="teaching.html">Teaching</a>
     <a href="whopays.html">Who Pays?</a>
+    <a href="https://github.com/shiebenaderet/yawpms">GitHub</a>
   </div>
 </footer>
 
