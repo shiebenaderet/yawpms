@@ -51,6 +51,7 @@ Each chapter includes:
 - **Stop and Think questions** — Analytical prompts, not recall quizzes
 - **Vocabulary boxes** — Key terms with student-friendly definitions
 - **Chapter activities** — Debates, rankings, and evidence-based discussions
+- **Built-in reader tools** — Text resizing, dyslexia-friendly font, line focus, text-to-speech, highlighting, notes, sepia/high-contrast themes, and selective Print/PDF
 
 ---
 
@@ -101,7 +102,7 @@ open ch1.html
 Images are sourced from *The American Yawp* (CC BY-SA 4.0) and Wikimedia Commons (public domain). Download them with the provided scripts:
 
 ```bash
-bash scripts/download_ch1_images.sh
+bash scripts/download_ch1_images.sh   # chapters 1–5 and 7 have download scripts
 bash scripts/download_ch7_images.sh
 ```
 
@@ -148,22 +149,25 @@ No contribution is too small. A typo fix matters. A student saying "this part wa
 ```
 yawpms/
 ├── index.html                    # Landing page
-├── ch1.html                      # Chapter 1: Indigenous America
-├── ch6.html                      # Chapter 6: A New Nation
-├── ch7.html                      # Chapter 7: The Early Republic
+├── ch1.html – ch15.html          # Chapters 1–15 (Volume I)
 ├── introduction.html             # Project introduction
 ├── about.html                    # About page
 ├── contributors.html             # Contributors page
 ├── teaching.html                 # Teaching materials
 ├── whopays.html                  # Who pays for this?
 ├── primary-source-reader.html    # Primary source reader (under construction)
+├── css/
+│   ├── chapter.css               # Shared chapter stylesheet
+│   ├── pages.css                 # Shared supporting-page stylesheet
+│   └── index.css                 # Landing page stylesheet
+├── js/
+│   └── reader-tools.js           # Reader tools (highlighting, notes, TTS, PDF, etc.)
 ├── images/
-│   ├── ch1/                      # Chapter 1 images
 │   ├── ch6/                      # Chapter 6 images
 │   └── ch7/                      # Chapter 7 images
 ├── scripts/
-│   ├── download_ch1_images.sh    # Image download script for ch1
-│   └── download_ch7_images.sh    # Image download script for ch7
+│   ├── download_ch1_images.sh    # Image download scripts (ch1–ch5, ch7)
+│   └── ...
 └── README.md
 ```
 

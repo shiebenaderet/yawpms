@@ -4,107 +4,16 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Chapter 5: The American Revolution | The American Yawp MS</title>
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:wght@400;600;700&display=swap');
-
-:root { --navy: #1B3A5C; --teal: #2A7F8E; --gold: #C4941D; --cream: #FAFAF8; --dark-gray: #2C2C2C; }
-
-* { box-sizing: border-box; margin: 0; padding: 0; }
-body { font-family: 'Libre Baskerville', Georgia, serif; color: var(--dark-gray); background: var(--cream); line-height: 1.8; }
-
-.title-page { min-height: 60vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 80px 24px; background: linear-gradient(170deg, #0D2137 0%, var(--navy) 40%, #2B5A7C 100%); color: white; }
-.series { font-family: 'Source Sans 3', sans-serif; font-size: 13px; letter-spacing: 4px; text-transform: uppercase; opacity: .5; margin-bottom: 16px; }
-.chapter-num { font-size: 20px; font-weight: 400; opacity: .7; margin-bottom: 12px; }
-.chapter-title { font-size: 52px; line-height: 1.2; margin-bottom: 20px; font-weight: 700; }
-.chapter-subtitle { font-size: 22px; font-style: italic; opacity: .75; margin-bottom: 32px; }
-.divider { width: 100px; height: 3px; background: var(--gold); margin: 0 auto 24px; }
-.attribution { font-family: 'Source Sans 3', sans-serif; font-size: 13px; opacity: .5; line-height: 1.6; max-width: 600px; }
-
-.container { max-width: 720px; margin: 0 auto; padding: 48px 24px; }
-
-.toc { background: white; border: 1px solid #ddd; border-radius: 8px; padding: 32px; margin-bottom: 48px; }
-.toc h2 { font-size: 18px; color: var(--navy); margin-bottom: 20px; text-align: center; }
-.toc ol { list-style: none; counter-reset: toc-counter; padding: 0; }
-.toc li { counter-increment: toc-counter; margin-bottom: 12px; }
-.toc li::before { content: counter(toc-counter, upper-roman) ". "; color: var(--gold); font-weight: 700; margin-right: 8px; }
-.toc a { color: var(--navy); text-decoration: none; border-bottom: 1px dotted transparent; }
-.toc a:hover { border-bottom-color: var(--navy); }
-
-.overview { background: #F0F4F8; border-left: 5px solid var(--teal); padding: 28px 32px; margin-bottom: 48px; border-radius: 0 8px 8px 0; }
-.overview h2 { font-size: 20px; color: var(--teal); margin-bottom: 16px; }
-.overview p { font-family: 'Source Sans 3', sans-serif; font-size: 16px; line-height: 1.7; }
-
-.big-questions { background: white; border: 2px solid var(--gold); border-radius: 8px; padding: 28px 32px; margin-bottom: 48px; }
-.big-questions h2 { font-size: 18px; color: var(--gold); margin-bottom: 16px; text-align: center; }
-.big-questions ul { list-style: none; padding: 0; }
-.big-questions li { font-family: 'Source Sans 3', sans-serif; font-size: 15px; padding-left: 28px; position: relative; margin-bottom: 12px; line-height: 1.6; }
-.big-questions li::before { content: "?"; color: var(--gold); font-weight: 700; font-size: 20px; position: absolute; left: 0; top: -2px; }
-
-section { margin-bottom: 64px; }
-section h2 { font-size: 28px; color: var(--navy); margin-bottom: 24px; padding-bottom: 12px; border-bottom: 2px solid #E0E0E0; }
-section h3 { font-size: 20px; color: var(--navy); margin: 32px 0 16px; }
-
-p { margin-bottom: 20px; font-size: 17px; line-height: 1.8; }
-p:last-child { margin-bottom: 0; }
-
-.vocab-box, .stop-think, .perspectives, .key-idea, .primary-source, .story-box, .activity-box, .voices-left-out { border-radius: 8px; padding: 24px 28px; margin: 32px 0; }
-.vocab-box { background: #E8F4F8; border-left: 5px solid var(--teal); }
-.vocab-box h3 { color: var(--teal); font-size: 16px; margin: 0 0 12px; }
-.vocab-box p { font-family: 'Source Sans 3', sans-serif; font-size: 15px; margin-bottom: 12px; line-height: 1.6; }
-.vocab-box p:last-child { margin-bottom: 0; }
-.vocab-box strong { color: var(--teal); }
-
-.stop-think { background: #FFF9E6; border-left: 5px solid var(--gold); }
-.stop-think h3 { color: var(--gold); font-size: 16px; margin: 0 0 12px; }
-.stop-think p { font-family: 'Source Sans 3', sans-serif; font-size: 15px; font-style: italic; margin-bottom: 0; line-height: 1.6; }
-
-.perspectives { background: #F3E8FF; border-left: 5px solid #7C3AED; }
-.perspectives h3 { color: #7C3AED; font-size: 16px; margin: 0 0 16px; }
-.perspectives .perspective { margin-bottom: 16px; font-family: 'Source Sans 3', sans-serif; font-size: 15px; line-height: 1.6; }
-.perspectives .perspective:last-child { margin-bottom: 0; }
-.perspectives .perspective strong { color: #7C3AED; }
-
-.key-idea { background: #E8F5E9; border-left: 5px solid #2E7D32; }
-.key-idea h3 { color: #2E7D32; font-size: 16px; margin: 0 0 12px; }
-.key-idea p { font-family: 'Source Sans 3', sans-serif; font-size: 15px; line-height: 1.6; margin-bottom: 12px; }
-.key-idea p:last-child { margin-bottom: 0; }
-
-.primary-source { background: #FFF3E0; border-left: 5px solid #E65100; font-style: italic; }
-.primary-source h3 { color: #E65100; font-size: 16px; margin: 0 0 12px; font-style: normal; }
-.primary-source p { font-family: 'Source Sans 3', sans-serif; font-size: 15px; line-height: 1.7; margin-bottom: 12px; }
-.primary-source .source-citation { font-size: 13px; margin-top: 12px; opacity: .7; font-style: normal; }
-
-.story-box { background: #FFF4E6; border-left: 5px solid #F57C00; }
-.story-box h3 { color: #F57C00; font-size: 18px; margin: 0 0 16px; }
-.story-box p { font-family: 'Source Sans 3', sans-serif; font-size: 15px; line-height: 1.7; margin-bottom: 12px; }
-.story-box p:last-child { margin-bottom: 0; }
-
-.voices-left-out { background: #FCE4EC; border-left: 5px solid #C2185B; }
-.voices-left-out h3 { color: #C2185B; font-size: 18px; margin: 0 0 16px; }
-.voices-left-out p { font-family: 'Source Sans 3', sans-serif; font-size: 15px; line-height: 1.7; margin-bottom: 12px; }
-.voices-left-out p:last-child { margin-bottom: 0; }
-.voices-left-out strong { color: #C2185B; }
-
-.activity-box { background: #FFEBEE; border: 2px solid #C62828; border-radius: 8px; padding: 32px; }
-.activity-box h3 { color: #C62828; font-size: 22px; margin: 0 0 20px; text-align: center; }
-.activity-box h4 { color: #C62828; font-size: 16px; margin: 20px 0 12px; }
-.activity-box p, .activity-box li { font-family: 'Source Sans 3', sans-serif; font-size: 15px; line-height: 1.7; }
-.activity-box ul, .activity-box ol { margin-left: 24px; margin-bottom: 16px; }
-.activity-box li { margin-bottom: 8px; }
-
-figure { margin: 32px 0; text-align: center; }
-figure img { max-width: 100%; height: auto; border-radius: 4px; box-shadow: 0 2px 8px rgba(0,0,0,.1); }
-figcaption { font-family: 'Source Sans 3', sans-serif; font-size: 14px; color: #666; margin-top: 12px; line-height: 1.6; font-style: italic; }
-
-footer { border-top: 2px solid #E0E0E0; margin-top: 64px; padding-top: 24px; font-family: 'Source Sans 3', sans-serif; font-size: 13px; color: #999; line-height: 1.7; }
-footer a { color: var(--teal); text-decoration: none; border-bottom: 1px dotted var(--teal); }
-footer a:hover { border-bottom-style: solid; }
-
-@media print { .title-page { page-break-after: always; } section { page-break-inside: avoid; } }
-@media (max-width: 600px) { .chapter-title { font-size: 36px; } .container { padding: 32px 16px; } section h2 { font-size: 24px; } }
-</style>
+<link rel="stylesheet" href="css/chapter.css">
 </head>
 <body>
+<div class="progress-bar"></div>
+
+<nav class="chapter-nav">
+  <a href="ch4.html">&larr; Prev</a>
+  <span class="nav-center"><a href="index.html">The American Yawp MS</a></span>
+  <a href="ch6.html">Next &rarr;</a>
+</nav>
 
 <div class="title-page">
   <div class="series">The American Yawp Middle School Edition</div>
@@ -398,5 +307,100 @@ footer a:hover { border-bottom-style: solid; }
 </footer>
 
 </div>
+
+<button class="back-to-top" aria-label="Back to top">&uarr;</button>
+
+<div class="reader-toolbar">
+  <button class="reader-toggle" aria-label="Reader tools">Aa</button>
+  <div class="reader-panel">
+    <h4>Reader Tools</h4>
+    <div class="reader-section">
+      <label>Text Size</label>
+      <div class="reader-btn-row">
+        <button class="reader-btn active" data-font-size="normal">A</button>
+        <button class="reader-btn" data-font-size="large">A+</button>
+        <button class="reader-btn" data-font-size="xlarge">A++</button>
+      </div>
+    </div>
+    <div class="reader-section">
+      <label>Line Spacing</label>
+      <div class="reader-btn-row">
+        <button class="reader-btn active" data-spacing="normal">Normal</button>
+        <button class="reader-btn" data-spacing="wide">Wide</button>
+      </div>
+    </div>
+    <div class="reader-section">
+      <label>Theme</label>
+      <div class="reader-btn-row">
+        <button class="reader-btn active" data-theme="default">Default</button>
+        <button class="reader-btn" data-theme="sepia">Sepia</button>
+        <button class="reader-btn" data-theme="contrast">High Contrast</button>
+      </div>
+    </div>
+    <div class="reader-section">
+      <label>Accessibility</label>
+      <div class="reader-btn-row">
+        <button class="reader-btn" data-dyslexia>Dyslexia Font</button>
+        <button class="reader-btn" data-line-focus>Line Focus</button>
+      </div>
+    </div>
+    <div class="reader-section">
+      <label>Tools</label>
+      <div class="reader-btn-row">
+        <button class="reader-btn" data-tts>Read Aloud</button>
+        <button class="reader-btn" data-action="notes">My Notes</button>
+        <button class="reader-btn" data-action="pdf">Print / PDF</button>
+      </div>
+    </div>
+    <div class="reader-section">
+      <label>Highlight Selected Text</label>
+      <div class="reader-btn-row">
+        <button class="reader-btn active" data-highlight-color="yellow" style="background:#FFF9C4">Yellow</button>
+        <button class="reader-btn" data-highlight-color="green" style="background:#C8E6C9">Green</button>
+        <button class="reader-btn" data-highlight-color="blue" style="background:#BBDEFB">Blue</button>
+        <button class="reader-btn" data-highlight-color="pink" style="background:#F8BBD0">Pink</button>
+      </div>
+      <div class="reader-btn-row" style="margin-top:6px">
+        <button class="reader-btn" data-action="highlight">Highlight Selection</button>
+        <button class="reader-btn" data-action="clear-highlights">Clear All</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="line-focus-overlay">
+  <div class="line-focus-top"></div>
+  <div class="line-focus-bottom"></div>
+</div>
+
+<div class="notes-panel">
+  <div class="notes-header">
+    <h4>My Notes</h4>
+    <button class="notes-close">&times;</button>
+  </div>
+  <div class="notes-body">
+    <div class="notes-empty">No notes yet.<br>Select text and add a note, or just type one below.</div>
+  </div>
+  <div class="add-note-area">
+    <textarea placeholder="Type a note..."></textarea>
+    <button>Save Note</button>
+  </div>
+</div>
+
+<div class="pdf-modal-overlay">
+  <div class="pdf-modal">
+    <h3>Print / Save as PDF</h3>
+    <p class="pdf-subtitle">Select the sections you want to include:</p>
+    <button class="pdf-select-all">Deselect All</button>
+    <ul class="pdf-section-list"></ul>
+    <div class="pdf-actions">
+      <button class="pdf-btn-cancel">Cancel</button>
+      <button class="pdf-btn-print">Print Selected</button>
+    </div>
+  </div>
+</div>
+
+<script src="js/reader-tools.js"></script>
+
 </body>
 </html>
