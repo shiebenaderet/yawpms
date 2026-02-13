@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>American Yawp Jr. - Chapter 7: The Early Republic</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:wght@400;600;700&display=swap');
+
+:root {
+  --navy: #1B3A5C;
+  --teal: #2A7F8E;
+  --gold: #C4941D;
+  --light-blue: #D5E8F0;
+  --light-gold: #FFF3D6;
+  --light-green: #E2F0E2;
+  --light-gray: #F5F5F5;
+  --light-purple: #EDE7F6;
+  --light-red: #FDECEA;
+  --light-orange: #FFF3E0;
+  --dark: #2C2C2C;
+  --med-gray: #666;
+  --deep-purple: #7B1FA2;
+  --deep-red: #D84315;
+  --green: #2E7D32;
+  --orange: #E65100;
+  --serif: 'Libre Baskerville', Georgia, serif;
+  --sans: 'Source Sans 3', 'Segoe UI', sans-serif;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: var(--serif);
+  color: var(--dark);
+  background: #FAFAF8;
+  line-height: 1.8;
+  font-size: 16.5px;
+}
+
+.container { max-width: 840px; margin: 0 auto; padding: 0 28px; }
+
+/* Title page */
+.title-page {
+  text-align: center;
+  padding: 80px 24px 60px;
+  background: linear-gradient(170deg, #0D2137 0%, #1B3A5C 40%, #2B5A7C 100%);
+  color: white;
+  margin-bottom: 48px;
+  position: relative;
+  overflow: hidden;
+}
+.title-page::after {
+  content: '';
+  position: absolute; bottom: 0; left: 0; right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+}
+.title-page .series { font-family: var(--sans); font-size: 13px; letter-spacing: 5px; text-transform: uppercase; opacity: .6; margin-bottom: 14px; }
+.title-page h1 { font-size: 44px; margin-bottom: 6px; line-height: 1.2; }
+.title-page .chapter-num { font-family: var(--sans); font-size: 17px; opacity: .5; margin-bottom: 8px; }
+.title-page .subtitle { font-style: italic; font-size: 19px; opacity: .8; margin-bottom: 36px; }
+.title-page .divider { width: 80px; height: 3px; background: var(--gold); margin: 0 auto 24px; }
+.title-page .attribution { font-family: var(--sans); font-size: 13px; opacity: .5; line-height: 1.6; }
+
+/* TOC */
+.toc {
+  background: var(--light-gray);
+  border-left: 4px solid var(--navy);
+  padding: 24px 28px;
+  margin-bottom: 40px;
+  border-radius: 0 8px 8px 0;
+}
+.toc h2 { font-size: 18px; color: var(--navy); margin-bottom: 12px; font-family: var(--sans); }
+.toc ol { padding-left: 22px; }
+.toc li { font-family: var(--sans); font-size: 15px; margin-bottom: 6px; }
+.toc a { color: var(--teal); text-decoration: none; }
+.toc a:hover { text-decoration: underline; }
+
+/* Overview & Big Questions */
+.overview {
+  background: var(--light-gray);
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 28px;
+  margin-bottom: 40px;
+}
+.overview h2 { font-size: 20px; color: var(--navy); margin-bottom: 12px; }
+.overview p { margin-bottom: 12px; }
+
+.big-questions {
+  border: 2px solid var(--navy);
+  border-radius: 8px;
+  padding: 24px 28px;
+  margin-bottom: 48px;
+  background: white;
+}
+.big-questions h3 { font-family: var(--sans); font-size: 15px; font-weight: 700; color: var(--navy); text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 14px; }
+.big-questions ol { padding-left: 22px; }
+.big-questions li { margin-bottom: 8px; font-size: 15px; }
+
+/* Section headings */
+h2.section-heading {
+  font-size: 28px;
+  color: var(--navy);
+  border-bottom: 3px solid var(--gold);
+  padding-bottom: 8px;
+  margin: 60px 0 24px;
+}
+
+/* Body text */
+p.body-text { margin-bottom: 18px; }
+
+/* Images */
+figure {
+  margin: 32px 0;
+  text-align: center;
+}
+figure img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 4px;
+  box-shadow: 0 3px 16px rgba(0,0,0,.14);
+}
+figcaption {
+  font-family: var(--sans);
+  font-size: 13px;
+  color: var(--med-gray);
+  margin-top: 10px;
+  line-height: 1.55;
+  font-style: italic;
+  max-width: 620px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Vocab */
+.vocab-box {
+  border: 2px solid var(--teal);
+  border-radius: 8px;
+  overflow: hidden;
+  margin: 28px 0;
+}
+.vocab-box .header {
+  background: var(--teal);
+  color: white;
+  padding: 10px 18px;
+  font-family: var(--sans);
+  font-weight: 700;
+  font-size: 15px;
+}
+.vocab-box dl { background: var(--light-blue); padding: 14px 18px; }
+.vocab-box dt { font-weight: 700; color: var(--navy); display: inline; }
+.vocab-box dd { display: inline; margin-left: 0; }
+.vocab-box .term-row { margin-bottom: 8px; }
+.vocab-box .term-row:last-child { margin-bottom: 0; }
+
+/* Stop and Think */
+.stop-think {
+  border: 2px solid var(--gold);
+  border-radius: 8px;
+  overflow: hidden;
+  margin: 32px 0;
+}
+.stop-think .header {
+  background: var(--gold);
+  color: white;
+  padding: 10px 18px;
+  font-family: var(--sans);
+  font-weight: 700;
+  font-size: 15px;
+}
+.stop-think .body { background: var(--light-gold); padding: 16px 20px; }
+.stop-think ol { padding-left: 20px; }
+.stop-think li { margin-bottom: 10px; font-size: 15px; }
+
+/* Perspectives */
+.perspectives {
+  border: 2px solid var(--deep-purple);
+  border-radius: 8px;
+  overflow: hidden;
+  margin: 32px 0;
+}
+.perspectives .header {
+  background: var(--deep-purple);
+  color: white;
+  padding: 10px 18px;
+  font-family: var(--sans);
+  font-weight: 700;
+  font-size: 15px;
+}
+.perspectives .body { background: var(--light-purple); padding: 16px 20px; }
+.perspectives .entry { margin-bottom: 12px; }
+.perspectives .entry:last-child { margin-bottom: 0; }
+.perspectives .who { font-weight: 700; color: #4A148C; }
+
+/* Key Idea */
+.key-idea {
+  border-left: 5px solid var(--green);
+  background: var(--light-green);
+  padding: 18px 22px;
+  margin: 28px 0;
+  border-radius: 0 6px 6px 0;
+}
+.key-idea .label { font-family: var(--sans); font-weight: 700; color: var(--green); font-size: 13px; text-transform: uppercase; letter-spacing: .5px; margin-bottom: 4px; }
+
+/* PRIMARY SOURCE quote box */
+.primary-source {
+  border: 2px solid #5D4037;
+  border-radius: 8px;
+  overflow: hidden;
+  margin: 32px 0;
+  background: #EFEBE9;
+}
+.primary-source .header {
+  background: #5D4037;
+  color: white;
+  padding: 10px 18px;
+  font-family: var(--sans);
+  font-weight: 700;
+  font-size: 15px;
+}
+.primary-source .body { padding: 18px 22px; }
+.primary-source blockquote {
+  font-style: italic;
+  border-left: 3px solid #8D6E63;
+  padding-left: 16px;
+  margin: 10px 0;
+  line-height: 1.7;
+}
+.primary-source .attribution {
+  font-family: var(--sans);
+  font-size: 13px;
+  color: #5D4037;
+  margin-top: 8px;
+  font-style: normal;
+}
+
+/* STORY BEHIND THE STORY */
+.story-box {
+  border: 2px solid var(--orange);
+  border-radius: 8px;
+  overflow: hidden;
+  margin: 32px 0;
+}
+.story-box .header {
+  background: var(--orange);
+  color: white;
+  padding: 10px 18px;
+  font-family: var(--sans);
+  font-weight: 700;
+  font-size: 15px;
+}
+.story-box .body {
+  background: var(--light-orange);
+  padding: 18px 22px;
+  font-size: 15.5px;
+}
+.story-box .body p { margin-bottom: 10px; }
+.story-box .body p:last-child { margin-bottom: 0; }
+
+/* Activity */
+.activity {
+  border: 2px solid var(--deep-red);
+  border-radius: 8px;
+  overflow: hidden;
+  margin: 40px 0;
+}
+.activity .header {
+  background: var(--deep-red);
+  color: white;
+  padding: 12px 18px;
+  font-family: var(--sans);
+  font-weight: 700;
+  font-size: 15px;
+}
+.activity .body { background: var(--light-red); padding: 20px 22px; }
+.activity ol, .activity ul { padding-left: 22px; margin: 10px 0; }
+.activity li { margin-bottom: 8px; font-size: 15px; }
+.activity h4 { font-family: var(--sans); color: var(--deep-red); margin-top: 18px; margin-bottom: 10px; font-size: 15px; }
+
+/* Footer */
+.attribution-footer {
+  border-top: 1px solid #ccc;
+  margin-top: 56px;
+  padding: 24px 0 48px;
+  font-family: var(--sans);
+  font-size: 13px;
+  color: var(--med-gray);
+  line-height: 1.7;
+}
+
+@media print {
+  body { font-size: 11pt; background: white; }
+  .title-page { background: white !important; color: var(--navy); border-bottom: 3px solid var(--navy); }
+  h2.section-heading { page-break-before: always; }
+  .vocab-box, .stop-think, .perspectives, .key-idea, .story-box, .primary-source, .activity { break-inside: avoid; }
+}
+@media (max-width: 600px) {
+  .title-page h1 { font-size: 28px; }
+  h2.section-heading { font-size: 22px; }
+  .container { padding: 0 16px; }
+  body { font-size: 15px; }
+}
+</style>
+</head>
+<body>
+
+<div class="title-page">
+  <div class="series">The American Yawp Jr.</div>
+  <div class="chapter-num">Chapter 7</div>
+  <h1>The Early Republic</h1>
+  <div class="divider"></div>
+  <div class="subtitle">Slavery, Expansion, and the War of 1812</div>
+  <div class="attribution">A Middle School Adaptation<br>
+  Adapted from <em>The American Yawp</em>, eds. Joseph Locke &amp; Ben Wright<br>
+  Licensed under Creative Commons BY-SA 4.0</div>
+</div>
+
+<div class="container">
+
+<nav class="toc">
+  <h2>In This Chapter</h2>
+  <ol>
+    <li><a href="#intro7">Introduction</a></li>
+    <li><a href="#slavery7">Black Americans and the Challenge to Slavery</a></li>
+    <li><a href="#republicanism">Jeffersonian Republicanism</a></li>
+    <li><a href="#jefferson-pres">Jefferson as President</a></li>
+    <li><a href="#native">Native American Power and the United States</a></li>
+    <li><a href="#war1812">The War of 1812</a></li>
+    <li><a href="#conclusion7">Wrapping Up</a></li>
+  </ol>
+</nav>
+
+<div class="overview">
+  <h2>Chapter Overview</h2>
+  <p>After Thomas Jefferson became president in 1800, the United States continued to grow&mdash;and continued to fight about what kind of country it would be. Enslaved and free Black Americans challenged racism and slavery. Women pushed for a role in public life. Native American nations built powerful alliances to resist American expansion. And a second war with Britain tested whether the young nation could survive.</p>
+  <p>This chapter covers the period from about 1800 to the mid-1820s, when Americans wrestled with the gap between their ideals of liberty and equality and the realities of slavery, racism, and conquest.</p>
+</div>
+
+<div class="big-questions">
+  <h3>Big Questions for This Chapter</h3>
+  <ol>
+    <li>How did enslaved and free Black Americans challenge slavery and racism in the early republic?</li>
+    <li>How did Jefferson&rsquo;s presidency change the relationship between the government and the people?</li>
+    <li>How did Native American leaders organize resistance to American expansion?</li>
+    <li>What were the causes and consequences of the War of 1812?</li>
+  </ol>
+</div>
+
+<figure>
+  <img src="images/ch7/america-guided-by-wisdom.jpg" alt="&ldquo;America Guided by Wisdom,&rdquo; 1815. This allegorical print shows America surrounded by symbols of wisdom, commerce, and agriculture, reflecting the national pride many white Americans felt after the War of 1812." loading="lazy">
+  <figcaption>&ldquo;America Guided by Wisdom,&rdquo; 1815. This allegorical print shows America surrounded by symbols of wisdom, commerce, and agriculture, reflecting the national pride many white Americans felt after the War of 1812. Library of Congress.</figcaption>
+</figure>
+
+<!-- ═══════════════════════════════════════════════ -->
+<h2 class="section-heading" id="intro7">I. Introduction</h2>
+
+<p class="body-text">Thomas Jefferson&rsquo;s election over John Adams was just one of many changes reshaping the early United States. Some changes happened peacefully; others involved violence. Everyone&mdash;the wealthy and the poor, white Americans and Black Americans, Native peoples and women&mdash;demanded a voice in what Thomas Paine had called an &ldquo;asylum&rdquo; for liberty. All of them would, in their own way, try to claim the freedom and equality that the Revolution had promised but not yet delivered.</p>
+
+<p class="body-text">The transfer of power from Adams to Jefferson in 1801 was remarkable in itself. For the first time, one political party peacefully handed power to another. There were no soldiers in the streets, no arrests, no coups. Jefferson walked to his inauguration rather than riding in a carriage, signaling that this was a government of the people&mdash;not of kings. &ldquo;We are all Republicans, we are all Federalists,&rdquo; he declared, trying to calm the bitter divisions of the 1790s.</p>
+
+<p class="body-text">But beneath that calm surface, fierce conflicts were building. The next twenty-five years would test every promise the young republic had made.</p>
+
+<!-- ═══════════════════════════════════════════════ -->
+<h2 class="section-heading" id="slavery7">II. Black Americans and the Challenge to Slavery</h2>
+
+<div class="vocab-box">
+  <div class="header">Vocabulary: Black Americans and Slavery</div>
+  <dl>
+    <div class="term-row"><dt>Gabriel&rsquo;s Rebellion</dt><dd> &mdash; A planned slave revolt in Virginia in 1800, led by an enslaved man named Gabriel, that was discovered before it could begin.</dd></div>
+    <div class="term-row"><dt>Haitian Revolution</dt><dd> &mdash; A successful revolution by enslaved people in the French colony of Haiti (1791&ndash;1804) that created the first Black republic in the world.</dd></div>
+    <div class="term-row"><dt>Polygenesis</dt><dd> &mdash; The false theory that different races were created separately and are actually different species.</dd></div>
+    <div class="term-row"><dt>Abolitionist</dt><dd> &mdash; A person who wanted to end slavery completely.</dd></div>
+    <div class="term-row"><dt>White supremacy</dt><dd> &mdash; The racist belief that white people are naturally superior to people of other races.</dd></div>
+  </dl>
+</div>
+
+<p class="body-text">In the summer of 1800, an enslaved man named Gabriel organized nearly a thousand enslaved people to attack Richmond, Virginia, and overthrow slavery. The plan was discovered just before it was supposed to happen, and Gabriel and twenty-five others were executed. But the plot sent shockwaves through white Virginia. It proved that enslaved people were capable of organizing sophisticated resistance&mdash;even though white supremacists claimed they were inferior.</p>
+
+<div class="story-box">
+  <div class="header">The Story Behind the Story: Gabriel&rsquo;s Plan</div>
+  <div class="body">
+    <p>Gabriel was not an ordinary field worker. He was a skilled blacksmith&mdash;tall, literate, and deeply aware of the political world around him. He had listened to white Virginians debate the meaning of liberty during the election of 1800, and he decided those words applied to him too.</p>
+    <p>His plan was sophisticated. He organized enslaved people from multiple plantations, had them forge swords from scythes, and planned a three-pronged attack on Richmond. One group would set fires as a distraction. Another would seize the arsenal. A third would capture Governor James Monroe. Gabriel even planned to spare Quakers, Methodists, and poor white people&mdash;groups he believed might be sympathetic to his cause.</p>
+    <p>A massive thunderstorm on the night of the planned attack made roads impassable, and two enslaved men revealed the plot to their enslaver. Gabriel was captured and hanged. At his trial, he reportedly said he had nothing more to say than what George Washington would have said had he been captured by the British. He saw himself as a revolutionary&mdash;not a criminal.</p>
+  </div>
+</div>
+
+<figure>
+  <img src="images/ch7/haitian-revolution.jpg" alt="A painting of the Haitian Revolution. The successful revolt by enslaved people in Haiti terrified white slaveholders but inspired Black Americans fighting for freedom." loading="lazy">
+  <figcaption>The Haitian Revolution. The successful revolt by enslaved people in Haiti terrified white slaveholders but inspired Black Americans fighting for freedom. January Suchodolski, <em>Battle at San Domingo</em>, 1845. Wikimedia.</figcaption>
+</figure>
+
+<p class="body-text">Even more inspiring to Black Americans was the Haitian Revolution (1791&ndash;1804). Enslaved people in the French colony of Haiti rose up, defeated the French army, and created the first Black republic in the world. For free and enslaved Black Americans, Haiti was proof that people of color could achieve anything when given the chance. David Walker, a Black abolitionist in Boston, called Haiti the &ldquo;glory of the blacks and terror of the tyrants.&rdquo;</p>
+
+<p class="body-text">For white Americans, especially slaveholders in the South, Haiti was terrifying. The image of armed Black revolutionaries haunted them. White publications began mocking Black Americans with cruel caricatures, trying to use racism to silence calls for equality. But this mockery also revealed something important: Black Americans were making their voices heard loudly enough that white leaders felt the need to push back.</p>
+
+<div class="primary-source">
+  <div class="header">Primary Source Voice: Benjamin Banneker to Thomas Jefferson, 1791</div>
+  <div class="body">
+    <p>Benjamin Banneker&mdash;a free Black mathematician, astronomer, and surveyor who helped plan the layout of Washington, D.C.&mdash;wrote directly to Secretary of State Thomas Jefferson to challenge his racist views:</p>
+    <blockquote>&ldquo;Sir, how pitiable is it to reflect, that although you were so fully convinced of the benevolence of the Father of Mankind&hellip; that you should at the same time counteract his mercies, in detaining by fraud and violence so numerous a part of my brethren, under groaning captivity and cruel oppression, that you should at the same time be found guilty of that most criminal act, which you professedly detested in others.&rdquo;</blockquote>
+    <div class="attribution">&mdash; Benjamin Banneker, letter to Thomas Jefferson, August 19, 1791</div>
+  </div>
+</div>
+
+<figure>
+  <img src="images/ch7/banneker-almanac.jpg" alt="The cover of Benjamin Banneker&rsquo;s almanac, 1795. Banneker&rsquo;s scientific achievements directly challenged racist claims that Black people were intellectually inferior." loading="lazy">
+  <figcaption>The cover of Benjamin Banneker&rsquo;s almanac, 1795. Banneker&rsquo;s scientific achievements directly challenged racist claims that Black people were intellectually inferior. Library of Congress.</figcaption>
+</figure>
+
+<p class="body-text">Meanwhile, ideas about race were shifting. Some thinkers believed that all humans shared a common origin and that social environment explained racial differences. Thomas Jefferson, however, argued in his <em>Notes on the State of Virginia</em> that Black people were inherently inferior&mdash;a claim that Banneker immediately challenged, demanding Jefferson abandon his &ldquo;absurd and false ideas.&rdquo; The debate over race, science, and equality was just beginning.</p>
+
+<div class="perspectives">
+  <div class="header">Multiple Perspectives: The Meaning of Haiti</div>
+  <div class="body">
+    <div class="entry"><span class="who">Free Black Americans:</span> Haiti proved that people of color could govern themselves and achieve greatness. It was an inspiration for the fight against slavery.</div>
+    <div class="entry"><span class="who">White slaveholders:</span> Haiti was a nightmare&mdash;proof that enslaved people might violently revolt. It justified even harsher control.</div>
+    <div class="entry"><span class="who">Abolitionists:</span> Haiti showed that slavery was not natural or permanent. Freedom was possible.</div>
+    <div class="entry"><span class="who">Thomas Jefferson:</span> While Haiti ended France&rsquo;s American ambitions (leading to the Louisiana Purchase), its racial implications were deeply troubling to a man who enslaved hundreds of people.</div>
+  </div>
+</div>
+
+<div class="key-idea">
+  <div class="label">Key Idea</div>
+  Black Americans&mdash;both free and enslaved&mdash;refused to be silent. Through rebellions, writings, and public arguments, they challenged the racism and slavery that contradicted America&rsquo;s founding ideals. Their resistance shaped the nation&rsquo;s politics even when they were denied citizenship.
+</div>
+
+<div class="stop-think">
+  <div class="header">Stop and Think</div>
+  <div class="body">
+    <ol>
+      <li>Why was the Haitian Revolution so important to both Black and white Americans&mdash;but for very different reasons?</li>
+      <li>Benjamin Banneker challenged Jefferson&rsquo;s racist views directly. Why does it matter that people spoke up against these ideas, even when they had little political power?</li>
+    </ol>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════ -->
+<h2 class="section-heading" id="republicanism">III. Jeffersonian Republicanism</h2>
+
+<div class="vocab-box">
+  <div class="header">Vocabulary: Jeffersonian Ideas</div>
+  <dl>
+    <div class="term-row"><dt>Democratic-Republicans</dt><dd> &mdash; The political party led by Jefferson that favored limited government, agriculture, and more direct democracy. Also called Republicans.</dd></div>
+    <div class="term-row"><dt>Republican Motherhood</dt><dd> &mdash; The idea that women had an important role in democracy by raising their children to be good citizens.</dd></div>
+    <div class="term-row"><dt>Suffrage</dt><dd> &mdash; The right to vote.</dd></div>
+    <div class="term-row"><dt>Second Great Awakening</dt><dd> &mdash; A wave of religious revivals in the early 1800s that encouraged personal salvation, emotional worship, and social reform.</dd></div>
+  </dl>
+</div>
+
+<figure>
+  <img src="images/ch7/james-peale-family.jpg" alt="James Peale painted this portrait of his wife Mary and their children. In the early republic, women were expected to raise virtuous citizens&mdash;an idea historians call &ldquo;Republican Motherhood.&rdquo;" loading="lazy">
+  <figcaption>James Peale painted this portrait of his wife Mary and their children. In the early republic, women were expected to raise virtuous citizens&mdash;an idea historians call &ldquo;Republican Motherhood.&rdquo; Wikimedia.</figcaption>
+</figure>
+
+<p class="body-text">Jefferson&rsquo;s election in 1800 represented a shift toward more direct democracy. While Federalist leaders had worried that ordinary people couldn&rsquo;t be trusted to govern, Jefferson believed the opposite. He saw himself as the champion of everyday citizens&mdash;farmers, workers, and small-town Americans.</p>
+
+<p class="body-text">But &ldquo;everyday citizens&rdquo; still didn&rsquo;t include everyone. American citizenship was defined as white, male, and usually wealthy. Yet women had been pushing for a voice since the Revolution. The idea of &ldquo;Republican Motherhood&rdquo; held that women played a crucial role in democracy&mdash;not by voting, but by raising their children to be responsible citizens. While this idea was limiting (it still confined women to the home), it also acknowledged that women were essential to the nation&rsquo;s success.</p>
+
+<div class="story-box">
+  <div class="header">The Story Behind the Story: The Camp Meeting Revival</div>
+  <div class="body">
+    <p>In August 1801, somewhere between ten and twenty thousand people descended on Cane Ridge, Kentucky, for a massive outdoor religious revival. For nearly a week, preachers shouted from makeshift stages while people sang, wept, fainted, and spoke in tongues. Black and white worshippers sometimes prayed side by side&mdash;a stunning sight in a slave society.</p>
+    <p>The Cane Ridge revival was part of the Second Great Awakening, a religious movement that swept the country in the early 1800s. Unlike the formal, educated sermons of traditional churches, these revivals were raw and emotional. They told ordinary people&mdash;including women, the poor, and the enslaved&mdash;that they could have a direct, personal relationship with God without needing a minister to interpret for them.</p>
+    <p>This was a deeply democratic idea, and it had political consequences. If God saw all people as equal, then maybe society should too. The Second Great Awakening fueled movements for abolition, temperance, and women&rsquo;s rights for decades to come.</p>
+  </div>
+</div>
+
+<figure>
+  <img src="images/ch7/camp-meeting.jpg" alt="A camp meeting during the Second Great Awakening, 1819. These outdoor revivals drew enormous crowds and gave ordinary people&mdash;including women, the poor, and the enslaved&mdash;a powerful voice in American religious and political life." loading="lazy">
+  <figcaption>A camp meeting during the Second Great Awakening, 1819. These outdoor revivals drew enormous crowds and gave ordinary people a powerful voice in American religious and political life. Library of Congress.</figcaption>
+</figure>
+
+<p class="body-text">Jefferson&rsquo;s supporters celebrated him as a philosopher-patriot who fought tyranny with ideas rather than weapons. They linked him to George Washington&rsquo;s legacy and argued that the Democratic-Republicans had saved the country from aristocratic Federalist rule.</p>
+
+<div class="key-idea">
+  <div class="label">Key Idea</div>
+  Jefferson&rsquo;s presidency expanded the idea of who could participate in democracy&mdash;at least for white men. But women, Black Americans, and Native peoples were still largely excluded, even as they demanded their own place in the conversation. Religious revivals gave many of these excluded groups a new language for claiming equality.
+</div>
+
+<!-- ═══════════════════════════════════════════════ -->
+<h2 class="section-heading" id="jefferson-pres">IV. Jefferson as President</h2>
+
+<div class="vocab-box">
+  <div class="header">Vocabulary: Jefferson&rsquo;s Presidency</div>
+  <dl>
+    <div class="term-row"><dt>Louisiana Purchase</dt><dd> &mdash; The 1803 deal in which the U.S. bought 828,000 square miles of land from France for $15 million, doubling the country&rsquo;s size.</dd></div>
+    <div class="term-row"><dt>Embargo Act of 1807</dt><dd> &mdash; A law that closed American ports to all foreign trade, hoping to pressure Britain and France to respect American shipping.</dd></div>
+    <div class="term-row"><dt>Peaceable coercion</dt><dd> &mdash; Jefferson&rsquo;s strategy of using economic pressure (like trade restrictions) instead of military force.</dd></div>
+    <div class="term-row"><dt>Judicial review</dt><dd> &mdash; The power of the Supreme Court to declare laws unconstitutional, established in <em>Marbury v. Madison</em> (1803).</dd></div>
+  </dl>
+</div>
+
+<figure>
+  <img src="images/ch7/jefferson-banner.jpg" alt="A victory banner celebrating Jefferson as president." loading="lazy">
+  <figcaption>A victory banner celebrating Jefferson as president. Smithsonian, National Museum of American History.</figcaption>
+</figure>
+
+<p class="body-text">As president, Jefferson worked to shrink the government and cut taxes. He reduced the military and eliminated all internal taxes during his first term. But his presidency was defined by two massive events: the Louisiana Purchase and the crisis with Britain and France on the seas.</p>
+
+<p class="body-text">Jefferson&rsquo;s biggest achievement was the Louisiana Purchase in 1803&mdash;buying a massive territory from France for just $15 million (about $250 million today), which doubled the size of the United States. The purchase happened partly because of the Haitian Revolution. When enslaved people in Haiti defeated the French army, Napoleon gave up his plans for a North American empire and decided to sell the territory. Jefferson knew the purchase might not be strictly constitutional, but he believed it was too important to pass up.</p>
+
+<div class="primary-source">
+  <div class="header">Primary Source Voice: Jefferson on the Louisiana Purchase, 1803</div>
+  <div class="body">
+    <p>Jefferson struggled with a real contradiction. He believed in strict limits on federal power, yet the Constitution said nothing about buying foreign territory. He wrote privately to a friend:</p>
+    <blockquote>&ldquo;The executive&hellip; have done an act beyond the Constitution. The Legislature in casting behind them metaphysical subtleties&hellip; must&hellip; throw themselves on their country for doing for them unauthorized what we know they would have done for themselves had they been in a situation to do it.&rdquo;</blockquote>
+    <div class="attribution">&mdash; Thomas Jefferson, letter to John Breckinridge, August 12, 1803</div>
+  </div>
+</div>
+
+<figure>
+  <img src="images/ch7/monticello.jpg" alt="Monticello, Thomas Jefferson&rsquo;s Virginia plantation. Jefferson wrote eloquently about liberty while enslaving over 600 people during his lifetime." loading="lazy">
+  <figcaption>Monticello, Thomas Jefferson&rsquo;s Virginia plantation. Jefferson wrote eloquently about liberty while enslaving over 600 people during his lifetime. Wikimedia.</figcaption>
+</figure>
+
+<p class="body-text">Jefferson sent Meriwether Lewis and William Clark to explore the new territory. Their expedition (1804&ndash;1806) traveled from St. Louis to the Pacific Ocean, documenting the land, its peoples, and its resources. They relied heavily on Native American guides and translators, especially Sacagawea, a young Shoshone woman who proved indispensable. The expedition revealed a continent already inhabited by hundreds of Native nations&mdash;a fact that American expansionists would work hard to ignore.</p>
+
+<figure>
+  <img src="images/ch7/lewis-and-clark.jpg" alt="Lewis and Clark on the Columbia River. Their expedition mapped the vast territory of the Louisiana Purchase, but the land they &ldquo;discovered&rdquo; was already home to hundreds of Native nations." loading="lazy">
+  <figcaption>Lewis and Clark on the Columbia River. Their expedition mapped the vast territory of the Louisiana Purchase, but the land they &ldquo;discovered&rdquo; was already home to hundreds of Native nations. Wikimedia.</figcaption>
+</figure>
+
+<p class="body-text">Meanwhile, Chief Justice John Marshall was quietly reshaping American government. In <em>Marbury v. Madison</em> (1803), the Supreme Court claimed the power of judicial review&mdash;the ability to strike down any law it judged unconstitutional. This made the judiciary a co-equal branch of government and gave the courts enormous power that they still hold today.</p>
+
+<figure>
+  <img src="images/ch7/john-marshall.jpg" alt="Chief Justice John Marshall. His decision in Marbury v. Madison established judicial review and made the Supreme Court a powerful force in American government." loading="lazy">
+  <figcaption>Chief Justice John Marshall. His decision in <em>Marbury v. Madison</em> established judicial review and made the Supreme Court a powerful force in American government. Henry Inman, 1832. Wikimedia.</figcaption>
+</figure>
+
+<p class="body-text">Jefferson&rsquo;s biggest failure came in foreign policy. Britain and France were both seizing American ships and sailors. Rather than go to war, Jefferson tried &ldquo;peaceable coercion&rdquo;&mdash;the Embargo Act of 1807 closed American ports to all foreign trade. The idea was to pressure Europe by cutting off their access to American goods. Instead, the embargo devastated the American economy without changing European behavior. Critics called Jefferson a tyrant for trying to enforce it.</p>
+
+<figure>
+  <img src="images/ch7/uss-chesapeake.jpg" alt="The British attack on the USS Chesapeake in 1807 outraged Americans and pushed the nation closer to war." loading="lazy">
+  <figcaption>The British attack on the USS Chesapeake in 1807 outraged Americans and pushed the nation closer to war. Fred S. Cozzens, 1897. Wikimedia.</figcaption>
+</figure>
+
+<div class="key-idea">
+  <div class="label">Key Idea</div>
+  Jefferson&rsquo;s presidency showed the tension between ideals and reality. He wanted limited government but used executive power to buy Louisiana. He wanted peace but his embargo hurt Americans more than Europeans. Leading a democracy meant making difficult trade-offs.
+</div>
+
+<div class="stop-think">
+  <div class="header">Stop and Think</div>
+  <div class="body">
+    <ol>
+      <li>Jefferson believed the Louisiana Purchase was too important to worry about whether it was strictly constitutional. When, if ever, should a president act outside the rules?</li>
+      <li>Why did Jefferson&rsquo;s embargo fail? What does this tell us about the limits of &ldquo;peaceable coercion&rdquo;?</li>
+    </ol>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════ -->
+<h2 class="section-heading" id="native">V. Native American Power and the United States</h2>
+
+<div class="vocab-box">
+  <div class="header">Vocabulary: Native Resistance</div>
+  <dl>
+    <div class="term-row"><dt>Play-off system</dt><dd> &mdash; A diplomatic strategy where Native nations maintained their independence by balancing relationships between competing European powers.</dd></div>
+    <div class="term-row"><dt>Tecumseh</dt><dd> &mdash; A Shawnee leader who tried to unite Native American nations to resist American expansion.</dd></div>
+    <div class="term-row"><dt>Tenskwatawa (The Prophet)</dt><dd> &mdash; Tecumseh&rsquo;s brother, a spiritual leader who called for Native peoples to reject European influences and return to traditional ways.</dd></div>
+    <div class="term-row"><dt>Confederacy</dt><dd> &mdash; An alliance of groups joined together for a common purpose.</dd></div>
+  </dl>
+</div>
+
+<figure>
+  <img src="images/ch7/red-jacket.jpg" alt="Red Jacket, a Seneca leader, was one of the most skilled Native American diplomats. The medal around his neck, given by George Washington, reflects his role as an intermediary." loading="lazy">
+  <figcaption>Red Jacket, a Seneca leader, was one of the most skilled Native American diplomats. The medal around his neck, given by George Washington, reflects his role as an intermediary. Library of Congress.</figcaption>
+</figure>
+
+<p class="body-text">While white Americans debated politics, Native American nations faced an existential threat. American settlers pushed relentlessly westward, taking Native land. The federal government negotiated treaties, but those treaties consistently favored American interests over Native sovereignty.</p>
+
+<p class="body-text">For centuries, Native peoples had maintained their independence through the &ldquo;play-off system&rdquo;&mdash;balancing relationships between competing European powers. But after the Revolution, with Britain pushed to Canada and France out of North America, this strategy became harder to maintain.</p>
+
+<div class="story-box">
+  <div class="header">The Story Behind the Story: Tecumseh&rsquo;s Journey</div>
+  <div class="body">
+    <p>Between 1808 and 1811, Tecumseh undertook one of the most ambitious diplomatic missions in American history. He traveled thousands of miles&mdash;from the Great Lakes to the Gulf Coast&mdash;visiting dozens of Native nations and delivering the same passionate message: unite or perish.</p>
+    <p>Tecumseh was a brilliant speaker. In meetings with Choctaw, Chickasaw, Creek, and Cherokee leaders, he argued that no single chief had the right to sell land that belonged to all Native peoples collectively. &ldquo;The way, the only way to check and stop this evil,&rdquo; he told them, &ldquo;is for all red men to unite in claiming a common and equal right in the land.&rdquo;</p>
+    <p>Some leaders joined him. The Red Stick Creeks in Alabama embraced his call for resistance. But others&mdash;including many Cherokee and Choctaw leaders&mdash;believed accommodation was safer. They had built schools, adopted written constitutions, and developed trade relationships. They feared that war would destroy everything they had built. This disagreement among Native nations was as real and consequential as any debate in the U.S. Congress.</p>
+  </div>
+</div>
+
+<p class="body-text">Two Shawnee brothers, Tecumseh and Tenskwatawa (known as the Prophet), tried to build a powerful alliance of Native nations to stop American expansion. Tenskwatawa preached a message of spiritual renewal&mdash;urging Native peoples to reject European goods, return to their traditions, and find strength in their shared identity. Tecumseh traveled from Canada to Georgia, calling for unity.</p>
+
+<div class="primary-source">
+  <div class="header">Primary Source Voice: Tecumseh Speaks to Governor Harrison, 1810</div>
+  <div class="body">
+    <p>When Indiana Territory Governor William Henry Harrison demanded that Native nations honor land treaties, Tecumseh delivered a powerful reply:</p>
+    <blockquote>&ldquo;The white people have no right to take the land from the Indians, because the Indians had it first; it is theirs. They may sell, but all must join. Any sale not made by all is not valid. The late sale is bad. It was made by a part only.&hellip; Sell a country! Why not sell the air, the clouds, and the great sea, as well as the earth?&rdquo;</blockquote>
+    <div class="attribution">&mdash; Tecumseh, speech to Governor William Henry Harrison at Vincennes, August 1810</div>
+  </div>
+</div>
+
+<figure>
+  <img src="images/ch7/tenskwatawa.jpg" alt="Tenskwatawa (The Prophet), painted by George Catlin in 1831. As a spiritual leader, he urged Native peoples to reject European influences and find strength in traditional ways." loading="lazy">
+  <figcaption>Tenskwatawa (The Prophet), painted by George Catlin in 1831. As a spiritual leader, he urged Native peoples to reject European influences and find strength in traditional ways. Wikimedia.</figcaption>
+</figure>
+
+<p class="body-text">Their movement was powerful but faced obstacles. Not all Native leaders agreed that confrontation was the best strategy. Some believed diplomacy and accommodation would better protect their people. In the Southeast, the Red Stick Creeks joined Tecumseh&rsquo;s cause, but other Creek leaders opposed them, leading to a civil war within Creek society.</p>
+
+<p class="body-text">In 1811, American forces under William Henry Harrison attacked the Prophet&rsquo;s followers at the Battle of Tippecanoe. The confederacy was weakened but not destroyed. Tecumseh continued fighting alongside the British during the War of 1812, until he was killed in battle in October 1813. His death was a devastating blow to the movement for Native unity.</p>
+
+<div class="perspectives">
+  <div class="header">Multiple Perspectives: How Should Native Nations Respond to American Expansion?</div>
+  <div class="body">
+    <div class="entry"><span class="who">Tecumseh:</span> Native nations must unite and fight. No single nation can resist the Americans alone. The land belongs to all Native peoples collectively, and no one chief can sell it.</div>
+    <div class="entry"><span class="who">Accommodationists:</span> Diplomacy and adaptation offer the best chance for survival. Fighting the Americans will only bring destruction.</div>
+    <div class="entry"><span class="who">The Red Sticks:</span> We must purge European influences from our culture and return to traditional ways&mdash;by force if necessary.</div>
+    <div class="entry"><span class="who">William Henry Harrison:</span> Native resistance must be crushed to make way for American settlement and &ldquo;civilization.&rdquo;</div>
+  </div>
+</div>
+
+<div class="key-idea">
+  <div class="label">Key Idea</div>
+  Native American resistance was not just military&mdash;it was also spiritual, cultural, and political. Leaders like Tecumseh tried to build something unprecedented: a unified Native identity that could stand against American expansion. Their failure had devastating consequences for Indigenous peoples across the continent.
+</div>
+
+<div class="stop-think">
+  <div class="header">Stop and Think</div>
+  <div class="body">
+    <ol>
+      <li>Tecumseh argued that land belonged to all Native peoples collectively and couldn&rsquo;t be sold by individual leaders. How does this view compare to American ideas about property?</li>
+      <li>Why did some Native leaders choose accommodation over resistance? Were they wrong?</li>
+    </ol>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════ -->
+<h2 class="section-heading" id="war1812">VI. The War of 1812</h2>
+
+<div class="vocab-box">
+  <div class="header">Vocabulary: The War of 1812</div>
+  <dl>
+    <div class="term-row"><dt>War Hawks</dt><dd> &mdash; Young, aggressive members of Congress who pushed for war with Britain.</dd></div>
+    <div class="term-row"><dt>Impressment</dt><dd> &mdash; The British practice of kidnapping American sailors and forcing them to serve in the Royal Navy.</dd></div>
+    <div class="term-row"><dt>Treaty of Ghent</dt><dd> &mdash; The 1814 peace treaty that ended the War of 1812, essentially returning things to how they were before the war.</dd></div>
+    <div class="term-row"><dt>Hartford Convention</dt><dd> &mdash; A meeting of New England Federalists who opposed the war and proposed limiting federal power.</dd></div>
+    <div class="term-row"><dt>Monroe Doctrine</dt><dd> &mdash; An 1823 policy declaring that the entire Western Hemisphere was off-limits to new European colonization.</dd></div>
+    <div class="term-row"><dt>American System</dt><dd> &mdash; Henry Clay&rsquo;s plan for economic growth through a national bank, protective tariffs, and internal improvements like roads and canals.</dd></div>
+  </dl>
+</div>
+
+<p class="body-text">Despite the embargo&rsquo;s failure, tensions with Britain kept building. British impressment of American sailors continued, and British agents in Canada supplied weapons to Native American nations resisting American expansion. Young &ldquo;War Hawks&rdquo; in Congress, led by Henry Clay and John C. Calhoun, pushed for war to defend American independence once and for all.</p>
+
+<p class="body-text">President Madison asked Congress for a declaration of war in June 1812. Americans hoped to invade Canada and force Britain to change its policies. But the war went badly at first. The American invasion of Canada failed, and the British captured Detroit. The tide turned slowly&mdash;Americans recaptured Detroit in 1813 and won naval victories on the Great Lakes.</p>
+
+<figure>
+  <img src="images/ch7/british-indians-cartoon.jpg" alt="This 1812 political cartoon from Philadelphia shows American outrage at British alliances with Native Americans during the war." loading="lazy">
+  <figcaption>This 1812 political cartoon from Philadelphia shows American outrage at British alliances with Native Americans during the war. William Charles, 1812. Library of Congress.</figcaption>
+</figure>
+
+<p class="body-text">The most dramatic moment came in August 1814, when British forces burned Washington, D.C., including the White House and the Capitol. But Americans rallied. The defense of Fort McHenry in Baltimore inspired Francis Scott Key to write &ldquo;The Star-Spangled Banner.&rdquo; And Andrew Jackson&rsquo;s victory at the Battle of New Orleans became a symbol of American toughness.</p>
+
+<div class="story-box">
+  <div class="header">The Story Behind the Story: Dolley Madison Saves Washington</div>
+  <div class="body">
+    <p>When British troops marched toward Washington in August 1814, President James Madison had already left to join the military commanders. First Lady Dolley Madison stayed behind at the White House, waiting for news. When a messenger arrived shouting &ldquo;Clear out! Clear out!&rdquo; she refused to flee until she had saved something important.</p>
+    <p>While servants loaded a wagon with cabinet papers and silver, Dolley ordered the full-length portrait of George Washington cut from its frame and carried to safety. &ldquo;I insist on waiting until the large picture of General Washington is secured,&rdquo; she wrote to her sister. The painting still hangs in the White House today.</p>
+    <p>Hours later, British soldiers ate the dinner that had been prepared for the Madisons, then set the building on fire. A thunderstorm that night saved the city from complete destruction. Dolley&rsquo;s composure under pressure made her a national hero&mdash;and showed that women&rsquo;s courage was as important to the republic as any soldier&rsquo;s.</p>
+  </div>
+</div>
+
+<figure>
+  <img src="images/ch7/washington-burning.jpg" alt="British troops set fire to Washington, D.C. in August 1814, burning the White House and Capitol. It was a humiliating moment for the young nation." loading="lazy">
+  <figcaption>British troops set fire to Washington, D.C. in August 1814, burning the White House and Capitol. It was a humiliating moment for the young nation. Wikimedia.</figcaption>
+</figure>
+
+<figure>
+  <img src="images/ch7/battle-of-new-orleans.jpg" alt="The Battle of New Orleans, January 1815. Andrew Jackson&rsquo;s victory made him a national hero&mdash;even though the peace treaty had already been signed two weeks earlier." loading="lazy">
+  <figcaption>The Battle of New Orleans, January 1815. Andrew Jackson&rsquo;s victory made him a national hero&mdash;even though the peace treaty had already been signed two weeks earlier. Wikimedia.</figcaption>
+</figure>
+
+<p class="body-text">The Treaty of Ghent, signed in December 1814, essentially restored things to how they were before the war. Neither side gained territory. But the War of 1812 had powerful effects on American identity. It boosted national pride, weakened the Federalist Party (whose opposition to the war made them look unpatriotic), and opened the door for westward expansion at the expense of Native nations who had lost their British allies.</p>
+
+<figure>
+  <img src="images/ch7/hartford-convention.jpg" alt="This cartoon mocks New England Federalists at the Hartford Convention, showing them leaping toward the British king. Their opposition to the war destroyed the Federalist Party." loading="lazy">
+  <figcaption>This cartoon mocks New England Federalists at the Hartford Convention, showing them leaping toward the British king. Their opposition to the war destroyed the Federalist Party. Wikimedia.</figcaption>
+</figure>
+
+<p class="body-text">After the war, politicians like Henry Clay promoted the &ldquo;American System&rdquo;&mdash;a plan for a national bank, protective tariffs, and roads and canals to bind the country together. In 1823, President James Monroe issued the Monroe Doctrine, declaring the entire Western Hemisphere off-limits to new European colonization. The United States was asserting itself as a continental power.</p>
+
+<div class="key-idea">
+  <div class="label">Key Idea</div>
+  The War of 1812 didn&rsquo;t change America&rsquo;s borders, but it changed how Americans saw themselves. It boosted nationalism, crushed Native resistance in the East, destroyed the Federalist Party, and set the stage for rapid westward expansion&mdash;with all the conflicts that would bring.
+</div>
+
+<div class="stop-think">
+  <div class="header">Stop and Think</div>
+  <div class="body">
+    <ol>
+      <li>If the Treaty of Ghent basically restored everything to how it was before the war, was the War of 1812 worth fighting? What did America gain&mdash;and what did it lose?</li>
+      <li>The war devastated Native American nations who had allied with Britain. How might the history of the early republic look different if Tecumseh&rsquo;s confederacy had succeeded?</li>
+    </ol>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════ -->
+<h2 class="section-heading" id="conclusion7">VII. Wrapping Up: Whose Republic?</h2>
+
+<p class="body-text">The early republic was a time of enormous contradiction. Americans celebrated liberty while enslaving millions. They praised democracy while denying it to women, Native peoples, and the poor. They claimed the land was empty while Indigenous nations fought to defend their homes.</p>
+
+<p class="body-text">Yet this period also planted seeds of change. Black Americans like David Walker and Benjamin Banneker challenged racism with powerful words and actions. Native leaders like Tecumseh built movements for unity and resistance. Women claimed a political role through the idea of Republican Motherhood, even if they couldn&rsquo;t yet vote. The meaning of &ldquo;We the People&rdquo; was expanding&mdash;slowly, unevenly, and always contested.</p>
+
+<div class="perspectives">
+  <div class="header">Whose Voices Were Left Out?</div>
+  <div class="body">
+    <div class="entry"><span class="who">Enslaved women:</span> Women like those at Monticello lived under the dual oppression of slavery and gender. They worked in fields and houses, raised children who could be sold away, and had no legal protection. Their stories were rarely written down, but they resisted in countless ways&mdash;slowing work, preserving cultural traditions, protecting their families.</div>
+    <div class="entry"><span class="who">Free Black communities in the North:</span> While this chapter focuses on dramatic events, thousands of free Black Americans in cities like Philadelphia and Boston were quietly building churches, schools, and mutual aid societies. Leaders like Richard Allen (founder of the African Methodist Episcopal Church) created institutions that would sustain Black communities for generations.</div>
+    <div class="entry"><span class="who">Native women:</span> In many Native nations, women held real political and economic power. Clan mothers among the Haudenosaunee (Iroquois) chose and could remove chiefs. But European-style treaties were always negotiated with men, systematically excluding Native women from the very diplomacy that decided their futures.</div>
+    <div class="entry"><span class="who">Poor white men:</span> Even among white men, democracy had limits. Many states still required property ownership to vote. Landless white laborers, sailors, and frontier settlers often had no more political voice than the groups formally excluded from citizenship.</div>
+  </div>
+</div>
+
+<p class="body-text">As the nation moved toward the 1830s, new challenges awaited: the expansion of slavery, the forced removal of Native peoples, and a growing industrial economy that would transform American life. The debates of the early republic&mdash;about power, equality, and who truly belongs&mdash;were far from over.</p>
+
+<div class="activity">
+  <div class="header">Chapter Activity: &ldquo;Whose Liberty?&rdquo; Evidence Chart</div>
+  <div class="body">
+    <p>This chapter shows how different groups experienced &ldquo;liberty&rdquo; very differently in the early republic. Create a chart with these columns:</p>
+    <ol>
+      <li><strong>Group</strong> (Enslaved Black Americans, Free Black Americans, White Women, Native Americans, Poor White Men, Wealthy White Men)</li>
+      <li><strong>What &ldquo;liberty&rdquo; meant to them</strong></li>
+      <li><strong>What barriers they faced</strong></li>
+      <li><strong>How they fought for their rights</strong></li>
+      <li><strong>Evidence from the text</strong></li>
+    </ol>
+    <h4>Discussion Questions:</h4>
+    <ul>
+      <li>Which group had the most power in the early republic? Which had the least? What gave some groups power over others?</li>
+      <li>Can a country be a &ldquo;democracy&rdquo; when most of its people are excluded from political life?</li>
+      <li>Which of these groups&rsquo; struggles for liberty connects most directly to issues in America today?</li>
+    </ul>
+  </div>
+</div>
+
+<div class="attribution-footer">
+  <strong>Attribution:</strong> Justin Clark et al., &ldquo;The Early Republic,&rdquo; Nathaniel C. Green, ed., in <em>The American Yawp</em>, eds. Joseph Locke and Ben Wright (Stanford, CA: Stanford University Press, 2018). <a href="https://www.americanyawp.com">www.americanyawp.com</a><br>
+  This adaptation is licensed under <a href="https://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International (CC BY-SA 4.0)</a>.<br>
+  Original images are used under their respective Creative Commons or public domain licenses as noted in captions.
+</div>
+
+</div><!-- .container -->
+</body>
+</html>
