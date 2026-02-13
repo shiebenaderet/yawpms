@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chapter 12: Manifest Destiny | The American Yawp MS</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:wght@400;600;700&display=swap');
+:root { --navy: #1B3A5C; --teal: #2A7F8E; --gold: #C4941D; --cream: #FAFAF8; --dark-gray: #2C2C2C; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Libre Baskerville', Georgia, serif; color: var(--dark-gray); background: var(--cream); line-height: 1.8; }
+.title-page { min-height: 60vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 80px 24px; background: linear-gradient(170deg, #0D2137 0%, var(--navy) 40%, #2B5A7C 100%); color: white; }
+.series { font-family: 'Source Sans 3', sans-serif; font-size: 13px; letter-spacing: 4px; text-transform: uppercase; opacity: .5; margin-bottom: 16px; }
+.chapter-num { font-size: 20px; opacity: .7; margin-bottom: 12px; }
+.chapter-title { font-size: 52px; line-height: 1.2; margin-bottom: 20px; font-weight: 700; }
+.chapter-subtitle { font-size: 22px; font-style: italic; opacity: .75; margin-bottom: 32px; }
+.divider { width: 100px; height: 3px; background: var(--gold); margin: 0 auto 24px; }
+.attribution { font-family: 'Source Sans 3', sans-serif; font-size: 13px; opacity: .5; max-width: 600px; }
+.container { max-width: 720px; margin: 0 auto; padding: 48px 24px; }
+.toc { background: white; border: 1px solid #ddd; border-radius: 8px; padding: 32px; margin-bottom: 48px; }
+.toc h2 { font-size: 18px; color: var(--navy); margin-bottom: 20px; text-align: center; }
+.toc ol { list-style: none; counter-reset: toc-counter; padding: 0; }
+.toc li { counter-increment: toc-counter; margin-bottom: 12px; }
+.toc li::before { content: counter(toc-counter, upper-roman) ". "; color: var(--gold); font-weight: 700; margin-right: 8px; }
+.toc a { color: var(--navy); text-decoration: none; }
+.overview { background: #F0F4F8; border-left: 5px solid var(--teal); padding: 28px 32px; margin-bottom: 48px; border-radius: 0 8px 8px 0; }
+.overview h2 { font-size: 20px; color: var(--teal); margin-bottom: 16px; }
+.overview p { font-family: 'Source Sans 3', sans-serif; font-size: 16px; line-height: 1.7; }
+.big-questions { background: white; border: 2px solid var(--gold); border-radius: 8px; padding: 28px 32px; margin-bottom: 48px; }
+.big-questions h2 { font-size: 18px; color: var(--gold); margin-bottom: 16px; text-align: center; }
+.big-questions ul { list-style: none; padding: 0; }
+.big-questions li { font-family: 'Source Sans 3', sans-serif; font-size: 15px; padding-left: 28px; position: relative; margin-bottom: 12px; line-height: 1.6; }
+.big-questions li::before { content: "?"; color: var(--gold); font-weight: 700; font-size: 20px; position: absolute; left: 0; top: -2px; }
+section { margin-bottom: 64px; }
+section h2 { font-size: 28px; color: var(--navy); margin-bottom: 24px; padding-bottom: 12px; border-bottom: 2px solid #E0E0E0; }
+section h3 { font-size: 20px; color: var(--navy); margin: 32px 0 16px; }
+p { margin-bottom: 20px; font-size: 17px; line-height: 1.8; }
+p:last-child { margin-bottom: 0; }
+.vocab-box, .stop-think, .perspectives, .key-idea, .primary-source, .story-box, .activity-box, .voices-left-out { border-radius: 8px; padding: 24px 28px; margin: 32px 0; }
+.vocab-box { background: #E8F4F8; border-left: 5px solid var(--teal); }
+.vocab-box h3 { color: var(--teal); font-size: 16px; margin: 0 0 12px; }
+.vocab-box p { font-family: 'Source Sans 3', sans-serif; font-size: 15px; margin-bottom: 12px; line-height: 1.6; }
+.vocab-box p:last-child { margin-bottom: 0; }
+.vocab-box strong { color: var(--teal); }
+.stop-think { background: #FFF9E6; border-left: 5px solid var(--gold); }
+.stop-think h3 { color: var(--gold); font-size: 16px; margin: 0 0 12px; }
+.stop-think p { font-family: 'Source Sans 3', sans-serif; font-size: 15px; font-style: italic; line-height: 1.6; }
+.perspectives { background: #F3E8FF; border-left: 5px solid #7C3AED; }
+.perspectives h3 { color: #7C3AED; font-size: 16px; margin: 0 0 16px; }
+.perspectives .perspective { margin-bottom: 16px; font-family: 'Source Sans 3', sans-serif; font-size: 15px; line-height: 1.6; }
+.perspectives .perspective:last-child { margin-bottom: 0; }
+.perspectives .perspective strong { color: #7C3AED; }
+.key-idea { background: #E8F5E9; border-left: 5px solid #2E7D32; }
+.key-idea h3 { color: #2E7D32; font-size: 16px; margin: 0 0 12px; }
+.key-idea p { font-family: 'Source Sans 3', sans-serif; font-size: 15px; line-height: 1.6; margin-bottom: 12px; }
+.key-idea p:last-child { margin-bottom: 0; }
+.primary-source { background: #FFF3E0; border-left: 5px solid #E65100; font-style: italic; }
+.primary-source h3 { color: #E65100; font-size: 16px; margin: 0 0 12px; font-style: normal; }
+.primary-source p { font-family: 'Source Sans 3', sans-serif; font-size: 15px; line-height: 1.7; margin-bottom: 12px; }
+.primary-source .source-citation { font-size: 13px; opacity: .7; font-style: normal; }
+.story-box { background: #FFF4E6; border-left: 5px solid #F57C00; }
+.story-box h3 { color: #F57C00; font-size: 18px; margin: 0 0 16px; }
+.story-box p { font-family: 'Source Sans 3', sans-serif; font-size: 15px; line-height: 1.7; margin-bottom: 12px; }
+.story-box p:last-child { margin-bottom: 0; }
+.voices-left-out { background: #FCE4EC; border-left: 5px solid #C2185B; }
+.voices-left-out h3 { color: #C2185B; font-size: 18px; margin: 0 0 16px; }
+.voices-left-out p { font-family: 'Source Sans 3', sans-serif; font-size: 15px; line-height: 1.7; margin-bottom: 12px; }
+.voices-left-out p:last-child { margin-bottom: 0; }
+.voices-left-out strong { color: #C2185B; }
+.activity-box { background: #FFEBEE; border: 2px solid #C62828; border-radius: 8px; padding: 32px; }
+.activity-box h3 { color: #C62828; font-size: 22px; margin: 0 0 20px; text-align: center; }
+.activity-box h4 { color: #C62828; font-size: 16px; margin: 20px 0 12px; }
+.activity-box p, .activity-box li { font-family: 'Source Sans 3', sans-serif; font-size: 15px; line-height: 1.7; }
+.activity-box ul, .activity-box ol { margin-left: 24px; margin-bottom: 16px; }
+.activity-box li { margin-bottom: 8px; }
+figure { margin: 32px 0; text-align: center; }
+figure img { max-width: 100%; height: auto; border-radius: 4px; box-shadow: 0 2px 8px rgba(0,0,0,.1); }
+figcaption { font-family: 'Source Sans 3', sans-serif; font-size: 14px; color: #666; margin-top: 12px; line-height: 1.6; font-style: italic; }
+footer { border-top: 2px solid #E0E0E0; margin-top: 64px; padding-top: 24px; font-family: 'Source Sans 3', sans-serif; font-size: 13px; color: #999; line-height: 1.7; }
+footer a { color: var(--teal); text-decoration: none; border-bottom: 1px dotted var(--teal); }
+footer a:hover { border-bottom-style: solid; }
+@media print { .title-page { page-break-after: always; } section { page-break-inside: avoid; } }
+@media (max-width: 600px) { .chapter-title { font-size: 36px; } .container { padding: 32px 16px; } section h2 { font-size: 24px; } }
+</style>
+</head>
+<body>
+
+<div class="title-page">
+  <div class="series">The American Yawp Middle School Edition</div>
+  <div class="chapter-num">Chapter 12</div>
+  <h1 class="chapter-title">Manifest Destiny</h1>
+  <div class="divider"></div>
+  <div class="chapter-subtitle">Westward Expansion, the Mexican-American War, and the Cost of Empire</div>
+  <p class="attribution">Adapted for middle school readers from <em>The American Yawp</em>, edited by Joseph Locke and Ben Wright</p>
+</div>
+
+<div class="container">
+
+<nav class="toc">
+  <h2>Contents</h2>
+  <ol>
+    <li><a href="#intro">Introduction: Sea to Shining Sea</a></li>
+    <li><a href="#manifest-destiny">The Idea of Manifest Destiny</a></li>
+    <li><a href="#oregon-trail">The Oregon Trail</a></li>
+    <li><a href="#texas-mexico">Texas and the Mexican-American War</a></li>
+    <li><a href="#gold-rush">The California Gold Rush</a></li>
+    <li><a href="#native-peoples">Native Peoples and Westward Expansion</a></li>
+    <li><a href="#conclusion">Wrapping Up: Expansion at What Cost?</a></li>
+  </ol>
+</nav>
+
+<div class="overview">
+  <h2>Chapter Overview</h2>
+  <p>Between the 1830s and 1850s, the United States expanded from the Mississippi River to the Pacific Ocean. Americans called this expansion "Manifest Destiny"—the belief that God intended them to spread their civilization across the entire continent. This expansion took many forms: families loading covered wagons and heading west on the Oregon Trail, a war of conquest against Mexico, and a frenzied gold rush in California. But the story of westward expansion is not simply a story of adventure and opportunity. It is also a story of invasion, displacement, and destruction. For the Mexican citizens who suddenly found themselves living in a foreign country, for the Native peoples who were driven from their homelands, and for the California Indians who faced outright genocide, Manifest Destiny meant devastation.</p>
+</div>
+
+<div class="big-questions">
+  <h2>Big Questions</h2>
+  <ul>
+    <li>What was Manifest Destiny, and why did so many Americans believe in it?</li>
+    <li>What were the real experiences of people who traveled the Oregon Trail?</li>
+    <li>Was the Mexican-American War justified, or was it an act of aggression?</li>
+    <li>Who paid the price for American expansion—and whose stories have been left out?</li>
+  </ul>
+</div>
+
+<section id="intro">
+  <h2>I. Introduction: Sea to Shining Sea</h2>
+
+  <p>In 1800, the United States was a nation hugging the Atlantic coast. By 1850, it stretched from the Atlantic to the Pacific. In just half a century, the country had tripled in size, absorbing lands that had belonged to Native nations, Mexico, and Great Britain. No other nation in the world was expanding so fast.</p>
+
+  <p>Many Americans celebrated this expansion as proof of their nation's greatness. They believed that God had chosen them to spread democracy, Christianity, and "civilization" across the continent. Newspapers and politicians declared it was America's destiny to reach the Pacific. The land was there, they said, and it was their right—perhaps even their duty—to take it.</p>
+
+  <p>But expansion was never peaceful, and it was never free. Every acre of new territory was taken from someone who already lived there. The westward movement sparked a war with Mexico, displaced hundreds of thousands of Native people, and intensified the most dangerous question in American politics: would the new territories allow slavery? The drive to expand from "sea to shining sea" would ultimately push the nation toward civil war.</p>
+
+  <div class="vocab-box">
+    <h3>Vocabulary</h3>
+    <p><strong>Manifest Destiny:</strong> The widely held belief in the 1840s that American settlers were destined by God to expand across the North American continent. The term was coined by newspaper editor John O'Sullivan in 1845.</p>
+    <p><strong>Annexation:</strong> The act of incorporating new territory into an existing country. The United States annexed Texas in 1845.</p>
+    <p><strong>Cession:</strong> Territory given up by one country to another, usually after a war. The Mexican Cession of 1848 transferred a vast area of land from Mexico to the United States.</p>
+  </div>
+</section>
+
+<section id="manifest-destiny">
+  <h2>II. The Idea of Manifest Destiny</h2>
+
+  <h3>A Belief Takes Shape</h3>
+
+  <p>The idea that Americans had a special right to expand westward did not appear overnight. It grew from several deep roots. Many Americans believed in "American exceptionalism"—the idea that the United States was fundamentally different from and better than other nations. They pointed to their democratic government, their Protestant Christian faith, and their spirit of enterprise as proof that Americans were uniquely qualified to settle and "improve" the continent.</p>
+
+  <p>Racial thinking was also central to Manifest Destiny. Most white Americans in this era believed that people of European descent were superior to Native peoples, Mexicans, and other groups. They used this belief to justify taking land from people they considered less "civilized." Expansion was not just a right, they argued—it was a duty to bring the supposed benefits of white American culture to the entire continent.</p>
+
+  <h3>John O'Sullivan Names the Dream</h3>
+
+  <p>In 1845, newspaper editor John L. O'Sullivan gave this set of beliefs its famous name. Writing about the annexation of Texas, O'Sullivan declared that it was America's "manifest destiny to overspread the continent allotted by Providence for the free development of our yearly multiplying millions." The phrase caught fire. Politicians, journalists, and ordinary citizens repeated it endlessly. "Manifest Destiny" became a rallying cry for expansion—a way to make conquest sound like a noble, even holy, mission.</p>
+
+  <p>Not everyone agreed. Critics pointed out that Manifest Destiny was just a fancy name for land theft. Many Whig politicians, including a young congressman named Abraham Lincoln, opposed the Mexican-American War and questioned whether expansion was truly God's will—or just greed dressed up in religious language.</p>
+
+  <div class="primary-source">
+    <h3>Primary Source: John O'Sullivan on Manifest Destiny (1845)</h3>
+    <p>"The American claim is by the right of our manifest destiny to overspread and to possess the whole of the continent which Providence has given us for the development of the great experiment of liberty and federated self-government entrusted to us."</p>
+    <p class="source-citation">—John L. O'Sullivan, "Annexation," <em>The United States Magazine and Democratic Review</em>, July 1845</p>
+  </div>
+
+  <div class="stop-think">
+    <h3>Stop and Think</h3>
+    <p>O'Sullivan says that God ("Providence") gave America the right to possess the whole continent. What is dangerous about claiming that God supports your country's political goals? Can you think of other examples in history where people have used religion to justify taking things from others?</p>
+  </div>
+
+  <div class="key-idea">
+    <h3>Key Idea: Manifest Destiny Was an Ideology, Not a Fact</h3>
+    <p>It is important to understand that Manifest Destiny was a <em>belief</em>—a set of ideas used to justify expansion. It was not a fact or a law of nature. The continent was not empty, and no divine power had granted it to the United States. Calling expansion "destiny" made it sound inevitable and natural, which made it easier for Americans to ignore the violence and injustice that expansion required. When we study Manifest Destiny, we need to examine not just what Americans believed, but what those beliefs allowed them to do—and to whom.</p>
+  </div>
+</section>
+
+<section id="oregon-trail">
+  <h2>III. The Oregon Trail</h2>
+
+  <h3>The Great Migration</h3>
+
+  <p>Beginning in the early 1840s, thousands of American families packed their belongings into covered wagons and set out on the 2,000-mile journey from Independence, Missouri, to the Oregon Country in the Pacific Northwest. They were drawn by reports of fertile land, mild climate, and the promise of a fresh start. The U.S. government encouraged migration to Oregon in part to strengthen American claims to the territory, which was jointly occupied with Great Britain until a treaty in 1846 established the border at the 49th parallel.</p>
+
+  <p>The journey took four to six months. Families traveled in wagon trains—groups of 20 to 100 wagons—for safety and mutual support. They walked alongside their wagons (there was rarely room to ride) across the Great Plains, over the Rocky Mountains, and through the deserts of the interior West. A typical day began before dawn and ended at dusk, covering 15 to 20 miles if conditions were good.</p>
+
+  <h3>Hardship and Death on the Trail</h3>
+
+  <p>The Oregon Trail was not the romantic adventure that many popular stories suggest. It was grueling, dangerous, and often deadly. The greatest killer was not conflict with Native peoples, as movies and novels have often claimed, but disease—especially cholera. This terrifying illness could strike a healthy person in the morning and kill them by nightfall. Historians estimate that as many as 20,000 people died along the trail between 1840 and 1860, most from disease.</p>
+
+  <p>Other dangers included river crossings (many people drowned), accidental gunshot wounds, broken wagon wheels, and starvation when supplies ran low. The trail was littered with abandoned furniture, dead oxen, and makeshift graves. Families who started the journey too late in the year risked being trapped by early mountain snows, as happened to the infamous Donner Party in 1846.</p>
+
+  <h3>Encounters with Native Peoples</h3>
+
+  <p>The Oregon Trail cut through the homelands of many Native nations, including the Pawnee, Sioux, Shoshone, and Nez Perce. The relationship between emigrants and Native peoples was more complicated than popular stories suggest. In the early years, many Native groups traded with and even assisted wagon trains, offering food, horses, and guidance in exchange for goods. Some Native people operated ferry services at river crossings.</p>
+
+  <p>But as the number of emigrants grew—by the late 1840s, tens of thousands were crossing each year—the impact on Native lands became devastating. Wagon trains consumed grass and water, drove away the bison that Native peoples depended on, and brought diseases like cholera and measles that killed thousands of Native people. Conflicts increased as resources grew scarce. The Oregon Trail was not just a road west—it was the beginning of the end for the Native nations of the Great Plains.</p>
+
+  <div class="story-box">
+    <h3>Story Behind the Story: The Donner Party</h3>
+    <p>In the spring of 1846, a group of about 90 emigrants led by George and Jacob Donner left Independence, Missouri, bound for California. Hoping to save time, they took an untested shortcut called the Hastings Cutoff through the Utah desert. The shortcut turned out to be longer and far more difficult than the standard route. It cost them precious weeks. By the time they reached the Sierra Nevada mountains in late October, heavy snow had blocked the mountain passes. They were trapped.</p>
+    <p>For four months, the group struggled to survive in makeshift shelters near what is now Donner Lake. They ate bark, boiled leather, and eventually—when starvation left no other choice—some resorted to eating the bodies of those who had died. Of the 87 people trapped in the mountains, only 48 survived. The Donner Party became the most notorious story of the westward migration, a grim reminder that the journey west could end in catastrophe.</p>
+  </div>
+
+  <div class="stop-think">
+    <h3>Stop and Think</h3>
+    <p>Why do you think popular stories about the Oregon Trail have often exaggerated conflict with Native peoples while downplaying the real dangers of disease and accidents? What does that tell us about how Americans wanted to remember westward expansion?</p>
+  </div>
+</section>
+
+<section id="texas-mexico">
+  <h2>IV. Texas and the Mexican-American War</h2>
+
+  <h3>Texas Breaks Away from Mexico</h3>
+
+  <p>In the 1820s, the Mexican government invited American settlers to move to its northern province of Texas, hoping they would develop the land and help protect the border. Americans came by the thousands, drawn by cheap land and fertile soil. But the arrangement quickly fell apart. The American settlers refused to follow Mexican laws, including Mexico's abolition of slavery in 1829. Many of the settlers were slaveholders from the American South who had no intention of giving up their enslaved workers.</p>
+
+  <p>In 1835, tensions between the Texan settlers and the Mexican government erupted into armed rebellion. The Texans declared independence in 1836 and, after a series of battles—including the famous siege of the Alamo, where Mexican forces under General Santa Anna overwhelmed a small Texan garrison—the Texans won a decisive victory at the Battle of San Jacinto. Texas became an independent republic, known as the Lone Star Republic. But most Texans wanted to join the United States, and in 1845, Congress voted to annex Texas as the 28th state.</p>
+
+  <h3>The Road to War</h3>
+
+  <p>Mexico had never recognized Texas independence and was furious about annexation. Making matters worse, the United States and Mexico disagreed about the border. Texas claimed the Rio Grande as its southern boundary; Mexico insisted the border was the Nueces River, about 150 miles to the north. In early 1846, President James K. Polk—a strong believer in Manifest Destiny—sent American troops under General Zachary Taylor into the disputed territory between the two rivers.</p>
+
+  <p>When Mexican forces attacked an American patrol in the disputed zone, Polk told Congress that Mexico had "shed American blood upon American soil" and asked for a declaration of war. Critics, including Abraham Lincoln and former President John Quincy Adams, argued that Polk had deliberately provoked the conflict by sending troops into territory that rightfully belonged to Mexico. But Congress declared war in May 1846.</p>
+
+  <h3>The War with Mexico, 1846-1848</h3>
+
+  <p>The Mexican-American War was a lopsided conflict. The United States had a larger, better-equipped army and a more powerful navy. American forces invaded Mexico from multiple directions. General Taylor fought his way south from Texas. General Winfield Scott launched an amphibious invasion at Veracruz and marched inland to capture Mexico City itself in September 1847. Other American forces seized New Mexico and California with relatively little resistance.</p>
+
+  <p>For Mexico, the war was a catastrophe. Mexican soldiers fought bravely but were outgunned and outnumbered. Thousands of Mexican civilians suffered as American troops occupied their towns and cities. The war ended with the Treaty of Guadalupe Hidalgo in February 1848.</p>
+
+  <h3>The Treaty of Guadalupe Hidalgo and the Mexican Cession</h3>
+
+  <p>The treaty's terms were staggering. Mexico was forced to give up nearly half its national territory—an area that included present-day California, Nevada, Utah, and Arizona, along with parts of New Mexico, Colorado, and Wyoming. This vast region, known as the Mexican Cession, added over 500,000 square miles to the United States. In return, the United States paid Mexico $15 million—a fraction of the land's true value. The treaty also promised that the roughly 80,000 Mexican citizens living in the ceded territory could become U.S. citizens with full rights. That promise was rarely honored.</p>
+
+  <div class="vocab-box">
+    <h3>Vocabulary</h3>
+    <p><strong>Mexican Cession:</strong> The vast territory that Mexico was forced to surrender to the United States under the Treaty of Guadalupe Hidalgo (1848), including present-day California, Nevada, Utah, Arizona, and parts of New Mexico, Colorado, and Wyoming.</p>
+    <p><strong>Treaty of Guadalupe Hidalgo (1848):</strong> The peace treaty that ended the Mexican-American War. Mexico gave up nearly half its territory, and the United States paid $15 million.</p>
+    <p><strong>Provoke:</strong> To deliberately cause a reaction or conflict. Critics accused President Polk of provoking the war with Mexico.</p>
+  </div>
+
+  <div class="perspectives">
+    <h3>Multiple Perspectives: Was the Mexican-American War Justified?</h3>
+    <div class="perspective"><strong>President James K. Polk and war supporters:</strong> "Mexico attacked our soldiers on American soil. We have every right to defend ourselves. The expansion of American territory will spread democracy and freedom across the continent. This war is part of our Manifest Destiny."</div>
+    <div class="perspective"><strong>Mexican perspective:</strong> "The Americans stole Texas from us and then invaded our country to steal even more. They sent soldiers into territory that was rightfully ours and then blamed us for defending our own land. This is not a war of defense—it is a war of conquest by a greedy, aggressive neighbor. Our people will lose their homes, their land, and their country."</div>
+    <div class="perspective"><strong>Abraham Lincoln and war critics:</strong> "Show me the exact spot where American blood was shed on American soil. The president provoked this war by sending troops into disputed territory. This is a war of aggression disguised as self-defense—and it shames our republic."</div>
+    <div class="perspective"><strong>Abolitionists:</strong> "This war is a slaveholders' plot to seize more territory for slavery. Every acre taken from Mexico will become another battlefield in the fight over whether America will be a free nation or a slave nation."</div>
+  </div>
+
+  <div class="primary-source">
+    <h3>Primary Source: Ulysses S. Grant on the Mexican-American War</h3>
+    <p>"I do not think there was ever a more wicked war than that waged by the United States on Mexico. I had a horror of the Mexican War, and I have always believed that it was on our part most unjust. The wickedness was not in the way the war was conducted, but in the war itself."</p>
+    <p class="source-citation">—Ulysses S. Grant, <em>Personal Memoirs</em> (1885). Grant served as a young officer in the Mexican-American War and later became the commanding general of the Union Army and the 18th President.</p>
+  </div>
+
+  <div class="stop-think">
+    <h3>Stop and Think</h3>
+    <p>Ulysses S. Grant, who fought in the Mexican-American War, later called it "one of the most unjust ever waged by a stronger against a weaker nation." Why might a soldier who fought in a war come to believe that the war was wrong? What does it take to question something you participated in?</p>
+  </div>
+</section>
+
+<section id="gold-rush">
+  <h2>V. The California Gold Rush</h2>
+
+  <h3>Gold at Sutter's Mill</h3>
+
+  <p>On January 24, 1848—just nine days before the Treaty of Guadalupe Hidalgo was signed—a carpenter named James Marshall discovered gold at Sutter's Mill in Coloma, California. When the news spread, it triggered one of the largest mass migrations in human history. By 1849, tens of thousands of people from around the world were pouring into California, hoping to strike it rich. They became known as the "Forty-Niners."</p>
+
+  <p>The Forty-Niners came from everywhere: the eastern United States, Mexico, Chile, China, Australia, and Europe. They traveled by ship around the tip of South America, by land across the continent, or by ship to Panama and then overland across the isthmus before catching another ship north. San Francisco, a tiny settlement in 1848, became a booming city almost overnight, growing from about 800 people to over 25,000 in just two years.</p>
+
+  <h3>Life in the Gold Fields</h3>
+
+  <p>Most miners did not get rich. The early arrivals sometimes found gold easily, panning in streams and rivers. But the easy gold was quickly exhausted. Mining became backbreaking, expensive work that required equipment and capital. Many miners ended up working for wages in large mining operations owned by wealthy investors—the same kind of boss-and-worker relationship they had hoped to escape. Prices in mining towns were astronomical: a single egg might cost the equivalent of $25 in today's money. Many miners went home poorer than when they arrived.</p>
+
+  <h3>Devastation for California's Native Peoples</h3>
+
+  <p>For the Native peoples of California, the Gold Rush was an apocalypse. Before the Gold Rush, an estimated 150,000 Native people lived in California. By 1870, that number had plummeted to roughly 30,000. This catastrophic decline was not accidental. The new state government of California paid bounties for Native scalps and funded militia campaigns against Native communities. Miners and settlers murdered Native people, destroyed their food sources, and forced survivors onto tiny, barren reservations. Children were kidnapped and sold as laborers under a California law that effectively legalized the enslavement of Native people. Historians today recognize what happened to California's Native peoples as genocide.</p>
+
+  <h3>Chinese Immigrants and Discrimination</h3>
+
+  <p>The Gold Rush drew tens of thousands of Chinese immigrants to California, most of them young men from the Guangdong province of southern China. They worked in the mines, built roads, and later became essential laborers in the construction of the transcontinental railroad. Chinese immigrants faced relentless discrimination. White miners resented their presence, and California passed the Foreign Miners' Tax in 1850, which specifically targeted Chinese and Mexican miners. Chinese workers were often driven from productive claims by violence and intimidation. Despite their enormous contributions to building California's economy, Chinese immigrants were treated as unwelcome outsiders.</p>
+
+  <div class="story-box">
+    <h3>Story Behind the Story: The World Rushes to California</h3>
+    <p>The Gold Rush was a truly global event. When news of the discovery reached China, thousands of young men from Guangdong province scraped together money for the voyage across the Pacific. They called California "Gam Saan"—Gold Mountain. From Chile, experienced miners sailed north, bringing expertise in hard-rock mining that American amateurs lacked. From Mexico, miners crossed the border into what had been, just months earlier, their own country's territory. From Ireland, Germany, and France, people fleeing poverty and revolution saw California as a last chance at fortune.</p>
+    <p>In the mining camps, dozens of languages were spoken. The diversity was remarkable—and so was the conflict. White American miners, many of them deeply racist, passed laws and used violence to push out foreign-born competitors. The Foreign Miners' Tax of 1850 was aimed directly at Mexican and Chinese miners. The Gold Rush created a multicultural California, but it also created a brutal racial hierarchy that would shape the state for generations.</p>
+  </div>
+
+  <div class="vocab-box">
+    <h3>Vocabulary</h3>
+    <p><strong>Forty-Niners:</strong> The people who rushed to California in 1849 seeking gold. They came from all over the world.</p>
+    <p><strong>Genocide:</strong> The deliberate, systematic destruction of a racial, ethnic, or cultural group. Historians use this term to describe what happened to California's Native peoples during and after the Gold Rush.</p>
+    <p><strong>Foreign Miners' Tax:</strong> A California law passed in 1850 that charged non-American miners a heavy monthly tax, specifically targeting Chinese and Mexican miners.</p>
+  </div>
+
+  <div class="stop-think">
+    <h3>Stop and Think</h3>
+    <p>The California Gold Rush is often told as an exciting adventure story. How does learning about the experiences of Native peoples and Chinese immigrants change the way you understand this event? Why do you think these parts of the story are often left out?</p>
+  </div>
+</section>
+
+<section id="native-peoples">
+  <h2>VI. Native Peoples and Westward Expansion</h2>
+
+  <h3>Displacement and Broken Promises</h3>
+
+  <p>Westward expansion was, above all, a catastrophe for Native peoples. Every treaty promising Native nations that they could keep their lands "as long as the grass grows and the rivers flow" was eventually broken when white settlers wanted the land. The Indian Removal Act of 1830 had already forced the Cherokee, Choctaw, Chickasaw, Creek, and Seminole nations from the Southeast. Now, as Americans pushed west of the Mississippi, the same pattern repeated itself on the Great Plains and in the Far West.</p>
+
+  <p>The Oregon Trail, the Santa Fe Trail, and other overland routes cut through Native homelands, disrupting migration patterns, depleting resources, and spreading deadly diseases. The massive bison herds that sustained the Lakota, Cheyenne, Comanche, and other Plains nations began to decline as emigrants killed the animals for food and sport. The U.S. government signed treaties with Native nations establishing boundaries for their lands—and then stood by or actively helped when settlers violated those boundaries.</p>
+
+  <h3>Violence and Resistance</h3>
+
+  <p>The response to Native peoples who resisted displacement was often extreme violence. In California, as we have seen, the state government organized and funded the killing of Native people. On the Great Plains, the U.S. Army fought a series of wars against Native nations that would continue for decades. Massacres of Native men, women, and children occurred repeatedly. The message was brutally clear: Native peoples were expected to make way for American expansion—or be destroyed.</p>
+
+  <p>But Native peoples did not simply disappear. They resisted in every way they could. Some nations fought back militarily, winning significant victories against American forces. Others used diplomacy, negotiating treaties to protect what they could of their homelands. Still others adapted, incorporating new technologies and trade goods into their cultures while maintaining their identities. The story of westward expansion is not just a story of conquest—it is also a story of resilience and survival against overwhelming odds.</p>
+
+  <div class="key-idea">
+    <h3>Key Idea: Expansion and Slavery</h3>
+    <p>Every new piece of territory acquired during the era of Manifest Destiny raised the same explosive question: would slavery be allowed there? The annexation of Texas added a massive slave state to the Union. The Mexican Cession opened half a million square miles to the same debate. Northerners and Southerners fought bitterly over whether the new western territories would be free or slave. This conflict—not expansion itself, but the question of slavery in the new territories—was the fuse that would ignite the Civil War. Manifest Destiny did not just expand the nation's borders; it accelerated the nation's march toward its bloodiest conflict.</p>
+  </div>
+
+  <div class="primary-source">
+    <h3>Primary Source: Chief Seattle's Words (1854)</h3>
+    <p>"The White Chief sends us word that he wishes to buy our land. But how can you buy or sell the sky? The land? The idea is strange to us. Every part of this earth is sacred to my people. Every shining pine needle, every sandy shore, every mist in the dark woods, every clearing and humming insect is holy in the memory and experience of my people."</p>
+    <p class="source-citation">—Attributed to Chief Seattle (Si'ahl) of the Duwamish and Suquamish peoples, 1854. (Note: The exact words of this speech have been debated by historians, and later versions may have been embellished. But the core message reflects the fundamental clash between Native and American views of land.)</p>
+  </div>
+</section>
+
+<section id="conclusion">
+  <h2>VII. Wrapping Up: Expansion at What Cost?</h2>
+
+  <p>Between 1845 and 1848, the United States acquired more than one million square miles of new territory—Texas, Oregon, and the Mexican Cession. The nation now stretched from the Atlantic to the Pacific. For millions of Americans, this expansion represented the fulfillment of a grand national destiny: a continental republic dedicated to freedom and democracy.</p>
+
+  <p>But that triumphant story leaves out most of the people who were affected. Mexico lost half its national territory to a war that many Americans—including a future president—considered unjust. Tens of thousands of Mexican citizens found themselves living in a foreign country overnight, promised rights that were rarely honored. Native peoples across the continent were displaced, dispossessed, and killed to make room for American settlement. California's Native population was nearly wiped out in what historians recognize as genocide. Chinese immigrants who helped build the new state were met with discrimination and violence.</p>
+
+  <p>And the new territory did not bring peace. Instead, it ripped open the question that had haunted America since its founding: would the nation be free or slave? The battle over slavery in the western territories would dominate the 1850s and lead directly to the Civil War. Manifest Destiny, it turned out, had not fulfilled America's destiny. It had set the stage for America's greatest crisis.</p>
+
+  <div class="voices-left-out">
+    <h3>Whose Voices Were Left Out?</h3>
+    <p><strong>Mexican Americans who became foreigners in their own land:</strong> When the Treaty of Guadalupe Hidalgo transferred the Mexican Cession to the United States, roughly 80,000 Mexican citizens suddenly found themselves living in a foreign country. The treaty promised them citizenship and property rights, but those promises were systematically broken. Through legal fraud, violence, and discriminatory laws, Mexican American families lost ranches and farms that had been in their families for generations. They became second-class citizens in places their ancestors had settled long before any American arrived. Their story—of dispossession, resistance, and endurance—is one of the most overlooked chapters in American history.</p>
+    <p><strong>California Native peoples:</strong> The Native peoples of California experienced one of the worst genocides in North American history. State-sponsored militias, vigilante mobs, and individual settlers killed thousands. Children were kidnapped. Entire communities were wiped out. California's 1850 "Act for the Government and Protection of Indians" effectively legalized forced labor and the separation of families. The survivors carried this trauma forward through generations, and many California Native communities continue to fight for recognition and justice today.</p>
+    <p><strong>Chinese immigrants:</strong> Chinese workers were essential to California's development—mining gold, building railroads, and establishing businesses. Yet they were denied citizenship, barred from testifying in court against white people, and subjected to special taxes and discriminatory laws. Their labor built the state, but the state treated them as perpetual outsiders. The anti-Chinese racism of the Gold Rush era would eventually lead to the Chinese Exclusion Act of 1882, the first federal law to ban immigration based on nationality.</p>
+  </div>
+</section>
+
+<div class="activity-box">
+  <h3>Chapter Activity: Manifest Destiny on Trial</h3>
+  <h4>The Task:</h4>
+  <p>Your class will put Manifest Destiny on trial. Was the westward expansion of the 1840s and 1850s justified, or was it an act of conquest and injustice? Divide into the following roles and prepare arguments using evidence from the chapter.</p>
+  <h4>Roles:</h4>
+  <ul>
+    <li><strong>Prosecution team</strong> (arguing Manifest Destiny was unjust): Use evidence about the Mexican-American War, the treatment of Native peoples, the California genocide, and discrimination against immigrants.</li>
+    <li><strong>Defense team</strong> (arguing expansion was justified): Use arguments that supporters of Manifest Destiny actually made—democracy, economic opportunity, divine purpose. Consider: are these arguments convincing?</li>
+    <li><strong>Witnesses:</strong> A Mexican rancher in California after 1848, a Forty-Niner from the eastern U.S., a Lakota leader, a Chinese miner, President Polk, Abraham Lincoln.</li>
+    <li><strong>Jury:</strong> Listen to both sides and deliver a verdict with an explanation of your reasoning.</li>
+  </ul>
+  <h4>Discussion Questions:</h4>
+  <ul>
+    <li>Is it possible for something to be both "progress" and an injustice at the same time? Give an example from this chapter.</li>
+    <li>How does the phrase "Manifest Destiny" make conquest sound natural and inevitable? Why is that language powerful—and dangerous?</li>
+    <li>What responsibilities, if any, does a nation have to the people whose land it takes?</li>
+  </ul>
+</div>
+
+<footer>
+  <p><strong>Chapter 12: Manifest Destiny</strong> from <em>The American Yawp Middle School Edition</em>. Adapted from <em>The American Yawp</em>, eds. Joseph Locke and Ben Wright (Stanford University Press, 2018).</p>
+  <p>Licensed under <a href="https://creativecommons.org/licenses/by-sa/4.0/">Creative Commons BY-SA 4.0</a>. Free to use, share, and adapt with attribution.</p>
+  <p><a href="index.html">← Back to chapters</a> | <a href="ch11.html">← Chapter 11</a> | <a href="ch13.html">Chapter 13 →</a></p>
+</footer>
+
+</div>
+</body>
+</html>

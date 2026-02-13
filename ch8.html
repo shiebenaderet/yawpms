@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chapter 8: The Market Revolution | The American Yawp MS</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:wght@400;600;700&display=swap');
+:root { --navy: #1B3A5C; --teal: #2A7F8E; --gold: #C4941D; --cream: #FAFAF8; --dark-gray: #2C2C2C; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Libre Baskerville', Georgia, serif; color: var(--dark-gray); background: var(--cream); line-height: 1.8; }
+.title-page { min-height: 60vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 80px 24px; background: linear-gradient(170deg, #0D2137 0%, var(--navy) 40%, #2B5A7C 100%); color: white; }
+.series { font-family: 'Source Sans 3', sans-serif; font-size: 13px; letter-spacing: 4px; text-transform: uppercase; opacity: .5; margin-bottom: 16px; }
+.chapter-num { font-size: 20px; opacity: .7; margin-bottom: 12px; }
+.chapter-title { font-size: 52px; line-height: 1.2; margin-bottom: 20px; font-weight: 700; }
+.chapter-subtitle { font-size: 22px; font-style: italic; opacity: .75; margin-bottom: 32px; }
+.divider { width: 100px; height: 3px; background: var(--gold); margin: 0 auto 24px; }
+.attribution { font-family: 'Source Sans 3', sans-serif; font-size: 13px; opacity: .5; max-width: 600px; }
+.container { max-width: 720px; margin: 0 auto; padding: 48px 24px; }
+.toc { background: white; border: 1px solid #ddd; border-radius: 8px; padding: 32px; margin-bottom: 48px; }
+.toc h2 { font-size: 18px; color: var(--navy); margin-bottom: 20px; text-align: center; }
+.toc ol { list-style: none; counter-reset: toc-counter; padding: 0; }
+.toc li { counter-increment: toc-counter; margin-bottom: 12px; }
+.toc li::before { content: counter(toc-counter, upper-roman) ". "; color: var(--gold); font-weight: 700; margin-right: 8px; }
+.toc a { color: var(--navy); text-decoration: none; }
+.overview { background: #F0F4F8; border-left: 5px solid var(--teal); padding: 28px 32px; margin-bottom: 48px; border-radius: 0 8px 8px 0; }
+.overview h2 { font-size: 20px; color: var(--teal); margin-bottom: 16px; }
+.overview p { font-family: 'Source Sans 3', sans-serif; font-size: 16px; line-height: 1.7; }
+.big-questions { background: white; border: 2px solid var(--gold); border-radius: 8px; padding: 28px 32px; margin-bottom: 48px; }
+.big-questions h2 { font-size: 18px; color: var(--gold); margin-bottom: 16px; text-align: center; }
+.big-questions ul { list-style: none; padding: 0; }
+.big-questions li { font-family: 'Source Sans 3', sans-serif; font-size: 15px; padding-left: 28px; position: relative; margin-bottom: 12px; line-height: 1.6; }
+.big-questions li::before { content: "?"; color: var(--gold); font-weight: 700; font-size: 20px; position: absolute; left: 0; top: -2px; }
+section { margin-bottom: 64px; }
+section h2 { font-size: 28px; color: var(--navy); margin-bottom: 24px; padding-bottom: 12px; border-bottom: 2px solid #E0E0E0; }
+section h3 { font-size: 20px; color: var(--navy); margin: 32px 0 16px; }
+p { margin-bottom: 20px; font-size: 17px; line-height: 1.8; }
+p:last-child { margin-bottom: 0; }
+.vocab-box, .stop-think, .perspectives, .key-idea, .primary-source, .story-box, .activity-box, .voices-left-out { border-radius: 8px; padding: 24px 28px; margin: 32px 0; }
+.vocab-box { background: #E8F4F8; border-left: 5px solid var(--teal); }
+.vocab-box h3 { color: var(--teal); font-size: 16px; margin: 0 0 12px; }
+.vocab-box p { font-family: 'Source Sans 3', sans-serif; font-size: 15px; margin-bottom: 12px; line-height: 1.6; }
+.vocab-box p:last-child { margin-bottom: 0; }
+.vocab-box strong { color: var(--teal); }
+.stop-think { background: #FFF9E6; border-left: 5px solid var(--gold); }
+.stop-think h3 { color: var(--gold); font-size: 16px; margin: 0 0 12px; }
+.stop-think p { font-family: 'Source Sans 3', sans-serif; font-size: 15px; font-style: italic; line-height: 1.6; }
+.perspectives { background: #F3E8FF; border-left: 5px solid #7C3AED; }
+.perspectives h3 { color: #7C3AED; font-size: 16px; margin: 0 0 16px; }
+.perspectives .perspective { margin-bottom: 16px; font-family: 'Source Sans 3', sans-serif; font-size: 15px; line-height: 1.6; }
+.perspectives .perspective:last-child { margin-bottom: 0; }
+.perspectives .perspective strong { color: #7C3AED; }
+.key-idea { background: #E8F5E9; border-left: 5px solid #2E7D32; }
+.key-idea h3 { color: #2E7D32; font-size: 16px; margin: 0 0 12px; }
+.key-idea p { font-family: 'Source Sans 3', sans-serif; font-size: 15px; line-height: 1.6; margin-bottom: 12px; }
+.key-idea p:last-child { margin-bottom: 0; }
+.primary-source { background: #FFF3E0; border-left: 5px solid #E65100; font-style: italic; }
+.primary-source h3 { color: #E65100; font-size: 16px; margin: 0 0 12px; font-style: normal; }
+.primary-source p { font-family: 'Source Sans 3', sans-serif; font-size: 15px; line-height: 1.7; margin-bottom: 12px; }
+.primary-source .source-citation { font-size: 13px; opacity: .7; font-style: normal; }
+.story-box { background: #FFF4E6; border-left: 5px solid #F57C00; }
+.story-box h3 { color: #F57C00; font-size: 18px; margin: 0 0 16px; }
+.story-box p { font-family: 'Source Sans 3', sans-serif; font-size: 15px; line-height: 1.7; margin-bottom: 12px; }
+.story-box p:last-child { margin-bottom: 0; }
+.voices-left-out { background: #FCE4EC; border-left: 5px solid #C2185B; }
+.voices-left-out h3 { color: #C2185B; font-size: 18px; margin: 0 0 16px; }
+.voices-left-out p { font-family: 'Source Sans 3', sans-serif; font-size: 15px; line-height: 1.7; margin-bottom: 12px; }
+.voices-left-out p:last-child { margin-bottom: 0; }
+.voices-left-out strong { color: #C2185B; }
+.activity-box { background: #FFEBEE; border: 2px solid #C62828; border-radius: 8px; padding: 32px; }
+.activity-box h3 { color: #C62828; font-size: 22px; margin: 0 0 20px; text-align: center; }
+.activity-box h4 { color: #C62828; font-size: 16px; margin: 20px 0 12px; }
+.activity-box p, .activity-box li { font-family: 'Source Sans 3', sans-serif; font-size: 15px; line-height: 1.7; }
+.activity-box ul, .activity-box ol { margin-left: 24px; margin-bottom: 16px; }
+.activity-box li { margin-bottom: 8px; }
+figure { margin: 32px 0; text-align: center; }
+figure img { max-width: 100%; height: auto; border-radius: 4px; box-shadow: 0 2px 8px rgba(0,0,0,.1); }
+figcaption { font-family: 'Source Sans 3', sans-serif; font-size: 14px; color: #666; margin-top: 12px; line-height: 1.6; font-style: italic; }
+footer { border-top: 2px solid #E0E0E0; margin-top: 64px; padding-top: 24px; font-family: 'Source Sans 3', sans-serif; font-size: 13px; color: #999; line-height: 1.7; }
+footer a { color: var(--teal); text-decoration: none; border-bottom: 1px dotted var(--teal); }
+footer a:hover { border-bottom-style: solid; }
+@media print { .title-page { page-break-after: always; } section { page-break-inside: avoid; } }
+@media (max-width: 600px) { .chapter-title { font-size: 36px; } .container { padding: 32px 16px; } section h2 { font-size: 24px; } }
+</style>
+</head>
+<body>
+
+<div class="title-page">
+  <div class="series">The American Yawp Middle School Edition</div>
+  <div class="chapter-num">Chapter 8</div>
+  <h1 class="chapter-title">The Market Revolution</h1>
+  <div class="divider"></div>
+  <div class="chapter-subtitle">Canals, Factories, and the Remaking of American Life</div>
+  <p class="attribution">Adapted for middle school readers from <em>The American Yawp</em>, edited by Joseph Locke and Ben Wright</p>
+</div>
+
+<div class="container">
+
+<nav class="toc">
+  <h2>Contents</h2>
+  <ol>
+    <li><a href="#intro">Introduction: The World Speeds Up</a></li>
+    <li><a href="#transportation">The Transportation Revolution</a></li>
+    <li><a href="#factories">The Factory System</a></li>
+    <li><a href="#workers">Workers and Work</a></li>
+    <li><a href="#market-society">A Market Society</a></li>
+    <li><a href="#conclusion">Wrapping Up: Progress for Whom?</a></li>
+  </ol>
+</nav>
+
+<div class="overview">
+  <h2>Chapter Overview</h2>
+  <p>Between 1800 and 1850, the American economy underwent a transformation so dramatic that historians call it the Market Revolution. New roads, canals, and railroads shrank distances. Factories replaced workshops. Farmers stopped growing food for their families and started growing crops to sell. Money, not barter, became the way people exchanged goods. This revolution created enormous wealth—but also enormous inequality. It drew women into factories, accelerated the demand for enslaved labor in the South, and divided the country into two very different economic systems that would eventually collide.</p>
+</div>
+
+<div class="big-questions">
+  <h2>Big Questions</h2>
+  <ul>
+    <li>How did new transportation technologies reshape the American economy and landscape?</li>
+    <li>What was it like to work in an early American factory?</li>
+    <li>How did the Market Revolution change daily life for ordinary Americans?</li>
+    <li>Who benefited from the Market Revolution—and who paid the price?</li>
+  </ul>
+</div>
+
+<section id="intro">
+  <h2>I. Introduction: The World Speeds Up</h2>
+
+  <p>In 1800, it took four weeks to travel from New York to Chicago. By 1857, it took two days. That single fact—the compression of distance and time—captures the essence of the Market Revolution.</p>
+
+  <p>Before the Market Revolution, most Americans were farmers who grew food for their own families. They made their own clothes, built their own furniture, and traded with neighbors. Most people rarely traveled more than a few miles from where they were born. Money was scarce. Life moved slowly.</p>
+
+  <p>By the 1850s, everything had changed. Railroads crisscrossed the nation. Factories churned out goods. Farmers grew cash crops for distant markets. People bought clothes and tools from stores instead of making them by hand. Americans were connected to a national—and international—economy in ways that would have been unimaginable a generation earlier.</p>
+
+  <p>This transformation created the modern American economy. It also created the modern American class system—a widening gap between rich and poor, owners and workers, that would define the nation's politics and culture for centuries to come.</p>
+
+  <div class="vocab-box">
+    <h3>Vocabulary</h3>
+    <p><strong>Market Revolution:</strong> The dramatic transformation of the American economy between about 1800 and 1850, driven by new transportation, new factories, and the shift from subsistence farming to commercial agriculture.</p>
+    <p><strong>Subsistence farming:</strong> Growing food for your own family's use rather than for sale. Before the Market Revolution, most American farmers practiced subsistence farming.</p>
+    <p><strong>Commercial agriculture:</strong> Growing crops specifically to sell in a market for profit—the opposite of subsistence farming.</p>
+  </div>
+</section>
+
+<section id="transportation">
+  <h2>II. The Transportation Revolution</h2>
+
+  <h3>Roads and Turnpikes</h3>
+
+  <p>In the early 1800s, American roads were terrible. Most were little more than rutted dirt paths that turned to mud in the rain. Transporting goods overland was slow, expensive, and unreliable. The federal government built the National Road (also called the Cumberland Road), stretching from Maryland to Illinois, and states chartered private companies to build toll roads called turnpikes. But roads alone couldn't solve the problem.</p>
+
+  <h3>The Canal Craze</h3>
+
+  <p>Water was the answer. In 1825, New York completed the Erie Canal—a 363-mile waterway connecting the Great Lakes to the Hudson River and, from there, to New York City. The canal was an engineering marvel and an economic blockbuster. It slashed the cost of shipping goods from the interior by 90%. Farmers in Ohio and Indiana could now ship grain to New York City cheaply. New York City became the nation's commercial capital. Towns along the canal—like Buffalo, Rochester, and Syracuse—boomed.</p>
+
+  <p>The Erie Canal's success sparked a national frenzy of canal building. States across the country dug canals connecting rivers, lakes, and cities. Not all of them were profitable—many went bankrupt—but together they knit the nation's economy together as never before.</p>
+
+  <div class="story-box">
+    <h3>Story Behind the Story: "Clinton's Ditch"</h3>
+    <p>When New York Governor DeWitt Clinton first proposed the Erie Canal, critics mocked it as "Clinton's Ditch." Building a 363-mile canal through wilderness, swamps, and solid rock seemed insane. The project took eight years and cost $7 million (roughly $200 million today). Workers—many of them Irish immigrants—dug with shovels and pickaxes, battled malaria in the swamps, and blasted through rock with black powder. Dozens died. But when the canal opened in 1825, Clinton sailed its entire length in a ceremonial barge. At the Atlantic end, he poured a barrel of Lake Erie water into the ocean, symbolizing the "wedding of the waters." Within a year, the canal had paid for itself. Within a decade, it had transformed the American economy.</p>
+  </div>
+
+  <h3>Railroads: The Game Changer</h3>
+
+  <p>Canals were impressive, but railroads were revolutionary. By the 1830s, steam-powered trains were spreading across the eastern United States. By 1860, the country had over 30,000 miles of railroad track—more than the rest of the world combined.</p>
+
+  <p>Railroads were faster than canals, could operate year-round (canals froze in winter), and could go places canals couldn't. They connected farms to cities, raw materials to factories, and producers to consumers. They created standard time zones (before railroads, every town set its own clocks). They even changed how Americans thought about distance: places that had seemed impossibly far were now just a train ride away.</p>
+
+  <figure>
+    <img src="images/ch8/erie-canal.jpg" alt="The Erie Canal with boats and buildings along the shore" />
+    <figcaption>The Erie Canal transformed New York's economy and sparked a national canal-building frenzy. (Public domain, 19th century)</figcaption>
+  </figure>
+
+  <div class="stop-think">
+    <h3>Stop and Think</h3>
+    <p>How might your daily life be different if it took four weeks to get a message or package from another city instead of one or two days? What would you not be able to do?</p>
+  </div>
+</section>
+
+<section id="factories">
+  <h2>III. The Factory System</h2>
+
+  <h3>From Workshops to Factories</h3>
+
+  <p>Before the Market Revolution, most goods were made by hand in small workshops. A shoemaker made shoes one pair at a time. A blacksmith forged tools individually. Each item was unique, crafted by a skilled artisan who controlled every step of the process.</p>
+
+  <p>Factories changed all of that. Using machines powered by water and steam, factories could produce goods faster, cheaper, and in greater quantities than any artisan. But factory work was fundamentally different from craft work. Instead of making a whole product, each worker performed one small, repetitive task—over and over, for 12 to 14 hours a day.</p>
+
+  <h3>The Lowell Mills: A New Experiment</h3>
+
+  <p>One of the most famous early factories was the textile mill complex at Lowell, Massachusetts. Beginning in the 1820s, factory owners recruited young, unmarried women from New England farms to work in the mills. These "Lowell mill girls" left home for the first time, earned their own wages, and lived in supervised boarding houses.</p>
+
+  <p>At first, the system seemed progressive. The women earned money, gained independence, and had access to libraries and lectures. But conditions deteriorated rapidly. As competition increased, owners cut wages, sped up machines, and crammed more workers into smaller spaces. The work was deafening, the air filled with cotton dust that destroyed workers' lungs, and the hours were brutal—typically 12 to 14 hours a day, six days a week.</p>
+
+  <div class="primary-source">
+    <h3>Primary Source: A Lowell Mill Girl Describes Factory Life</h3>
+    <p>"At first the hours seemed very long, but I was so interested in the machinery and so delighted with the animals and flowers I could see out the windows that time passed quickly. But soon I found that the novelty wore off, and the tedium of the work became oppressive. We were wakened at five, worked until seven at night, with thirty minutes for dinner."</p>
+    <p class="source-citation">—Harriet Robinson, <em>Loom and Spindle</em> (1898), describing her experience beginning work at age 10 in the 1830s</p>
+  </div>
+
+  <h3>Workers Fight Back</h3>
+
+  <p>As conditions worsened, workers organized. The Lowell mill girls staged "turn-outs" (strikes) in 1834 and 1836, protesting wage cuts. They formed the Lowell Female Labor Reform Association and petitioned the Massachusetts legislature for a ten-hour workday. Male workers organized too: shoemakers, carpenters, and other trades formed early labor unions to bargain for better wages and working conditions.</p>
+
+  <p>But factory owners had the upper hand. They could replace striking workers—often with desperate immigrants willing to work for less. Early labor organizing won some victories, but the fundamental power imbalance between owners and workers remained.</p>
+
+  <div class="vocab-box">
+    <h3>Vocabulary</h3>
+    <p><strong>Factory system:</strong> A method of manufacturing in which workers and machines are concentrated in a single building, producing goods in large quantities through division of labor.</p>
+    <p><strong>Strike (turn-out):</strong> An organized work stoppage by employees to protest wages or working conditions.</p>
+    <p><strong>Labor union:</strong> An organization of workers formed to bargain collectively with employers for better wages, hours, and working conditions.</p>
+  </div>
+</section>
+
+<section id="workers">
+  <h2>IV. Workers and Work</h2>
+
+  <h3>Immigration and the Labor Force</h3>
+
+  <p>The Market Revolution coincided with a massive wave of immigration. Between 1820 and 1860, about 5 million immigrants arrived in the United States—mostly from Ireland and Germany. Irish immigrants, many fleeing the devastating Potato Famine (1845–1852), arrived desperately poor and willing to take any work available. They built canals, laid railroad tracks, and filled the lowest-paid factory jobs. They faced vicious discrimination—"No Irish Need Apply" signs were common.</p>
+
+  <p>German immigrants were often more skilled and better funded. Many settled in the Midwest, becoming farmers, brewers, and skilled craftsmen. But they too faced hostility from native-born Americans who feared that immigrants were stealing jobs, changing the culture, and (because many Irish and German immigrants were Catholic) threatening Protestant values.</p>
+
+  <h3>Child Labor</h3>
+
+  <p>Children as young as seven or eight worked in factories, mines, and workshops. They were small enough to crawl under machines to fix jams, and their tiny fingers could handle delicate tasks. They were also cheap—children earned a fraction of what adults made. For many poor families, children's wages were essential for survival. But the cost was devastating: lost childhoods, mangled bodies, and stunted educations.</p>
+
+  <div class="perspectives">
+    <h3>Multiple Perspectives: Was the Market Revolution Progress?</h3>
+    <div class="perspective"><strong>Factory owners and investors:</strong> "We are creating wealth, jobs, and opportunity. America is becoming the most productive nation on Earth. Our factories clothe millions and our railroads unite the continent."</div>
+    <div class="perspective"><strong>Factory workers:</strong> "We work 14 hours a day for wages that barely keep us alive. The machines are dangerous. The air is poisonous. We have no say in our working conditions. This isn't progress—it's exploitation."</div>
+    <div class="perspective"><strong>Southern planters:</strong> "Northern factory owners lecture us about slavery while their own workers labor in miserable conditions for starvation wages. At least we feed and house our workers." (Note: this argument was deeply dishonest—it ignored the fundamental horror of human ownership.)</div>
+    <div class="perspective"><strong>Small farmers:</strong> "The market used to work for us. Now we're competing with factories and railroads. The rich get richer and we can barely survive."</div>
+  </div>
+
+  <div class="stop-think">
+    <h3>Stop and Think</h3>
+    <p>The Market Revolution made goods cheaper and more available, but it also created dangerous working conditions and growing inequality. Do the benefits of economic "progress" justify the costs? Who gets to decide?</p>
+  </div>
+</section>
+
+<section id="market-society">
+  <h2>V. A Market Society</h2>
+
+  <h3>The Cult of Domesticity</h3>
+
+  <p>The Market Revolution didn't just change work—it changed families. As men increasingly left home to work in factories and offices, a new ideal emerged for middle-class white women: the "cult of domesticity." Women were expected to stay home, raise children, manage the household, and serve as the family's moral and spiritual center. The home was supposed to be a peaceful refuge from the competitive, cutthroat world of the market.</p>
+
+  <p>This ideal applied mainly to middle-class and wealthy white women. Poor women, immigrant women, and enslaved women had always worked—and continued to. The cult of domesticity was as much about class as it was about gender.</p>
+
+  <h3>The Growth of Cities</h3>
+
+  <p>The Market Revolution fueled explosive urban growth. New York City's population grew from 60,000 in 1800 to over 800,000 by 1860. Cities became centers of commerce, manufacturing, and immigration—but also of poverty, disease, and overcrowding. Wealthy families lived in elegant townhouses while workers crammed into filthy tenements. Cholera, typhoid, and other diseases swept through poor neighborhoods where sanitation was nonexistent.</p>
+
+  <div class="key-idea">
+    <h3>Key Idea: Two Economies, One Country</h3>
+    <p>The Market Revolution deepened the divide between North and South. The North industrialized—building factories, railroads, and cities. The South doubled down on agriculture, expanding cotton production powered by enslaved labor. Both economies were connected (Northern factories processed Southern cotton), but they produced very different societies with very different values and interests. This growing divide—between free labor and slave labor, between industry and agriculture—would eventually tear the nation apart.</p>
+  </div>
+</section>
+
+<section id="conclusion">
+  <h2>VI. Wrapping Up: Progress for Whom?</h2>
+
+  <p>The Market Revolution transformed the United States from an agrarian nation of small farmers into a commercial and industrial power. It connected the country through roads, canals, and railroads. It made goods cheaper and more available. It created new opportunities for wealth and mobility.</p>
+
+  <p>But it also created a new kind of inequality. Factory workers toiled in dangerous conditions for low wages while owners accumulated fortunes. Women were pushed into a narrow domestic role—or forced into factory labor with no protections. Immigrants faced exploitation and discrimination. And in the South, the Market Revolution's appetite for cotton intensified the demand for enslaved labor, making slavery more profitable and more entrenched than ever.</p>
+
+  <p>The Market Revolution's central question—who benefits from economic growth and who bears its costs—remains one of the most important questions in American life.</p>
+
+  <div class="voices-left-out">
+    <h3>Whose Voices Were Left Out?</h3>
+    <p><strong>Factory children:</strong> Thousands of children worked in factories and mines from the age of seven or eight. They left few records. Their lost childhoods, injuries, and stunted opportunities are among the hidden costs of industrialization.</p>
+    <p><strong>Irish immigrant women:</strong> Irish women who worked as domestic servants in wealthy households left almost no written records. They were essential to the middle-class lifestyle they served but were treated as invisible.</p>
+    <p><strong>Enslaved people who produced the cotton:</strong> The Market Revolution's most important commodity—cotton—was grown entirely by enslaved people. Their labor powered the Northern factories and the Southern economy, but their voices are rarely centered in stories about economic "progress."</p>
+  </div>
+</section>
+
+<div class="activity-box">
+  <h3>Chapter Activity: Winners and Losers</h3>
+  <h4>The Task:</h4>
+  <p>Create a two-column chart: "Winners" and "Losers" of the Market Revolution. For each group below, decide whether they primarily benefited or suffered—and explain your reasoning with evidence from the chapter.</p>
+  <ul>
+    <li>Factory owners</li>
+    <li>Lowell mill girls</li>
+    <li>Small farmers</li>
+    <li>Irish immigrants</li>
+    <li>Enslaved people in the South</li>
+    <li>Middle-class white women</li>
+    <li>Consumers (people who buy goods)</li>
+    <li>Skilled artisans (shoemakers, blacksmiths)</li>
+  </ul>
+  <h4>Discussion Questions:</h4>
+  <ul>
+    <li>Can someone be both a "winner" and a "loser"? Give an example.</li>
+    <li>Is economic growth always good? When might it cause more harm than good?</li>
+    <li>What connections do you see between the Market Revolution and our economy today?</li>
+  </ul>
+</div>
+
+<footer>
+  <p><strong>Chapter 8: The Market Revolution</strong> from <em>The American Yawp Middle School Edition</em>. Adapted from <em>The American Yawp</em>, eds. Joseph Locke and Ben Wright (Stanford University Press, 2018).</p>
+  <p>Licensed under <a href="https://creativecommons.org/licenses/by-sa/4.0/">Creative Commons BY-SA 4.0</a>. Free to use, share, and adapt with attribution.</p>
+  <p><a href="index.html">← Back to chapters</a> | <a href="ch7.html">← Chapter 7</a> | <a href="ch9.html">Chapter 9 →</a></p>
+</footer>
+
+</div>
+</body>
+</html>

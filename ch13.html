@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chapter 13: The Sectional Crisis | The American Yawp MS</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:wght@400;600;700&display=swap');
+:root { --navy: #1B3A5C; --teal: #2A7F8E; --gold: #C4941D; --cream: #FAFAF8; --dark-gray: #2C2C2C; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Libre Baskerville', Georgia, serif; color: var(--dark-gray); background: var(--cream); line-height: 1.8; }
+.title-page { min-height: 60vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 80px 24px; background: linear-gradient(170deg, #0D2137 0%, var(--navy) 40%, #2B5A7C 100%); color: white; }
+.series { font-family: 'Source Sans 3', sans-serif; font-size: 13px; letter-spacing: 4px; text-transform: uppercase; opacity: .5; margin-bottom: 16px; }
+.chapter-num { font-size: 20px; opacity: .7; margin-bottom: 12px; }
+.chapter-title { font-size: 52px; line-height: 1.2; margin-bottom: 20px; font-weight: 700; }
+.chapter-subtitle { font-size: 22px; font-style: italic; opacity: .75; margin-bottom: 32px; }
+.divider { width: 100px; height: 3px; background: var(--gold); margin: 0 auto 24px; }
+.attribution { font-family: 'Source Sans 3', sans-serif; font-size: 13px; opacity: .5; max-width: 600px; }
+.container { max-width: 720px; margin: 0 auto; padding: 48px 24px; }
+.toc { background: white; border: 1px solid #ddd; border-radius: 8px; padding: 32px; margin-bottom: 48px; }
+.toc h2 { font-size: 18px; color: var(--navy); margin-bottom: 20px; text-align: center; }
+.toc ol { list-style: none; counter-reset: toc-counter; padding: 0; }
+.toc li { counter-increment: toc-counter; margin-bottom: 12px; }
+.toc li::before { content: counter(toc-counter, upper-roman) ". "; color: var(--gold); font-weight: 700; margin-right: 8px; }
+.toc a { color: var(--navy); text-decoration: none; }
+.overview { background: #F0F4F8; border-left: 5px solid var(--teal); padding: 28px 32px; margin-bottom: 48px; border-radius: 0 8px 8px 0; }
+.overview h2 { font-size: 20px; color: var(--teal); margin-bottom: 16px; }
+.overview p { font-family: 'Source Sans 3', sans-serif; font-size: 16px; line-height: 1.7; }
+.big-questions { background: white; border: 2px solid var(--gold); border-radius: 8px; padding: 28px 32px; margin-bottom: 48px; }
+.big-questions h2 { font-size: 18px; color: var(--gold); margin-bottom: 16px; text-align: center; }
+.big-questions ul { list-style: none; padding: 0; }
+.big-questions li { font-family: 'Source Sans 3', sans-serif; font-size: 15px; padding-left: 28px; position: relative; margin-bottom: 12px; line-height: 1.6; }
+.big-questions li::before { content: "?"; color: var(--gold); font-weight: 700; font-size: 20px; position: absolute; left: 0; top: -2px; }
+section { margin-bottom: 64px; }
+section h2 { font-size: 28px; color: var(--navy); margin-bottom: 24px; padding-bottom: 12px; border-bottom: 2px solid #E0E0E0; }
+section h3 { font-size: 20px; color: var(--navy); margin: 32px 0 16px; }
+p { margin-bottom: 20px; font-size: 17px; line-height: 1.8; }
+p:last-child { margin-bottom: 0; }
+.vocab-box, .stop-think, .perspectives, .key-idea, .primary-source, .story-box, .activity-box, .voices-left-out { border-radius: 8px; padding: 24px 28px; margin: 32px 0; }
+.vocab-box { background: #E8F4F8; border-left: 5px solid var(--teal); }
+.vocab-box h3 { color: var(--teal); font-size: 16px; margin: 0 0 12px; }
+.vocab-box p { font-family: 'Source Sans 3', sans-serif; font-size: 15px; margin-bottom: 12px; line-height: 1.6; }
+.vocab-box p:last-child { margin-bottom: 0; }
+.vocab-box strong { color: var(--teal); }
+.stop-think { background: #FFF9E6; border-left: 5px solid var(--gold); }
+.stop-think h3 { color: var(--gold); font-size: 16px; margin: 0 0 12px; }
+.stop-think p { font-family: 'Source Sans 3', sans-serif; font-size: 15px; font-style: italic; line-height: 1.6; }
+.perspectives { background: #F3E8FF; border-left: 5px solid #7C3AED; }
+.perspectives h3 { color: #7C3AED; font-size: 16px; margin: 0 0 16px; }
+.perspectives .perspective { margin-bottom: 16px; font-family: 'Source Sans 3', sans-serif; font-size: 15px; line-height: 1.6; }
+.perspectives .perspective:last-child { margin-bottom: 0; }
+.perspectives .perspective strong { color: #7C3AED; }
+.key-idea { background: #E8F5E9; border-left: 5px solid #2E7D32; }
+.key-idea h3 { color: #2E7D32; font-size: 16px; margin: 0 0 12px; }
+.key-idea p { font-family: 'Source Sans 3', sans-serif; font-size: 15px; line-height: 1.6; margin-bottom: 12px; }
+.key-idea p:last-child { margin-bottom: 0; }
+.primary-source { background: #FFF3E0; border-left: 5px solid #E65100; font-style: italic; }
+.primary-source h3 { color: #E65100; font-size: 16px; margin: 0 0 12px; font-style: normal; }
+.primary-source p { font-family: 'Source Sans 3', sans-serif; font-size: 15px; line-height: 1.7; margin-bottom: 12px; }
+.primary-source .source-citation { font-size: 13px; opacity: .7; font-style: normal; }
+.story-box { background: #FFF4E6; border-left: 5px solid #F57C00; }
+.story-box h3 { color: #F57C00; font-size: 18px; margin: 0 0 16px; }
+.story-box p { font-family: 'Source Sans 3', sans-serif; font-size: 15px; line-height: 1.7; margin-bottom: 12px; }
+.story-box p:last-child { margin-bottom: 0; }
+.voices-left-out { background: #FCE4EC; border-left: 5px solid #C2185B; }
+.voices-left-out h3 { color: #C2185B; font-size: 18px; margin: 0 0 16px; }
+.voices-left-out p { font-family: 'Source Sans 3', sans-serif; font-size: 15px; line-height: 1.7; margin-bottom: 12px; }
+.voices-left-out p:last-child { margin-bottom: 0; }
+.voices-left-out strong { color: #C2185B; }
+.activity-box { background: #FFEBEE; border: 2px solid #C62828; border-radius: 8px; padding: 32px; }
+.activity-box h3 { color: #C62828; font-size: 22px; margin: 0 0 20px; text-align: center; }
+.activity-box h4 { color: #C62828; font-size: 16px; margin: 20px 0 12px; }
+.activity-box p, .activity-box li { font-family: 'Source Sans 3', sans-serif; font-size: 15px; line-height: 1.7; }
+.activity-box ul, .activity-box ol { margin-left: 24px; margin-bottom: 16px; }
+.activity-box li { margin-bottom: 8px; }
+figure { margin: 32px 0; text-align: center; }
+figure img { max-width: 100%; height: auto; border-radius: 4px; box-shadow: 0 2px 8px rgba(0,0,0,.1); }
+figcaption { font-family: 'Source Sans 3', sans-serif; font-size: 14px; color: #666; margin-top: 12px; line-height: 1.6; font-style: italic; }
+footer { border-top: 2px solid #E0E0E0; margin-top: 64px; padding-top: 24px; font-family: 'Source Sans 3', sans-serif; font-size: 13px; color: #999; line-height: 1.7; }
+footer a { color: var(--teal); text-decoration: none; border-bottom: 1px dotted var(--teal); }
+footer a:hover { border-bottom-style: solid; }
+@media print { .title-page { page-break-after: always; } section { page-break-inside: avoid; } }
+@media (max-width: 600px) { .chapter-title { font-size: 36px; } .container { padding: 32px 16px; } section h2 { font-size: 24px; } }
+</style>
+</head>
+<body>
+
+<div class="title-page">
+  <div class="series">The American Yawp Middle School Edition</div>
+  <div class="chapter-num">Chapter 13</div>
+  <h1 class="chapter-title">The Sectional Crisis</h1>
+  <div class="divider"></div>
+  <div class="chapter-subtitle">Slavery, Compromise, and the Road to Disunion</div>
+  <p class="attribution">Adapted for middle school readers from <em>The American Yawp</em>, edited by Joseph Locke and Ben Wright</p>
+</div>
+
+<div class="container">
+
+<nav class="toc">
+  <h2>Contents</h2>
+  <ol>
+    <li><a href="#intro">Introduction: A House Dividing</a></li>
+    <li><a href="#compromise-1850">The Compromise of 1850</a></li>
+    <li><a href="#fugitive-slave-act">The Fugitive Slave Act and Resistance</a></li>
+    <li><a href="#bleeding-kansas">Bleeding Kansas</a></li>
+    <li><a href="#dred-scott">The Dred Scott Decision</a></li>
+    <li><a href="#election-secession">The Election of 1860 and Secession</a></li>
+    <li><a href="#conclusion">Wrapping Up: The Failure of Compromise</a></li>
+  </ol>
+</nav>
+
+<div class="overview">
+  <h2>Chapter Overview</h2>
+  <p>Between 1850 and 1861, the United States came apart. For decades, politicians had managed to hold the country together through a series of compromises over slavery. But each new compromise only delayed the crisis and deepened the anger on both sides. The question at the heart of it all was deceptively simple: would slavery be allowed to expand into the new western territories? Northerners increasingly said no. Southerners increasingly said that any attempt to stop slavery's expansion was an attack on their way of life. Compromise by compromise, election by election, the bonds holding the Union together snapped. By the time Abraham Lincoln was elected president in November 1860, the nation was fracturing. Within months, Southern states would leave the Union, and the deadliest war in American history would begin.</p>
+</div>
+
+<div class="big-questions">
+  <h2>Big Questions</h2>
+  <ul>
+    <li>Why did earlier compromises over slavery fail to prevent the sectional crisis?</li>
+    <li>How did the Fugitive Slave Act change the way Northerners thought about slavery?</li>
+    <li>What role did violence play in the debate over slavery's expansion into Kansas?</li>
+    <li>How did the Dred Scott decision make compromise nearly impossible?</li>
+    <li>Why did Southern states secede after Lincoln's election, even though he promised not to touch slavery where it already existed?</li>
+  </ul>
+</div>
+
+<section id="intro">
+  <h2>I. Introduction: A House Dividing</h2>
+
+  <p>In June 1858, a tall, lanky Illinois lawyer named Abraham Lincoln accepted his party's nomination for the U.S. Senate with a speech that shook the nation. "A house divided against itself cannot stand," he declared. "I believe this government cannot endure, permanently half slave and half free." Lincoln was not calling for war. He was stating a fact that most Americans already felt in their bones: the country was splitting in two, and something had to give.</p>
+
+  <p>The division was not new. Since the nation's founding, Americans had argued over slavery. The Constitution itself was a compromise between slaveholding and non-slaveholding states. The Missouri Compromise of 1820 had drawn a line across the western territories, keeping a fragile balance between slave states and free states. But by the 1850s, that balance was collapsing. The country was growing too fast, the territories were too vast, and the moral stakes were too high for compromise to hold.</p>
+
+  <p>At the root of the crisis were two fundamentally different visions of America's future. The North was industrializing, urbanizing, and increasingly committed to the idea of "free labor"--that workers should be free to sell their own work and rise through their own effort. The South was committed to a plantation economy built on enslaved labor, and Southern leaders insisted that slavery was not merely tolerable but a positive good. These two visions could not coexist forever.</p>
+
+  <p>This chapter traces the decade of crisis that led to the Civil War--from the Compromise of 1850 to the secession of the Southern states in the winter of 1860-1861. It is a story of failed compromises, rising violence, and the ultimate collapse of a political system that tried to paper over the nation's deepest moral failure.</p>
+
+  <div class="vocab-box">
+    <h3>Vocabulary</h3>
+    <p><strong>Sectionalism:</strong> Loyalty to the interests of one's own region (such as the North or the South) over the interests of the country as a whole. By the 1850s, sectionalism had become the dominant force in American politics.</p>
+    <p><strong>Free labor:</strong> The Northern ideal that workers should be free to choose their own employers, negotiate their own wages, and rise through hard work. Free labor advocates believed slavery degraded all labor.</p>
+    <p><strong>Secession:</strong> The act of formally withdrawing from a political union. Southern states seceded from the United States in 1860-1861 to form their own nation.</p>
+  </div>
+</section>
+
+<section id="compromise-1850">
+  <h2>II. The Compromise of 1850</h2>
+
+  <h3>Gold, Land, and the Slavery Question</h3>
+
+  <p>The crisis of the 1850s began, ironically, with victory. The United States had just won the Mexican-American War (1846-1848), gaining a vast stretch of territory from Texas to California. Then, in January 1848, gold was discovered at Sutter's Mill in California, triggering the Gold Rush. By 1849, tens of thousands of people had flooded into California, and the territory was ready to apply for statehood.</p>
+
+  <p>There was just one problem: California wanted to enter the Union as a free state. This would tip the delicate balance in the U.S. Senate, where slave states and free states had been evenly matched for decades. Southerners were furious. If they lost their equal voice in the Senate, they feared the North would use its growing population and political power to attack slavery everywhere.</p>
+
+  <h3>Henry Clay's Grand Bargain</h3>
+
+  <p>The aging Senator Henry Clay of Kentucky--known as "the Great Compromiser"--stepped forward with a package deal. After months of intense debate, Congress passed a series of laws known as the Compromise of 1850. The key provisions were:</p>
+
+  <p>California would be admitted as a free state, giving the North a majority in the Senate. The territories of New Mexico and Utah would be organized under the principle of <strong>popular sovereignty</strong>, meaning the settlers themselves would vote on whether to allow slavery. The slave trade (but not slavery itself) was abolished in Washington, D.C. And, most controversially, Congress passed a new, much tougher Fugitive Slave Act that required Northerners to help capture and return escaped enslaved people.</p>
+
+  <p>Supporters hailed the compromise as a triumph of statesmanship that had saved the Union. But in reality, it had only bought time. Each side got something it wanted, but each side also got something that enraged the other. The Fugitive Slave Act, in particular, would prove to be political dynamite.</p>
+
+  <div class="vocab-box">
+    <h3>Vocabulary</h3>
+    <p><strong>Popular sovereignty:</strong> The idea that the people living in a territory should vote to decide whether to allow slavery, rather than having Congress decide for them. Senator Stephen Douglas of Illinois championed this concept.</p>
+    <p><strong>Fugitive Slave Act:</strong> A federal law requiring all citizens--including those in free states--to assist in the capture and return of people who had escaped slavery. It imposed heavy fines and jail time on anyone who helped a fugitive.</p>
+    <p><strong>Compromise of 1850:</strong> A set of five laws designed to settle the dispute over slavery in the territories gained from the Mexican-American War. It admitted California as a free state but included the harsh Fugitive Slave Act.</p>
+  </div>
+
+  <div class="stop-think">
+    <h3>Stop and Think</h3>
+    <p>The Compromise of 1850 gave both sides something they wanted and something they hated. Can a compromise work if both sides walk away angry? What makes a compromise successful or unsuccessful?</p>
+  </div>
+</section>
+
+<section id="fugitive-slave-act">
+  <h2>III. The Fugitive Slave Act and Resistance</h2>
+
+  <h3>A Law That Changed the North</h3>
+
+  <p>Before 1850, many white Northerners were indifferent to slavery. They disapproved of it in theory but considered it a distant Southern problem that did not affect their lives. The Fugitive Slave Act changed that. Suddenly, slavery was no longer just a Southern institution--it reached directly into Northern communities.</p>
+
+  <p>The law was brutal in its design. Federal commissioners were appointed to hear cases of alleged fugitives. These commissioners were paid $10 if they ruled in favor of the slaveholder but only $5 if they ruled in favor of the accused person. The accused had no right to a jury trial and could not even testify on their own behalf. Any citizen could be forced to join a posse to hunt down fugitives, and anyone who helped an escaped person could be fined $1,000 and jailed for six months.</p>
+
+  <p>The consequences were immediate and terrifying. Slave catchers roamed Northern cities, sometimes kidnapping free Black people and dragging them South into slavery. Families who had lived freely in the North for years suddenly found themselves in danger. Entire Black communities in cities like Boston, New York, and Cincinnati lived in constant fear.</p>
+
+  <h3>Northern Outrage and Resistance</h3>
+
+  <p>The Fugitive Slave Act backfired spectacularly on the South. Instead of making Northerners compliant, it radicalized them. In Boston, an angry crowd broke into a courthouse and freed a captured man named Shadrach Minkins in 1851. When another man, Anthony Burns, was captured in Boston in 1854, it took 2,000 federal troops to march him through the city streets to a waiting ship. Fifty thousand Bostonians lined the streets in silent, furious protest. Buildings were draped in black. The cost of returning one man to slavery was over $100,000--a fact that many Northerners found both enraging and absurd.</p>
+
+  <p>The Underground Railroad--the secret network of safe houses, hidden routes, and brave guides that helped enslaved people escape to freedom--intensified its operations. Harriet Tubman, who had escaped slavery herself, made roughly thirteen trips back into the South, leading approximately seventy people to freedom. She was so effective that slaveholders offered a $40,000 reward for her capture. "I never ran my train off the track," she later said, "and I never lost a passenger."</p>
+
+  <h3>Uncle Tom's Cabin: A Book That Shook a Nation</h3>
+
+  <p>In 1852, Harriet Beecher Stowe, a white woman from Connecticut, published <em>Uncle Tom's Cabin</em>, a novel depicting the horrors of slavery. The book was an immediate sensation. It sold 300,000 copies in its first year and over a million within two years--staggering numbers for the time. Stowe brought slavery to life for Northern readers who had never witnessed it firsthand. Her vivid portrayal of families torn apart, of the cruelty of slave owners, and of the humanity of enslaved people created a wave of anti-slavery sentiment across the North and around the world.</p>
+
+  <p>Southerners were enraged. They called the book a pack of lies and banned it across the South. Some Southern writers published their own novels depicting slavery as kind and benevolent. But the damage was done. <em>Uncle Tom's Cabin</em> turned slavery from an abstract political issue into a deeply personal moral one. When Abraham Lincoln reportedly met Stowe during the Civil War, he is said to have remarked, "So you're the little woman who wrote the book that started this great war."</p>
+
+  <div class="key-idea">
+    <h3>Key Idea: Slavery Comes North</h3>
+    <p>The Fugitive Slave Act was one of the most important turning points in the sectional crisis. Before 1850, many white Northerners could ignore slavery because it existed far away, in the South. The Fugitive Slave Act made slavery everyone's problem. It forced Northern citizens to participate in the system of slavery, and that participation--or the refusal of it--radicalized millions. The law that was supposed to strengthen slavery instead created a massive anti-slavery backlash that would fuel the Republican Party and, eventually, Lincoln's election.</p>
+  </div>
+
+  <div class="perspectives">
+    <h3>Multiple Perspectives: The Fugitive Slave Act</h3>
+    <div class="perspective"><strong>Southern slaveholders:</strong> "The Constitution protects our right to our property. Enslaved people who flee are stolen property, and the federal government is obligated to return them. Northerners who harbor fugitives are breaking the law and undermining the compromise that holds this Union together."</div>
+    <div class="perspective"><strong>Northern abolitionists:</strong> "No law can make human beings into property. We have a higher moral duty to oppose slavery, regardless of what Congress says. We will not be slave catchers. Every person who breathes free air on Northern soil is free."</div>
+    <div class="perspective"><strong>Free Black communities in the North:</strong> "This law makes none of us safe. Slave catchers seize free people and drag them South with no trial and no rights. We must protect ourselves and each other, because the government will not protect us."</div>
+    <div class="perspective"><strong>Northern moderates:</strong> "We don't like slavery, but we accepted this compromise to save the Union. If we refuse to follow the law, we are no better than those who would break up the country. The Union must come first."</div>
+  </div>
+</section>
+
+<section id="bleeding-kansas">
+  <h2>IV. Bleeding Kansas</h2>
+
+  <h3>The Kansas-Nebraska Act: Reopening the Wound</h3>
+
+  <p>In 1854, Senator Stephen Douglas of Illinois made a fateful decision. He wanted to organize the vast Nebraska Territory so that a transcontinental railroad could be built through it--preferably along a northern route that would benefit his home state. But to get Southern support, he needed to offer something in return. His offer was devastating: the Kansas-Nebraska Act.</p>
+
+  <p>The act divided the Nebraska Territory into two parts--Kansas and Nebraska--and applied the principle of popular sovereignty to both. This effectively repealed the Missouri Compromise of 1820, which had banned slavery north of the 36-30' line. Land that had been free territory for over thirty years was now open to slavery if settlers voted for it.</p>
+
+  <p>The reaction in the North was volcanic. Anti-slavery Northerners saw the Kansas-Nebraska Act as proof that a "Slave Power"--a conspiracy of wealthy slaveholders--controlled the federal government and would stop at nothing to expand slavery. The act destroyed the Whig Party, fractured the Democrats, and gave birth to a new political force: the Republican Party, founded in 1854 on the principle that slavery must not expand into the territories.</p>
+
+  <h3>A Territory at War</h3>
+
+  <p>Both sides rushed settlers into Kansas to influence the vote. Pro-slavery Missourians--called "Border Ruffians"--crossed into Kansas by the thousands to cast illegal ballots. They established a pro-slavery government in the town of Lecompton. Free-state settlers, many supported by Northern emigrant aid societies, set up their own rival government in Topeka. Kansas now had two governments, each claiming to be legitimate, and both sides were armed.</p>
+
+  <p>Violence erupted quickly. In May 1856, a pro-slavery mob attacked the free-state town of Lawrence, burning buildings, destroying printing presses, and looting homes. The "Sack of Lawrence" sent shockwaves through the North. Days later, the abolitionist John Brown, a fierce and deeply religious man who believed God had called him to destroy slavery, retaliated with horrifying brutality. Brown and his followers dragged five pro-slavery settlers from their homes along Pottawatomie Creek and hacked them to death with broadswords.</p>
+
+  <p>The violence in Kansas continued for months, earning the territory the grim nickname "Bleeding Kansas." More than fifty people were killed. The territory became a miniature version of the war that would soon engulf the entire nation--a preview of the bloodshed to come.</p>
+
+  <div class="vocab-box">
+    <h3>Vocabulary</h3>
+    <p><strong>Kansas-Nebraska Act (1854):</strong> A law that organized the Kansas and Nebraska territories under popular sovereignty, effectively repealing the Missouri Compromise and reopening the question of slavery in territories where it had been banned for over thirty years.</p>
+    <p><strong>Border Ruffians:</strong> Pro-slavery Missourians who crossed into Kansas to cast fraudulent votes and intimidate free-state settlers.</p>
+    <p><strong>Republican Party:</strong> A new political party founded in 1854, united by the belief that slavery must not be allowed to expand into western territories. The party drew support from former Whigs, Free-Soilers, and anti-slavery Democrats.</p>
+  </div>
+
+  <div class="story-box">
+    <h3>Story Behind the Story: John Brown at Harpers Ferry</h3>
+    <p>John Brown was not finished after Kansas. In October 1859, the sixty-year-old abolitionist led a raid on the federal arsenal at Harpers Ferry, Virginia (now West Virginia). His plan was breathtaking in its ambition and doomed from the start: he intended to seize the weapons, arm enslaved people in the surrounding area, and trigger a massive slave rebellion that would sweep across the South and destroy slavery forever.</p>
+    <p>Brown and his band of twenty-one men--including five Black men--captured the arsenal on the night of October 16. But no slave uprising materialized. Local militia surrounded the building, and the next day U.S. Marines under Colonel Robert E. Lee stormed the arsenal. Ten of Brown's men were killed. Brown was wounded, captured, tried for treason, and hanged on December 2, 1859.</p>
+    <p>Brown's raid electrified the nation. Northerners were divided--some called him a dangerous fanatic, but many hailed him as a heroic martyr. Church bells tolled across the North on the day of his execution. Henry David Thoreau compared him to Christ. Southerners were horrified and enraged. They saw the raid as proof that the North intended to destroy slavery by force, and they pointed to Northern sympathy for Brown as evidence that the two sections could no longer coexist. Brown's raid pushed the South closer to secession than any single event before Lincoln's election.</p>
+    <p>On his way to the gallows, Brown handed a note to a guard. It read: "I, John Brown, am now quite certain that the crimes of this guilty land will never be purged away but with blood." He was right.</p>
+  </div>
+
+  <div class="stop-think">
+    <h3>Stop and Think</h3>
+    <p>John Brown used violence to fight against slavery. Some people at the time--and some historians today--consider him a hero. Others consider him a terrorist. Can violence ever be justified in the fight against injustice? What are the dangers of answering "yes"? What are the dangers of answering "no"?</p>
+  </div>
+</section>
+
+<section id="dred-scott">
+  <h2>V. The Dred Scott Decision</h2>
+
+  <h3>A Case That Shook the Nation</h3>
+
+  <p>In March 1857, the United States Supreme Court issued one of the most infamous decisions in American history. The case involved Dred Scott, an enslaved man who had been taken by his owner from the slave state of Missouri into the free state of Illinois and the free territory of Wisconsin. Scott argued that living on free soil had made him a free man. His case wound through the courts for over a decade before reaching the Supreme Court.</p>
+
+  <p>Chief Justice Roger B. Taney, a slaveholder from Maryland, wrote the majority opinion. His ruling went far beyond the question of Dred Scott's freedom. Taney declared three things, each more explosive than the last.</p>
+
+  <p>First, Taney ruled that Black people--whether free or enslaved--were not citizens of the United States and therefore had no right to sue in federal court. Black people, Taney wrote, had "no rights which the white man was bound to respect." This single sentence, among the most notorious in American legal history, stripped all Black Americans of legal standing.</p>
+
+  <p>Second, Taney ruled that Congress had no power to ban slavery in the territories. This meant that the Missouri Compromise--which had banned slavery north of the 36-30' line--had been unconstitutional all along. Slavery was now legal in every territory in the United States.</p>
+
+  <p>Third, Taney declared that enslaved people were property, protected by the Fifth Amendment's guarantee that no person could be deprived of their property without due process of law. The federal government, in Taney's view, was constitutionally obligated to protect slavery everywhere.</p>
+
+  <h3>The Fallout</h3>
+
+  <p>Southerners celebrated the decision as a vindication of everything they had been arguing. Slavery was not just a local institution that could be tolerated--it was a constitutionally protected right that no Congress and no territory could touch.</p>
+
+  <p>Northerners were appalled. The decision seemed to prove the existence of the "Slave Power conspiracy" that Republicans had been warning about. If Congress could not ban slavery in the territories, then popular sovereignty was meaningless. If Black people had "no rights," then the promise of the Declaration of Independence was a lie. Abraham Lincoln warned that the next step would be a ruling making slavery legal in the free states themselves.</p>
+
+  <p>The Dred Scott decision did not settle the slavery question. It made it unsettleable. By removing the possibility of political compromise, the Supreme Court pushed the nation closer to the only resolution that remained: war.</p>
+
+  <div class="primary-source">
+    <h3>Primary Source: Lincoln's "House Divided" Speech (1858)</h3>
+    <p>"A house divided against itself cannot stand. I believe this government cannot endure, permanently half slave and half free. I do not expect the Union to be dissolved--I do not expect the house to fall--but I do expect it will cease to be divided. It will become all one thing, or all the other."</p>
+    <p>"Either the opponents of slavery, will arrest the further spread of it, and place it where the public mind shall rest in the belief that it is in course of ultimate extinction; or its advocates will push it forward, till it shall become alike lawful in all the States, old as well as new--North as well as South."</p>
+    <p class="source-citation">--Abraham Lincoln, speech accepting the Republican nomination for U.S. Senate, Springfield, Illinois, June 16, 1858</p>
+  </div>
+
+  <div class="key-idea">
+    <h3>Key Idea: The Death of Compromise</h3>
+    <p>The Dred Scott decision effectively destroyed every tool that politicians had used to manage the slavery crisis. The Missouri Compromise was ruled unconstitutional. Popular sovereignty was rendered meaningless (if Congress could not ban slavery, neither could a territorial legislature). The only question left was whether slavery would expand everywhere or be stopped entirely. There was no middle ground left. The Dred Scott decision did not cause the Civil War by itself, but it closed off every path to a peaceful solution.</p>
+  </div>
+</section>
+
+<section id="election-secession">
+  <h2>VI. The Election of 1860 and Secession</h2>
+
+  <h3>A Fractured Nation Votes</h3>
+
+  <p>The presidential election of 1860 was unlike any before it. The country was so divided that it essentially held two separate elections--one in the North and one in the South. The Democratic Party split in two: Northern Democrats nominated Stephen Douglas, who supported popular sovereignty, while Southern Democrats nominated John C. Breckinridge of Kentucky, who demanded federal protection of slavery in all territories. A fourth candidate, John Bell, ran on the Constitutional Union Party ticket, calling vaguely for national unity.</p>
+
+  <p>The Republican candidate was Abraham Lincoln. The Republican platform was clear: slavery must not expand into the territories. Lincoln was careful to say that he would not touch slavery where it already existed--he had no legal authority to do so, and he knew it. But he was firm that the territories must remain free. Lincoln did not appear on the ballot in most Southern states. He did not need to. He won every Northern state and, with it, the presidency.</p>
+
+  <h3>Secession</h3>
+
+  <p>Lincoln's election was the breaking point. Before he even took office, Southern states began to leave the Union. South Carolina was first, seceding on December 20, 1860, just six weeks after the election. Mississippi, Florida, Alabama, Georgia, Louisiana, and Texas followed in January and February 1861. In February, delegates from the seceding states met in Montgomery, Alabama, and formed a new nation: the Confederate States of America. They chose Jefferson Davis of Mississippi as their president.</p>
+
+  <p>The seceding states were explicit about their reasons. The declarations of secession issued by South Carolina, Mississippi, Georgia, and Texas all named the defense of slavery as the primary cause. Mississippi's declaration stated: "Our position is thoroughly identified with the institution of slavery--the greatest material interest of the world." Alexander Stephens, the Confederate vice president, declared in his infamous "Cornerstone Speech" that the Confederacy's foundations rested "upon the great truth that the negro is not equal to the white man; that slavery, subordination to the superior race, is his natural and normal condition."</p>
+
+  <p>There was no ambiguity. The Southern states seceded to protect and perpetuate slavery.</p>
+
+  <h3>The Nation Waits</h3>
+
+  <p>Between Lincoln's election in November 1860 and his inauguration on March 4, 1861, the outgoing president, James Buchanan, did essentially nothing. He believed secession was illegal but also believed he had no constitutional authority to stop it. Congress tried desperately to craft a last-minute compromise, but no proposal could bridge the gap. In his inaugural address, Lincoln pleaded with the South: "We are not enemies, but friends. We must not be enemies." But the Confederate government had already been formed. Forts and arsenals across the South had been seized. The nation held its breath, waiting for the war that now seemed inevitable.</p>
+
+  <div class="perspectives">
+    <h3>Multiple Perspectives: Should the South Secede?</h3>
+    <div class="perspective"><strong>Southern secessionists:</strong> "Lincoln's election proves that the North intends to destroy our way of life. The federal government has become a tool of Northern aggression against our rights and our property. We entered this Union voluntarily, and we have every right to leave it. Our liberty--and the institution that sustains our economy and our civilization--demands it."</div>
+    <div class="perspective"><strong>Southern unionists:</strong> "Secession is madness. Lincoln cannot touch slavery where it exists--he has said so himself. The South has allies in the North. If we leave the Union, we throw away our protections under the Constitution and invite a war we cannot win. Patience and politics, not revolution, will protect our interests."</div>
+    <div class="perspective"><strong>Northern Republicans:</strong> "The Union is perpetual--no state has the right to leave it. Secession is treason. We will not allow a slaveholding minority to destroy the republic because they lost a fair election. If the South wants war, we will meet them."</div>
+    <div class="perspective"><strong>Enslaved people:</strong> "The slaveholders say they are fighting for liberty--the liberty to own us. We pray that this crisis will be our deliverance. If the Union breaks, perhaps freedom will follow. We watch and we wait and we hope."</div>
+  </div>
+
+  <div class="stop-think">
+    <h3>Stop and Think</h3>
+    <p>The Confederate states said they were seceding to defend their "rights." But the specific right they were defending was the right to own other human beings. How should we think about claims of "liberty" and "rights" when those claims are used to justify the oppression of others?</p>
+  </div>
+</section>
+
+<section id="conclusion">
+  <h2>VII. Wrapping Up: The Failure of Compromise</h2>
+
+  <p>For forty years, from the Missouri Compromise of 1820 to the election of 1860, American politicians tried to hold the Union together by splitting the difference on slavery. They drew lines on maps, invented formulas like popular sovereignty, and crafted elaborate legislative bargains. Each compromise bought a few years of uneasy peace. But none of them addressed the fundamental question: Was it morally acceptable for one human being to own another?</p>
+
+  <p>The compromises failed because slavery was not a problem that could be compromised away. Every attempt to find a middle ground only clarified the stakes and hardened the positions on both sides. The Compromise of 1850 created the Fugitive Slave Act, which radicalized the North. The Kansas-Nebraska Act reopened the slavery question in territories where it had been settled, leading to open warfare in Kansas. The Dred Scott decision declared that Congress had no power to limit slavery at all, destroying every previous compromise and making future ones impossible.</p>
+
+  <p>By 1861, the United States was two nations in all but name. The North and the South had different economies, different labor systems, different cultures, and different moral frameworks. They could no longer agree on what America was supposed to be. The election of Abraham Lincoln--a man who simply wanted to stop slavery from expanding--was enough to shatter the Union.</p>
+
+  <p>The failure of compromise left only one option: war. The Civil War that began in April 1861 would kill more than 700,000 Americans, destroy the Southern economy, and ultimately end slavery. It was the most catastrophic event in American history--and, as John Brown had predicted, the nation's guilt over slavery could only be purged with blood.</p>
+
+  <div class="voices-left-out">
+    <h3>Whose Voices Were Left Out?</h3>
+    <p><strong>Fugitive slaves:</strong> The people most directly affected by the Fugitive Slave Act--those who had risked everything to escape slavery--are often overshadowed by the political debates surrounding the law. Their stories of terror, courage, and survival deserve to be at the center of this history. Many fled to Canada after 1850, knowing that even the Northern states were no longer safe. They left behind communities, families, and the fragile lives they had built in freedom.</p>
+    <p><strong>Free Black communities in the North:</strong> The roughly 225,000 free Black people living in the North during the 1850s faced daily discrimination, were denied citizenship by the Dred Scott decision, and lived under the constant threat of kidnapping by slave catchers. They organized vigilance committees to protect their communities, hid fugitives in their homes, and fought for their rights in a nation that refused to recognize them. Their activism and resistance were essential to the anti-slavery movement, yet their contributions are often overlooked in favor of white abolitionists.</p>
+    <p><strong>Enslaved families separated by the domestic slave trade:</strong> As the cotton economy expanded westward, roughly one million enslaved people were forcibly relocated from the Upper South to the Deep South between 1790 and 1860. Husbands were separated from wives. Children were torn from parents. This "Second Middle Passage" destroyed families on a massive scale, yet the anguish of these separations is rarely given the attention it deserves. Enslaved people had no political voice, no vote, and no legal standing--but they were the people whose lives and bodies were the subject of every compromise and every crisis.</p>
+  </div>
+</section>
+
+<div class="activity-box">
+  <h3>Chapter Activity: The Collapse of Compromise</h3>
+  <h4>The Task:</h4>
+  <p>Create a timeline of the major events in this chapter, from the Compromise of 1850 through secession in 1860-1861. For each event, answer three questions:</p>
+  <ol>
+    <li>What problem was this event supposed to solve?</li>
+    <li>What new problems did it create?</li>
+    <li>How did it push the North and South further apart?</li>
+  </ol>
+  <h4>Events to Include:</h4>
+  <ul>
+    <li>The Compromise of 1850</li>
+    <li>The Fugitive Slave Act and Northern resistance</li>
+    <li>Publication of <em>Uncle Tom's Cabin</em> (1852)</li>
+    <li>The Kansas-Nebraska Act (1854)</li>
+    <li>Bleeding Kansas (1855-1856)</li>
+    <li>The Dred Scott decision (1857)</li>
+    <li>John Brown's raid on Harpers Ferry (1859)</li>
+    <li>The election of Abraham Lincoln (1860)</li>
+    <li>Secession of Southern states (1860-1861)</li>
+  </ul>
+  <h4>Discussion Questions:</h4>
+  <ul>
+    <li>Was there a point when the Civil War could still have been avoided? If so, when? If not, why not?</li>
+    <li>The compromises over slavery often ignored the voices of enslaved people themselves. How might the debates have been different if enslaved people had a seat at the table?</li>
+    <li>Some people argue that compromise is always better than conflict. Based on this chapter, do you agree? Are there issues on which compromise is not possible--or not morally acceptable?</li>
+  </ul>
+</div>
+
+<footer>
+  <p><strong>Chapter 13: The Sectional Crisis</strong> from <em>The American Yawp Middle School Edition</em>. Adapted from <em>The American Yawp</em>, eds. Joseph Locke and Ben Wright (Stanford University Press, 2018).</p>
+  <p>Licensed under <a href="https://creativecommons.org/licenses/by-sa/4.0/">Creative Commons BY-SA 4.0</a>. Free to use, share, and adapt with attribution.</p>
+  <p><a href="index.html">← Back to chapters</a> | <a href="ch12.html">← Chapter 12</a> | <a href="ch14.html">Chapter 14 →</a></p>
+</footer>
+
+</div>
+</body>
+</html>

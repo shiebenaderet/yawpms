@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chapter 11: The Cotton Revolution | The American Yawp MS</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:wght@400;600;700&display=swap');
+:root { --navy: #1B3A5C; --teal: #2A7F8E; --gold: #C4941D; --cream: #FAFAF8; --dark-gray: #2C2C2C; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Libre Baskerville', Georgia, serif; color: var(--dark-gray); background: var(--cream); line-height: 1.8; }
+.title-page { min-height: 60vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 80px 24px; background: linear-gradient(170deg, #0D2137 0%, var(--navy) 40%, #2B5A7C 100%); color: white; }
+.series { font-family: 'Source Sans 3', sans-serif; font-size: 13px; letter-spacing: 4px; text-transform: uppercase; opacity: .5; margin-bottom: 16px; }
+.chapter-num { font-size: 20px; opacity: .7; margin-bottom: 12px; }
+.chapter-title { font-size: 52px; line-height: 1.2; margin-bottom: 20px; font-weight: 700; }
+.chapter-subtitle { font-size: 22px; font-style: italic; opacity: .75; margin-bottom: 32px; }
+.divider { width: 100px; height: 3px; background: var(--gold); margin: 0 auto 24px; }
+.attribution { font-family: 'Source Sans 3', sans-serif; font-size: 13px; opacity: .5; max-width: 600px; }
+.container { max-width: 720px; margin: 0 auto; padding: 48px 24px; }
+.toc { background: white; border: 1px solid #ddd; border-radius: 8px; padding: 32px; margin-bottom: 48px; }
+.toc h2 { font-size: 18px; color: var(--navy); margin-bottom: 20px; text-align: center; }
+.toc ol { list-style: none; counter-reset: toc-counter; padding: 0; }
+.toc li { counter-increment: toc-counter; margin-bottom: 12px; }
+.toc li::before { content: counter(toc-counter, upper-roman) ". "; color: var(--gold); font-weight: 700; margin-right: 8px; }
+.toc a { color: var(--navy); text-decoration: none; }
+.overview { background: #F0F4F8; border-left: 5px solid var(--teal); padding: 28px 32px; margin-bottom: 48px; border-radius: 0 8px 8px 0; }
+.overview h2 { font-size: 20px; color: var(--teal); margin-bottom: 16px; }
+.overview p { font-family: 'Source Sans 3', sans-serif; font-size: 16px; line-height: 1.7; }
+.big-questions { background: white; border: 2px solid var(--gold); border-radius: 8px; padding: 28px 32px; margin-bottom: 48px; }
+.big-questions h2 { font-size: 18px; color: var(--gold); margin-bottom: 16px; text-align: center; }
+.big-questions ul { list-style: none; padding: 0; }
+.big-questions li { font-family: 'Source Sans 3', sans-serif; font-size: 15px; padding-left: 28px; position: relative; margin-bottom: 12px; line-height: 1.6; }
+.big-questions li::before { content: "?"; color: var(--gold); font-weight: 700; font-size: 20px; position: absolute; left: 0; top: -2px; }
+section { margin-bottom: 64px; }
+section h2 { font-size: 28px; color: var(--navy); margin-bottom: 24px; padding-bottom: 12px; border-bottom: 2px solid #E0E0E0; }
+section h3 { font-size: 20px; color: var(--navy); margin: 32px 0 16px; }
+p { margin-bottom: 20px; font-size: 17px; line-height: 1.8; }
+p:last-child { margin-bottom: 0; }
+.vocab-box, .stop-think, .perspectives, .key-idea, .primary-source, .story-box, .activity-box, .voices-left-out { border-radius: 8px; padding: 24px 28px; margin: 32px 0; }
+.vocab-box { background: #E8F4F8; border-left: 5px solid var(--teal); }
+.vocab-box h3 { color: var(--teal); font-size: 16px; margin: 0 0 12px; }
+.vocab-box p { font-family: 'Source Sans 3', sans-serif; font-size: 15px; margin-bottom: 12px; line-height: 1.6; }
+.vocab-box p:last-child { margin-bottom: 0; }
+.vocab-box strong { color: var(--teal); }
+.stop-think { background: #FFF9E6; border-left: 5px solid var(--gold); }
+.stop-think h3 { color: var(--gold); font-size: 16px; margin: 0 0 12px; }
+.stop-think p { font-family: 'Source Sans 3', sans-serif; font-size: 15px; font-style: italic; line-height: 1.6; }
+.perspectives { background: #F3E8FF; border-left: 5px solid #7C3AED; }
+.perspectives h3 { color: #7C3AED; font-size: 16px; margin: 0 0 16px; }
+.perspectives .perspective { margin-bottom: 16px; font-family: 'Source Sans 3', sans-serif; font-size: 15px; line-height: 1.6; }
+.perspectives .perspective:last-child { margin-bottom: 0; }
+.perspectives .perspective strong { color: #7C3AED; }
+.key-idea { background: #E8F5E9; border-left: 5px solid #2E7D32; }
+.key-idea h3 { color: #2E7D32; font-size: 16px; margin: 0 0 12px; }
+.key-idea p { font-family: 'Source Sans 3', sans-serif; font-size: 15px; line-height: 1.6; margin-bottom: 12px; }
+.key-idea p:last-child { margin-bottom: 0; }
+.primary-source { background: #FFF3E0; border-left: 5px solid #E65100; font-style: italic; }
+.primary-source h3 { color: #E65100; font-size: 16px; margin: 0 0 12px; font-style: normal; }
+.primary-source p { font-family: 'Source Sans 3', sans-serif; font-size: 15px; line-height: 1.7; margin-bottom: 12px; }
+.primary-source .source-citation { font-size: 13px; opacity: .7; font-style: normal; }
+.story-box { background: #FFF4E6; border-left: 5px solid #F57C00; }
+.story-box h3 { color: #F57C00; font-size: 18px; margin: 0 0 16px; }
+.story-box p { font-family: 'Source Sans 3', sans-serif; font-size: 15px; line-height: 1.7; margin-bottom: 12px; }
+.story-box p:last-child { margin-bottom: 0; }
+.voices-left-out { background: #FCE4EC; border-left: 5px solid #C2185B; }
+.voices-left-out h3 { color: #C2185B; font-size: 18px; margin: 0 0 16px; }
+.voices-left-out p { font-family: 'Source Sans 3', sans-serif; font-size: 15px; line-height: 1.7; margin-bottom: 12px; }
+.voices-left-out p:last-child { margin-bottom: 0; }
+.voices-left-out strong { color: #C2185B; }
+.activity-box { background: #FFEBEE; border: 2px solid #C62828; border-radius: 8px; padding: 32px; }
+.activity-box h3 { color: #C62828; font-size: 22px; margin: 0 0 20px; text-align: center; }
+.activity-box h4 { color: #C62828; font-size: 16px; margin: 20px 0 12px; }
+.activity-box p, .activity-box li { font-family: 'Source Sans 3', sans-serif; font-size: 15px; line-height: 1.7; }
+.activity-box ul, .activity-box ol { margin-left: 24px; margin-bottom: 16px; }
+.activity-box li { margin-bottom: 8px; }
+figure { margin: 32px 0; text-align: center; }
+figure img { max-width: 100%; height: auto; border-radius: 4px; box-shadow: 0 2px 8px rgba(0,0,0,.1); }
+figcaption { font-family: 'Source Sans 3', sans-serif; font-size: 14px; color: #666; margin-top: 12px; line-height: 1.6; font-style: italic; }
+footer { border-top: 2px solid #E0E0E0; margin-top: 64px; padding-top: 24px; font-family: 'Source Sans 3', sans-serif; font-size: 13px; color: #999; line-height: 1.7; }
+footer a { color: var(--teal); text-decoration: none; border-bottom: 1px dotted var(--teal); }
+footer a:hover { border-bottom-style: solid; }
+@media print { .title-page { page-break-after: always; } section { page-break-inside: avoid; } }
+@media (max-width: 600px) { .chapter-title { font-size: 36px; } .container { padding: 32px 16px; } section h2 { font-size: 24px; } }
+</style>
+</head>
+<body>
+
+<div class="title-page">
+  <div class="series">The American Yawp Middle School Edition</div>
+  <div class="chapter-num">Chapter 11</div>
+  <h1 class="chapter-title">The Cotton Revolution</h1>
+  <div class="divider"></div>
+  <div class="chapter-subtitle">Slavery, Resistance, and the Economy That Divided America</div>
+  <p class="attribution">Adapted for middle school readers from <em>The American Yawp</em>, edited by Joseph Locke and Ben Wright</p>
+</div>
+
+<div class="container">
+
+<nav class="toc">
+  <h2>Contents</h2>
+  <ol>
+    <li><a href="#intro">Introduction: King Cotton</a></li>
+    <li><a href="#cotton-gin">The Cotton Gin and the Expansion of Slavery</a></li>
+    <li><a href="#life-under-slavery">Life Under Slavery</a></li>
+    <li><a href="#community-culture">Enslaved Communities and Culture</a></li>
+    <li><a href="#resistance">Resistance</a></li>
+    <li><a href="#defense-slavery">The Defense of Slavery</a></li>
+    <li><a href="#conclusion">Wrapping Up: The Human Cost of Cotton</a></li>
+  </ol>
+</nav>
+
+<div class="overview">
+  <h2>Chapter Overview</h2>
+  <p>In the first half of the 1800s, cotton became the most valuable commodity in the American economy, and enslaved labor was the engine that produced it. A single invention -- the cotton gin -- transformed the South, binding millions of African Americans to a brutal system of forced labor that spread westward across the continent. But enslaved people were never merely victims. They built families, created vibrant cultures, maintained their dignity, and resisted their bondage in ways both dramatic and quiet. Meanwhile, white Southerners constructed an elaborate defense of slavery, calling it a "positive good" rather than acknowledging it as the moral catastrophe it was. The story of the Cotton Revolution is the story of how America's greatest wealth was built on its greatest injustice.</p>
+</div>
+
+<div class="big-questions">
+  <h2>Big Questions</h2>
+  <ul>
+    <li>How did the cotton gin make slavery more profitable and cause it to expand westward?</li>
+    <li>What was daily life like for enslaved people on Southern plantations?</li>
+    <li>How did enslaved people resist their bondage and maintain their humanity?</li>
+    <li>What arguments did white Southerners use to defend slavery, and why were those arguments wrong?</li>
+    <li>How did the cotton economy connect the North and South -- even as it divided them?</li>
+  </ul>
+</div>
+
+<section id="intro">
+  <h2>I. Introduction: King Cotton</h2>
+
+  <p>By the 1850s, Americans had a saying: "Cotton is king." It was not an exaggeration. Cotton accounted for more than half of all American exports. It fueled the textile mills of New England and Great Britain. It made Southern planters fabulously wealthy. And it was produced almost entirely by the labor of enslaved people.</p>
+
+  <p>In 1790, the United States produced about 1.5 million pounds of cotton. By 1860, that number had exploded to nearly 2 billion pounds. Behind every bale of that cotton stood enslaved men, women, and children who planted, tended, and picked it under the threat of the whip. The number of enslaved people in the United States grew from about 700,000 in 1790 to nearly 4 million by 1860.</p>
+
+  <p>The cotton economy did not just shape the South. It shaped the entire nation. Northern banks financed cotton plantations. Northern ships carried cotton to European markets. Northern factories turned raw cotton into cloth. The entire country was entangled in the institution of slavery, even as many Northerners claimed to oppose it.</p>
+
+  <p>This chapter tells the story of the people at the center of the cotton economy: the millions of enslaved African Americans who built the South's wealth with their bodies and their labor, who suffered unspeakable cruelties, and who never stopped fighting for their freedom.</p>
+
+  <div class="vocab-box">
+    <h3>Vocabulary</h3>
+    <p><strong>King Cotton:</strong> A phrase used before the Civil War to describe the dominant role cotton played in the American and global economy. Southerners believed cotton was so important that no one would dare challenge the system that produced it.</p>
+    <p><strong>Commodity:</strong> A raw material or agricultural product that can be bought and sold, such as cotton, tobacco, sugar, or wheat.</p>
+    <p><strong>Planter:</strong> A large-scale Southern farmer who owned a plantation and enslaved twenty or more people. Planters were the wealthiest and most politically powerful class in the South.</p>
+  </div>
+</section>
+
+<section id="cotton-gin">
+  <h2>II. The Cotton Gin and the Expansion of Slavery</h2>
+
+  <h3>Whitney's Invention</h3>
+
+  <p>In 1793, a young Yale graduate named Eli Whitney visited a cotton plantation in Georgia. There he observed the central problem of cotton production: separating the sticky green seeds from the fluffy white cotton fibers was incredibly slow and tedious. A single worker could clean only about one pound of cotton per day by hand.</p>
+
+  <p>Whitney invented a simple machine -- the cotton gin (short for "engine") -- that could do the work fifty times faster. A worker using a cotton gin could clean fifty pounds of cotton in a single day. Whitney thought his invention would reduce the need for enslaved labor. He was catastrophically wrong.</p>
+
+  <h3>How the Cotton Gin Made Slavery Worse</h3>
+
+  <p>The cotton gin did not reduce slavery. It supercharged it. By making it profitable to grow cotton on a massive scale, the gin created an enormous demand for the one thing a machine could not replace: the human labor needed to plant, tend, and harvest the crop. Cotton still had to be picked by hand, one boll at a time, under the blazing Southern sun. More cotton meant more land, and more land meant more enslaved workers.</p>
+
+  <p>Before the cotton gin, slavery had actually seemed to be declining in some parts of the South. Tobacco had exhausted the soil in Virginia and Maryland. Some enslavers were beginning to wonder whether the institution was economically worthwhile. The cotton gin erased all of that. Suddenly, slavery was more profitable than ever, and enslavers rushed to expand it.</p>
+
+  <div class="key-idea">
+    <h3>Key Idea: Technology Does Not Always Lead to Freedom</h3>
+    <p>Eli Whitney believed the cotton gin would make slavery unnecessary. Instead, it made slavery far more profitable and entrenched. This is an important lesson: new technology does not automatically make the world better or freer. The effects of an invention depend on who controls it and what social system it operates within. In a society built on enslaved labor, a labor-saving machine did not free workers -- it enslaved more of them.</p>
+  </div>
+
+  <h3>Cotton Moves West</h3>
+
+  <p>The hunger for new cotton land drove the expansion of slavery westward. Planters pushed into Alabama, Mississippi, Louisiana, Arkansas, and Texas, clearing forests and draining swamps to create new cotton fields. This westward expansion was devastating for Native Americans, who were forcibly removed from their lands (as covered in Chapter 10). It was also devastating for enslaved people, hundreds of thousands of whom were uprooted from their homes in the Upper South and sold or marched to the Deep South in what became known as the domestic slave trade.</p>
+
+  <p>By the 1850s, the "Cotton Belt" -- the crescent of land stretching from South Carolina through Georgia, Alabama, Mississippi, and Louisiana into Texas -- was one of the wealthiest regions on Earth. That wealth came from the stolen labor of enslaved people.</p>
+
+  <div class="stop-think">
+    <h3>Stop and Think</h3>
+    <p>Eli Whitney believed his invention would reduce slavery. Instead, it did the opposite. Can you think of other examples -- from history or from today -- where a new technology had unexpected consequences? What does this tell us about the relationship between technology and society?</p>
+  </div>
+</section>
+
+<section id="life-under-slavery">
+  <h2>III. Life Under Slavery</h2>
+
+  <h3>The Daily Grind</h3>
+
+  <p>Enslaved people on cotton plantations typically worked from sunup to sundown -- and sometimes beyond. During harvest season, the workday could stretch to sixteen or eighteen hours. Men, women, and children as young as six or seven worked in the fields. Each picker was assigned a daily quota, often 150 to 200 pounds of cotton. Those who fell short were whipped.</p>
+
+  <p>The work was backbreaking. Cotton plants grew low to the ground, so pickers spent the entire day stooped over. The cotton bolls were surrounded by sharp, dried husks that cut and bloodied workers' hands. The Southern sun was relentless. There was no shade, no rest, and no choice.</p>
+
+  <h3>Task System vs. Gang System</h3>
+
+  <p>Enslaved labor was organized in two main ways. Under the <strong>task system</strong>, common in the rice-growing regions of South Carolina and Georgia, each worker was assigned a specific task for the day. Once the task was completed, the worker had some limited time for themselves -- to tend a small garden, do craftwork, or rest. Under the <strong>gang system</strong>, which was far more common on cotton plantations, enslaved people worked in large groups under the constant supervision of an overseer or driver. There was no personal time. The gang worked until the overseer said they could stop.</p>
+
+  <p>The gang system was grinding and dehumanizing. Overseers -- white men hired to manage enslaved workers -- used the whip freely to maintain the pace of work. Some plantations also used enslaved "drivers," who were forced into the painful position of pushing fellow enslaved people to work harder or face punishment themselves.</p>
+
+  <h3>Family Separation and the Domestic Slave Trade</h3>
+
+  <p>One of the cruelest features of American slavery was the constant threat of family separation. Enslaved people had no legal right to their families. An enslaver could sell a husband away from his wife, a mother away from her children, at any time and for any reason -- to pay a debt, to punish disobedience, or simply to make a profit.</p>
+
+  <p>The domestic slave trade -- the buying and selling of enslaved people within the United States -- was a massive, organized industry. After 1808, when the international slave trade was banned, the domestic trade became the primary way enslavers acquired labor. Major slave-trading firms operated in cities like Richmond, Charleston, and New Orleans. Enslaved people were displayed, inspected, and auctioned like livestock. Roughly one million enslaved people were forcibly moved from the Upper South to the Deep South between 1790 and 1860, most through the domestic slave trade.</p>
+
+  <p>The trauma of family separation haunted enslaved communities. Parents lived in constant fear that their children would be taken. Children were torn from mothers' arms. Husbands and wives were separated, sometimes permanently. This was not an accidental cruelty -- it was a deliberate tool of control. Enslavers understood that the threat of sale was one of the most powerful ways to compel obedience.</p>
+
+  <h3>Physical Violence</h3>
+
+  <p>Slavery was maintained through systematic violence. Whipping was the most common punishment, but enslaved people also endured branding, mutilation, confinement in stocks and pens, and other tortures. Violence was not reserved for "disobedience" -- it was woven into the everyday fabric of plantation life. Overseers whipped workers to make them work faster. Enslavers beat people for looking them in the eye, for moving too slowly, or for no reason at all.</p>
+
+  <p>Enslaved women faced an additional horror: sexual violence. Enslaved women had no legal ability to refuse the advances of their enslavers. The children born from these assaults were themselves enslaved, adding to the enslaver's wealth. This was one of the most monstrous aspects of the institution, and it was pervasive.</p>
+
+  <div class="vocab-box">
+    <h3>Vocabulary</h3>
+    <p><strong>Domestic slave trade:</strong> The buying and selling of enslaved people within the United States, especially the forced migration of enslaved people from the Upper South (Virginia, Maryland) to the Deep South (Alabama, Mississippi, Louisiana) to work on cotton plantations.</p>
+    <p><strong>Task system:</strong> A labor system in which each enslaved person was assigned a specific daily task; once completed, the worker had limited time to themselves.</p>
+    <p><strong>Gang system:</strong> A labor system in which enslaved people worked in large groups under constant supervision, with no personal time. This was the dominant system on cotton plantations.</p>
+    <p><strong>Overseer:</strong> A white man hired by a plantation owner to supervise and discipline enslaved workers, often using physical violence.</p>
+  </div>
+
+  <div class="primary-source">
+    <h3>Primary Source: Solomon Northup Describes a Day in the Cotton Fields</h3>
+    <p>"An ordinary day's work is considered two hundred pounds. A slave who is accustomed to picking is punished if he or she brings in a less quantity than that. ... The hands are required to be in the cotton field as soon as it is light in the morning, and, with the exception of ten or fifteen minutes, which is given them at noon to swallow their allowance of cold bacon, they are not permitted to be a moment idle until it is too dark to see, and when the moon is full, they often times labor till the middle of the night."</p>
+    <p class="source-citation">-- Solomon Northup, <em>Twelve Years a Slave</em> (1853). Northup was a free Black man from New York who was kidnapped and sold into slavery in Louisiana, where he was held for twelve years before being rescued.</p>
+  </div>
+
+  <div class="stop-think">
+    <h3>Stop and Think</h3>
+    <p>Why do you think the threat of family separation was such a powerful tool of control? What does it tell us about the humanity of enslaved people that enslavers tried so hard to deny -- that they loved their families and would do almost anything to stay together?</p>
+  </div>
+</section>
+
+<section id="community-culture">
+  <h2>IV. Enslaved Communities and Culture</h2>
+
+  <h3>Family as Foundation</h3>
+
+  <p>Despite every effort by enslavers to break them, enslaved people built and maintained families. They married (though their marriages had no legal recognition), raised children, and created extended networks of aunts, uncles, cousins, and "fictive kin" -- people who were not related by blood but who functioned as family. When family members were sold away, communities stepped in to care for the children and elders left behind.</p>
+
+  <p>Naming practices reflected the importance of family. Enslaved parents often named children after relatives who had been sold away, keeping the memory of absent family members alive across generations. These naming traditions were quiet acts of resistance against a system designed to erase family bonds.</p>
+
+  <h3>Religion and Spirituality</h3>
+
+  <p>Christianity became a central part of enslaved culture, but enslaved people transformed it into something very different from their enslavers' religion. Where enslavers used the Bible to justify slavery -- preaching obedience and submission -- enslaved people found in the Bible a story of liberation. The Exodus story, in which God freed the Israelites from bondage in Egypt, became the foundational narrative of enslaved Christianity. "Go down, Moses, way down in Egypt's land, tell old Pharaoh to let my people go" was not just a song -- it was a statement of faith that God would deliver them from bondage.</p>
+
+  <p>Enslaved people often held their own religious services in secret, away from the eyes of enslavers, in gatherings known as "hush harbors" or "brush arbors." In these hidden meetings, they could worship freely, express their grief and hope, and build community without surveillance.</p>
+
+  <h3>Music and Oral Tradition</h3>
+
+  <p>Music was essential to enslaved life. Work songs helped regulate the rhythm of labor and made the unbearable hours pass. Spirituals expressed both religious faith and veiled desires for freedom. Songs like "Swing Low, Sweet Chariot" and "Follow the Drinking Gourd" carried double meanings: on the surface they were religious hymns, but they also contained coded messages about escape routes and the Underground Railroad. The "drinking gourd" referred to the Big Dipper constellation, which pointed north toward freedom.</p>
+
+  <p>Oral tradition -- storytelling passed down by word of mouth -- preserved African cultural traditions, taught survival strategies, and provided entertainment and hope. The "Brer Rabbit" stories, in which a small, clever rabbit outwits larger and more powerful animals, were thinly veiled allegories about enslaved people outsmarting their enslavers through cunning rather than force.</p>
+
+  <h3>Survival Strategies</h3>
+
+  <p>Enslaved people developed sophisticated strategies for surviving within a system designed to crush them. They learned to read the moods and habits of their enslavers, to appear compliant while preserving their inner lives, and to build hidden networks of communication and mutual support. They maintained small gardens and hunted and fished to supplement the meager rations provided by enslavers. They taught their children how to navigate the dangers of slavery -- when to speak and when to stay silent, how to avoid provoking violence, and how to hold onto their sense of self-worth in a world that told them they were worth nothing.</p>
+
+  <div class="key-idea">
+    <h3>Key Idea: Culture as Resistance</h3>
+    <p>Building families, practicing religion, singing songs, and telling stories may not seem like acts of resistance. But in a system designed to reduce human beings to property -- to strip them of their names, their families, their cultures, and their dignity -- every act of cultural creation was an act of defiance. Enslaved people insisted on being human in a system that denied their humanity. That insistence was one of the most powerful forms of resistance in American history.</p>
+  </div>
+</section>
+
+<section id="resistance">
+  <h2>V. Resistance</h2>
+
+  <h3>Everyday Resistance</h3>
+
+  <p>Not all resistance was dramatic. In fact, the most common forms of resistance were quiet, everyday acts that enslaved people used to push back against their bondage without risking the extreme violence that open rebellion would bring. These included working slowly, pretending to be sick, "accidentally" breaking tools and equipment, misunderstanding instructions, and setting small fires. Enslaved people also stole food -- though they often reframed this not as theft but as simply taking what they had earned through their labor.</p>
+
+  <p>These small acts of defiance were significant. They reduced the productivity and profits of enslavers, forced enslavers to constantly monitor their workers (which was itself costly and exhausting), and preserved enslaved people's sense of agency -- the feeling that they were not completely powerless, that they could still make choices and take actions of their own.</p>
+
+  <h3>Running Away</h3>
+
+  <p>Tens of thousands of enslaved people ran away. Some fled to nearby swamps or forests and hid for days or weeks before returning or being captured. Others made the dangerous journey north, traveling hundreds of miles on foot through hostile territory, navigating by the North Star, and relying on the help of free Black people, sympathetic whites, and the loose network known as the Underground Railroad.</p>
+
+  <p>Running away was extraordinarily dangerous. Enslavers hired professional slave catchers -- men with horses and dogs trained to track human beings. The Fugitive Slave Act of 1850 made it a federal crime to help a runaway and required Northern authorities to assist in capturing fugitives. Those who were caught faced savage punishment: whipping, branding, shackling, and sale to the Deep South, far from family and any hope of escape.</p>
+
+  <h3>The Underground Railroad and Harriet Tubman</h3>
+
+  <p>The Underground Railroad was not a railroad and it was not underground. It was a secret network of people -- Black and white, free and enslaved -- who helped fugitives escape to freedom in the North or in Canada. "Conductors" guided runaways along secret routes. "Stations" were safe houses where fugitives could hide, rest, and eat. "Passengers" were the freedom seekers themselves.</p>
+
+  <p>The most famous conductor was Harriet Tubman. Born into slavery in Maryland around 1822, Tubman escaped to freedom in 1849. But instead of remaining safely in the North, she returned to the South again and again -- at least thirteen times -- to lead others to freedom. She guided roughly seventy people out of slavery, including her own parents and several siblings. She carried a pistol, both for protection and to discourage any frightened fugitive from turning back and endangering the group. Enslavers put a bounty on her head, but she was never captured and never lost a single passenger.</p>
+
+  <div class="story-box">
+    <h3>Story Behind the Story: Harriet Tubman's Rescues</h3>
+    <p>Harriet Tubman's rescue missions were feats of extraordinary courage and planning. She typically traveled in winter, when the long nights provided more darkness for cover. She left on Saturday nights, because newspapers that might carry advertisements for runaways did not print on Sundays, giving her group a head start. She used disguises -- sometimes dressing as an old woman, sometimes as a man -- and employed a network of allies who sheltered her passengers along the way.</p>
+    <p>Tubman suffered from seizures and sudden blackouts throughout her life, the result of a severe head injury inflicted by an overseer when she was a teenager. Despite this disability, she made the dangerous journey south over and over. When asked if she was ever afraid, she reportedly said she "never ran her train off the track and never lost a passenger."</p>
+    <p>After the Civil War, Tubman continued her activism, supporting women's suffrage and establishing a home for elderly African Americans in Auburn, New York. She died in 1913. Today she is recognized as one of the greatest heroes in American history.</p>
+  </div>
+
+  <h3>Nat Turner's Rebellion, 1831</h3>
+
+  <p>The most famous slave rebellion in American history took place in Southampton County, Virginia, in August 1831. Nat Turner, an enslaved man who was deeply religious and literate, believed God had chosen him to lead his people out of bondage. On the night of August 21, Turner and a small group of followers began moving from plantation to plantation, killing white enslavers and their families. Over two days, the group grew to about seventy people and killed roughly sixty whites.</p>
+
+  <p>The rebellion was crushed by state militia and federal troops. Turner hid for more than two months before being captured, tried, and executed. In retaliation, white mobs killed an estimated 200 Black people -- most of whom had nothing to do with the rebellion. State legislatures across the South passed harsh new laws restricting the movement, education, and assembly of enslaved people. It became illegal to teach enslaved people to read. It became illegal for Black people to preach.</p>
+
+  <p>Turner's rebellion terrified the white South. It shattered the comforting myth that enslaved people were content with their condition. It proved that the system of slavery could only be maintained through ever-increasing violence and repression. And it deepened the divide between North and South, as Southerners blamed Northern abolitionists for inciting rebellion and demanded silence on the issue of slavery.</p>
+
+  <div class="perspectives">
+    <h3>Multiple Perspectives: How Was Nat Turner's Rebellion Understood?</h3>
+    <div class="perspective"><strong>White Southerners:</strong> "This is what happens when abolitionists fill enslaved people's heads with dangerous ideas. We must tighten control, ban education for the enslaved, and silence anyone who questions slavery. Our safety depends on it."</div>
+    <div class="perspective"><strong>Northern abolitionists:</strong> "Turner's rebellion proves that enslaved people are not content. They want freedom just as any human being would. The violence of the rebellion is terrible, but it is a direct result of the far greater violence of slavery itself."</div>
+    <div class="perspective"><strong>Enslaved people:</strong> While reactions varied, many enslaved people understood Turner's motivations even if they feared the brutal retaliation that followed. Turner became a symbol of the desire for freedom that enslavers could never fully extinguish.</div>
+    <div class="perspective"><strong>Free Black people in the North:</strong> "We fear for our brothers and sisters in the South who will suffer terrible retaliation. But we also know that a people held in chains will eventually rise. The blame lies not with those who rebel but with those who enslaved them."</div>
+  </div>
+
+  <div class="vocab-box">
+    <h3>Vocabulary</h3>
+    <p><strong>Underground Railroad:</strong> A secret network of people and safe houses that helped enslaved people escape to freedom in the North or Canada. It was not a literal railroad.</p>
+    <p><strong>Fugitive Slave Act (1850):</strong> A federal law requiring Northern states to help capture and return runaway enslaved people to their enslavers, even in states where slavery was illegal.</p>
+    <p><strong>Slave rebellion:</strong> An organized, violent uprising by enslaved people against their enslavers. Nat Turner's Rebellion in 1831 was the most famous example in the United States.</p>
+  </div>
+</section>
+
+<section id="defense-slavery">
+  <h2>VI. The Defense of Slavery</h2>
+
+  <h3>From "Necessary Evil" to "Positive Good"</h3>
+
+  <p>In the late 1700s, even many enslavers acknowledged that slavery was morally wrong. Thomas Jefferson called it a "moral and political depravity." Enslavers in the founding generation often described slavery as a "necessary evil" -- wrong in principle, but too economically important and too deeply embedded in Southern society to abolish.</p>
+
+  <p>By the 1830s, that attitude had vanished. As cotton made slavery more profitable than ever, and as abolitionist criticism grew louder, Southern leaders stopped apologizing for slavery and began aggressively defending it. They no longer called it a necessary evil. They called it a "positive good."</p>
+
+  <h3>The "Positive Good" Theory</h3>
+
+  <p>South Carolina Senator John C. Calhoun became the most prominent voice for this new defense. In an 1837 speech to the United States Senate, Calhoun declared: "I hold that in the present state of civilization, where two races of different origin, and distinguished by color, and other physical differences, as well as intellectual, are brought together, the relation now existing in the slaveholding states between the two, is, instead of an evil, a good -- a positive good."</p>
+
+  <p>Calhoun and other defenders of slavery argued that enslaved people were better off than free workers in the North. They claimed that enslavers provided food, shelter, and care to enslaved people, while Northern factory owners paid starvation wages and abandoned workers when they became sick or old. This argument was dishonest in every way: it ignored the violence, the family separation, the denial of education, and the fundamental horror of owning another human being as property.</p>
+
+  <h3>Paternalism</h3>
+
+  <p>Central to the proslavery argument was the idea of "paternalism" -- the claim that enslavers were like fathers to their enslaved workers, providing guidance, protection, and care. Enslavers described their plantations as happy, well-ordered communities where everyone knew their place and was taken care of. They called enslaved people "part of the family."</p>
+
+  <p>This was a lie. The same "father" who claimed to care for his enslaved workers whipped them for picking too little cotton, sold their children for profit, and denied them every basic human right. Paternalism was not kindness -- it was a story enslavers told themselves to avoid confronting the reality of what they were doing.</p>
+
+  <h3>Biblical and "Scientific" Justifications</h3>
+
+  <p>Proslavery writers also turned to the Bible and to pseudoscience to defend slavery. They pointed to passages in the Bible that seemed to accept slavery (such as the "curse of Ham" in Genesis) and argued that God had ordained the institution. They promoted fake "scientific" theories claiming that Black people were naturally inferior to white people and were designed by nature for manual labor.</p>
+
+  <p>These arguments were wrong -- morally, scientifically, and theologically. But they were widely believed in the South and provided a convenient justification for a system that made white Southerners wealthy at the expense of Black people's freedom and lives.</p>
+
+  <div class="stop-think">
+    <h3>Stop and Think</h3>
+    <p>Why do you think white Southerners shifted from calling slavery a "necessary evil" to calling it a "positive good"? What changed? Consider the role of cotton profits, abolitionist pressure, and the human tendency to justify systems that benefit us.</p>
+  </div>
+</section>
+
+<section id="conclusion">
+  <h2>VII. Wrapping Up: The Human Cost of Cotton</h2>
+
+  <p>The cotton economy made the United States one of the wealthiest nations on Earth. It enriched Southern planters, Northern bankers, British factory owners, and everyone who wore cotton clothing or slept on cotton sheets. But that wealth was built on the suffering of nearly four million enslaved people who received nothing for their labor -- not wages, not freedom, not even ownership of their own bodies.</p>
+
+  <p>The human cost of cotton cannot be measured in numbers alone. It was measured in families torn apart at the auction block. It was measured in backs scarred by the whip. It was measured in children who grew up never knowing their parents. It was measured in the millions of hours of stolen labor and stolen life.</p>
+
+  <p>But the story of the Cotton Revolution is not only a story of suffering. It is also a story of resilience, resistance, and the unbreakable human desire for freedom. Enslaved people built communities and cultures that sustained them through the darkest conditions. They fought back in ways large and small. They insisted on their humanity in a system designed to deny it. And their struggle laid the foundation for the movement that would eventually bring slavery to an end -- though not before the nation tore itself apart in the bloodiest war in American history.</p>
+
+  <p>The legacy of the cotton economy and of slavery continues to shape American life today. Understanding that legacy -- honestly, fully, and with respect for the people who lived it -- is essential to understanding the nation we have inherited.</p>
+
+  <div class="voices-left-out">
+    <h3>Whose Voices Were Left Out?</h3>
+    <p><strong>Enslaved children:</strong> Children as young as five or six were put to work on plantations. They experienced the trauma of slavery from their earliest memories -- the fear of separation from parents, the violence of the overseer, the knowledge that they were considered property. Their experiences are among the least documented in the historical record.</p>
+    <p><strong>Enslaved women:</strong> While some narratives, like those of Harriet Jacobs, survive, the experiences of most enslaved women -- who bore the double burden of forced labor and sexual exploitation -- went unrecorded. They held families together under impossible conditions and resisted in ways that are only beginning to be fully understood by historians.</p>
+    <p><strong>Free Black people in the South:</strong> A small population of free Black people lived in the South, often in a precarious position between slavery and full freedom. They faced strict legal restrictions, constant surveillance, and the ever-present danger of being kidnapped and sold into slavery. Their stories are often overlooked in accounts that focus on enslaved and white populations.</p>
+    <p><strong>Poor white Southerners who did not own enslaved people:</strong> The majority of white Southerners did not own enslaved people. Many were poor farmers who competed economically with enslaved labor. Their complicated relationship with slavery -- they did not directly benefit from it but were often its fiercest defenders -- is a story that deserves more attention.</p>
+  </div>
+</section>
+
+<div class="activity-box">
+  <h3>Chapter Activity: Voices of the Cotton Kingdom</h3>
+  <h4>Part 1: Primary Source Analysis</h4>
+  <p>Read the excerpt from Solomon Northup's <em>Twelve Years a Slave</em> included in this chapter. Then answer the following questions:</p>
+  <ul>
+    <li>What specific details does Northup provide about the daily routine of enslaved cotton workers?</li>
+    <li>What do these details tell us about the physical and emotional toll of enslaved labor?</li>
+    <li>Why are first-person accounts like Northup's so important for understanding slavery?</li>
+  </ul>
+  <h4>Part 2: Forms of Resistance</h4>
+  <p>Create a chart with two columns: "Everyday Resistance" and "Open Resistance." Using evidence from the chapter, list at least three examples in each column. Then write a paragraph answering this question:</p>
+  <ul>
+    <li>Which form of resistance do you think was more effective in challenging the system of slavery? Why?</li>
+  </ul>
+  <h4>Part 3: Challenging the "Positive Good" Argument</h4>
+  <p>Imagine you are a Northern abolitionist in 1837 who has just read John C. Calhoun's "positive good" speech. Write a letter to the editor of a newspaper (5-7 sentences) responding to Calhoun's arguments. Use specific evidence from this chapter to explain why his defense of slavery is wrong.</p>
+  <h4>Discussion Questions:</h4>
+  <ul>
+    <li>How did the cotton gin -- a machine designed to make work easier -- end up causing so much human suffering?</li>
+    <li>What does the culture created by enslaved people (music, stories, religion) tell us about the human spirit?</li>
+    <li>Why is it important to study slavery not just as a system of economics and politics, but as an experience lived by millions of individual human beings?</li>
+  </ul>
+</div>
+
+<footer>
+  <p><strong>Chapter 11: The Cotton Revolution</strong> from <em>The American Yawp Middle School Edition</em>. Adapted from <em>The American Yawp</em>, eds. Joseph Locke and Ben Wright (Stanford University Press, 2018).</p>
+  <p>Licensed under <a href="https://creativecommons.org/licenses/by-sa/4.0/">Creative Commons BY-SA 4.0</a>. Free to use, share, and adapt with attribution.</p>
+  <p><a href="index.html">← Back to chapters</a> | <a href="ch10.html">← Chapter 10</a> | <a href="ch12.html">Chapter 12 →</a></p>
+</footer>
+
+</div>
+</body>
+</html>
