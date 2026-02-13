@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chapter 4: Colonial Society | The American Yawp MS</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:wght@400;600;700&display=swap');
+
+:root { --navy: #1B3A5C; --teal: #2A7F8E; --gold: #C4941D; --cream: #FAFAF8; --dark-gray: #2C2C2C; }
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Libre Baskerville', Georgia, serif; color: var(--dark-gray); background: var(--cream); line-height: 1.8; }
+
+.title-page { min-height: 60vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 80px 24px; background: linear-gradient(170deg, #0D2137 0%, var(--navy) 40%, #2B5A7C 100%); color: white; }
+.series { font-family: 'Source Sans 3', sans-serif; font-size: 13px; letter-spacing: 4px; text-transform: uppercase; opacity: .5; margin-bottom: 16px; }
+.chapter-num { font-size: 20px; font-weight: 400; opacity: .7; margin-bottom: 12px; }
+.chapter-title { font-size: 52px; line-height: 1.2; margin-bottom: 20px; font-weight: 700; }
+.chapter-subtitle { font-size: 22px; font-style: italic; opacity: .75; margin-bottom: 32px; }
+.divider { width: 100px; height: 3px; background: var(--gold); margin: 0 auto 24px; }
+.attribution { font-family: 'Source Sans 3', sans-serif; font-size: 13px; opacity: .5; line-height: 1.6; max-width: 600px; }
+
+.container { max-width: 720px; margin: 0 auto; padding: 48px 24px; }
+
+.toc { background: white; border: 1px solid #ddd; border-radius: 8px; padding: 32px; margin-bottom: 48px; }
+.toc h2 { font-size: 18px; color: var(--navy); margin-bottom: 20px; text-align: center; }
+.toc ol { list-style: none; counter-reset: toc-counter; padding: 0; }
+.toc li { counter-increment: toc-counter; margin-bottom: 12px; }
+.toc li::before { content: counter(toc-counter, upper-roman) ". "; color: var(--gold); font-weight: 700; margin-right: 8px; }
+.toc a { color: var(--navy); text-decoration: none; border-bottom: 1px dotted transparent; }
+.toc a:hover { border-bottom-color: var(--navy); }
+
+.overview { background: #F0F4F8; border-left: 5px solid var(--teal); padding: 28px 32px; margin-bottom: 48px; border-radius: 0 8px 8px 0; }
+.overview h2 { font-size: 20px; color: var(--teal); margin-bottom: 16px; }
+.overview p { font-family: 'Source Sans 3', sans-serif; font-size: 16px; line-height: 1.7; }
+
+.big-questions { background: white; border: 2px solid var(--gold); border-radius: 8px; padding: 28px 32px; margin-bottom: 48px; }
+.big-questions h2 { font-size: 18px; color: var(--gold); margin-bottom: 16px; text-align: center; }
+.big-questions ul { list-style: none; padding: 0; }
+.big-questions li { font-family: 'Source Sans 3', sans-serif; font-size: 15px; padding-left: 28px; position: relative; margin-bottom: 12px; line-height: 1.6; }
+.big-questions li::before { content: "?"; color: var(--gold); font-weight: 700; font-size: 20px; position: absolute; left: 0; top: -2px; }
+
+section { margin-bottom: 64px; }
+section h2 { font-size: 28px; color: var(--navy); margin-bottom: 24px; padding-bottom: 12px; border-bottom: 2px solid #E0E0E0; }
+section h3 { font-size: 20px; color: var(--navy); margin: 32px 0 16px; }
+
+p { margin-bottom: 20px; font-size: 17px; line-height: 1.8; }
+p:last-child { margin-bottom: 0; }
+
+.vocab-box, .stop-think, .perspectives, .key-idea, .primary-source, .story-box, .activity-box, .voices-left-out { border-radius: 8px; padding: 24px 28px; margin: 32px 0; }
+.vocab-box { background: #E8F4F8; border-left: 5px solid var(--teal); }
+.vocab-box h3 { color: var(--teal); font-size: 16px; margin: 0 0 12px; }
+.vocab-box p { font-family: 'Source Sans 3', sans-serif; font-size: 15px; margin-bottom: 12px; line-height: 1.6; }
+.vocab-box p:last-child { margin-bottom: 0; }
+.vocab-box strong { color: var(--teal); }
+
+.stop-think { background: #FFF9E6; border-left: 5px solid var(--gold); }
+.stop-think h3 { color: var(--gold); font-size: 16px; margin: 0 0 12px; }
+.stop-think p { font-family: 'Source Sans 3', sans-serif; font-size: 15px; font-style: italic; margin-bottom: 0; line-height: 1.6; }
+
+.perspectives { background: #F3E8FF; border-left: 5px solid #7C3AED; }
+.perspectives h3 { color: #7C3AED; font-size: 16px; margin: 0 0 16px; }
+.perspectives .perspective { margin-bottom: 16px; font-family: 'Source Sans 3', sans-serif; font-size: 15px; line-height: 1.6; }
+.perspectives .perspective:last-child { margin-bottom: 0; }
+.perspectives .perspective strong { color: #7C3AED; }
+
+.key-idea { background: #E8F5E9; border-left: 5px solid #2E7D32; }
+.key-idea h3 { color: #2E7D32; font-size: 16px; margin: 0 0 12px; }
+.key-idea p { font-family: 'Source Sans 3', sans-serif; font-size: 15px; line-height: 1.6; margin-bottom: 12px; }
+.key-idea p:last-child { margin-bottom: 0; }
+
+.primary-source { background: #FFF3E0; border-left: 5px solid #E65100; font-style: italic; }
+.primary-source h3 { color: #E65100; font-size: 16px; margin: 0 0 12px; font-style: normal; }
+.primary-source p { font-family: 'Source Sans 3', sans-serif; font-size: 15px; line-height: 1.7; margin-bottom: 12px; }
+.primary-source .source-citation { font-size: 13px; margin-top: 12px; opacity: .7; font-style: normal; }
+
+.story-box { background: #FFF4E6; border-left: 5px solid #F57C00; }
+.story-box h3 { color: #F57C00; font-size: 18px; margin: 0 0 16px; }
+.story-box p { font-family: 'Source Sans 3', sans-serif; font-size: 15px; line-height: 1.7; margin-bottom: 12px; }
+.story-box p:last-child { margin-bottom: 0; }
+
+.voices-left-out { background: #FCE4EC; border-left: 5px solid #C2185B; }
+.voices-left-out h3 { color: #C2185B; font-size: 18px; margin: 0 0 16px; }
+.voices-left-out p { font-family: 'Source Sans 3', sans-serif; font-size: 15px; line-height: 1.7; margin-bottom: 12px; }
+.voices-left-out p:last-child { margin-bottom: 0; }
+.voices-left-out strong { color: #C2185B; }
+
+.activity-box { background: #FFEBEE; border: 2px solid #C62828; border-radius: 8px; padding: 32px; }
+.activity-box h3 { color: #C62828; font-size: 22px; margin: 0 0 20px; text-align: center; }
+.activity-box h4 { color: #C62828; font-size: 16px; margin: 20px 0 12px; }
+.activity-box p, .activity-box li { font-family: 'Source Sans 3', sans-serif; font-size: 15px; line-height: 1.7; }
+.activity-box ul, .activity-box ol { margin-left: 24px; margin-bottom: 16px; }
+.activity-box li { margin-bottom: 8px; }
+
+figure { margin: 32px 0; text-align: center; }
+figure img { max-width: 100%; height: auto; border-radius: 4px; box-shadow: 0 2px 8px rgba(0,0,0,.1); }
+figcaption { font-family: 'Source Sans 3', sans-serif; font-size: 14px; color: #666; margin-top: 12px; line-height: 1.6; font-style: italic; }
+
+footer { border-top: 2px solid #E0E0E0; margin-top: 64px; padding-top: 24px; font-family: 'Source Sans 3', sans-serif; font-size: 13px; color: #999; line-height: 1.7; }
+footer a { color: var(--teal); text-decoration: none; border-bottom: 1px dotted var(--teal); }
+footer a:hover { border-bottom-style: solid; }
+
+@media print { .title-page { page-break-after: always; } section { page-break-inside: avoid; } }
+@media (max-width: 600px) { .chapter-title { font-size: 36px; } .container { padding: 32px 16px; } section h2 { font-size: 24px; } }
+</style>
+</head>
+<body>
+
+<div class="title-page">
+  <div class="series">The American Yawp Middle School Edition</div>
+  <div class="chapter-num">Chapter 4</div>
+  <h1 class="chapter-title">Colonial Society</h1>
+  <div class="divider"></div>
+  <div class="chapter-subtitle">Slavery, Commerce, Enlightenment, and the Roots of American Culture</div>
+  <p class="attribution">Adapted for middle school readers from <em>The American Yawp</em>, edited by Joseph Locke and Ben Wright</p>
+</div>
+
+<div class="container">
+
+<nav class="toc">
+  <h2>Contents</h2>
+  <ol>
+    <li><a href="#intro">Introduction: 13 Colonies, Many Worlds</a></li>
+    <li><a href="#slavery-economy">Slavery and the Colonial Economy</a></li>
+    <li><a href="#colonial-regions">Three Colonial Regions</a></li>
+    <li><a href="#great-awakening">The Great Awakening: A Religious Revolution</a></li>
+    <li><a href="#enlightenment">The Enlightenment Comes to America</a></li>
+    <li><a href="#imperial-wars">Wars for Empire</a></li>
+    <li><a href="#conclusion">Wrapping Up: What Held the Colonies Together?</a></li>
+  </ol>
+</nav>
+
+<div class="overview">
+  <h2>Chapter Overview</h2>
+  <p>By the mid-1700s, Britain's 13 colonies had grown into a diverse, complex, and increasingly confident society. New England ran on trade and fishing. The Middle Colonies were the breadbasket. The Southern Colonies ran on enslaved labor and cash crops. Beneath these differences, powerful forces were reshaping colonial life: the explosion of the transatlantic slave trade, the emotional wildfire of the Great Awakening, the rational ideals of the Enlightenment, and a series of brutal wars between European empires and Native nations. These forces would collide to produce something no one expected: revolution.</p>
+</div>
+
+<div class="big-questions">
+  <h2>Big Questions</h2>
+  <ul>
+    <li>How did slavery become central to the colonial economy—not just in the South, but across all the colonies?</li>
+    <li>How did the Great Awakening and the Enlightenment plant the seeds of revolution?</li>
+    <li>What was daily life like for different groups of people in colonial America?</li>
+    <li>How did wars between European empires reshape the colonies and their relationship with Britain?</li>
+  </ul>
+</div>
+
+<section id="intro">
+  <h2>I. Introduction: 13 Colonies, Many Worlds</h2>
+
+  <p>Picture colonial America in 1750. A Boston merchant sips tea while reading a London newspaper. A Virginia planter surveys tobacco fields worked by hundreds of enslaved people. A German farmer in Pennsylvania plows rich soil. An enslaved woman in South Carolina tends a rice paddy, standing knee-deep in water under the blazing sun. A Mohawk leader sits in a council meeting, debating whether to side with the French or the British in the next war.</p>
+
+  <p>These were all Americans—though most wouldn't have used that word yet. They lived in the same colonies, but their experiences couldn't have been more different. Colonial America was not one society. It was many, layered on top of each other, connected by trade, divided by race, class, religion, and geography.</p>
+
+  <p>Understanding colonial society means understanding all of these layers—not just the wealthy white men who left the most records, but the enslaved Africans who built the economy, the women who managed households, the Indigenous peoples who fought to keep their land, and the immigrants who arrived from across Europe and Africa, voluntarily or by force.</p>
+</section>
+
+<section id="slavery-economy">
+  <h2>II. Slavery and the Colonial Economy</h2>
+
+  <h3>The Transatlantic Slave Trade</h3>
+
+  <p>By the 1700s, the transatlantic slave trade had become one of the largest and most profitable enterprises in the world. European merchants sailed to the West African coast, where they purchased enslaved people from African kingdoms and traders. The enslaved were packed into the holds of ships—chained together, lying in their own waste, with barely enough room to move—for a journey across the Atlantic that lasted 6 to 8 weeks. This nightmare voyage was called the Middle Passage.</p>
+
+  <p>An estimated 12.5 million Africans were forced onto slave ships between the 1500s and the 1800s. About 10.7 million survived the crossing. Of these, only about 400,000 were brought directly to mainland North America—most went to the Caribbean and Brazil, where conditions were even more deadly. But those 400,000 became the ancestors of millions.</p>
+
+  <div class="story-box">
+    <h3>Story Behind the Story: Olaudah Equiano's Journey</h3>
+    <p>Olaudah Equiano was kidnapped from his home in West Africa at the age of 11. In his autobiography, published in 1789, he described the horror of the Middle Passage: "The closeness of the place, and the heat of the climate, added to the number in the ship, which was so crowded that each had scarcely room to turn himself, almost suffocated us. The shrieks of the women, and the groans of the dying, rendered the whole a scene of horror almost inconceivable." Equiano eventually purchased his own freedom and became a leading voice in the movement to abolish the slave trade. His memoir is one of the most powerful firsthand accounts of slavery ever written.</p>
+  </div>
+
+  <h3>Slavery Was Not Just a Southern Problem</h3>
+
+  <p>We often think of slavery as a Southern institution. It wasn't. In the colonial period, slavery existed in every colony. Enslaved people worked as domestic servants in Boston, as dockworkers in New York, as farmhands in Pennsylvania, and as plantation laborers in Virginia and South Carolina. Northern merchants grew rich shipping enslaved people and slave-produced goods. Northern banks financed slave purchases. Northern factories processed slave-grown cotton and sugar.</p>
+
+  <p>The entire colonial economy—North and South—was built on the exploitation of enslaved labor. Understanding this is essential to understanding American history.</p>
+
+  <h3>Enslaved Communities and Resistance</h3>
+
+  <p>Enslaved people were not passive. Despite unimaginable oppression, they created communities, maintained cultural traditions, and resisted in every way they could. Some resisted openly—running away, breaking tools, slowing down work, or organizing revolts. The Stono Rebellion of 1739 in South Carolina saw about 80 enslaved people seize weapons and march toward Spanish Florida, where Spain had promised freedom to escaped slaves. The rebellion was crushed, and South Carolina responded with even harsher slave codes.</p>
+
+  <p>More often, resistance was quieter. Enslaved people preserved African languages, music, and spiritual practices. They formed families and communities despite laws that denied their humanity. They passed down stories, songs, and survival strategies from generation to generation. This cultural resilience—the refusal to be completely broken—was itself an act of resistance.</p>
+
+  <div class="primary-source">
+    <h3>Primary Source: Olaudah Equiano on the Middle Passage</h3>
+    <p>"I was soon put down under the decks, and there I received such a salutation in my nostrils as I had never experienced in my life: so that, with the loathsomeness of the stench, and crying together, I became so sick and low that I was not able to eat... I now wished for the last friend, death, to relieve me."</p>
+    <p class="source-citation">—Olaudah Equiano, <em>The Interesting Narrative of the Life of Olaudah Equiano</em> (1789)</p>
+  </div>
+
+  <div class="vocab-box">
+    <h3>Vocabulary</h3>
+    <p><strong>Middle Passage:</strong> The brutal sea voyage that brought enslaved Africans across the Atlantic Ocean to the Americas. Conditions were so horrific that an estimated 15% of captives died during the crossing.</p>
+    <p><strong>Slave code:</strong> Laws that defined enslaved people as property, stripped them of rights, and regulated every aspect of their lives—including movement, assembly, and education.</p>
+    <p><strong>Mercantilism:</strong> The economic theory that a nation's wealth comes from exporting more than it imports. Colonies existed to provide raw materials to the mother country and buy its manufactured goods.</p>
+  </div>
+
+  <div class="stop-think">
+    <h3>Stop and Think</h3>
+    <p>Why do you think enslaved people's cultural preservation—keeping African languages, music, and traditions alive—was a form of resistance? What does it mean to resist when you can't escape?</p>
+  </div>
+</section>
+
+<section id="colonial-regions">
+  <h2>III. Three Colonial Regions</h2>
+
+  <h3>New England: Trade, Ships, and Sermons</h3>
+
+  <p>New England's rocky soil and cold climate made large-scale farming difficult. Instead, New Englanders turned to the sea: fishing (especially cod), whaling, and shipbuilding became major industries. Boston and other port cities became centers of trade, connecting the colonies to Britain, the Caribbean, and Africa.</p>
+
+  <p>New England society was organized around towns and churches. Town meetings gave (white, male, property-owning) residents a voice in local government. Literacy was high—Puritans believed everyone should be able to read the Bible—and New England established some of the first public schools in the colonies.</p>
+
+  <h3>The Middle Colonies: Diversity and Agriculture</h3>
+
+  <p>The Middle Colonies—New York, New Jersey, Pennsylvania, and Delaware—were the most diverse region. Pennsylvania, founded by the Quaker William Penn, attracted settlers from across Europe: English, German, Scots-Irish, Dutch, Swedish, and others. Philadelphia became one of the largest and most cosmopolitan cities in the colonies.</p>
+
+  <p>The Middle Colonies were also the breadbasket of colonial America. Rich soil and a moderate climate produced abundant wheat, corn, and other grains that were exported throughout the Atlantic world.</p>
+
+  <h3>The Southern Colonies: Plantations and Slavery</h3>
+
+  <p>The Southern Colonies—Virginia, Maryland, the Carolinas, and Georgia—were dominated by plantation agriculture. Tobacco in the Chesapeake, rice in the Carolina Lowcountry, and later cotton further south drove the economy. This economy depended entirely on enslaved labor.</p>
+
+  <p>South Carolina's rice plantations were especially brutal. Enslaved workers—many of them from rice-growing regions of West Africa, whose knowledge and skills made the crop possible—labored in flooded fields, exposed to heat, snakes, and malaria. By the mid-1700s, enslaved people outnumbered white residents in South Carolina by a two-to-one margin.</p>
+
+  <figure>
+    <img src="images/ch4/rice-cultivation.jpg" alt="Illustration of rice cultivation in the colonial South" />
+    <figcaption>Rice cultivation in the colonial South depended on the knowledge and labor of enslaved Africans, many of whom came from rice-growing regions of West Africa. (Public domain)</figcaption>
+  </figure>
+
+  <div class="key-idea">
+    <h3>Key Idea: Enslaved Africans Brought Knowledge, Not Just Labor</h3>
+    <p>For a long time, history textbooks described enslaved Africans only as a source of labor—as if they were machines. In fact, enslaved Africans brought sophisticated knowledge and skills that were essential to the colonial economy. West Africans knew how to cultivate rice in flooded fields—a technique that Carolina planters couldn't have figured out on their own. Africans brought knowledge of metalworking, animal husbandry, herbal medicine, and dozens of other skills. Recognizing this doesn't minimize the horror of slavery—it reveals that enslaved people were skilled, knowledgeable human beings whose contributions built the colonial economy.</p>
+  </div>
+</section>
+
+<section id="great-awakening">
+  <h2>IV. The Great Awakening: A Religious Revolution</h2>
+
+  <p>In the 1730s and 1740s, a wave of emotional religious revivals swept through the colonies. Known as the Great Awakening, this movement transformed colonial religion, culture, and—eventually—politics.</p>
+
+  <h3>What Happened</h3>
+
+  <p>Traveling preachers like George Whitefield and Jonathan Edwards drew enormous crowds with dramatic, emotional sermons. Whitefield, a theatrical English minister, could draw crowds of 20,000 or more. He preached outdoors, wept openly, and used vivid, terrifying imagery to convince people that they were sinners in desperate need of God's grace.</p>
+
+  <p>Edwards, a Massachusetts minister, delivered one of the most famous sermons in American history: "Sinners in the Hands of an Angry God" (1741). He described God dangling sinners over the fires of hell like a spider over a flame. Audience members screamed, fainted, and begged for mercy.</p>
+
+  <div class="primary-source">
+    <h3>Primary Source: Jonathan Edwards, "Sinners in the Hands of an Angry God"</h3>
+    <p>"The God that holds you over the pit of hell, much as one holds a spider, or some loathsome insect over the fire, abhors you, and is dreadfully provoked... you hang by a slender thread, with the flames of divine wrath flashing about it, and ready every moment to singe it, and burn it asunder."</p>
+    <p class="source-citation">—Jonathan Edwards, "Sinners in the Hands of an Angry God" (1741)</p>
+  </div>
+
+  <h3>Why It Mattered</h3>
+
+  <p>The Great Awakening wasn't just about religion. It had profound political consequences:</p>
+
+  <p><strong>It challenged authority.</strong> The Awakening encouraged ordinary people to question established ministers and think for themselves about spiritual matters. If you could decide your own relationship with God, why couldn't you decide your own government?</p>
+
+  <p><strong>It crossed boundaries.</strong> The Awakening spread across all colonies, all classes, and even across racial lines. Enslaved people attended revivals and some became preachers. For the first time, the colonies shared a common cultural experience.</p>
+
+  <p><strong>It created new divisions.</strong> "New Lights" (who embraced the emotional revivalism) clashed with "Old Lights" (who defended traditional, structured worship). This conflict taught colonists to organize, debate, and challenge established institutions—skills they would later use in the fight for independence.</p>
+
+  <div class="stop-think">
+    <h3>Stop and Think</h3>
+    <p>How might a religious movement that encouraged people to "think for themselves" about God also encourage them to think for themselves about government? What's the connection between religious freedom and political freedom?</p>
+  </div>
+</section>
+
+<section id="enlightenment">
+  <h2>V. The Enlightenment Comes to America</h2>
+
+  <p>While the Great Awakening stirred people's hearts, another intellectual movement was reshaping their minds. The Enlightenment—a European philosophical movement—emphasized reason, science, and individual rights over tradition, superstition, and divine authority.</p>
+
+  <h3>Enlightenment Ideas</h3>
+
+  <p>Enlightenment thinkers like John Locke, Montesquieu, and Voltaire argued that:</p>
+
+  <p><strong>Natural rights:</strong> All people are born with certain rights—life, liberty, and property—that no government can take away (John Locke).</p>
+
+  <p><strong>Social contract:</strong> Governments get their power from the consent of the governed. If a government violates people's rights, the people have the right to overthrow it (Locke again).</p>
+
+  <p><strong>Separation of powers:</strong> Government should be divided into separate branches to prevent any one person or group from becoming too powerful (Montesquieu).</p>
+
+  <p><strong>Religious tolerance:</strong> People should be free to worship as they choose, and the state should not impose religion (Voltaire).</p>
+
+  <p>These ideas spread rapidly through the colonies, especially among educated elites. Benjamin Franklin—printer, scientist, inventor, diplomat, and the most famous American of his era—embodied the Enlightenment spirit. His experiments with electricity, his founding of libraries and fire companies, and his passion for self-improvement made him a living example of Enlightenment ideals.</p>
+
+  <h3>A Dangerous Combination</h3>
+
+  <p>The Great Awakening and the Enlightenment might seem like opposites—one was emotional and religious, the other was rational and secular. But together, they planted the seeds of revolution. Both movements told colonists that they had the right to think for themselves, to question authority, and to challenge unjust power. When the time came, those ideas would fuel the most radical political experiment in modern history.</p>
+
+  <div class="vocab-box">
+    <h3>Vocabulary</h3>
+    <p><strong>Enlightenment:</strong> An intellectual movement of the 17th and 18th centuries that emphasized reason, science, and individual rights. Enlightenment ideas profoundly influenced the American Revolution.</p>
+    <p><strong>Natural rights:</strong> Rights that all people are born with, according to Enlightenment thinker John Locke: life, liberty, and property. Thomas Jefferson later changed "property" to "the pursuit of happiness."</p>
+    <p><strong>Social contract:</strong> The idea that governments get their authority from the consent of the governed—not from God or from tradition.</p>
+  </div>
+</section>
+
+<section id="imperial-wars">
+  <h2>VI. Wars for Empire</h2>
+
+  <p>Throughout the colonial period, European empires fought for control of North America. These wars—known in the colonies as the French and Indian Wars—drew colonists and Native nations into global conflicts.</p>
+
+  <h3>The French and Indian War (1754–1763)</h3>
+
+  <p>The largest and most consequential of these conflicts was the French and Indian War (known in Europe as the Seven Years' War). It began as a dispute over the Ohio River Valley, where both France and Britain claimed territory. A young Virginia militia officer named George Washington fired some of the first shots—and promptly lost the battle.</p>
+
+  <p>The war was a global conflict, fought on three continents. In North America, France allied with many Indigenous nations (especially the Huron and Algonquin peoples), while Britain allied with the Haudenosaunee Confederacy. After early French victories, Britain committed massive resources and eventually won, capturing Quebec in 1759 and forcing France to surrender in 1763.</p>
+
+  <h3>The Treaty of Paris (1763)</h3>
+
+  <p>The Treaty of Paris transformed the map of North America. France ceded virtually all of its North American territory to Britain—Canada and everything east of the Mississippi River. Spain (France's ally) gave Florida to Britain but received Louisiana from France as compensation. Britain was now the dominant power in North America.</p>
+
+  <p>But victory came at a cost. The war had been enormously expensive. Britain was deeply in debt. And British leaders decided that the colonists should help pay for the war that had been fought, in part, to protect them. This decision—to tax the colonies—would set off a chain of events that no one anticipated.</p>
+
+  <h3>The Proclamation of 1763</h3>
+
+  <p>To avoid further conflicts with Indigenous peoples (and further military expenses), King George III issued the Proclamation of 1763, forbidding colonial settlement west of the Appalachian Mountains. The vast territory between the Appalachians and the Mississippi was reserved for Native nations.</p>
+
+  <p>Colonists were furious. Many had fought in the war specifically to gain access to western lands. The Proclamation felt like a betrayal—their own government was preventing them from settling land they had helped win. It was one of the first major cracks between Britain and its colonies.</p>
+
+  <div class="story-box">
+    <h3>Story Behind the Story: Pontiac's War</h3>
+    <p>The Proclamation of 1763 wasn't just about keeping colonists happy. It was a response to a massive Indigenous uprising. In 1763, an Ottawa leader named Pontiac organized a coalition of Native nations to attack British forts across the Great Lakes and Ohio Valley. In a matter of weeks, Native warriors captured eight British forts and besieged several more. Thousands of colonists were killed or driven from the frontier. Pontiac's War demonstrated that Indigenous nations remained powerful military forces—and that Britain couldn't afford another frontier war. The Proclamation was, in part, an attempt to buy peace with Native nations. It worked temporarily. But colonists' anger over the Proclamation helped push them toward revolution.</p>
+  </div>
+
+  <div class="stop-think">
+    <h3>Stop and Think</h3>
+    <p>Britain fought an expensive war to protect the colonies, then asked the colonies to help pay for it. The colonies refused. Who was right? Should colonists have contributed to the cost of their own defense? Or did Britain have no right to tax people who weren't represented in Parliament?</p>
+  </div>
+</section>
+
+<section id="conclusion">
+  <h2>VII. Wrapping Up: What Held the Colonies Together?</h2>
+
+  <p>By the 1760s, the 13 colonies were more different than alike. A Boston merchant had little in common with a Carolina rice planter. A Pennsylvania Quaker would have been horrified by a Virginia slave auction. A frontier farmer in the Appalachians lived in a different world than a Philadelphia intellectual.</p>
+
+  <p>And yet, certain forces were pulling the colonies together. The Great Awakening gave them a shared religious experience. The Enlightenment gave them shared ideas about rights and liberty. The French and Indian War gave them a shared enemy and, for the first time, forced them to cooperate militarily. And Britain's decision to tax and regulate the colonies after 1763 would give them a shared grievance.</p>
+
+  <p>These bonds—forged from religion, ideas, war, and resentment—would soon be tested. The question was whether 13 very different colonies could find enough common ground to stand together against the most powerful empire on Earth.</p>
+
+  <p>They were about to find out.</p>
+
+  <div class="voices-left-out">
+    <h3>Whose Voices Were Left Out?</h3>
+    <p><strong>Enslaved women:</strong> They performed grueling labor in fields and households, bore children who would be born into slavery, and endured sexual violence from white enslavers. Their experiences are almost entirely absent from colonial records. Yet they built families, preserved cultural traditions, and resisted in ways both visible and invisible.</p>
+    <p><strong>Poor white colonists:</strong> Not all white colonists were wealthy planters or prosperous merchants. Many were desperately poor—former indentured servants, tenant farmers, and urban laborers who owned no property and had no political voice. Their struggles are often overshadowed by the stories of elites.</p>
+    <p><strong>Native nations caught between empires:</strong> The French and Indian War forced Indigenous peoples to choose sides—or try to remain neutral in a conflict over their own land. No matter who won, Native nations lost territory and sovereignty. Their strategic calculations and devastating losses rarely receive the attention they deserve.</p>
+    <p><strong>Free Black colonists:</strong> A small but significant population of free Black people lived in the colonies. They worked as artisans, farmers, and sailors. They built communities and churches. But their legal rights shrank over time as racial slavery hardened, and their stories are rarely told.</p>
+  </div>
+</section>
+
+<div class="activity-box">
+  <h3>Chapter Activity: Colonial America — Would You Want to Live There?</h3>
+
+  <h4>The Task:</h4>
+  <p>You've been randomly assigned an identity in colonial America, circa 1750. Based on the information in this chapter, write a journal entry describing one day in your life.</p>
+
+  <h4>Possible Identities:</h4>
+  <ol>
+    <li>An enslaved man working on a South Carolina rice plantation</li>
+    <li>A Puritan minister's wife in Boston</li>
+    <li>A German immigrant farmer in Pennsylvania</li>
+    <li>A wealthy tobacco planter's son in Virginia</li>
+    <li>A Mohawk leader debating whether to ally with Britain or France</li>
+    <li>A free Black woman running a small business in Philadelphia</li>
+    <li>A young indentured servant in Maryland</li>
+    <li>An enslaved woman who attends a Great Awakening revival meeting</li>
+  </ol>
+
+  <h4>Discussion Questions:</h4>
+  <ul>
+    <li>How did your identity shape your experience? What freedoms did you have or lack?</li>
+    <li>Which identity would you most and least want to have? Why?</li>
+    <li>When we talk about "colonial Americans," whose experience are we usually describing? Whose experience should we be describing?</li>
+  </ul>
+</div>
+
+<footer>
+  <p><strong>Chapter 4: Colonial Society</strong> from <em>The American Yawp Middle School Edition</em>. Adapted from <em>The American Yawp</em>, eds. Joseph Locke and Ben Wright (Stanford University Press, 2018).</p>
+  <p>Licensed under <a href="https://creativecommons.org/licenses/by-sa/4.0/">Creative Commons BY-SA 4.0</a>. Free to use, share, and adapt with attribution.</p>
+  <p><a href="index.html">← Back to chapters</a> | <a href="ch3.html">← Chapter 3</a> | <a href="ch5.html">Chapter 5 →</a></p>
+</footer>
+
+</div>
+</body>
+</html>

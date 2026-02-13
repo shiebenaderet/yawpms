@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chapter 2: Colliding Cultures | The American Yawp MS</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:wght@400;600;700&display=swap');
+
+:root {
+  --navy: #1B3A5C;
+  --teal: #2A7F8E;
+  --gold: #C4941D;
+  --cream: #FAFAF8;
+  --dark-gray: #2C2C2C;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Libre Baskerville', Georgia, serif;
+  color: var(--dark-gray);
+  background: var(--cream);
+  line-height: 1.8;
+}
+
+.title-page {
+  min-height: 60vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 80px 24px;
+  background: linear-gradient(170deg, #0D2137 0%, var(--navy) 40%, #2B5A7C 100%);
+  color: white;
+}
+.series { font-family: 'Source Sans 3', sans-serif; font-size: 13px; letter-spacing: 4px; text-transform: uppercase; opacity: .5; margin-bottom: 16px; }
+.chapter-num { font-size: 20px; font-weight: 400; opacity: .7; margin-bottom: 12px; }
+.chapter-title { font-size: 52px; line-height: 1.2; margin-bottom: 20px; font-weight: 700; }
+.chapter-subtitle { font-size: 22px; font-style: italic; opacity: .75; margin-bottom: 32px; }
+.divider { width: 100px; height: 3px; background: var(--gold); margin: 0 auto 24px; }
+.attribution { font-family: 'Source Sans 3', sans-serif; font-size: 13px; opacity: .5; line-height: 1.6; max-width: 600px; }
+
+.container { max-width: 720px; margin: 0 auto; padding: 48px 24px; }
+
+.toc {
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 32px;
+  margin-bottom: 48px;
+}
+.toc h2 { font-size: 18px; color: var(--navy); margin-bottom: 20px; text-align: center; }
+.toc ol { list-style: none; counter-reset: toc-counter; padding: 0; }
+.toc li { counter-increment: toc-counter; margin-bottom: 12px; }
+.toc li::before { content: counter(toc-counter, upper-roman) ". "; color: var(--gold); font-weight: 700; margin-right: 8px; }
+.toc a { color: var(--navy); text-decoration: none; border-bottom: 1px dotted transparent; transition: border-color .2s; }
+.toc a:hover { border-bottom-color: var(--navy); }
+
+.overview {
+  background: #F0F4F8;
+  border-left: 5px solid var(--teal);
+  padding: 28px 32px;
+  margin-bottom: 48px;
+  border-radius: 0 8px 8px 0;
+}
+.overview h2 { font-size: 20px; color: var(--teal); margin-bottom: 16px; }
+.overview p { font-family: 'Source Sans 3', sans-serif; font-size: 16px; line-height: 1.7; }
+
+.big-questions {
+  background: white;
+  border: 2px solid var(--gold);
+  border-radius: 8px;
+  padding: 28px 32px;
+  margin-bottom: 48px;
+}
+.big-questions h2 { font-size: 18px; color: var(--gold); margin-bottom: 16px; text-align: center; }
+.big-questions ul { list-style: none; padding: 0; }
+.big-questions li {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 15px;
+  padding-left: 28px;
+  position: relative;
+  margin-bottom: 12px;
+  line-height: 1.6;
+}
+.big-questions li::before { content: "?"; color: var(--gold); font-weight: 700; font-size: 20px; position: absolute; left: 0; top: -2px; }
+
+section { margin-bottom: 64px; }
+section h2 {
+  font-size: 28px;
+  color: var(--navy);
+  margin-bottom: 24px;
+  padding-bottom: 12px;
+  border-bottom: 2px solid #E0E0E0;
+}
+section h3 { font-size: 20px; color: var(--navy); margin: 32px 0 16px; }
+
+p { margin-bottom: 20px; font-size: 17px; line-height: 1.8; }
+p:last-child { margin-bottom: 0; }
+
+.vocab-box, .stop-think, .perspectives, .key-idea, .primary-source, .story-box, .activity-box, .voices-left-out {
+  border-radius: 8px;
+  padding: 24px 28px;
+  margin: 32px 0;
+}
+
+.vocab-box { background: #E8F4F8; border-left: 5px solid var(--teal); }
+.vocab-box h3 { color: var(--teal); font-size: 16px; margin: 0 0 12px; }
+.vocab-box p { font-family: 'Source Sans 3', sans-serif; font-size: 15px; margin-bottom: 12px; line-height: 1.6; }
+.vocab-box p:last-child { margin-bottom: 0; }
+.vocab-box strong { color: var(--teal); }
+
+.stop-think { background: #FFF9E6; border-left: 5px solid var(--gold); }
+.stop-think h3 { color: var(--gold); font-size: 16px; margin: 0 0 12px; }
+.stop-think p { font-family: 'Source Sans 3', sans-serif; font-size: 15px; font-style: italic; margin-bottom: 0; line-height: 1.6; }
+
+.perspectives { background: #F3E8FF; border-left: 5px solid #7C3AED; }
+.perspectives h3 { color: #7C3AED; font-size: 16px; margin: 0 0 16px; }
+.perspectives .perspective { margin-bottom: 16px; font-family: 'Source Sans 3', sans-serif; font-size: 15px; line-height: 1.6; }
+.perspectives .perspective:last-child { margin-bottom: 0; }
+.perspectives .perspective strong { color: #7C3AED; }
+
+.key-idea { background: #E8F5E9; border-left: 5px solid #2E7D32; }
+.key-idea h3 { color: #2E7D32; font-size: 16px; margin: 0 0 12px; }
+.key-idea p { font-family: 'Source Sans 3', sans-serif; font-size: 15px; line-height: 1.6; margin-bottom: 12px; }
+.key-idea p:last-child { margin-bottom: 0; }
+
+.primary-source { background: #FFF3E0; border-left: 5px solid #E65100; font-style: italic; }
+.primary-source h3 { color: #E65100; font-size: 16px; margin: 0 0 12px; font-style: normal; }
+.primary-source p { font-family: 'Source Sans 3', sans-serif; font-size: 15px; line-height: 1.7; margin-bottom: 12px; }
+.primary-source .source-citation { font-size: 13px; margin-top: 12px; opacity: .7; font-style: normal; }
+
+.story-box { background: #FFF4E6; border-left: 5px solid #F57C00; }
+.story-box h3 { color: #F57C00; font-size: 18px; margin: 0 0 16px; }
+.story-box p { font-family: 'Source Sans 3', sans-serif; font-size: 15px; line-height: 1.7; margin-bottom: 12px; }
+.story-box p:last-child { margin-bottom: 0; }
+
+.voices-left-out { background: #FCE4EC; border-left: 5px solid #C2185B; }
+.voices-left-out h3 { color: #C2185B; font-size: 18px; margin: 0 0 16px; }
+.voices-left-out p { font-family: 'Source Sans 3', sans-serif; font-size: 15px; line-height: 1.7; margin-bottom: 12px; }
+.voices-left-out p:last-child { margin-bottom: 0; }
+.voices-left-out strong { color: #C2185B; }
+
+.activity-box { background: #FFEBEE; border: 2px solid #C62828; border-radius: 8px; padding: 32px; }
+.activity-box h3 { color: #C62828; font-size: 22px; margin: 0 0 20px; text-align: center; }
+.activity-box h4 { color: #C62828; font-size: 16px; margin: 20px 0 12px; }
+.activity-box p, .activity-box li { font-family: 'Source Sans 3', sans-serif; font-size: 15px; line-height: 1.7; }
+.activity-box ul, .activity-box ol { margin-left: 24px; margin-bottom: 16px; }
+.activity-box li { margin-bottom: 8px; }
+
+figure { margin: 32px 0; text-align: center; }
+figure img { max-width: 100%; height: auto; border-radius: 4px; box-shadow: 0 2px 8px rgba(0,0,0,.1); }
+figcaption { font-family: 'Source Sans 3', sans-serif; font-size: 14px; color: #666; margin-top: 12px; line-height: 1.6; font-style: italic; }
+
+footer {
+  border-top: 2px solid #E0E0E0;
+  margin-top: 64px;
+  padding-top: 24px;
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 13px;
+  color: #999;
+  line-height: 1.7;
+}
+footer a { color: var(--teal); text-decoration: none; border-bottom: 1px dotted var(--teal); }
+footer a:hover { border-bottom-style: solid; }
+
+@media print {
+  .title-page { page-break-after: always; }
+  section { page-break-inside: avoid; }
+}
+
+@media (max-width: 600px) {
+  .chapter-title { font-size: 36px; }
+  .container { padding: 32px 16px; }
+  section h2 { font-size: 24px; }
+}
+</style>
+</head>
+<body>
+
+<div class="title-page">
+  <div class="series">The American Yawp Middle School Edition</div>
+  <div class="chapter-num">Chapter 2</div>
+  <h1 class="chapter-title">Colliding Cultures</h1>
+  <div class="divider"></div>
+  <div class="chapter-subtitle">Spanish Missions, French Fur Traders, and the Struggle for a Continent</div>
+  <p class="attribution">Adapted for middle school readers from <em>The American Yawp</em>, edited by Joseph Locke and Ben Wright</p>
+</div>
+
+<div class="container">
+
+<nav class="toc">
+  <h2>Contents</h2>
+  <ol>
+    <li><a href="#intro">Introduction: Three Flags, One Continent</a></li>
+    <li><a href="#spanish-america">Spanish America: Missions, Mines, and Mestizaje</a></li>
+    <li><a href="#french-america">French America: Fur, Faith, and Alliance</a></li>
+    <li><a href="#dutch-america">Dutch America: Trade Above All</a></li>
+    <li><a href="#english-arrive">England Looks West</a></li>
+    <li><a href="#native-responses">Native Peoples Respond</a></li>
+    <li><a href="#conclusion">Wrapping Up: Whose Land?</a></li>
+  </ol>
+</nav>
+
+<div class="overview">
+  <h2>Chapter Overview</h2>
+  <p>After Columbus, a rush of European nations scrambled to claim the Americas. Spain built an empire of missions, mines, and forced labor stretching from Florida to California. France forged alliances with Native peoples through the fur trade. The Dutch built a trading empire along the Hudson River. And England—late to the game—began planting colonies that would eventually outgrow them all. But this chapter isn't just about Europeans. Native peoples were not passive victims. They traded, negotiated, played European powers against each other, fought back, and adapted. The collision of cultures reshaped every society it touched.</p>
+</div>
+
+<div class="big-questions">
+  <h2>Big Questions</h2>
+  <ul>
+    <li>How did Spanish, French, Dutch, and English colonization differ from one another?</li>
+    <li>Why did European nations compete so fiercely for territory in the Americas?</li>
+    <li>How did Native peoples respond to European colonization—and how did they shape it?</li>
+    <li>What role did religion, economics, and military power play in European expansion?</li>
+  </ul>
+</div>
+
+<section id="intro">
+  <h2>I. Introduction: Three Flags, One Continent</h2>
+
+  <p>Imagine looking at a map of North America in 1600. Spain claimed the entire South and Southwest—from Florida to New Mexico to California. France claimed the St. Lawrence River, the Great Lakes, and eventually the entire Mississippi River valley. The Dutch controlled a strip along the Hudson River. And England? England had exactly one colony: a tiny, struggling settlement on an island in Virginia that kept running out of food.</p>
+
+  <p>Within 200 years, England would control nearly all of it. But in 1600, that outcome was far from certain. The story of how European empires competed for North America—and how Indigenous peoples navigated, resisted, and shaped that competition—is one of the most dramatic chapters in American history.</p>
+
+  <p>Each European nation brought its own goals, its own methods, and its own relationship with the Indigenous peoples they encountered. Understanding those differences helps explain why the Americas developed as they did—and why the legacies of colonization still echo today.</p>
+
+  <div class="vocab-box">
+    <h3>Vocabulary</h3>
+    <p><strong>Colony:</strong> A territory controlled by a foreign power. The colonizing country sends settlers and imposes its laws, economy, and culture on the people already living there.</p>
+    <p><strong>Empire:</strong> A group of nations, territories, or peoples ruled by a single authority. Spain, France, England, and the Netherlands all built empires in the Americas.</p>
+    <p><strong>Colonization:</strong> The process of establishing control over a foreign territory and its people, often involving settlement, exploitation of resources, and suppression of Indigenous cultures.</p>
+  </div>
+</section>
+
+<section id="spanish-america">
+  <h2>II. Spanish America: Missions, Mines, and Mestizaje</h2>
+
+  <p>Spain was the first European power in the Americas and, for over a century, the most dominant. After conquering the Aztec and Inca empires, Spain controlled an enormous territory stretching from South America through Central America, Mexico, the Caribbean, Florida, and the American Southwest. It was the largest empire the world had ever seen.</p>
+
+  <h3>Gold, Silver, and Forced Labor</h3>
+
+  <p>Spain's primary goal was wealth. The discovery of massive silver deposits at Potosí (in modern-day Bolivia) and other mines made Spain the richest country in Europe. But mining required labor—backbreaking, deadly labor. Spain forced Indigenous people to work in the mines through systems like the encomienda (which we learned about in Chapter 1) and the mita, a system of forced labor inherited from the Inca Empire.</p>
+
+  <p>Conditions in the mines were horrific. Workers descended into dark, suffocating tunnels and breathed toxic dust. Many died of exhaustion, cave-ins, or mercury poisoning. As Indigenous populations collapsed from disease and overwork, Spain increasingly turned to enslaved Africans to fill the labor shortage.</p>
+
+  <h3>The Mission System</h3>
+
+  <p>Alongside the mines, Spain built a vast network of Catholic missions. Missionaries—especially Franciscan and Jesuit priests—traveled to the farthest edges of the empire to convert Indigenous peoples to Christianity. From Florida to Texas to California, missions became centers of Spanish control.</p>
+
+  <p>Missionaries saw themselves as saving souls. They taught Indigenous peoples the Catholic faith, the Spanish language, and European farming techniques. But from the Indigenous perspective, missions were often prisons. Native people were forced to abandon their languages, religions, and ways of life. Those who resisted were punished—sometimes beaten, sometimes locked in chains. Disease swept through the crowded mission communities, killing thousands.</p>
+
+  <div class="story-box">
+    <h3>Story Behind the Story: The Pueblo Revolt of 1680</h3>
+    <p>For decades, the Pueblo peoples of New Mexico endured Spanish rule. Missionaries banned their religious ceremonies. Soldiers punished those who resisted. Drought and famine made life desperate. Then, in 1680, a Pueblo religious leader named Popé organized something extraordinary: a coordinated uprising across dozens of Pueblo communities. On August 10, 1680, the Pueblo peoples rose up simultaneously, killing over 400 Spanish colonists and driving the remaining 2,000 out of New Mexico entirely. The Spanish didn't return for 12 years. It was the most successful Indigenous revolt against European colonization in North American history—and a reminder that Native peoples were never passive victims.</p>
+  </div>
+
+  <h3>Mestizaje: A Mixed Society</h3>
+
+  <p>Unlike the English colonies (which we'll learn about later), Spanish America became a deeply mixed society. Spanish men married or had children with Indigenous women and, later, with enslaved African women. The result was a population of mestizos (mixed Spanish and Indigenous), mulatos (mixed Spanish and African), and dozens of other categories in Spain's elaborate racial hierarchy (the casta system we encountered in Chapter 1).</p>
+
+  <p>This mixing—called mestizaje—created entirely new cultures that blended European, Indigenous, and African traditions in food, music, language, art, and religion. It also created deep inequalities, with people of Spanish descent holding power over everyone else.</p>
+
+  <div class="vocab-box">
+    <h3>Vocabulary</h3>
+    <p><strong>Mission:</strong> A religious settlement established by Catholic priests to convert Indigenous peoples to Christianity. In Spanish America, missions also served as centers of economic and political control.</p>
+    <p><strong>Mestizo/Mestiza:</strong> A person of mixed Indigenous and European ancestry. In Spanish America, mestizos formed a large and growing part of the population.</p>
+    <p><strong>Mestizaje:</strong> The blending of European, Indigenous, and African cultures that characterized Spanish America.</p>
+  </div>
+
+  <div class="stop-think">
+    <h3>Stop and Think</h3>
+    <p>Spanish missionaries believed they were saving Indigenous souls. Indigenous peoples experienced the missions as cultural destruction. Can both things be true at the same time? How do we evaluate historical actions when the people involved had such different perspectives?</p>
+  </div>
+</section>
+
+<section id="french-america">
+  <h2>III. French America: Fur, Faith, and Alliance</h2>
+
+  <p>France approached colonization very differently from Spain. While Spain conquered, mined, and built missions, France came to trade.</p>
+
+  <h3>The Fur Trade</h3>
+
+  <p>European demand for beaver fur—used to make fashionable felt hats—drove the French deep into the North American interior. French traders (called coureurs de bois, or "runners of the woods") ventured into the forests of Canada and the Great Lakes, trading European goods (metal tools, cloth, guns, and alcohol) for beaver pelts from Indigenous hunters.</p>
+
+  <p>The fur trade created a very different kind of relationship between Europeans and Native peoples. France needed Native hunters and traders, so the French cultivated alliances rather than imposing conquest. French traders learned Indigenous languages, married Indigenous women, and participated in Native diplomatic rituals. The Huron (Wendat), Algonquin, and many other nations became French trading partners and military allies.</p>
+
+  <p>This didn't mean the relationship was equal. The fur trade disrupted Indigenous economies, created dependencies on European goods, and fueled wars between Native nations competing for access to trade. Alcohol, in particular, devastated many communities.</p>
+
+  <h3>Samuel de Champlain and New France</h3>
+
+  <p>In 1608, Samuel de Champlain founded Quebec, the capital of New France, on the St. Lawrence River. Unlike the massive Spanish colonial cities, New France remained thinly populated. France sent relatively few settlers—the harsh Canadian winters, the focus on trade rather than farming, and the lack of gold or silver made New France less attractive to immigrants than Spanish America.</p>
+
+  <p>Champlain formed a critical alliance with the Huron Confederacy, the dominant trading power in the Great Lakes region. This alliance pulled France into an existing conflict between the Huron and the Haudenosaunee (Iroquois) Confederacy—a rivalry that would shape North American politics for over a century.</p>
+
+  <figure>
+    <img src="images/ch2/champlain-habitation.jpg" alt="Illustration of Champlain's Quebec settlement" />
+    <figcaption>Champlain's settlement at Quebec, founded in 1608. The small, fortified trading post was the capital of New France. (Public domain)</figcaption>
+  </figure>
+
+  <h3>Jesuit Missionaries</h3>
+
+  <p>Like Spain, France sent Catholic missionaries to convert Indigenous peoples. Jesuit priests (called "Black Robes" by many Native peoples) lived among Indigenous communities, learned their languages, and tried to persuade them to adopt Christianity. Some Jesuits showed genuine respect for Indigenous cultures, even as they worked to replace Indigenous spiritual practices with Catholicism.</p>
+
+  <p>The results were mixed. Some Indigenous people adopted Christianity—sometimes blending it with their own spiritual traditions. Others rejected it entirely. And the missionaries, like all Europeans, unwittingly carried diseases that devastated the communities they lived among.</p>
+
+  <div class="key-idea">
+    <h3>Key Idea: Trade as Colonization</h3>
+    <p>France's approach to colonization was less violent than Spain's—but it was still colonization. The fur trade reshaped Indigenous economies, creating dependencies on European goods and disrupting traditional ways of life. French alliances pulled Native nations into European conflicts. And French claims to vast territories ignored the sovereignty of the people who actually lived there. Colonization doesn't always look like conquest. Sometimes it looks like trade.</p>
+  </div>
+</section>
+
+<section id="dutch-america">
+  <h2>IV. Dutch America: Trade Above All</h2>
+
+  <p>The Dutch Republic—one of the richest and most commercially powerful nations in Europe—entered the colonial race in the early 1600s. In 1609, the English explorer Henry Hudson (sailing for the Dutch) explored the river that now bears his name. The Dutch quickly established trading posts along the Hudson River, founding the colony of New Netherland with its capital, New Amsterdam, on the southern tip of Manhattan Island.</p>
+
+  <h3>A Trading Colony</h3>
+
+  <p>New Netherland was, above all, a business venture. The Dutch West India Company ran the colony as a for-profit enterprise, focused on the fur trade. The Dutch traded with the Mohawk and other Haudenosaunee nations, becoming key suppliers of European goods—including firearms—to the Haudenosaunee Confederacy.</p>
+
+  <p>This made the Haudenosaunee increasingly powerful and reshaped the balance of power in the entire Northeast. Armed with Dutch guns, the Haudenosaunee launched devastating attacks on the Huron and other French-allied nations in what historians call the "Beaver Wars" of the 1640s–1680s.</p>
+
+  <h3>A Diverse Colony</h3>
+
+  <p>New Netherland was remarkably diverse for its time. Drawn by the colony's commercial opportunities and relative tolerance, settlers arrived from all over Europe. By the 1640s, residents of New Amsterdam spoke 18 different languages. The colony included Dutch, English, German, Scandinavian, French, African (both free and enslaved), and Jewish settlers. This diversity would become a lasting feature of New York City, which New Amsterdam eventually became.</p>
+
+  <p>In 1664, England seized New Netherland without firing a shot—the Dutch governor, Peter Stuyvesant, couldn't convince his colonists to fight. The English renamed the colony New York. But the Dutch legacy of commerce, diversity, and tolerance remained.</p>
+
+  <div class="stop-think">
+    <h3>Stop and Think</h3>
+    <p>The Dutch traded firearms to the Haudenosaunee, which gave the Haudenosaunee a military advantage over their rivals. Should we consider the consequences of arms trading when evaluating the Dutch role in North America? Why or why not?</p>
+  </div>
+</section>
+
+<section id="english-arrive">
+  <h2>V. England Looks West</h2>
+
+  <p>England was late to colonization. While Spain was conquering empires and France was trading furs, England was dealing with its own problems: religious conflict, political turmoil, and a long rivalry with Spain. But by the late 1500s, England's attention turned to the Americas.</p>
+
+  <h3>The Lost Colony of Roanoke</h3>
+
+  <p>England's first attempt at colonization was a disaster. In 1585, Sir Walter Raleigh sponsored a colony on Roanoke Island, off the coast of modern-day North Carolina. The settlers struggled to feed themselves and clashed with the local Algonquian peoples. A supply ship returned in 1590 to find the colony abandoned. The only clue was the word "CROATOAN" carved into a wooden post. The colonists were never found.</p>
+
+  <p>The mystery of the "Lost Colony" has fascinated people for centuries. The most likely explanation is that the starving colonists left Roanoke and were absorbed into a nearby Indigenous community. But we'll never know for sure.</p>
+
+  <div class="story-box">
+    <h3>Story Behind the Story: Why "CROATOAN"?</h3>
+    <p>Croatoan was the name of a nearby island and the Indigenous people who lived there. Before the colony's governor left to get supplies, he told the settlers that if they moved, they should carve where they went. "CROATOAN" suggests they went to Croatoan Island—perhaps taken in by the Croatoan people when food ran out. Archaeological evidence and oral traditions among the Lumbee people of North Carolina support this theory. If true, the "Lost Colony" wasn't lost at all—it survived by joining an Indigenous community. The real question is: why do we call it "lost" instead of "adopted"?</p>
+  </div>
+
+  <h3>Why England Colonized</h3>
+
+  <p>Several forces pushed England toward colonization in the early 1600s:</p>
+
+  <p><strong>Economics:</strong> England's population was growing, but economic opportunities were shrinking. Wealthy landowners were enclosing common land (turning shared farmland into private property), forcing poor farmers off the land. Colonies offered a place to send the poor and unemployed—and a source of raw materials for English industry.</p>
+
+  <p><strong>Religion:</strong> England had become Protestant under Henry VIII, but religious tensions persisted. Puritans (who wanted to "purify" the Church of England of Catholic traditions) and Separatists (who wanted to leave the Church entirely) saw the Americas as a place to build communities based on their religious beliefs.</p>
+
+  <p><strong>Competition:</strong> Spain and France were getting rich from the Americas. England wanted its share. Privateers like Sir Francis Drake had been raiding Spanish treasure ships for decades. Permanent colonies would provide a more stable source of wealth.</p>
+
+  <div class="perspectives">
+    <h3>Multiple Perspectives: Why Colonize?</h3>
+    <div class="perspective"><strong>English merchants and investors:</strong> "The Americas are full of resources—timber, fish, furs, gold. Colonies will make us rich and give us a competitive edge against Spain."</div>
+    <div class="perspective"><strong>Puritans and religious dissenters:</strong> "God has given us this land to build a pure Christian community. We will be a 'city upon a hill,' a model for all the world to see."</div>
+    <div class="perspective"><strong>English poor and unemployed:</strong> "There's no land or work for me here. Maybe in the Americas I can own my own farm and start a new life."</div>
+    <div class="perspective"><strong>Algonquian peoples along the coast:</strong> "More strangers are coming in their ships. Some of our neighbors have traded with them. Others have been killed by their diseases. What will they want from us?"</div>
+  </div>
+
+  <div class="vocab-box">
+    <h3>Vocabulary</h3>
+    <p><strong>Privateer:</strong> A privately owned ship authorized by a government to attack and rob enemy vessels. English privateers like Sir Francis Drake attacked Spanish treasure ships.</p>
+    <p><strong>Puritan:</strong> A member of a Protestant religious group in England that wanted to "purify" the Church of England of Catholic rituals and hierarchy.</p>
+    <p><strong>Enclosure:</strong> The process by which wealthy English landowners fenced off common land for private use, displacing poor farmers.</p>
+  </div>
+</section>
+
+<section id="native-responses">
+  <h2>VI. Native Peoples Respond</h2>
+
+  <p>Too often, the story of colonization is told as if Indigenous peoples were simply swept aside. They weren't. Native nations were sophisticated political actors who assessed the European arrivals and made strategic decisions about how to respond.</p>
+
+  <h3>Diplomacy and Alliance</h3>
+
+  <p>Many Native nations initially welcomed European traders. European goods—metal tools, woven cloth, and especially firearms—were useful and desirable. By trading with Europeans, Native leaders could strengthen their own positions, acquire military advantages over rivals, and forge valuable alliances.</p>
+
+  <p>The Haudenosaunee Confederacy, for example, became masters of what historians call the "play-off system"—skillfully balancing relationships with the Dutch, French, and English to maintain their independence and power. When one European power became too demanding, the Haudenosaunee could threaten to ally with another.</p>
+
+  <h3>Resistance and War</h3>
+
+  <p>When diplomacy failed, Native peoples fought back. The Pueblo Revolt of 1680 (described earlier in this chapter) drove the Spanish out of New Mexico for over a decade. In the Northeast, the Powhatan Confederacy launched devastating attacks on English settlements in Virginia in 1622 and 1644. The Pequot War (1636–1638) in New England ended in the near-destruction of the Pequot nation by English colonists and their Native allies.</p>
+
+  <p>These conflicts reveal an important truth: colonization was never a foregone conclusion. For over a century, the outcome was genuinely uncertain. Native nations had the military power, the knowledge of the land, and the diplomatic skill to challenge European expansion—and they often succeeded, at least temporarily.</p>
+
+  <h3>Adaptation and Survival</h3>
+
+  <p>Native peoples also adapted to the new reality in creative ways. They adopted European technologies—horses, metal tools, firearms—and integrated them into their existing cultures. They converted to Christianity on their own terms, often blending Catholic or Protestant practices with Indigenous spirituality. They intermarried with Europeans and Africans, creating new mixed communities.</p>
+
+  <p>These adaptations weren't signs of weakness. They were signs of resilience—of peoples finding ways to survive and maintain their identities in the face of overwhelming pressure.</p>
+
+  <div class="key-idea">
+    <h3>Key Idea: Indigenous Agency</h3>
+    <p>"Agency" means the ability to make choices and take action. For too long, history textbooks depicted Indigenous peoples as passive victims of European colonization—people to whom history happened. But Indigenous peoples had agency. They chose when to trade, when to fight, when to negotiate, and when to adapt. They shaped the course of colonization as much as Europeans did. Understanding their agency is essential to understanding American history.</p>
+  </div>
+
+  <div class="stop-think">
+    <h3>Stop and Think</h3>
+    <p>The Haudenosaunee used the "play-off system" to balance competing European powers. Can you think of a modern example of a smaller nation balancing relationships between larger powers? What makes this strategy effective—and risky?</p>
+  </div>
+</section>
+
+<section id="conclusion">
+  <h2>VII. Wrapping Up: Whose Land?</h2>
+
+  <p>By the early 1700s, multiple European empires claimed territory in North America. Spain held the South and Southwest. France held the interior—the Great Lakes, the Mississippi Valley, and Louisiana. England held a narrow strip of colonies along the Atlantic coast. The Dutch had been absorbed by the English. And everywhere, Indigenous nations maintained their own territories, alliances, and sovereignty—even as European diseases, wars, and settlements pressed in from all sides.</p>
+
+  <p>The competition between these empires would eventually erupt into massive wars that reshaped the continent. But the fundamental question remained the same one it had been since 1492: whose land is this?</p>
+
+  <p>The Europeans claimed it by "right of discovery"—a legal fiction that said European Christian nations could claim any land not already controlled by other Christians. Indigenous peoples never accepted that claim. They had lived on this land for thousands of years. They had built civilizations, governed themselves, and cultivated the land. No European flag planted on a beach changed that.</p>
+
+  <p>This tension—between European claims and Indigenous sovereignty—would define American history for centuries to come.</p>
+
+  <div class="voices-left-out">
+    <h3>Whose Voices Were Left Out?</h3>
+    <p><strong>Indigenous women:</strong> European accounts of colonization were written almost entirely by men. But Indigenous women were central to every aspect of their societies—as farmers, diplomats, traders, and cultural leaders. In many matrilineal societies, women owned the land and chose the leaders. Colonization often undermined women's power, as Europeans imposed patriarchal systems that concentrated authority in the hands of men.</p>
+    <p><strong>Enslaved Africans in Spanish America:</strong> By the mid-1500s, enslaved Africans were being transported to Spanish colonies in large numbers. Their labor built the mines, plantations, and cities of the empire. But their voices are almost entirely absent from the historical record. We know very little about their experiences, their resistance, or their communities.</p>
+    <p><strong>Mixed-race children:</strong> In Spanish and French America, large mixed-race populations emerged from relationships (often coerced) between European men and Indigenous or African women. These children grew up between cultures, belonging fully to neither. Their experiences are rarely centered in historical narratives.</p>
+  </div>
+</section>
+
+<div class="activity-box">
+  <h3>Chapter Activity: Colonial Comparison Chart</h3>
+
+  <h4>The Task:</h4>
+  <p>Create a comparison chart analyzing the four European colonial powers discussed in this chapter: Spain, France, the Netherlands, and England.</p>
+
+  <h4>For Each Colony, Answer:</h4>
+  <ol>
+    <li><strong>Primary motivation:</strong> What did this country want most? (Gold? Fur? Religious freedom? Land?)</li>
+    <li><strong>Relationship with Indigenous peoples:</strong> How did colonists interact with Native nations? (Conquest? Trade? Alliance? A mix?)</li>
+    <li><strong>Role of religion:</strong> How important was Christianity to this colony's mission?</li>
+    <li><strong>Labor system:</strong> Who did the work? (Indigenous forced labor? Enslaved Africans? European settlers? Indentured servants?)</li>
+    <li><strong>Legacy:</strong> What lasting impact did this colonial power have on the Americas?</li>
+  </ol>
+
+  <h4>Discussion Questions:</h4>
+  <ul>
+    <li>Which colonial power had the most destructive impact on Indigenous peoples? Is there a "least bad" form of colonization, or is all colonization inherently harmful?</li>
+    <li>Why do you think England eventually dominated North America, even though Spain and France arrived first and controlled more territory?</li>
+    <li>How might American history be different if France or the Netherlands had become the dominant colonial power instead of England?</li>
+  </ul>
+</div>
+
+<footer>
+  <p><strong>Chapter 2: Colliding Cultures</strong> from <em>The American Yawp Middle School Edition</em>. Adapted from <em>The American Yawp</em>, eds. Joseph Locke and Ben Wright (Stanford University Press, 2018).</p>
+  <p>Licensed under <a href="https://creativecommons.org/licenses/by-sa/4.0/">Creative Commons BY-SA 4.0</a>. Free to use, share, and adapt with attribution.</p>
+  <p><a href="index.html">← Back to chapters</a> | <a href="ch1.html">← Chapter 1</a> | <a href="ch3.html">Chapter 3 →</a></p>
+</footer>
+
+</div>
+</body>
+</html>

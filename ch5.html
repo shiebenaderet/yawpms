@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chapter 5: The American Revolution | The American Yawp MS</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:wght@400;600;700&display=swap');
+
+:root { --navy: #1B3A5C; --teal: #2A7F8E; --gold: #C4941D; --cream: #FAFAF8; --dark-gray: #2C2C2C; }
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Libre Baskerville', Georgia, serif; color: var(--dark-gray); background: var(--cream); line-height: 1.8; }
+
+.title-page { min-height: 60vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 80px 24px; background: linear-gradient(170deg, #0D2137 0%, var(--navy) 40%, #2B5A7C 100%); color: white; }
+.series { font-family: 'Source Sans 3', sans-serif; font-size: 13px; letter-spacing: 4px; text-transform: uppercase; opacity: .5; margin-bottom: 16px; }
+.chapter-num { font-size: 20px; font-weight: 400; opacity: .7; margin-bottom: 12px; }
+.chapter-title { font-size: 52px; line-height: 1.2; margin-bottom: 20px; font-weight: 700; }
+.chapter-subtitle { font-size: 22px; font-style: italic; opacity: .75; margin-bottom: 32px; }
+.divider { width: 100px; height: 3px; background: var(--gold); margin: 0 auto 24px; }
+.attribution { font-family: 'Source Sans 3', sans-serif; font-size: 13px; opacity: .5; line-height: 1.6; max-width: 600px; }
+
+.container { max-width: 720px; margin: 0 auto; padding: 48px 24px; }
+
+.toc { background: white; border: 1px solid #ddd; border-radius: 8px; padding: 32px; margin-bottom: 48px; }
+.toc h2 { font-size: 18px; color: var(--navy); margin-bottom: 20px; text-align: center; }
+.toc ol { list-style: none; counter-reset: toc-counter; padding: 0; }
+.toc li { counter-increment: toc-counter; margin-bottom: 12px; }
+.toc li::before { content: counter(toc-counter, upper-roman) ". "; color: var(--gold); font-weight: 700; margin-right: 8px; }
+.toc a { color: var(--navy); text-decoration: none; border-bottom: 1px dotted transparent; }
+.toc a:hover { border-bottom-color: var(--navy); }
+
+.overview { background: #F0F4F8; border-left: 5px solid var(--teal); padding: 28px 32px; margin-bottom: 48px; border-radius: 0 8px 8px 0; }
+.overview h2 { font-size: 20px; color: var(--teal); margin-bottom: 16px; }
+.overview p { font-family: 'Source Sans 3', sans-serif; font-size: 16px; line-height: 1.7; }
+
+.big-questions { background: white; border: 2px solid var(--gold); border-radius: 8px; padding: 28px 32px; margin-bottom: 48px; }
+.big-questions h2 { font-size: 18px; color: var(--gold); margin-bottom: 16px; text-align: center; }
+.big-questions ul { list-style: none; padding: 0; }
+.big-questions li { font-family: 'Source Sans 3', sans-serif; font-size: 15px; padding-left: 28px; position: relative; margin-bottom: 12px; line-height: 1.6; }
+.big-questions li::before { content: "?"; color: var(--gold); font-weight: 700; font-size: 20px; position: absolute; left: 0; top: -2px; }
+
+section { margin-bottom: 64px; }
+section h2 { font-size: 28px; color: var(--navy); margin-bottom: 24px; padding-bottom: 12px; border-bottom: 2px solid #E0E0E0; }
+section h3 { font-size: 20px; color: var(--navy); margin: 32px 0 16px; }
+
+p { margin-bottom: 20px; font-size: 17px; line-height: 1.8; }
+p:last-child { margin-bottom: 0; }
+
+.vocab-box, .stop-think, .perspectives, .key-idea, .primary-source, .story-box, .activity-box, .voices-left-out { border-radius: 8px; padding: 24px 28px; margin: 32px 0; }
+.vocab-box { background: #E8F4F8; border-left: 5px solid var(--teal); }
+.vocab-box h3 { color: var(--teal); font-size: 16px; margin: 0 0 12px; }
+.vocab-box p { font-family: 'Source Sans 3', sans-serif; font-size: 15px; margin-bottom: 12px; line-height: 1.6; }
+.vocab-box p:last-child { margin-bottom: 0; }
+.vocab-box strong { color: var(--teal); }
+
+.stop-think { background: #FFF9E6; border-left: 5px solid var(--gold); }
+.stop-think h3 { color: var(--gold); font-size: 16px; margin: 0 0 12px; }
+.stop-think p { font-family: 'Source Sans 3', sans-serif; font-size: 15px; font-style: italic; margin-bottom: 0; line-height: 1.6; }
+
+.perspectives { background: #F3E8FF; border-left: 5px solid #7C3AED; }
+.perspectives h3 { color: #7C3AED; font-size: 16px; margin: 0 0 16px; }
+.perspectives .perspective { margin-bottom: 16px; font-family: 'Source Sans 3', sans-serif; font-size: 15px; line-height: 1.6; }
+.perspectives .perspective:last-child { margin-bottom: 0; }
+.perspectives .perspective strong { color: #7C3AED; }
+
+.key-idea { background: #E8F5E9; border-left: 5px solid #2E7D32; }
+.key-idea h3 { color: #2E7D32; font-size: 16px; margin: 0 0 12px; }
+.key-idea p { font-family: 'Source Sans 3', sans-serif; font-size: 15px; line-height: 1.6; margin-bottom: 12px; }
+.key-idea p:last-child { margin-bottom: 0; }
+
+.primary-source { background: #FFF3E0; border-left: 5px solid #E65100; font-style: italic; }
+.primary-source h3 { color: #E65100; font-size: 16px; margin: 0 0 12px; font-style: normal; }
+.primary-source p { font-family: 'Source Sans 3', sans-serif; font-size: 15px; line-height: 1.7; margin-bottom: 12px; }
+.primary-source .source-citation { font-size: 13px; margin-top: 12px; opacity: .7; font-style: normal; }
+
+.story-box { background: #FFF4E6; border-left: 5px solid #F57C00; }
+.story-box h3 { color: #F57C00; font-size: 18px; margin: 0 0 16px; }
+.story-box p { font-family: 'Source Sans 3', sans-serif; font-size: 15px; line-height: 1.7; margin-bottom: 12px; }
+.story-box p:last-child { margin-bottom: 0; }
+
+.voices-left-out { background: #FCE4EC; border-left: 5px solid #C2185B; }
+.voices-left-out h3 { color: #C2185B; font-size: 18px; margin: 0 0 16px; }
+.voices-left-out p { font-family: 'Source Sans 3', sans-serif; font-size: 15px; line-height: 1.7; margin-bottom: 12px; }
+.voices-left-out p:last-child { margin-bottom: 0; }
+.voices-left-out strong { color: #C2185B; }
+
+.activity-box { background: #FFEBEE; border: 2px solid #C62828; border-radius: 8px; padding: 32px; }
+.activity-box h3 { color: #C62828; font-size: 22px; margin: 0 0 20px; text-align: center; }
+.activity-box h4 { color: #C62828; font-size: 16px; margin: 20px 0 12px; }
+.activity-box p, .activity-box li { font-family: 'Source Sans 3', sans-serif; font-size: 15px; line-height: 1.7; }
+.activity-box ul, .activity-box ol { margin-left: 24px; margin-bottom: 16px; }
+.activity-box li { margin-bottom: 8px; }
+
+figure { margin: 32px 0; text-align: center; }
+figure img { max-width: 100%; height: auto; border-radius: 4px; box-shadow: 0 2px 8px rgba(0,0,0,.1); }
+figcaption { font-family: 'Source Sans 3', sans-serif; font-size: 14px; color: #666; margin-top: 12px; line-height: 1.6; font-style: italic; }
+
+footer { border-top: 2px solid #E0E0E0; margin-top: 64px; padding-top: 24px; font-family: 'Source Sans 3', sans-serif; font-size: 13px; color: #999; line-height: 1.7; }
+footer a { color: var(--teal); text-decoration: none; border-bottom: 1px dotted var(--teal); }
+footer a:hover { border-bottom-style: solid; }
+
+@media print { .title-page { page-break-after: always; } section { page-break-inside: avoid; } }
+@media (max-width: 600px) { .chapter-title { font-size: 36px; } .container { padding: 32px 16px; } section h2 { font-size: 24px; } }
+</style>
+</head>
+<body>
+
+<div class="title-page">
+  <div class="series">The American Yawp Middle School Edition</div>
+  <div class="chapter-num">Chapter 5</div>
+  <h1 class="chapter-title">The American Revolution</h1>
+  <div class="divider"></div>
+  <div class="chapter-subtitle">Taxes, Tea, and the Birth of a Nation</div>
+  <p class="attribution">Adapted for middle school readers from <em>The American Yawp</em>, edited by Joseph Locke and Ben Wright</p>
+</div>
+
+<div class="container">
+
+<nav class="toc">
+  <h2>Contents</h2>
+  <ol>
+    <li><a href="#intro">Introduction: A Revolution Nobody Expected</a></li>
+    <li><a href="#crisis">The Imperial Crisis: Taxes and Resistance</a></li>
+    <li><a href="#independence">The Road to Independence</a></li>
+    <li><a href="#war">The War</a></li>
+    <li><a href="#everyones-revolution">Everybody's Revolution</a></li>
+    <li><a href="#conclusion">Wrapping Up: A Revolution Unfinished</a></li>
+  </ol>
+</nav>
+
+<div class="overview">
+  <h2>Chapter Overview</h2>
+  <p>In 1763, most American colonists were proud to be British. By 1776, they were fighting a war to break away from Britain forever. What happened? A series of British taxes and regulations, colonial resistance, escalating violence, and revolutionary ideas combined to produce the most radical political break in modern history. But the American Revolution was more than a war between colonies and empire. It was a battle over the meaning of freedom—and whose freedom counted. Enslaved Africans, Indigenous peoples, women, and poor whites all had their own stake in the Revolution's outcome, and their stories are essential to understanding what it meant.</p>
+</div>
+
+<div class="big-questions">
+  <h2>Big Questions</h2>
+  <ul>
+    <li>What caused the American colonies to rebel against the most powerful empire on Earth?</li>
+    <li>What was revolutionary about the Declaration of Independence?</li>
+    <li>How did women, enslaved people, and Native Americans experience the Revolution?</li>
+    <li>Did the Revolution deliver on its promise of liberty and equality? For whom?</li>
+  </ul>
+</div>
+
+<section id="intro">
+  <h2>I. Introduction: A Revolution Nobody Expected</h2>
+
+  <p>Here's what you need to understand about the American Revolution: nobody saw it coming.</p>
+
+  <p>In 1763, Britain had just won the French and Indian War, and its American colonies were thriving. Colonists celebrated the victory, toasted the king, and felt proud to be part of the British Empire. Just 12 years later, colonial militiamen were shooting at British soldiers on a bridge in Massachusetts.</p>
+
+  <p>What changed? The short answer is: Britain tried to make the colonies pay for the war, and the colonies refused. But the longer answer involves a collision of ideas, interests, and identities that transformed a tax dispute into a revolution—and created a new nation built on principles that its founders didn't fully live up to.</p>
+
+  <div class="vocab-box">
+    <h3>Vocabulary</h3>
+    <p><strong>Revolution:</strong> A fundamental change in political power or organization. The American Revolution replaced British colonial rule with an independent republic governed by "the people."</p>
+    <p><strong>Patriot:</strong> A colonist who supported independence from Britain. Also called "Whigs" or "rebels."</p>
+    <p><strong>Loyalist:</strong> A colonist who remained loyal to the British Crown. Also called "Tories." About 15-20% of the colonial population were Loyalists.</p>
+  </div>
+</section>
+
+<section id="crisis">
+  <h2>II. The Imperial Crisis: Taxes and Resistance</h2>
+
+  <h3>The Stamp Act (1765)</h3>
+
+  <p>After the French and Indian War, Britain was deep in debt. Parliament decided the colonies should help pay—after all, the war had been fought to protect them. In 1765, Parliament passed the Stamp Act, requiring colonists to buy special stamps for every piece of printed paper: newspapers, legal documents, playing cards, even dice.</p>
+
+  <p>Colonists erupted in fury. It wasn't the amount of money—the tax was relatively small. It was the principle. The colonies had no representatives in the British Parliament. If Parliament could tax them without their consent, what couldn't it do? Colonists rallied around a powerful slogan: "No taxation without representation."</p>
+
+  <p>Mobs attacked the homes of tax collectors. Merchants organized boycotts of British goods. Colonial assemblies passed resolutions declaring the tax illegal. A group called the Sons of Liberty organized protests throughout the colonies. Facing overwhelming resistance, Parliament repealed the Stamp Act in 1766—but immediately passed the Declaratory Act, asserting that Parliament had the right to tax the colonies "in all cases whatsoever."</p>
+
+  <h3>The Townshend Acts and the Boston Massacre (1770)</h3>
+
+  <p>In 1767, Parliament tried again with the Townshend Acts, placing taxes on imported goods like glass, paper, paint, and tea. Again, colonists protested. Britain sent soldiers to Boston to maintain order. The presence of armed soldiers in a civilian city was explosive.</p>
+
+  <p>On March 5, 1770, a confrontation between a crowd of colonists and a squad of British soldiers turned violent. The soldiers fired into the crowd, killing five people. The first to die was Crispus Attucks—a man of African and Native American descent who became the first casualty of the Revolution.</p>
+
+  <p>Patriots called it the "Boston Massacre" and used it as propaganda to stoke anti-British anger. The actual event was more complicated—the soldiers were being pelted with rocks and ice—but the power of the narrative mattered more than the details. The massacre became a symbol of British tyranny.</p>
+
+  <figure>
+    <img src="images/ch5/boston-massacre.jpg" alt="Paul Revere's engraving of the Boston Massacre" />
+    <figcaption>Paul Revere's famous engraving of the Boston Massacre (1770). This image was propaganda—it depicts the soldiers firing in an organized volley into a peaceful crowd, which isn't what happened. But it was enormously effective at rallying anti-British sentiment. (Public domain)</figcaption>
+  </figure>
+
+  <h3>The Boston Tea Party (1773)</h3>
+
+  <p>In 1773, Parliament passed the Tea Act, giving the British East India Company a monopoly on tea sales in the colonies. This wasn't actually a new tax—it was a business arrangement that would have made tea cheaper. But colonists saw it as another example of Parliament manipulating colonial trade without their consent.</p>
+
+  <p>On December 16, 1773, about 150 Sons of Liberty, dressed as Mohawk Indians (a disguise that fooled no one), boarded three ships in Boston Harbor and dumped 342 chests of tea into the water—worth about $1.7 million in today's money. The Boston Tea Party was an act of deliberate, theatrical defiance.</p>
+
+  <p>Britain's response was swift and furious. Parliament passed the Coercive Acts (which colonists called the "Intolerable Acts"), shutting down Boston Harbor, dissolving Massachusetts's elected government, and quartering British troops in private homes. Instead of isolating Massachusetts, these acts unified the colonies in outrage.</p>
+
+  <div class="story-box">
+    <h3>Story Behind the Story: Why Dress as "Mohawks"?</h3>
+    <p>The men who dumped tea in Boston Harbor disguised themselves as Mohawk Indians. They weren't trying to fool anyone—everyone knew who they were. The disguise was symbolic. By dressing as Native Americans, the protesters were saying: "We are not British. We are Americans. We belong to this land, not to London." It was an early act of American identity-making—but a troubling one, since it appropriated Indigenous identity while real Indigenous peoples were being pushed off their lands. The costume said something powerful about who colonists wanted to be. It also said something troubling about whose identity they felt entitled to claim.</p>
+  </div>
+
+  <div class="vocab-box">
+    <h3>Vocabulary</h3>
+    <p><strong>"No taxation without representation":</strong> The colonial argument that Parliament had no right to tax the colonies because the colonies had no elected representatives in Parliament.</p>
+    <p><strong>Boycott:</strong> An organized refusal to buy or use goods as a form of protest. Colonial boycotts of British goods were remarkably effective.</p>
+    <p><strong>Sons of Liberty:</strong> A secret organization of colonial men who led resistance to British taxation through protests, boycotts, and sometimes violence.</p>
+  </div>
+
+  <div class="stop-think">
+    <h3>Stop and Think</h3>
+    <p>Was the Boston Tea Party an act of patriotic protest or an act of criminal destruction of property? Can both things be true? When is it justified to break the law to make a political point?</p>
+  </div>
+</section>
+
+<section id="independence">
+  <h2>III. The Road to Independence</h2>
+
+  <h3>The First Continental Congress (1774)</h3>
+
+  <p>In September 1774, delegates from 12 of the 13 colonies (Georgia didn't send anyone) gathered in Philadelphia for the First Continental Congress. They debated what to do about Britain. Some wanted reconciliation. Others pushed for stronger resistance. They agreed on a colonial boycott of British goods and called for another congress if their grievances weren't addressed.</p>
+
+  <h3>Lexington and Concord (April 1775)</h3>
+
+  <p>On the night of April 18, 1775, British troops marched out of Boston toward the towns of Lexington and Concord, Massachusetts, to seize colonial weapons stockpiled there. Thanks to riders like Paul Revere and William Dawes, the colonial militia (known as Minutemen) was warned.</p>
+
+  <p>At Lexington, a small group of militia faced the British troops. Someone fired—no one knows who. Eight Americans were killed. The British marched on to Concord, where a larger militia force drove them back. As the British retreated to Boston, colonial fighters fired on them from behind trees, stone walls, and buildings. By the end of the day, 73 British soldiers and 49 Americans were dead.</p>
+
+  <p>The war had begun.</p>
+
+  <h3>Common Sense (January 1776)</h3>
+
+  <p>Even after Lexington and Concord, many colonists still hoped for reconciliation with Britain. That changed in January 1776, when Thomas Paine published <em>Common Sense</em>, a pamphlet that made the case for independence in plain, fiery language that anyone could understand.</p>
+
+  <p>Paine argued that monarchy was absurd—why should millions of people be governed by one family? He argued that America had outgrown Britain and didn't need its "protection." He called King George III a "royal brute." And he declared that it was simply "common sense" for America to be independent.</p>
+
+  <p><em>Common Sense</em> was a sensation. It sold over 500,000 copies in a population of 2.5 million—making it, proportionally, the best-selling American publication of all time. It transformed public opinion. By the spring of 1776, independence seemed not just possible but inevitable.</p>
+
+  <div class="primary-source">
+    <h3>Primary Source: Thomas Paine, Common Sense</h3>
+    <p>"There is something absurd, in supposing a continent to be perpetually governed by an island. In no instance hath nature made the satellite larger than its primary planet... Everything that is right or natural pleads for separation. The blood of the slain, the weeping voice of nature cries, 'TIS TIME TO PART."</p>
+    <p class="source-citation">—Thomas Paine, <em>Common Sense</em> (January 1776)</p>
+  </div>
+
+  <h3>The Declaration of Independence (July 4, 1776)</h3>
+
+  <p>On June 7, 1776, Virginia delegate Richard Henry Lee proposed that the colonies declare independence. The Continental Congress appointed a committee to draft a declaration. Thomas Jefferson, a 33-year-old Virginia planter, wrote most of it.</p>
+
+  <p>The Declaration of Independence, adopted on July 4, 1776, is one of the most important documents in human history. It made three revolutionary arguments:</p>
+
+  <p><strong>1. Natural rights:</strong> "We hold these truths to be self-evident, that all men are created equal, that they are endowed by their Creator with certain unalienable Rights, that among these are Life, Liberty and the pursuit of Happiness."</p>
+
+  <p><strong>2. Government by consent:</strong> Governments derive "their just powers from the consent of the governed."</p>
+
+  <p><strong>3. The right of revolution:</strong> When a government destroys people's rights, "it is the Right of the People to alter or to abolish it."</p>
+
+  <p>These ideas were explosive. They challenged the entire basis of monarchy and aristocracy. They declared that ordinary people had rights that no king could take away. And they established a standard—"all men are created equal"—that Americans have been arguing about ever since.</p>
+
+  <div class="perspectives">
+    <h3>Multiple Perspectives: "All Men Are Created Equal"</h3>
+    <div class="perspective"><strong>Thomas Jefferson (the author):</strong> Jefferson meant white, property-owning men. He himself owned over 600 enslaved people during his lifetime. He may have believed these words could eventually apply more broadly, but he didn't live them.</div>
+    <div class="perspective"><strong>Abigail Adams (wife of John Adams):</strong> She wrote to her husband at the Continental Congress: "Remember the Ladies... Do not put such unlimited power into the hands of the Husbands." Women heard "all men are created equal" and wondered: what about us?</div>
+    <div class="perspective"><strong>Enslaved people:</strong> They heard "all men are created equal" and saw the hypocrisy immediately. How could slaveholders declare that liberty was an unalienable right? Some enslaved people petitioned for their freedom, citing the Declaration's own words.</div>
+    <div class="perspective"><strong>Later generations:</strong> The Declaration's promise of equality has been invoked by every major freedom movement in American history—abolitionists, suffragists, civil rights activists, and others. As Martin Luther King Jr. put it, the Declaration was a "promissory note" that America has yet to fully cash.</div>
+  </div>
+</section>
+
+<section id="war">
+  <h2>IV. The War</h2>
+
+  <h3>David vs. Goliath</h3>
+
+  <p>On paper, the Americans had no chance. Britain had the most powerful military in the world—a professional army, the world's largest navy, and the wealth to sustain a long war. The colonies had no army, no navy, no central government, and no money. George Washington, appointed commander of the Continental Army, spent much of the war desperately trying to keep his ragged, underfed, unpaid soldiers from deserting.</p>
+
+  <p>But the Americans had advantages too. They were fighting on home ground. They didn't need to win the war—they just needed to avoid losing it long enough for Britain to decide the war wasn't worth the cost. And they had a cause that inspired extraordinary sacrifice.</p>
+
+  <h3>Valley Forge and the Turning Point</h3>
+
+  <p>The winter of 1777–1778 at Valley Forge, Pennsylvania, tested the Continental Army to its limits. Washington's troops were starving, freezing, and dying of disease. About 2,000 soldiers died that winter—not from enemy fire, but from cold and sickness. Many walked barefoot through the snow because they had no shoes.</p>
+
+  <p>But Valley Forge also forged the army that would win the war. A Prussian military officer named Baron von Steuben drilled the ragged troops into a disciplined fighting force. By spring, the army that emerged from Valley Forge was fundamentally different from the one that had entered it.</p>
+
+  <div class="story-box">
+    <h3>Story Behind the Story: The Bloody Footprints</h3>
+    <p>One of the most haunting images of the Revolution is the description of bloody footprints in the snow at Valley Forge. Soldiers who had no shoes wrapped their feet in rags, which quickly wore through. The trail of blood in the snow became a symbol of the Revolution's human cost. Washington himself wrote that you could "track the army... to Valley Forge by the blood of their feet." Yet these same soldiers stayed. They didn't desert. They drilled in the cold, rebuilt their discipline, and went on to win the war. Why? Not because they were paid (they weren't) or well-fed (they weren't). They stayed because they believed in something bigger than their own comfort. That belief—imperfect, incomplete, but real—is what made the Revolution possible.</p>
+  </div>
+
+  <h3>Saratoga and the French Alliance</h3>
+
+  <p>The turning point of the war came at the Battle of Saratoga in October 1777. American forces surrounded and captured an entire British army of nearly 6,000 soldiers. It was a stunning victory—and it convinced France to enter the war on America's side.</p>
+
+  <p>France's support was decisive. French money, soldiers, ships, and weapons transformed the war. The French navy, in particular, evened the odds at sea and prevented Britain from resupplying its forces. Without France, the Americans almost certainly would have lost.</p>
+
+  <h3>Yorktown: The End</h3>
+
+  <p>In October 1781, Washington, with the help of French forces under General Rochambeau and the French navy under Admiral de Grasse, trapped the British army under General Cornwallis at Yorktown, Virginia. After a siege of three weeks, Cornwallis surrendered 8,000 soldiers. When news reached London, the British Prime Minister reportedly said, "Oh God, it is all over."</p>
+
+  <p>The Treaty of Paris, signed in 1783, officially ended the war. Britain recognized American independence and ceded all territory east of the Mississippi River to the new nation.</p>
+
+  <div class="key-idea">
+    <h3>Key Idea: The Revolution Was Won by Many</h3>
+    <p>The American Revolution is often told as a story of great men—Washington, Jefferson, Adams, Franklin. But the war was won by ordinary people: farmers who left their fields to fight, women who managed farms and businesses while their husbands were at war, enslaved people who served on both sides hoping to win their freedom, and Indigenous nations who made strategic choices about which side to support. It was also won with help from abroad—especially from France, whose intervention was decisive. The Revolution was never a solo effort.</p>
+  </div>
+</section>
+
+<section id="everyones-revolution">
+  <h2>V. Everybody's Revolution</h2>
+
+  <p>The Revolution promised liberty and equality. But different groups of Americans experienced it very differently.</p>
+
+  <h3>Women</h3>
+
+  <p>Women played essential roles in the Revolution, even though they couldn't vote, hold office, or own property in most colonies. They organized boycotts of British goods, spinning their own cloth instead of buying British imports. They managed farms, businesses, and families while men were at war. Some, like Deborah Sampson, disguised themselves as men and fought.</p>
+
+  <p>Abigail Adams famously urged her husband to "remember the ladies" when writing the new nation's laws. He laughed it off. After the war, women's legal status barely changed. The Revolution's promise of equality stopped at gender.</p>
+
+  <h3>Enslaved People</h3>
+
+  <p>For enslaved people, the Revolution was a desperate gamble. Both sides offered freedom to enslaved people who would fight for them. In 1775, Lord Dunmore, the British governor of Virginia, proclaimed freedom to any enslaved person who escaped a Patriot master and joined the British army. Thousands of enslaved people fled to British lines.</p>
+
+  <p>On the American side, about 5,000 Black men served in the Continental Army. Some won their freedom through military service. But most enslaved people remained in bondage. The Revolution did spark a wave of emancipation in the Northern states—by 1804, every Northern state had passed gradual emancipation laws. But in the South, where enslaved labor was most profitable, slavery not only survived the Revolution—it expanded.</p>
+
+  <h3>Native Americans</h3>
+
+  <p>For Indigenous peoples, the Revolution was a catastrophe regardless of which side won. Most Native nations, including the powerful Haudenosaunee Confederacy, sided with Britain—not out of loyalty to the king, but because Britain's Proclamation of 1763 had at least tried to limit colonial expansion onto Native land. The Americans made no such promise.</p>
+
+  <p>The war devastated Native communities. American forces destroyed Haudenosaunee villages in a scorching campaign in 1779. When the war ended, the Treaty of Paris ceded Native lands to the United States without consulting a single Native nation. As far as the treaty was concerned, Indigenous peoples didn't exist.</p>
+
+  <h3>Loyalists</h3>
+
+  <p>Not all colonists supported the Revolution. About 15-20% of the population remained loyal to Britain. Loyalists came from all walks of life—wealthy merchants, Anglican ministers, recent immigrants, and enslaved people who sought freedom with the British. During and after the war, Patriots confiscated Loyalist property, imprisoned suspected Loyalists, and sometimes tarred and feathered them. An estimated 60,000-80,000 Loyalists fled to Canada, Britain, or the Caribbean.</p>
+
+  <div class="primary-source">
+    <h3>Primary Source: Abigail Adams, "Remember the Ladies"</h3>
+    <p>"I long to hear that you have declared an independency. And, by the way, in the new code of laws which I suppose it will be necessary for you to make, I desire you would remember the ladies and be more generous and favorable to them than your ancestors. Do not put such unlimited power into the hands of the husbands. Remember, all men would be tyrants if they could."</p>
+    <p class="source-citation">—Abigail Adams, letter to John Adams (March 31, 1776)</p>
+  </div>
+
+  <div class="stop-think">
+    <h3>Stop and Think</h3>
+    <p>The Declaration of Independence declared that "all men are created equal," but the new nation denied rights to women, enslaved people, Native Americans, and men without property. Was the Revolution a success or a failure? Can it be both?</p>
+  </div>
+</section>
+
+<section id="conclusion">
+  <h2>VI. Wrapping Up: A Revolution Unfinished</h2>
+
+  <p>The American Revolution accomplished something extraordinary: 13 colonies defeated the most powerful empire on Earth and created a new nation founded on the radical idea that governments derive their power from the consent of the governed. The Declaration of Independence set a standard—"all men are created equal"—that no previous nation had ever aspired to.</p>
+
+  <p>But the Revolution was also deeply contradictory. The men who declared that liberty was an unalienable right owned enslaved people. The nation that celebrated "the consent of the governed" denied political participation to women, Black people, Indigenous peoples, and most poor white men. The war that was fought for American freedom led to devastating losses of freedom for Native nations.</p>
+
+  <p>The Revolution didn't resolve these contradictions. It created them—and left them for future generations to wrestle with. The fight over what "all men are created equal" actually means would define American history for the next 250 years. It still does.</p>
+
+  <p>As we move into the next chapter—the struggle to build a government for this new nation—remember that the Constitution wasn't written in a moment of unity. It was written in a moment of crisis, by people who disagreed about almost everything except that they didn't want to be ruled by a king. What they built was messy, flawed, and brilliant. Just like the Revolution itself.</p>
+
+  <div class="voices-left-out">
+    <h3>Whose Voices Were Left Out?</h3>
+    <p><strong>Enslaved people who fled to the British:</strong> Thousands of enslaved people escaped to British lines, seeking the freedom that Lord Dunmore's Proclamation promised. When the war ended, many were re-enslaved or abandoned. Some made it to Nova Scotia, Sierra Leone, or London—but their stories of courage and betrayal are rarely told.</p>
+    <p><strong>Haudenosaunee women:</strong> The American military campaign against the Haudenosaunee in 1779 destroyed over 40 towns and burned vast stores of food. Haudenosaunee women, who controlled agricultural production and had significant political authority, lost not just their homes but their power. The destruction of their food stores caused widespread famine.</p>
+    <p><strong>Poor soldiers:</strong> Many Continental soldiers were poor men who enlisted because they needed the pay (which often never came). After the war, they returned home to find their farms in debt, their families struggling, and their promises of land unfulfilled. Their resentment would fuel Shays' Rebellion—the crisis that opens Chapter 6.</p>
+    <p><strong>Loyalist families:</strong> Families who remained loyal to Britain lost everything—their property, their communities, and sometimes their safety. Many were forced into exile. Their perspective on the Revolution is almost never told in American schools.</p>
+  </div>
+</section>
+
+<div class="activity-box">
+  <h3>Chapter Activity: The Revolution on Trial</h3>
+
+  <h4>The Setup:</h4>
+  <p>The American Revolution is on trial. The question: <strong>Was the Revolution truly revolutionary?</strong></p>
+
+  <h4>The Teams:</h4>
+  <ul>
+    <li><strong>The Prosecution</strong> argues that the Revolution was not truly revolutionary. It was led by wealthy white men who kept their privileges, denied rights to women, expanded slavery, and devastated Indigenous nations. The Declaration's promises were empty words.</li>
+    <li><strong>The Defense</strong> argues that the Revolution was genuinely revolutionary. It overthrew a monarchy, established a republic based on consent, created a framework for expanding rights, and inspired freedom movements around the world for centuries.</li>
+  </ul>
+
+  <h4>Evidence to Consider:</h4>
+  <ol>
+    <li>The Declaration of Independence and its promise of equality</li>
+    <li>The continued existence of slavery after the Revolution</li>
+    <li>Northern emancipation laws passed after the war</li>
+    <li>The treatment of Native Americans during and after the war</li>
+    <li>Abigail Adams's "Remember the Ladies" letter and women's unchanged status</li>
+    <li>The fact that only property-owning white men could vote in most states</li>
+    <li>The Revolution's influence on the French Revolution, the Haitian Revolution, and later freedom movements</li>
+  </ol>
+
+  <h4>Discussion:</h4>
+  <ul>
+    <li>Which side made the stronger case? Why?</li>
+    <li>Is it fair to judge 18th-century people by 21st-century standards?</li>
+    <li>Can a revolution that falls short of its ideals still be considered successful?</li>
+  </ul>
+</div>
+
+<footer>
+  <p><strong>Chapter 5: The American Revolution</strong> from <em>The American Yawp Middle School Edition</em>. Adapted from <em>The American Yawp</em>, eds. Joseph Locke and Ben Wright (Stanford University Press, 2018).</p>
+  <p>Licensed under <a href="https://creativecommons.org/licenses/by-sa/4.0/">Creative Commons BY-SA 4.0</a>. Free to use, share, and adapt with attribution.</p>
+  <p><a href="index.html">← Back to chapters</a> | <a href="ch4.html">← Chapter 4</a> | <a href="ch6.html">Chapter 6 →</a></p>
+</footer>
+
+</div>
+</body>
+</html>

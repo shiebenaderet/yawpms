@@ -61,10 +61,10 @@ The primary focus of this project is **Volume I**, covering pre-Columbian Americ
 | Chapter | Title | Status |
 |---------|-------|--------|
 | 1 | [Indigenous America](https://shiebenaderet.github.io/yawpms/ch1.html) | ✓ Draft |
-| 2 | Colliding Cultures | Planned |
-| 3 | British North America | Planned |
-| 4 | Colonial Society | Planned |
-| 5 | The American Revolution | Planned |
+| 2 | [Colliding Cultures](https://shiebenaderet.github.io/yawpms/ch2.html) | ✓ Draft |
+| 3 | [British North America](https://shiebenaderet.github.io/yawpms/ch3.html) | ✓ Draft |
+| 4 | [Colonial Society](https://shiebenaderet.github.io/yawpms/ch4.html) | ✓ Draft |
+| 5 | [The American Revolution](https://shiebenaderet.github.io/yawpms/ch5.html) | ✓ Draft |
 | 6 | [A New Nation (1786-1800)](https://shiebenaderet.github.io/yawpms/ch6.html) | ✓ Draft |
 | 7 | [The Early Republic (1800-1824)](https://shiebenaderet.github.io/yawpms/ch7.html) | ✓ Draft |
 | 8 | The Market Revolution | Planned |
