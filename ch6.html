@@ -4,307 +4,16 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Chapter 6: A New Nation | The American Yawp MS</title>
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:wght@400;600;700&display=swap');
-
-:root {
-  --navy: #1B3A5C;
-  --teal: #2A7F8E;
-  --gold: #C4941D;
-  --light-blue: #D5E8F0;
-  --light-gold: #FFF3D6;
-  --light-green: #E2F0E2;
-  --light-gray: #F5F5F5;
-  --light-purple: #EDE7F6;
-  --light-red: #FDECEA;
-  --light-orange: #FFF3E0;
-  --dark: #2C2C2C;
-  --med-gray: #666;
-  --deep-purple: #7B1FA2;
-  --deep-red: #D84315;
-  --green: #2E7D32;
-  --orange: #E65100;
-  --serif: 'Libre Baskerville', Georgia, serif;
-  --sans: 'Source Sans 3', 'Segoe UI', sans-serif;
-}
-
-* { box-sizing: border-box; margin: 0; padding: 0; }
-
-body {
-  font-family: var(--serif);
-  color: var(--dark);
-  background: #FAFAF8;
-  line-height: 1.8;
-  font-size: 16.5px;
-}
-
-.container { max-width: 840px; margin: 0 auto; padding: 0 28px; }
-
-/* Title page */
-.title-page {
-  text-align: center;
-  padding: 80px 24px 60px;
-  background: linear-gradient(170deg, #0D2137 0%, #1B3A5C 40%, #2B5A7C 100%);
-  color: white;
-  margin-bottom: 48px;
-  position: relative;
-  overflow: hidden;
-}
-.title-page::after {
-  content: '';
-  position: absolute; bottom: 0; left: 0; right: 0;
-  height: 4px;
-  background: linear-gradient(90deg, transparent, var(--gold), transparent);
-}
-.title-page .series { font-family: var(--sans); font-size: 13px; letter-spacing: 5px; text-transform: uppercase; opacity: .6; margin-bottom: 14px; }
-.title-page h1 { font-size: 44px; margin-bottom: 6px; line-height: 1.2; }
-.title-page .chapter-num { font-family: var(--sans); font-size: 17px; opacity: .5; margin-bottom: 8px; }
-.title-page .subtitle { font-style: italic; font-size: 19px; opacity: .8; margin-bottom: 36px; }
-.title-page .divider { width: 80px; height: 3px; background: var(--gold); margin: 0 auto 24px; }
-.title-page .attribution { font-family: var(--sans); font-size: 13px; opacity: .5; line-height: 1.6; }
-
-/* TOC */
-.toc {
-  background: var(--light-gray);
-  border-left: 4px solid var(--navy);
-  padding: 24px 28px;
-  margin-bottom: 40px;
-  border-radius: 0 8px 8px 0;
-}
-.toc h2 { font-size: 18px; color: var(--navy); margin-bottom: 12px; font-family: var(--sans); }
-.toc ol { padding-left: 22px; }
-.toc li { font-family: var(--sans); font-size: 15px; margin-bottom: 6px; }
-.toc a { color: var(--teal); text-decoration: none; }
-.toc a:hover { text-decoration: underline; }
-
-/* Overview & Big Questions */
-.overview {
-  background: var(--light-gray);
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  padding: 28px;
-  margin-bottom: 40px;
-}
-.overview h2 { font-size: 20px; color: var(--navy); margin-bottom: 12px; }
-.overview p { margin-bottom: 12px; }
-
-.big-questions {
-  border: 2px solid var(--navy);
-  border-radius: 8px;
-  padding: 24px 28px;
-  margin-bottom: 48px;
-  background: white;
-}
-.big-questions h3 { font-family: var(--sans); font-size: 15px; font-weight: 700; color: var(--navy); text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 14px; }
-.big-questions ol { padding-left: 22px; }
-.big-questions li { margin-bottom: 8px; font-size: 15px; }
-
-/* Section headings */
-h2.section-heading {
-  font-size: 28px;
-  color: var(--navy);
-  border-bottom: 3px solid var(--gold);
-  padding-bottom: 8px;
-  margin: 60px 0 24px;
-}
-
-/* Body text */
-p.body-text { margin-bottom: 18px; }
-
-/* Images */
-figure {
-  margin: 32px 0;
-  text-align: center;
-}
-figure img {
-  max-width: 100%;
-  height: auto;
-  border-radius: 4px;
-  box-shadow: 0 3px 16px rgba(0,0,0,.14);
-}
-figcaption {
-  font-family: var(--sans);
-  font-size: 13px;
-  color: var(--med-gray);
-  margin-top: 10px;
-  line-height: 1.55;
-  font-style: italic;
-  max-width: 620px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-/* Vocab */
-.vocab-box {
-  border: 2px solid var(--teal);
-  border-radius: 8px;
-  overflow: hidden;
-  margin: 28px 0;
-}
-.vocab-box .header {
-  background: var(--teal);
-  color: white;
-  padding: 10px 18px;
-  font-family: var(--sans);
-  font-weight: 700;
-  font-size: 15px;
-}
-.vocab-box dl { background: var(--light-blue); padding: 14px 18px; }
-.vocab-box dt { font-weight: 700; color: var(--navy); display: inline; }
-.vocab-box dd { display: inline; margin-left: 0; }
-.vocab-box .term-row { margin-bottom: 8px; }
-.vocab-box .term-row:last-child { margin-bottom: 0; }
-
-/* Stop and Think */
-.stop-think {
-  border: 2px solid var(--gold);
-  border-radius: 8px;
-  overflow: hidden;
-  margin: 32px 0;
-}
-.stop-think .header {
-  background: var(--gold);
-  color: white;
-  padding: 10px 18px;
-  font-family: var(--sans);
-  font-weight: 700;
-  font-size: 15px;
-}
-.stop-think .body { background: var(--light-gold); padding: 16px 20px; }
-.stop-think ol { padding-left: 20px; }
-.stop-think li { margin-bottom: 10px; font-size: 15px; }
-
-/* Perspectives */
-.perspectives {
-  border: 2px solid var(--deep-purple);
-  border-radius: 8px;
-  overflow: hidden;
-  margin: 32px 0;
-}
-.perspectives .header {
-  background: var(--deep-purple);
-  color: white;
-  padding: 10px 18px;
-  font-family: var(--sans);
-  font-weight: 700;
-  font-size: 15px;
-}
-.perspectives .body { background: var(--light-purple); padding: 16px 20px; }
-.perspectives .entry { margin-bottom: 12px; }
-.perspectives .entry:last-child { margin-bottom: 0; }
-.perspectives .who { font-weight: 700; color: #4A148C; }
-
-/* Key Idea */
-.key-idea {
-  border-left: 5px solid var(--green);
-  background: var(--light-green);
-  padding: 18px 22px;
-  margin: 28px 0;
-  border-radius: 0 6px 6px 0;
-}
-.key-idea .label { font-family: var(--sans); font-weight: 700; color: var(--green); font-size: 13px; text-transform: uppercase; letter-spacing: .5px; margin-bottom: 4px; }
-
-/* PRIMARY SOURCE quote box */
-.primary-source {
-  border: 2px solid #5D4037;
-  border-radius: 8px;
-  overflow: hidden;
-  margin: 32px 0;
-  background: #EFEBE9;
-}
-.primary-source .header {
-  background: #5D4037;
-  color: white;
-  padding: 10px 18px;
-  font-family: var(--sans);
-  font-weight: 700;
-  font-size: 15px;
-}
-.primary-source .body { padding: 18px 22px; }
-.primary-source blockquote {
-  font-style: italic;
-  border-left: 3px solid #8D6E63;
-  padding-left: 16px;
-  margin: 10px 0;
-  line-height: 1.7;
-}
-.primary-source .attribution {
-  font-family: var(--sans);
-  font-size: 13px;
-  color: #5D4037;
-  margin-top: 8px;
-  font-style: normal;
-}
-
-/* STORY BEHIND THE STORY */
-.story-box {
-  border: 2px solid var(--orange);
-  border-radius: 8px;
-  overflow: hidden;
-  margin: 32px 0;
-}
-.story-box .header {
-  background: var(--orange);
-  color: white;
-  padding: 10px 18px;
-  font-family: var(--sans);
-  font-weight: 700;
-  font-size: 15px;
-}
-.story-box .body {
-  background: var(--light-orange);
-  padding: 18px 22px;
-  font-size: 15.5px;
-}
-.story-box .body p { margin-bottom: 10px; }
-.story-box .body p:last-child { margin-bottom: 0; }
-
-/* Activity */
-.activity {
-  border: 2px solid var(--deep-red);
-  border-radius: 8px;
-  overflow: hidden;
-  margin: 40px 0;
-}
-.activity .header {
-  background: var(--deep-red);
-  color: white;
-  padding: 12px 18px;
-  font-family: var(--sans);
-  font-weight: 700;
-  font-size: 15px;
-}
-.activity .body { background: var(--light-red); padding: 20px 22px; }
-.activity ol, .activity ul { padding-left: 22px; margin: 10px 0; }
-.activity li { margin-bottom: 8px; font-size: 15px; }
-.activity h4 { font-family: var(--sans); color: var(--deep-red); margin-top: 18px; margin-bottom: 10px; font-size: 15px; }
-
-/* Footer */
-.attribution-footer {
-  border-top: 1px solid #ccc;
-  margin-top: 56px;
-  padding: 24px 0 48px;
-  font-family: var(--sans);
-  font-size: 13px;
-  color: var(--med-gray);
-  line-height: 1.7;
-}
-
-@media print {
-  body { font-size: 11pt; background: white; }
-  .title-page { background: white !important; color: var(--navy); border-bottom: 3px solid var(--navy); }
-  h2.section-heading { page-break-before: always; }
-  .vocab-box, .stop-think, .perspectives, .key-idea, .story-box, .primary-source, .activity { break-inside: avoid; }
-}
-@media (max-width: 600px) {
-  .title-page h1 { font-size: 28px; }
-  h2.section-heading { font-size: 22px; }
-  .container { padding: 0 16px; }
-  body { font-size: 15px; }
-}
-</style>
+<link rel="stylesheet" href="css/chapter.css">
 </head>
 <body>
+<div class="progress-bar"></div>
+
+<nav class="chapter-nav">
+  <a href="ch5.html">&larr; Prev</a>
+  <span class="nav-center"><a href="index.html">The American Yawp MS</a></span>
+  <a href="ch7.html">Next &rarr;</a>
+</nav>
 
 <div class="title-page">
   <div class="series">The American Yawp Middle School Edition</div>
@@ -840,5 +549,100 @@ figcaption {
 </div>
 
 </div><!-- .container -->
+
+<button class="back-to-top" aria-label="Back to top">&uarr;</button>
+
+<div class="reader-toolbar">
+  <button class="reader-toggle" aria-label="Reader tools">Aa</button>
+  <div class="reader-panel">
+    <h4>Reader Tools</h4>
+    <div class="reader-section">
+      <label>Text Size</label>
+      <div class="reader-btn-row">
+        <button class="reader-btn active" data-font-size="normal">A</button>
+        <button class="reader-btn" data-font-size="large">A+</button>
+        <button class="reader-btn" data-font-size="xlarge">A++</button>
+      </div>
+    </div>
+    <div class="reader-section">
+      <label>Line Spacing</label>
+      <div class="reader-btn-row">
+        <button class="reader-btn active" data-spacing="normal">Normal</button>
+        <button class="reader-btn" data-spacing="wide">Wide</button>
+      </div>
+    </div>
+    <div class="reader-section">
+      <label>Theme</label>
+      <div class="reader-btn-row">
+        <button class="reader-btn active" data-theme="default">Default</button>
+        <button class="reader-btn" data-theme="sepia">Sepia</button>
+        <button class="reader-btn" data-theme="contrast">High Contrast</button>
+      </div>
+    </div>
+    <div class="reader-section">
+      <label>Accessibility</label>
+      <div class="reader-btn-row">
+        <button class="reader-btn" data-dyslexia>Dyslexia Font</button>
+        <button class="reader-btn" data-line-focus>Line Focus</button>
+      </div>
+    </div>
+    <div class="reader-section">
+      <label>Tools</label>
+      <div class="reader-btn-row">
+        <button class="reader-btn" data-tts>Read Aloud</button>
+        <button class="reader-btn" data-action="notes">My Notes</button>
+        <button class="reader-btn" data-action="pdf">Print / PDF</button>
+      </div>
+    </div>
+    <div class="reader-section">
+      <label>Highlight Selected Text</label>
+      <div class="reader-btn-row">
+        <button class="reader-btn active" data-highlight-color="yellow" style="background:#FFF9C4">Yellow</button>
+        <button class="reader-btn" data-highlight-color="green" style="background:#C8E6C9">Green</button>
+        <button class="reader-btn" data-highlight-color="blue" style="background:#BBDEFB">Blue</button>
+        <button class="reader-btn" data-highlight-color="pink" style="background:#F8BBD0">Pink</button>
+      </div>
+      <div class="reader-btn-row" style="margin-top:6px">
+        <button class="reader-btn" data-action="highlight">Highlight Selection</button>
+        <button class="reader-btn" data-action="clear-highlights">Clear All</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="line-focus-overlay">
+  <div class="line-focus-top"></div>
+  <div class="line-focus-bottom"></div>
+</div>
+
+<div class="notes-panel">
+  <div class="notes-header">
+    <h4>My Notes</h4>
+    <button class="notes-close">&times;</button>
+  </div>
+  <div class="notes-body">
+    <div class="notes-empty">No notes yet.<br>Select text and add a note, or just type one below.</div>
+  </div>
+  <div class="add-note-area">
+    <textarea placeholder="Type a note..."></textarea>
+    <button>Save Note</button>
+  </div>
+</div>
+
+<div class="pdf-modal-overlay">
+  <div class="pdf-modal">
+    <h3>Print / Save as PDF</h3>
+    <p class="pdf-subtitle">Select the sections you want to include:</p>
+    <button class="pdf-select-all">Deselect All</button>
+    <ul class="pdf-section-list"></ul>
+    <div class="pdf-actions">
+      <button class="pdf-btn-cancel">Cancel</button>
+      <button class="pdf-btn-print">Print Selected</button>
+    </div>
+  </div>
+</div>
+
+<script src="js/reader-tools.js"></script>
+
 </body>
 </html>

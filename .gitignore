@@ -1,0 +1,17 @@
+# macOS
+.DS_Store
+._*
+
+# Editor files
+*.swp
+*.swo
+*~
+.vscode/
+.idea/
+
+# OS files
+Thumbs.db
+Desktop.ini
+
+# Node (if used for tooling later)
+node_modules/
