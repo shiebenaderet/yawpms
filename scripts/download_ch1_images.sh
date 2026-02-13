@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Download images for Chapter 1: Indigenous America
-# Images sourced from The American Yawp (CC BY-SA 4.0) and Wikimedia Commons (public domain)
+# Images sourced from Wikimedia Commons (public domain / CC BY-SA)
 # Usage: bash scripts/download_ch1_images.sh
 
 set -euo pipefail
@@ -12,14 +12,10 @@ mkdir -p "$IMG_DIR"
 echo "Downloading Chapter 1 images to $IMG_DIR ..."
 
 declare -A IMAGES=(
-  # From The American Yawp (CC BY-SA 4.0)
-  ["cahokia-mounds.jpg"]="http://www.americanyawp.com/text/wp-content/uploads/Cahokia.jpg"
-  ["tenochtitlan.jpg"]="http://www.americanyawp.com/text/wp-content/uploads/Tenochtitlan.jpg"
-  ["columbus-landing.jpg"]="http://www.americanyawp.com/text/wp-content/uploads/Columbus_landing_on_Hispaniola.jpg"
-  ["casta-painting.jpg"]="http://www.americanyawp.com/text/wp-content/uploads/Casta_painting.jpg"
-
-  # From Wikimedia Commons (public domain)
-  ["mesa-verde.jpg"]="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Mesa_Verde_National_Park_Cliff_Palace_Right_Part_2006_09_12.jpg/640px-Mesa_Verde_National_Park_Cliff_Palace_Right_Part_2006_09_12.jpg"
+  ["cahokia-mounds.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/Cahokia_Aerial_HRoe_2015.jpg?width=640"
+  ["mesa-verde.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/Cliff_Palace_Mesa_Verde_National_Park_Colorado_USA.JPG?width=640"
+  ["tenochtitlan.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/The_Great_Tenochtitlan_full_view.JPG?width=640"
+  ["casta-painting.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/Casta_painting_all.jpg?width=640"
 )
 
 for local in "${!IMAGES[@]}"; do

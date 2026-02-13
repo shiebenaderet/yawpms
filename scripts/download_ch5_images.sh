@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Download images for Chapter 5: The American Revolution
-# Images sourced from The American Yawp (CC BY-SA 4.0) and Wikimedia Commons (public domain)
+# Images sourced from Wikimedia Commons (public domain)
 # Usage: bash scripts/download_ch5_images.sh
 
 set -euo pipefail
@@ -12,8 +12,7 @@ mkdir -p "$IMG_DIR"
 echo "Downloading Chapter 5 images to $IMG_DIR ..."
 
 declare -A IMAGES=(
-  # From Wikimedia Commons (public domain)
-  ["boston-massacre.jpg"]="https://upload.wikimedia.org/wikipedia/commons/thumb/5/57/Boston_Massacre_high-res.jpg/440px-Boston_Massacre_high-res.jpg"
+  ["boston-massacre.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/Boston_Massacre_high-res.jpg?width=640"
 )
 
 for local in "${!IMAGES[@]}"; do

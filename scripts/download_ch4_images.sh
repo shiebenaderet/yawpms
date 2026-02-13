@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Download images for Chapter 4: Colonial Society
-# Images sourced from The American Yawp (CC BY-SA 4.0) and Wikimedia Commons (public domain)
+# Images sourced from Wikimedia Commons (public domain)
 # Usage: bash scripts/download_ch4_images.sh
 
 set -euo pipefail
@@ -12,8 +12,7 @@ mkdir -p "$IMG_DIR"
 echo "Downloading Chapter 4 images to $IMG_DIR ..."
 
 declare -A IMAGES=(
-  # From The American Yawp (CC BY-SA 4.0)
-  ["rice-cultivation.jpg"]="http://www.americanyawp.com/text/wp-content/uploads/Planting_Rice_in_South_Carolina.jpg"
+  ["rice-cultivation.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/Rice_culture_on_the_Ogeechee%2C_near_Savannah%2C_Georgia_-_Sketched_by_A.R._Waud._LCCN2015647678.jpg?width=640"
 )
 
 for local in "${!IMAGES[@]}"; do

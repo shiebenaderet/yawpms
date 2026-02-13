@@ -1,18 +1,19 @@
 #!/usr/bin/env bash
-# Download images for Chapter 3: British North America
+# Download images for Chapter 11: The Cotton Revolution
 # Images sourced from Wikimedia Commons (public domain)
-# Usage: bash scripts/download_ch3_images.sh
+# Usage: bash scripts/download_ch11_images.sh
 
 set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
-IMG_DIR="$SCRIPT_DIR/../images/ch3"
+IMG_DIR="$SCRIPT_DIR/../images/ch11"
 mkdir -p "$IMG_DIR"
 
-echo "Downloading Chapter 3 images to $IMG_DIR ..."
+echo "Downloading Chapter 11 images to $IMG_DIR ..."
 
 declare -A IMAGES=(
-  ["pocahontas.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/Pocahontas_by_Simon_van_de_Passe.jpg?width=640"
+  ["cotton-gin.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/Eli_Whitney%27s_Cotton_Gin_Patent_Drawing%2C_03-14-1794%2C_Page_1_%285476286235%29.jpg?width=640"
+  ["slave-family.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/Family_of_slaves_at_the_Gaines%27_house_LCCN96511694.jpg?width=640"
 )
 
 for local in "${!IMAGES[@]}"; do

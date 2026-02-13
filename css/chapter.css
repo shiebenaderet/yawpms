@@ -327,7 +327,9 @@ figure img {
   border-radius: 0;
   box-shadow: none;
 }
-/* Placeholder when image hasn't loaded yet or is missing */
+/* Graceful fallback when image is missing or fails to load.
+   Browsers render alt text inside the element when the src fails,
+   so we style the img itself as a visible placeholder. */
 figure img[alt] {
   min-height: 180px;
   object-fit: cover;
@@ -335,6 +337,32 @@ figure img[alt] {
   font-size: 14px;
   color: #999;
   text-align: center;
+}
+figure img[alt]::after {
+  content: attr(alt);
+  display: block;
+  padding: 24px 20px;
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 14px;
+  font-style: italic;
+  color: #888;
+  line-height: 1.6;
+}
+/* Broken-image indicator: show alt text in a styled box */
+figure img:not([src]),
+figure img[src=""] {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 200px;
+  background: #F5F5F5;
+  border: 2px dashed #ccc;
+  border-radius: 6px;
+  padding: 24px;
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 14px;
+  font-style: italic;
+  color: #888;
 }
 figcaption {
   font-family: 'Source Sans 3', sans-serif;

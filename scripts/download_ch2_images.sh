@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Download images for Chapter 2: Colliding Cultures
-# Images sourced from The American Yawp (CC BY-SA 4.0) and Wikimedia Commons (public domain)
+# Images sourced from Wikimedia Commons (public domain)
 # Usage: bash scripts/download_ch2_images.sh
 
 set -euo pipefail
@@ -12,8 +12,7 @@ mkdir -p "$IMG_DIR"
 echo "Downloading Chapter 2 images to $IMG_DIR ..."
 
 declare -A IMAGES=(
-  # From Wikimedia Commons (public domain)
-  ["champlain-habitation.jpg"]="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0d/Habitation_de_Quebec.jpg/640px-Habitation_de_Quebec.jpg"
+  ["champlain-habitation.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/Champlain_Habitation_de_Quebec.jpg?width=640"
 )
 
 for local in "${!IMAGES[@]}"; do
