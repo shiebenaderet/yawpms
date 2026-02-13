@@ -312,15 +312,39 @@ p:last-child { margin-bottom: 0; }
 
 /* ---- Figures / Images ---- */
 
-figure { margin: 32px 0; text-align: center; }
-figure img { max-width: 100%; height: auto; border-radius: 4px; box-shadow: 0 2px 8px rgba(0,0,0,.1); }
-figcaption {
+figure {
+  margin: 32px 0;
+  text-align: center;
+  background: var(--light-gray);
+  border-radius: 6px;
+  overflow: hidden;
+}
+figure img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+  border-radius: 0;
+  box-shadow: none;
+}
+/* Placeholder when image hasn't loaded yet or is missing */
+figure img[alt] {
+  min-height: 180px;
+  object-fit: cover;
   font-family: 'Source Sans 3', sans-serif;
   font-size: 14px;
+  color: #999;
+  text-align: center;
+}
+figcaption {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 13px;
   color: #666;
-  margin-top: 12px;
-  line-height: 1.6;
+  padding: 12px 20px 14px;
+  line-height: 1.55;
   font-style: italic;
+  background: white;
+  border-top: 1px solid #eee;
 }
 
 /* ---- Footer ---- */
