@@ -1,4 +1,4 @@
-# YAWP MS
+# American Yawp MS
 
 **A free, open-source middle school American history textbook.**
 
@@ -8,27 +8,43 @@ Adapted from [*The American Yawp*](http://www.americanyawp.com/), the collaborat
 
 ---
 
+## About This Project
+
+**American Yawp MS** (Middle School Edition) is a free, open-source American history textbook that treats students like thinkers, not test-takers. It tells real stories, includes the voices that traditional textbooks leave out, and asks hard questions instead of easy ones.
+
+This project is built on a simple belief: history education should be universally accessible. That means free forever, with no paywalls, no ads, and no commercialization.
+
+### What "Yawp" Means
+
+**Yawp** \yôp\ *n*: 1: a raucous noise 2: rough vigorous language
+
+> "I sound my barbaric yawp over the roofs of the world."
+> —Walt Whitman, *Song of Myself* (1855)
+
+The name comes from Walt Whitman's celebration of the diverse, messy, and vibrant voices that make up America. This textbook embraces that spirit.
+
+---
+
 ## Why This Exists
 
-History shouldn't be boring, and it shouldn't cost money.
+Most middle school history textbooks are expensive, dry, and sanitized. They present history as a list of facts to memorize rather than a story to wrestle with. They skim over complexity, avoid controversy, and leave out the perspectives of women, Indigenous peoples, enslaved Africans, immigrants, and working people.
 
-YAWP MS is built on a simple belief: every student deserves access to a history textbook that treats them like a thinker, not a test-taker. One that tells real stories, includes the voices that traditional textbooks leave out, and asks hard questions instead of easy ones.
+**American Yawp MS** is different. It's:
 
-This project is **free forever**. It is licensed under [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/), which means:
+- **Free forever** — Licensed under [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/), ensuring it can never be locked behind a paywall
+- **Narrative-driven** — History told through people, scenes, and drama
+- **Inclusive** — Centering marginalized voices and asking "whose voices were left out?"
+- **Rigorous** — College-level scholarship adapted for middle schoolers
+- **Open-source** — Anyone can use, adapt, and improve it
 
-- Anyone can use it, share it, and adapt it
-- No one can lock it behind a paywall
-- It can never be sold on Teachers Pay Teachers or any other platform as a paid resource
-- Any adaptation must remain open and free under the same license
-
-If you believe history education should be universally accessible, this project is for you.
+---
 
 ## What Makes It Different
 
-Each chapter features:
+Each chapter includes:
 
-- **Narrative storytelling** — History told through people, scenes, and drama, not dry summaries
-- **"Story Behind the Story" callouts** — The fascinating details that make history stick
+- **Narrative storytelling** — History told through people and drama, not dry summaries
+- **"Story Behind the Story" callouts** — Fascinating details that make history stick
 - **Primary source voices** — Actual quotes from the people who lived it
 - **Multiple Perspectives boxes** — Competing viewpoints on contested events
 - **"Whose Voices Were Left Out?" sections** — Explicitly addressing exclusion and power
@@ -36,34 +52,87 @@ Each chapter features:
 - **Vocabulary boxes** — Key terms with student-friendly definitions
 - **Chapter activities** — Debates, rankings, and evidence-based discussions
 
-## Chapters
+---
+
+## Volume I: To 1877 (Chapters 1–15)
+
+The primary focus of this project is **Volume I**, covering pre-Columbian America through Reconstruction. These 15 chapters align with most middle school U.S. history curricula.
 
 | Chapter | Title | Status |
 |---------|-------|--------|
-| 1 | The New World | Planned |
+| 1 | [Indigenous America](https://shiebenaderet.github.io/yawpms/ch1.html) | ✓ Draft |
 | 2 | Colliding Cultures | Planned |
 | 3 | British North America | Planned |
 | 4 | Colonial Society | Planned |
 | 5 | The American Revolution | Planned |
-| 6 | [A New Nation (1786-1800)](https://shiebenaderet.github.io/yawpms/ch6.html) | Draft |
-| 7 | [The Early Republic (1800-1824)](https://shiebenaderet.github.io/yawpms/ch7.html) | Draft |
-| 8-29 | Additional chapters | Planned |
+| 6 | [A New Nation (1786-1800)](https://shiebenaderet.github.io/yawpms/ch6.html) | ✓ Draft |
+| 7 | [The Early Republic (1800-1824)](https://shiebenaderet.github.io/yawpms/ch7.html) | ✓ Draft |
+| 8 | The Market Revolution | Planned |
+| 9 | Democracy in America | Planned |
+| 10 | Religion and Reform | Planned |
+| 11 | The Cotton Revolution | Planned |
+| 12 | Manifest Destiny | Planned |
+| 13 | The Sectional Crisis | Planned |
+| 14 | The Civil War | Planned |
+| 15 | Reconstruction | Planned |
+
+**Volume II** (1877–present) is planned for future development. Most middle school curricula end with Reconstruction, and most high schools start American history at or after this point. If there's demand for a middle school adaptation of Volume II, we'll build it.
+
+---
+
+## How to Use This Textbook
+
+### Read Online
+
+Visit **[shiebenaderet.github.io/yawpms](https://shiebenaderet.github.io/yawpms)** to read chapters in your browser.
+
+### Run Locally
+
+Clone the repo and open any `.html` file in your browser:
+
+```bash
+git clone https://github.com/shiebenaderet/yawpms.git
+cd yawpms
+open ch1.html
+```
+
+### Download Images
+
+Images are sourced from *The American Yawp* (CC BY-SA 4.0) and Wikimedia Commons (public domain). Download them with the provided scripts:
+
+```bash
+bash scripts/download_ch1_images.sh
+bash scripts/download_ch7_images.sh
+```
+
+---
+
+## Companion Resources
+
+- **[Introduction](https://shiebenaderet.github.io/yawpms/introduction.html)** — Why this project exists and what makes it different
+- **[About](https://shiebenaderet.github.io/yawpms/about.html)** — The story behind American Yawp MS
+- **[Teaching Materials](https://shiebenaderet.github.io/yawpms/teaching.html)** — Resources for educators
+- **[Contributors](https://shiebenaderet.github.io/yawpms/contributors.html)** — The people making this happen
+- **[Who Pays for This?](https://shiebenaderet.github.io/yawpms/whopays.html)** — The economics of free education
+- **Primary Source Reader** — *Under construction*
+
+---
 
 ## Call for Collaborators
 
 **This project needs you.**
 
-I'm building YAWP MS to design projects, lessons, and activities around this material that are universally accessible and available to all for free. But one person can only do so much. If any of this sounds like you, please reach out:
+One person can only do so much. If any of this sounds like you, please reach out:
 
-- **Teachers** who want to pilot chapters in their classrooms and give feedback on what works
+- **Teachers** who want to pilot chapters in their classrooms and give feedback
 - **History educators** who want to write or review chapter content
-- **Curriculum designers** who want to build lessons, projects, and activities around the chapters
-- **Special education teachers** who can help ensure the material is truly accessible to all learners
+- **Curriculum designers** who want to build lessons, projects, and activities
+- **Special education teachers** who can help ensure accessibility for all learners
 - **ELL/ESL specialists** who can help adapt content for multilingual classrooms
 - **Designers and developers** who want to improve the reading experience
 - **Students** who are willing to tell us what's engaging and what's not
 
-### How to contribute
+### How to Contribute
 
 1. **Open an issue** — Share feedback, suggest corrections, or propose a new chapter
 2. **Submit a pull request** — Write content, fix errors, or improve the design
@@ -72,49 +141,75 @@ I'm building YAWP MS to design projects, lessons, and activities around this mat
 
 No contribution is too small. A typo fix matters. A student saying "this part was confusing" matters. A teacher saying "my kids loved this activity" matters.
 
-## Getting Started
+---
 
-### Read online
-
-Visit **[shiebenaderet.github.io/yawpms](https://shiebenaderet.github.io/yawpms)** to read chapters in your browser.
-
-### Run locally
-
-Clone the repo and open any `.html` file in your browser:
-
-```bash
-git clone https://github.com/shiebenaderet/yawpms.git
-cd yawpms
-open ch6.html
-```
-
-### Download images
-
-Images are sourced from *The American Yawp* (CC BY-SA 4.0) and Wikimedia Commons (public domain). Download them with the provided scripts:
-
-```bash
-bash scripts/download_ch7_images.sh
-```
-
-### Project structure
+## Project Structure
 
 ```
 yawpms/
 ├── index.html                    # Landing page
+├── ch1.html                      # Chapter 1: Indigenous America
 ├── ch6.html                      # Chapter 6: A New Nation
 ├── ch7.html                      # Chapter 7: The Early Republic
+├── introduction.html             # Project introduction
+├── about.html                    # About page
+├── contributors.html             # Contributors page
+├── teaching.html                 # Teaching materials
+├── whopays.html                  # Who pays for this?
+├── primary-source-reader.html    # Primary source reader (under construction)
 ├── images/
+│   ├── ch1/                      # Chapter 1 images
 │   ├── ch6/                      # Chapter 6 images
 │   └── ch7/                      # Chapter 7 images
 ├── scripts/
-│   └── download_ch7_images.sh    # Image download script
+│   ├── download_ch1_images.sh    # Image download script for ch1
+│   └── download_ch7_images.sh    # Image download script for ch7
 └── README.md
 ```
+
+---
 
 ## License
 
 This adaptation is licensed under [Creative Commons Attribution-ShareAlike 4.0 International (CC BY-SA 4.0)](https://creativecommons.org/licenses/by-sa/4.0/).
 
-Adapted from *The American Yawp*, eds. Joseph Locke and Ben Wright (Stanford University Press, 2018). Original images are used under their respective Creative Commons or public domain licenses.
+Adapted from *The American Yawp*, edited by Joseph L. Locke and Ben Wright (Stanford University Press, 2018). Original images are used under their respective Creative Commons or public domain licenses.
 
-**What CC BY-SA means in practice:** You are free to use, remix, and redistribute this material for any purpose — including commercial — as long as you give credit and share your adaptations under the same license. This ensures the material stays free and open forever.
+**What CC BY-SA means in practice:**
+
+- You are free to use, remix, and redistribute this material for any purpose—including commercial use
+- You must give appropriate credit to the original source
+- You must share your adaptations under the same license
+- This ensures the material stays free and open forever
+
+**What this license prohibits:**
+
+- Locking this material behind a paywall
+- Selling it on platforms like Teachers Pay Teachers
+- Changing the license to restrict future use
+
+If you believe history education should be universally accessible, this license is your guarantee.
+
+---
+
+## Credits
+
+This project would not exist without the groundbreaking work of the editors, authors, and contributors to *The American Yawp*. We are deeply grateful to:
+
+- **Joseph L. Locke** and **Ben Wright**, editors of *The American Yawp*
+- The **300+ historians** who wrote and reviewed the original textbook
+- **Stanford University Press**, for publishing and supporting open-source scholarship
+- The **Creative Commons community**, for building the legal framework that makes projects like this possible
+
+---
+
+## Contact
+
+Questions? Feedback? Want to contribute?
+
+- **GitHub Issues:** [github.com/shiebenaderet/yawpms/issues](https://github.com/shiebenaderet/yawpms/issues)
+- **Email:** (coming soon)
+
+---
+
+**American Yawp MS** is a passion project created by a history educator who believes that every student deserves access to high-quality, free, and inclusive history education. If you believe that too, join us.

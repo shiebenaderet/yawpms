@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chapter 1: Indigenous America | The American Yawp MS</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:wght@400;600;700&display=swap');
+
+:root {
+  --navy: #1B3A5C;
+  --teal: #2A7F8E;
+  --gold: #C4941D;
+  --cream: #FAFAF8;
+  --dark-gray: #2C2C2C;
+  --light-gray: #F5F5F5;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Libre Baskerville', Georgia, serif;
+  color: var(--dark-gray);
+  background: var(--cream);
+  line-height: 1.8;
+}
+
+.title-page {
+  min-height: 60vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 80px 24px;
+  background: linear-gradient(170deg, #0D2137 0%, var(--navy) 40%, #2B5A7C 100%);
+  color: white;
+}
+.series { font-family: 'Source Sans 3', sans-serif; font-size: 13px; letter-spacing: 4px; text-transform: uppercase; opacity: .5; margin-bottom: 16px; }
+.chapter-num { font-size: 20px; font-weight: 400; opacity: .7; margin-bottom: 12px; }
+.chapter-title { font-size: 52px; line-height: 1.2; margin-bottom: 20px; font-weight: 700; }
+.chapter-subtitle { font-size: 22px; font-style: italic; opacity: .75; margin-bottom: 32px; }
+.divider { width: 100px; height: 3px; background: var(--gold); margin: 0 auto 24px; }
+.attribution { font-family: 'Source Sans 3', sans-serif; font-size: 13px; opacity: .5; line-height: 1.6; max-width: 600px; }
+
+.container { max-width: 720px; margin: 0 auto; padding: 48px 24px; }
+
+.toc {
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 32px;
+  margin-bottom: 48px;
+}
+.toc h2 { font-size: 18px; color: var(--navy); margin-bottom: 20px; text-align: center; }
+.toc ol { list-style: none; counter-reset: toc-counter; padding: 0; }
+.toc li { counter-increment: toc-counter; margin-bottom: 12px; }
+.toc li::before { content: counter(toc-counter, upper-roman) ". "; color: var(--gold); font-weight: 700; margin-right: 8px; }
+.toc a { color: var(--navy); text-decoration: none; border-bottom: 1px dotted transparent; transition: border-color .2s; }
+.toc a:hover { border-bottom-color: var(--navy); }
+
+.overview {
+  background: #F0F4F8;
+  border-left: 5px solid var(--teal);
+  padding: 28px 32px;
+  margin-bottom: 48px;
+  border-radius: 0 8px 8px 0;
+}
+.overview h2 { font-size: 20px; color: var(--teal); margin-bottom: 16px; }
+.overview p { font-family: 'Source Sans 3', sans-serif; font-size: 16px; line-height: 1.7; }
+
+.big-questions {
+  background: white;
+  border: 2px solid var(--gold);
+  border-radius: 8px;
+  padding: 28px 32px;
+  margin-bottom: 48px;
+}
+.big-questions h2 { font-size: 18px; color: var(--gold); margin-bottom: 16px; text-align: center; }
+.big-questions ul { list-style: none; padding: 0; }
+.big-questions li {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 15px;
+  padding-left: 28px;
+  position: relative;
+  margin-bottom: 12px;
+  line-height: 1.6;
+}
+.big-questions li::before { content: "?"; color: var(--gold); font-weight: 700; font-size: 20px; position: absolute; left: 0; top: -2px; }
+
+section { margin-bottom: 64px; }
+section h2 {
+  font-size: 28px;
+  color: var(--navy);
+  margin-bottom: 24px;
+  padding-bottom: 12px;
+  border-bottom: 2px solid #E0E0E0;
+}
+
+section h3 {
+  font-size: 20px;
+  color: var(--navy);
+  margin: 32px 0 16px;
+}
+
+p { margin-bottom: 20px; font-size: 17px; line-height: 1.8; }
+p:last-child { margin-bottom: 0; }
+
+.vocab-box, .stop-think, .perspectives, .key-idea, .primary-source, .story-box, .activity-box, .voices-left-out {
+  border-radius: 8px;
+  padding: 24px 28px;
+  margin: 32px 0;
+}
+
+.vocab-box {
+  background: #E8F4F8;
+  border-left: 5px solid var(--teal);
+}
+.vocab-box h3 { color: var(--teal); font-size: 16px; margin: 0 0 12px; }
+.vocab-box p { font-family: 'Source Sans 3', sans-serif; font-size: 15px; margin-bottom: 12px; line-height: 1.6; }
+.vocab-box p:last-child { margin-bottom: 0; }
+.vocab-box strong { color: var(--teal); }
+
+.stop-think {
+  background: #FFF9E6;
+  border-left: 5px solid var(--gold);
+}
+.stop-think h3 { color: var(--gold); font-size: 16px; margin: 0 0 12px; }
+.stop-think p { font-family: 'Source Sans 3', sans-serif; font-size: 15px; font-style: italic; margin-bottom: 0; line-height: 1.6; }
+
+.perspectives {
+  background: #F3E8FF;
+  border-left: 5px solid #7C3AED;
+}
+.perspectives h3 { color: #7C3AED; font-size: 16px; margin: 0 0 16px; }
+.perspectives .perspective { margin-bottom: 16px; font-family: 'Source Sans 3', sans-serif; font-size: 15px; line-height: 1.6; }
+.perspectives .perspective:last-child { margin-bottom: 0; }
+.perspectives .perspective strong { color: #7C3AED; }
+
+.key-idea {
+  background: #E8F5E9;
+  border-left: 5px solid #2E7D32;
+}
+.key-idea h3 { color: #2E7D32; font-size: 16px; margin: 0 0 12px; }
+.key-idea p { font-family: 'Source Sans 3', sans-serif; font-size: 15px; line-height: 1.6; margin-bottom: 12px; }
+.key-idea p:last-child { margin-bottom: 0; }
+
+.primary-source {
+  background: #FFF3E0;
+  border-left: 5px solid #E65100;
+  font-style: italic;
+}
+.primary-source h3 { color: #E65100; font-size: 16px; margin: 0 0 12px; font-style: normal; }
+.primary-source p { font-family: 'Source Sans 3', sans-serif; font-size: 15px; line-height: 1.7; margin-bottom: 12px; }
+.primary-source .source-citation { font-size: 13px; margin-top: 12px; opacity: .7; font-style: normal; }
+
+.story-box {
+  background: #FFF4E6;
+  border-left: 5px solid #F57C00;
+}
+.story-box h3 { color: #F57C00; font-size: 18px; margin: 0 0 16px; }
+.story-box p { font-family: 'Source Sans 3', sans-serif; font-size: 15px; line-height: 1.7; margin-bottom: 12px; }
+.story-box p:last-child { margin-bottom: 0; }
+
+.voices-left-out {
+  background: #FCE4EC;
+  border-left: 5px solid #C2185B;
+}
+.voices-left-out h3 { color: #C2185B; font-size: 18px; margin: 0 0 16px; }
+.voices-left-out p { font-family: 'Source Sans 3', sans-serif; font-size: 15px; line-height: 1.7; margin-bottom: 12px; }
+.voices-left-out p:last-child { margin-bottom: 0; }
+.voices-left-out strong { color: #C2185B; }
+
+.activity-box {
+  background: #FFEBEE;
+  border: 2px solid #C62828;
+  border-radius: 8px;
+  padding: 32px;
+}
+.activity-box h3 { color: #C62828; font-size: 22px; margin: 0 0 20px; text-align: center; }
+.activity-box h4 { color: #C62828; font-size: 16px; margin: 20px 0 12px; }
+.activity-box p, .activity-box li { font-family: 'Source Sans 3', sans-serif; font-size: 15px; line-height: 1.7; }
+.activity-box ul, .activity-box ol { margin-left: 24px; margin-bottom: 16px; }
+.activity-box li { margin-bottom: 8px; }
+
+figure {
+  margin: 32px 0;
+  text-align: center;
+}
+figure img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 4px;
+  box-shadow: 0 2px 8px rgba(0,0,0,.1);
+}
+figcaption {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 14px;
+  color: #666;
+  margin-top: 12px;
+  line-height: 1.6;
+  font-style: italic;
+}
+
+footer {
+  border-top: 2px solid #E0E0E0;
+  margin-top: 64px;
+  padding-top: 24px;
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 13px;
+  color: #999;
+  line-height: 1.7;
+}
+footer a { color: var(--teal); text-decoration: none; border-bottom: 1px dotted var(--teal); }
+footer a:hover { border-bottom-style: solid; }
+
+@media print {
+  .title-page { page-break-after: always; }
+  section { page-break-inside: avoid; }
+  figure { page-break-inside: avoid; }
+}
+
+@media (max-width: 600px) {
+  .chapter-title { font-size: 36px; }
+  .container { padding: 32px 16px; }
+  section h2 { font-size: 24px; }
+}
+</style>
+</head>
+<body>
+
+<div class="title-page">
+  <div class="series">The American Yawp Middle School Edition</div>
+  <div class="chapter-num">Chapter 1</div>
+  <h1 class="chapter-title">Indigenous America</h1>
+  <div class="divider"></div>
+  <div class="chapter-subtitle">The New World Before Columbus—and After</div>
+  <p class="attribution">Adapted for middle school readers from <em>The American Yawp</em>, edited by Joseph Locke and Ben Wright</p>
+</div>
+
+<div class="container">
+
+<nav class="toc">
+  <h2>Contents</h2>
+  <ol>
+    <li><a href="#intro">Introduction: Whose "New World"?</a></li>
+    <li><a href="#first-americans">The First Americans</a></li>
+    <li><a href="#native-nations">A Continent of Nations</a></li>
+    <li><a href="#european-expansion">European Expansion</a></li>
+    <li><a href="#spanish-conquest">Spanish Exploration and Conquest</a></li>
+    <li><a href="#columbian-exchange">The Columbian Exchange</a></li>
+    <li><a href="#conclusion">Wrapping Up: Whose History?</a></li>
+  </ol>
+</nav>
+
+<div class="overview">
+  <h2>Chapter Overview</h2>
+  <p>Europeans called the Americas "the New World." But for the tens of millions of Native Americans living there, it was anything but new. For over 10,000 years, Indigenous peoples built cities, farmed the land, governed themselves, traded across vast networks, and created hundreds of distinct cultures and languages. The arrival of Europeans in 1492 changed everything. It brought violence, disease, and exploitation—but also resistance, survival, and adaptation. This is the story of the Americas before and after contact, and the catastrophic collision that transformed both worlds forever.</p>
+</div>
+
+<div class="big-questions">
+  <h2>Big Questions</h2>
+  <ul>
+    <li>How did the first Americans arrive, and how did they create such diverse civilizations across the continent?</li>
+    <li>What were Indigenous societies like before Europeans arrived?</li>
+    <li>Why did Europeans start exploring the world in the 1400s, and what were they looking for?</li>
+    <li>What was the Columbian Exchange, and how did it transform both the Americas and Europe?</li>
+  </ul>
+</div>
+
+<section id="intro">
+  <h2>I. Introduction: Whose "New World"?</h2>
+
+  <p>In 1492, Christopher Columbus stepped ashore on an island in the Caribbean. He believed he had reached Asia. He had not. He had stumbled onto a continent Europeans didn't know existed—a continent that was already home to millions of people.</p>
+
+  <p>Columbus called the people he met "Indians" because he thought he was in the Indies (islands near Asia). The name stuck, even though it was wrong. These people weren't from India. They were the descendants of migrants who had arrived in the Americas thousands of years earlier, long before any European had ever dreamed of crossing the Atlantic.</p>
+
+  <p>Europeans called this land "the New World." But it wasn't new. Humans had lived there for over ten thousand years. They spoke hundreds of languages. They built great cities. They farmed, hunted, traded, made art, waged war, made peace, governed themselves, and told stories about where they came from and who they were.</p>
+
+  <p>This chapter is about two worlds—Indigenous America and Europe—and what happened when they collided. That collision changed everything. It unleashed catastrophic disease, centuries of violence, and the largest exchange of plants, animals, and people in human history. It was one of the most important turning points in all of world history. And it started with a misunderstanding.</p>
+
+  <div class="vocab-box">
+    <h3>Vocabulary</h3>
+    <p><strong>Indigenous:</strong> Native to a place; the original inhabitants of a region. Indigenous peoples of the Americas are also called Native Americans, American Indians, or First Nations (in Canada).</p>
+    <p><strong>Columbian Exchange:</strong> The transfer of plants, animals, diseases, people, and ideas between the Americas and Europe/Africa/Asia after 1492. Named after Christopher Columbus.</p>
+    <p><strong>Pre-Columbian:</strong> Referring to the Americas before Columbus's arrival in 1492.</p>
+  </div>
+</section>
+
+<section id="first-americans">
+  <h2>II. The First Americans</h2>
+
+  <h3>How Did People Get to the Americas?</h3>
+
+  <p>For centuries, Indigenous peoples have told their own stories about where they came from. The Salinan people of California say that a bald eagle formed the first man out of clay and the first woman out of a feather. The Lenape tell of a Sky Woman who fell into a watery world and, with the help of a muskrat and a beaver, landed on the back of a great turtle—creating Turtle Island, the Indigenous name for North America. The Choctaw trace their origins to Nanih Waiya, a great earthen mound in the Mississippi Valley, from which their ancestors emerged into the world.</p>
+
+  <p>These creation stories reflect deep spiritual beliefs about the relationship between people and the land. They are not meant to be scientific explanations—they are sacred narratives about identity, belonging, and the ties between humans and the natural world.</p>
+
+  <p>Modern archaeology offers a different story. Scientists believe that the first people to reach the Americas crossed a land bridge from Asia to North America during the last Ice Age. Between 12,000 and 20,000 years ago, so much of the world's water was frozen in massive glaciers that sea levels dropped dramatically. This exposed a wide strip of land—called Beringia—connecting modern-day Siberia and Alaska. Small bands of people, following migrating animals, walked across this bridge into a new continent.</p>
+
+  <p>From there, they spread south and east, eventually reaching the tip of South America. Over thousands of years, these migrants adapted to an incredible range of environments—frozen tundra, dense forests, wide grasslands, scorching deserts, and high mountains. They developed hundreds of distinct languages, cultures, and ways of life.</p>
+
+  <div class="story-box">
+    <h3>Story Behind the Story: The Ice-Free Corridor</h3>
+    <p>How did the first Americans get past the massive ice sheets covering much of Canada? For decades, scientists believed they traveled through an "ice-free corridor" between two giant glaciers. But recent research suggests another possibility: they may have traveled by boat along the Pacific coast, fishing and hunting sea mammals as they went. This would make them some of the world's earliest seafarers—navigating icy waters in small boats, hugging the coastline, and landing on beaches to set up camp. The evidence is hard to find because those ancient coastlines are now underwater, drowned by rising seas when the glaciers melted. But it's a reminder that history is full of mysteries we're still trying to solve.</p>
+  </div>
+
+  <h3>The Agricultural Revolution</h3>
+
+  <p>Around 5,000 to 9,000 years ago, people in the Americas began to farm. In Mesoamerica (modern-day Mexico and Central America), they domesticated maize (corn), beans, and squash—the "Three Sisters" that became the foundation of agriculture across much of North America. These crops were high in calories, easy to store, and, when planted together, supported each other's growth. Corn provided a stalk for beans to climb. Beans added nitrogen to the soil. Squash spread across the ground, blocking weeds and keeping the soil moist.</p>
+
+  <p>Farming changed everything. It allowed people to settle in one place, store surplus food, and support larger populations. With more food, not everyone had to spend all their time hunting or gathering. Some people became priests, artists, warriors, or leaders. Cities emerged. Governments formed. Trade networks expanded. Agriculture made civilization possible.</p>
+
+  <p>But it also came with costs. Farming required hard labor. Diets became less diverse, sometimes leading to malnutrition. Settled communities were more vulnerable to disease. And agriculture created inequality—some people accumulated more land and wealth than others.</p>
+
+  <div class="vocab-box">
+    <h3>Vocabulary</h3>
+    <p><strong>Beringia:</strong> The land bridge that connected Asia and North America during the Ice Age, allowing the first people to migrate to the Americas.</p>
+    <p><strong>Three Sisters:</strong> The three main crops—corn, beans, and squash—grown together by many Native American societies. They were nutritious and supported each other's growth.</p>
+    <p><strong>Mesoamerica:</strong> The region including modern-day Mexico and Central America, home to advanced civilizations like the Maya and Aztec.</p>
+  </div>
+
+  <div class="stop-think">
+    <h3>Stop and Think</h3>
+    <p>Why do you think Indigenous creation stories and scientific explanations about how people arrived in the Americas might both be important? What different purposes do they serve?</p>
+  </div>
+</section>
+
+<section id="native-nations">
+  <h2>III. A Continent of Nations</h2>
+
+  <p>By the time Europeans arrived in the Americas, an estimated 50 to 100 million people lived there. They were not one people. They spoke hundreds of languages, practiced different religions, lived in different kinds of houses, ate different foods, and governed themselves in different ways. Calling them all "Indians" erased that incredible diversity.</p>
+
+  <p>Let's look at just a few examples of the rich variety of Indigenous civilizations.</p>
+
+  <h3>Cahokia: A City Bigger Than London</h3>
+
+  <p>Around the year 1050, a massive city rose near the Mississippi River, across from modern-day St. Louis. It was called Cahokia. At its peak, Cahokia was home to as many as 30,000 people—making it larger than London at the time. The city was dominated by enormous earthen mounds, some over 100 feet tall, topped with temples and elite residences. The largest, Monks Mound, covered 14 acres at its base and rose in four terraces to a height of 100 feet.</p>
+
+  <p>Cahokia was a center of trade, religion, and political power. People came from hundreds of miles away to trade goods, participate in ceremonies, and pay tribute to the city's leaders. Archaeologists have found evidence of copper from the Great Lakes, shells from the Gulf Coast, and mica from the Appalachian Mountains—proof of Cahokia's far-reaching trade networks.</p>
+
+  <p>But Cahokia didn't last. By 1350, the city had been abandoned. No one knows exactly why. Climate change, deforestation, overpopulation, disease, warfare, and political collapse may all have played a role. What's clear is that Cahokia represents just one chapter in a long history of complex societies rising and falling across the Americas—long before Europeans arrived.</p>
+
+  <figure>
+    <img src="images/ch1/cahokia-mounds.jpg" alt="Painting of Cahokia at its peak, showing large earthen mounds and a bustling city" />
+    <figcaption>An artist's reconstruction of Cahokia around 1150 CE. The massive Monks Mound dominates the skyline. (Painting by William R. Iseminger, Cahokia Mounds State Historic Site)</figcaption>
+  </figure>
+
+  <h3>The Haudenosaunee: A League of Peace and Power</h3>
+
+  <p>In the forests of what is now upstate New York, five nations—the Mohawk, Oneida, Onondaga, Cayuga, and Seneca—formed a powerful alliance called the Haudenosaunee Confederacy (also known as the Iroquois League). According to tradition, it was founded by a man called the Peacemaker and a leader named Hiawatha, who convinced the warring nations to unite under a Great Law of Peace.</p>
+
+  <p>The Haudenosaunee Confederacy was a sophisticated democracy. Decisions were made by consensus, with representatives from each nation meeting in a Grand Council. Women held significant power: clan mothers chose the male leaders and could remove them if they failed to serve the people. The Confederacy's influence on early American ideas about democracy and federalism is debated, but it's clear that the Haudenosaunee created a stable, effective government that lasted for centuries.</p>
+
+  <h3>The Pueblo Peoples: Cities in the Cliffs</h3>
+
+  <p>In the arid Southwest, the Ancestral Puebloans (also called the Anasazi) built remarkable cities into the sides of cliffs. At Mesa Verde in present-day Colorado, stone buildings with hundreds of rooms clung to the rock walls of canyons. These weren't simple shelters—they were planned communities with kivas (circular ceremonial rooms), storage areas, and defensive advantages.</p>
+
+  <p>The Pueblo peoples developed sophisticated irrigation systems to farm in one of the driest regions of North America. They grew corn, beans, and squash, and built vast networks of roads connecting distant communities. But around 1300, many of these settlements were abandoned, likely due to prolonged drought, resource depletion, and conflict. The descendants of the Ancestral Puebloans—including the Hopi, Zuni, and Puebloan peoples of the Rio Grande—continue to live in the Southwest today.</p>
+
+  <figure>
+    <img src="images/ch1/mesa-verde.jpg" alt="Cliff Palace at Mesa Verde" />
+    <figcaption>Cliff Palace at Mesa Verde, Colorado. Built by the Ancestral Puebloans around 1190 CE, this complex housed about 100 people. (Public domain, National Park Service)</figcaption>
+  </figure>
+
+  <h3>The Pacific Northwest: A World of Salmon and Cedar</h3>
+
+  <p>Along the Pacific coast—from northern California to Alaska—Indigenous peoples built a rich culture based on salmon, cedar trees, and the sea. Tribes like the Tlingit, Haida, and Chinook lived in large plank houses made from cedar, traveled in massive ocean-going canoes, and carved elaborate totem poles depicting family histories and spiritual beliefs.</p>
+
+  <p>The abundance of salmon allowed these societies to thrive without large-scale agriculture. Every year, millions of salmon swam upriver to spawn, and Indigenous peoples developed sustainable fishing practices that ensured the salmon would return year after year. Wealth and status were displayed through potlatch ceremonies—elaborate feasts where leaders gave away enormous quantities of food, blankets, and other goods to demonstrate their generosity and power.</p>
+
+  <h3>The Great Plains: Following the Buffalo</h3>
+
+  <p>On the vast grasslands of the Great Plains, peoples like the Lakota, Cheyenne, and Comanche lived as nomadic hunters, following massive herds of buffalo (more accurately called bison). Buffalo provided nearly everything: meat for food, hides for clothing and shelter, bones for tools, and sinew for thread.</p>
+
+  <p>Before Europeans brought horses to the Americas, Plains peoples hunted on foot, using techniques like driving herds off cliffs or surrounding them in coordinated hunts. Life was mobile and seasonal, with communities following the buffalo migrations and gathering for communal hunts and ceremonies.</p>
+
+  <div class="key-idea">
+    <h3>Key Idea: Diversity, Not Uniformity</h3>
+    <p>There was no single "Native American" way of life. Indigenous peoples adapted to every environment imaginable, from Arctic tundra to tropical rainforests. They built cities and lived as nomads. They farmed and they hunted. They governed by consensus and by hierarchy. They spoke hundreds of mutually unintelligible languages. The idea that all Native Americans were the same is a myth—one that has been used to erase the complexity and richness of Indigenous history.</p>
+  </div>
+
+  <div class="stop-think">
+    <h3>Stop and Think</h3>
+    <p>Why do you think it's important to learn about specific Native American societies (like Cahokia or the Haudenosaunee) rather than just talking about "Native Americans" in general?</p>
+  </div>
+</section>
+
+<section id="european-expansion">
+  <h2>IV. European Expansion: Why Did They Come?</h2>
+
+  <p>For most of the Middle Ages, Europeans knew almost nothing about the Americas. They were focused on their own continent—and on Asia. European merchants craved Asian goods: silk, spices, porcelain, and precious gems. But getting those goods was expensive and dangerous. Trade routes ran through the Middle East, where Muslim merchants controlled access and charged high prices. European kings and merchants dreamed of finding a direct sea route to Asia, cutting out the middlemen and keeping the profits for themselves.</p>
+
+  <h3>The Crusades and the Taste for Luxury</h3>
+
+  <p>The Crusades (a series of religious wars between Christians and Muslims from 1095 to 1291) brought Europeans into contact with the wealth of the Islamic world and, beyond it, Asia. Returning crusaders brought back silks, spices, and stories of incredible riches. Demand for these luxury goods soared among Europe's wealthy elite.</p>
+
+  <p>But the fall of Constantinople (the capital of the Byzantine Empire) to the Ottoman Turks in 1453 made overland trade routes even more difficult and expensive. Europeans needed a new way to reach Asia. They looked to the sea.</p>
+
+  <h3>Portugal Leads the Way</h3>
+
+  <p>Portugal, a small kingdom on Europe's Atlantic edge, became a pioneer of exploration. Prince Henry the Navigator (1394–1460) invested heavily in navigation technology, mapmaking, and shipbuilding. Portuguese sailors developed the caravel, a small, fast ship that could sail into the wind. They improved the astrolabe, an instrument used to measure latitude by observing the stars. Slowly, Portuguese ships inched down the west coast of Africa, mapping the coastline, establishing trading posts, and searching for a route around Africa to Asia.</p>
+
+  <p>In 1488, Bartolomeu Dias rounded the southern tip of Africa. In 1498, Vasco da Gama reached India by sea. Portugal had found its route to Asia. But it was long, dangerous, and expensive. Other European kingdoms wanted a shorter path.</p>
+
+  <h3>Sugar and Slavery</h3>
+
+  <p>As Portuguese explorers moved down the African coast, they established plantations on islands like Madeira and São Tomé. There, they grew sugar—a lucrative crop that Europeans craved. Sugar production was backbreaking labor. To meet the demand, Portuguese merchants turned to the African slave trade, buying enslaved people from African kingdoms and forcing them to work on sugar plantations.</p>
+
+  <p>This system—plantations worked by enslaved laborers producing cash crops for European markets—would later be transplanted to the Americas with devastating consequences.</p>
+
+  <div class="vocab-box">
+    <h3>Vocabulary</h3>
+    <p><strong>Crusades:</strong> A series of religious wars (1095–1291) in which European Christians tried to capture Jerusalem and other holy sites from Muslim control.</p>
+    <p><strong>Caravel:</strong> A small, fast sailing ship developed by the Portuguese, designed to sail into the wind and explore coastlines.</p>
+    <p><strong>Astrolabe:</strong> A navigation tool used to measure the angle of the sun or stars above the horizon, helping sailors determine their latitude.</p>
+  </div>
+
+  <div class="stop-think">
+    <h3>Stop and Think</h3>
+    <p>Why might European demand for luxury goods like silk and spices have led to such dramatic changes in world history?</p>
+  </div>
+</section>
+
+<section id="spanish-conquest">
+  <h2>V. Spanish Exploration and Conquest</h2>
+
+  <h3>Columbus and the "Discovery" of a New World</h3>
+
+  <p>In 1492, an Italian sailor named Christopher Columbus convinced the Spanish monarchs, King Ferdinand and Queen Isabella, to fund a risky voyage. Columbus believed he could reach Asia by sailing west across the Atlantic. He was wrong about the distance—he thought Asia was much closer than it actually was. If the Americas hadn't been in the way, he and his crew would have died at sea.</p>
+
+  <p>On October 12, 1492, Columbus's ships landed on an island in the Bahamas. Columbus called the people he met "Indians" and claimed the land for Spain. He had no idea he had stumbled onto two continents unknown to Europeans. He believed, until the day he died, that he had reached the outskirts of Asia.</p>
+
+  <p>Columbus made four voyages to the Caribbean. He was looking for gold. He found some, but not nearly as much as he had promised. He enslaved Indigenous people and sent them back to Spain. He imposed brutal systems of forced labor. Historians estimate that the Taíno people of the Caribbean numbered around 1 million before Columbus arrived. Within 50 years, they had nearly disappeared—wiped out by disease, overwork, and violence.</p>
+
+  <div class="perspectives">
+    <h3>Multiple Perspectives: Was Columbus a Hero?</h3>
+    <div class="perspective"><strong>Traditional View (19th–mid-20th century):</strong> Columbus was a brave explorer who "discovered" America, opening the way for European civilization and Christianity to spread to a "new" continent. He was celebrated as a hero in the United States, with a national holiday (Columbus Day) in his honor.</div>
+    <div class="perspective"><strong>Indigenous Perspective:</strong> Columbus did not "discover" anything. Millions of people already lived in the Americas. His arrival marked the beginning of colonization, genocide, disease, and the destruction of Indigenous cultures. Many Native Americans see Columbus Day as a celebration of their oppression.</div>
+    <div class="perspective"><strong>Modern Historians:</strong> Columbus was neither a hero nor a simple villain—he was a product of his time. He was ambitious, courageous, and brutal. He opened the door to an exchange of people, plants, animals, and ideas that transformed the world. But that transformation came at an unimaginable cost to Indigenous peoples. Understanding Columbus requires grappling with that complexity.</div>
+  </div>
+
+  <h3>The Aztec Empire and Hernán Cortés</h3>
+
+  <p>In central Mexico, the Aztec Empire (also called the Mexica Empire) dominated a vast territory. Its capital, Tenochtitlán, was one of the largest cities in the world, home to over 200,000 people. Built on an island in the middle of a lake, the city featured enormous pyramids, floating gardens called chinampas, bustling markets, and sophisticated aqueducts that brought fresh water from the mountains.</p>
+
+  <p>The Aztecs ruled through conquest and tribute. Subject peoples were required to pay taxes in the form of goods, labor, and even human beings for ritual sacrifice. Many of these conquered groups resented Aztec rule and were waiting for a chance to rebel.</p>
+
+  <p>In 1519, a Spanish conquistador named Hernán Cortés landed on the coast of Mexico with about 600 men. He was greedy, ruthless, and ambitious. He also got incredibly lucky. Many Indigenous groups, tired of Aztec domination, allied with Cortés, seeing him as a way to overthrow their oppressors. Thousands of Indigenous warriors joined the Spanish.</p>
+
+  <p>The Aztec emperor, Moctezuma II, initially welcomed Cortés to Tenochtitlán, perhaps believing the Spanish were gods or hoping to negotiate. It was a fatal mistake. Cortés took Moctezuma hostage. Fighting broke out. In 1521, after a brutal siege, Tenochtitlán fell. The city was destroyed, and the Aztec Empire collapsed.</p>
+
+  <p>But Cortés didn't win because of superior weapons or tactics. He won because of disease.</p>
+
+  <figure>
+    <img src="images/ch1/tenochtitlan.jpg" alt="Painting of Tenochtitlan, the Aztec capital" />
+    <figcaption>The Aztec capital of Tenochtitlán, built on an island in Lake Texcoco. At its peak, it was home to over 200,000 people. (Painting by Diego Rivera, reproduction, public domain)</figcaption>
+  </figure>
+
+  <h3>The Catastrophe of Disease</h3>
+
+  <p>The deadliest weapon the Spanish brought to the Americas wasn't guns or swords. It was germs.</p>
+
+  <p>Indigenous peoples had no immunity to European diseases like smallpox, measles, typhus, and influenza. These diseases spread like wildfire, killing millions. In some regions, 90% of the population died within a few generations. Entire communities were wiped out. Survivors were left traumatized, weakened, and vulnerable to conquest.</p>
+
+  <p>When smallpox reached Tenochtitlán during the siege, it killed more Aztecs than Spanish weapons ever did. Cortés didn't defeat the Aztecs—disease did.</p>
+
+  <p>This pattern repeated across the Americas. Wherever Europeans went, disease followed. The death toll was staggering—one of the greatest demographic catastrophes in human history. Scholars estimate that the Indigenous population of the Americas declined by as much as 90% in the century after contact.</p>
+
+  <div class="story-box">
+    <h3>Story Behind the Story: The Great Dying</h3>
+    <p>Imagine losing nine out of every ten people you know. Your parents, your siblings, your friends, your neighbors—gone. That's what happened to Indigenous peoples across the Americas in the decades after European contact. Smallpox swept through villages, leaving behind orphans and empty houses. Survivors had no time to mourn. They had to bury the dead, care for the sick, and try to hold their communities together. And then another wave of disease would come—measles, typhus, influenza. European colonizers often saw this as proof that God wanted them to take the land. But it wasn't divine will. It was biology. Indigenous peoples had been isolated from Eurasia for thousands of years and had no immunity to Old World diseases. The "Great Dying," as some historians call it, was one of the darkest chapters in human history—and it shaped everything that came after.</p>
+  </div>
+
+  <h3>The Encomienda System and Forced Labor</h3>
+
+  <p>After conquering the Aztecs, the Spanish imposed a brutal system of forced labor called the encomienda. Under this system, Spanish colonists were granted control over Indigenous communities. In theory, the colonists were supposed to protect the Indigenous people and teach them Christianity. In practice, they enslaved them, forcing them to work in mines, on plantations, and in households.</p>
+
+  <p>The conditions were horrific. Indigenous workers were beaten, starved, and worked to death. Families were torn apart. Communities collapsed. A few Spanish priests, like Bartolomé de las Casas, spoke out against the cruelty. But the system continued for centuries, driven by Spanish greed for gold and silver.</p>
+
+  <div class="primary-source">
+    <h3>Primary Source: Bartolomé de las Casas Condemns Spanish Cruelty</h3>
+    <p>"The Spaniards with their horses, their spears and lances, began to commit murders and strange cruelties. They entered into towns, villages, and hamlets, sparing neither children nor the aged, nor pregnant women, all of whom they ran through the body and lacerated, as though they were assaulting so many lambs herded in their sheepfold... They made bets as to who would slit a man in two, or cut off his head at one blow... They tore babies from their mothers' breasts by their feet, and dashed their heads against the rocks."</p>
+    <p class="source-citation">—Bartolomé de las Casas, <em>A Brief Account of the Destruction of the Indies</em> (1542)</p>
+  </div>
+
+  <h3>The Casta System: A New Racial Hierarchy</h3>
+
+  <p>Spanish colonists created an elaborate racial hierarchy called the casta system. At the top were peninsulares—people born in Spain. Below them were criollos (Creoles)—people of Spanish descent born in the Americas. Below them were mestizos—people of mixed Spanish and Indigenous ancestry. At the bottom were Indigenous people and enslaved Africans.</p>
+
+  <p>Your place in this hierarchy determined your legal rights, your job opportunities, and your social status. The Spanish encouraged intermarriage and cultural mixing in ways that the English colonists in North America did not. But this didn't mean equality. The casta system was designed to maintain Spanish dominance and control.</p>
+
+  <figure>
+    <img src="images/ch1/casta-painting.jpg" alt="Spanish colonial casta painting showing racial hierarchy" />
+    <figcaption>A Spanish colonial "casta painting" showing the racial hierarchy in New Spain. These paintings depicted different racial mixtures and reinforced the idea that race determined social status. (Public domain, 18th century)</figcaption>
+  </figure>
+
+  <div class="vocab-box">
+    <h3>Vocabulary</h3>
+    <p><strong>Conquistador:</strong> A Spanish conqueror who led military expeditions in the Americas during the 16th century. From the Spanish word for "conqueror."</p>
+    <p><strong>Encomienda:</strong> A Spanish colonial system in which colonists were granted authority over Indigenous communities, forcing them to work in exchange for supposed "protection" and Christian teaching. In practice, it was slavery.</p>
+    <p><strong>Casta System:</strong> The racial hierarchy created by Spanish colonists in the Americas, ranking people based on their ancestry (Spanish, Indigenous, African, or mixed).</p>
+  </div>
+
+  <div class="stop-think">
+    <h3>Stop and Think</h3>
+    <p>Why do you think disease had such a devastating impact on Indigenous populations but not on Europeans? What does this tell us about how interconnected (or isolated) different parts of the world were before 1492?</p>
+  </div>
+</section>
+
+<section id="columbian-exchange">
+  <h2>VI. The Columbian Exchange: Everything Changes</h2>
+
+  <p>The arrival of Europeans in the Americas triggered what historians call the Columbian Exchange—the transfer of plants, animals, diseases, people, and ideas between the "Old World" (Europe, Africa, and Asia) and the "New World" (the Americas). It was one of the most important events in human history, transforming diets, economies, ecosystems, and societies on both sides of the Atlantic.</p>
+
+  <h3>From the Americas to Europe</h3>
+
+  <p>Crops native to the Americas revolutionized diets around the world. Potatoes, originally from the Andes Mountains, became a staple food in Europe, feeding millions and fueling population growth. Maize (corn) spread to Africa and Asia. Tomatoes, once considered poisonous in Europe, became essential to Italian cuisine. Cacao (chocolate), vanilla, chili peppers, and pumpkins all came from the Americas.</p>
+
+  <p>These crops weren't just exotic luxuries—they were calorie-dense, nutritious, and capable of growing in a wide range of climates. They helped feed growing populations and changed the way people around the world ate.</p>
+
+  <h3>From Europe to the Americas</h3>
+
+  <p>Europeans brought wheat, rice, sugarcane, coffee, and bananas to the Americas. They also brought animals: horses, cattle, pigs, sheep, and chickens. These animals transformed Indigenous life in unexpected ways.</p>
+
+  <p>Horses, in particular, revolutionized life on the Great Plains. Plains peoples like the Lakota and Comanche adopted horses, becoming some of the most skilled horsemen in the world. Horses made buffalo hunting far more efficient and allowed Plains nations to expand their power and territory.</p>
+
+  <p>But European animals also caused problems. Pigs, left to roam free, destroyed Indigenous crops. Cattle overgrazed the land. Sheep competed with native animals for food. European livestock reshaped ecosystems across the Americas.</p>
+
+  <h3>The Human Cost: Disease and Slavery</h3>
+
+  <p>As we've already seen, the Columbian Exchange also brought disease—and it flowed mostly in one direction. Smallpox, measles, typhus, and other European diseases devastated Indigenous populations. The death toll was catastrophic.</p>
+
+  <p>The Columbian Exchange also included the forced migration of millions of enslaved Africans to the Americas. As Indigenous populations collapsed, European colonists turned to the transatlantic slave trade to supply labor for plantations growing sugar, tobacco, and cotton. Over the next three centuries, an estimated 12 million Africans were enslaved and transported to the Americas. Millions more died during the brutal journey across the Atlantic.</p>
+
+  <div class="key-idea">
+    <h3>Key Idea: The World Was Never the Same</h3>
+    <p>The Columbian Exchange connected the world in ways that had never been possible before. It brought new foods, new animals, new people, and new ideas across the oceans. It fueled population growth in Europe and Africa. It enriched European empires. It transformed ecosystems. And it caused unimaginable suffering—through disease, through slavery, and through conquest. The world became more connected, but the cost was borne by Indigenous peoples and enslaved Africans. Understanding the Columbian Exchange means grappling with both its creativity and its cruelty.</p>
+  </div>
+
+  <div class="stop-think">
+    <h3>Stop and Think</h3>
+    <p>Think about a food you eat regularly. Is it native to the Americas or to Europe/Africa/Asia? How would your diet be different if the Columbian Exchange had never happened?</p>
+  </div>
+</section>
+
+<section id="conclusion">
+  <h2>VII. Wrapping Up: Whose History?</h2>
+
+  <p>For a long time, American history textbooks began with Columbus. The message was clear: history started when Europeans arrived. Everything before that was "prehistory"—a blank space waiting to be filled.</p>
+
+  <p>But that story is wrong. The Americas were not empty. They were not waiting to be "discovered." Millions of people already lived there, in complex and diverse societies. They had their own histories, their own governments, their own cultures, and their own ways of understanding the world.</p>
+
+  <p>The arrival of Europeans didn't bring civilization to a wilderness. It brought catastrophe to a populated continent. It unleashed violence, disease, and exploitation on a scale that is hard to comprehend. Indigenous peoples resisted, survived, and adapted—but the cost was staggering.</p>
+
+  <p>At the same time, the Columbian Exchange reshaped the entire world. It connected continents that had been isolated for thousands of years. It introduced new crops that fed billions. It built empires and destroyed them. It created new cultures and erased old ones. It was one of the most consequential events in all of human history.</p>
+
+  <p>As you continue studying American history, remember this: the story doesn't begin with Europeans. It begins with the people who were here first. And their story—of resilience, resistance, and survival—continues today.</p>
+
+  <div class="voices-left-out">
+    <h3>Whose Voices Were Left Out?</h3>
+    <p><strong>Indigenous women:</strong> Most historical accounts of contact focus on male leaders—chiefs, warriors, conquistadors. But Indigenous women played crucial roles as farmers, diplomats, interpreters, and cultural preservers. Women like Malintzin (also called La Malinche), who served as Cortés's translator, made the conquest possible. Yet their perspectives are often ignored or dismissed.</p>
+    <p><strong>Ordinary Indigenous people:</strong> We know the names of emperors like Moctezuma and conquistadors like Cortés. But what about the farmers, the artisans, the parents, the children—the millions of ordinary people whose lives were destroyed? Their voices are almost entirely absent from the historical record.</p>
+    <p><strong>The Taíno people:</strong> The first Indigenous people Columbus encountered in the Caribbean were nearly wiped out within a generation. Very few records of their language, culture, or perspectives survive. Their near-total erasure is a haunting reminder of what was lost.</p>
+  </div>
+</section>
+
+<div class="activity-box">
+  <h3>Chapter Activity: Perspectives on "Discovery"</h3>
+
+  <h4>The Task:</h4>
+  <p>The word "discovery" is often used to describe Columbus's arrival in the Americas. But that word implies that the Americas were unknown, empty, or waiting to be found. For the millions of Indigenous people living there, there was no "discovery"—just invasion.</p>
+
+  <p>Your task: Rewrite the story of 1492 from three different perspectives.</p>
+
+  <ol>
+    <li><strong>A Taíno person</strong> living in the Caribbean, seeing strange ships arrive on the horizon.</li>
+    <li><strong>A Spanish sailor</strong> on Columbus's crew, landing in a world you've never imagined.</li>
+    <li><strong>A modern historian</strong> trying to explain what happened in a way that's fair to everyone.</li>
+  </ol>
+
+  <h4>Instructions:</h4>
+  <ul>
+    <li>Write 1-2 paragraphs from each perspective.</li>
+    <li>Think about what each person would see, feel, and believe.</li>
+    <li>Use evidence from the chapter to support your narrative.</li>
+  </ul>
+
+  <h4>Discussion Questions:</h4>
+  <ul>
+    <li>Should we stop using the word "discovery" to describe Columbus's voyages? Why or why not?</li>
+    <li>Is it possible to tell a historical story that's fair to everyone involved? Or does every story have a point of view?</li>
+    <li>Why do you think U.S. history textbooks used to start with Columbus instead of with Indigenous peoples?</li>
+  </ul>
+</div>
+
+<footer>
+  <p><strong>Chapter 1: Indigenous America</strong> from <em>The American Yawp Middle School Edition</em>. Adapted from <em>The American Yawp</em>, eds. Joseph Locke and Ben Wright (Stanford University Press, 2018).</p>
+  <p>Licensed under <a href="https://creativecommons.org/licenses/by-sa/4.0/">Creative Commons BY-SA 4.0</a>. Free to use, share, and adapt with attribution.</p>
+  <p><a href="index.html">← Back to chapters</a> | <a href="https://github.com/shiebenaderet/yawpms">Contribute on GitHub</a></p>
+</footer>
+
+</div>
+</body>
+</html>
