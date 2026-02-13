@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chapter 9: Democracy in America | The American Yawp MS</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:wght@400;600;700&display=swap');
+:root { --navy: #1B3A5C; --teal: #2A7F8E; --gold: #C4941D; --cream: #FAFAF8; --dark-gray: #2C2C2C; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Libre Baskerville', Georgia, serif; color: var(--dark-gray); background: var(--cream); line-height: 1.8; }
+.title-page { min-height: 60vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 80px 24px; background: linear-gradient(170deg, #0D2137 0%, var(--navy) 40%, #2B5A7C 100%); color: white; }
+.series { font-family: 'Source Sans 3', sans-serif; font-size: 13px; letter-spacing: 4px; text-transform: uppercase; opacity: .5; margin-bottom: 16px; }
+.chapter-num { font-size: 20px; opacity: .7; margin-bottom: 12px; }
+.chapter-title { font-size: 52px; line-height: 1.2; margin-bottom: 20px; font-weight: 700; }
+.chapter-subtitle { font-size: 22px; font-style: italic; opacity: .75; margin-bottom: 32px; }
+.divider { width: 100px; height: 3px; background: var(--gold); margin: 0 auto 24px; }
+.attribution { font-family: 'Source Sans 3', sans-serif; font-size: 13px; opacity: .5; max-width: 600px; }
+.container { max-width: 720px; margin: 0 auto; padding: 48px 24px; }
+.toc { background: white; border: 1px solid #ddd; border-radius: 8px; padding: 32px; margin-bottom: 48px; }
+.toc h2 { font-size: 18px; color: var(--navy); margin-bottom: 20px; text-align: center; }
+.toc ol { list-style: none; counter-reset: toc-counter; padding: 0; }
+.toc li { counter-increment: toc-counter; margin-bottom: 12px; }
+.toc li::before { content: counter(toc-counter, upper-roman) ". "; color: var(--gold); font-weight: 700; margin-right: 8px; }
+.toc a { color: var(--navy); text-decoration: none; }
+.overview { background: #F0F4F8; border-left: 5px solid var(--teal); padding: 28px 32px; margin-bottom: 48px; border-radius: 0 8px 8px 0; }
+.overview h2 { font-size: 20px; color: var(--teal); margin-bottom: 16px; }
+.overview p { font-family: 'Source Sans 3', sans-serif; font-size: 16px; line-height: 1.7; }
+.big-questions { background: white; border: 2px solid var(--gold); border-radius: 8px; padding: 28px 32px; margin-bottom: 48px; }
+.big-questions h2 { font-size: 18px; color: var(--gold); margin-bottom: 16px; text-align: center; }
+.big-questions ul { list-style: none; padding: 0; }
+.big-questions li { font-family: 'Source Sans 3', sans-serif; font-size: 15px; padding-left: 28px; position: relative; margin-bottom: 12px; line-height: 1.6; }
+.big-questions li::before { content: "?"; color: var(--gold); font-weight: 700; font-size: 20px; position: absolute; left: 0; top: -2px; }
+section { margin-bottom: 64px; }
+section h2 { font-size: 28px; color: var(--navy); margin-bottom: 24px; padding-bottom: 12px; border-bottom: 2px solid #E0E0E0; }
+section h3 { font-size: 20px; color: var(--navy); margin: 32px 0 16px; }
+p { margin-bottom: 20px; font-size: 17px; line-height: 1.8; }
+p:last-child { margin-bottom: 0; }
+.vocab-box, .stop-think, .perspectives, .key-idea, .primary-source, .story-box, .activity-box, .voices-left-out { border-radius: 8px; padding: 24px 28px; margin: 32px 0; }
+.vocab-box { background: #E8F4F8; border-left: 5px solid var(--teal); }
+.vocab-box h3 { color: var(--teal); font-size: 16px; margin: 0 0 12px; }
+.vocab-box p { font-family: 'Source Sans 3', sans-serif; font-size: 15px; margin-bottom: 12px; line-height: 1.6; }
+.vocab-box p:last-child { margin-bottom: 0; }
+.vocab-box strong { color: var(--teal); }
+.stop-think { background: #FFF9E6; border-left: 5px solid var(--gold); }
+.stop-think h3 { color: var(--gold); font-size: 16px; margin: 0 0 12px; }
+.stop-think p { font-family: 'Source Sans 3', sans-serif; font-size: 15px; font-style: italic; line-height: 1.6; }
+.perspectives { background: #F3E8FF; border-left: 5px solid #7C3AED; }
+.perspectives h3 { color: #7C3AED; font-size: 16px; margin: 0 0 16px; }
+.perspectives .perspective { margin-bottom: 16px; font-family: 'Source Sans 3', sans-serif; font-size: 15px; line-height: 1.6; }
+.perspectives .perspective:last-child { margin-bottom: 0; }
+.perspectives .perspective strong { color: #7C3AED; }
+.key-idea { background: #E8F5E9; border-left: 5px solid #2E7D32; }
+.key-idea h3 { color: #2E7D32; font-size: 16px; margin: 0 0 12px; }
+.key-idea p { font-family: 'Source Sans 3', sans-serif; font-size: 15px; line-height: 1.6; margin-bottom: 12px; }
+.key-idea p:last-child { margin-bottom: 0; }
+.primary-source { background: #FFF3E0; border-left: 5px solid #E65100; font-style: italic; }
+.primary-source h3 { color: #E65100; font-size: 16px; margin: 0 0 12px; font-style: normal; }
+.primary-source p { font-family: 'Source Sans 3', sans-serif; font-size: 15px; line-height: 1.7; margin-bottom: 12px; }
+.primary-source .source-citation { font-size: 13px; opacity: .7; font-style: normal; }
+.story-box { background: #FFF4E6; border-left: 5px solid #F57C00; }
+.story-box h3 { color: #F57C00; font-size: 18px; margin: 0 0 16px; }
+.story-box p { font-family: 'Source Sans 3', sans-serif; font-size: 15px; line-height: 1.7; margin-bottom: 12px; }
+.story-box p:last-child { margin-bottom: 0; }
+.voices-left-out { background: #FCE4EC; border-left: 5px solid #C2185B; }
+.voices-left-out h3 { color: #C2185B; font-size: 18px; margin: 0 0 16px; }
+.voices-left-out p { font-family: 'Source Sans 3', sans-serif; font-size: 15px; line-height: 1.7; margin-bottom: 12px; }
+.voices-left-out p:last-child { margin-bottom: 0; }
+.voices-left-out strong { color: #C2185B; }
+.activity-box { background: #FFEBEE; border: 2px solid #C62828; border-radius: 8px; padding: 32px; }
+.activity-box h3 { color: #C62828; font-size: 22px; margin: 0 0 20px; text-align: center; }
+.activity-box h4 { color: #C62828; font-size: 16px; margin: 20px 0 12px; }
+.activity-box p, .activity-box li { font-family: 'Source Sans 3', sans-serif; font-size: 15px; line-height: 1.7; }
+.activity-box ul, .activity-box ol { margin-left: 24px; margin-bottom: 16px; }
+.activity-box li { margin-bottom: 8px; }
+figure { margin: 32px 0; text-align: center; }
+figure img { max-width: 100%; height: auto; border-radius: 4px; box-shadow: 0 2px 8px rgba(0,0,0,.1); }
+figcaption { font-family: 'Source Sans 3', sans-serif; font-size: 14px; color: #666; margin-top: 12px; line-height: 1.6; font-style: italic; }
+footer { border-top: 2px solid #E0E0E0; margin-top: 64px; padding-top: 24px; font-family: 'Source Sans 3', sans-serif; font-size: 13px; color: #999; line-height: 1.7; }
+footer a { color: var(--teal); text-decoration: none; border-bottom: 1px dotted var(--teal); }
+footer a:hover { border-bottom-style: solid; }
+@media print { .title-page { page-break-after: always; } section { page-break-inside: avoid; } }
+@media (max-width: 600px) { .chapter-title { font-size: 36px; } .container { padding: 32px 16px; } section h2 { font-size: 24px; } }
+</style>
+</head>
+<body>
+
+<div class="title-page">
+  <div class="series">The American Yawp Middle School Edition</div>
+  <div class="chapter-num">Chapter 9</div>
+  <h1 class="chapter-title">Democracy in America</h1>
+  <div class="divider"></div>
+  <div class="chapter-subtitle">Andrew Jackson, Indian Removal, and the Question of Who Counts</div>
+  <p class="attribution">Adapted for middle school readers from <em>The American Yawp</em>, edited by Joseph Locke and Ben Wright</p>
+</div>
+
+<div class="container">
+
+<nav class="toc">
+  <h2>Contents</h2>
+  <ol>
+    <li><a href="#intro">Introduction: The Rise of the Common Man</a></li>
+    <li><a href="#suffrage">The Expansion of Suffrage</a></li>
+    <li><a href="#jackson">Andrew Jackson: Hero or Tyrant?</a></li>
+    <li><a href="#indian-removal">The Indian Removal Act and the Trail of Tears</a></li>
+    <li><a href="#nullification">The Nullification Crisis</a></li>
+    <li><a href="#bank-war">The Bank War</a></li>
+    <li><a href="#conclusion">Wrapping Up: Democracy's Limits</a></li>
+  </ol>
+</nav>
+
+<div class="overview">
+  <h2>Chapter Overview</h2>
+  <p>Between the 1820s and 1840s, American politics was transformed. More white men than ever before gained the right to vote. A brash, self-made war hero named Andrew Jackson rode this wave of popular democracy into the White House, promising to fight for ordinary people against wealthy elites. But Jackson's version of democracy had brutal limits. While he expanded political power for white men, he unleashed devastating violence against Native Americans, forced tens of thousands from their homelands, and ignored the rights of enslaved people entirely. The Jacksonian era forces us to ask a question that still matters today: What does democracy really mean when it excludes so many?</p>
+</div>
+
+<div class="big-questions">
+  <h2>Big Questions</h2>
+  <ul>
+    <li>How did American democracy expand in the 1820s and 1830s--and who was still left out?</li>
+    <li>Was Andrew Jackson a champion of the common people or a dangerous tyrant?</li>
+    <li>Why did the United States force Native Americans from their homelands, and how did Native peoples resist?</li>
+    <li>What was the nullification crisis, and why did it matter for the future of the country?</li>
+    <li>How did Jackson's war against the national bank affect ordinary Americans?</li>
+  </ul>
+</div>
+
+<section id="intro">
+  <h2>I. Introduction: The Rise of the Common Man</h2>
+
+  <p>In the early years of the American republic, politics was a gentleman's game. Presidents came from wealthy, educated families. George Washington, John Adams, Thomas Jefferson, James Madison, James Monroe--all of them were elite landowners. Voters were expected to defer to their "betters." Ordinary farmers, workers, and tradesmen were not expected to hold office or even to have strong opinions about who should.</p>
+
+  <p>By the 1820s, this was changing fast. A new spirit of popular democracy was sweeping the nation. State after state dropped the old requirement that only property owners could vote. Political parties began holding raucous public conventions instead of quiet backroom meetings. Candidates started campaigning directly to the people--shaking hands, giving speeches, and promising to fight for the "common man."</p>
+
+  <p>At the center of this transformation stood Andrew Jackson--a rough-edged military hero from the frontier of Tennessee. Jackson was no gentleman politician. He had grown up poor, fought in duels, and made his name slaughtering Creek and Seminole warriors on the battlefield. His supporters loved him precisely because he was not like the polished elites who had run the country since its founding. His enemies feared him for the same reason.</p>
+
+  <p>The era that bears Jackson's name--the Jacksonian era--is often celebrated as the dawn of American democracy. But it was a democracy with deep contradictions. The same movement that gave white men more political power also crushed Native nations, ignored enslaved people, and silenced women. Understanding those contradictions is essential to understanding America itself.</p>
+
+  <div class="vocab-box">
+    <h3>Vocabulary</h3>
+    <p><strong>Jacksonian democracy:</strong> The political movement of the 1820s-1840s that expanded voting rights to most white men and celebrated the "common man" over wealthy elites. Named after Andrew Jackson, though the movement was bigger than any one person.</p>
+    <p><strong>Suffrage:</strong> The right to vote. The expansion of suffrage means more people gaining the ability to vote in elections.</p>
+    <p><strong>Universal white male suffrage:</strong> The idea that all white men should be allowed to vote, regardless of whether they owned property. This was considered radical at the time, even though it still excluded most of the population.</p>
+  </div>
+</section>
+
+<section id="suffrage">
+  <h2>II. The Expansion of Suffrage</h2>
+
+  <h3>Tearing Down the Property Requirement</h3>
+
+  <p>In the early republic, most states required voters to own a certain amount of property--usually land. The reasoning was that only people with a financial stake in society should have a say in governing it. This meant that most working men--tenant farmers, factory workers, sailors, day laborers--could not vote.</p>
+
+  <p>Between 1800 and 1840, state after state eliminated property requirements for voting. New western states like Ohio, Indiana, and Illinois entered the Union with no property requirements at all. Older eastern states, pressured by growing populations of landless workers, gradually followed. By the 1840s, nearly all white men over the age of 21 could vote, regardless of how much they owned.</p>
+
+  <p>The results were dramatic. Voter turnout soared. In the 1824 presidential election, only about 27 percent of eligible voters cast ballots. By 1840, that number had jumped to nearly 80 percent. Politics went from a polite activity of the elite to a rowdy, passionate, mass spectacle.</p>
+
+  <h3>Who Still Could Not Vote</h3>
+
+  <p>But expanded suffrage had sharp limits. Women could not vote in any state. Free Black men, who had been able to vote in several northern states after the Revolution, were actually losing that right during this period. States like New York, Pennsylvania, and Connecticut passed new laws specifically barring Black men from the polls, even as they removed property requirements for white men. Enslaved people, of course, had no political rights whatsoever. And Native Americans were not considered citizens at all.</p>
+
+  <p>In other words, "universal suffrage" in the Jacksonian era really meant universal white male suffrage. Democracy was expanding--but only for some.</p>
+
+  <div class="key-idea">
+    <h3>Key Idea: Democracy Expanded and Contracted at the Same Time</h3>
+    <p>One of the strangest facts about Jacksonian democracy is that it expanded and contracted at the same time. White men without property gained the vote, but free Black men in many states lost it. The same era that celebrated the "common man" deliberately excluded women, Black people, and Native Americans from political life. Democracy was growing--but so were its boundaries about who counted as a full person.</p>
+  </div>
+
+  <div class="stop-think">
+    <h3>Stop and Think</h3>
+    <p>If democracy means "rule by the people," what happens when a society expands voting rights for some groups while taking them away from others? Can you call that progress?</p>
+  </div>
+</section>
+
+<section id="jackson">
+  <h2>III. Andrew Jackson: Hero or Tyrant?</h2>
+
+  <h3>From the Frontier to the White House</h3>
+
+  <p>Andrew Jackson's life story read like an adventure novel. Born in 1767 on the Carolina frontier, he was orphaned by age 14--his father died before his birth, his mother and two brothers died during the Revolutionary War. As a boy of 13, Jackson was captured by British soldiers. When an officer ordered him to polish his boots, Jackson refused. The officer slashed him across the face with a sword, leaving scars Jackson carried for life. He never forgave the British.</p>
+
+  <p>Jackson moved to Tennessee, became a lawyer, and then a wealthy plantation owner--though he never lost his frontier roughness. He fought duels, brawled with rivals, and carried bullets lodged in his body from past fights. In 1815, he became a national hero by defeating the British at the Battle of New Orleans during the War of 1812. He then led brutal military campaigns against the Creek and Seminole peoples in the Southeast, seizing millions of acres of Native land for white settlement.</p>
+
+  <h3>The Election of 1828</h3>
+
+  <p>Jackson first ran for president in 1824 and won the most popular votes and electoral votes, but not a majority. The House of Representatives chose John Quincy Adams instead, in what Jackson's supporters furiously called the "corrupt bargain." Jackson spent the next four years building a political movement for revenge.</p>
+
+  <p>The 1828 election was one of the nastiest in American history. Adams's supporters called Jackson a murderer, a bigamist, and an ignorant frontier barbarian. Jackson's supporters called Adams an elitist snob who had lived off the public's money his entire life. Jackson won in a landslide, carrying the South and the West with overwhelming support from ordinary white men who saw him as one of their own.</p>
+
+  <div class="story-box">
+    <h3>Story Behind the Story: The Inaugural Mob</h3>
+    <p>When Andrew Jackson was inaugurated on March 4, 1829, thousands of supporters flooded into Washington to celebrate. After the ceremony, the crowd surged into the White House for the reception. It was chaos. Muddy boots trampled elegant carpets. Furniture was smashed. Fistfights broke out over the punch bowl. China and glasses were shattered. Jackson himself had to be rescued through a window to escape the crush. Servants eventually lured the crowd outside by placing tubs of whiskey and orange juice on the White House lawn. Supreme Court Justice Joseph Story watched the scene and wrote, "The reign of King Mob seemed triumphant." To Jackson's supporters, the scene proved that the people's house now truly belonged to the people. To his critics, it proved that democracy was a dangerous experiment.</p>
+  </div>
+
+  <h3>The Spoils System</h3>
+
+  <p>Once in office, Jackson replaced hundreds of government officials with his own loyal supporters. Critics called this the "spoils system"--as in "to the victor belong the spoils." Previous presidents had kept most officials in their jobs regardless of who won the election. Jackson argued that rotating officeholders was more democratic: it prevented a permanent class of government insiders and gave ordinary citizens a chance to serve.</p>
+
+  <p>In practice, the spoils system rewarded political loyalty over competence. Some of Jackson's appointees were capable. Others were spectacularly unqualified. One customs collector Jackson appointed was later found to have stolen over a million dollars. The spoils system became a fixture of American politics for decades, breeding corruption and inefficiency.</p>
+
+  <div class="vocab-box">
+    <h3>Vocabulary</h3>
+    <p><strong>Spoils system:</strong> The practice of a newly elected president replacing government officials with his own political supporters. The name comes from the phrase "to the victor belong the spoils."</p>
+    <p><strong>Corrupt bargain:</strong> The accusation by Jackson's supporters that John Quincy Adams won the presidency in 1824 through a secret deal with Henry Clay, who became Adams's Secretary of State.</p>
+    <p><strong>Inauguration:</strong> The ceremony in which a new president is officially sworn into office.</p>
+  </div>
+
+  <div class="perspectives">
+    <h3>Multiple Perspectives: Andrew Jackson</h3>
+    <div class="perspective"><strong>Jackson's supporters (then and now):</strong> "Jackson was the first president who truly represented ordinary Americans. He fought against the rich and powerful, destroyed the corrupt national bank, and proved that you didn't have to be born into a wealthy family to lead the nation."</div>
+    <div class="perspective"><strong>Jackson's political opponents (the Whigs):</strong> "Jackson is a tyrant who ignores the Constitution, defies the Supreme Court, and rules by the force of his personality. He is 'King Andrew,' and he threatens to destroy the republic."</div>
+    <div class="perspective"><strong>Cherokee and other Native peoples:</strong> "Jackson is a destroyer of nations. He promised us treaties and then broke every one. He stole our land, burned our towns, and marched us to our deaths. His 'democracy' was built on our graves."</div>
+    <div class="perspective"><strong>Enslaved people:</strong> "Jackson speaks of liberty and the common man while he owns over 150 enslaved people on his plantation. His democracy does not include us. It is built on our labor."</div>
+  </div>
+</section>
+
+<section id="indian-removal">
+  <h2>IV. The Indian Removal Act and the Trail of Tears</h2>
+
+  <h3>Native Nations of the Southeast</h3>
+
+  <p>In the 1820s, approximately 125,000 Native Americans still lived on millions of acres of land in the southeastern United States--land that white settlers desperately wanted. The Cherokee, Chickasaw, Choctaw, Creek, and Seminole nations (sometimes called the "Five Civilized Tribes" by white Americans) had been living on these lands for centuries.</p>
+
+  <p>Many of these nations, especially the Cherokee, had adopted elements of Euro-American culture in an effort to prove they could coexist with white society. The Cherokee had a written constitution modeled on the U.S. Constitution. They had their own written language, developed by the scholar Sequoyah, and published a bilingual newspaper called the <em>Cherokee Phoenix</em>. They had schools, farms, and a formal government. Some Cherokee, it should be noted, also owned enslaved Black people--a painful reminder that no group is without moral complexity.</p>
+
+  <p>None of it mattered to Andrew Jackson.</p>
+
+  <h3>The Indian Removal Act of 1830</h3>
+
+  <p>In 1830, Jackson pushed the Indian Removal Act through Congress. The law authorized the president to negotiate treaties with Native nations in the Southeast, exchanging their lands for territory west of the Mississippi River in what is now Oklahoma. The word "negotiate" made it sound voluntary. It was not.</p>
+
+  <p>Jackson and his allies made it clear that Native nations had two choices: sign a treaty and move west, or stay and face state laws that would strip them of all rights and protections. Georgia, Alabama, and Mississippi had already passed laws abolishing tribal governments and making it illegal for Native people to testify in court against white people. The message was unmistakable: leave or be destroyed.</p>
+
+  <div class="primary-source">
+    <h3>Primary Source: Andrew Jackson Addresses Native Americans</h3>
+    <p>"Where you now are, you and my white children are too near to each other to live in harmony and peace... Beyond the great River Mississippi... your Father has provided a country large enough for all of you... There your white brothers will not trouble you; they will have no claim to the land, and you can live upon it, you and all your children, as long as the grass grows or the water runs, in peace and plenty."</p>
+    <p class="source-citation">--Andrew Jackson, message to the Creek Nation, 1829. The promises made in this message were broken almost immediately.</p>
+  </div>
+
+  <h3>Cherokee Resistance and Worcester v. Georgia</h3>
+
+  <p>The Cherokee refused to go quietly. They challenged Georgia's laws in the United States Supreme Court. In the landmark 1832 case <em>Worcester v. Georgia</em>, Chief Justice John Marshall ruled that Georgia had no authority over Cherokee lands. The Cherokee were a sovereign nation, Marshall declared, and only the federal government could deal with them. It was a stunning legal victory.</p>
+
+  <p>Jackson reportedly responded: "John Marshall has made his decision; now let him enforce it." Whether or not Jackson actually said those exact words, his meaning was clear. He ignored the Supreme Court's ruling and pressed forward with removal. The president of the United States had defied the highest court in the land--and there was nothing the Cherokee could do about it.</p>
+
+  <h3>The Trail of Tears</h3>
+
+  <p>In 1835, a small group of Cherokee leaders--acting without the authority of the Cherokee nation--signed the Treaty of New Echota, agreeing to removal. The vast majority of Cherokee, led by Principal Chief John Ross, opposed the treaty and petitioned Congress with nearly 16,000 signatures. Congress ratified the treaty anyway, by a single vote.</p>
+
+  <p>In 1838, the U.S. Army began rounding up Cherokee men, women, and children at gunpoint. Families were torn from their homes with no warning. Soldiers looted their houses and farms. Approximately 16,000 Cherokee were forced into stockades and then marched nearly a thousand miles west to Indian Territory (present-day Oklahoma). The journey took place in the brutal winter of 1838-1839. The Cherokee traveled on foot, by wagon, and by boat, with inadequate food, clothing, and shelter.</p>
+
+  <p>At least 4,000 Cherokee died on the march--from exposure, starvation, disease, and exhaustion. The Cherokee called it <em>Nunna daul Isunyi</em>: "The Trail Where They Cried." History remembers it as the Trail of Tears.</p>
+
+  <p>The Cherokee were not the only victims. The Choctaw were removed beginning in 1831, suffering terrible losses. The Creek were marched west in 1836, many of them in chains. The Chickasaw were forced out in 1837. The Seminole fought back in a bloody guerrilla war in the Florida swamps that lasted seven years, but most were eventually forced west as well.</p>
+
+  <div class="primary-source">
+    <h3>Primary Source: A Soldier Remembers the Trail of Tears</h3>
+    <p>"I fought through the Civil War and have seen men shot to pieces and slaughtered by thousands, but the Cherokee removal was the cruelest work I ever knew."</p>
+    <p class="source-citation">--Private John G. Burnett, recalling his role in the Cherokee removal, written in 1890</p>
+  </div>
+
+  <div class="stop-think">
+    <h3>Stop and Think</h3>
+    <p>The Cherokee adopted a written constitution, a written language, schools, and farming--things white Americans said they should do to be "civilized." But it did not protect them from removal. What does this tell us about the real reasons behind Indian removal?</p>
+  </div>
+
+  <div class="key-idea">
+    <h3>Key Idea: Indian Removal Was Not Inevitable</h3>
+    <p>It is tempting to treat Indian removal as something that "just happened"--an unavoidable consequence of westward expansion. But it was a deliberate political choice. The Supreme Court ruled it unconstitutional. Thousands of Americans, including many white missionaries and politicians, opposed it. Congress debated it fiercely. Jackson chose removal because it was popular with white voters who wanted Native land--and because Native peoples lacked the political power to stop him. Understanding this helps us see that historical injustices are the result of human decisions, not unstoppable forces.</p>
+  </div>
+</section>
+
+<section id="nullification">
+  <h2>V. The Nullification Crisis</h2>
+
+  <h3>The Tariff Problem</h3>
+
+  <p>While Jackson was fighting over Indian removal, another crisis was brewing--this one between the federal government and the state of South Carolina. The issue was tariffs: taxes on imported goods.</p>
+
+  <p>In 1828, Congress passed an extremely high tariff on imported manufactured goods. The tariff was designed to protect Northern factories from foreign competition. If British-made cloth was taxed heavily at the border, Americans would buy cloth made in Northern mills instead. Northern manufacturers loved it.</p>
+
+  <p>Southern planters hated it. The South had few factories. Southerners bought manufactured goods from Europe, and the tariff made those goods much more expensive. Even worse, they feared that European countries would retaliate by buying less Southern cotton. Southerners called the 1828 law the "Tariff of Abominations."</p>
+
+  <h3>Calhoun's Dangerous Idea</h3>
+
+  <p>Vice President John C. Calhoun of South Carolina secretly wrote a document arguing that any state had the right to "nullify"--declare null and void--any federal law it considered unconstitutional. Calhoun's theory drew on the old idea of states' rights: the belief that the states had created the federal government and could therefore override it when it overstepped its bounds.</p>
+
+  <p>Calhoun's nullification doctrine was about more than tariffs. Southern leaders feared that if the federal government could impose tariffs that hurt the South, it could one day move against slavery itself. Nullification was, at its core, a tool for protecting the South's slave-based economy from federal power.</p>
+
+  <div class="vocab-box">
+    <h3>Vocabulary</h3>
+    <p><strong>Tariff:</strong> A tax on imported goods. Tariffs can be used to raise money for the government or to protect domestic industries from foreign competition.</p>
+    <p><strong>Nullification:</strong> The idea that a state can declare a federal law unconstitutional and refuse to obey it. This theory was rejected by most constitutional scholars then and now.</p>
+    <p><strong>States' rights:</strong> The belief that state governments should have more power than the federal government. In the antebellum period, this idea was most often used to defend slavery.</p>
+  </div>
+
+  <h3>Jackson Draws the Line</h3>
+
+  <p>In 1832, South Carolina made its move. A special state convention voted to nullify the tariffs of 1828 and 1832, declaring them unconstitutional and unenforceable in South Carolina. The state threatened to secede--leave the Union entirely--if the federal government tried to collect the tariffs by force.</p>
+
+  <p>Jackson was furious. Despite being a slaveholder and a champion of states' rights on many issues, he drew the line at nullification and secession. "The laws of the United States must be executed," he declared. He called nullification treason and privately threatened to hang Calhoun. Congress passed the Force Bill, authorizing Jackson to use the military to enforce federal law in South Carolina.</p>
+
+  <p>The crisis was eventually defused by a compromise tariff, negotiated by Senator Henry Clay, that gradually lowered rates. South Carolina backed down--but the underlying tensions between federal power and states' rights, between North and South, were far from resolved. The nullification crisis was a dress rehearsal for the Civil War that would come three decades later.</p>
+
+  <div class="story-box">
+    <h3>Story Behind the Story: The Toast That Shook Washington</h3>
+    <p>The growing rift between Jackson and Calhoun exploded into the open at a formal dinner in April 1830. The evening was organized by Southern politicians who hoped to rally support for states' rights and nullification. When the time came for toasts, Jackson rose, locked eyes with Calhoun, and declared: "Our Federal Union--it must be preserved!" The room went silent. Calhoun, visibly shaking, raised his glass and offered his own toast: "The Union, next to our liberty, the most dear." The exchange was electric. In two short sentences, the president and vice president had drawn the battle lines of the nullification crisis. Within two years, Calhoun would resign the vice presidency--the first person in American history to do so.</p>
+  </div>
+
+  <div class="stop-think">
+    <h3>Stop and Think</h3>
+    <p>Jackson defied the Supreme Court on Indian removal but insisted that South Carolina had to obey federal law on tariffs. How can you explain this contradiction? What does it tell us about how power and principle can come into conflict?</p>
+  </div>
+</section>
+
+<section id="bank-war">
+  <h2>VI. The Bank War</h2>
+
+  <h3>The Second Bank of the United States</h3>
+
+  <p>The Second Bank of the United States was the most powerful financial institution in the country. Chartered by Congress in 1816, it held the federal government's money, regulated state banks, and controlled the money supply. Its president, Nicholas Biddle, was a brilliant, arrogant Philadelphia aristocrat who wielded enormous economic power.</p>
+
+  <p>Jackson hated the Bank. He saw it as a corrupt tool of wealthy Eastern elites--a "monster" that used its power to crush ordinary farmers and workers. Jackson believed that the Bank gave special privileges to the rich while hurting common people. He distrusted paper money and banks in general, preferring "hard money"--gold and silver coins.</p>
+
+  <h3>Jackson Kills the Bank</h3>
+
+  <p>In 1832, Jackson's opponents, led by Senator Henry Clay, tried to force the issue by pushing a bill through Congress to renew the Bank's charter four years early. They thought Jackson wouldn't dare veto such a popular institution in an election year. They were wrong.</p>
+
+  <p>Jackson vetoed the recharter bill with a thundering message that attacked the Bank as unconstitutional and anti-democratic. "It is to be regretted that the rich and powerful too often bend the acts of government to their selfish purposes," he wrote. The veto was wildly popular with ordinary voters, and Jackson won reelection in 1832 by a landslide.</p>
+
+  <p>Not content with blocking the Bank's recharter, Jackson moved to destroy it immediately. He ordered the federal government's money removed from the Bank and deposited in selected state banks, which critics mockingly called "pet banks." The Bank of the United States was dead.</p>
+
+  <div class="primary-source">
+    <h3>Primary Source: Jackson's Bank Veto Message (1832)</h3>
+    <p>"It is to be regretted that the rich and powerful too often bend the acts of government to their selfish purposes. Distinctions in society will always exist under every just government... but when the laws undertake to add to these natural and just advantages artificial distinctions, to grant titles, gratuities, and exclusive privileges, to make the rich richer and the potent more powerful, the humble members of society--the farmers, mechanics, and laborers--who have neither the time nor the means of securing like favors to themselves, have a right to complain of the injustice of their Government."</p>
+    <p class="source-citation">--Andrew Jackson, Bank Veto Message, July 10, 1832</p>
+  </div>
+
+  <h3>The Panic of 1837</h3>
+
+  <p>Jackson may have won the political battle, but the economic consequences were disastrous. Without the Bank of the United States to regulate them, state banks printed enormous amounts of paper money and made reckless loans. Land speculation exploded. A bubble formed--and in 1837, shortly after Jackson left office, it burst.</p>
+
+  <p>The Panic of 1837 was one of the worst economic depressions in American history up to that point. Banks collapsed. Businesses failed. Unemployment skyrocketed. Bread riots broke out in New York City. The depression lasted roughly seven years and caused immense suffering, especially among the poor and working class--the very people Jackson had claimed to champion.</p>
+
+  <p>Jackson's successor, Martin Van Buren, inherited the crisis and was blamed for it, even though most of the damage had been done before he took office. Van Buren lost his bid for reelection in 1840 to William Henry Harrison, a Whig candidate who ran as a man of the people--despite being a wealthy Virginia aristocrat. The irony was thick.</p>
+
+  <div class="vocab-box">
+    <h3>Vocabulary</h3>
+    <p><strong>Veto:</strong> The president's power to reject a bill passed by Congress. A veto can be overridden by a two-thirds vote in both the House and Senate.</p>
+    <p><strong>Speculation:</strong> Buying land, stocks, or other assets not to use them but in hopes of selling them later at a higher price. When too many people speculate, it can create a "bubble" that eventually bursts.</p>
+    <p><strong>Panic:</strong> In 19th-century America, a sudden economic crisis in which banks fail, businesses close, and unemployment rises sharply. Similar to what we now call a depression or recession.</p>
+  </div>
+
+  <div class="perspectives">
+    <h3>Multiple Perspectives: The Bank War</h3>
+    <div class="perspective"><strong>Jackson and his supporters:</strong> "The Bank is a monster that serves the rich at the expense of the people. No private institution should have this much power over the nation's economy. Destroying it is a victory for democracy."</div>
+    <div class="perspective"><strong>Nicholas Biddle and Bank supporters:</strong> "The Bank provides stability. It regulates state banks, prevents reckless lending, and keeps the economy healthy. Destroying it will lead to chaos--which is exactly what happened."</div>
+    <div class="perspective"><strong>Working people during the Panic of 1837:</strong> "Jackson said he was fighting for us, but now we're the ones who are starving. The banks are closed, there's no work, and our savings are gone. Who was this fight really for?"</div>
+  </div>
+</section>
+
+<section id="conclusion">
+  <h2>VII. Wrapping Up: Democracy's Limits</h2>
+
+  <p>The Jacksonian era was a time of genuine democratic expansion. More Americans participated in politics than ever before. The old idea that only wealthy, educated gentlemen should govern was replaced by a new belief that ordinary citizens--at least, ordinary white male citizens--had the right and the ability to shape their own government.</p>
+
+  <p>But Jacksonian democracy was also deeply, deliberately exclusionary. It expanded freedom for white men while crushing Native nations, ignoring enslaved people, and silencing women. Andrew Jackson himself embodied these contradictions: a self-made man who championed the common people, and a slaveholder who ordered the forced removal of entire nations from their homelands.</p>
+
+  <p>The Jacksonian era also surfaced tensions that would only grow more dangerous in the decades ahead. The nullification crisis revealed how deeply the North and South disagreed about the nature of the Union. The Bank War showed how economic power and political power were intertwined. And the Trail of Tears demonstrated what happened when democratic majorities used their power to destroy the rights of minorities.</p>
+
+  <p>Democracy, the Jacksonian era teaches us, is not just about who gets to vote. It is about who gets counted as fully human--and what limits a society places on the power of the majority.</p>
+
+  <div class="voices-left-out">
+    <h3>Whose Voices Were Left Out?</h3>
+    <p><strong>Cherokee women and children:</strong> Most accounts of the Trail of Tears focus on political leaders and military decisions. But the people who suffered most were ordinary families--mothers carrying infants, children separated from parents, elderly people who could not survive the march. Their individual stories are largely lost.</p>
+    <p><strong>Enslaved people on Jackson's plantation:</strong> Andrew Jackson owned as many as 150 enslaved people at his plantation, the Hermitage, near Nashville. While Jackson spoke constantly about liberty and the rights of the common man, the people who made his wealth possible had no rights at all. Their names, experiences, and perspectives are rarely included in stories about Jacksonian democracy.</p>
+    <p><strong>Free Black voters who lost the franchise:</strong> During the same years that property requirements were dropped for white men, free Black men in states like Pennsylvania and New York had their voting rights stripped away. Their protests against this injustice are an important but often overlooked part of the story.</p>
+    <p><strong>Women of the Jacksonian era:</strong> Women could not vote, hold office, or participate in the political system that was supposedly being opened to "the people." Some women, like the activist Angelina Grimke, began to speak out--but they were mocked and attacked for stepping outside their "proper sphere."</p>
+  </div>
+</section>
+
+<div class="activity-box">
+  <h3>Chapter Activity: Was Andrew Jackson a Good President?</h3>
+  <h4>The Task:</h4>
+  <p>You are a historian preparing a report card for Andrew Jackson's presidency. Grade him (A through F) in each of the following categories, and write 2-3 sentences explaining each grade using evidence from the chapter.</p>
+  <ul>
+    <li><strong>Expanding democracy:</strong> Did he make the political system more fair and open?</li>
+    <li><strong>Treatment of Native Americans:</strong> How should we judge the Indian Removal Act and the Trail of Tears?</li>
+    <li><strong>Economic policy:</strong> Did his war on the Bank help or hurt ordinary Americans?</li>
+    <li><strong>Respect for the Constitution:</strong> Did he follow the law, or did he act like a king?</li>
+    <li><strong>Overall leadership:</strong> Taking everything into account, what grade does he deserve?</li>
+  </ul>
+  <h4>Extension:</h4>
+  <p>Write a one-paragraph argument for or against putting Andrew Jackson on the twenty-dollar bill. Use at least three specific facts from the chapter to support your position.</p>
+  <h4>Discussion Questions:</h4>
+  <ul>
+    <li>Can a president be a champion of democracy for some people and a tyrant for others at the same time?</li>
+    <li>The Supreme Court ruled in favor of the Cherokee in <em>Worcester v. Georgia</em>. What happens to a democracy when its leaders ignore the courts?</li>
+    <li>Jackson claimed to fight for the "common man" against wealthy elites. Do you think he actually did? Why or why not?</li>
+  </ul>
+</div>
+
+<footer>
+  <p><strong>Chapter 9: Democracy in America</strong> from <em>The American Yawp Middle School Edition</em>. Adapted from <em>The American Yawp</em>, eds. Joseph Locke and Ben Wright (Stanford University Press, 2018).</p>
+  <p>Licensed under <a href="https://creativecommons.org/licenses/by-sa/4.0/">Creative Commons BY-SA 4.0</a>. Free to use, share, and adapt with attribution.</p>
+  <p><a href="index.html">← Back to chapters</a> | <a href="ch8.html">← Chapter 8</a> | <a href="ch10.html">Chapter 10 →</a></p>
+</footer>
+
+</div>
+</body>
+</html>

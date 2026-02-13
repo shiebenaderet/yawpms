@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chapter 14: The Civil War | The American Yawp MS</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:wght@400;600;700&display=swap');
+:root { --navy: #1B3A5C; --teal: #2A7F8E; --gold: #C4941D; --cream: #FAFAF8; --dark-gray: #2C2C2C; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Libre Baskerville', Georgia, serif; color: var(--dark-gray); background: var(--cream); line-height: 1.8; }
+.title-page { min-height: 60vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 80px 24px; background: linear-gradient(170deg, #0D2137 0%, var(--navy) 40%, #2B5A7C 100%); color: white; }
+.series { font-family: 'Source Sans 3', sans-serif; font-size: 13px; letter-spacing: 4px; text-transform: uppercase; opacity: .5; margin-bottom: 16px; }
+.chapter-num { font-size: 20px; opacity: .7; margin-bottom: 12px; }
+.chapter-title { font-size: 52px; line-height: 1.2; margin-bottom: 20px; font-weight: 700; }
+.chapter-subtitle { font-size: 22px; font-style: italic; opacity: .75; margin-bottom: 32px; }
+.divider { width: 100px; height: 3px; background: var(--gold); margin: 0 auto 24px; }
+.attribution { font-family: 'Source Sans 3', sans-serif; font-size: 13px; opacity: .5; max-width: 600px; }
+.container { max-width: 720px; margin: 0 auto; padding: 48px 24px; }
+.toc { background: white; border: 1px solid #ddd; border-radius: 8px; padding: 32px; margin-bottom: 48px; }
+.toc h2 { font-size: 18px; color: var(--navy); margin-bottom: 20px; text-align: center; }
+.toc ol { list-style: none; counter-reset: toc-counter; padding: 0; }
+.toc li { counter-increment: toc-counter; margin-bottom: 12px; }
+.toc li::before { content: counter(toc-counter, upper-roman) ". "; color: var(--gold); font-weight: 700; margin-right: 8px; }
+.toc a { color: var(--navy); text-decoration: none; }
+.overview { background: #F0F4F8; border-left: 5px solid var(--teal); padding: 28px 32px; margin-bottom: 48px; border-radius: 0 8px 8px 0; }
+.overview h2 { font-size: 20px; color: var(--teal); margin-bottom: 16px; }
+.overview p { font-family: 'Source Sans 3', sans-serif; font-size: 16px; line-height: 1.7; }
+.big-questions { background: white; border: 2px solid var(--gold); border-radius: 8px; padding: 28px 32px; margin-bottom: 48px; }
+.big-questions h2 { font-size: 18px; color: var(--gold); margin-bottom: 16px; text-align: center; }
+.big-questions ul { list-style: none; padding: 0; }
+.big-questions li { font-family: 'Source Sans 3', sans-serif; font-size: 15px; padding-left: 28px; position: relative; margin-bottom: 12px; line-height: 1.6; }
+.big-questions li::before { content: "?"; color: var(--gold); font-weight: 700; font-size: 20px; position: absolute; left: 0; top: -2px; }
+section { margin-bottom: 64px; }
+section h2 { font-size: 28px; color: var(--navy); margin-bottom: 24px; padding-bottom: 12px; border-bottom: 2px solid #E0E0E0; }
+section h3 { font-size: 20px; color: var(--navy); margin: 32px 0 16px; }
+p { margin-bottom: 20px; font-size: 17px; line-height: 1.8; }
+p:last-child { margin-bottom: 0; }
+.vocab-box, .stop-think, .perspectives, .key-idea, .primary-source, .story-box, .activity-box, .voices-left-out { border-radius: 8px; padding: 24px 28px; margin: 32px 0; }
+.vocab-box { background: #E8F4F8; border-left: 5px solid var(--teal); }
+.vocab-box h3 { color: var(--teal); font-size: 16px; margin: 0 0 12px; }
+.vocab-box p { font-family: 'Source Sans 3', sans-serif; font-size: 15px; margin-bottom: 12px; line-height: 1.6; }
+.vocab-box p:last-child { margin-bottom: 0; }
+.vocab-box strong { color: var(--teal); }
+.stop-think { background: #FFF9E6; border-left: 5px solid var(--gold); }
+.stop-think h3 { color: var(--gold); font-size: 16px; margin: 0 0 12px; }
+.stop-think p { font-family: 'Source Sans 3', sans-serif; font-size: 15px; font-style: italic; line-height: 1.6; }
+.perspectives { background: #F3E8FF; border-left: 5px solid #7C3AED; }
+.perspectives h3 { color: #7C3AED; font-size: 16px; margin: 0 0 16px; }
+.perspectives .perspective { margin-bottom: 16px; font-family: 'Source Sans 3', sans-serif; font-size: 15px; line-height: 1.6; }
+.perspectives .perspective:last-child { margin-bottom: 0; }
+.perspectives .perspective strong { color: #7C3AED; }
+.key-idea { background: #E8F5E9; border-left: 5px solid #2E7D32; }
+.key-idea h3 { color: #2E7D32; font-size: 16px; margin: 0 0 12px; }
+.key-idea p { font-family: 'Source Sans 3', sans-serif; font-size: 15px; line-height: 1.6; margin-bottom: 12px; }
+.key-idea p:last-child { margin-bottom: 0; }
+.primary-source { background: #FFF3E0; border-left: 5px solid #E65100; font-style: italic; }
+.primary-source h3 { color: #E65100; font-size: 16px; margin: 0 0 12px; font-style: normal; }
+.primary-source p { font-family: 'Source Sans 3', sans-serif; font-size: 15px; line-height: 1.7; margin-bottom: 12px; }
+.primary-source .source-citation { font-size: 13px; opacity: .7; font-style: normal; }
+.story-box { background: #FFF4E6; border-left: 5px solid #F57C00; }
+.story-box h3 { color: #F57C00; font-size: 18px; margin: 0 0 16px; }
+.story-box p { font-family: 'Source Sans 3', sans-serif; font-size: 15px; line-height: 1.7; margin-bottom: 12px; }
+.story-box p:last-child { margin-bottom: 0; }
+.voices-left-out { background: #FCE4EC; border-left: 5px solid #C2185B; }
+.voices-left-out h3 { color: #C2185B; font-size: 18px; margin: 0 0 16px; }
+.voices-left-out p { font-family: 'Source Sans 3', sans-serif; font-size: 15px; line-height: 1.7; margin-bottom: 12px; }
+.voices-left-out p:last-child { margin-bottom: 0; }
+.voices-left-out strong { color: #C2185B; }
+.activity-box { background: #FFEBEE; border: 2px solid #C62828; border-radius: 8px; padding: 32px; }
+.activity-box h3 { color: #C62828; font-size: 22px; margin: 0 0 20px; text-align: center; }
+.activity-box h4 { color: #C62828; font-size: 16px; margin: 20px 0 12px; }
+.activity-box p, .activity-box li { font-family: 'Source Sans 3', sans-serif; font-size: 15px; line-height: 1.7; }
+.activity-box ul, .activity-box ol { margin-left: 24px; margin-bottom: 16px; }
+.activity-box li { margin-bottom: 8px; }
+figure { margin: 32px 0; text-align: center; }
+figure img { max-width: 100%; height: auto; border-radius: 4px; box-shadow: 0 2px 8px rgba(0,0,0,.1); }
+figcaption { font-family: 'Source Sans 3', sans-serif; font-size: 14px; color: #666; margin-top: 12px; line-height: 1.6; font-style: italic; }
+footer { border-top: 2px solid #E0E0E0; margin-top: 64px; padding-top: 24px; font-family: 'Source Sans 3', sans-serif; font-size: 13px; color: #999; line-height: 1.7; }
+footer a { color: var(--teal); text-decoration: none; border-bottom: 1px dotted var(--teal); }
+footer a:hover { border-bottom-style: solid; }
+@media print { .title-page { page-break-after: always; } section { page-break-inside: avoid; } }
+@media (max-width: 600px) { .chapter-title { font-size: 36px; } .container { padding: 32px 16px; } section h2 { font-size: 24px; } }
+</style>
+</head>
+<body>
+
+<div class="title-page">
+  <div class="series">The American Yawp Middle School Edition</div>
+  <div class="chapter-num">Chapter 14</div>
+  <h1 class="chapter-title">The Civil War</h1>
+  <div class="divider"></div>
+  <div class="chapter-subtitle">Emancipation, Sacrifice, and the Fight to Save the Union</div>
+  <p class="attribution">Adapted for middle school readers from <em>The American Yawp</em>, edited by Joseph Locke and Ben Wright</p>
+</div>
+
+<div class="container">
+
+<nav class="toc">
+  <h2>Contents</h2>
+  <ol>
+    <li><a href="#intro">Introduction: Brother Against Brother</a></li>
+    <li><a href="#war-begins">The War Begins</a></li>
+    <li><a href="#emancipation">Emancipation</a></li>
+    <li><a href="#home-front">The Home Front</a></li>
+    <li><a href="#battles">Key Battles and Turning Points</a></li>
+    <li><a href="#end">The End of the War</a></li>
+    <li><a href="#conclusion">Wrapping Up: What Was the War About?</a></li>
+  </ol>
+</nav>
+
+<div class="overview">
+  <h2>Chapter Overview</h2>
+  <p>In April 1861, the United States tore itself apart. Eleven Southern states seceded from the Union and formed the Confederate States of America, and the two sides plunged into the bloodiest war in American history. What began as a fight to preserve the Union became a war to end slavery. Over four brutal years, more than 620,000 soldiers died, cities were burned, families were shattered, and the meaning of American freedom was transformed forever. The Civil War settled two questions that had divided the nation since its founding: whether the United States was one nation or a loose collection of states, and whether a country founded on the idea that "all men are created equal" could continue to enslave millions of people.</p>
+</div>
+
+<div class="big-questions">
+  <h2>Big Questions</h2>
+  <ul>
+    <li>Why did the Civil War begin, and what were the advantages and disadvantages of each side?</li>
+    <li>How did the war's purpose change from preserving the Union to ending slavery?</li>
+    <li>What role did African Americans play in winning their own freedom?</li>
+    <li>How did the war affect civilians, women, and families on both sides?</li>
+    <li>What was the human cost of the Civil War, and what did it ultimately decide?</li>
+  </ul>
+</div>
+
+<section id="intro">
+  <h2>I. Introduction: Brother Against Brother</h2>
+
+  <p>When Confederate batteries opened fire on Fort Sumter, South Carolina, on April 12, 1861, Americans entered a war that no one expected would last very long. Northerners predicted a quick victory. Southerners believed the North would never have the stomach for a real fight. Both sides were tragically wrong.</p>
+
+  <p>The Civil War would last four years and kill more Americans than every other American war combined, from the Revolution through the Korean War. It pitted neighbor against neighbor, brother against brother. Families were literally torn apart: Senator John Crittenden of Kentucky had one son who became a Union general and another who became a Confederate general. Mary Todd Lincoln, the president's wife, had four brothers fighting for the Confederacy.</p>
+
+  <p>The war transformed the nation in ways no one could have predicted. It ended slavery, redefined American citizenship, expanded the power of the federal government, and left scars on the landscape and in the hearts of Americans that took generations to heal. Some of those scars have never fully healed.</p>
+
+  <div class="vocab-box">
+    <h3>Vocabulary</h3>
+    <p><strong>Secession:</strong> The act of formally withdrawing from a political union. Eleven Southern states seceded from the United States to form the Confederacy.</p>
+    <p><strong>Confederacy (Confederate States of America):</strong> The nation formed by eleven Southern slave states that seceded from the Union between 1860 and 1861. Its capital was Richmond, Virginia.</p>
+    <p><strong>Union:</strong> The United States of America. During the Civil War, the term "Union" referred to the Northern states that remained loyal to the federal government.</p>
+  </div>
+</section>
+
+<section id="war-begins">
+  <h2>II. The War Begins</h2>
+
+  <h3>Fort Sumter: The First Shots</h3>
+
+  <p>When Abraham Lincoln was inaugurated as president in March 1861, seven Southern states had already seceded. The new president faced an impossible choice. Fort Sumter, a federal military fort in the harbor of Charleston, South Carolina, was running out of supplies. If Lincoln sent supply ships, the Confederacy would see it as an act of aggression. If he abandoned the fort, he would be accepting secession.</p>
+
+  <p>Lincoln chose to send supplies but not weapons. Confederate President Jefferson Davis decided this was unacceptable. On April 12, 1861, Confederate forces bombarded Fort Sumter for 34 hours. The fort surrendered. Remarkably, no one was killed in the bombardment itself. But the war had begun. Lincoln called for 75,000 volunteers to put down the rebellion. In response, four more Southern states seceded: Virginia, Arkansas, Tennessee, and North Carolina. The nation was at war.</p>
+
+  <h3>Advantages and Disadvantages</h3>
+
+  <p>On paper, the Union had enormous advantages. The North had a population of about 22 million, compared to the South's 9 million (of whom 3.5 million were enslaved people who would not fight for the Confederacy). The North had 90% of the nation's factories, which could produce weapons, ammunition, uniforms, and supplies. It had more railroads, more money, more ships, and a functioning government with an established military.</p>
+
+  <p>But the Confederacy had advantages too. The South was fighting a defensive war on its own territory, which is always easier than invading. Southern soldiers were generally more experienced with horses and firearms. The South had many talented military officers, including Robert E. Lee, who was so respected that Lincoln had first offered him command of the Union army. And the South did not need to win the war outright. It just needed to fight long enough to exhaust the North's willingness to continue.</p>
+
+  <h3>Bull Run: A Rude Awakening</h3>
+
+  <p>In July 1861, the first major battle of the war took place near Manassas, Virginia, along a creek called Bull Run. Confident Northerners, including politicians and their families, actually brought picnic baskets to watch what they expected would be a quick Union victory. Instead, the battle was a shocking Confederate triumph. Union soldiers fled in panic back toward Washington, tangled up with the terrified spectators.</p>
+
+  <p>The First Battle of Bull Run shattered the illusion that the war would be short or easy. It also revealed a grim truth: this war would be fought with modern weapons, including rifled muskets that were far more accurate and deadly than anything used in previous wars, but with old-fashioned tactics that sent soldiers marching in tight rows directly into murderous gunfire. The result would be slaughter on an unimaginable scale.</p>
+
+  <div class="stop-think">
+    <h3>Stop and Think</h3>
+    <p>Why do you think civilians brought picnic baskets to watch the Battle of Bull Run? What does that tell you about what Americans expected the war to be like? How do you think their views changed after the battle?</p>
+  </div>
+
+  <div class="key-idea">
+    <h3>Key Idea: A New Kind of War</h3>
+    <p>The Civil War was the first truly "modern" war. New technologies, including rifled muskets, artillery, ironclad warships, railroads for moving troops, and the telegraph for communication, made it far deadlier than any previous conflict. A single rifle could now kill accurately at 500 yards. But military tactics had not caught up with the technology. Generals still ordered soldiers to charge across open fields in tight formations, resulting in catastrophic casualties. Soldiers on both sides quickly learned that this was not the glorious adventure they had imagined.</p>
+  </div>
+</section>
+
+<section id="emancipation">
+  <h2>III. Emancipation</h2>
+
+  <h3>Lincoln's Evolving Views</h3>
+
+  <p>When the war began, Abraham Lincoln insisted its purpose was to preserve the Union, not to end slavery. "If I could save the Union without freeing any slave I would do it," he wrote in August 1862, "and if I could save it by freeing all the slaves I would do it." Lincoln personally opposed slavery, calling it a "moral, social, and political wrong." But he worried that making the war about slavery would drive the border states, slave states that had remained in the Union (Missouri, Kentucky, Maryland, and Delaware), into the Confederacy.</p>
+
+  <p>But the war itself changed the equation. Enslaved people were fleeing to Union army lines by the thousands, forcing the question of their status. Union generals could see that enslaved labor was helping the Confederate war effort: enslaved people built fortifications, drove supply wagons, and produced food for Southern armies. Freeing enslaved people was not just morally right. It was a military strategy.</p>
+
+  <h3>The Emancipation Proclamation</h3>
+
+  <p>On January 1, 1863, Abraham Lincoln issued the Emancipation Proclamation. It declared that all enslaved people in states that were in rebellion against the United States were "then, thenceforward, and forever free." It was a revolutionary document, but it was also complicated. The Proclamation only applied to Confederate states, where Lincoln had no actual power to enforce it. It did not free enslaved people in the border states that had stayed in the Union. And it freed no one immediately: actual freedom came only when Union armies advanced into Confederate territory.</p>
+
+  <p>Despite these limitations, the Emancipation Proclamation was transformative. It officially made the war a fight to end slavery, not just to preserve the Union. It discouraged Britain and France from recognizing the Confederacy, since those nations had already abolished slavery and could not be seen supporting a slave nation. And most importantly, it opened the door for Black men to serve in the Union Army.</p>
+
+  <div class="primary-source">
+    <h3>Primary Source: The Emancipation Proclamation (Excerpt)</h3>
+    <p>"That on the first day of January, in the year of our Lord one thousand eight hundred and sixty-three, all persons held as slaves within any State or designated part of a State, the people whereof shall then be in rebellion against the United States, shall be then, thenceforward, and forever free; and the Executive Government of the United States, including the military and naval authority thereof, will recognize and maintain the freedom of such persons."</p>
+    <p class="source-citation">—Abraham Lincoln, Emancipation Proclamation, January 1, 1863</p>
+  </div>
+
+  <h3>Black Soldiers in the Union Army</h3>
+
+  <p>After the Emancipation Proclamation, African Americans enlisted in the Union Army and Navy in huge numbers. By the war's end, approximately 180,000 Black men had served as soldiers and another 20,000 had served in the Navy. They made up roughly 10% of the entire Union fighting force. These soldiers fought in more than 400 engagements, including 39 major battles.</p>
+
+  <p>Black soldiers faced discrimination even within the Union Army. They were paid less than white soldiers, were often given inferior weapons and equipment, and were commanded almost exclusively by white officers. They also faced a terrifying additional danger: the Confederate government announced that captured Black soldiers would not be treated as prisoners of war but would be re-enslaved or executed. Despite all of this, Black troops fought with extraordinary courage and skill, proving their valor beyond any doubt.</p>
+
+  <div class="story-box">
+    <h3>Story Behind the Story: The 54th Massachusetts</h3>
+    <p>The 54th Massachusetts Infantry was one of the first Black regiments in the Union Army. Organized in early 1863, it was led by Colonel Robert Gould Shaw, a young white officer from a prominent abolitionist family. The regiment included free Black men from across the North, including two sons of Frederick Douglass.</p>
+    <p>On July 18, 1863, the 54th Massachusetts led a frontal assault on Fort Wagner, a heavily fortified Confederate position guarding the entrance to Charleston Harbor. The attack was nearly suicidal: the soldiers had to charge across a narrow strip of sand directly into devastating cannon and rifle fire. Colonel Shaw was killed leading the charge. Nearly half the regiment was killed, wounded, or captured. The Confederates buried Shaw in a mass grave with his Black soldiers, intending it as an insult. Shaw's father said he was proud his son was buried with his men.</p>
+    <p>The 54th Massachusetts did not capture Fort Wagner. But their bravery transformed Northern public opinion about Black soldiers. Frederick Douglass declared that the assault "made Fort Wagner such a name to the colored race as Bunker Hill had been for ninety years to the white Yankees." The regiment's sacrifice helped open the floodgates for Black military service.</p>
+  </div>
+
+  <div class="vocab-box">
+    <h3>Vocabulary</h3>
+    <p><strong>Emancipation:</strong> The act of freeing people from slavery or oppression.</p>
+    <p><strong>Emancipation Proclamation:</strong> The executive order issued by President Lincoln on January 1, 1863, declaring enslaved people in Confederate states to be free.</p>
+    <p><strong>Contraband:</strong> A term used during the Civil War for enslaved people who escaped to Union lines. Union General Benjamin Butler first used the term in 1861, arguing that since the Confederacy considered enslaved people to be property, they could be seized as "contraband of war."</p>
+  </div>
+
+  <div class="stop-think">
+    <h3>Stop and Think</h3>
+    <p>The Emancipation Proclamation only freed enslaved people in Confederate states, not in Union border states. Why do you think Lincoln made this decision? Was it the right choice? What does this tell you about the relationship between moral principles and political strategy?</p>
+  </div>
+</section>
+
+<section id="home-front">
+  <h2>IV. The Home Front</h2>
+
+  <h3>Women's Roles Transform</h3>
+
+  <p>The Civil War disrupted every aspect of civilian life and dramatically changed the roles of women on both sides. With millions of men away at war, women took over farms, ran businesses, and filled jobs in factories and government offices. In the North, women worked in arsenal factories making ammunition, served as clerks in the Treasury Department, and organized massive relief efforts through the United States Sanitary Commission, which supplied food, medicine, and clothing to Union troops.</p>
+
+  <p>Women also served as nurses in military hospitals, a role that had previously been considered inappropriate for women. Clara Barton, who would later found the American Red Cross, tended wounded soldiers on the battlefield itself. Dorothea Dix served as Superintendent of Army Nurses. In the South, women ran plantations, managed enslaved laborers, and coped with devastating shortages of food and supplies as the Union blockade strangled the Southern economy.</p>
+
+  <h3>Draft Riots and Resistance</h3>
+
+  <p>As casualties mounted, both sides turned to conscription, or the military draft, to fill their armies. The Confederacy passed a draft law in 1862; the Union followed in 1863. Both laws were deeply unpopular and both contained loopholes that favored the wealthy. In the Confederacy, men who owned twenty or more enslaved people were exempt. In the Union, any man could avoid the draft by paying $300 (roughly a full year's wages for a working-class man) or by hiring a substitute to serve in his place.</p>
+
+  <p>The unfairness sparked outrage. In July 1863, draft riots erupted in New York City, the largest civil disturbance in American history apart from the war itself. Working-class white men, many of them Irish immigrants, attacked draft offices, wealthy neighborhoods, and African American communities. Rioters lynched Black men, burned the Colored Orphan Asylum, and rampaged for four days before federal troops restored order. More than 100 people were killed. The riots revealed deep class resentments and exposed the ugly reality that many Northerners were willing to fight to save the Union but not to free enslaved people.</p>
+
+  <h3>Economic Impact and Civilian Suffering</h3>
+
+  <p>The war's economic impact was dramatically uneven. The Northern economy actually boomed during the war, fueled by government contracts for weapons, uniforms, and supplies. Factories ran at full capacity. Farmers prospered as they fed the massive Union Army. The federal government passed landmark economic legislation, including the Homestead Act (which gave free land to western settlers), the Morrill Act (which created public universities), and the Pacific Railroad Act (which authorized the transcontinental railroad).</p>
+
+  <p>The Southern economy, by contrast, was devastated. The Union naval blockade cut off trade and prevented the Confederacy from exporting cotton or importing manufactured goods. Inflation spiraled out of control: by 1865, prices in the Confederacy had risen by 9,000%. A barrel of flour in Richmond cost $1,000 in Confederate dollars. Southern civilians, especially women and children, faced starvation. In April 1863, hundreds of women in Richmond, the Confederate capital, rioted over bread shortages, looting stores and demanding food. President Jefferson Davis personally confronted the crowd and threatened to have soldiers open fire before the riot dispersed.</p>
+
+  <div class="key-idea">
+    <h3>Key Idea: "A Rich Man's War and a Poor Man's Fight"</h3>
+    <p>On both sides, the Civil War hit poor and working-class people hardest. Wealthy men could buy their way out of the draft. Poor men could not. Wealthy families could still afford food and supplies. Poor families, especially in the South, went hungry. The phrase "a rich man's war and a poor man's fight" became a common bitter complaint among ordinary soldiers and civilians who felt they were bearing the costs of a conflict that mainly served the interests of the powerful.</p>
+  </div>
+</section>
+
+<section id="battles">
+  <h2>V. Key Battles and Turning Points</h2>
+
+  <h3>Antietam: The Bloodiest Day</h3>
+
+  <p>On September 17, 1862, Union and Confederate forces clashed at Antietam Creek near Sharpsburg, Maryland. It became the single bloodiest day in American history. In twelve hours of savage fighting, roughly 23,000 soldiers were killed, wounded, or went missing. Bodies lay so thick on the ground that, according to witnesses, you could walk across the battlefield without ever touching the earth. The battle was essentially a draw, but Confederate General Robert E. Lee retreated back into Virginia. That was enough for Lincoln to claim it as a Union victory and use it as the occasion to announce the Emancipation Proclamation.</p>
+
+  <h3>Gettysburg: The Turning Point</h3>
+
+  <p>In July 1863, Lee made his boldest gamble: a full-scale invasion of the North. He marched his Army of Northern Virginia into Pennsylvania, hoping a major victory on Northern soil would shatter Union morale and force Lincoln to negotiate peace. Instead, he collided with the Union Army of the Potomac at the small town of Gettysburg.</p>
+
+  <p>The three-day battle (July 1-3, 1863) was the largest ever fought in North America. On the third day, Lee ordered approximately 12,500 soldiers to charge across nearly a mile of open ground directly at the center of the Union line. This assault, known as Pickett's Charge, was a catastrophe. Confederate soldiers were cut down by artillery and rifle fire. Barely half made it back. Lee's invasion was broken. He retreated to Virginia and would never again have the strength to invade the North. Combined casualties at Gettysburg exceeded 50,000 men.</p>
+
+  <h3>Vicksburg: Splitting the Confederacy</h3>
+
+  <p>On the very same day that Lee retreated from Gettysburg, July 4, 1863, the Confederate fortress of Vicksburg, Mississippi, surrendered to Union General Ulysses S. Grant after a grueling 47-day siege. Vicksburg sat on high bluffs overlooking the Mississippi River. Its fall gave the Union control of the entire Mississippi River, effectively splitting the Confederacy in two. The western Confederate states of Texas, Arkansas, and most of Louisiana were cut off from the rest of the Confederacy.</p>
+
+  <p>Together, Gettysburg and Vicksburg marked the turning point of the war. After July 1863, the Confederacy was on the defensive, slowly being squeezed from all sides.</p>
+
+  <h3>Sherman's March to the Sea: Total War</h3>
+
+  <p>In late 1864, Union General William Tecumseh Sherman captured Atlanta, Georgia, and then led 60,000 soldiers on a devastating march from Atlanta to Savannah on the coast, a distance of about 300 miles. Sherman's army cut a path of destruction 60 miles wide, burning farms, destroying railroads, killing livestock, and seizing food and supplies. Sherman was practicing what would later be called "total war": the deliberate targeting of civilian resources to destroy the enemy's ability and will to fight.</p>
+
+  <p>Sherman's March was terrifying for Southern civilians. His soldiers burned barns, tore up railroad tracks (twisting the heated rails around trees in what soldiers called "Sherman's neckties"), and left a trail of devastation that scarred the Southern landscape and memory for generations. Sherman himself was blunt about his intentions: "War is cruelty, and you cannot refine it," he wrote. "The crueler it is, the sooner it will be over."</p>
+
+  <div class="vocab-box">
+    <h3>Vocabulary</h3>
+    <p><strong>Total war:</strong> A military strategy that targets not only enemy soldiers but also the civilian population, economy, and infrastructure that supports the war effort.</p>
+    <p><strong>Siege:</strong> A military operation in which an army surrounds a city or fortress, cutting off supplies and reinforcements, in order to force its surrender.</p>
+    <p><strong>Casualties:</strong> Soldiers who are killed, wounded, captured, or missing in action during a battle or war.</p>
+  </div>
+
+  <div class="stop-think">
+    <h3>Stop and Think</h3>
+    <p>Sherman believed that destroying civilian property and resources would shorten the war and ultimately save lives by ending the fighting sooner. Do you agree with this reasoning? Is it ever justified to target civilians and their property during a war? Where do you draw the line?</p>
+  </div>
+</section>
+
+<section id="end">
+  <h2>VI. The End of the War</h2>
+
+  <h3>Appomattox: Surrender</h3>
+
+  <p>By the spring of 1865, the Confederacy was collapsing. Its armies were starving, its economy was destroyed, and its territory was shrinking every day. On April 2, 1865, Union forces finally broke through the defenses around Petersburg, Virginia, after a nine-month siege. Richmond, the Confederate capital, fell the next day. Confederate officials fled, and retreating soldiers set fire to the city's warehouses. Ironically, many of the people who helped put out the fires and restore order were Black Union soldiers.</p>
+
+  <p>Robert E. Lee retreated westward with what remained of his army, hoping to link up with other Confederate forces. But Union troops surrounded him. On April 9, 1865, Lee surrendered to Ulysses S. Grant at Appomattox Court House, a small village in Virginia. Grant offered generous terms: Confederate soldiers could go home, keep their horses and personal property, and would not be prosecuted for treason. Lee accepted. As Lee rode away, Grant ordered his men not to celebrate. "The war is over," he said. "The rebels are our countrymen again."</p>
+
+  <h3>Lincoln's Assassination</h3>
+
+  <p>The nation's joy was shattered five days later. On the evening of April 14, 1865, President Abraham Lincoln attended a play at Ford's Theatre in Washington, D.C. During the performance, John Wilkes Booth, a well-known actor and Confederate sympathizer, crept into the presidential box and shot Lincoln in the back of the head. Lincoln died the following morning. Secretary of War Edwin Stanton reportedly said, "Now he belongs to the ages."</p>
+
+  <p>Lincoln's assassination plunged the nation into grief at the very moment of victory. It also had devastating political consequences. Lincoln had begun thinking carefully about how to rebuild the nation and bring the Southern states back into the Union. His successor, Andrew Johnson, lacked Lincoln's political skill, moral vision, and commitment to the rights of formerly enslaved people. The story of Reconstruction, and of Johnson's disastrous presidency, belongs to the next chapter. But Lincoln's murder ensured that the road from war to peace would be far rougher than it needed to be.</p>
+
+  <h3>The Cost</h3>
+
+  <p>The numbers are staggering. Approximately 620,000 soldiers died during the Civil War, and some recent estimates put the number as high as 750,000. About 360,000 were Union soldiers and 260,000 were Confederates. Two-thirds of those deaths were caused not by battle wounds but by disease: dysentery, typhoid, pneumonia, and infections from wounds treated in filthy field hospitals where doctors operated without understanding germs or sterilization.</p>
+
+  <p>Beyond the dead, hundreds of thousands more were wounded, many permanently. Soldiers returned home missing arms and legs. An entire generation of young men was shattered. The South, where most of the fighting took place, was physically devastated: cities burned, farms destroyed, railroads torn up, and an entire economic system, built on slavery, obliterated. The financial cost of the war exceeded $6 billion, a sum almost incomprehensible at the time.</p>
+
+  <div class="primary-source">
+    <h3>Primary Source: A Union Soldier's Letter Home</h3>
+    <p>"I am sick of this war. We have been marching and fighting for three years now and I cannot see the end. The men around me are ragged and thin. We have buried so many friends I cannot count them. I do not complain about the cause, for I believe we are right. But the cost, the terrible cost. If the people at home could see what we see they would weep."</p>
+    <p class="source-citation">—Letter from a Union soldier, 1864 (composite based on typical soldier correspondence of the period)</p>
+  </div>
+</section>
+
+<section id="conclusion">
+  <h2>VII. Wrapping Up: What Was the War About?</h2>
+
+  <p>The Civil War was fought over slavery. That statement might seem simple, but it has been debated and distorted for more than 160 years. In the decades after the war, many white Southerners promoted what historians call the "Lost Cause" narrative, which argued that the war was really about states' rights, Southern honor, and resistance to Northern tyranny, not slavery. This version of history was taught in schools, celebrated in monuments, and embedded in American culture for generations.</p>
+
+  <p>But the historical evidence is overwhelming. When Southern states seceded, their leaders said clearly and repeatedly that they were leaving to protect slavery. Mississippi's declaration of secession stated: "Our position is thoroughly identified with the institution of slavery, the greatest material interest of the world." Confederate Vice President Alexander Stephens declared that the Confederacy's "cornerstone" rested "upon the great truth that the negro is not equal to the white man; that slavery, subordination to the superior race, is his natural and normal condition." The Confederacy was created to preserve and expand slavery. The war was fought because the South seceded to protect slavery, and the North fought to prevent the breakup of the nation.</p>
+
+  <p>The war ended slavery, preserved the Union, and established that the federal government was supreme over the states. It also raised profound new questions that would define the next era of American history: What rights would the four million formerly enslaved people have? Would they be citizens? Would they vote? Would they receive land, education, and economic opportunity? The war was over, but the struggle over its meaning and legacy had only just begun.</p>
+
+  <div class="perspectives">
+    <h3>Multiple Perspectives: Was the War About Slavery or States' Rights?</h3>
+    <div class="perspective"><strong>The seceding states themselves:</strong> Confederate leaders were explicit: they seceded to protect slavery. Their own declarations, constitutions, and speeches say so in plain language. The Confederate Constitution specifically protected slavery and prohibited any Confederate state from ever abolishing it.</div>
+    <div class="perspective"><strong>The "Lost Cause" narrative (developed after the war):</strong> Many white Southerners later argued the war was about states' rights, not slavery. This narrative presented the Confederacy as a noble cause defending liberty against government overreach. Historians today recognize this as a distortion designed to make the Confederacy morally acceptable and to justify continued racial oppression.</div>
+    <div class="perspective"><strong>Enslaved people and abolitionists:</strong> For the four million people held in bondage, there was never any doubt. The war was about slavery, because slavery was the system that denied them their humanity. Frederick Douglass called the war "a war for and against slavery" from the very beginning and urged Lincoln to recognize it as such.</div>
+    <div class="perspective"><strong>Historians today:</strong> The overwhelming scholarly consensus is that slavery was the central cause of the Civil War. "States' rights" was the mechanism, but the right that Southern states were fighting for was the right to own human beings as property.</div>
+  </div>
+
+  <div class="voices-left-out">
+    <h3>Whose Voices Were Left Out?</h3>
+    <p><strong>Enslaved people who freed themselves ("contrabands"):</strong> Long before the Emancipation Proclamation, enslaved people took freedom into their own hands. Tens of thousands fled to Union army lines whenever Northern troops came near. Union General Benjamin Butler declared them "contraband of war" to avoid returning them to their enslavers. These self-emancipated men, women, and children built camps near Union forts, worked as laborers, cooks, and scouts for the army, and forced the question of slavery onto the Union's agenda. Their actions helped push Lincoln toward emancipation. Yet their stories are often overshadowed by the narrative of Lincoln as the "Great Emancipator."</p>
+    <p><strong>Women soldiers who fought in disguise:</strong> An estimated 400 to 750 women disguised themselves as men and fought as soldiers in both the Union and Confederate armies. Sarah Edmonds served as "Franklin Thompson" in the Union Army for two years. Jennie Hodgers served as "Albert Cashier" for the entire war and continued living as a man for decades afterward. These women's stories were largely hidden or dismissed for over a century, erased from a war narrative that defined courage and sacrifice as exclusively male.</p>
+    <p><strong>Native Americans who fought on both sides:</strong> Approximately 20,000 Native Americans fought in the Civil War, serving in both Union and Confederate forces. The Cherokee Nation was itself divided by the war, with some leaders allying with the Confederacy (which promised to respect Native sovereignty) and others fighting for the Union. Ely S. Parker, a Seneca lawyer and engineer, served on Grant's staff and wrote out the terms of Lee's surrender at Appomattox. After the war, Native peoples received almost no recognition for their service and continued to face dispossession and forced assimilation.</p>
+  </div>
+</section>
+
+<div class="activity-box">
+  <h3>Chapter Activity: Voices of the Civil War</h3>
+  <h4>The Task:</h4>
+  <p>Choose one of the following people and write a one-page diary entry from their perspective during a specific moment of the Civil War. Use evidence from the chapter to make your entry historically accurate.</p>
+  <ul>
+    <li>A Black soldier in the 54th Massachusetts before the assault on Fort Wagner</li>
+    <li>An enslaved person escaping to Union lines in 1862</li>
+    <li>A woman in Richmond during the bread riots of 1863</li>
+    <li>A Union soldier writing home after the Battle of Gettysburg</li>
+    <li>A Confederate soldier at Appomattox on the day of surrender</li>
+    <li>A woman disguised as a male soldier</li>
+  </ul>
+  <h4>Your diary entry should include:</h4>
+  <ul>
+    <li>At least three specific historical details from the chapter</li>
+    <li>A description of what you see, hear, and feel</li>
+    <li>Your character's thoughts about why the war is being fought</li>
+    <li>Your character's hopes or fears about the future</li>
+  </ul>
+  <h4>Discussion Questions:</h4>
+  <ul>
+    <li>How did different people experience the same war in completely different ways?</li>
+    <li>Why is it important to hear the Civil War's story from multiple perspectives, not just from generals and presidents?</li>
+    <li>The Civil War ended over 160 years ago. Why do Americans still argue about what it meant?</li>
+  </ul>
+</div>
+
+<footer>
+  <p><strong>Chapter 14: The Civil War</strong> from <em>The American Yawp Middle School Edition</em>. Adapted from <em>The American Yawp</em>, eds. Joseph Locke and Ben Wright (Stanford University Press, 2018).</p>
+  <p>Licensed under <a href="https://creativecommons.org/licenses/by-sa/4.0/">Creative Commons BY-SA 4.0</a>. Free to use, share, and adapt with attribution.</p>
+  <p><a href="index.html">← Back to chapters</a> | <a href="ch13.html">← Chapter 13</a> | <a href="ch15.html">Chapter 15 →</a></p>
+</footer>
+
+</div>
+</body>
+</html>

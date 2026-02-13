@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chapter 15: Reconstruction | The American Yawp MS</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:wght@400;600;700&display=swap');
+:root { --navy: #1B3A5C; --teal: #2A7F8E; --gold: #C4941D; --cream: #FAFAF8; --dark-gray: #2C2C2C; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Libre Baskerville', Georgia, serif; color: var(--dark-gray); background: var(--cream); line-height: 1.8; }
+.title-page { min-height: 60vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 80px 24px; background: linear-gradient(170deg, #0D2137 0%, var(--navy) 40%, #2B5A7C 100%); color: white; }
+.series { font-family: 'Source Sans 3', sans-serif; font-size: 13px; letter-spacing: 4px; text-transform: uppercase; opacity: .5; margin-bottom: 16px; }
+.chapter-num { font-size: 20px; opacity: .7; margin-bottom: 12px; }
+.chapter-title { font-size: 52px; line-height: 1.2; margin-bottom: 20px; font-weight: 700; }
+.chapter-subtitle { font-size: 22px; font-style: italic; opacity: .75; margin-bottom: 32px; }
+.divider { width: 100px; height: 3px; background: var(--gold); margin: 0 auto 24px; }
+.attribution { font-family: 'Source Sans 3', sans-serif; font-size: 13px; opacity: .5; max-width: 600px; }
+.container { max-width: 720px; margin: 0 auto; padding: 48px 24px; }
+.toc { background: white; border: 1px solid #ddd; border-radius: 8px; padding: 32px; margin-bottom: 48px; }
+.toc h2 { font-size: 18px; color: var(--navy); margin-bottom: 20px; text-align: center; }
+.toc ol { list-style: none; counter-reset: toc-counter; padding: 0; }
+.toc li { counter-increment: toc-counter; margin-bottom: 12px; }
+.toc li::before { content: counter(toc-counter, upper-roman) ". "; color: var(--gold); font-weight: 700; margin-right: 8px; }
+.toc a { color: var(--navy); text-decoration: none; }
+.overview { background: #F0F4F8; border-left: 5px solid var(--teal); padding: 28px 32px; margin-bottom: 48px; border-radius: 0 8px 8px 0; }
+.overview h2 { font-size: 20px; color: var(--teal); margin-bottom: 16px; }
+.overview p { font-family: 'Source Sans 3', sans-serif; font-size: 16px; line-height: 1.7; }
+.big-questions { background: white; border: 2px solid var(--gold); border-radius: 8px; padding: 28px 32px; margin-bottom: 48px; }
+.big-questions h2 { font-size: 18px; color: var(--gold); margin-bottom: 16px; text-align: center; }
+.big-questions ul { list-style: none; padding: 0; }
+.big-questions li { font-family: 'Source Sans 3', sans-serif; font-size: 15px; padding-left: 28px; position: relative; margin-bottom: 12px; line-height: 1.6; }
+.big-questions li::before { content: "?"; color: var(--gold); font-weight: 700; font-size: 20px; position: absolute; left: 0; top: -2px; }
+section { margin-bottom: 64px; }
+section h2 { font-size: 28px; color: var(--navy); margin-bottom: 24px; padding-bottom: 12px; border-bottom: 2px solid #E0E0E0; }
+section h3 { font-size: 20px; color: var(--navy); margin: 32px 0 16px; }
+p { margin-bottom: 20px; font-size: 17px; line-height: 1.8; }
+p:last-child { margin-bottom: 0; }
+.vocab-box, .stop-think, .perspectives, .key-idea, .primary-source, .story-box, .activity-box, .voices-left-out { border-radius: 8px; padding: 24px 28px; margin: 32px 0; }
+.vocab-box { background: #E8F4F8; border-left: 5px solid var(--teal); }
+.vocab-box h3 { color: var(--teal); font-size: 16px; margin: 0 0 12px; }
+.vocab-box p { font-family: 'Source Sans 3', sans-serif; font-size: 15px; margin-bottom: 12px; line-height: 1.6; }
+.vocab-box p:last-child { margin-bottom: 0; }
+.vocab-box strong { color: var(--teal); }
+.stop-think { background: #FFF9E6; border-left: 5px solid var(--gold); }
+.stop-think h3 { color: var(--gold); font-size: 16px; margin: 0 0 12px; }
+.stop-think p { font-family: 'Source Sans 3', sans-serif; font-size: 15px; font-style: italic; line-height: 1.6; }
+.perspectives { background: #F3E8FF; border-left: 5px solid #7C3AED; }
+.perspectives h3 { color: #7C3AED; font-size: 16px; margin: 0 0 16px; }
+.perspectives .perspective { margin-bottom: 16px; font-family: 'Source Sans 3', sans-serif; font-size: 15px; line-height: 1.6; }
+.perspectives .perspective:last-child { margin-bottom: 0; }
+.perspectives .perspective strong { color: #7C3AED; }
+.key-idea { background: #E8F5E9; border-left: 5px solid #2E7D32; }
+.key-idea h3 { color: #2E7D32; font-size: 16px; margin: 0 0 12px; }
+.key-idea p { font-family: 'Source Sans 3', sans-serif; font-size: 15px; line-height: 1.6; margin-bottom: 12px; }
+.key-idea p:last-child { margin-bottom: 0; }
+.primary-source { background: #FFF3E0; border-left: 5px solid #E65100; font-style: italic; }
+.primary-source h3 { color: #E65100; font-size: 16px; margin: 0 0 12px; font-style: normal; }
+.primary-source p { font-family: 'Source Sans 3', sans-serif; font-size: 15px; line-height: 1.7; margin-bottom: 12px; }
+.primary-source .source-citation { font-size: 13px; opacity: .7; font-style: normal; }
+.story-box { background: #FFF4E6; border-left: 5px solid #F57C00; }
+.story-box h3 { color: #F57C00; font-size: 18px; margin: 0 0 16px; }
+.story-box p { font-family: 'Source Sans 3', sans-serif; font-size: 15px; line-height: 1.7; margin-bottom: 12px; }
+.story-box p:last-child { margin-bottom: 0; }
+.voices-left-out { background: #FCE4EC; border-left: 5px solid #C2185B; }
+.voices-left-out h3 { color: #C2185B; font-size: 18px; margin: 0 0 16px; }
+.voices-left-out p { font-family: 'Source Sans 3', sans-serif; font-size: 15px; line-height: 1.7; margin-bottom: 12px; }
+.voices-left-out p:last-child { margin-bottom: 0; }
+.voices-left-out strong { color: #C2185B; }
+.activity-box { background: #FFEBEE; border: 2px solid #C62828; border-radius: 8px; padding: 32px; }
+.activity-box h3 { color: #C62828; font-size: 22px; margin: 0 0 20px; text-align: center; }
+.activity-box h4 { color: #C62828; font-size: 16px; margin: 20px 0 12px; }
+.activity-box p, .activity-box li { font-family: 'Source Sans 3', sans-serif; font-size: 15px; line-height: 1.7; }
+.activity-box ul, .activity-box ol { margin-left: 24px; margin-bottom: 16px; }
+.activity-box li { margin-bottom: 8px; }
+figure { margin: 32px 0; text-align: center; }
+figure img { max-width: 100%; height: auto; border-radius: 4px; box-shadow: 0 2px 8px rgba(0,0,0,.1); }
+figcaption { font-family: 'Source Sans 3', sans-serif; font-size: 14px; color: #666; margin-top: 12px; line-height: 1.6; font-style: italic; }
+footer { border-top: 2px solid #E0E0E0; margin-top: 64px; padding-top: 24px; font-family: 'Source Sans 3', sans-serif; font-size: 13px; color: #999; line-height: 1.7; }
+footer a { color: var(--teal); text-decoration: none; border-bottom: 1px dotted var(--teal); }
+footer a:hover { border-bottom-style: solid; }
+@media print { .title-page { page-break-after: always; } section { page-break-inside: avoid; } }
+@media (max-width: 600px) { .chapter-title { font-size: 36px; } .container { padding: 32px 16px; } section h2 { font-size: 24px; } }
+</style>
+</head>
+<body>
+
+<div class="title-page">
+  <div class="series">The American Yawp Middle School Edition</div>
+  <div class="chapter-num">Chapter 15</div>
+  <h1 class="chapter-title">Reconstruction</h1>
+  <div class="divider"></div>
+  <div class="chapter-subtitle">Freedom, Terror, and the Unfinished Revolution</div>
+  <p class="attribution">Adapted for middle school readers from <em>The American Yawp</em>, edited by Joseph Locke and Ben Wright</p>
+</div>
+
+<div class="container">
+
+<nav class="toc">
+  <h2>Contents</h2>
+  <ol>
+    <li><a href="#intro">Introduction: The Second Founding</a></li>
+    <li><a href="#presidential">Presidential Reconstruction</a></li>
+    <li><a href="#radical">Radical Reconstruction</a></li>
+    <li><a href="#freedom">Black Freedom and Achievement</a></li>
+    <li><a href="#resistance">White Supremacist Resistance</a></li>
+    <li><a href="#end">The End of Reconstruction</a></li>
+    <li><a href="#conclusion">Wrapping Up: The Promises Betrayed</a></li>
+  </ol>
+</nav>
+
+<div class="overview">
+  <h2>Chapter Overview</h2>
+  <p>The Civil War destroyed slavery, but it did not answer the most important question facing the nation: What would freedom actually mean for four million formerly enslaved people? The period from 1865 to 1877, known as Reconstruction, was America's first great experiment in interracial democracy. During these years, Black Americans voted, held office, built schools and churches, and claimed their rights as citizens. But white supremacists fought back with terror and violence, and the federal government eventually abandoned its commitment to Black freedom. Reconstruction's failure would shape American life for the next century and beyond.</p>
+</div>
+
+<div class="big-questions">
+  <h2>Big Questions</h2>
+  <ul>
+    <li>What did freedom mean for formerly enslaved people, and how did they fight to define it on their own terms?</li>
+    <li>Why did Presidential Reconstruction fail, and how did Radical Reconstruction differ?</li>
+    <li>How did white supremacists use violence and terror to undermine Black freedom?</li>
+    <li>Why did the federal government abandon Reconstruction, and what were the consequences?</li>
+  </ul>
+</div>
+
+<section id="intro">
+  <h2>I. Introduction: The Second Founding</h2>
+
+  <p>In the spring of 1865, the Civil War was over. The Confederacy had been crushed. Slavery was dead. More than four million Black Americans were free. But freedom from slavery was only the beginning. The harder question was just starting: What kind of nation would the United States become?</p>
+
+  <p>Would formerly enslaved people receive land, education, and the right to vote? Would they become full and equal citizens? Would the men who led the Confederacy be punished or welcomed back into power? Would the federal government protect Black rights, or would it leave Black Southerners at the mercy of the same white people who had enslaved them?</p>
+
+  <p>These questions defined the era of Reconstruction. Some historians call the constitutional amendments passed during this period the "Second Founding" of the United States, because they attempted to remake the nation on the basis of equality rather than white supremacy. For a brief, extraordinary moment, that vision seemed possible. Then it was destroyed.</p>
+
+  <p>Understanding Reconstruction is essential to understanding modern America. The promises made and broken during this era echo through every civil rights struggle that followed.</p>
+
+  <div class="vocab-box">
+    <h3>Vocabulary</h3>
+    <p><strong>Reconstruction:</strong> The period from 1865 to 1877 when the federal government attempted to rebuild the South, integrate formerly enslaved people into American society, and determine the terms on which former Confederate states would rejoin the Union.</p>
+    <p><strong>Freedpeople:</strong> The term used for formerly enslaved people after emancipation. It emphasized their new status as free men and women.</p>
+    <p><strong>Second Founding:</strong> A term used by historians to describe the 13th, 14th, and 15th Amendments, which fundamentally remade the Constitution by abolishing slavery, guaranteeing citizenship and equal protection, and protecting voting rights.</p>
+  </div>
+</section>
+
+<section id="presidential">
+  <h2>II. Presidential Reconstruction</h2>
+
+  <h3>Lincoln's Plan: Mercy and Speed</h3>
+
+  <p>Even before the war ended, President Abraham Lincoln had begun thinking about how to bring the Confederate states back into the Union. His approach was lenient. Under his "Ten Percent Plan," a Southern state could form a new government once just 10 percent of its voters swore loyalty to the Union and accepted the end of slavery. Lincoln wanted reconciliation. He wanted to heal the nation quickly.</p>
+
+  <p>But Lincoln never got to carry out his plan. On April 14, 1865, just five days after the Confederate surrender, he was assassinated by John Wilkes Booth at Ford's Theatre in Washington, D.C. The task of Reconstruction fell to his vice president, Andrew Johnson.</p>
+
+  <h3>Johnson's Lenient Approach</h3>
+
+  <p>Andrew Johnson was a Democrat from Tennessee who had remained loyal to the Union during the war. Many in Congress hoped he would be tough on the former Confederacy. They were wrong. Johnson was a white supremacist who openly declared that the United States was "a government for white men." He had opposed secession, but he had no interest in Black equality.</p>
+
+  <p>Johnson pardoned thousands of former Confederates, including wealthy plantation owners and high-ranking military officers. He returned their land. He allowed Southern states to create new governments with almost no conditions. He vetoed bills designed to protect Black rights. Under Johnson's Reconstruction, the old Southern ruling class quickly returned to power.</p>
+
+  <h3>The Black Codes</h3>
+
+  <p>With Johnson's encouragement, Southern states passed laws known as Black Codes in 1865 and 1866. These laws were designed to control Black labor and restrict Black freedom. While they technically acknowledged that slavery was over, they recreated slavery's conditions under different names.</p>
+
+  <p>Black Codes required Black people to sign year-long labor contracts with white employers. If they refused, they could be arrested for "vagrancy" and forced to work without pay. Black people were forbidden from owning certain types of property, serving on juries, or testifying against white people in court. Some codes prohibited Black people from entering towns without permission or gathering in groups.</p>
+
+  <p>The message was unmistakable: the South intended to keep Black people in a condition as close to slavery as possible.</p>
+
+  <div class="vocab-box">
+    <h3>Vocabulary</h3>
+    <p><strong>Black Codes:</strong> Laws passed by Southern states in 1865 and 1866 that severely restricted the rights and freedoms of Black people, effectively recreating many conditions of slavery.</p>
+    <p><strong>Vagrancy laws:</strong> Laws that made it a crime to be unemployed. Southern states used vagrancy laws to arrest Black people who refused to sign labor contracts and force them into unpaid labor.</p>
+    <p><strong>Presidential Reconstruction:</strong> The period (1865-1867) when Presidents Lincoln and Johnson controlled the process of rebuilding the South, generally taking a lenient approach toward former Confederates.</p>
+  </div>
+
+  <div class="stop-think">
+    <h3>Stop and Think</h3>
+    <p>The Black Codes did not use the word "slavery," but many people said they recreated slavery in all but name. What specific features of the Black Codes made them so similar to slavery? Why do you think Southern states avoided using the word "slavery" in these laws?</p>
+  </div>
+</section>
+
+<section id="radical">
+  <h2>III. Radical Reconstruction</h2>
+
+  <h3>Congress Takes Over</h3>
+
+  <p>By 1866, many members of Congress were furious. They looked at the South and saw former Confederates back in power, Black Codes reducing freedpeople to near-slavery, and violence against Black people going unpunished. Andrew Johnson's lenient approach had failed. Reconstruction, they believed, had to start over.</p>
+
+  <p>A group of Republican congressmen known as the Radical Republicans took the lead. Led by men like Thaddeus Stevens in the House and Charles Sumner in the Senate, they argued that the federal government had a duty to protect Black rights and transform Southern society. They believed that without radical change, the South would simply rebuild white supremacy under a different name. The Black Codes had proved them right.</p>
+
+  <h3>The Fourteenth Amendment: Citizenship and Equal Protection</h3>
+
+  <p>In 1868, Congress passed and the states ratified the Fourteenth Amendment to the Constitution. This was one of the most important changes ever made to American law. It declared that all persons born in the United States were citizens, and that no state could deny any citizen "equal protection of the laws" or deprive any person of "life, liberty, or property, without due process of law."</p>
+
+  <p>The Fourteenth Amendment was a direct response to the Black Codes and to the Supreme Court's infamous Dred Scott decision of 1857, which had declared that Black people could never be American citizens. Now, for the first time, citizenship was defined in the Constitution and made available to everyone born on American soil regardless of race.</p>
+
+  <h3>The Fifteenth Amendment: Voting Rights</h3>
+
+  <p>In 1870, the Fifteenth Amendment was ratified, declaring that the right to vote could not be denied "on account of race, color, or previous condition of servitude." For the first time in American history, Black men could vote. In the South, where Black people made up a majority or near-majority of the population in many states, this was revolutionary. Black voters could now elect leaders who represented their interests.</p>
+
+  <p>The Fifteenth Amendment, however, did not extend voting rights to women of any race. This was a source of bitter conflict within the reform movement, as many women's suffrage activists who had supported abolition felt betrayed.</p>
+
+  <h3>The Reconstruction Acts and Military Occupation</h3>
+
+  <p>In 1867, Congress passed the Reconstruction Acts over Johnson's vetoes. These laws divided the former Confederate states (except Tennessee, which had already been readmitted) into five military districts, each governed by a Union general. To rejoin the Union, Southern states had to write new constitutions guaranteeing Black men the right to vote, and they had to ratify the Fourteenth Amendment. Federal troops were stationed throughout the South to enforce these requirements and protect Black citizens.</p>
+
+  <p>For the first time, the federal government was using its power to actively protect the rights of Black Americans. It was a dramatic, unprecedented intervention, and it transformed Southern politics overnight.</p>
+
+  <div class="primary-source">
+    <h3>Primary Source: The Fourteenth Amendment, Section 1 (1868)</h3>
+    <p>"All persons born or naturalized in the United States, and subject to the jurisdiction thereof, are citizens of the United States and of the State wherein they reside. No State shall make or enforce any law which shall abridge the privileges or immunities of citizens of the United States; nor shall any State deprive any person of life, liberty, or property, without due process of law; nor deny to any person within its jurisdiction the equal protection of the laws."</p>
+    <p class="source-citation">—Fourteenth Amendment to the United States Constitution, ratified July 9, 1868</p>
+  </div>
+
+  <div class="vocab-box">
+    <h3>Vocabulary</h3>
+    <p><strong>Radical Republicans:</strong> Members of Congress who pushed for the strongest protections for Black rights and the harshest treatment of the former Confederacy. They believed Reconstruction required a fundamental transformation of Southern society.</p>
+    <p><strong>Fourteenth Amendment (1868):</strong> The constitutional amendment that defined citizenship, guaranteed equal protection of the laws, and established due process rights for all persons. One of the most important amendments in American history.</p>
+    <p><strong>Fifteenth Amendment (1870):</strong> The constitutional amendment that prohibited denying the right to vote based on race, color, or previous condition of servitude.</p>
+    <p><strong>Reconstruction Acts (1867):</strong> Laws passed by Congress that divided the South into military districts and required former Confederate states to guarantee Black voting rights and ratify the Fourteenth Amendment before being readmitted to the Union.</p>
+  </div>
+
+  <div class="key-idea">
+    <h3>Key Idea: The Constitutional Revolution</h3>
+    <p>The Thirteenth, Fourteenth, and Fifteenth Amendments fundamentally transformed the Constitution. Before the Civil War, the Constitution protected slavery and left the definition of citizenship to individual states. After Reconstruction, the Constitution abolished slavery, defined national citizenship, guaranteed equal protection, and protected voting rights regardless of race. These amendments shifted power from the states to the federal government and established principles of equality that would fuel civil rights movements for the next 150 years. Even though these promises would go unfulfilled for decades, the words were in the Constitution, waiting to be enforced.</p>
+  </div>
+</section>
+
+<section id="freedom">
+  <h2>IV. Black Freedom and Achievement</h2>
+
+  <h3>Freedpeople's Schools</h3>
+
+  <p>One of the first things formerly enslaved people did with their freedom was build schools. Under slavery, it had been illegal to teach enslaved people to read and write. Now, freedpeople of all ages flooded into classrooms. Elderly grandparents sat beside young children, learning to read the Bible, write their names, and do arithmetic. Black communities raised money, donated land, and built schoolhouses. Northern missionary organizations, especially the American Missionary Association, sent teachers south. Many of these teachers were Black women.</p>
+
+  <p>By 1870, more than 4,000 schools serving over 200,000 students had been established across the South. Black Southerners understood what slaveholders had always understood: education was power. Literacy meant the ability to read contracts, understand laws, participate in politics, and resist exploitation.</p>
+
+  <h3>Black Churches</h3>
+
+  <p>Under slavery, Black religious life had been tightly controlled by white people. Enslaved people were forced to attend white churches, where ministers preached obedience. After emancipation, Black Southerners left white churches in enormous numbers and founded their own congregations. Black churches became the most important institutions in African American communities. They were not just places of worship. They served as schools, meeting halls, mutual aid societies, and political organizing centers. Black ministers became community leaders and, in many cases, political leaders as well.</p>
+
+  <h3>Black Elected Officials</h3>
+
+  <p>With the right to vote came the right to hold office. During Reconstruction, more than 1,500 Black men held elected office across the South, from local school boards to the United States Congress. In 1870, Hiram Revels of Mississippi became the first Black member of the U.S. Senate, filling the very seat that Jefferson Davis, the president of the Confederacy, had once held. Blanche K. Bruce, also of Mississippi, became the second Black senator in 1875 and served a full six-year term. In the House of Representatives, sixteen Black men served during Reconstruction.</p>
+
+  <p>Black officeholders worked to fund public schools, build hospitals, reform the tax system, and protect workers' rights. Many were formerly enslaved people who had taught themselves to read. Their achievements were extraordinary, and their very presence in government was a radical challenge to white supremacy.</p>
+
+  <h3>Land, Family, and the Freedmen's Bureau</h3>
+
+  <p>Freedpeople understood that true freedom required economic independence, and economic independence required land. "Give us our own land and we take care of ourselves," one freedman declared. "But without land, the old masters can hire us or starve us, as they please." Some freedpeople occupied abandoned plantations, and early in Reconstruction, General William T. Sherman set aside coastal land in Georgia and South Carolina for Black settlement. But President Johnson reversed these land grants and returned the land to its former Confederate owners.</p>
+
+  <p>The Freedmen's Bureau, established by Congress in 1865, was the federal agency charged with helping the transition from slavery to freedom. It distributed food, established hospitals, founded schools, and helped freedpeople negotiate labor contracts. It also helped formerly enslaved people search for family members who had been sold away during slavery. The Bureau was understaffed, underfunded, and overwhelmed, but it was the first large-scale federal social welfare program in American history.</p>
+
+  <div class="story-box">
+    <h3>Story Behind the Story: Searching for Lost Family</h3>
+    <p>One of the most heartbreaking legacies of slavery was the forced separation of families. Enslaved husbands, wives, and children had been sold away from one another, sometimes to plantations hundreds of miles distant. After emancipation, thousands of freedpeople set out on desperate journeys to find their loved ones.</p>
+    <p>Newspapers published columns of "Information Wanted" advertisements. A typical notice might read: "Sam Dove wishes to know of the whereabouts of his mother, Areno, his sisters Maria, Neziah, and Peggy, and his brother Edmond, who were owned by Geo. Dove of Rockingham County, Shenandoah Valley, Virginia. Sold in Richmond, Virginia, by Josh Dove, in the year 1839."</p>
+    <p>Some searches took years. Some never succeeded. Ben and Betty Dodson had been separated by sale before the war. After emancipation, Ben walked hundreds of miles across multiple states searching for Betty. After twenty years, he found her. Their reunion was one of countless stories of love, loss, and persistence in the aftermath of slavery. For every joyful reunion, there were thousands of searches that ended in silence.</p>
+  </div>
+
+  <div class="stop-think">
+    <h3>Stop and Think</h3>
+    <p>Why was land ownership so important to freedpeople? Think about the connection between owning land and being truly independent. What happens to people's freedom when they have to depend on the same people who once enslaved them for a place to live and work?</p>
+  </div>
+</section>
+
+<section id="resistance">
+  <h2>V. White Supremacist Resistance</h2>
+
+  <h3>The Ku Klux Klan</h3>
+
+  <p>White Southerners who refused to accept Black freedom and equality organized a campaign of terror. The most notorious terrorist organization was the Ku Klux Klan (KKK), founded in Pulaski, Tennessee, in 1866. Klan members dressed in white robes and hoods to hide their identities and rode through the night attacking Black people and their white allies.</p>
+
+  <p>The Klan targeted Black voters, Black officeholders, Black teachers, Black landowners, and anyone who challenged white supremacy. They burned schools and churches. They whipped, tortured, and murdered. Their goal was simple: destroy Reconstruction by making it too dangerous for Black people to exercise their rights.</p>
+
+  <h3>Racial Terror and Violence</h3>
+
+  <p>The violence of Reconstruction was staggering. In the Colfax Massacre of 1873, a white mob in Louisiana murdered as many as 150 Black men who were defending a courthouse after a disputed election. In the Hamburg Massacre of 1876 in South Carolina, a white militia attacked Black men and executed prisoners. Across the South, individual acts of violence were even more common: Black men were murdered for voting, for refusing to remove their hats in the presence of white people, or for no reason at all.</p>
+
+  <p>The violence was not random. It was organized, strategic, and political. Its purpose was to overthrow Reconstruction governments and restore white supremacist rule. And it worked.</p>
+
+  <div class="primary-source">
+    <h3>Primary Source: Testimony About Klan Violence</h3>
+    <p>"They came to my house about two o'clock in the morning; there were about twenty or thirty of them. I was asleep; they broke in. They took me out of bed and took me to the woods. They stripped me naked. They told me they were going to kill me if I voted the Radical ticket again. They beat me with sticks and straps. They cut my back to pieces."</p>
+    <p class="source-citation">—Testimony of Abram Colby, a Black Georgia legislator, before the Joint Select Committee to Inquire into the Condition of Affairs in the Late Insurrectionary States, 1871</p>
+  </div>
+
+  <h3>"Redemption" Campaigns</h3>
+
+  <p>White supremacists called their campaign to overthrow Reconstruction governments "Redemption." They claimed they were "redeeming" the South from "corrupt" Black and Republican rule. In reality, they were using violence, fraud, and intimidation to strip Black people of their political power and restore the old racial hierarchy.</p>
+
+  <p>State by state, "Redeemer" Democrats used threats and violence to suppress the Black vote and win elections. In Mississippi in 1875, white paramilitary groups murdered Black Republicans in broad daylight and forced others to flee. The governor begged the federal government for help. President Ulysses S. Grant refused to send troops. Mississippi fell to the Redeemers. Other Southern states soon followed.</p>
+
+  <h3>Economic Coercion of Black Workers</h3>
+
+  <p>Violence was not the only weapon. White landowners used economic power to control Black workers. Because most freedpeople had been denied land, they were forced to work for white employers. Landowners could fire workers who voted Republican, evict families who tried to attend school, or refuse to sell supplies to Black people who challenged the racial order. Without economic independence, political freedom was fragile. White supremacists understood this and used economic coercion alongside terror to destroy Black power.</p>
+
+  <div class="perspectives">
+    <h3>Multiple Perspectives: What Should Reconstruction Look Like?</h3>
+    <div class="perspective"><strong>Freedpeople:</strong> "We want land, education, and the right to vote. We want to be treated as full citizens. We built the wealth of the South with our labor under slavery. We deserve to share in that wealth. We do not want revenge. We want justice, opportunity, and the chance to live as free people."</div>
+    <div class="perspective"><strong>Former Confederates:</strong> "The war is over. Let us govern ourselves. We know the Negro and we know how to manage race relations. Northern interference is tyranny. We accept that slavery is ended, but we will never accept social or political equality. The white man must rule."</div>
+    <div class="perspective"><strong>Radical Republicans:</strong> "The rebels committed treason. They must not be allowed back into power until the rights of the freedpeople are guaranteed. The federal government must protect Black citizens with troops, laws, and constitutional amendments. Without radical change, the South will simply rebuild slavery under another name."</div>
+  </div>
+
+  <div class="key-idea">
+    <h3>Key Idea: Violence as a Political Strategy</h3>
+    <p>The violence of the Reconstruction era was not random or senseless. It was a deliberate political strategy used by white supremacists to destroy Black political power. By attacking voters, officeholders, teachers, and community leaders, terrorist organizations like the Ku Klux Klan aimed to make it so dangerous to participate in democracy that Black citizens would be forced to withdraw from public life. Understanding this violence as organized and strategic, rather than as isolated acts of hatred, is essential to understanding why Reconstruction failed.</p>
+  </div>
+</section>
+
+<section id="end">
+  <h2>VI. The End of Reconstruction</h2>
+
+  <h3>The Compromise of 1877</h3>
+
+  <p>The presidential election of 1876 between Republican Rutherford B. Hayes and Democrat Samuel Tilden was one of the most disputed in American history. Tilden won the popular vote, but the results in three Southern states were contested. After months of crisis, a backroom deal was struck: Hayes would become president, and in exchange, the federal government would withdraw the remaining troops from the South.</p>
+
+  <p>This agreement, known as the Compromise of 1877, effectively ended Reconstruction. Without federal troops to protect them, Black Southerners were left to face the white supremacist power structure alone. The federal government had decided that national unity and political stability mattered more than Black rights.</p>
+
+  <h3>Federal Troops Withdraw</h3>
+
+  <p>When the last federal soldiers left the South in 1877, it was a turning point in American history. The presence of troops had not prevented all violence, but it had served as a check on the worst abuses. Without that protection, the remaining Reconstruction governments collapsed. "Redeemer" Democrats seized control of every Southern state. Black voter registration plummeted. Black officeholders were driven from power. The brief experiment in interracial democracy was over.</p>
+
+  <h3>The Rise of Jim Crow</h3>
+
+  <p>In the decades after Reconstruction, Southern states built an elaborate system of racial segregation and discrimination known as Jim Crow. Poll taxes, literacy tests, and grandfather clauses stripped Black men of the right to vote. Segregation laws separated Black and white people in schools, trains, restaurants, hospitals, and cemeteries. Any Black person who challenged the racial order faced the threat of lynching. The Supreme Court aided this process: in Plessy v. Ferguson (1896), it ruled that racial segregation was constitutional as long as facilities were "separate but equal." They never were.</p>
+
+  <h3>Sharecropping Traps Black Workers in Poverty</h3>
+
+  <p>Without land of their own, most Black Southerners became sharecroppers. Under this system, a family farmed a plot of land owned by a white landowner and paid "rent" with a share of the crop, usually half or more. Sharecroppers had to buy seeds, tools, and food on credit from the landowner's store, often at outrageously inflated prices. At the end of the year, the sharecropper's share of the crop rarely covered the debt. Year after year, sharecropping families fell deeper into debt, bound to the land almost as surely as they had been under slavery.</p>
+
+  <p>Sharecropping was not slavery, but it was designed to produce a similar result: a permanent, exploitable Black labor force with no real freedom to leave, no economic independence, and no political power.</p>
+
+  <div class="vocab-box">
+    <h3>Vocabulary</h3>
+    <p><strong>Compromise of 1877:</strong> The political deal that resolved the disputed 1876 presidential election by giving the presidency to Republican Rutherford B. Hayes in exchange for the withdrawal of federal troops from the South, effectively ending Reconstruction.</p>
+    <p><strong>Jim Crow:</strong> The system of racial segregation and discrimination that dominated the American South from the 1870s through the 1960s. Jim Crow laws enforced the separation of Black and white people in nearly every aspect of public life.</p>
+    <p><strong>Sharecropping:</strong> A system in which a family farmed land owned by someone else and paid rent with a share of the crop. In practice, sharecropping trapped Black families in cycles of debt and poverty.</p>
+    <p><strong>Poll tax:</strong> A fee required to vote, used to prevent poor Black (and some poor white) people from participating in elections.</p>
+  </div>
+
+  <div class="stop-think">
+    <h3>Stop and Think</h3>
+    <p>The Compromise of 1877 traded Black rights for political peace. When is compromise a good thing, and when does it come at too high a price? Who benefited from this compromise, and who paid the cost?</p>
+  </div>
+</section>
+
+<section id="conclusion">
+  <h2>VII. Wrapping Up: The Promises Betrayed</h2>
+
+  <p>Reconstruction was a revolution that was begun but never finished. In the span of just a few years, formerly enslaved people went from being legally defined as property to voting, holding office, attending school, and building communities. The constitutional amendments passed during Reconstruction enshrined principles of equality that would eventually transform American law. These were extraordinary achievements.</p>
+
+  <p>But the nation lacked the will to follow through. White supremacist violence, Northern indifference, and political compromise combined to destroy Reconstruction before it could fulfill its promise. The federal government abandoned Black Southerners to a system of racial terror, segregation, and economic exploitation that would persist for nearly a century.</p>
+
+  <p>The story of Reconstruction is not just a story about the past. It is a story about the gap between America's ideals and its actions. The Fourteenth Amendment promised equal protection. The Fifteenth Amendment promised the right to vote. Those promises were betrayed for generations. When the civil rights movement of the 1950s and 1960s demanded equality, they were not asking for something new. They were demanding that America finally keep the promises it had made during Reconstruction.</p>
+
+  <p>The unfinished work of Reconstruction remains unfinished. The questions it raised, about racial justice, about the meaning of citizenship, about the federal government's responsibility to protect the rights of all Americans, are still being debated today.</p>
+
+  <div class="voices-left-out">
+    <h3>Whose Voices Were Left Out?</h3>
+    <p><strong>Black women during Reconstruction:</strong> Black women were central to Reconstruction. They built schools, organized churches, worked to reunite families, and fought for their communities. Yet the Fifteenth Amendment granted voting rights only to men. Black women like Frances Ellen Watkins Harper and Sojourner Truth argued powerfully for universal suffrage, but their demands were ignored. Black women also faced unique dangers: they were targets of sexual violence by white men, and their labor as domestic workers and field hands went largely unrecognized. Their contributions to Reconstruction were enormous, but history has often made them invisible.</p>
+    <p><strong>Poor white Southerners:</strong> Not all white Southerners were wealthy planters. The majority were poor farmers who had never owned enslaved people. During Reconstruction, some poor white Southerners allied with Black voters in the Republican Party, recognizing that they shared common economic interests. But wealthy white Democrats used racism to break these alliances, convincing poor white people that their racial identity mattered more than their economic interests. This strategy, which pitted poor white workers against poor Black workers, would shape Southern politics for more than a century.</p>
+    <p><strong>Native Americans during Reconstruction:</strong> While the nation debated the rights of formerly enslaved people, it was simultaneously waging war against Native American nations in the West. The same federal government that sent troops to protect Black voters in the South sent troops to force Native peoples onto reservations. The Fourteenth Amendment's promise of citizenship did not extend to most Native Americans until 1924. The expansion of railroads and white settlement during the Reconstruction era accelerated the destruction of Native lands and cultures, a devastating contradiction in an era supposedly dedicated to justice and equality.</p>
+  </div>
+</section>
+
+<div class="activity-box">
+  <h3>Chapter Activity: Reconstruction on Trial</h3>
+  <h4>The Task:</h4>
+  <p>Your class will hold a mock trial to determine: <strong>Who was most responsible for the failure of Reconstruction?</strong> Each group will prepare a case against one of the following "defendants." Use evidence from the chapter to support your arguments.</p>
+  <h4>The Defendants:</h4>
+  <ul>
+    <li><strong>President Andrew Johnson</strong> -- for his lenient policies, pardoning of Confederates, and vetoing of civil rights legislation</li>
+    <li><strong>White supremacist organizations (the KKK and Redeemers)</strong> -- for their campaign of terror and violence against Black citizens</li>
+    <li><strong>The federal government after 1877</strong> -- for withdrawing troops and abandoning Black Southerners</li>
+    <li><strong>Northern voters and politicians</strong> -- for losing interest in Reconstruction and choosing political peace over justice</li>
+  </ul>
+  <h4>For Each Defendant, Your Group Should:</h4>
+  <ol>
+    <li>Identify at least three specific actions (or failures to act) that contributed to Reconstruction's failure</li>
+    <li>Explain how those actions harmed freedpeople and undermined democracy</li>
+    <li>Use at least one primary source or specific historical detail from the chapter as evidence</li>
+  </ol>
+  <h4>Discussion Questions:</h4>
+  <ul>
+    <li>Can one group be singled out as the most responsible, or did the failure require all of them?</li>
+    <li>What would have had to happen differently for Reconstruction to succeed?</li>
+    <li>How do the promises and failures of Reconstruction connect to civil rights struggles that came later?</li>
+  </ul>
+</div>
+
+<footer>
+  <p><strong>Chapter 15: Reconstruction</strong> from <em>The American Yawp Middle School Edition</em>. Adapted from <em>The American Yawp</em>, eds. Joseph Locke and Ben Wright (Stanford University Press, 2018).</p>
+  <p>Licensed under <a href="https://creativecommons.org/licenses/by-sa/4.0/">Creative Commons BY-SA 4.0</a>. Free to use, share, and adapt with attribution.</p>
+  <p><a href="index.html">← Back to chapters</a> | <a href="ch14.html">← Chapter 14</a> | <a href="index.html">Back to Home</a></p>
+</footer>
+
+</div>
+</body>
+</html>

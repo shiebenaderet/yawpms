@@ -67,14 +67,14 @@ The primary focus of this project is **Volume I**, covering pre-Columbian Americ
 | 5 | [The American Revolution](https://shiebenaderet.github.io/yawpms/ch5.html) | ✓ Draft |
 | 6 | [A New Nation (1786-1800)](https://shiebenaderet.github.io/yawpms/ch6.html) | ✓ Draft |
 | 7 | [The Early Republic (1800-1824)](https://shiebenaderet.github.io/yawpms/ch7.html) | ✓ Draft |
-| 8 | The Market Revolution | Planned |
-| 9 | Democracy in America | Planned |
-| 10 | Religion and Reform | Planned |
-| 11 | The Cotton Revolution | Planned |
-| 12 | Manifest Destiny | Planned |
-| 13 | The Sectional Crisis | Planned |
-| 14 | The Civil War | Planned |
-| 15 | Reconstruction | Planned |
+| 8 | [The Market Revolution](https://shiebenaderet.github.io/yawpms/ch8.html) | ✓ Draft |
+| 9 | [Democracy in America](https://shiebenaderet.github.io/yawpms/ch9.html) | ✓ Draft |
+| 10 | [Religion and Reform](https://shiebenaderet.github.io/yawpms/ch10.html) | ✓ Draft |
+| 11 | [The Cotton Revolution](https://shiebenaderet.github.io/yawpms/ch11.html) | ✓ Draft |
+| 12 | [Manifest Destiny](https://shiebenaderet.github.io/yawpms/ch12.html) | ✓ Draft |
+| 13 | [The Sectional Crisis](https://shiebenaderet.github.io/yawpms/ch13.html) | ✓ Draft |
+| 14 | [The Civil War](https://shiebenaderet.github.io/yawpms/ch14.html) | ✓ Draft |
+| 15 | [Reconstruction](https://shiebenaderet.github.io/yawpms/ch15.html) | ✓ Draft |
 
 **Volume II** (1877–present) is planned for future development. Most middle school curricula end with Reconstruction, and most high schools start American history at or after this point. If there's demand for a middle school adaptation of Volume II, we'll build it.
 
