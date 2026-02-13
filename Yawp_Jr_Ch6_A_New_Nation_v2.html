@@ -1,0 +1,844 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>American Yawp Jr. - Chapter 6: A New Nation</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:wght@400;600;700&display=swap');
+
+:root {
+  --navy: #1B3A5C;
+  --teal: #2A7F8E;
+  --gold: #C4941D;
+  --light-blue: #D5E8F0;
+  --light-gold: #FFF3D6;
+  --light-green: #E2F0E2;
+  --light-gray: #F5F5F5;
+  --light-purple: #EDE7F6;
+  --light-red: #FDECEA;
+  --light-orange: #FFF3E0;
+  --dark: #2C2C2C;
+  --med-gray: #666;
+  --deep-purple: #7B1FA2;
+  --deep-red: #D84315;
+  --green: #2E7D32;
+  --orange: #E65100;
+  --serif: 'Libre Baskerville', Georgia, serif;
+  --sans: 'Source Sans 3', 'Segoe UI', sans-serif;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: var(--serif);
+  color: var(--dark);
+  background: #FAFAF8;
+  line-height: 1.8;
+  font-size: 16.5px;
+}
+
+.container { max-width: 840px; margin: 0 auto; padding: 0 28px; }
+
+/* Title page */
+.title-page {
+  text-align: center;
+  padding: 80px 24px 60px;
+  background: linear-gradient(170deg, #0D2137 0%, #1B3A5C 40%, #2B5A7C 100%);
+  color: white;
+  margin-bottom: 48px;
+  position: relative;
+  overflow: hidden;
+}
+.title-page::after {
+  content: '';
+  position: absolute; bottom: 0; left: 0; right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+}
+.title-page .series { font-family: var(--sans); font-size: 13px; letter-spacing: 5px; text-transform: uppercase; opacity: .6; margin-bottom: 14px; }
+.title-page h1 { font-size: 44px; margin-bottom: 6px; line-height: 1.2; }
+.title-page .chapter-num { font-family: var(--sans); font-size: 17px; opacity: .5; margin-bottom: 8px; }
+.title-page .subtitle { font-style: italic; font-size: 19px; opacity: .8; margin-bottom: 36px; }
+.title-page .divider { width: 80px; height: 3px; background: var(--gold); margin: 0 auto 24px; }
+.title-page .attribution { font-family: var(--sans); font-size: 13px; opacity: .5; line-height: 1.6; }
+
+/* TOC */
+.toc {
+  background: var(--light-gray);
+  border-left: 4px solid var(--navy);
+  padding: 24px 28px;
+  margin-bottom: 40px;
+  border-radius: 0 8px 8px 0;
+}
+.toc h2 { font-size: 18px; color: var(--navy); margin-bottom: 12px; font-family: var(--sans); }
+.toc ol { padding-left: 22px; }
+.toc li { font-family: var(--sans); font-size: 15px; margin-bottom: 6px; }
+.toc a { color: var(--teal); text-decoration: none; }
+.toc a:hover { text-decoration: underline; }
+
+/* Overview & Big Questions */
+.overview {
+  background: var(--light-gray);
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 28px;
+  margin-bottom: 40px;
+}
+.overview h2 { font-size: 20px; color: var(--navy); margin-bottom: 12px; }
+.overview p { margin-bottom: 12px; }
+
+.big-questions {
+  border: 2px solid var(--navy);
+  border-radius: 8px;
+  padding: 24px 28px;
+  margin-bottom: 48px;
+  background: white;
+}
+.big-questions h3 { font-family: var(--sans); font-size: 15px; font-weight: 700; color: var(--navy); text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 14px; }
+.big-questions ol { padding-left: 22px; }
+.big-questions li { margin-bottom: 8px; font-size: 15px; }
+
+/* Section headings */
+h2.section-heading {
+  font-size: 28px;
+  color: var(--navy);
+  border-bottom: 3px solid var(--gold);
+  padding-bottom: 8px;
+  margin: 60px 0 24px;
+}
+
+/* Body text */
+p.body-text { margin-bottom: 18px; }
+
+/* Images */
+figure {
+  margin: 32px 0;
+  text-align: center;
+}
+figure img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 4px;
+  box-shadow: 0 3px 16px rgba(0,0,0,.14);
+}
+figcaption {
+  font-family: var(--sans);
+  font-size: 13px;
+  color: var(--med-gray);
+  margin-top: 10px;
+  line-height: 1.55;
+  font-style: italic;
+  max-width: 620px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Vocab */
+.vocab-box {
+  border: 2px solid var(--teal);
+  border-radius: 8px;
+  overflow: hidden;
+  margin: 28px 0;
+}
+.vocab-box .header {
+  background: var(--teal);
+  color: white;
+  padding: 10px 18px;
+  font-family: var(--sans);
+  font-weight: 700;
+  font-size: 15px;
+}
+.vocab-box dl { background: var(--light-blue); padding: 14px 18px; }
+.vocab-box dt { font-weight: 700; color: var(--navy); display: inline; }
+.vocab-box dd { display: inline; margin-left: 0; }
+.vocab-box .term-row { margin-bottom: 8px; }
+.vocab-box .term-row:last-child { margin-bottom: 0; }
+
+/* Stop and Think */
+.stop-think {
+  border: 2px solid var(--gold);
+  border-radius: 8px;
+  overflow: hidden;
+  margin: 32px 0;
+}
+.stop-think .header {
+  background: var(--gold);
+  color: white;
+  padding: 10px 18px;
+  font-family: var(--sans);
+  font-weight: 700;
+  font-size: 15px;
+}
+.stop-think .body { background: var(--light-gold); padding: 16px 20px; }
+.stop-think ol { padding-left: 20px; }
+.stop-think li { margin-bottom: 10px; font-size: 15px; }
+
+/* Perspectives */
+.perspectives {
+  border: 2px solid var(--deep-purple);
+  border-radius: 8px;
+  overflow: hidden;
+  margin: 32px 0;
+}
+.perspectives .header {
+  background: var(--deep-purple);
+  color: white;
+  padding: 10px 18px;
+  font-family: var(--sans);
+  font-weight: 700;
+  font-size: 15px;
+}
+.perspectives .body { background: var(--light-purple); padding: 16px 20px; }
+.perspectives .entry { margin-bottom: 12px; }
+.perspectives .entry:last-child { margin-bottom: 0; }
+.perspectives .who { font-weight: 700; color: #4A148C; }
+
+/* Key Idea */
+.key-idea {
+  border-left: 5px solid var(--green);
+  background: var(--light-green);
+  padding: 18px 22px;
+  margin: 28px 0;
+  border-radius: 0 6px 6px 0;
+}
+.key-idea .label { font-family: var(--sans); font-weight: 700; color: var(--green); font-size: 13px; text-transform: uppercase; letter-spacing: .5px; margin-bottom: 4px; }
+
+/* PRIMARY SOURCE quote box */
+.primary-source {
+  border: 2px solid #5D4037;
+  border-radius: 8px;
+  overflow: hidden;
+  margin: 32px 0;
+  background: #EFEBE9;
+}
+.primary-source .header {
+  background: #5D4037;
+  color: white;
+  padding: 10px 18px;
+  font-family: var(--sans);
+  font-weight: 700;
+  font-size: 15px;
+}
+.primary-source .body { padding: 18px 22px; }
+.primary-source blockquote {
+  font-style: italic;
+  border-left: 3px solid #8D6E63;
+  padding-left: 16px;
+  margin: 10px 0;
+  line-height: 1.7;
+}
+.primary-source .attribution {
+  font-family: var(--sans);
+  font-size: 13px;
+  color: #5D4037;
+  margin-top: 8px;
+  font-style: normal;
+}
+
+/* STORY BEHIND THE STORY */
+.story-box {
+  border: 2px solid var(--orange);
+  border-radius: 8px;
+  overflow: hidden;
+  margin: 32px 0;
+}
+.story-box .header {
+  background: var(--orange);
+  color: white;
+  padding: 10px 18px;
+  font-family: var(--sans);
+  font-weight: 700;
+  font-size: 15px;
+}
+.story-box .body {
+  background: var(--light-orange);
+  padding: 18px 22px;
+  font-size: 15.5px;
+}
+.story-box .body p { margin-bottom: 10px; }
+.story-box .body p:last-child { margin-bottom: 0; }
+
+/* Activity */
+.activity {
+  border: 2px solid var(--deep-red);
+  border-radius: 8px;
+  overflow: hidden;
+  margin: 40px 0;
+}
+.activity .header {
+  background: var(--deep-red);
+  color: white;
+  padding: 12px 18px;
+  font-family: var(--sans);
+  font-weight: 700;
+  font-size: 15px;
+}
+.activity .body { background: var(--light-red); padding: 20px 22px; }
+.activity ol, .activity ul { padding-left: 22px; margin: 10px 0; }
+.activity li { margin-bottom: 8px; font-size: 15px; }
+.activity h4 { font-family: var(--sans); color: var(--deep-red); margin-top: 18px; margin-bottom: 10px; font-size: 15px; }
+
+/* Footer */
+.attribution-footer {
+  border-top: 1px solid #ccc;
+  margin-top: 56px;
+  padding: 24px 0 48px;
+  font-family: var(--sans);
+  font-size: 13px;
+  color: var(--med-gray);
+  line-height: 1.7;
+}
+
+@media print {
+  body { font-size: 11pt; background: white; }
+  .title-page { background: white !important; color: var(--navy); border-bottom: 3px solid var(--navy); }
+  h2.section-heading { page-break-before: always; }
+  .vocab-box, .stop-think, .perspectives, .key-idea, .story-box, .primary-source, .activity { break-inside: avoid; }
+}
+@media (max-width: 600px) {
+  .title-page h1 { font-size: 28px; }
+  h2.section-heading { font-size: 22px; }
+  .container { padding: 0 16px; }
+  body { font-size: 15px; }
+}
+</style>
+</head>
+<body>
+
+<div class="title-page">
+  <div class="series">The American Yawp Jr.</div>
+  <div class="chapter-num">Chapter 6</div>
+  <h1>A New Nation</h1>
+  <div class="divider"></div>
+  <div class="subtitle">From Shays's Rebellion to the Election of 1800</div>
+  <div class="attribution">A Middle School Adaptation<br>
+  Adapted from <em>The American Yawp</em>, eds. Joseph Locke &amp; Ben Wright<br>
+  Licensed under Creative Commons BY-SA 4.0</div>
+</div>
+
+<div class="container">
+
+<nav class="toc">
+  <h2>In This Chapter</h2>
+  <ol>
+    <li><a href="#intro">Introduction: The Sword and the Farm</a></li>
+    <li><a href="#shays">Shays's Rebellion: When Veterans Marched on Their Own Government</a></li>
+    <li><a href="#convention">The Constitutional Convention: A Secret Summer in Philadelphia</a></li>
+    <li><a href="#ratification">Ratifying the Constitution: The People Decide</a></li>
+    <li><a href="#slavery">Slavery and the New Nation: The Compromises Nobody Should Be Proud Of</a></li>
+    <li><a href="#hamilton">Hamilton vs. Jefferson: Two Visions for America</a></li>
+    <li><a href="#whiskey">The Whiskey Rebellion and Jay's Treaty</a></li>
+    <li><a href="#french">The French Revolution Comes to America</a></li>
+    <li><a href="#election">The Election of 1800: The Nastiest Campaign in History</a></li>
+    <li><a href="#conclusion">Wrapping Up: A Nation Built on Argument</a></li>
+  </ol>
+</nav>
+
+<div class="overview">
+  <h2>Chapter Overview</h2>
+  <p>The American Revolution was over. The British were gone. But now came a harder question than anyone expected: <em>How do you actually run a country?</em></p>
+  <p>The United States under the Articles of Confederation was barely holding together. The national government had no power to collect taxes, no president, and no courts. States printed their own money that was worthless across state lines. Veterans who had bled for independence were losing their farms to debt collectors. And then some of those veterans picked up their muskets again&mdash;this time, aimed at their own government.</p>
+  <p>This chapter tells the story of how Americans argued, compromised, and sometimes fought their way toward a new Constitution and a new kind of government. It is a story full of brilliant ideas and terrible bargains, of secret meetings and public brawls, of friendships destroyed and a nation forged.</p>
+</div>
+
+<div class="big-questions">
+  <h3>Big Questions for This Chapter</h3>
+  <ol>
+    <li>Why did veterans of the Revolution end up rebelling against their own government?</li>
+    <li>What was it like inside the room where the Constitution was written&mdash;and who was deliberately left outside?</li>
+    <li>How did a Caribbean orphan and a Virginia plantation owner end up in a fight that shaped America forever?</li>
+    <li>Can a democracy survive when its leaders call each other criminals, tyrants, and worse?</li>
+  </ol>
+</div>
+
+<!-- ═══════════════════════ INTRODUCTION ═══════════════════════ -->
+
+<h2 class="section-heading" id="intro">I. Introduction: The Sword and the Farm</h2>
+
+<figure>
+  <img src="http://www.americanyawp.com/text/wp-content/uploads/cropped2federalpillars-newyork-2.jpg" alt="The Federal Pillars cartoon showing states ratifying the Constitution" loading="lazy">
+  <figcaption>"The Federal Pillars," from <em>The Massachusetts Centinel</em>, August 2, 1789. Each pillar represents a state ratifying the Constitution. The last pillar, North Carolina, is shown rising to join the others. Library of Congress.</figcaption>
+</figure>
+
+<p class="body-text">Sometime around 1780, the Marquis de Lafayette&mdash;the French nobleman who had crossed an ocean to fight for American freedom&mdash;gave a gift to Captain Daniel Shays of the 5th Massachusetts Regiment: an ornamental sword. It was a mark of honor, a thank-you for Shays's bravery at Bunker Hill, Saratoga, and Stony Point. George Washington himself had handpicked Shays for a special assignment: guarding the British spy John Andr&eacute; before his execution.</p>
+
+<p class="body-text">A few years later, Daniel Shays sold that sword. He needed the money to keep his farm.</p>
+
+<p class="body-text">That moment&mdash;a war hero selling his sword to pay his debts&mdash;tells you everything you need to know about what America looked like after the Revolution. The country had won its independence, but it was falling apart from the inside. And the story of how Americans tried to put it back together is one of the wildest, messiest, most important chapters in our history.</p>
+
+<div class="vocab-box">
+  <div class="header">&#x1F4D6; Key Terms for This Chapter</div>
+  <dl>
+    <div class="term-row"><dt>Articles of Confederation</dt><dd> &mdash; America's first constitution (1781&ndash;1789). It created a national government so weak it couldn't collect taxes, raise an army, or settle disputes between states.</dd></div>
+    <div class="term-row"><dt>Constitution</dt><dd> &mdash; The document, written in 1787, that replaced the Articles and created the government we still have today&mdash;with a president, Congress, and Supreme Court.</dd></div>
+    <div class="term-row"><dt>Compromise</dt><dd> &mdash; An agreement where each side gives up something it wants. The Constitution was built on compromises&mdash;some brilliant, some deeply unjust.</dd></div>
+  </dl>
+</div>
+
+<!-- ═══════════════════════ SHAYS'S REBELLION ═══════════════════════ -->
+
+<h2 class="section-heading" id="shays">II. Shays's Rebellion: When Veterans Marched on Their Own Government</h2>
+
+<figure>
+  <img src="http://www.americanyawp.com/text/wp-content/uploads/Unidentified_Artist_-_Daniel_Shays_and_Job_Shattuck_-_Google_Art_Project.jpg" alt="Daniel Shays and Job Shattuck depicted in period illustration" loading="lazy">
+  <figcaption>Daniel Shays and Job Shattuck, two leaders of the uprising, shown rising "illustrious from the Jail." Not everyone thought they were villains. National Portrait Gallery, Smithsonian Institution.</figcaption>
+</figure>
+
+<p class="body-text">Daniel Shays had fought at Bunker Hill. He had charged British positions at Saratoga. He had watched a man hanged for treason against the United States. And when the war ended, the government that owed him years of back pay simply&hellip; didn't pay.</p>
+
+<p class="body-text">He wasn't alone. Across western Massachusetts, thousands of farmers&mdash;many of them veterans&mdash;were drowning in debt. The economy had collapsed after the war. But Massachusetts, controlled by wealthy merchants in Boston, demanded that taxes be paid in hard currency&mdash;gold and silver coins that farmers simply did not have. When they couldn't pay, courts ordered their farms foreclosed. Some veterans were even thrown into debtors' prison.</p>
+
+<div class="story-box">
+  <div class="header">&#x1F4A1; THE STORY BEHIND THE STORY</div>
+  <div class="body">
+    <p><strong>The Sword That Broke America.</strong> Lafayette's gift to Daniel Shays was an ornamental sword&mdash;a symbol of honor and sacrifice. When Shays sold it to pay his debts, the news traveled fast. His neighbors were outraged&mdash;not at Shays, but at a government that forced a war hero to sell his sword to survive. It became a rallying cry: if the country couldn't take care of the men who had fought for its freedom, what good was it?</p>
+    <p>Shays had a wife, Abigail, and six children. His sixty-eight-acre farm in Shutesbury was everything his family had. When the courts came for it, Shays didn't write a letter. He gathered his neighbors, and they marched.</p>
+  </div>
+</div>
+
+<p class="body-text">These farmers saw themselves as patriots, not rebels. They were doing exactly what the Revolution had taught them: standing up against a government that taxed them unfairly and ignored their petitions. They called themselves "Regulators" and began blocking courthouses so judges couldn't order any more foreclosures.</p>
+
+<p class="body-text">Governor James Bowdoin saw things very differently. He called them dangerous mobs and sent 3,000 militia troops under General Benjamin Lincoln to crush the uprising. On January 25, 1787, Shays led about 1,500 men toward the federal armory in Springfield. General William Shepard was waiting. He ordered his cannons loaded with grapeshot&mdash;clusters of metal balls that shredded everything in their path. Four of Shays's men were killed. Twenty were wounded. The rest scattered into the freezing Massachusetts winter.</p>
+
+<div class="primary-source">
+  <div class="header">&#x1F4DC; PRIMARY SOURCE VOICE</div>
+  <div class="body">
+    <blockquote>"The seeds of war are now sown."</blockquote>
+    <div class="attribution">&mdash; A correspondent in Shrewsbury, Massachusetts, after the rebellion turned violent, January 1787</div>
+  </div>
+</div>
+
+<p class="body-text">Shays fled to Vermont. He was sentenced to death for treason but was pardoned in 1788. He spent his final years on a small pension&mdash;for his service in the Revolutionary War, not the rebellion. He died in 1825, at seventy-eight, still insisting that everything he did was to protect the rights he had fought for in 1776.</p>
+
+<div class="perspectives">
+  <div class="header">&#x1F50D; MULTIPLE PERSPECTIVES: Was Shays's Rebellion Justified?</div>
+  <div class="body">
+    <div class="entry"><span class="who">Daniel Shays and the farmers:</span> "We fought and bled for this country, and now it's stealing our homes. We have every right to resist&mdash;that's what the Revolution was about."</div>
+    <div class="entry"><span class="who">Thomas Jefferson</span> (writing from Paris): "A little rebellion now and then is a good thing. The tree of liberty must be refreshed from time to time with the blood of patriots and tyrants."</div>
+    <div class="entry"><span class="who">George Washington</span> (alarmed): "There are combustibles in every State which a spark might set fire to. Good God! Who besides a Tory could have foreseen these disorders?"</div>
+    <div class="entry"><span class="who">James Madison:</span> The rebellion proved the Articles of Confederation were fatally weak. Without a stronger government, the entire American experiment would collapse.</div>
+  </div>
+</div>
+
+<div class="key-idea">
+  <div class="label">Key Idea</div>
+  Shays's Rebellion terrified America's leaders. It became the single most important reason why men like Washington and Madison agreed to meet in Philadelphia to create a new, stronger government. Without Shays, there might be no Constitution.
+</div>
+
+<div class="stop-think">
+  <div class="header">&#x1F914; STOP AND THINK</div>
+  <div class="body">
+    <ol>
+      <li>Shays fought at Bunker Hill for American freedom, then took up arms against the American government. Was he a patriot both times? A traitor the second time? How do you decide?</li>
+      <li>Washington had crushed mutinies during the Revolution and would later crush the Whiskey Rebellion. Why do you think Jefferson disagreed so strongly with him about Shays?</li>
+    </ol>
+  </div>
+</div>
+
+<!-- ═══════════════════════ CONVENTION ═══════════════════════ -->
+
+<h2 class="section-heading" id="convention">III. The Constitutional Convention: A Secret Summer in Philadelphia</h2>
+
+<div class="vocab-box">
+  <div class="header">&#x1F4D6; Vocabulary: The Convention</div>
+  <dl>
+    <div class="term-row"><dt>Convention</dt><dd> &mdash; A formal meeting to make important decisions. This one was supposed to just fix the Articles of Confederation. Instead, it replaced them entirely.</dd></div>
+    <div class="term-row"><dt>Virginia Plan</dt><dd> &mdash; James Madison's bold proposal for a whole new government with three branches and representation based on population.</dd></div>
+    <div class="term-row"><dt>New Jersey Plan</dt><dd> &mdash; William Paterson's counter-proposal that kept equal votes for every state, protecting smaller states' power.</dd></div>
+    <div class="term-row"><dt>Great Compromise</dt><dd> &mdash; The deal that created two houses of Congress: the House (based on population) and the Senate (two per state).</dd></div>
+  </dl>
+</div>
+
+<figure>
+  <img src="http://www.americanyawp.com/text/wp-content/uploads/Independence_Hall_10.jpg" alt="The Assembly Room in Independence Hall, Philadelphia" loading="lazy">
+  <figcaption>The Assembly Room in Independence Hall, Philadelphia. In this room, with the windows nailed shut in the middle of summer, fifty-five men argued their way toward a new government. Wikimedia, CC BY-SA 3.0.</figcaption>
+</figure>
+
+<p class="body-text">Picture this: It is May 1787. Fifty-five men are filing into the Pennsylvania State House in Philadelphia. They've been told they're here to "fix" the Articles of Confederation. But a small group of them&mdash;led by a thirty-six-year-old Virginian who stands barely five feet four inches tall and speaks so softly that other delegates have to lean forward to hear him&mdash;has a much bigger plan. James Madison doesn't want to fix the Articles. He wants to throw them out and start over.</p>
+
+<p class="body-text">The first thing the delegates do is take a vow of secrecy. Nothing said in this room can be shared with anyone&mdash;not the press, not their families, not even other politicians. Then, to make sure no one outside can eavesdrop, they nail the windows shut.</p>
+
+<p class="body-text">It is going to be a very long, very hot summer.</p>
+
+<div class="story-box">
+  <div class="header">&#x1F4A1; THE STORY BEHIND THE STORY</div>
+  <div class="body">
+    <p><strong>The Characters in the Room.</strong> The Constitutional Convention was full of personalities that would make a great movie:</p>
+    <p><strong>George Washington</strong> sat in a tall wooden chair on a raised platform, wearing his old military uniform. He rarely spoke, but his presence kept order. When debates got too heated, delegates would glance up at the general and remember to behave.</p>
+    <p><strong>Benjamin Franklin</strong>, at eighty-one the oldest delegate, was too ill to walk. He was carried to the Convention every day in a sedan chair&mdash;a covered seat hoisted by four prisoners from the Walnut Street Jail.</p>
+    <p><strong>James Madison</strong> arrived eleven days early and used the time to write the Virginia Plan. He sat in the front row every single day and took notes on everything&mdash;notes that remain our best record of what happened.</p>
+    <p><strong>William Paterson</strong> of New Jersey called Philadelphia "the warmest place I have ever been in." (He had apparently never visited Florida.)</p>
+    <p><strong>Rhode Island</strong> refused to send anyone at all.</p>
+  </div>
+</div>
+
+<figure>
+  <img src="http://www.americanyawp.com/text/wp-content/uploads/Madison_1816.jpg" alt="Portrait of James Madison" loading="lazy">
+  <figcaption>James Madison, painted by John Vanderlyn, 1816. At 5'4" and barely 100 pounds, Madison was physically unimposing&mdash;but intellectually, he dominated the Convention. He is often called "The Father of the Constitution." Wikimedia.</figcaption>
+</figure>
+
+<p class="body-text">Madison's Virginia Plan was radical. It called for a completely new government with three branches: a legislature (Congress) to make laws, an executive (president) to enforce them, and a judiciary (courts) to interpret them. Representation in Congress would be based on population&mdash;great news for big states like Virginia, terrible news for small ones like Delaware.</p>
+
+<p class="body-text">Small states fought back hard. William Paterson's New Jersey Plan would keep one vote per state, just like under the Articles. The debate raged for weeks in that suffocating, sealed room. At one point, delegates from small states threatened to walk out entirely. The Convention was on the verge of collapse.</p>
+
+<p class="body-text">The solution came from Roger Sherman of Connecticut: a compromise. Congress would have two chambers. The House of Representatives would be based on population (Madison's idea), while the Senate would give every state exactly two votes (Paterson's idea). This "Great Compromise" saved the Convention&mdash;and created the Congress we still have today.</p>
+
+<div class="primary-source">
+  <div class="header">&#x1F4DC; PRIMARY SOURCE VOICE</div>
+  <div class="body">
+    <blockquote>"Nothing spoken in the house be printed, or otherwise published or communicated without leave. Gossip or misunderstanding can easily ruin all the hard work we shall have to do this summer."</blockquote>
+    <div class="attribution">&mdash; George Washington, enforcing the secrecy rule at the start of the Convention, May 1787</div>
+  </div>
+</div>
+
+<div class="primary-source">
+  <div class="header">&#x1F4DC; PRIMARY SOURCE VOICE</div>
+  <div class="body">
+    <blockquote>"I am sorry they began their deliberations by so abominable a precedent as that of tying up the tongues of their members."</blockquote>
+    <div class="attribution">&mdash; Thomas Jefferson, in a letter from Paris, criticizing the secrecy of the Convention. (Jefferson was serving as ambassador to France and was not present in Philadelphia.) He grudgingly admitted the delegates were "an assembly of demigods."</div>
+  </div>
+</div>
+
+<div class="key-idea">
+  <div class="label">Key Idea</div>
+  The Constitution was not written by calm, agreeing men. It was hammered out in a locked, sweltering room by people who yelled at each other, threatened to quit, and only kept going because they were terrified of what would happen if they failed. That messy process is actually what made it work.
+</div>
+
+<div class="stop-think">
+  <div class="header">&#x1F914; STOP AND THINK</div>
+  <div class="body">
+    <ol>
+      <li>The Convention was held in total secrecy. Jefferson thought this was wrong. Madison thought it was necessary so delegates could change their minds without embarrassment. Who do you agree with&mdash;and why?</li>
+      <li>Should a country's most important decisions be made in secret? What are the risks of transparency? Of secrecy?</li>
+    </ol>
+  </div>
+</div>
+
+<!-- ═══════════════════════ RATIFICATION ═══════════════════════ -->
+
+<h2 class="section-heading" id="ratification">IV. Ratifying the Constitution: The People Decide</h2>
+
+<div class="vocab-box">
+  <div class="header">&#x1F4D6; Vocabulary: Ratification</div>
+  <dl>
+    <div class="term-row"><dt>Ratify</dt><dd> &mdash; To officially approve. Nine of thirteen states had to ratify the Constitution for it to take effect.</dd></div>
+    <div class="term-row"><dt>Federalists</dt><dd> &mdash; Supporters of the Constitution who wanted a strong national government. Key figures: Hamilton, Madison, and Jay.</dd></div>
+    <div class="term-row"><dt>Anti-Federalists</dt><dd> &mdash; Opponents who feared the Constitution gave too much power to the national government and demanded a Bill of Rights.</dd></div>
+    <div class="term-row"><dt>Bill of Rights</dt><dd> &mdash; The first ten amendments to the Constitution, protecting individual freedoms like speech, religion, and fair trials. Added in 1791.</dd></div>
+  </dl>
+</div>
+
+<p class="body-text">Writing the Constitution was only half the battle. Now the states had to approve it&mdash;and that kicked off one of the greatest public debates in American history. This was no polite discussion. Federalists and Anti-Federalists attacked each other in newspapers, pamphlets, taverns, and churches.</p>
+
+<p class="body-text">Alexander Hamilton, James Madison, and John Jay wrote eighty-five essays called <em>The Federalist Papers</em>, arguing for the Constitution with dazzling logic and urgency. Anti-Federalists fired back with their own essays, warning that without a Bill of Rights, the new government could become just as tyrannical as the British king.</p>
+
+<p class="body-text">They had a point. The original Constitution said nothing about freedom of speech, freedom of religion, the right to a fair trial, or protection from unreasonable searches. To many Americans, this was a dealbreaker.</p>
+
+<p class="body-text">State by state, the vote was agonizingly close. Many states only ratified after being promised that a Bill of Rights would be added immediately. By July 1788, enough states had said yes. The Bill of Rights&mdash;ten amendments protecting the freedoms Americans hold most dear&mdash;was ratified in 1791.</p>
+
+<div class="story-box">
+  <div class="header">&#x1F4A1; THE STORY BEHIND THE STORY</div>
+  <div class="body">
+    <p><strong>The Grand Federal Procession.</strong> On July 4, 1788, Philadelphia threw a massive parade to celebrate the Constitution. Blacksmiths marched with a working forge, hammering swords into farm tools&mdash;a symbol of turning from war to peace. Bakers pulled a float with an oven baking "Federal Bread." A rabbi walked arm-in-arm with two Christian ministers, demonstrating religious unity. And leading the parade was a float called "The Grand Federal Edifice"&mdash;a miniature temple held up by thirteen pillars, one for each state.</p>
+  </div>
+</div>
+
+<div class="key-idea">
+  <div class="label">Key Idea</div>
+  The Bill of Rights exists because the Anti-Federalists demanded it. They lost the bigger fight over the Constitution&mdash;but their insistence on protecting individual liberties gave us the freedoms we consider most fundamental today. Sometimes the losers of a debate change history more than the winners.
+</div>
+
+<!-- ═══════════════════════ SLAVERY ═══════════════════════ -->
+
+<h2 class="section-heading" id="slavery">V. Slavery and the New Nation: The Compromises Nobody Should Be Proud Of</h2>
+
+<div class="vocab-box">
+  <div class="header">&#x1F4D6; Vocabulary: Slavery and the Constitution</div>
+  <dl>
+    <div class="term-row"><dt>Three-Fifths Compromise</dt><dd> &mdash; The agreement that each enslaved person would count as three-fifths of a person for purposes of representation and taxes. This gave slaveholding states extra power in Congress.</dd></div>
+    <div class="term-row"><dt>Slave Trade Compromise</dt><dd> &mdash; Congress agreed not to ban the Atlantic slave trade for twenty years, until 1808.</dd></div>
+    <div class="term-row"><dt>Fugitive Slave Clause</dt><dd> &mdash; Required that enslaved people who escaped to free states be returned to their enslavers.</dd></div>
+  </dl>
+</div>
+
+<p class="body-text">There is no way to talk honestly about the Constitution without talking about slavery. The word "slave" never appears in the document&mdash;the framers carefully avoided it, using phrases like "other persons" instead. But slavery is written into the Constitution's bones.</p>
+
+<p class="body-text">Southern delegates arrived in Philadelphia with a clear demand: protect slavery, or we walk. And they meant it. Over a third of the Convention's delegates were themselves enslavers. In the South, enslaved people made up nearly 40% of the total population. The entire southern economy ran on forced labor.</p>
+
+<p class="body-text">The Three-Fifths Compromise was perhaps the most chilling bargain. Enslaved people couldn't vote, couldn't own property, couldn't testify in court. But they would be counted&mdash;partially&mdash;to give their enslavers more seats in Congress. It was a mathematical equation that turned human beings into political currency.</p>
+
+<div class="perspectives">
+  <div class="header">&#x1F50D; WHOSE VOICES WERE LEFT OUT?</div>
+  <div class="body">
+    <div class="entry"><span class="who">Enslaved people:</span> Approximately 700,000 people were enslaved in the United States in 1787. None had any say in the Constitution. The document counted them as three-fifths of a person for representation, protected the slave trade until 1808, and required that those who escaped be returned.</div>
+    <div class="entry"><span class="who">Women:</span> Not a single woman was present at the Convention. The Constitution included no protections for women's rights. Most states barred women from voting entirely.</div>
+    <div class="entry"><span class="who">Native Americans:</span> Were not considered citizens and had no representation. The Constitution would govern a nation that would systematically take their land for the next two centuries.</div>
+    <div class="entry"><span class="who">Poor white men:</span> Many states required property ownership to vote, which shut out large numbers of the very farmers who had fought in the Revolution.</div>
+  </div>
+</div>
+
+<div class="key-idea">
+  <div class="label">Key Idea</div>
+  The Constitution expanded democracy for some Americans while deliberately excluding others. The same document that begins with "We the People" also protected the institution of slavery. Understanding who was included in "We the People"&mdash;and who wasn't&mdash;is essential to understanding America.
+</div>
+
+<div class="stop-think">
+  <div class="header">&#x1F914; STOP AND THINK</div>
+  <div class="body">
+    <ol>
+      <li>The Constitution never uses the word "slave." Why do you think the framers avoided the word while still protecting slavery? What does that choice tell you?</li>
+      <li>Some historians argue the Constitution was the best deal possible at the time&mdash;that without the slavery compromises, the southern states would have left, and the country would have fallen apart. Others argue that protecting slavery was a moral failure that cannot be justified. Where do you stand?</li>
+    </ol>
+  </div>
+</div>
+
+<!-- ═══════════════════════ HAMILTON VS JEFFERSON ═══════════════════════ -->
+
+<h2 class="section-heading" id="hamilton">VI. Hamilton vs. Jefferson: Two Visions for America</h2>
+
+<div class="vocab-box">
+  <div class="header">&#x1F4D6; Vocabulary: The Great Debate</div>
+  <dl>
+    <div class="term-row"><dt>Secretary of the Treasury</dt><dd> &mdash; The government official in charge of the nation's money. Alexander Hamilton was the first.</dd></div>
+    <div class="term-row"><dt>Bank of the United States</dt><dd> &mdash; Hamilton's proposed national bank to manage government money and make loans.</dd></div>
+    <div class="term-row"><dt>Strict construction</dt><dd> &mdash; Jefferson's view that the government should only do what the Constitution specifically says it can do.</dd></div>
+    <div class="term-row"><dt>Loose construction</dt><dd> &mdash; Hamilton's view that the Constitution allows the government to do anything it doesn't specifically forbid.</dd></div>
+  </dl>
+</div>
+
+<figure>
+  <img src="http://www.americanyawp.com/text/wp-content/uploads/hamilton_1806.jpg" alt="Portrait of Alexander Hamilton" loading="lazy">
+  <figcaption>Alexander Hamilton, painted by John Trumbull, 1806. An orphan from the Caribbean who became Washington's right hand, Hamilton envisioned an America powered by banks, industry, and commerce. Wikimedia.</figcaption>
+</figure>
+
+<p class="body-text">No one at the Constitutional Convention had a more unlikely story than Alexander Hamilton. Born out of wedlock on the tiny Caribbean island of Nevis, Hamilton watched his father abandon the family and his mother die of yellow fever&mdash;all before he was thirteen. Orphaned, penniless, and alone, the teenage Hamilton went to work as a clerk in a trading company on the island of St. Croix.</p>
+
+<p class="body-text">Then came the hurricane.</p>
+
+<div class="story-box">
+  <div class="header">&#x1F4A1; THE STORY BEHIND THE STORY</div>
+  <div class="body">
+    <p><strong>The Hurricane That Changed America.</strong> In August 1772, a devastating hurricane tore through St. Croix. The fifteen-year-old Hamilton wrote a letter describing the destruction that was so vivid, so brilliantly written, that the local newspaper published it. Community leaders were so impressed by this orphan clerk's talent that they pooled their money to send him to New York for an education.</p>
+    <p>Hamilton arrived at King's College (now Columbia University) and never looked back. Within three years he was fighting in the Revolution. By twenty-two, he was George Washington's most trusted aide. By thirty-two, he was the first Secretary of the Treasury of the United States.</p>
+    <p>His opponents loved to remind everyone of his origins. They called him "the bastard brat of a Scotch pedlar." Hamilton used it as fuel.</p>
+  </div>
+</div>
+
+<p class="body-text">As Secretary of the Treasury, Hamilton proposed an ambitious plan to make America an economic powerhouse. The federal government would take on all the states' war debts, binding wealthy creditors to the national government's success. He would create a Bank of the United States to manage the country's money. And he would fund it all with new taxes&mdash;including a tax on whiskey.</p>
+
+<p class="body-text">Thomas Jefferson, the Secretary of State, was horrified. Jefferson saw America's future as a nation of independent farmers, not bankers and factory owners. He argued the Bank was unconstitutional&mdash;nowhere in the Constitution did it say Congress could create a bank. Hamilton fired back: the Constitution gave Congress the power to do what was "necessary and proper" to run the government, and a national bank was necessary.</p>
+
+<p class="body-text">President Washington sided with Hamilton. The Bank was created. But the argument was about something much bigger than a bank. It was about what kind of country America would become&mdash;and it split the nation into two political parties that, in many ways, still exist today.</p>
+
+<div class="primary-source">
+  <div class="header">&#x1F4DC; PRIMARY SOURCE VOICE</div>
+  <div class="body">
+    <blockquote>"For god's sake, my dear sir, take up your pen, select the most striking heresies, and cut him to pieces in the face of the public."</blockquote>
+    <div class="attribution">&mdash; Thomas Jefferson, in a letter begging James Madison to attack Hamilton's ideas in print, 1790s</div>
+  </div>
+</div>
+
+<div class="key-idea">
+  <div class="label">Key Idea</div>
+  Hamilton and Jefferson's argument wasn't just personal&mdash;it was about two fundamentally different visions of America. Hamilton wanted a commercial nation of cities, banks, and industry. Jefferson wanted a republic of small farmers. This debate created America's first political parties: the Federalists (Hamilton) and the Democratic-Republicans (Jefferson). We are still having versions of this argument today.
+</div>
+
+<!-- ═══════════════════════ WHISKEY REBELLION ═══════════════════════ -->
+
+<h2 class="section-heading" id="whiskey">VII. The Whiskey Rebellion and Jay's Treaty</h2>
+
+<div class="vocab-box">
+  <div class="header">&#x1F4D6; Vocabulary: Rebellion and Foreign Relations</div>
+  <dl>
+    <div class="term-row"><dt>Excise tax</dt><dd> &mdash; A tax on producing or selling a specific product. Hamilton's tax on whiskey hit frontier farmers hardest.</dd></div>
+    <div class="term-row"><dt>Impressment</dt><dd> &mdash; When the British navy kidnapped American sailors and forced them to serve on British warships.</dd></div>
+    <div class="term-row"><dt>Jay's Treaty (1794)</dt><dd> &mdash; An agreement with Britain that avoided war but was wildly unpopular because it failed to stop impressment.</dd></div>
+  </dl>
+</div>
+
+<p class="body-text">For farmers on the western frontier, whiskey wasn't a drink&mdash;it was currency. Grain was heavy and spoiled quickly, making it nearly impossible to transport over the mountains to eastern markets. But turn that grain into whiskey, and you had something compact, valuable, and easy to trade. Hamilton's tax on whiskey felt like a direct attack on their livelihood.</p>
+
+<p class="body-text">In 1791, protesters in western Pennsylvania tarred and feathered a tax collector. By 1794, about seven thousand angry farmers had organized an armed resistance, burning tax collectors' homes and threatening federal officials. President Washington had seen enough. He personally led thirteen thousand militia troops westward&mdash;the only time in American history a sitting president has led troops into the field. The rebels melted away without a fight.</p>
+
+<div class="story-box">
+  <div class="header">&#x1F4A1; THE STORY BEHIND THE STORY</div>
+  <div class="body">
+    <p><strong>From Shays to Whiskey: Same Anger, Different Response.</strong> Compare: When Shays's farmers rebelled in 1786, the national government under the Articles couldn't do anything&mdash;Massachusetts had to handle it alone. When whiskey rebels rose up in 1794, President Washington rode out with 13,000 troops. In eight years, the government had gone from powerless to overwhelming. That was exactly Hamilton's point: the Constitution worked.</p>
+    <p>But it was also Jefferson's fear: a government this powerful could crush anyone who disagreed with it.</p>
+  </div>
+</div>
+
+<p class="body-text">Meanwhile, the Atlantic Ocean was becoming a battlefield. Britain and France were at war, and both were seizing American ships. British captains were kidnapping American sailors through impressment and forcing them to serve in the Royal Navy. Thousands of Americans were dragged off their own ships.</p>
+
+<p class="body-text">Jay's Treaty, signed in 1794, got Britain to leave its western forts and pay for some shipping losses&mdash;but it failed to stop impressment and committed the U.S. to treating Britain as a preferred trade partner. Republicans were furious. They saw it as a sellout to the old enemy. People burned effigies of John Jay in the streets. The treaty helped cement the divide between America's two political parties.</p>
+
+<div class="stop-think">
+  <div class="header">&#x1F914; STOP AND THINK</div>
+  <div class="body">
+    <ol>
+      <li>Washington crushed both the Whiskey Rebellion and (through the states) Shays's Rebellion. But Jefferson said rebellions could be healthy for democracy. Who was right?</li>
+      <li>Jay's Treaty avoided a war with Britain that America probably would have lost. Was accepting a bad deal better than fighting a war?</li>
+    </ol>
+  </div>
+</div>
+
+<!-- ═══════════════════════ FRENCH REVOLUTION ═══════════════════════ -->
+
+<h2 class="section-heading" id="french">VIII. The French Revolution Comes to America</h2>
+
+<div class="vocab-box">
+  <div class="header">&#x1F4D6; Vocabulary: Revolution Abroad, Crisis at Home</div>
+  <dl>
+    <div class="term-row"><dt>French Revolution</dt><dd> &mdash; The overthrow of the French king beginning in 1789. It started with hope but descended into mass executions.</dd></div>
+    <div class="term-row"><dt>Alien Act (1798)</dt><dd> &mdash; Allowed the government to deport immigrants considered "dangerous."</dd></div>
+    <div class="term-row"><dt>Sedition Act (1798)</dt><dd> &mdash; Made it a crime to criticize the president or the government. Federalists used it to jail Republican newspaper editors.</dd></div>
+    <div class="term-row"><dt>XYZ Affair</dt><dd> &mdash; A scandal in which French officials demanded bribes before they would negotiate with American diplomats.</dd></div>
+  </dl>
+</div>
+
+<figure>
+  <img src="http://www.americanyawp.com/text/wp-content/uploads/Execution_of_Louis_XVI.jpg" alt="The execution of King Louis XVI" loading="lazy">
+  <figcaption>The execution of King Louis XVI of France, January 21, 1793. The French Revolution began with ideals of liberty that Americans cheered&mdash;but the guillotine changed everything. Wikimedia.</figcaption>
+</figure>
+
+<p class="body-text">When the French Revolution began in 1789, Americans were thrilled. Liberty was spreading! Towns held parades on July 14th (the anniversary of the storming of the Bastille), people called each other "Citizen" in the French fashion, and Jefferson's supporters saw it as proof that the American Revolution had inspired the world.</p>
+
+<p class="body-text">Then came the guillotine. The French revolutionary government executed the king, the queen, and then thousands of its own citizens during the Reign of Terror. Heads rolled&mdash;literally&mdash;and the revolution devoured itself. Americans who had cheered suddenly had to decide: Was this still liberty? Or had it become madness?</p>
+
+<p class="body-text">The answer split the country. Jefferson's Republicans continued to support France, arguing that revolution was always messy. Hamilton's Federalists backed Britain, horrified by the violence. When French officials demanded bribes from American diplomats (the XYZ Affair), Congress passed two of the most controversial laws in American history.</p>
+
+<p class="body-text">The Alien Act gave the president power to deport any immigrant considered a threat. The Sedition Act made it a crime to publish "false, scandalous, or malicious" writing about the president or Congress. In practice, this meant Federalists could&mdash;and did&mdash;jail Republican newspaper editors for criticizing John Adams.</p>
+
+<p class="body-text">Jefferson and Madison struck back secretly, writing the Kentucky and Virginia Resolutions, which argued that states had the right to declare federal laws unconstitutional. This idea&mdash;"states' rights"&mdash;would echo through American history all the way to the Civil War and beyond.</p>
+
+<div class="key-idea">
+  <div class="label">Key Idea</div>
+  The Alien and Sedition Acts raised a question that Americans still fight about today: How much freedom should you give up in the name of security? The Federalists said criticism during a crisis was dangerous. The Republicans said a government that silences its critics is no longer a democracy. Both sides had a point&mdash;but only one side was sending the other to jail.
+</div>
+
+<!-- ═══════════════════════ ELECTION OF 1800 ═══════════════════════ -->
+
+<h2 class="section-heading" id="election">IX. The Election of 1800: The Nastiest Campaign in History</h2>
+
+<div class="vocab-box">
+  <div class="header">&#x1F4D6; Vocabulary: The Election of 1800</div>
+  <dl>
+    <div class="term-row"><dt>Electoral College</dt><dd> &mdash; The system in which a group of electors (not the people directly) chooses the president.</dd></div>
+    <div class="term-row"><dt>Peaceful transfer of power</dt><dd> &mdash; When one leader or party hands over control to another without violence. This happened for the first time in 1801.</dd></div>
+    <div class="term-row"><dt>Judicial review</dt><dd> &mdash; The Supreme Court's power to declare laws unconstitutional, established in Marbury v. Madison (1803).</dd></div>
+  </dl>
+</div>
+
+<figure>
+  <img src="http://www.americanyawp.com/text/wp-content/uploads/server.np-2-1-1000x1166.jpeg" alt="Anti-Jefferson political cartoon" loading="lazy">
+  <figcaption>This vicious political cartoon shows Jefferson kneeling before an altar of "Gallic Despotism," suggesting he worshipped the violent French Revolution. Campaign propaganda in 1800 was brutal. "Providential Detection," 1797. American Antiquarian Society.</figcaption>
+</figure>
+
+<p class="body-text">If you think modern political campaigns are nasty, you haven't seen 1800.</p>
+
+<p class="body-text">John Adams and Thomas Jefferson had once been close friends. They had worked side by side to declare independence in 1776. But by 1800, party politics had turned them into bitter enemies. For the first and only time in American history, a president was running against his own vice president.</p>
+
+<p class="body-text">Neither man campaigned personally&mdash;that was considered undignified. Instead, they unleashed their supporters and hired newspaper writers to destroy each other in print. And the insults were <em>spectacular</em>.</p>
+
+<div class="story-box">
+  <div class="header">&#x1F4A1; THE STORY BEHIND THE STORY: The Insults of 1800</div>
+  <div class="body">
+    <p>Jefferson hired a journalist named James Callender to attack Adams. Callender called President Adams "old, querulous, bald, blind, crippled, and toothless." He also mocked Adams's weight, earning the president the nickname "His Rotundity."</p>
+    <p>Adams's supporters fired back, calling Jefferson "a mean-spirited, low-lived fellow," "a howling atheist," and "a coward" who would destroy Christianity, burn all the Bibles, and invite chaos. Martha Washington herself reportedly told a visiting minister that Jefferson was "one of the most detestable of mankind."</p>
+    <p>One Federalist newspaper warned that electing Jefferson would cause "murder, robbery, rape, adultery, and incest" to be "openly taught and practiced."</p>
+    <p><em>Think about that the next time someone says modern politics are uniquely nasty.</em></p>
+  </div>
+</div>
+
+<p class="body-text">The election ended in chaos. Jefferson and his running mate Aaron Burr accidentally tied in the Electoral College (this was before the Twelfth Amendment fixed the system). The House of Representatives had to break the tie. It took thirty-six rounds of voting over six days before Jefferson finally won&mdash;in part because his old enemy Alexander Hamilton, who despised both men, considered Burr even more dangerous than Jefferson.</p>
+
+<p class="body-text">But here is the remarkable part: despite all the hatred, all the insults, all the predictions of tyranny and disaster&mdash;when it was over, John Adams left. He packed his bags, walked out of the brand-new White House, and went home to Massachusetts. No army. No coup. No violence. Power transferred peacefully from one political party to another for the first time in American history.</p>
+
+<p class="body-text">Jefferson called it "the Revolution of 1800"&mdash;a revolution accomplished not by the sword, but by the vote.</p>
+
+<div class="primary-source">
+  <div class="header">&#x1F4DC; PRIMARY SOURCE VOICE</div>
+  <div class="body">
+    <blockquote>"The revolution of 1800 was as real a revolution in the principles of our government as that of 1776 was in its form; not effected indeed by the sword, but by the rational and peaceable instrument of reform, the suffrage of the people."</blockquote>
+    <div class="attribution">&mdash; Thomas Jefferson, reflecting on the election, 1819</div>
+  </div>
+</div>
+
+<figure>
+  <img src="http://www.americanyawp.com/text/wp-content/uploads/USCapitol1800.jpg" alt="The U.S. Capitol in Washington, D.C., around 1800" loading="lazy">
+  <figcaption>The U.S. Capitol as it looked around 1800, when the new government moved into its permanent home in Washington, D.C. William Russell Birch, c. 1800. Wikimedia.</figcaption>
+</figure>
+
+<div class="story-box">
+  <div class="header">&#x1F4A1; THE STORY BEHIND THE STORY: The Ending Nobody Saw Coming</div>
+  <div class="body">
+    <p>After twelve years of bitterness, Adams and Jefferson began writing letters to each other in 1812 and gradually rebuilt their friendship. For fourteen years, they exchanged 158 letters about philosophy, aging, memory, and the country they had built together.</p>
+    <p>On July 4, 1826&mdash;the fiftieth anniversary of the Declaration of Independence&mdash;both men died within hours of each other. Adams's last words were reportedly: "Thomas Jefferson survives." He didn't know that Jefferson had died earlier that same day.</p>
+  </div>
+</div>
+
+<p class="body-text">One more legacy from this era: in 1803, Chief Justice John Marshall decided the landmark case <em>Marbury v. Madison</em>, establishing the principle of <strong>judicial review</strong>&mdash;the idea that the Supreme Court can strike down any law it considers unconstitutional. This power, not explicitly mentioned in the Constitution, remains one of the most important features of American government.</p>
+
+<div class="key-idea">
+  <div class="label">Key Idea</div>
+  The peaceful transfer of power in 1801 is one of the most important moments in American history. It proved that democracy could survive even the most vicious political fights. Adams and Jefferson hated each other's politics, but both loved the republic enough to let the system work. That precedent has held for over two hundred years.
+</div>
+
+<div class="stop-think">
+  <div class="header">&#x1F914; STOP AND THINK</div>
+  <div class="body">
+    <ol>
+      <li>Are the insults from the 1800 election worse than, similar to, or milder than what you see in politics today? What does that comparison tell you about democracy?</li>
+      <li>Adams and Jefferson went from best friends to enemies to friends again. What does their relationship tell us about politics and human nature?</li>
+      <li>Jefferson called 1800 a "revolution." Was it? What changed&mdash;and what stayed the same?</li>
+    </ol>
+  </div>
+</div>
+
+<!-- ═══════════════════════ CONCLUSION ═══════════════════════ -->
+
+<h2 class="section-heading" id="conclusion">X. Wrapping Up: A Nation Built on Argument</h2>
+
+<p class="body-text">Daniel Shays sold his sword. James Madison locked the windows. Alexander Hamilton wrote his way off an island. Thomas Jefferson and John Adams called each other terrible names and then became friends again and died on the same day.</p>
+
+<p class="body-text">The first years of the United States were messy, angry, brilliant, and contradictory. Americans fought over how strong the government should be, who should have power, how to handle money and debt, how to deal with foreign countries, and&mdash;always&mdash;what to do about slavery. At every turn, compromise was necessary. But those compromises came at a cost, especially for enslaved people, women, Native Americans, and the poor.</p>
+
+<p class="body-text">And yet, through all of this conflict, the country survived. The Constitution created a government flexible enough to adapt. The Bill of Rights protected individual freedoms. The peaceful transfer of power in 1801 proved that democracy could work without descending into violence.</p>
+
+<p class="body-text">The arguments of this era&mdash;about federal power vs. states' rights, about who counts as "We the People," about how to balance freedom and security&mdash;are not just history. They are the arguments we are still having. Right now. Today.</p>
+
+<div class="activity">
+  <div class="header">&#x270D;&#xFE0F; CHAPTER ACTIVITY: Constitutional Compromise Ranking</div>
+  <div class="body">
+    <p>This chapter describes many compromises that shaped the new nation. Rank the following from <strong>MOST fair to LEAST fair</strong>. Be prepared to defend your ranking with evidence from the chapter:</p>
+    <ol>
+      <li><strong>The Great Compromise</strong> &mdash; Two houses of Congress: one based on population, one with equal votes per state</li>
+      <li><strong>The Three-Fifths Compromise</strong> &mdash; Enslaved people counted as 3/5 of a person for representation</li>
+      <li><strong>The Slave Trade Compromise</strong> &mdash; Congress could not ban the slave trade for twenty years</li>
+      <li><strong>Jay's Treaty</strong> &mdash; Avoided war with Britain but failed to stop impressment</li>
+      <li><strong>The Bill of Rights</strong> &mdash; Added to win Anti-Federalist support for ratification</li>
+    </ol>
+    <h4>Discussion Questions:</h4>
+    <ul>
+      <li>Who benefited most from each compromise? Who was harmed?</li>
+      <li>Is a compromise still "fair" if some people had no say in it?</li>
+      <li>Which compromise from this chapter still affects American life today? How?</li>
+    </ul>
+    <h4>Extension: "Whose Side Are You On?" Debate</h4>
+    <ul>
+      <li>Choose one of these pairs and prepare a one-minute argument from your person's perspective: <strong>Shays vs. Washington</strong> (Is rebellion justified?), <strong>Hamilton vs. Jefferson</strong> (What kind of economy?), <strong>Federalist vs. Anti-Federalist</strong> (Bill of Rights: necessary or not?), or <strong>Adams vs. Jefferson, 1800</strong> (Who should be president?)</li>
+    </ul>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div class="attribution-footer">
+  <strong>Attribution:</strong> Adapted from Marco Basile et al., "A New Nation," Tara Strauch, ed., in <em>The American Yawp</em>, eds. Joseph Locke and Ben Wright (Stanford, CA: Stanford University Press, 2018). <a href="https://www.americanyawp.com">www.americanyawp.com</a><br>
+  This adaptation is licensed under <a href="https://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International (CC BY-SA 4.0)</a>.<br>
+  Original images are used under their respective Creative Commons or public domain licenses as noted in captions.
+</div>
+
+</div><!-- .container -->
+</body>
+</html>
