@@ -1,0 +1,52 @@
+name: Feedback or Error Report
+description: Report a factual error, typo, broken link, or suggestion
+title: "[Feedback] "
+labels: ["feedback"]
+body:
+  - type: dropdown
+    id: type
+    attributes:
+      label: Type of feedback
+      options:
+        - "Factual error"
+        - "Typo or grammar"
+        - "Broken link or image"
+        - "Unclear or confusing passage"
+        - "Content suggestion"
+        - "Other"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: chapter
+    attributes:
+      label: Chapter (if applicable)
+      description: Which chapter is this about?
+      options:
+        - "N/A — general or site-wide"
+        - "1 — Indigenous America"
+        - "2 — Colliding Cultures"
+        - "3 — British North America"
+        - "4 — Colonial Society"
+        - "5 — The American Revolution"
+        - "6 — A New Nation"
+        - "7 — The Early Republic"
+        - "8 — The Market Revolution"
+        - "9 — Democracy in America"
+        - "10 — Religion and Reform"
+        - "11 — The Cotton Revolution"
+        - "12 — Manifest Destiny"
+        - "13 — The Sectional Crisis"
+        - "14 — The Civil War"
+        - "15 — Reconstruction"
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+      description: What's the issue or suggestion? Be as specific as you can.
+      placeholder: "In Chapter 5, Section II, the second paragraph says..."
+    validations:
+      required: true

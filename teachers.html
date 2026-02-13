@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Teachers Hub | American Yawp MS</title>
+<link rel="stylesheet" href="css/pages.css">
+<style>
+/* ---- Teachers Hub specific styles ---- */
+.review-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 24px 0 32px;
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 14px;
+}
+.review-table th {
+  text-align: left;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: #1B3A5C;
+  padding: 10px 12px;
+  border-bottom: 2px solid #1B3A5C;
+}
+.review-table td {
+  padding: 10px 12px;
+  border-bottom: 1px solid #eee;
+  vertical-align: middle;
+}
+.review-table tr:hover { background: #F8FAFB; }
+.review-table a { text-decoration: none; }
+
+.status-badge {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .5px;
+  padding: 3px 10px;
+  border-radius: 12px;
+  text-transform: uppercase;
+}
+.status-draft { background: #FFF3E0; color: #E65100; }
+.status-review { background: #E3F2FD; color: #1565C0; }
+.status-approved { background: #E8F5E9; color: #2E7D32; }
+
+.channel-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin: 24px 0 32px;
+}
+.channel-card {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 24px;
+  background: white;
+  transition: box-shadow .2s;
+}
+.channel-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,.06); }
+.channel-card h3 {
+  font-size: 17px;
+  color: #1B3A5C;
+  margin-bottom: 8px;
+}
+.channel-card p {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+  margin-bottom: 12px;
+  color: #555;
+}
+.channel-card .card-link {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  color: #2A7F8E;
+  text-decoration: none;
+  border-bottom: 1px dotted #2A7F8E;
+}
+.channel-card .card-link:hover { border-bottom-style: solid; }
+
+.review-checklist {
+  list-style: none;
+  padding: 0;
+  margin: 16px 0 24px;
+}
+.review-checklist li {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 15px;
+  line-height: 1.7;
+  padding: 8px 0 8px 32px;
+  position: relative;
+  border-bottom: 1px solid #f0f0f0;
+}
+.review-checklist li::before {
+  content: "□";
+  position: absolute;
+  left: 4px;
+  color: #2A7F8E;
+  font-size: 18px;
+  top: 6px;
+}
+
+.step-number {
+  display: inline-block;
+  width: 28px;
+  height: 28px;
+  background: #1B3A5C;
+  color: white;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 28px;
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  margin-right: 10px;
+  flex-shrink: 0;
+}
+
+.step-list {
+  list-style: none;
+  padding: 0;
+  margin: 20px 0;
+}
+.step-list li {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 16px;
+  font-size: 16px;
+  line-height: 1.7;
+}
+.step-list li p { margin-bottom: 0; }
+
+@media (max-width: 600px) {
+  .channel-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>Teachers Hub</h1>
+  <div class="divider"></div>
+  <p>Review, Improve, and Shape This Textbook</p>
+</div>
+
+<nav class="nav-bar">
+  <a href="index.html">Home</a>
+  <a href="introduction.html">Introduction</a>
+  <a href="about.html">About</a>
+  <a href="contributors.html">Contributors</a>
+  <a href="teaching.html">Teaching Materials</a>
+  <a href="teachers.html">Teachers Hub</a>
+  <a href="whopays.html">Who Pays?</a>
+</nav>
+
+<div class="container">
+
+<p>American Yawp MS was drafted with AI assistance and has not yet been fully vetted by teachers and historians. Before we share it widely, we need educators to read, review, and improve it. This page is your starting point.</p>
+
+<p>Every correction, suggestion, and revision makes this textbook more trustworthy and more useful. Whether you catch a factual error, think a paragraph is unclear for middle schoolers, or want to rewrite a section entirely, your input matters.</p>
+
+<h2>How to Give Feedback</h2>
+
+<div class="channel-grid">
+  <div class="channel-card">
+    <h3>Quick Feedback Form</h3>
+    <p>Found an error? Have a suggestion? Use this form. No account needed, takes two minutes. Good for typos, factual corrections, unclear passages, and quick suggestions.</p>
+    <a class="card-link" href="https://forms.gle/PLACEHOLDER" target="_blank" rel="noopener">Open Feedback Form &rarr;</a>
+  </div>
+  <div class="channel-card">
+    <h3>GitHub Discussions</h3>
+    <p>For longer conversations, teaching ideas, and back-and-forth discussion. Requires a free GitHub account. This is where ongoing collaboration happens.</p>
+    <a class="card-link" href="https://github.com/shiebenaderet/yawpms/discussions" target="_blank" rel="noopener">Join the Discussion &rarr;</a>
+  </div>
+  <div class="channel-card">
+    <h3>File a Specific Issue</h3>
+    <p>Found a clear problem you want tracked? GitHub Issues are the best way to report bugs, broken links, or specific content errors that need to be fixed.</p>
+    <a class="card-link" href="https://github.com/shiebenaderet/yawpms/issues/new/choose" target="_blank" rel="noopener">Open an Issue &rarr;</a>
+  </div>
+  <div class="channel-card">
+    <h3>Full Chapter Review</h3>
+    <p>Want to do a thorough review of an entire chapter? Use our structured review template. This is the most impactful thing a reviewer can do.</p>
+    <a class="card-link" href="https://github.com/shiebenaderet/yawpms/issues/new?template=chapter-review.yml" target="_blank" rel="noopener">Start a Chapter Review &rarr;</a>
+  </div>
+</div>
+
+<h2>Chapter Review Status</h2>
+
+<p>Each chapter must be reviewed by at least three people before we consider it ready for classroom use. Here's where things stand:</p>
+
+<table class="review-table">
+  <thead>
+    <tr>
+      <th>Ch.</th>
+      <th>Title</th>
+      <th>Status</th>
+      <th>Reviewers</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td>1</td><td><a href="ch1.html">Indigenous America</a></td><td><span class="status-badge status-draft">Draft</span></td><td>0 / 3</td></tr>
+    <tr><td>2</td><td><a href="ch2.html">Colliding Cultures</a></td><td><span class="status-badge status-draft">Draft</span></td><td>0 / 3</td></tr>
+    <tr><td>3</td><td><a href="ch3.html">British North America</a></td><td><span class="status-badge status-draft">Draft</span></td><td>0 / 3</td></tr>
+    <tr><td>4</td><td><a href="ch4.html">Colonial Society</a></td><td><span class="status-badge status-draft">Draft</span></td><td>0 / 3</td></tr>
+    <tr><td>5</td><td><a href="ch5.html">The American Revolution</a></td><td><span class="status-badge status-draft">Draft</span></td><td>0 / 3</td></tr>
+    <tr><td>6</td><td><a href="ch6.html">A New Nation</a></td><td><span class="status-badge status-draft">Draft</span></td><td>0 / 3</td></tr>
+    <tr><td>7</td><td><a href="ch7.html">The Early Republic</a></td><td><span class="status-badge status-draft">Draft</span></td><td>0 / 3</td></tr>
+    <tr><td>8</td><td><a href="ch8.html">The Market Revolution</a></td><td><span class="status-badge status-draft">Draft</span></td><td>0 / 3</td></tr>
+    <tr><td>9</td><td><a href="ch9.html">Democracy in America</a></td><td><span class="status-badge status-draft">Draft</span></td><td>0 / 3</td></tr>
+    <tr><td>10</td><td><a href="ch10.html">Religion and Reform</a></td><td><span class="status-badge status-draft">Draft</span></td><td>0 / 3</td></tr>
+    <tr><td>11</td><td><a href="ch11.html">The Cotton Revolution</a></td><td><span class="status-badge status-draft">Draft</span></td><td>0 / 3</td></tr>
+    <tr><td>12</td><td><a href="ch12.html">Manifest Destiny</a></td><td><span class="status-badge status-draft">Draft</span></td><td>0 / 3</td></tr>
+    <tr><td>13</td><td><a href="ch13.html">The Sectional Crisis</a></td><td><span class="status-badge status-draft">Draft</span></td><td>0 / 3</td></tr>
+    <tr><td>14</td><td><a href="ch14.html">The Civil War</a></td><td><span class="status-badge status-draft">Draft</span></td><td>0 / 3</td></tr>
+    <tr><td>15</td><td><a href="ch15.html">Reconstruction</a></td><td><span class="status-badge status-draft">Draft</span></td><td>0 / 3</td></tr>
+  </tbody>
+</table>
+
+<p><em>Status key:</em> <span class="status-badge status-draft">Draft</span> = AI-generated, not yet reviewed.
+<span class="status-badge status-review">Under Review</span> = Being actively reviewed.
+<span class="status-badge status-approved">Approved</span> = Reviewed by 3+ people and cleared for classroom use.</p>
+
+<h2>What Reviewers Look For</h2>
+
+<p>When reviewing a chapter, here's what matters most:</p>
+
+<ul class="review-checklist">
+  <li><strong>Factual accuracy</strong> — Are the dates, names, events, and claims correct? Are there any errors of omission that distort the picture?</li>
+  <li><strong>Age appropriateness</strong> — Is the language right for grades 6-8? Is difficult content (violence, slavery, injustice) handled honestly but sensitively?</li>
+  <li><strong>Clarity</strong> — Can a middle school student follow the narrative? Are unfamiliar concepts explained?</li>
+  <li><strong>Engagement</strong> — Is the writing compelling? Does it tell stories, not just list facts? Would a 12-year-old keep reading?</li>
+  <li><strong>Diverse perspectives</strong> — Are multiple viewpoints represented? Are marginalized voices included meaningfully, not as tokens?</li>
+  <li><strong>Pedagogical value</strong> — Do the vocab boxes, primary sources, and discussion prompts work? Are they useful in a real classroom?</li>
+  <li><strong>Alignment with scholarship</strong> — Does the chapter reflect current historical understanding, not outdated interpretations?</li>
+</ul>
+
+<h2>How to Do a Full Chapter Review</h2>
+
+<ol class="step-list">
+  <li><span class="step-number">1</span><p><strong>Pick a chapter</strong> from the status table above. Choose one marked "Draft" that you feel qualified to review.</p></li>
+  <li><span class="step-number">2</span><p><strong>Read it carefully.</strong> Read the whole chapter as if you were assigning it to your students. Note anything that feels wrong, unclear, or weak.</p></li>
+  <li><span class="step-number">3</span><p><strong>Submit your review.</strong> Use the <a href="https://github.com/shiebenaderet/yawpms/issues/new?template=chapter-review.yml">Chapter Review template</a> on GitHub, or fill out the <a href="https://forms.gle/PLACEHOLDER">feedback form</a> and note "Full Chapter Review" in the feedback type.</p></li>
+  <li><span class="step-number">4</span><p><strong>Be specific.</strong> "Section III has a problem" is less helpful than "In Section III, paragraph 2 says the Stamp Act was passed in 1764, but it was 1765."</p></li>
+</ol>
+
+<div class="callout">
+  <h3>A Note on AI-Generated Content</h3>
+  <p>This textbook was drafted using Claude (an AI assistant) and has not yet been fully vetted by human experts. While the AI draws on extensive historical knowledge and the source material of the original <em>American Yawp</em>, AI-generated text can contain errors, oversimplifications, or subtle inaccuracies. That's exactly why this review process exists. We are committed to transparency: no chapter will be presented as "ready" until real teachers and historians have signed off on it.</p>
+</div>
+
+<h2>Frequently Asked Questions</h2>
+
+<p><strong>Do I need a GitHub account?</strong><br>
+Not for quick feedback — use the Google Form. For discussions and chapter reviews, a free GitHub account helps us track and respond to your input.</p>
+
+<p><strong>Can I edit the text directly?</strong><br>
+Yes! If you're comfortable with GitHub, you can fork the repository, edit a chapter's HTML, and submit a pull request. If that's unfamiliar, just describe the change you'd make and we'll implement it.</p>
+
+<p><strong>How do I know if someone already reported an issue?</strong><br>
+Check the <a href="https://github.com/shiebenaderet/yawpms/issues">open issues</a> on GitHub. Duplicates are fine, though — they help us see which problems people notice most.</p>
+
+<p><strong>What happens after I submit a review?</strong><br>
+We read every piece of feedback. Factual corrections get fixed quickly. Bigger suggestions (rewrites, structural changes) get discussed in GitHub Discussions and implemented when there's consensus.</p>
+
+<p><strong>Is my feedback credited?</strong><br>
+Yes. Reviewers who complete a full chapter review are listed on the <a href="contributors.html">Contributors</a> page (with your permission).</p>
+
+<footer>
+  <p><a href="index.html">&larr; Back to home</a> | <a href="introduction.html">Introduction</a> | <a href="about.html">About</a> | <a href="contributors.html">Contributors</a> | <a href="teaching.html">Teaching Materials</a> | <a href="whopays.html">Who Pays?</a></p>
+</footer>
+
+</div>
+</body>
+</html>
