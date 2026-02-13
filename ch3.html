@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chapter 3: British North America | The American Yawp MS</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:wght@400;600;700&display=swap');
+
+:root {
+  --navy: #1B3A5C;
+  --teal: #2A7F8E;
+  --gold: #C4941D;
+  --cream: #FAFAF8;
+  --dark-gray: #2C2C2C;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body { font-family: 'Libre Baskerville', Georgia, serif; color: var(--dark-gray); background: var(--cream); line-height: 1.8; }
+
+.title-page { min-height: 60vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 80px 24px; background: linear-gradient(170deg, #0D2137 0%, var(--navy) 40%, #2B5A7C 100%); color: white; }
+.series { font-family: 'Source Sans 3', sans-serif; font-size: 13px; letter-spacing: 4px; text-transform: uppercase; opacity: .5; margin-bottom: 16px; }
+.chapter-num { font-size: 20px; font-weight: 400; opacity: .7; margin-bottom: 12px; }
+.chapter-title { font-size: 52px; line-height: 1.2; margin-bottom: 20px; font-weight: 700; }
+.chapter-subtitle { font-size: 22px; font-style: italic; opacity: .75; margin-bottom: 32px; }
+.divider { width: 100px; height: 3px; background: var(--gold); margin: 0 auto 24px; }
+.attribution { font-family: 'Source Sans 3', sans-serif; font-size: 13px; opacity: .5; line-height: 1.6; max-width: 600px; }
+
+.container { max-width: 720px; margin: 0 auto; padding: 48px 24px; }
+
+.toc { background: white; border: 1px solid #ddd; border-radius: 8px; padding: 32px; margin-bottom: 48px; }
+.toc h2 { font-size: 18px; color: var(--navy); margin-bottom: 20px; text-align: center; }
+.toc ol { list-style: none; counter-reset: toc-counter; padding: 0; }
+.toc li { counter-increment: toc-counter; margin-bottom: 12px; }
+.toc li::before { content: counter(toc-counter, upper-roman) ". "; color: var(--gold); font-weight: 700; margin-right: 8px; }
+.toc a { color: var(--navy); text-decoration: none; border-bottom: 1px dotted transparent; transition: border-color .2s; }
+.toc a:hover { border-bottom-color: var(--navy); }
+
+.overview { background: #F0F4F8; border-left: 5px solid var(--teal); padding: 28px 32px; margin-bottom: 48px; border-radius: 0 8px 8px 0; }
+.overview h2 { font-size: 20px; color: var(--teal); margin-bottom: 16px; }
+.overview p { font-family: 'Source Sans 3', sans-serif; font-size: 16px; line-height: 1.7; }
+
+.big-questions { background: white; border: 2px solid var(--gold); border-radius: 8px; padding: 28px 32px; margin-bottom: 48px; }
+.big-questions h2 { font-size: 18px; color: var(--gold); margin-bottom: 16px; text-align: center; }
+.big-questions ul { list-style: none; padding: 0; }
+.big-questions li { font-family: 'Source Sans 3', sans-serif; font-size: 15px; padding-left: 28px; position: relative; margin-bottom: 12px; line-height: 1.6; }
+.big-questions li::before { content: "?"; color: var(--gold); font-weight: 700; font-size: 20px; position: absolute; left: 0; top: -2px; }
+
+section { margin-bottom: 64px; }
+section h2 { font-size: 28px; color: var(--navy); margin-bottom: 24px; padding-bottom: 12px; border-bottom: 2px solid #E0E0E0; }
+section h3 { font-size: 20px; color: var(--navy); margin: 32px 0 16px; }
+
+p { margin-bottom: 20px; font-size: 17px; line-height: 1.8; }
+p:last-child { margin-bottom: 0; }
+
+.vocab-box, .stop-think, .perspectives, .key-idea, .primary-source, .story-box, .activity-box, .voices-left-out { border-radius: 8px; padding: 24px 28px; margin: 32px 0; }
+
+.vocab-box { background: #E8F4F8; border-left: 5px solid var(--teal); }
+.vocab-box h3 { color: var(--teal); font-size: 16px; margin: 0 0 12px; }
+.vocab-box p { font-family: 'Source Sans 3', sans-serif; font-size: 15px; margin-bottom: 12px; line-height: 1.6; }
+.vocab-box p:last-child { margin-bottom: 0; }
+.vocab-box strong { color: var(--teal); }
+
+.stop-think { background: #FFF9E6; border-left: 5px solid var(--gold); }
+.stop-think h3 { color: var(--gold); font-size: 16px; margin: 0 0 12px; }
+.stop-think p { font-family: 'Source Sans 3', sans-serif; font-size: 15px; font-style: italic; margin-bottom: 0; line-height: 1.6; }
+
+.perspectives { background: #F3E8FF; border-left: 5px solid #7C3AED; }
+.perspectives h3 { color: #7C3AED; font-size: 16px; margin: 0 0 16px; }
+.perspectives .perspective { margin-bottom: 16px; font-family: 'Source Sans 3', sans-serif; font-size: 15px; line-height: 1.6; }
+.perspectives .perspective:last-child { margin-bottom: 0; }
+.perspectives .perspective strong { color: #7C3AED; }
+
+.key-idea { background: #E8F5E9; border-left: 5px solid #2E7D32; }
+.key-idea h3 { color: #2E7D32; font-size: 16px; margin: 0 0 12px; }
+.key-idea p { font-family: 'Source Sans 3', sans-serif; font-size: 15px; line-height: 1.6; margin-bottom: 12px; }
+.key-idea p:last-child { margin-bottom: 0; }
+
+.primary-source { background: #FFF3E0; border-left: 5px solid #E65100; font-style: italic; }
+.primary-source h3 { color: #E65100; font-size: 16px; margin: 0 0 12px; font-style: normal; }
+.primary-source p { font-family: 'Source Sans 3', sans-serif; font-size: 15px; line-height: 1.7; margin-bottom: 12px; }
+.primary-source .source-citation { font-size: 13px; margin-top: 12px; opacity: .7; font-style: normal; }
+
+.story-box { background: #FFF4E6; border-left: 5px solid #F57C00; }
+.story-box h3 { color: #F57C00; font-size: 18px; margin: 0 0 16px; }
+.story-box p { font-family: 'Source Sans 3', sans-serif; font-size: 15px; line-height: 1.7; margin-bottom: 12px; }
+.story-box p:last-child { margin-bottom: 0; }
+
+.voices-left-out { background: #FCE4EC; border-left: 5px solid #C2185B; }
+.voices-left-out h3 { color: #C2185B; font-size: 18px; margin: 0 0 16px; }
+.voices-left-out p { font-family: 'Source Sans 3', sans-serif; font-size: 15px; line-height: 1.7; margin-bottom: 12px; }
+.voices-left-out p:last-child { margin-bottom: 0; }
+.voices-left-out strong { color: #C2185B; }
+
+.activity-box { background: #FFEBEE; border: 2px solid #C62828; border-radius: 8px; padding: 32px; }
+.activity-box h3 { color: #C62828; font-size: 22px; margin: 0 0 20px; text-align: center; }
+.activity-box h4 { color: #C62828; font-size: 16px; margin: 20px 0 12px; }
+.activity-box p, .activity-box li { font-family: 'Source Sans 3', sans-serif; font-size: 15px; line-height: 1.7; }
+.activity-box ul, .activity-box ol { margin-left: 24px; margin-bottom: 16px; }
+.activity-box li { margin-bottom: 8px; }
+
+figure { margin: 32px 0; text-align: center; }
+figure img { max-width: 100%; height: auto; border-radius: 4px; box-shadow: 0 2px 8px rgba(0,0,0,.1); }
+figcaption { font-family: 'Source Sans 3', sans-serif; font-size: 14px; color: #666; margin-top: 12px; line-height: 1.6; font-style: italic; }
+
+footer { border-top: 2px solid #E0E0E0; margin-top: 64px; padding-top: 24px; font-family: 'Source Sans 3', sans-serif; font-size: 13px; color: #999; line-height: 1.7; }
+footer a { color: var(--teal); text-decoration: none; border-bottom: 1px dotted var(--teal); }
+footer a:hover { border-bottom-style: solid; }
+
+@media print { .title-page { page-break-after: always; } section { page-break-inside: avoid; } }
+@media (max-width: 600px) { .chapter-title { font-size: 36px; } .container { padding: 32px 16px; } section h2 { font-size: 24px; } }
+</style>
+</head>
+<body>
+
+<div class="title-page">
+  <div class="series">The American Yawp Middle School Edition</div>
+  <div class="chapter-num">Chapter 3</div>
+  <h1 class="chapter-title">British North America</h1>
+  <div class="divider"></div>
+  <div class="chapter-subtitle">Jamestown, Plymouth, and the Roots of Colonial America</div>
+  <p class="attribution">Adapted for middle school readers from <em>The American Yawp</em>, edited by Joseph Locke and Ben Wright</p>
+</div>
+
+<div class="container">
+
+<nav class="toc">
+  <h2>Contents</h2>
+  <ol>
+    <li><a href="#intro">Introduction: Two Colonies, Two Stories</a></li>
+    <li><a href="#jamestown">Jamestown: Greed, Starvation, and Tobacco</a></li>
+    <li><a href="#new-england">New England: God's Experiment</a></li>
+    <li><a href="#chesapeake">The Chesapeake: Tobacco and Bound Labor</a></li>
+    <li><a href="#slavery-begins">Slavery Takes Root</a></li>
+    <li><a href="#bacons-rebellion">Bacon's Rebellion: The Turning Point</a></li>
+    <li><a href="#conclusion">Wrapping Up: Freedom for Whom?</a></li>
+  </ol>
+</nav>
+
+<div class="overview">
+  <h2>Chapter Overview</h2>
+  <p>England's first permanent colonies in North America could hardly have been more different. Jamestown, Virginia, was founded in 1607 by men chasing gold. They nearly starved to death before discovering that tobacco could make them rich—if they could find enough workers to grow it. Plymouth, Massachusetts, was founded in 1620 by religious separatists seeking freedom to worship as they pleased. Over the next century, these two models—profit and piety—would define the English colonies. But both shared a darker truth: colonial wealth was built on the exploitation of other people's labor, from indentured servants to enslaved Africans.</p>
+</div>
+
+<div class="big-questions">
+  <h2>Big Questions</h2>
+  <ul>
+    <li>Why did the Jamestown colonists nearly fail, and what saved them?</li>
+    <li>How did the Puritan vision of a "city upon a hill" shape New England—and who was excluded from it?</li>
+    <li>Why did the English colonies shift from indentured servitude to race-based slavery?</li>
+    <li>What did Bacon's Rebellion reveal about the tensions within colonial society?</li>
+  </ul>
+</div>
+
+<section id="intro">
+  <h2>I. Introduction: Two Colonies, Two Stories</h2>
+
+  <p>In 1607, a group of about 100 English men and boys landed on a swampy peninsula in Virginia. They called their settlement Jamestown, after King James I. They were looking for gold. They didn't find any. Within a year, more than half of them were dead—killed by disease, starvation, and conflicts with the Powhatan Confederacy.</p>
+
+  <p>Thirteen years later, in 1620, a different group of English settlers—men, women, and children—landed on the rocky shore of Cape Cod, Massachusetts. They called themselves Pilgrims. They weren't looking for gold. They were looking for a place to practice their religion freely. Their first winter was brutal: half of them died. But the survivors hung on, and with the help of local Wampanoag people, they built a community that endured.</p>
+
+  <p>These two settlements—Jamestown and Plymouth—represent the two great motivations that drove English colonization: money and religion. In reality, most colonies blended both. But understanding the tension between greed and God helps explain why the English colonies developed as they did—and who paid the price.</p>
+</section>
+
+<section id="jamestown">
+  <h2>II. Jamestown: Greed, Starvation, and Tobacco</h2>
+
+  <h3>The Wrong Kind of Colonists</h3>
+
+  <p>Jamestown's original settlers were, to put it bluntly, terrible at survival. Most were gentlemen—men from wealthy families who had never farmed, built anything, or done physical labor of any kind. They expected to find gold lying on the ground, get rich, and go home. Instead, they found mosquitoes, malaria, and a powerful Indigenous confederacy that wasn't interested in sharing its land.</p>
+
+  <p>The settlers built their fort on a mosquito-infested swamp. They drank contaminated water. They refused to plant crops, clinging to the hope that gold would appear. By the end of the first year, disease and starvation had killed more than half of them. During the winter of 1609–1610—known as "the Starving Time"—conditions became so desperate that colonists ate horses, rats, shoe leather, and, according to archaeological evidence, each other.</p>
+
+  <div class="story-box">
+    <h3>Story Behind the Story: The Starving Time</h3>
+    <p>In 2013, archaeologists at Jamestown discovered the remains of a 14-year-old girl. Her skull showed clear evidence of butchering—her flesh had been removed after death. The discovery confirmed what historical accounts had hinted at: during the winter of 1609–1610, some Jamestown colonists resorted to cannibalism. Of the 300 colonists who entered that winter, only 60 survived. When supply ships finally arrived in spring, the survivors were so weakened that they had already decided to abandon the colony. They were literally sailing away when the ships appeared. Jamestown survived not because of the colonists' skill or planning, but by sheer luck.</p>
+  </div>
+
+  <h3>Tobacco Saves the Colony</h3>
+
+  <p>Jamestown's salvation came from an unlikely source: a plant. In 1612, a colonist named John Rolfe began experimenting with tobacco—a crop Native Americans had been growing for centuries. Rolfe developed a sweeter variety that Europeans loved. Within a few years, tobacco was making fortunes. Colonists planted it everywhere—in fields, in gardens, even in the streets of Jamestown.</p>
+
+  <p>Tobacco transformed Virginia. It gave the colony an economic purpose and attracted new settlers. But tobacco was incredibly labor-intensive. Growing, harvesting, and curing tobacco required enormous amounts of backbreaking work. Who would do it?</p>
+
+  <h3>The Powhatan Confederacy</h3>
+
+  <p>Jamestown sat in the middle of Tsenacommacah—the territory of the Powhatan Confederacy, a powerful alliance of about 30 Algonquian-speaking nations led by a paramount chief known as Wahunsenacah (or Powhatan). The Powhatan people initially traded with the English, exchanging food for metal tools and other goods. But as the English population grew and demanded more land, relations deteriorated.</p>
+
+  <p>In 1622, the Powhatan launched a coordinated attack on English settlements, killing about 350 colonists—nearly a third of the English population in Virginia. The English retaliated with a campaign of destruction, burning Powhatan villages and crops. A second major attack in 1644 failed to drive the English out. By the 1660s, the Powhatan Confederacy had been devastated by war, disease, and land loss.</p>
+
+  <figure>
+    <img src="images/ch3/pocahontas.jpg" alt="Portrait of Pocahontas in English clothing" />
+    <figcaption>A 1616 engraving of Pocahontas (Amonute) during her visit to England. She married John Rolfe and was presented to English society as evidence that Native peoples could be "civilized"—a deeply problematic idea. (Public domain)</figcaption>
+  </figure>
+
+  <div class="perspectives">
+    <h3>Multiple Perspectives: Pocahontas</h3>
+    <div class="perspective"><strong>The Disney version:</strong> Pocahontas was a romantic heroine who fell in love with John Smith and brought peace between the English and the Powhatan. It's a heartwarming love story.</div>
+    <div class="perspective"><strong>The historical record:</strong> Pocahontas (whose real name was Amonute) was about 11 years old when she met John Smith—far too young for a romance. She was later kidnapped by the English, held captive, converted to Christianity, renamed "Rebecca," and married to John Rolfe. She traveled to England, where she was displayed as proof that Native peoples could be "civilized." She died in England at about age 21, far from home.</div>
+    <div class="perspective"><strong>Powhatan perspective:</strong> Pocahontas was a diplomatic pawn—first used by her father Wahunsenacah to manage relations with the English, then kidnapped and used by the English to control the Powhatan. Her story is one of cultural erasure, not romance.</div>
+  </div>
+
+  <div class="vocab-box">
+    <h3>Vocabulary</h3>
+    <p><strong>Joint-stock company:</strong> A business in which investors pooled their money to fund risky ventures (like colonies) and shared the profits. The Virginia Company funded Jamestown.</p>
+    <p><strong>Cash crop:</strong> A crop grown specifically to sell for profit rather than to feed the farmer. Tobacco was Virginia's first major cash crop.</p>
+    <p><strong>Indentured servant:</strong> A person who agreed to work for a set number of years (usually 4-7) in exchange for passage to the colonies, food, and shelter. After their term ended, they were free.</p>
+  </div>
+</section>
+
+<section id="new-england">
+  <h2>III. New England: God's Experiment</h2>
+
+  <h3>The Pilgrims at Plymouth</h3>
+
+  <p>The Pilgrims were Separatists—English Protestants who believed the Church of England was so corrupt that they needed to separate from it entirely. After fleeing to the Netherlands, they secured funding for a colony in the Americas. In 1620, about 100 passengers—roughly half Separatists and half ordinary settlers—sailed on the Mayflower and landed at Plymouth, Massachusetts.</p>
+
+  <p>Before going ashore, the Pilgrims drafted the Mayflower Compact—a written agreement establishing a government based on the consent of the governed. It was one of the earliest examples of self-government in the English colonies.</p>
+
+  <p>The Pilgrims' first winter was devastating. Half the colonists died of cold and disease. The survivors were saved by the Wampanoag people, who taught them how to farm the local land. Squanto (Tisquantum), a Wampanoag man who had been kidnapped by English traders years earlier and spoke English, served as translator and guide.</p>
+
+  <div class="story-box">
+    <h3>Story Behind the Story: The Real Story of "Thanksgiving"</h3>
+    <p>The harvest celebration of 1621—the event we call "the first Thanksgiving"—was real. The Pilgrims and the Wampanoag did share a feast. But the story we tell about it leaves out almost everything that matters. Squanto could speak English because he had been kidnapped and sold into slavery in Spain before escaping to England and eventually returning home—only to find his entire village had been wiped out by an epidemic. The Wampanoag leader Massasoit allied with the Pilgrims not out of friendship but out of strategic calculation: the Wampanoag had been devastated by disease and needed allies against their rivals, the Narragansett. Within a generation, the relationship between English colonists and the Wampanoag would collapse into one of the bloodiest wars in American history (King Philip's War, 1675–1678). The Thanksgiving story isn't wrong—it's incomplete.</p>
+  </div>
+
+  <h3>The Puritans and Massachusetts Bay</h3>
+
+  <p>A much larger wave of Puritans arrived in 1630, founding the Massachusetts Bay Colony under the leadership of John Winthrop. Unlike the Separatists, the Puritans didn't want to leave the Church of England—they wanted to reform it from within. Winthrop famously declared that their colony would be "a city upon a hill"—a model Christian community for all the world to see.</p>
+
+  <p>The Massachusetts Bay Colony grew rapidly. Unlike Jamestown, these colonists came as families—men, women, and children—with skills and resources. They built towns, churches, schools, and farms. They established Harvard College in 1636 to train ministers. They created town meetings where adult male church members could vote on local issues—an early form of democratic self-government.</p>
+
+  <p>But Puritan New England was far from free. The Puritans were deeply intolerant of religious dissent. Those who questioned Puritan beliefs were punished—sometimes banished, sometimes worse.</p>
+
+  <h3>Dissenters and Exiles</h3>
+
+  <p>Roger Williams, a Puritan minister, argued that the government had no right to enforce religious beliefs and that the colonists should pay Native Americans for their land rather than simply taking it. The Puritans banished him in 1636. Williams fled south and founded Providence (later Rhode Island), a colony based on religious freedom and separation of church and state.</p>
+
+  <p>Anne Hutchinson, a brilliant and outspoken woman, held Bible study meetings in her home and challenged the authority of Puritan ministers. She was put on trial, condemned for her "unfeminine" behavior, and banished in 1638. She moved to Rhode Island and later to the Dutch colony of New Netherland, where she was killed in a conflict with Indigenous people in 1643.</p>
+
+  <div class="primary-source">
+    <h3>Primary Source: John Winthrop's "City Upon a Hill"</h3>
+    <p>"For we must consider that we shall be as a city upon a hill. The eyes of all people are upon us. So that if we shall deal falsely with our God in this work we have undertaken, and so cause him to withdraw his present help from us, we shall be made a story and a byword through the world."</p>
+    <p class="source-citation">—John Winthrop, "A Model of Christian Charity" (1630)</p>
+  </div>
+
+  <div class="stop-think">
+    <h3>Stop and Think</h3>
+    <p>The Puritans came to America seeking religious freedom—but then denied that same freedom to dissenters like Roger Williams and Anne Hutchinson. Why do you think people who have been persecuted sometimes become persecutors themselves?</p>
+  </div>
+</section>
+
+<section id="chesapeake">
+  <h2>IV. The Chesapeake: Tobacco and Bound Labor</h2>
+
+  <p>As Virginia's tobacco economy boomed, the colony's appetite for labor became insatiable. Growing tobacco required constant, grueling work: clearing land, planting, weeding, harvesting, and curing the leaves. But workers were scarce. Who would do this miserable work in a malarial swamp thousands of miles from home?</p>
+
+  <h3>Indentured Servitude</h3>
+
+  <p>The answer, for most of the 1600s, was indentured servants. These were poor English men and women—often teenagers—who signed contracts agreeing to work for a master for 4 to 7 years. In exchange, their master paid for their passage to Virginia, fed and housed them, and—in theory—gave them land, tools, and clothes when their term ended (called "freedom dues").</p>
+
+  <p>In practice, indentured servitude was harsh. Servants could be bought and sold. They could be beaten. They couldn't marry without their master's permission. Many died before their terms ended—from disease, overwork, or abuse. Women who became pregnant had extra years added to their contracts.</p>
+
+  <p>Those who survived and gained their freedom often found that the best land had already been claimed by the colony's wealthy elite. They scraped by on marginal land, growing resentful of a system that seemed rigged against them.</p>
+
+  <h3>The Headright System</h3>
+
+  <p>To attract more settlers, Virginia offered 50 acres of land to anyone who paid for a person's passage to the colony. This was called the headright system. Wealthy planters used it to accumulate enormous estates: every indentured servant they imported earned them 50 more acres. The result was a growing gap between a small class of wealthy planters and a large class of landless poor—a tension that would eventually explode.</p>
+
+  <div class="vocab-box">
+    <h3>Vocabulary</h3>
+    <p><strong>Headright system:</strong> A policy granting 50 acres of land to anyone who paid for a person's passage to Virginia. Wealthy planters used it to accumulate large estates.</p>
+    <p><strong>Freedom dues:</strong> The land, tools, and goods promised to indentured servants when their contracts expired.</p>
+    <p><strong>Planter elite:</strong> The wealthy landowners who dominated politics and society in the Chesapeake colonies through large tobacco plantations.</p>
+  </div>
+</section>
+
+<section id="slavery-begins">
+  <h2>V. Slavery Takes Root</h2>
+
+  <h3>The First Africans in Virginia</h3>
+
+  <p>In 1619, a ship carrying "20 and odd" Africans arrived at Point Comfort, Virginia. These people had been captured in the Kingdom of Ndongo (in modern-day Angola), transported across the Atlantic on a Portuguese slave ship, and then seized by English privateers. Their exact legal status in Virginia is debated—some may have been treated as indentured servants rather than lifelong slaves.</p>
+
+  <p>For the first few decades, the line between African servitude and slavery in Virginia was blurry. Some Africans worked alongside white indentured servants, earned their freedom, and even acquired land and servants of their own. Anthony Johnson, an African who arrived in Virginia in 1621, eventually gained his freedom, accumulated 250 acres of land, and owned indentured servants himself.</p>
+
+  <h3>The Hardening of Racial Slavery</h3>
+
+  <p>But over the course of the 1600s, the laws changed. Virginia's ruling class deliberately created a system of race-based slavery that was permanent, hereditary, and defined by skin color. Key laws included:</p>
+
+  <p><strong>1662:</strong> Virginia declared that a child's status (free or enslaved) followed the status of the mother—not the father. This meant that the children of enslaved women were automatically enslaved, even if their fathers were free white men. It also meant that white men who raped enslaved women faced no legal consequences.</p>
+
+  <p><strong>1667:</strong> Virginia declared that baptism did not free enslaved people. This closed a loophole that some Africans had used to claim freedom through conversion to Christianity.</p>
+
+  <p><strong>1705:</strong> Virginia passed a comprehensive slave code that defined enslaved people as property, stripped them of all legal rights, and made it legal for masters to kill enslaved people who resisted.</p>
+
+  <div class="key-idea">
+    <h3>Key Idea: Race Was Constructed, Not Natural</h3>
+    <p>The racial categories we take for granted today—"white," "Black"—were created by law and custom in the colonial period. In the early 1600s, poor English and African laborers worked side by side, socialized together, and sometimes ran away together. The rigid racial divide between "white" and "Black" didn't exist yet. Virginia's ruling class deliberately created that divide through laws that gave poor white people legal advantages over all Black people—enslaved or free. The goal was to prevent poor whites and enslaved Blacks from uniting against the wealthy elite, as they had done during Bacon's Rebellion (covered in the next section). Race-based slavery was not a natural or inevitable development. It was a deliberate political choice.</p>
+  </div>
+
+  <div class="stop-think">
+    <h3>Stop and Think</h3>
+    <p>Why did Virginia's ruling class create laws that separated white and Black laborers? What were they afraid of? How might American history have been different if poor whites and enslaved Blacks had remained allies instead of being divided by race?</p>
+  </div>
+</section>
+
+<section id="bacons-rebellion">
+  <h2>VI. Bacon's Rebellion: The Turning Point</h2>
+
+  <p>In 1676, Virginia erupted in violence—not between colonists and Native Americans, but between colonists and their own government. The uprising, known as Bacon's Rebellion, revealed the deep tensions within colonial society and had consequences that shaped American history for centuries.</p>
+
+  <h3>What Happened</h3>
+
+  <p>Nathaniel Bacon was a wealthy young planter who was frustrated with Virginia's governor, William Berkeley. Bacon wanted the government to wage war against all Native Americans on the frontier, seizing their land for settlers. Berkeley refused, partly because he profited from the fur trade with Native peoples.</p>
+
+  <p>Bacon raised an army of discontented colonists—former indentured servants, poor farmers, and even some enslaved Africans—and attacked Native communities indiscriminately, killing friendly and hostile groups alike. When Berkeley tried to stop him, Bacon turned his army against the colonial government itself. His forces burned Jamestown to the ground.</p>
+
+  <p>Bacon died of dysentery in October 1676, and the rebellion collapsed. Berkeley executed 23 rebels. But the damage was done.</p>
+
+  <h3>Why It Matters</h3>
+
+  <p>Bacon's Rebellion terrified Virginia's ruling class. They had seen poor whites and Black laborers unite against them. The solution? Divide them. In the decades after the rebellion, Virginia's elite systematically replaced indentured servitude with race-based slavery and passed laws granting poor white people legal privileges over all Black people. The message was clear: no matter how poor you are, you're still better than a slave.</p>
+
+  <p>This strategy worked. Poor whites gained a psychological investment in the racial hierarchy, even as they remained economically exploited by the planter elite. The racial divide that Bacon's Rebellion helped create would persist for centuries—through slavery, through Jim Crow, and into the present.</p>
+
+  <div class="perspectives">
+    <h3>Multiple Perspectives: Bacon's Rebellion</h3>
+    <div class="perspective"><strong>Nathaniel Bacon and his followers:</strong> "We are oppressed! The governor protects Indians while honest settlers are attacked on the frontier. We have a right to defend ourselves and to seize land from savages."</div>
+    <div class="perspective"><strong>Governor Berkeley:</strong> "Bacon is a traitor and a demagogue. He's stirring up the rabble to start an illegal war that will destroy our trade alliances. This is not about liberty—it's about one man's ambition."</div>
+    <div class="perspective"><strong>The Native peoples being attacked:</strong> "We have treaties with the English. We trade with them. We live in peace. And now this man attacks our villages without provocation, killing women and children?"</div>
+    <div class="perspective"><strong>Virginia's ruling class (after the rebellion):</strong> "We cannot let poor whites and Blacks unite again. If we give poor whites a racial identity—a sense that they are superior to Blacks—they will police the slaves for us instead of rebelling against us."</div>
+  </div>
+</section>
+
+<section id="conclusion">
+  <h2>VII. Wrapping Up: Freedom for Whom?</h2>
+
+  <p>By the end of the 1600s, British North America was a society built on contradictions. The Puritans preached Christian charity but banished dissenters and waged war on Indigenous peoples. Virginia celebrated individual liberty while enslaving tens of thousands of Africans. Colonists fleeing oppression in England became oppressors in America.</p>
+
+  <p>The roots of American democracy were real—town meetings, the Mayflower Compact, and elected assemblies gave some colonists genuine political power. But those same democratic institutions existed alongside, and often depended on, the systematic exploitation of Indigenous lands, indentured labor, and enslaved African lives.</p>
+
+  <p>Understanding this contradiction is essential. American history is not a story of steady progress toward freedom. It's a story of people fighting over what freedom means, who deserves it, and who gets to decide. That fight started in the first English colonies—and it continues today.</p>
+
+  <div class="voices-left-out">
+    <h3>Whose Voices Were Left Out?</h3>
+    <p><strong>Indentured servants:</strong> They made up the majority of English immigrants to the Chesapeake. Most left no written records. We know their labor built the colony, but we rarely hear their stories—their hopes, their suffering, or what happened to them after their terms ended.</p>
+    <p><strong>Enslaved Africans:</strong> The first Africans in Virginia left almost no written records. Their names, their languages, their experiences of capture and enslavement, their resistance—almost all of it is lost to history. The historical record tells us what was done to them, but rarely lets us hear their voices.</p>
+    <p><strong>Indigenous women:</strong> The Powhatan, Wampanoag, and other nations had rich, complex cultures. Women played central roles as farmers, diplomats, and community leaders. But European accounts rarely describe Indigenous women as anything other than wives or curiosities.</p>
+    <p><strong>Anne Hutchinson and other dissenting women:</strong> Women who challenged male authority in colonial society were silenced, banished, or worse. Their ideas—about religious freedom, gender equality, and social justice—were ahead of their time and deserve to be remembered.</p>
+  </div>
+</section>
+
+<div class="activity-box">
+  <h3>Chapter Activity: Who Had Power in Colonial America?</h3>
+
+  <h4>The Task:</h4>
+  <p>Create a "Power Pyramid" for colonial Virginia in the year 1700. Arrange the following groups from most powerful (top) to least powerful (bottom), and explain your reasoning:</p>
+
+  <ul>
+    <li>Wealthy tobacco planters</li>
+    <li>Poor white farmers (former indentured servants)</li>
+    <li>Indentured servants currently under contract</li>
+    <li>Free Black people (like Anthony Johnson)</li>
+    <li>Enslaved Africans</li>
+    <li>Powhatan and other Indigenous peoples</li>
+    <li>White women (wives of planters)</li>
+    <li>The governor and colonial officials</li>
+  </ul>
+
+  <h4>Discussion Questions:</h4>
+  <ul>
+    <li>Where would you place yourself in this pyramid? How would your life be different depending on your position?</li>
+    <li>After Bacon's Rebellion, how did the pyramid change? Which groups gained power and which lost it?</li>
+    <li>Who benefits from keeping the groups at the bottom divided against each other instead of united?</li>
+  </ul>
+</div>
+
+<footer>
+  <p><strong>Chapter 3: British North America</strong> from <em>The American Yawp Middle School Edition</em>. Adapted from <em>The American Yawp</em>, eds. Joseph Locke and Ben Wright (Stanford University Press, 2018).</p>
+  <p>Licensed under <a href="https://creativecommons.org/licenses/by-sa/4.0/">Creative Commons BY-SA 4.0</a>. Free to use, share, and adapt with attribution.</p>
+  <p><a href="index.html">← Back to chapters</a> | <a href="ch2.html">← Chapter 2</a> | <a href="ch4.html">Chapter 4 →</a></p>
+</footer>
+
+</div>
+</body>
+</html>
