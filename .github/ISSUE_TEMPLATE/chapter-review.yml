@@ -1,0 +1,112 @@
+name: Chapter Review
+description: Submit a full review of a chapter
+title: "Review: Chapter [NUMBER] — [TITLE]"
+labels: ["review", "chapter-feedback"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for reviewing a chapter! Your feedback is essential to making this textbook trustworthy and classroom-ready.
+
+  - type: dropdown
+    id: chapter
+    attributes:
+      label: Chapter
+      description: Which chapter did you review?
+      options:
+        - "1 — Indigenous America"
+        - "2 — Colliding Cultures"
+        - "3 — British North America"
+        - "4 — Colonial Society"
+        - "5 — The American Revolution"
+        - "6 — A New Nation"
+        - "7 — The Early Republic"
+        - "8 — The Market Revolution"
+        - "9 — Democracy in America"
+        - "10 — Religion and Reform"
+        - "11 — The Cotton Revolution"
+        - "12 — Manifest Destiny"
+        - "13 — The Sectional Crisis"
+        - "14 — The Civil War"
+        - "15 — Reconstruction"
+    validations:
+      required: true
+
+  - type: input
+    id: reviewer-role
+    attributes:
+      label: Your background
+      description: e.g., "8th grade U.S. History teacher, 12 years" or "History PhD student"
+      placeholder: Brief description of your teaching or subject expertise
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: review-areas
+    attributes:
+      label: Review checklist
+      description: Check each area you evaluated. You don't have to check all of them.
+      options:
+        - label: "Factual accuracy — dates, names, events, and claims are correct"
+        - label: "Age appropriateness — language and content are suitable for grades 6–8"
+        - label: "Clarity — a middle school student can follow the narrative"
+        - label: "Engagement — the writing is compelling and tells stories, not just lists facts"
+        - label: "Diverse perspectives — multiple viewpoints are represented meaningfully"
+        - label: "Pedagogical features — vocab boxes, primary sources, and prompts are useful"
+        - label: "Alignment with current scholarship — reflects up-to-date historical understanding"
+
+  - type: textarea
+    id: factual-errors
+    attributes:
+      label: Factual errors or inaccuracies
+      description: List any specific errors you found. Include section/paragraph if possible.
+      placeholder: |
+        - Section III, para 2: Says the Stamp Act was passed in 1764, but it was 1765.
+        - Section V: Overstates the role of X and doesn't mention Y.
+    validations:
+      required: false
+
+  - type: textarea
+    id: clarity-issues
+    attributes:
+      label: Clarity or language issues
+      description: Anything confusing, too advanced, or unclear for middle school students.
+      placeholder: |
+        - The opening paragraph uses "hegemony" without defining it.
+        - Section IV jumps between topics too quickly.
+    validations:
+      required: false
+
+  - type: textarea
+    id: strengths
+    attributes:
+      label: What works well
+      description: What did you think was effective? This helps us know what to preserve.
+      placeholder: |
+        - The primary source from Frederick Douglass is powerful and well-contextualized.
+        - The "Story Behind the Story" box about the Erie Canal is great.
+    validations:
+      required: false
+
+  - type: textarea
+    id: suggestions
+    attributes:
+      label: Suggestions for improvement
+      description: Any changes you'd recommend — rewrites, additions, removals, restructuring.
+      placeholder: |
+        - Add a "Whose Voices Were Left Out?" section about X.
+        - The chapter activity could be stronger if it asked students to Y.
+    validations:
+      required: false
+
+  - type: dropdown
+    id: overall-assessment
+    attributes:
+      label: Overall assessment
+      description: In your judgment, is this chapter ready for classroom use?
+      options:
+        - "Ready — minor issues only, could be used now"
+        - "Needs revision — solid foundation but has specific problems to fix"
+        - "Needs significant work — major factual, structural, or pedagogical issues"
+    validations:
+      required: true
