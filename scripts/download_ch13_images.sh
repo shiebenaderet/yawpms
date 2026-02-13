@@ -1,18 +1,19 @@
 #!/usr/bin/env bash
-# Download images for Chapter 3: British North America
+# Download images for Chapter 13: The Sectional Crisis
 # Images sourced from Wikimedia Commons (public domain)
-# Usage: bash scripts/download_ch3_images.sh
+# Usage: bash scripts/download_ch13_images.sh
 
 set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
-IMG_DIR="$SCRIPT_DIR/../images/ch3"
+IMG_DIR="$SCRIPT_DIR/../images/ch13"
 mkdir -p "$IMG_DIR"
 
-echo "Downloading Chapter 3 images to $IMG_DIR ..."
+echo "Downloading Chapter 13 images to $IMG_DIR ..."
 
 declare -A IMAGES=(
-  ["pocahontas.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/Pocahontas_by_Simon_van_de_Passe.jpg?width=640"
+  ["john-brown.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/John_Brown_daguerreotype%2C_c._1856.png?width=440"
+  ["dred-scott.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/Oil_on_Canvas_Portrait_of_Dred_Scott_%28cropped%29.jpg?width=440"
 )
 
 for local in "${!IMAGES[@]}"; do
