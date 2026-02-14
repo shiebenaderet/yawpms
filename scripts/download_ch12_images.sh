@@ -14,20 +14,27 @@ echo "Downloading Chapter 12 images to $IMG_DIR ..."
 declare -A IMAGES=(
   ["american-progress.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/American_Progress_%28John_Gast_painting%29.jpg?width=640"
   ["oregon-trail.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/Bierstadt_Albert_Oregon_Trail.jpg?width=640"
-  ["battle-of-chapultepec.jpg"]="https://upload.wikimedia.org/wikipedia/commons/thumb/c/ce/Battle_of_Chapultepec.jpg/640px-Battle_of_Chapultepec.jpg"
-  ["gold-rush-miners.jpg"]="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2d/California_gold_rush_daguerreotype.jpg/640px-California_gold_rush_daguerreotype.jpg"
-  ["mexican-cession-map.jpg"]="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4f/Mexican_Cession.png/640px-Mexican_Cession.png"
+  ["battle-of-chapultepec.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/Battle_of_Chapultepec.jpg?width=640"
+  ["gold-rush-miners.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/California_gold_miners_with_long_tom.jpg?width=640"
+  ["mexican-cession-map.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/Mexican_Cession.png?width=640"
 )
 
+MIN_SIZE=5000
 for local in "${!IMAGES[@]}"; do
   url="${IMAGES[$local]}"
   dest="$IMG_DIR/$local"
-  if [ -f "$dest" ]; then
+  if [ -f "$dest" ] && [ "$(stat -f%z "$dest" 2>/dev/null || stat -c%s "$dest" 2>/dev/null)" -ge "$MIN_SIZE" ]; then
     echo "  [skip] $local already exists"
   else
     echo "  [download] $local"
     if curl -sL --fail "$url" -o "$dest" 2>/dev/null; then
-      echo "  [ok] $local"
+      size=$(stat -f%z "$dest" 2>/dev/null || stat -c%s "$dest" 2>/dev/null)
+      if [ "$size" -lt "$MIN_SIZE" ]; then
+        echo "  [FAILED] $local — got $size bytes (likely error page); check URL"
+        rm -f "$dest"
+      else
+        echo "  [ok] $local"
+      fi
     else
       echo "  [FAILED] $local — check URL: $url"
       rm -f "$dest"
