@@ -2,7 +2,7 @@
 
 This document compares our chapter HTML with the [American Yawp](https://www.americanyawp.com) source, lists every image the book expects, and explains why some images don’t load and how to fix it.
 
-**Recent changes:** The audit’s recommended images (Ch1 Crooked Beak mask, Ch2 Castello Plan, New Orleans 1728, Battle of Gravelines, Ch3 Virginia fishing) are now in the download scripts and in the chapter HTML. The old `scripts/images/` folder and `scripts/download-images.sh` have been removed; use only `download_all_images.sh` and `download_all_maps.sh` (and per-chapter scripts) which write to repo-root `images/`.
+**Recent changes:** The audit’s recommended images (Ch1 Crooked Beak mask, Ch2 Castello Plan, New Orleans 1728, Battle of Gravelines, Ch3 Virginia fishing) are now in the download scripts and in the chapter HTML. The old `scripts/images/` folder and `scripts/download-images.sh` have been removed; use only `download_all_images.sh` and `download_all_maps.sh` (and per-chapter scripts) which write to repo-root `images/`. **Ch3:** The Bacon's Rebellion section now uses Howard Pyle's *Burning of Jamestown* (1676); *The Old Plantation* (c. 1790) was moved to the "Hardening of Racial Slavery" section where it fits the context (enslaved people's cultural life).
 
 ---
 
@@ -35,8 +35,9 @@ bash scripts/download_all_maps.sh
 ```
 
 - **Skip existing:** Both scripts skip files that already exist and are at least 5 KB (so broken/error-page files get re-downloaded).
-- **Errors:** A failed download in one chapter (or one map) does not stop the rest. Re-run the same script to retry; existing good files are skipped.
-- If something fails (e.g. Wikimedia rate limit), run the script again later or run the specific `download_chN_images.sh` for that chapter.
+- **Errors:** A failed download in one chapter (or one map) does not stop the rest. Re-run the same script to retry; existing good files are skipped. At the end, `download_all_images.sh` prints a list of all failed images.
+- **User-Agent:** Wikimedia Commons requires a User-Agent header. All download scripts source `scripts/download_common.sh`, which sets a compliant User-Agent so requests are not blocked. If you see many "[FAILED] … check URL" errors, ensure you're running the scripts as provided (they send the User-Agent automatically).
+- If something fails (e.g. rate limit or temporary outage), run the script again later or run the specific `download_chN_images.sh` for that chapter.
 
 ---
 

@@ -6,6 +6,7 @@
 set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+source "$SCRIPT_DIR/download_common.sh"
 IMG_DIR="$SCRIPT_DIR/../images/ch5"
 mkdir -p "$IMG_DIR"
 
@@ -13,10 +14,10 @@ echo "Downloading Chapter 5 images to $IMG_DIR ..."
 
 declare -A IMAGES=(
   ["boston-massacre.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/Boston_Massacre_high-res.jpg?width=640"
-  ["common-sense.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/Common_Sense_by_Thomas_Paine.jpg?width=440"
+  ["common-sense.jpg"]="https://upload.wikimedia.org/wikipedia/commons/4/4a/Commonsense.jpg"
   ["declaration-of-independence.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/Declaration_of_Independence_%281819%29%2C_by_John_Trumbull.jpg?width=640"
   ["surrender-cornwallis.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/Surrender_of_Lord_Cornwallis.jpg?width=640"
-  ["yorktown-soldiers.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/Soldats_de_l%27Arm%C3%A9e_Continentale_%C3%A0_Yorktown.jpg?width=640"
+  ["yorktown-soldiers.jpg"]="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/Soldats_de_l%27Arm%C3%A9e_Continentale_%C3%A0_Yorktown.jpg/640px-Soldats_de_l%27Arm%C3%A9e_Continentale_%C3%A0_Yorktown.jpg"
 )
 
 MIN_SIZE=5000
@@ -28,10 +29,10 @@ for local in "${!IMAGES[@]}"; do
   else
     echo "  [download] $local"
     sleep 2
-    if ! curl -sL --fail --max-time 60 "$url" -o "$dest" 2>/dev/null; then
+    if ! curl -sL --fail --max-time 60 -A "$CURL_USER_AGENT" "$url" -o "$dest" 2>/dev/null; then
       echo "  [retry in 5s] $local"
       sleep 5
-      curl -sL --fail --max-time 60 "$url" -o "$dest" 2>/dev/null || true
+      curl -sL --fail --max-time 60 -A "$CURL_USER_AGENT" "$url" -o "$dest" 2>/dev/null || true
     fi
     if [ -f "$dest" ]; then
       size=$(stat -f%z "$dest" 2>/dev/null || stat -c%s "$dest" 2>/dev/null)

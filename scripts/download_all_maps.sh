@@ -6,6 +6,7 @@
 
 set -u
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+source "$SCRIPT_DIR/download_common.sh"
 BASE_DIR="$(cd "$SCRIPT_DIR/.." && pwd)"
 W="https://commons.wikimedia.org/wiki/Special:FilePath"
 SIZE="?width=960"
@@ -25,7 +26,7 @@ download() {
     return 0
   fi
   echo "  [get]  ch${ch}/${file}"
-  if ! curl -sL --fail "$url" -o "$dest" 2>/dev/null; then
+  if ! curl -sL --fail -A "$CURL_USER_AGENT" "$url" -o "$dest" 2>/dev/null; then
     echo "  [FAIL] ch${ch}/${file} — curl failed"
     rm -f "$dest"
     return 1
