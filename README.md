@@ -51,7 +51,7 @@ Each chapter includes:
 - **Stop and Think questions** — Analytical prompts, not recall quizzes
 - **Vocabulary boxes** — Key terms with student-friendly definitions
 - **Chapter activities** — Debates, rankings, and evidence-based discussions
-- **Built-in reader tools** — Text resizing, dyslexia-friendly font, line focus, text-to-speech, highlighting, notes, sepia/high-contrast themes, and selective Print/PDF
+- **Built-in reader tools** — Text size and line spacing (including extra-wide), **OpenDyslexic** font option, line focus, read-aloud with speed control, reading-time estimate, highlighting, notes, sepia/dark/high-contrast themes, and selective Print/PDF. Respects reduced-motion preferences.
 
 ---
 
