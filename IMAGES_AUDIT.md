@@ -34,7 +34,9 @@ bash scripts/download_all_images.sh
 bash scripts/download_all_maps.sh
 ```
 
-If something fails in step 2 (e.g. Wikimedia rate limit), run `download_all_maps.sh` again later or run the specific `download_chN_images.sh` for that chapter.
+- **Skip existing:** Both scripts skip files that already exist and are at least 5 KB (so broken/error-page files get re-downloaded).
+- **Errors:** A failed download in one chapter (or one map) does not stop the rest. Re-run the same script to retry; existing good files are skipped.
+- If something fails (e.g. Wikimedia rate limit), run the script again later or run the specific `download_chN_images.sh` for that chapter.
 
 ---
 

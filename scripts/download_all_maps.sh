@@ -1,16 +1,16 @@
 #!/usr/bin/env bash
-# Download all chapter maps in one script. Saves to images/ch1 .. images/ch15.
+# Download all chapter maps. Saves to images/ch1 .. images/ch15.
+# Skips existing files (with min-size check). Continues on per-file errors.
 # Sources: Wikimedia Commons (PD/CC), LOC, NPS, NARA. See MAPS.md for plan.
 # Usage: bash scripts/download_all_maps.sh
 
-set -euo pipefail
-
+set -u
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 BASE_DIR="$(cd "$SCRIPT_DIR/.." && pwd)"
 W="https://commons.wikimedia.org/wiki/Special:FilePath"
-# Use 960px for readability; fall back to 640px if a thumbnail is missing
 SIZE="?width=960"
 UPLOAD="https://upload.wikimedia.org/wikipedia/commons"
+MIN_SIZE=5000
 
 download() {
   local ch="$1"
@@ -18,17 +18,26 @@ download() {
   local url="$3"
   local dest="$BASE_DIR/images/ch${ch}/${file}"
   mkdir -p "$(dirname "$dest")"
-  if [ -f "$dest" ]; then
+  local size
+  size=$(stat -f%z "$dest" 2>/dev/null || stat -c%s "$dest" 2>/dev/null)
+  if [ -f "$dest" ] && [ "${size:-0}" -ge "$MIN_SIZE" ]; then
     echo "  [skip] ch${ch}/${file}"
-  else
-    echo "  [get]  ch${ch}/${file}"
-    if curl -sL --fail "$url" -o "$dest" 2>/dev/null; then
-      echo "  [ok]   ch${ch}/${file}"
-    else
-      echo "  [FAIL] ch${ch}/${file}"
-      rm -f "$dest"
-    fi
+    return 0
   fi
+  echo "  [get]  ch${ch}/${file}"
+  if ! curl -sL --fail "$url" -o "$dest" 2>/dev/null; then
+    echo "  [FAIL] ch${ch}/${file} — curl failed"
+    rm -f "$dest"
+    return 1
+  fi
+  size=$(stat -f%z "$dest" 2>/dev/null || stat -c%s "$dest" 2>/dev/null)
+  if [ "${size:-0}" -lt "$MIN_SIZE" ]; then
+    echo "  [FAIL] ch${ch}/${file} — got ${size:-0} bytes (likely error page)"
+    rm -f "$dest"
+    return 1
+  fi
+  echo "  [ok]   ch${ch}/${file}"
+  return 0
 }
 
 echo "Downloading all maps to $BASE_DIR/images/chN/ ..."

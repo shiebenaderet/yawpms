@@ -20,18 +20,30 @@ declare -A IMAGES=(
   ["trail-of-tears.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/Trails_of_Tears_en.png?width=640"
 )
 
+MIN_SIZE=5000
 for local in "${!IMAGES[@]}"; do
   url="${IMAGES[$local]}"
   dest="$IMG_DIR/$local"
-  if [ -f "$dest" ]; then
-    echo "  [skip] $local already exists"
+  if [ -f "$dest" ] && [ "$(stat -f%z "$dest" 2>/dev/null || stat -c%s "$dest" 2>/dev/null)" -ge "$MIN_SIZE" ]; then
+    echo "  [skip] $local"
   else
     echo "  [download] $local"
-    if curl -sL --fail "$url" -o "$dest" 2>/dev/null; then
-      echo "  [ok] $local"
+    sleep 2
+    if ! curl -sL --fail --max-time 60 "$url" -o "$dest" 2>/dev/null; then
+      echo "  [retry in 5s] $local"
+      sleep 5
+      curl -sL --fail --max-time 60 "$url" -o "$dest" 2>/dev/null || true
+    fi
+    if [ -f "$dest" ]; then
+      size=$(stat -f%z "$dest" 2>/dev/null || stat -c%s "$dest" 2>/dev/null)
+      if [ "${size:-0}" -lt "$MIN_SIZE" ]; then
+        echo "  [FAILED] $local — got ${size:-0} bytes (likely error page)"
+        rm -f "$dest"
+      else
+        echo "  [ok] $local"
+      fi
     else
-      echo "  [FAILED] $local — check URL: $url"
-      rm -f "$dest"
+      echo "  [FAILED] $local — check URL"
     fi
   fi
 done

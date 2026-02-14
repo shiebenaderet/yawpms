@@ -90,6 +90,7 @@
   // Line Spacing Control
   // ==========================================
   function initSpacing() {
+    injectExtraWideSpacingButton();
     var btns = document.querySelectorAll('[data-spacing]');
     var saved = localStorage.getItem('yawp_spacing') || 'normal';
     applySpacing(saved);
@@ -106,13 +107,26 @@
     });
   }
 
+  function injectExtraWideSpacingButton() {
+    var row = document.querySelector('.reader-btn-row [data-spacing="wide"]');
+    if (!row || row.closest('.reader-section') === null) return;
+    var parent = row.parentNode;
+    if (parent.querySelector('[data-spacing="xwide"]')) return;
+    var btn = document.createElement('button');
+    btn.className = 'reader-btn';
+    btn.setAttribute('data-spacing', 'xwide');
+    btn.textContent = 'Extra wide';
+    parent.appendChild(btn);
+  }
+
   function applySpacing(sp) {
-    document.body.classList.remove('spacing-wide');
+    document.body.classList.remove('spacing-wide', 'spacing-xwide');
     if (sp === 'wide') document.body.classList.add('spacing-wide');
+    if (sp === 'xwide') document.body.classList.add('spacing-xwide');
   }
 
   // ==========================================
-  // Dyslexia-Friendly Font
+  // OpenDyslexic Font (dyslexia-friendly)
   // ==========================================
   function initDyslexiaFont() {
     var btn = document.querySelector('[data-dyslexia]');
@@ -155,14 +169,21 @@
   }
 
   // ==========================================
-  // Text-to-Speech
+  // Text-to-Speech (with speed control for students)
   // ==========================================
   var ttsUtterance = null;
   var ttsBtn = null;
+  var ttsRate = parseFloat(localStorage.getItem('yawp_tts_rate') || '0.9', 10);
+
+  function getTTSRate() {
+    return ttsRate;
+  }
 
   function initTTS() {
     ttsBtn = document.querySelector('[data-tts]');
     if (!ttsBtn || !window.speechSynthesis) return;
+
+    injectTTSSpeedControls();
 
     ttsBtn.addEventListener('click', function() {
       if (speechSynthesis.speaking) {
@@ -177,7 +198,6 @@
       if (sel && sel.toString().trim().length > 0) {
         text = sel.toString();
       } else {
-        // Read the current section in view
         var sections = document.querySelectorAll('section, .overview');
         var bestSection = null;
         var bestDist = Infinity;
@@ -194,7 +214,7 @@
       if (!text.trim()) return;
 
       ttsUtterance = new SpeechSynthesisUtterance(text.slice(0, 5000));
-      ttsUtterance.rate = 0.9;
+      ttsUtterance.rate = getTTSRate();
       ttsUtterance.onend = function() {
         ttsBtn.textContent = 'Read Aloud';
         ttsBtn.classList.remove('active');
@@ -203,6 +223,37 @@
       ttsBtn.textContent = 'Stop Reading';
       ttsBtn.classList.add('active');
     });
+  }
+
+  function injectTTSSpeedControls() {
+    var toolsLabel = Array.from(document.querySelectorAll('.reader-section label')).find(function(l) { return l.textContent.trim() === 'Tools'; });
+    if (!toolsLabel) return;
+    var section = toolsLabel.closest('.reader-section');
+    if (!section || section.querySelector('.reader-tts-speed')) return;
+    var wrap = document.createElement('div');
+    wrap.className = 'reader-section';
+    wrap.innerHTML = '<label>Read aloud speed</label><div class="reader-tts-speed"></div>';
+    var container = wrap.querySelector('.reader-tts-speed');
+    var speeds = [
+      { value: 0.75, label: 'Slower' },
+      { value: 0.9, label: 'Normal' },
+      { value: 1.1, label: 'Faster' }
+    ];
+    speeds.forEach(function(s) {
+      var btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'speed-btn' + (Math.abs(ttsRate - s.value) < 0.05 ? ' active' : '');
+      btn.textContent = s.label;
+      btn.setAttribute('data-tts-rate', String(s.value));
+      btn.addEventListener('click', function() {
+        container.querySelectorAll('.speed-btn').forEach(function(b) { b.classList.remove('active'); });
+        btn.classList.add('active');
+        ttsRate = s.value;
+        localStorage.setItem('yawp_tts_rate', String(ttsRate));
+      });
+      container.appendChild(btn);
+    });
+    section.parentNode.insertBefore(wrap, section);
   }
 
   // ==========================================
@@ -675,12 +726,31 @@
   }
 
   // ==========================================
+  // Reading Time Estimate (for students to plan)
+  // ==========================================
+  function initReadingTime() {
+    var panel = document.querySelector('.reader-panel');
+    if (!panel || panel.querySelector('.reader-reading-time')) return;
+    var main = document.querySelector('.container');
+    if (!main) return;
+    var text = main.textContent || '';
+    var words = text.trim().split(/\s+/).filter(Boolean).length;
+    var mins = Math.max(1, Math.round(words / 200));
+    var el = document.createElement('div');
+    el.className = 'reader-reading-time';
+    el.textContent = 'About ' + mins + ' min read';
+    var h4 = panel.querySelector('h4');
+    panel.insertBefore(el, h4 ? h4.nextElementSibling : null);
+  }
+
+  // ==========================================
   // Initialize Everything
   // ==========================================
   function init() {
     initProgressBar();
     initBackToTop();
     initReaderPanel();
+    initReadingTime();
     initFontSize();
     initSpacing();
     initDyslexiaFont();

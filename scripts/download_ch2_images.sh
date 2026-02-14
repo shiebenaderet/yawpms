@@ -14,7 +14,7 @@ echo "Downloading Chapter 2 images to $IMG_DIR ..."
 declare -A IMAGES=(
   ["champlain-habitation.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/Champlain_Habitation_de_Quebec.jpg?width=640"
   ["waldseemuller-map.jpg"]="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c0/Waldseemuller_map_2.jpg/960px-Waldseemuller_map_2.jpg"
-  ["de-bry-spanish-cruelty.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/Christopher_Columbus%27_Soldiers_Chop_the_Hands_off_of_Arawak_Indians_who_Failed_to_Meet_the_Mining_Quota.jpg?width=640"
+  ["de-bry-spanish-cruelty.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/Conquistadors_espagnols_utilisant_les_Am%C3%A9rindiens_comme_porteurs.jpg?width=640"
   ["secotan-village.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/De_Bry_-_America_Part_1_-_Algonquin_village_-_HLABG.png?width=640"
   ["negotiating-peace.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/Treaty_of_Penn_with_Indians_by_Benjamin_West.jpg?width=640"
   ["castello-plan.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/Castelloplan.jpg?width=640"
@@ -31,17 +31,21 @@ for local in "${!IMAGES[@]}"; do
   else
     echo "  [download] $local"
     sleep 2
-    if curl -sL --fail "$url" -o "$dest" 2>/dev/null; then
+    if ! curl -sL --fail --max-time 60 "$url" -o "$dest" 2>/dev/null; then
+      echo "  [retry in 5s] $local"
+      sleep 5
+      curl -sL --fail --max-time 60 "$url" -o "$dest" 2>/dev/null || true
+    fi
+    if [ -f "$dest" ]; then
       size=$(stat -f%z "$dest" 2>/dev/null || stat -c%s "$dest" 2>/dev/null)
-      if [ "$size" -lt "$MIN_SIZE" ]; then
-        echo "  [FAILED] $local — got $size bytes (likely error page)"
+      if [ "${size:-0}" -lt "$MIN_SIZE" ]; then
+        echo "  [FAILED] $local — got ${size:-0} bytes (likely error page)"
         rm -f "$dest"
       else
         echo "  [ok] $local"
       fi
     else
-      echo "  [FAILED] $local — check URL: $url"
-      rm -f "$dest"
+      echo "  [FAILED] $local — check URL"
     fi
   fi
 done

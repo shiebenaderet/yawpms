@@ -4,6 +4,24 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:wght@400;600;700&display=swap');
 
+/* OpenDyslexic — dyslexia-friendly reading font (loaded on demand when user toggles) */
+@font-face {
+  font-family: 'OpenDyslexic';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('https://cdn.jsdelivr.net/npm/@fontsource/opendyslexic@5.0.0/files/opendyslexic-latin-400-normal.woff2') format('woff2'),
+       url('https://cdn.jsdelivr.net/npm/@fontsource/opendyslexic@5.0.0/files/opendyslexic-latin-400-normal.woff') format('woff');
+}
+@font-face {
+  font-family: 'OpenDyslexic';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('https://cdn.jsdelivr.net/npm/@fontsource/opendyslexic@5.0.0/files/opendyslexic-latin-700-normal.woff2') format('woff2'),
+       url('https://cdn.jsdelivr.net/npm/@fontsource/opendyslexic@5.0.0/files/opendyslexic-latin-700-normal.woff') format('woff');
+}
+
 :root {
   --navy: #1B3A5C;
   --teal: #2A7F8E;
@@ -460,6 +478,36 @@ footer a:hover { border-bottom-style: solid; }
 }
 .reader-panel.open { display: block; }
 
+.reader-reading-time {
+  font-size: 12px;
+  color: #666;
+  margin-bottom: 12px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #eee;
+}
+
+.reader-tts-speed {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.reader-tts-speed .speed-btn {
+  padding: 4px 8px;
+  font-size: 12px;
+  border-radius: 4px;
+  border: 1px solid #ddd;
+  background: #f9f9f9;
+  cursor: pointer;
+  font-family: 'Source Sans 3', sans-serif;
+}
+.reader-tts-speed .speed-btn:hover { background: #eee; }
+.reader-tts-speed .speed-btn.active {
+  background: var(--teal);
+  color: white;
+  border-color: var(--teal);
+}
+
 .reader-panel h4 {
   font-size: 14px;
   color: var(--navy);
@@ -681,7 +729,11 @@ body.font-xlarge .activity-box li { font-size: 19px; }
 body.spacing-wide { line-height: 2.2; }
 body.spacing-wide p { line-height: 2.2; }
 
-body.dyslexia-font { font-family: 'Lexend', 'OpenDyslexic', sans-serif; word-spacing: 0.12em; letter-spacing: 0.03em; }
+body.spacing-xwide { line-height: 2.5; }
+body.spacing-xwide p { line-height: 2.5; }
+
+/* OpenDyslexic — designed to reduce letter confusion and improve readability for readers with dyslexia */
+body.dyslexia-font { font-family: 'OpenDyslexic', sans-serif; word-spacing: 0.12em; letter-spacing: 0.03em; }
 body.dyslexia-font .series,
 body.dyslexia-font .attribution,
 body.dyslexia-font .vocab-box p,
@@ -694,7 +746,8 @@ body.dyslexia-font .activity-box p,
 body.dyslexia-font .activity-box li,
 body.dyslexia-font .perspectives .perspective,
 body.dyslexia-font figcaption,
-body.dyslexia-font footer { font-family: 'Lexend', 'OpenDyslexic', sans-serif; }
+body.dyslexia-font footer,
+body.dyslexia-font h1, body.dyslexia-font h2, body.dyslexia-font h3, body.dyslexia-font h4 { font-family: 'OpenDyslexic', sans-serif; }
 
 body.high-contrast { background: #fff; color: #000; }
 body.high-contrast .title-page { background: #000; }
@@ -1010,6 +1063,18 @@ body.dark-mode .title-page[style*="background-image"]::before {
 .dict-popup .dict-error {
   font-size: 14px;
   color: #999;
+}
+
+/* ---- Reduced motion (accessibility) ---- */
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  .progress-bar { transition: none; }
+  .back-to-top.visible { transition: none; }
 }
 
 /* ---- Print Styles ---- */
