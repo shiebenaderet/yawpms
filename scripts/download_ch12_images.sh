@@ -14,7 +14,9 @@ echo "Downloading Chapter 12 images to $IMG_DIR ..."
 declare -A IMAGES=(
   ["american-progress.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/American_Progress_%28John_Gast_painting%29.jpg?width=640"
   ["oregon-trail.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/Bierstadt_Albert_Oregon_Trail.jpg?width=640"
-  ["battle-of-chapultepec.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/Attack_on_Chapultepec%2C_Sept._13th_1847.jpg?width=640"
+  ["battle-of-chapultepec.jpg"]="https://upload.wikimedia.org/wikipedia/commons/thumb/c/ce/Battle_of_Chapultepec.jpg/640px-Battle_of_Chapultepec.jpg"
+  ["gold-rush-miners.jpg"]="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2d/California_gold_rush_daguerreotype.jpg/640px-California_gold_rush_daguerreotype.jpg"
+  ["mexican-cession-map.jpg"]="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4f/Mexican_Cession.png/640px-Mexican_Cession.png"
 )
 
 for local in "${!IMAGES[@]}"; do

@@ -15,6 +15,8 @@ declare -A IMAGES=(
   ["camp-meeting-revival.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/Camp_meeting_of_the_Methodists_in_N._America_J._Milbert_del_M._Dubourg_sculp_(cropped).jpg?width=640"
   ["frederick-douglass.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/Frederick_Douglass_%28circa_1879%29.jpg?width=440"
   ["seneca-falls.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/Woman%27s_Rights_Convention.jpg?width=640"
+  ["sojourner-truth.jpg"]="https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/Sojourner_truth_c1870.jpg/440px-Sojourner_truth_c1870.jpg"
+  ["dorothea-dix.jpg"]="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Dorothea_Lynde_Dix.jpg/440px-Dorothea_Lynde_Dix.jpg"
 )
 
 for local in "${!IMAGES[@]}"; do
