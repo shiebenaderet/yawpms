@@ -157,12 +157,20 @@ body.reading-width-narrow .container { max-width: 58ch; }
 .big-questions li {
   font-family: 'Source Sans 3', sans-serif;
   font-size: 15px;
-  padding-left: 28px;
+  padding-left: 26px;
   position: relative;
   margin-bottom: 12px;
   line-height: 1.6;
 }
-.big-questions li::before { content: "?"; color: var(--gold); font-weight: 700; font-size: 20px; position: absolute; left: 0; top: -2px; }
+.big-questions li::before {
+  content: "\2610";
+  color: var(--gold);
+  font-size: 18px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  line-height: 1.5;
+}
 
 /* ---- Sections ---- */
 
@@ -204,17 +212,40 @@ p:last-child { margin-bottom: 0; }
   border-bottom: 1px solid rgba(0,0,0,.08);
 }
 
-/* Vocabulary */
+/* Vocabulary / Key Terms */
 .vocab-box { background: #F0F7FA; border-left: 4px solid var(--teal); }
-.vocab-box h3 { color: var(--teal); }
-.vocab-box p {
+.vocab-box h3,
+.vocab-box .header {
+  color: var(--teal);
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  margin: 0 0 14px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid rgba(0,0,0,.08);
+}
+.vocab-box .header { font-size: 14px; text-transform: none; letter-spacing: .3px; }
+.vocab-box p,
+.vocab-box .term-row {
   font-family: 'Source Sans 3', sans-serif;
   font-size: 15px;
   margin-bottom: 10px;
   line-height: 1.65;
   padding-left: 4px;
 }
-.vocab-box p:last-child { margin-bottom: 0; }
+.vocab-box p:last-child,
+.vocab-box .term-row:last-child { margin-bottom: 0; }
+.vocab-box dl { margin: 0; padding: 0; }
+.vocab-box .term-row { display: block; }
+.vocab-box dt {
+  font-weight: 700;
+  color: var(--navy);
+  margin-bottom: 2px;
+  letter-spacing: .2px;
+}
+.vocab-box dd { margin: 0 0 0 0; padding: 0; }
 .vocab-box strong {
   color: var(--navy);
   font-weight: 700;
@@ -640,13 +671,13 @@ footer a:hover { border-bottom-style: solid; }
   border-bottom: 1px solid #eee;
 }
 
-.reader-section {
+.reader-panel .reader-section {
   margin-bottom: 18px;
   padding-bottom: 16px;
   border-bottom: 1px solid #eee;
 }
-.reader-section:last-child { margin-bottom: 0; padding-bottom: 0; border-bottom: none; }
-.reader-section label {
+.reader-panel .reader-section:last-child { margin-bottom: 0; padding-bottom: 0; border-bottom: none; }
+.reader-panel .reader-section label {
   display: block;
   font-size: 12px;
   color: #666;
@@ -974,6 +1005,7 @@ body.dark-mode .tts-reading-sentence {
 body.font-large { font-size: 19px; }
 body.font-large p { font-size: 19px; }
 body.font-large .vocab-box p,
+body.font-large .vocab-box .term-row,
 body.font-large .stop-think p,
 body.font-large .perspectives .perspective,
 body.font-large .key-idea p,
@@ -986,6 +1018,7 @@ body.font-large .activity-box li { font-size: 17px; }
 body.font-xlarge { font-size: 21px; }
 body.font-xlarge p { font-size: 21px; }
 body.font-xlarge .vocab-box p,
+body.font-xlarge .vocab-box .term-row,
 body.font-xlarge .stop-think p,
 body.font-xlarge .perspectives .perspective,
 body.font-xlarge .key-idea p,
@@ -1006,6 +1039,7 @@ body.dyslexia-font { font-family: 'OpenDyslexic', sans-serif; word-spacing: 0.12
 body.dyslexia-font .series,
 body.dyslexia-font .attribution,
 body.dyslexia-font .vocab-box p,
+body.dyslexia-font .vocab-box .term-row,
 body.dyslexia-font .stop-think p,
 body.dyslexia-font .key-idea p,
 body.dyslexia-font .primary-source p,
@@ -1079,9 +1113,13 @@ body.dark-mode section h3 { color: #7ab8e0; }
 body.dark-mode p { color: #d0d0d0; }
 
 body.dark-mode .vocab-box { background: #0f1e25; border-left-color: #4dd0c8; }
-body.dark-mode .vocab-box h3 { color: #4dd0c8; }
-body.dark-mode .vocab-box p { color: #ccc; }
+body.dark-mode .vocab-box h3,
+body.dark-mode .vocab-box .header { color: #4dd0c8; border-bottom-color: rgba(255,255,255,.1); }
+body.dark-mode .vocab-box p,
+body.dark-mode .vocab-box .term-row { color: #ccc; }
+body.dark-mode .vocab-box dt,
 body.dark-mode .vocab-box strong { color: #7ab8e0; }
+body.dark-mode .vocab-box dd { color: #bbb; }
 
 body.dark-mode .stop-think { background: #1c1810; border-left-color: #e8b94e; }
 body.dark-mode .stop-think h3 { color: #c9a035; }
