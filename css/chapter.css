@@ -477,6 +477,34 @@ figcaption {
   border-top: 1px solid #eee;
 }
 
+/* ---- Map Figures ---- */
+
+figure.map-figure {
+  border: 2px solid var(--navy);
+  background: #fafcfe;
+}
+figure.map-figure img {
+  min-height: 0;
+  object-fit: contain;
+  padding: 8px;
+  background: white;
+}
+figure.map-figure figcaption {
+  background: #eef3f8;
+  border-top: 2px solid var(--navy);
+  color: var(--navy);
+  font-style: normal;
+  font-size: 13px;
+}
+figure.map-figure figcaption .map-label {
+  display: block;
+  font-weight: 700;
+  font-size: 14px;
+  margin-bottom: 3px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
 /* ---- Footer ---- */
 
 footer {
@@ -1311,6 +1339,9 @@ body.dark-mode .activity-box li { color: #ccc; }
 
 body.dark-mode figure { background: #1a1a1a; }
 body.dark-mode figcaption { background: #222; border-top-color: #333; color: #999; }
+body.dark-mode figure.map-figure { border-color: #3a5a7a; background: #1a2a3a; }
+body.dark-mode figure.map-figure img { background: #1e1e1e; }
+body.dark-mode figure.map-figure figcaption { background: #1a2a3a; border-top-color: #3a5a7a; color: #8ab4d8; }
 
 body.dark-mode footer { border-top-color: #333; color: #777; }
 body.dark-mode footer a { color: #4dd0c8; border-bottom-color: #4dd0c8; }
