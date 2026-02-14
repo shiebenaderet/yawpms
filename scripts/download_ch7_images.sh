@@ -18,7 +18,7 @@ declare -A IMAGES=(
   ["banneker-almanac.jpg"]="https://damscdn.mdhistory.org/resource/2241/sc2/2241-0-sc2.jpg"
   ["james-peale-family.jpg"]="https://upload.wikimedia.org/wikipedia/commons/1/1c/The_Peale_Family.jpeg"
   ["camp-meeting.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/Camp_meeting_of_the_Methodists_in_N._America_J._Milbert_del_M._Dubourg_sculp_%28cropped%29.jpg?width=640"
-  ["jefferson-banner.jpg"]="https://ids.si.edu/ids/deliveryService?id=nmah-529033&max=640"
+  ["jefferson-banner.jpg"]="https://www.loc.gov/exhibits/creating-the-united-states/BillofRights/Electionof1800/Assets/us0132_01_enlarge.jpg"
   ["monticello.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/Thomas_Jefferson%27s_Monticello.JPG?width=640"
   ["lewis-and-clark.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/Lewis_and_clark-expedition.jpg?width=640"
   ["john-marshall.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/John_Marshall_by_Henry_Inman%2C_1832.jpg?width=440"

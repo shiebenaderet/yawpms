@@ -72,7 +72,7 @@ bash scripts/download_all_maps.sh
 | 5 | declaration-of-independence.jpg | download_ch5_images.sh | |
 | 5 | siege-of-yorktown.gif | download_all_maps.sh | |
 | 5 | surrender-cornwallis.jpg | download_ch5_images.sh | |
-| 5 | yorktown-soldiers.jpg | download_ch5_images.sh | |
+| 5 | yorktown-soldiers.gif | download_ch5_images.sh | Direct Commons URL (Continental Army at Yorktown). |
 | **6** | federal-pillars.jpg | download_ch6_images.sh | **Was missing; script added** |
 | 6 | us-territory-1789.png | download_all_maps.sh | |
 | 6 | shays-shattuck.jpg | download_ch6_images.sh | |
