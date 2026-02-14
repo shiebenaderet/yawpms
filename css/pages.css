@@ -14,15 +14,26 @@ body {
   line-height: 1.8;
 }
 
+/* Site banner: "Westward the Course of Empire Takes Its Way" (Currier & Ives, 1868), LOC */
 .header {
-  background: linear-gradient(170deg, #0D2137 0%, #1B3A5C 40%, #2B5A7C 100%);
+  min-height: 220px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #0D2137;
+  background-image: linear-gradient(to bottom, rgba(13,33,55,.2) 0%, rgba(13,33,55,.55) 45%, rgba(13,33,55,.9) 100%),
+    url('../images/site/westward-banner.jpg');
+  background-size: 100% 100%, cover;
+  background-position: 0 0, center center;
+  background-repeat: no-repeat;
   color: white;
   text-align: center;
-  padding: 60px 24px 50px;
+  padding: 48px 24px 44px;
 }
-.header h1 { font-size: 42px; margin-bottom: 12px; }
+.header h1 { font-size: 42px; margin-bottom: 12px; text-shadow: 0 1px 4px rgba(0,0,0,.4); }
 .header .divider { width: 80px; height: 3px; background: #C4941D; margin: 0 auto 20px; }
-.header p { font-family: 'Source Sans 3', sans-serif; font-size: 16px; opacity: .7; max-width: 600px; margin: 0 auto; }
+.header p { font-family: 'Source Sans 3', sans-serif; font-size: 16px; opacity: .95; max-width: 600px; margin: 0 auto; text-shadow: 0 1px 3px rgba(0,0,0,.35); }
 
 .nav-bar {
   background: white;
@@ -99,6 +110,7 @@ footer a { color: #2A7F8E; text-decoration: none; border-bottom: 1px dotted #2A7
 footer a:hover { border-bottom-style: solid; }
 
 @media (max-width: 600px) {
+  .header { min-height: 180px; padding: 36px 16px 32px; }
   .header h1 { font-size: 32px; }
   .container { padding: 32px 16px; }
   .nav-bar a { display: block; margin: 6px 0; }
