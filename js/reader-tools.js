@@ -148,9 +148,10 @@
   }
 
   function applyTheme(theme) {
-    document.body.classList.remove('high-contrast', 'sepia');
+    document.body.classList.remove('high-contrast', 'sepia', 'dark-mode');
     if (theme === 'contrast') document.body.classList.add('high-contrast');
     if (theme === 'sepia') document.body.classList.add('sepia');
+    if (theme === 'dark') document.body.classList.add('dark-mode');
   }
 
   // ==========================================
@@ -536,6 +537,144 @@
   }
 
   // ==========================================
+  // Glossary Panel
+  // ==========================================
+  function initGlossary() {
+    var glossaryBtn = document.querySelector('[data-action="glossary"]');
+    var panel = document.querySelector('.glossary-panel');
+    var closeBtn = panel ? panel.querySelector('.glossary-close') : null;
+    if (!glossaryBtn || !panel) return;
+
+    // Build glossary from vocab boxes
+    var terms = [];
+    document.querySelectorAll('.vocab-box').forEach(function(box) {
+      box.querySelectorAll('p').forEach(function(p) {
+        var strong = p.querySelector('strong');
+        if (strong) {
+          var termText = strong.textContent.replace(/:$/, '').trim();
+          var defText = p.textContent.replace(strong.textContent, '').trim();
+          if (defText.charAt(0) === ':') defText = defText.substring(1).trim();
+          terms.push({ term: termText, definition: defText });
+        }
+      });
+    });
+
+    // Sort alphabetically
+    terms.sort(function(a, b) { return a.term.localeCompare(b.term); });
+
+    // Render glossary
+    var body = panel.querySelector('.glossary-body');
+    if (body && terms.length > 0) {
+      var html = '<div class="glossary-search"><input type="text" placeholder="Search terms..." class="glossary-search-input"></div>';
+      terms.forEach(function(t) {
+        html += '<div class="glossary-term-item">';
+        html += '<div class="glossary-term-word">' + escapeHtml(t.term) + '</div>';
+        html += '<div class="glossary-term-def">' + escapeHtml(t.definition) + '</div>';
+        html += '</div>';
+      });
+      body.innerHTML = html;
+
+      // Search filter
+      var searchInput = body.querySelector('.glossary-search-input');
+      if (searchInput) {
+        searchInput.addEventListener('input', function() {
+          var q = searchInput.value.toLowerCase();
+          body.querySelectorAll('.glossary-term-item').forEach(function(item) {
+            var word = item.querySelector('.glossary-term-word').textContent.toLowerCase();
+            var def = item.querySelector('.glossary-term-def').textContent.toLowerCase();
+            item.style.display = (word.includes(q) || def.includes(q)) ? '' : 'none';
+          });
+        });
+      }
+    } else if (body) {
+      body.innerHTML = '<div class="glossary-empty">No vocabulary terms found on this page.</div>';
+    }
+
+    glossaryBtn.addEventListener('click', function() {
+      panel.classList.toggle('open');
+    });
+    if (closeBtn) {
+      closeBtn.addEventListener('click', function() {
+        panel.classList.remove('open');
+      });
+    }
+  }
+
+  // ==========================================
+  // Double-Click Dictionary Lookup
+  // ==========================================
+  function initDictionary() {
+    var popup = document.createElement('div');
+    popup.className = 'dict-popup';
+    popup.style.display = 'none';
+    document.body.appendChild(popup);
+
+    // Double-click any word to look it up
+    document.addEventListener('dblclick', function(e) {
+      // Don't trigger inside reader panel, notes, or glossary
+      if (e.target.closest('.reader-panel, .notes-panel, .glossary-panel, .dict-popup')) return;
+
+      var sel = window.getSelection();
+      var word = sel ? sel.toString().trim() : '';
+      if (!word || word.includes(' ') || word.length > 30) return;
+
+      // Clean punctuation
+      word = word.replace(/[^a-zA-Z\u2019'-]/g, '');
+      if (!word || word.length < 2) return;
+
+      // Position popup near click
+      var popupX = Math.min(e.pageX - 20, window.innerWidth - 360);
+      var popupY = e.pageY + 20;
+      popup.style.left = Math.max(10, popupX) + 'px';
+      popup.style.top = popupY + 'px';
+      popup.innerHTML = '<div class="dict-loading">Looking up \u201c' + escapeHtml(word) + '\u201d\u2026</div>';
+      popup.style.display = 'block';
+
+      fetch('https://api.dictionaryapi.dev/api/v2/entries/en/' + encodeURIComponent(word.toLowerCase()))
+        .then(function(r) { return r.json(); })
+        .then(function(data) {
+          if (Array.isArray(data) && data.length > 0) {
+            var entry = data[0];
+            var html = '<div class="dict-word">' + escapeHtml(entry.word) + '</div>';
+            if (entry.phonetic) {
+              html += '<div class="dict-phonetic">' + escapeHtml(entry.phonetic) + '</div>';
+            }
+            var meanings = entry.meanings || [];
+            meanings.slice(0, 2).forEach(function(m) {
+              html += '<div class="dict-pos">' + escapeHtml(m.partOfSpeech) + '</div>';
+              var defs = m.definitions || [];
+              defs.slice(0, 2).forEach(function(d) {
+                html += '<div class="dict-def">' + escapeHtml(d.definition) + '</div>';
+              });
+            });
+            popup.innerHTML = html;
+          } else {
+            popup.innerHTML = '<div class="dict-error">No definition found for \u201c' + escapeHtml(word) + '\u201d</div>';
+          }
+        })
+        .catch(function() {
+          popup.innerHTML = '<div class="dict-error">Could not look up this word. Check your connection.</div>';
+        });
+    });
+
+    // Close popup on click elsewhere
+    document.addEventListener('click', function(e) {
+      if (!popup.contains(e.target)) {
+        popup.style.display = 'none';
+      }
+    });
+
+    // Close on scroll
+    var scrollTimer;
+    window.addEventListener('scroll', function() {
+      clearTimeout(scrollTimer);
+      scrollTimer = setTimeout(function() {
+        popup.style.display = 'none';
+      }, 150);
+    });
+  }
+
+  // ==========================================
   // Initialize Everything
   // ==========================================
   function init() {
@@ -551,6 +690,8 @@
     initHighlighting();
     initNotes();
     initPDFBuilder();
+    initGlossary();
+    initDictionary();
   }
 
   if (document.readyState === 'loading') {
