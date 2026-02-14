@@ -253,7 +253,6 @@
 
   function showTTSNowPlaying(visible) {
     if (ttsNowPlayingBar) ttsNowPlayingBar.classList.toggle('visible', !!visible);
-    if (ttsPanel && visible) ttsPanel.classList.remove('open');
     if (ttsBtn) {
       ttsBtn.textContent = visible ? 'Stop Reading' : 'Read Aloud';
       ttsBtn.classList.toggle('active', !!visible);
@@ -314,7 +313,6 @@
 
     var startKokoro = function() {
       showTTSNowPlaying(true);
-      if (ttsPanel) ttsPanel.classList.remove('open');
       window.yawpKokoroTTS.speak(text, {
         rate: getTTSRate(),
         voice: kokoroVoice,
@@ -345,9 +343,25 @@
 
   function startBrowserTTS(text) {
     showTTSNowPlaying(true);
-    if (ttsPanel) ttsPanel.classList.remove('open');
     var chunks = chunkTextForTTS(text);
     speakChunkQueue(chunks, 0);
+  }
+
+  function initTTSClickRefocus() {
+    var container = document.querySelector('.container');
+    if (!container) return;
+    container.addEventListener('click', function(e) {
+      if (e.target.closest('a, button, [data-tts], .reader-toolbar, .reader-panel, .notes-panel, .glossary-panel, .vocab-box, .stop-think, .key-idea, .activity-box')) return;
+      if (!speechSynthesis.speaking && (!window.yawpKokoroTTS || !window.yawpKokoroTTS.isPlaying || !window.yawpKokoroTTS.isPlaying())) return;
+      var target = e.target.closest('section, .overview');
+      if (!target) return;
+      e.preventDefault();
+      speechSynthesis.cancel();
+      if (window.yawpKokoroTTS && window.yawpKokoroTTS.stop) window.yawpKokoroTTS.stop();
+      var text = target.textContent.trim();
+      if (!text) return;
+      startTTS(text);
+    });
   }
 
   function initTTS() {
@@ -357,6 +371,7 @@
 
     injectTTSNowPlayingBar();
     setTimeout(injectTTSCompact, 50);
+    initTTSClickRefocus();
 
     ttsBtn.addEventListener('click', function() {
       if (speechSynthesis.speaking || (window.yawpKokoroTTS && window.yawpKokoroTTS.isPlaying && window.yawpKokoroTTS.isPlaying())) {
@@ -373,13 +388,30 @@
     });
   }
 
+  function findParagraphContainingText(block, sentence) {
+    if (!block || !sentence) return null;
+    var needle = normalizeForMatch(sentence).slice(0, 60);
+    var paras = block.querySelectorAll('p');
+    for (var i = 0; i < paras.length; i++) {
+      var pNorm = normalizeForMatch(paras[i].textContent);
+      if (pNorm.indexOf(needle) !== -1) return paras[i];
+    }
+    return null;
+  }
+
   function highlightSentenceInPage(sentence) {
     clearTTSReadingHighlight();
     var container = document.querySelector('.container');
     var block = container ? findBlockContainingText(container, sentence) : null;
     if (block) {
       block.classList.add('tts-reading');
-      block.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      var para = findParagraphContainingText(block, sentence);
+      if (para) {
+        para.classList.add('tts-reading-sentence');
+        para.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      } else {
+        block.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
     }
   }
 
@@ -1045,6 +1077,118 @@
   }
 
   // ==========================================
+  // Icon-tree panel: icons expand to logical branches
+  // ==========================================
+  function initReaderPanelTree() {
+    var panel = document.querySelector('.reader-panel');
+    if (!panel || panel.querySelector('.reader-panel-tree')) return;
+
+    var h4 = panel.querySelector('h4');
+    var meta = panel.querySelector('.reader-reading-time') || panel.querySelector('.reader-section-jump') || panel.querySelector('.reader-reading-width');
+    var sections = Array.from(panel.querySelectorAll('.reader-section'));
+    if (!sections.length) return;
+
+    var branchMap = { text: [], theme: [], a11y: [], audio: [], highlight: [] };
+    var toolsSection = null;
+    var actionButtons = [];
+
+    sections.forEach(function(section) {
+      var label = (section.querySelector('label') || {}).textContent || '';
+      if (label.indexOf('Text Size') !== -1 || label.indexOf('Line Spacing') !== -1) branchMap.text.push(section);
+      else if (label.indexOf('Theme') !== -1) branchMap.theme.push(section);
+      else if (label.indexOf('Accessibility') !== -1) branchMap.a11y.push(section);
+      else if (label.indexOf('Tools') !== -1) {
+        toolsSection = section;
+        var row = section.querySelector('.reader-btn-row');
+        if (row) {
+          Array.from(row.querySelectorAll('[data-action="notes"], [data-action="pdf"], [data-action="glossary"]')).forEach(function(btn) {
+            actionButtons.push(btn);
+            btn.parentNode.removeChild(btn);
+          });
+        }
+        branchMap.audio.push(section);
+      } else if (label.indexOf('Highlight') !== -1) branchMap.highlight.push(section);
+    });
+
+    var tree = document.createElement('div');
+    tree.className = 'reader-panel-tree';
+
+    var metaWrap = document.createElement('div');
+    metaWrap.className = 'reader-panel-meta';
+    if (panel.querySelector('.reader-reading-time')) metaWrap.appendChild(panel.querySelector('.reader-reading-time'));
+    if (panel.querySelector('.reader-section-jump')) metaWrap.appendChild(panel.querySelector('.reader-section-jump'));
+    if (panel.querySelector('.reader-reading-width')) metaWrap.appendChild(panel.querySelector('.reader-reading-width'));
+    if (metaWrap.childNodes.length) tree.appendChild(metaWrap);
+
+    var iconsRow = document.createElement('div');
+    iconsRow.className = 'reader-panel-icons';
+    var branches = [
+      { id: 'text', icon: 'Aa', label: 'Text' },
+      { id: 'theme', icon: '\u263C', label: 'Theme' },
+      { id: 'a11y', icon: '\u267F', label: 'Accessibility' },
+      { id: 'audio', icon: '\u25B6', label: 'Read aloud' },
+      { id: 'highlight', icon: '\u270E', label: 'Highlight' }
+    ];
+    branches.forEach(function(b) {
+      var btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'reader-icon-btn';
+      btn.setAttribute('data-branch', b.id);
+      btn.setAttribute('aria-expanded', 'false');
+      btn.setAttribute('aria-label', b.label);
+      btn.textContent = b.icon;
+      btn.title = b.label;
+      iconsRow.appendChild(btn);
+    });
+    actionButtons.forEach(function(btn) {
+      var action = btn.getAttribute('data-action');
+      var titles = { notes: 'My Notes', pdf: 'Print / PDF', glossary: 'Glossary' };
+      btn.className = 'reader-btn reader-icon-btn reader-icon-action';
+      btn.textContent = action === 'notes' ? '\u270D' : (action === 'pdf' ? '\u2399' : '\u2139');
+      btn.title = titles[action] || action;
+      btn.setAttribute('aria-label', titles[action] || action);
+      iconsRow.appendChild(btn);
+    });
+    tree.appendChild(iconsRow);
+
+    var contentWrap = document.createElement('div');
+    contentWrap.className = 'reader-panel-content';
+    ['text', 'theme', 'a11y', 'audio', 'highlight'].forEach(function(branchId) {
+      var content = document.createElement('div');
+      content.className = 'reader-branch-content';
+      content.setAttribute('data-branch', branchId);
+      branchMap[branchId].forEach(function(section) {
+        content.appendChild(section);
+      });
+      if (content.childNodes.length) contentWrap.appendChild(content);
+    });
+    tree.appendChild(contentWrap);
+
+    var defaultBranch = 'audio';
+    var firstContent = contentWrap.querySelector('.reader-branch-content[data-branch="' + defaultBranch + '"]') || contentWrap.querySelector('.reader-branch-content');
+    if (firstContent) firstContent.classList.add('open');
+    var firstBtn = iconsRow.querySelector('[data-branch="' + defaultBranch + '"]');
+    if (firstBtn) firstBtn.classList.add('active');
+    if (firstBtn) firstBtn.setAttribute('aria-expanded', 'true');
+
+    iconsRow.querySelectorAll('[data-branch]').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        var branch = btn.getAttribute('data-branch');
+        contentWrap.querySelectorAll('.reader-branch-content').forEach(function(c) {
+          c.classList.toggle('open', c.getAttribute('data-branch') === branch);
+        });
+        iconsRow.querySelectorAll('[data-branch]').forEach(function(b) {
+          b.classList.toggle('active', b.getAttribute('data-branch') === branch);
+          b.setAttribute('aria-expanded', b.getAttribute('data-branch') === branch);
+        });
+      });
+    });
+
+    while (panel.lastChild !== h4) panel.removeChild(panel.lastChild);
+    panel.appendChild(tree);
+  }
+
+  // ==========================================
   // Initialize Everything
   // ==========================================
   function init() {
@@ -1065,6 +1209,7 @@
     initPDFBuilder();
     initGlossary();
     initDictionary();
+    setTimeout(initReaderPanelTree, 100);
   }
 
   if (document.readyState === 'loading') {
