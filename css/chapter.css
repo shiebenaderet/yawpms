@@ -152,8 +152,10 @@ body.reading-width-narrow .container { max-width: 58ch; }
   padding: 28px 32px;
   margin-bottom: 48px;
 }
-.big-questions h2 { font-size: 18px; color: var(--gold); margin-bottom: 16px; text-align: center; }
-.big-questions ul { list-style: none; padding: 0; }
+.big-questions h2,
+.big-questions h3 { font-size: 18px; color: var(--gold); margin-bottom: 16px; text-align: center; }
+.big-questions ul,
+.big-questions ol { list-style: none; padding: 0; margin: 0; counter-reset: none; }
 .big-questions li {
   font-family: 'Source Sans 3', sans-serif;
   font-size: 15px;
@@ -238,14 +240,25 @@ p:last-child { margin-bottom: 0; }
 .vocab-box p:last-child,
 .vocab-box .term-row:last-child { margin-bottom: 0; }
 .vocab-box dl { margin: 0; padding: 0; }
-.vocab-box .term-row { display: block; }
+.vocab-box .term-row {
+  display: block;
+  margin-bottom: 14px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid rgba(0,0,0,.06);
+}
+.vocab-box .term-row:last-child { margin-bottom: 0; padding-bottom: 0; border-bottom: none; }
 .vocab-box dt {
   font-weight: 700;
   color: var(--navy);
-  margin-bottom: 2px;
+  margin: 0 0 4px 0;
   letter-spacing: .2px;
+  display: block;
 }
-.vocab-box dd { margin: 0 0 0 0; padding: 0; }
+.vocab-box dd {
+  margin: 0;
+  padding: 0;
+  line-height: 1.65;
+}
 
 /* Glossary terms in body text: click to see definition */
 .glossary-term {
