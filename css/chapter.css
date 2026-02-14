@@ -944,37 +944,6 @@ footer a:hover { border-bottom-style: solid; }
 .reader-bookmark-remove:hover { background: #eee; color: #333; }
 .reader-bookmarks-empty { padding: 10px; color: #888; font-size: 13px; }
 
-/* ---- Highlighter: pen button + color circles ---- */
-.reader-highlight-wrap {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 8px;
-}
-.reader-highlight-pen {
-  min-width: 40px;
-  font-size: 18px;
-}
-.reader-highlight-colors {
-  display: none;
-  gap: 6px;
-  align-items: center;
-}
-.reader-highlight-colors.open {
-  display: flex;
-}
-.reader-highlight-color {
-  width: 28px;
-  height: 28px;
-  padding: 0;
-  border-radius: 50%;
-  min-width: 0;
-  border: 2px solid transparent;
-}
-.reader-highlight-color:hover { border-color: var(--navy); }
-.reader-highlight-color.active { border-color: var(--teal); box-shadow: 0 0 0 1px var(--teal); }
-.reader-highlight-clear { font-size: 12px; margin-left: auto; }
-
 /* ---- Dictionary: Wikipedia link ---- */
 .dict-wiki-link {
   display: block;
@@ -1068,11 +1037,6 @@ body.dark-mode .tts-reading-sentence {
 .line-focus-bottom { bottom: 0; }
 
 /* ---- Highlight Styles ---- */
-
-.user-highlight-yellow { background: rgba(255,235,59,.4); border-radius: 2px; }
-.user-highlight-green { background: rgba(129,199,132,.4); border-radius: 2px; }
-.user-highlight-blue { background: rgba(100,181,246,.4); border-radius: 2px; }
-.user-highlight-pink { background: rgba(244,143,177,.4); border-radius: 2px; }
 
 /* ---- Notes Sidebar ---- */
 

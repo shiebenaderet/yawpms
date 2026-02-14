@@ -1,6 +1,6 @@
 /* ============================================================
    American Yawp MS — Reader Tools
-   Highlighting, Notes, TTS, Font Controls, Line Focus
+   Notes, TTS, Font Controls, Line Focus
    ============================================================ */
 
 (function() {
@@ -124,7 +124,7 @@
     panel.querySelectorAll('.reader-reading-width').forEach(function(el) { el.setAttribute('data-in-panel', 'reading'); });
     panel.querySelectorAll('.reader-reading-mode').forEach(function(el) { el.setAttribute('data-in-panel', 'reading'); });
     panel.querySelectorAll('.reader-section').forEach(function(section) {
-      if (section.querySelector('[data-font-size], [data-spacing], [data-theme], [data-dyslexia], [data-line-focus], [data-highlight-color]')) {
+      if (section.querySelector('[data-font-size], [data-spacing], [data-theme], [data-dyslexia], [data-line-focus]')) {
         section.setAttribute('data-in-panel', 'reading');
       }
       if (section.querySelector('[data-action="notes"], [data-action="pdf"], [data-action="glossary"]')) {
@@ -674,141 +674,15 @@
   }
 
   // ==========================================
-  // Text Highlighting
+  // Remove Highlight section from reader panel (feature removed)
   // ==========================================
-  var highlightColor = 'yellow';
-  var highlights = [];
-
-  var highlightColors = [
-    { id: 'yellow', label: 'Yellow', bg: '#FFF9C4' },
-    { id: 'green', label: 'Green', bg: '#C8E6C9' },
-    { id: 'blue', label: 'Blue', bg: '#BBDEFB' },
-    { id: 'pink', label: 'Pink', bg: '#F8BBD0' }
-  ];
-
-  function initHighlighting() {
-    var saved = localStorage.getItem('yawp_highlights_' + pageKey);
-    if (saved) {
-      try { highlights = JSON.parse(saved); } catch(e) { highlights = []; }
-      restoreHighlights();
-    }
-
-    var section = document.querySelector('.reader-panel .reader-section');
-    section = section && [].find.call(document.querySelectorAll('.reader-panel .reader-section'), function(s) {
+  function removeHighlightSection() {
+    var panel = document.querySelector('.reader-panel');
+    if (!panel) return;
+    var section = [].find.call(panel.querySelectorAll('.reader-section'), function(s) {
       return s.querySelector('[data-highlight-color]') || (s.querySelector('label') && s.querySelector('label').textContent.indexOf('Highlight') !== -1);
     });
-    if (!section) return;
-
-    var row = section.querySelector('.reader-btn-row');
-    if (!row) return;
-
-    var wrap = document.createElement('div');
-    wrap.className = 'reader-highlight-wrap';
-    var penBtn = document.createElement('button');
-    penBtn.type = 'button';
-    penBtn.className = 'reader-btn reader-highlight-pen';
-    penBtn.setAttribute('aria-label', 'Highlighter');
-    penBtn.title = 'Select text, then click to highlight';
-    penBtn.innerHTML = '\u270E'; // pencil
-    var colorsWrap = document.createElement('div');
-    colorsWrap.className = 'reader-highlight-colors';
-    colorsWrap.setAttribute('aria-hidden', 'true');
-    highlightColors.forEach(function(c) {
-      var circle = document.createElement('button');
-      circle.type = 'button';
-      circle.className = 'reader-btn reader-highlight-color' + (c.id === highlightColor ? ' active' : '');
-      circle.setAttribute('data-highlight-color', c.id);
-      circle.style.background = c.bg;
-      circle.title = c.label;
-      circle.setAttribute('aria-label', c.label);
-      circle.addEventListener('click', function() {
-        highlightColor = c.id;
-        colorsWrap.querySelectorAll('[data-highlight-color]').forEach(function(b) { b.classList.remove('active'); });
-        circle.classList.add('active');
-        colorsWrap.classList.remove('open');
-        colorsWrap.setAttribute('aria-hidden', 'true');
-        penBtn.title = 'Select text, then click pen to highlight';
-      });
-      colorsWrap.appendChild(circle);
-    });
-    var clearBtn = document.createElement('button');
-    clearBtn.type = 'button';
-    clearBtn.className = 'reader-btn reader-highlight-clear';
-    clearBtn.textContent = 'Clear all';
-    clearBtn.addEventListener('click', function() { clearAllHighlights(); });
-
-    penBtn.addEventListener('click', function() {
-      if (colorsWrap.classList.contains('open')) {
-        colorsWrap.classList.remove('open');
-        colorsWrap.setAttribute('aria-hidden', 'true');
-        highlightSelection();
-      } else {
-        colorsWrap.classList.add('open');
-        colorsWrap.setAttribute('aria-hidden', 'false');
-      }
-    });
-
-    wrap.appendChild(penBtn);
-    wrap.appendChild(colorsWrap);
-    wrap.appendChild(clearBtn);
-    row.parentNode.replaceChild(wrap, row);
-    var extraRow = section.querySelector('.reader-btn-row');
-    if (extraRow) extraRow.remove();
-  }
-
-  function highlightSelection() {
-    var sel = window.getSelection();
-    if (!sel || sel.isCollapsed || !sel.rangeCount) return;
-
-    var range = sel.getRangeAt(0);
-    var text = sel.toString().trim();
-    if (!text) return;
-
-    // Create highlight span
-    var span = document.createElement('span');
-    span.className = 'user-highlight-' + highlightColor;
-    span.setAttribute('data-highlight-id', Date.now());
-
-    try {
-      range.surroundContents(span);
-    } catch(e) {
-      // If selection spans multiple elements, wrap each text node
-      return;
-    }
-
-    // Save to storage
-    highlights.push({
-      id: span.getAttribute('data-highlight-id'),
-      text: text,
-      color: highlightColor,
-      section: findParentSection(span)
-    });
-    localStorage.setItem('yawp_highlights_' + pageKey, JSON.stringify(highlights));
-    sel.removeAllRanges();
-  }
-
-  function findParentSection(el) {
-    var sec = el.closest('section');
-    if (sec) {
-      var h2 = sec.querySelector('h2');
-      return h2 ? h2.textContent : '';
-    }
-    return '';
-  }
-
-  function clearAllHighlights() {
-    document.querySelectorAll('[data-highlight-id]').forEach(function(span) {
-      var parent = span.parentNode;
-      while (span.firstChild) parent.insertBefore(span.firstChild, span);
-      parent.removeChild(span);
-    });
-    highlights = [];
-    localStorage.removeItem('yawp_highlights_' + pageKey);
-  }
-
-  function restoreHighlights() {
-    // Simple restoration: re-highlighting based on saved data is complex
-    // For a static site, we store but note that highlights may not persist across content changes
+    if (section) section.remove();
   }
 
   // ==========================================
@@ -2021,7 +1895,7 @@
     // TTS disabled for now (was not working reliably)
     // initTTS();
     initLineFocus();
-    initHighlighting();
+    removeHighlightSection();
     initNotes();
     initPDFBuilder();
     initGlossary();
