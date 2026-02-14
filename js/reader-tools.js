@@ -68,14 +68,29 @@
   // ==========================================
   function initFontFamily() {
     var panel = document.querySelector('.reader-panel');
-    if (!panel || panel.querySelector('.reader-font-family')) return;
+    if (!panel) return;
     var saved = localStorage.getItem('yawp_font_family') || 'serif';
     if (saved === 'sans') document.body.classList.add('font-sans');
 
+    var row = panel.querySelector('.reader-find-view .reader-view-btns') || panel.querySelector('.reader-font-family .reader-btn-row');
+    var btns = row ? row.querySelectorAll('[data-font-family]') : [];
+    if (btns.length) {
+      btns.forEach(function(btn) {
+        var f = btn.getAttribute('data-font-family');
+        btn.classList.toggle('active', saved === f);
+        btn.addEventListener('click', function() {
+          document.body.classList.toggle('font-sans', f === 'sans');
+          localStorage.setItem('yawp_font_family', f);
+          row.querySelectorAll('[data-font-family]').forEach(function(b) { b.classList.remove('active'); });
+          btn.classList.add('active');
+        });
+      });
+      return;
+    }
     var wrap = document.createElement('div');
     wrap.className = 'reader-section reader-font-family';
     wrap.innerHTML = '<label>Font</label><div class="reader-btn-row"></div>';
-    var row = wrap.querySelector('.reader-btn-row');
+    row = wrap.querySelector('.reader-btn-row');
     ['serif', 'sans'].forEach(function(f) {
       var btn = document.createElement('button');
       btn.type = 'button';
@@ -886,15 +901,9 @@
   }
 
   // ==========================================
-  // Glossary Panel
+  // Glossary: shared term list from .vocab-box (p strong + term-row dt/dd)
   // ==========================================
-  function initGlossary() {
-    var glossaryBtn = document.querySelector('[data-action="glossary"]');
-    var panel = document.querySelector('.glossary-panel');
-    var closeBtn = panel ? panel.querySelector('.glossary-close') : null;
-    if (!glossaryBtn || !panel) return;
-
-    // Build glossary from vocab boxes
+  function getGlossaryTerms() {
     var terms = [];
     document.querySelectorAll('.vocab-box').forEach(function(box) {
       box.querySelectorAll('p').forEach(function(p) {
@@ -903,10 +912,33 @@
           var termText = strong.textContent.replace(/:$/, '').trim();
           var defText = p.textContent.replace(strong.textContent, '').trim();
           if (defText.charAt(0) === ':') defText = defText.substring(1).trim();
-          terms.push({ term: termText, definition: defText });
+          if (termText && defText) terms.push({ term: termText, definition: defText });
+        }
+      });
+      box.querySelectorAll('.term-row').forEach(function(row) {
+        var dt = row.querySelector('dt');
+        var dd = row.querySelector('dd');
+        if (dt && dd) {
+          var termText = dt.textContent.replace(/:$/, '').trim();
+          var defText = dd.textContent.replace(/^\s*[—–-]\s*/, '').trim();
+          if (termText && defText) terms.push({ term: termText, definition: defText });
         }
       });
     });
+    return terms;
+  }
+
+  // ==========================================
+  // Glossary Panel
+  // ==========================================
+  function initGlossary() {
+    var glossaryBtn = document.querySelector('[data-action="glossary"]');
+    var panel = document.querySelector('.glossary-panel');
+    var closeBtn = panel ? panel.querySelector('.glossary-close') : null;
+    if (!glossaryBtn || !panel) return;
+
+    // Build glossary from vocab boxes (both <p><strong> and .term-row dt/dd)
+    var terms = getGlossaryTerms();
 
     // Sort alphabetically
     terms.sort(function(a, b) { return a.term.localeCompare(b.term); });
@@ -947,6 +979,111 @@
         panel.classList.remove('open');
       });
     }
+  }
+
+  // ==========================================
+  // Glossary terms in text: visual + click-to-define popup
+  // ==========================================
+  function initGlossaryInText() {
+    var container = document.querySelector('.container');
+    if (!container) return;
+    var terms = getGlossaryTerms();
+    if (terms.length === 0) return;
+
+    // Sort by term length descending so we match "Bill of Rights" before "Bill"
+    terms = terms.slice().sort(function(a, b) { return b.term.length - a.term.length; });
+
+    function escapeRegex(s) {
+      return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    }
+
+    function getNonOverlappingMatches(text) {
+      var matches = [];
+      var termLower;
+      var regex;
+      for (var i = 0; i < terms.length; i++) {
+        termLower = terms[i].term.toLowerCase();
+        regex = new RegExp('\\b' + escapeRegex(terms[i].term) + '\\b', 'gi');
+        var match;
+        while ((match = regex.exec(text)) !== null) {
+          matches.push({ start: match.index, end: match.index + match[0].length, text: match[0], definition: terms[i].definition });
+        }
+      }
+      matches.sort(function(a, b) { return a.start !== b.start ? a.start - b.start : b.end + b.start - (a.end + a.start); });
+      var merged = [];
+      for (var j = 0; j < matches.length; j++) {
+        if (merged.length && matches[j].start < merged[merged.length - 1].end) continue;
+        merged.push(matches[j]);
+      }
+      return merged;
+    }
+
+    function walkTextNodes(root, fn) {
+      var walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, {
+        acceptNode: function(node) {
+          if (node.parentNode.closest('.vocab-box, .reader-panel, .glossary-panel, .reader-command-palette, script, style, .glossary-term')) return NodeFilter.FILTER_REJECT;
+          return NodeFilter.FILTER_ACCEPT;
+        }
+      });
+      var nodes = [];
+      while (walker.nextNode()) nodes.push(walker.currentNode);
+      nodes.forEach(fn);
+    }
+
+    walkTextNodes(container, function(textNode) {
+      var text = textNode.textContent;
+      if (!text || text.length < 2) return;
+      var matches = getNonOverlappingMatches(text);
+      if (matches.length === 0) return;
+
+      var fragment = document.createDocumentFragment();
+      var lastEnd = 0;
+      matches.forEach(function(m) {
+        if (m.start > lastEnd) {
+          fragment.appendChild(document.createTextNode(text.slice(lastEnd, m.start)));
+        }
+        var span = document.createElement('span');
+        span.className = 'glossary-term';
+        span.setAttribute('data-term', m.text);
+        span.setAttribute('data-definition', m.definition);
+        span.textContent = m.text;
+        fragment.appendChild(span);
+        lastEnd = m.end;
+      });
+      if (lastEnd < text.length) {
+        fragment.appendChild(document.createTextNode(text.slice(lastEnd)));
+      }
+      textNode.parentNode.replaceChild(fragment, textNode);
+    });
+
+    // Popup for glossary term click
+    var popup = document.createElement('div');
+    popup.className = 'glossary-term-popup';
+    popup.setAttribute('role', 'tooltip');
+    document.body.appendChild(popup);
+
+    container.addEventListener('click', function(e) {
+      var termEl = e.target.closest('.glossary-term');
+      if (!termEl) return;
+      e.preventDefault();
+      var term = termEl.getAttribute('data-term');
+      var def = termEl.getAttribute('data-definition');
+      if (!def) return;
+      popup.innerHTML = '<strong class="glossary-term-popup-word">' + escapeHtml(term) + '</strong><div class="glossary-term-popup-def">' + escapeHtml(def) + '</div>';
+      popup.style.display = 'block';
+      var rect = termEl.getBoundingClientRect();
+      popup.style.left = Math.max(8, Math.min(rect.left, window.innerWidth - 320)) + 'px';
+      popup.style.top = (rect.top + rect.height + 6) + 'px';
+    });
+
+    document.addEventListener('click', function(e) {
+      if (!popup.contains(e.target) && !e.target.closest('.glossary-term')) {
+        popup.style.display = 'none';
+      }
+    });
+    window.addEventListener('scroll', function() {
+      popup.style.display = 'none';
+    }, true);
   }
 
   // ==========================================
@@ -1025,6 +1162,34 @@
   }
 
   // ==========================================
+  // Find & View — combined Search, Reading mode, Font, Width at top
+  // ==========================================
+  function initFindAndView() {
+    var panel = document.querySelector('.reader-panel');
+    if (!panel || panel.querySelector('.reader-find-view')) return;
+    var wrap = document.createElement('div');
+    wrap.className = 'reader-find-view';
+    wrap.innerHTML =
+      '<div class="reader-section reader-search-wrap">' +
+        '<label>Search</label>' +
+        '<input type="search" class="reader-search-input" placeholder="Search this chapter (\u2318K)" aria-label="Search text">' +
+        '<div class="reader-search-results"></div>' +
+      '</div>' +
+      '<div class="reader-section reader-view-row">' +
+        '<label>View</label>' +
+        '<div class="reader-btn-row reader-view-btns">' +
+          '<button type="button" class="reader-btn" data-reading-mode="scroll" title="Scroll">Scroll</button>' +
+          '<button type="button" class="reader-btn" data-reading-mode="page" title="Page by page">Page</button>' +
+          '<button type="button" class="reader-btn" data-font-family="serif" title="Serif font">Serif</button>' +
+          '<button type="button" class="reader-btn" data-font-family="sans" title="Sans font">Sans</button>' +
+          '<button type="button" class="reader-btn" data-reading-width="normal" title="Normal width">Width</button>' +
+          '<button type="button" class="reader-btn" data-reading-width="narrow" title="Narrow column">Narrow</button>' +
+        '</div>' +
+      '</div>';
+    panel.insertBefore(wrap, panel.querySelector('h4').nextElementSibling);
+  }
+
+  // ==========================================
   // Reading Time Estimate (for students to plan)
   // ==========================================
   function initReadingTime() {
@@ -1047,7 +1212,7 @@
   // ==========================================
   function initReadingMode() {
     var panel = document.querySelector('.reader-panel');
-    if (!panel || panel.querySelector('.reader-reading-mode')) return;
+    if (!panel) return;
     var container = document.querySelector('.container');
     if (!container) return;
     var blocks = [];
@@ -1058,20 +1223,34 @@
 
     var saved = localStorage.getItem('yawp_reading_mode') || 'scroll';
     var pageIndex = Math.min(parseInt(localStorage.getItem('yawp_page_index_' + pageKey) || '0', 10), blocks.length - 1);
-    var wrap = document.createElement('div');
-    wrap.className = 'reader-section reader-reading-mode';
-    wrap.innerHTML = '<label>Reading mode</label><div class="reader-btn-row"></div>';
-    var row = wrap.querySelector('.reader-btn-row');
-    var scrollBtn = document.createElement('button');
-    scrollBtn.type = 'button';
-    scrollBtn.className = 'reader-btn' + (saved === 'scroll' ? ' active' : '');
-    scrollBtn.textContent = 'Scroll';
-    scrollBtn.setAttribute('data-reading-mode', 'scroll');
-    var pageBtn = document.createElement('button');
-    pageBtn.type = 'button';
-    pageBtn.className = 'reader-btn' + (saved === 'page' ? ' active' : '');
-    pageBtn.textContent = 'Page';
-    pageBtn.setAttribute('data-reading-mode', 'page');
+    var viewRow = panel.querySelector('.reader-find-view .reader-view-btns');
+    var scrollBtn = viewRow ? viewRow.querySelector('[data-reading-mode="scroll"]') : null;
+    var pageBtn = viewRow ? viewRow.querySelector('[data-reading-mode="page"]') : null;
+    var row = viewRow;
+    var wrap = null;
+
+    if (!scrollBtn || !pageBtn) {
+      wrap = document.createElement('div');
+      wrap.className = 'reader-section reader-reading-mode';
+      wrap.innerHTML = '<label>Reading mode</label><div class="reader-btn-row"></div>';
+      row = wrap.querySelector('.reader-btn-row');
+      scrollBtn = document.createElement('button');
+      scrollBtn.type = 'button';
+      scrollBtn.className = 'reader-btn' + (saved === 'scroll' ? ' active' : '');
+      scrollBtn.textContent = 'Scroll';
+      scrollBtn.setAttribute('data-reading-mode', 'scroll');
+      pageBtn = document.createElement('button');
+      pageBtn.type = 'button';
+      pageBtn.className = 'reader-btn' + (saved === 'page' ? ' active' : '');
+      pageBtn.textContent = 'Page';
+      pageBtn.setAttribute('data-reading-mode', 'page');
+      row.appendChild(scrollBtn);
+      row.appendChild(pageBtn);
+      panel.insertBefore(wrap, panel.querySelector('.reader-reading-time'));
+    } else {
+      scrollBtn.classList.toggle('active', saved === 'scroll');
+      pageBtn.classList.toggle('active', saved === 'page');
+    }
 
     function applyMode(mode) {
       var isPage = mode === 'page';
@@ -1110,31 +1289,31 @@
       pageBtn.classList.add('active');
       applyMode('page');
     });
-    row.appendChild(scrollBtn);
-    row.appendChild(pageBtn);
-    panel.insertBefore(wrap, panel.querySelector('.reader-reading-time'));
 
-    var navBar = document.createElement('div');
-    navBar.className = 'reader-page-nav';
-    navBar.style.display = 'none';
-    navBar.innerHTML = '<button type="button" class="reader-page-prev" aria-label="Previous page">&larr;</button><span class="reader-page-label"></span><button type="button" class="reader-page-next" aria-label="Next page">&rarr;</button>';
-    var prevBtn = navBar.querySelector('.reader-page-prev');
-    var nextBtn = navBar.querySelector('.reader-page-next');
-    prevBtn.addEventListener('click', function() {
-      if (pageIndex <= 0) return;
-      pageIndex--;
-      localStorage.setItem('yawp_page_index_' + pageKey, String(pageIndex));
-      blocks.forEach(function(b, i) { b.style.display = i === pageIndex ? 'block' : 'none'; });
-      updatePageNav();
-    });
-    nextBtn.addEventListener('click', function() {
-      if (pageIndex >= blocks.length - 1) return;
-      pageIndex++;
-      localStorage.setItem('yawp_page_index_' + pageKey, String(pageIndex));
-      blocks.forEach(function(b, i) { b.style.display = i === pageIndex ? 'block' : 'none'; });
-      updatePageNav();
-    });
-    document.body.appendChild(navBar);
+    var navBar = document.querySelector('.reader-page-nav');
+    if (!navBar) {
+      navBar = document.createElement('div');
+      navBar.className = 'reader-page-nav';
+      navBar.style.display = 'none';
+      navBar.innerHTML = '<button type="button" class="reader-page-prev" aria-label="Previous page">&larr;</button><span class="reader-page-label"></span><button type="button" class="reader-page-next" aria-label="Next page">&rarr;</button>';
+      var prevBtn = navBar.querySelector('.reader-page-prev');
+      var nextBtn = navBar.querySelector('.reader-page-next');
+      prevBtn.addEventListener('click', function() {
+        if (pageIndex <= 0) return;
+        pageIndex--;
+        localStorage.setItem('yawp_page_index_' + pageKey, String(pageIndex));
+        blocks.forEach(function(b, i) { b.style.display = i === pageIndex ? 'block' : 'none'; });
+        updatePageNav();
+      });
+      nextBtn.addEventListener('click', function() {
+        if (pageIndex >= blocks.length - 1) return;
+        pageIndex++;
+        localStorage.setItem('yawp_page_index_' + pageKey, String(pageIndex));
+        blocks.forEach(function(b, i) { b.style.display = i === pageIndex ? 'block' : 'none'; });
+        updatePageNav();
+      });
+      document.body.appendChild(navBar);
+    }
     if (saved === 'page') applyMode('page');
   }
 
@@ -1143,15 +1322,20 @@
   // ==========================================
   function initSearch() {
     var panel = document.querySelector('.reader-panel');
-    if (!panel || panel.querySelector('.reader-search-wrap')) return;
+    if (!panel) return;
     var container = document.querySelector('.container');
     if (!container) return;
 
-    var wrap = document.createElement('div');
-    wrap.className = 'reader-section reader-search-wrap';
-    wrap.innerHTML = '<label>Search in this chapter</label><input type="search" class="reader-search-input" placeholder="Search..." aria-label="Search text"><div class="reader-search-results"></div>';
+    var wrap = panel.querySelector('.reader-search-wrap');
+    if (!wrap) {
+      wrap = document.createElement('div');
+      wrap.className = 'reader-section reader-search-wrap';
+      wrap.innerHTML = '<label>Search in this chapter</label><input type="search" class="reader-search-input" placeholder="Search..." aria-label="Search text"><div class="reader-search-results"></div>';
+      panel.insertBefore(wrap, panel.querySelector('.reader-reading-time'));
+    }
     var input = wrap.querySelector('.reader-search-input');
     var resultsEl = wrap.querySelector('.reader-search-results');
+    if (!input || !resultsEl) return;
     var searchTimer = null;
 
     function runSearch(q) {
@@ -1196,7 +1380,108 @@
     input.addEventListener('keydown', function(e) {
       if (e.key === 'Escape') { resultsEl.innerHTML = ''; input.value = ''; input.blur(); }
     });
-    panel.insertBefore(wrap, panel.querySelector('.reader-reading-time'));
+  }
+
+  // ==========================================
+  // Command palette: Cmd+K / Ctrl+K — search chapter (and / for book hint)
+  // ==========================================
+  function getChapterSearchHits(q, container) {
+    if (!container) return [];
+    q = (q || '').trim().toLowerCase();
+    if (q.length < 2) return [];
+    var blocks = container.querySelectorAll('section, .overview');
+    var hits = [];
+    blocks.forEach(function(block) {
+      var text = block.textContent;
+      var pos = text.toLowerCase().indexOf(q);
+      if (pos === -1) return;
+      var start = Math.max(0, pos - 30);
+      var end = Math.min(text.length, pos + q.length + 60);
+      var snippet = (start > 0 ? '\u2026' : '') + text.slice(start, end).replace(/\s+/g, ' ') + (end < text.length ? '\u2026' : '');
+      var h2 = block.querySelector('h2');
+      hits.push({ block: block, snippet: snippet, title: h2 ? h2.textContent : (block.classList.contains('overview') ? 'Chapter Overview' : 'Section') });
+      if (hits.length >= 15) return;
+    });
+    return hits;
+  }
+
+  function initCommandPalette() {
+    var container = document.querySelector('.container');
+    if (!container) return;
+    var overlay = document.createElement('div');
+    overlay.className = 'reader-command-palette';
+    overlay.setAttribute('aria-hidden', 'true');
+    overlay.innerHTML =
+      '<div class="reader-command-palette-backdrop"></div>' +
+      '<div class="reader-command-palette-box" role="dialog" aria-label="Search chapter">' +
+        '<input type="search" class="reader-command-palette-input" placeholder="Search this chapter… (type / to search whole book)" aria-label="Search">' +
+        '<div class="reader-command-palette-results"></div>' +
+        '<div class="reader-command-palette-hint">\u2318K to open, Esc to close</div>' +
+      '</div>';
+    var backdrop = overlay.querySelector('.reader-command-palette-backdrop');
+    var input = overlay.querySelector('.reader-command-palette-input');
+    var resultsEl = overlay.querySelector('.reader-command-palette-results');
+    var searchTimer = null;
+
+    function close() {
+      overlay.classList.remove('open');
+      overlay.setAttribute('aria-hidden', 'true');
+      input.value = '';
+      resultsEl.innerHTML = '';
+    }
+    function open() {
+      overlay.classList.add('open');
+      overlay.setAttribute('aria-hidden', 'false');
+      input.value = '';
+      resultsEl.innerHTML = '';
+      input.focus();
+    }
+
+    function runSearch() {
+      var q = input.value.trim();
+      var isBookSearch = q.indexOf('/') === 0;
+      var searchQ = isBookSearch ? q.slice(1).trim() : q;
+      resultsEl.innerHTML = '';
+      if (isBookSearch && searchQ.length >= 2) {
+        resultsEl.innerHTML = '<div class="reader-search-empty">Whole-book search coming soon. Search this chapter above.</div>';
+        return;
+      }
+      if (searchQ.length < 2) return;
+      var hits = getChapterSearchHits(searchQ, container);
+      if (hits.length === 0) {
+        resultsEl.innerHTML = '<div class="reader-search-empty">No matches in this chapter.</div>';
+        return;
+      }
+      hits.forEach(function(h) {
+        var item = document.createElement('button');
+        item.type = 'button';
+        item.className = 'reader-search-hit';
+        item.innerHTML = '<span class="reader-search-hit-title">' + escapeHtml(h.title) + '</span><span class="reader-search-hit-snippet">' + escapeHtml(h.snippet) + '</span>';
+        item.addEventListener('click', function() {
+          h.block.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          close();
+        });
+        resultsEl.appendChild(item);
+      });
+    }
+
+    input.addEventListener('input', function() {
+      clearTimeout(searchTimer);
+      searchTimer = setTimeout(runSearch, 150);
+    });
+    input.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') { e.preventDefault(); close(); }
+    });
+    backdrop.addEventListener('click', close);
+    document.body.appendChild(overlay);
+
+    document.addEventListener('keydown', function(e) {
+      if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+        e.preventDefault();
+        if (overlay.classList.contains('open')) close();
+        else open();
+      }
+    });
   }
 
   // ==========================================
@@ -1318,14 +1603,29 @@
   // ==========================================
   function initReadingWidth() {
     var panel = document.querySelector('.reader-panel');
-    if (!panel || panel.querySelector('.reader-reading-width')) return;
+    if (!panel) return;
     var saved = localStorage.getItem('yawp_reading_width') || 'normal';
     if (saved === 'narrow') document.body.classList.add('reading-width-narrow');
 
+    var row = panel.querySelector('.reader-find-view .reader-view-btns') || panel.querySelector('.reader-reading-width .reader-btn-row');
+    var btns = row ? row.querySelectorAll('[data-reading-width]') : [];
+    if (btns.length) {
+      btns.forEach(function(btn) {
+        var mode = btn.getAttribute('data-reading-width');
+        btn.classList.toggle('active', saved === mode);
+        btn.addEventListener('click', function() {
+          row.querySelectorAll('[data-reading-width]').forEach(function(b) { b.classList.remove('active'); });
+          btn.classList.add('active');
+          document.body.classList.toggle('reading-width-narrow', mode === 'narrow');
+          localStorage.setItem('yawp_reading_width', mode);
+        });
+      });
+      return;
+    }
     var wrap = document.createElement('div');
     wrap.className = 'reader-section reader-reading-width';
     wrap.innerHTML = '<label>Reading width</label><div class="reader-btn-row"></div>';
-    var row = wrap.querySelector('.reader-btn-row');
+    row = wrap.querySelector('.reader-btn-row');
     ['normal', 'narrow'].forEach(function(mode) {
       var btn = document.createElement('button');
       btn.type = 'button';
@@ -1463,9 +1763,11 @@
     initProgressBar();
     initBackToTop();
     initReaderPanel();
+    initFindAndView();
     initReadingTime();
     initReadingMode();
     initSearch();
+    initCommandPalette();
     initBookmarks();
     initReadingWidth();
     initSectionJump();
@@ -1474,6 +1776,7 @@
     initSpacing();
     initDyslexiaFont();
     initTheme();
+    initGlossaryInText();
     // TTS disabled for now (was not working reliably)
     // initTTS();
     initLineFocus();
