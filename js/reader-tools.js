@@ -169,7 +169,7 @@
   }
 
   // ==========================================
-  // Text-to-Speech (chunked, voice picker, section or full chapter)
+  // Text-to-Speech (Kokoro default, compact UI, now-playing bar)
   // ==========================================
   var ttsBtn = null;
   var ttsRate = parseFloat(localStorage.getItem('yawp_tts_rate') || '0.9', 10);
@@ -177,6 +177,17 @@
   var ttsVoiceId = localStorage.getItem('yawp_tts_voice') || '';
   var ttsQueue = [];
   var TTS_CHUNK_MAX = 4000;
+  var ttsNowPlayingBar = null;
+  var ttsPanel = null;
+
+  var KOKORO_VOICES = [
+    { id: 'af_bella', label: 'Bella (female)' },
+    { id: 'af_heart', label: 'Heart (female)' },
+    { id: 'af_nicole', label: 'Nicole (female)' },
+    { id: 'am_michael', label: 'Michael (male)' },
+    { id: 'am_fenrir', label: 'Fenrir (male)' },
+    { id: 'bf_emma', label: 'Emma (British)' }
+  ];
 
   function getTTSRate() { return ttsRate; }
 
@@ -240,11 +251,19 @@
     }
   }
 
+  function showTTSNowPlaying(visible) {
+    if (ttsNowPlayingBar) ttsNowPlayingBar.classList.toggle('visible', !!visible);
+    if (ttsPanel && visible) ttsPanel.classList.remove('open');
+    if (ttsBtn) {
+      ttsBtn.textContent = visible ? 'Stop Reading' : 'Read Aloud';
+      ttsBtn.classList.toggle('active', !!visible);
+    }
+  }
+
   function speakChunkQueue(chunks, index) {
     if (index >= chunks.length) {
       clearTTSReadingHighlight();
-      ttsBtn.textContent = 'Read Aloud';
-      ttsBtn.classList.remove('active');
+      showTTSNowPlaying(false);
       return;
     }
     highlightBlockForChunk(chunks[index]);
@@ -279,61 +298,78 @@
     return bestSection ? bestSection.textContent : '';
   }
 
+  function getNextSectionAfterCurrent() {
+    var current = document.querySelector('section.tts-reading, .overview.tts-reading');
+    if (!current) return null;
+    var blocks = document.querySelectorAll('.container > section, .container > .overview');
+    for (var i = 0; i < blocks.length; i++) {
+      if (blocks[i] === current && i + 1 < blocks.length) return blocks[i + 1];
+    }
+    return null;
+  }
+
+  function startTTS(text) {
+    var useKokoro = localStorage.getItem('yawp_tts_kokoro') !== 'false' && window.yawpKokoroTTS;
+    var kokoroVoice = localStorage.getItem('yawp_tts_kokoro_voice') || 'af_bella';
+
+    var startKokoro = function() {
+      showTTSNowPlaying(true);
+      if (ttsPanel) ttsPanel.classList.remove('open');
+      window.yawpKokoroTTS.speak(text, {
+        rate: getTTSRate(),
+        voice: kokoroVoice,
+        onSentence: function(sentence) { highlightSentenceInPage(sentence); },
+        onEnd: function() {
+          clearTTSReadingHighlight();
+          showTTSNowPlaying(false);
+        }
+      });
+    };
+
+    if (useKokoro) {
+      if (window.yawpKokoroTTS.isReady && window.yawpKokoroTTS.isReady()) {
+        startKokoro();
+        return;
+      }
+      if (window.yawpKokoroTTS.load) {
+        if (ttsBtn) ttsBtn.textContent = 'Loading…';
+        window.yawpKokoroTTS.load().then(startKokoro).catch(function() {
+          if (ttsBtn) ttsBtn.textContent = 'Read Aloud';
+          startBrowserTTS(text);
+        });
+        return;
+      }
+    }
+    startBrowserTTS(text);
+  }
+
+  function startBrowserTTS(text) {
+    showTTSNowPlaying(true);
+    if (ttsPanel) ttsPanel.classList.remove('open');
+    var chunks = chunkTextForTTS(text);
+    speakChunkQueue(chunks, 0);
+  }
+
   function initTTS() {
     ttsBtn = document.querySelector('[data-tts]');
+    ttsPanel = document.querySelector('.reader-panel');
     if (!ttsBtn || !window.speechSynthesis) return;
 
-    injectTTSSpeedControls();
-    injectTTSVoicePicker();
-    injectTTSScopePicker();
-    setTimeout(injectKokoroToggle, 100);
+    injectTTSNowPlayingBar();
+    setTimeout(injectTTSCompact, 50);
 
     ttsBtn.addEventListener('click', function() {
       if (speechSynthesis.speaking || (window.yawpKokoroTTS && window.yawpKokoroTTS.isPlaying && window.yawpKokoroTTS.isPlaying())) {
         speechSynthesis.cancel();
         if (window.yawpKokoroTTS && window.yawpKokoroTTS.stop) window.yawpKokoroTTS.stop();
         clearTTSReadingHighlight();
-        ttsBtn.textContent = 'Read Aloud';
-        ttsBtn.classList.remove('active');
+        showTTSNowPlaying(false);
         return;
       }
 
       var text = getTextForTTS();
       if (!text.trim()) return;
-
-      var useKokoro = localStorage.getItem('yawp_tts_kokoro') === 'true';
-      if (useKokoro && window.yawpKokoroTTS) {
-        var startKokoro = function() {
-          ttsBtn.textContent = 'Stop Reading';
-          ttsBtn.classList.add('active');
-          window.yawpKokoroTTS.speak(text, {
-            rate: getTTSRate(),
-            onSentence: function(sentence) { highlightSentenceInPage(sentence); },
-            onEnd: function() {
-              clearTTSReadingHighlight();
-              ttsBtn.textContent = 'Read Aloud';
-              ttsBtn.classList.remove('active');
-            }
-          });
-        };
-        if (window.yawpKokoroTTS.isReady && window.yawpKokoroTTS.isReady()) {
-          startKokoro();
-          return;
-        }
-        if (window.yawpKokoroTTS.load) {
-          ttsBtn.textContent = 'Loading…';
-          window.yawpKokoroTTS.load().then(startKokoro).catch(function() {
-            ttsBtn.textContent = 'Read Aloud';
-            speakChunkQueue(chunkTextForTTS(text), 0);
-          });
-          return;
-        }
-      }
-
-      var chunks = chunkTextForTTS(text);
-      ttsBtn.textContent = 'Stop Reading';
-      ttsBtn.classList.add('active');
-      speakChunkQueue(chunks, 0);
+      startTTS(text);
     });
   }
 
@@ -347,143 +383,113 @@
     }
   }
 
-  function injectTTSSpeedControls() {
+  function injectTTSNowPlayingBar() {
+    var toolbar = document.querySelector('.reader-toolbar');
+    if (!toolbar || toolbar.querySelector('.reader-tts-now-playing')) return;
+    var bar = document.createElement('div');
+    bar.className = 'reader-tts-now-playing';
+    bar.setAttribute('aria-label', 'Reading controls');
+    var stopBtn = document.createElement('button');
+    stopBtn.type = 'button';
+    stopBtn.className = 'reader-tts-bar-btn reader-tts-stop';
+    stopBtn.innerHTML = '&#10074;&#10074;';
+    stopBtn.title = 'Stop';
+    stopBtn.setAttribute('aria-label', 'Stop reading');
+    var skipBtn = document.createElement('button');
+    skipBtn.type = 'button';
+    skipBtn.className = 'reader-tts-bar-btn reader-tts-skip';
+    skipBtn.innerHTML = '&#9197;';
+    skipBtn.title = 'Next section';
+    skipBtn.setAttribute('aria-label', 'Skip to next section');
+    stopBtn.addEventListener('click', function() {
+      speechSynthesis.cancel();
+      if (window.yawpKokoroTTS && window.yawpKokoroTTS.stop) window.yawpKokoroTTS.stop();
+      clearTTSReadingHighlight();
+      showTTSNowPlaying(false);
+    });
+    skipBtn.addEventListener('click', function() {
+      speechSynthesis.cancel();
+      if (window.yawpKokoroTTS && window.yawpKokoroTTS.stop) window.yawpKokoroTTS.stop();
+      var nextBlock = getNextSectionAfterCurrent();
+      if (nextBlock) {
+        var text = nextBlock.textContent;
+        if (text.trim()) startTTS(text.trim());
+        else showTTSNowPlaying(false);
+      } else {
+        clearTTSReadingHighlight();
+        showTTSNowPlaying(false);
+      }
+    });
+    bar.appendChild(stopBtn);
+    bar.appendChild(skipBtn);
+    toolbar.insertBefore(bar, toolbar.querySelector('.reader-panel'));
+    ttsNowPlayingBar = bar;
+  }
+
+  function injectTTSCompact() {
     var toolsLabel = Array.from(document.querySelectorAll('.reader-section label')).find(function(l) { return l.textContent.trim() === 'Tools'; });
     if (!toolsLabel) return;
     var section = toolsLabel.closest('.reader-section');
-    if (!section || section.querySelector('.reader-tts-speed')) return;
-    var wrap = document.createElement('div');
-    wrap.className = 'reader-section';
-    wrap.innerHTML = '<label>Read aloud speed</label><div class="reader-tts-speed"></div>';
-    var container = wrap.querySelector('.reader-tts-speed');
-    var speeds = [
-      { value: 0.75, label: 'Slower' },
-      { value: 0.9, label: 'Normal' },
-      { value: 1.1, label: 'Faster' }
-    ];
-    speeds.forEach(function(s) {
+    if (!section || section.querySelector('.reader-tts-compact-row')) return;
+
+    var row = document.createElement('div');
+    row.className = 'reader-tts-compact-row';
+
+    var speedRow = document.createElement('div');
+    speedRow.className = 'reader-tts-mini-row';
+    [ { value: 0.75, label: '\u2212' }, { value: 0.9, label: '1\u00d7' }, { value: 1.1, label: '+' } ].forEach(function(s) {
       var btn = document.createElement('button');
       btn.type = 'button';
-      btn.className = 'speed-btn' + (Math.abs(ttsRate - s.value) < 0.05 ? ' active' : '');
+      btn.className = 'reader-btn reader-btn-sm' + (Math.abs(ttsRate - s.value) < 0.05 ? ' active' : '');
       btn.textContent = s.label;
+      btn.title = s.value === 0.9 ? 'Normal speed' : (s.value < 0.9 ? 'Slower' : 'Faster');
       btn.setAttribute('data-tts-rate', String(s.value));
       btn.addEventListener('click', function() {
-        container.querySelectorAll('.speed-btn').forEach(function(b) { b.classList.remove('active'); });
+        speedRow.querySelectorAll('[data-tts-rate]').forEach(function(b) { b.classList.remove('active'); });
         btn.classList.add('active');
         ttsRate = s.value;
         localStorage.setItem('yawp_tts_rate', String(ttsRate));
       });
-      container.appendChild(btn);
+      speedRow.appendChild(btn);
     });
-    section.parentNode.insertBefore(wrap, section);
-  }
 
-  function injectTTSVoicePicker() {
-    var section = document.querySelector('.reader-tts-speed');
-    if (!section || section.closest('.reader-section').querySelector('.reader-tts-voice')) return;
-    var wrap = section.closest('.reader-section');
-    var label = document.createElement('label');
-    label.textContent = 'Voice';
-    var sel = document.createElement('select');
-    sel.className = 'reader-tts-voice';
-    sel.setAttribute('aria-label', 'Text-to-speech voice');
-
-    function fillVoices() {
-      var voices = speechSynthesis.getVoices();
-      if (!voices.length) return;
-      if (sel.options.length > 1) return;
-      sel.innerHTML = '';
-      var en = voices.filter(function(v) { return v.lang.startsWith('en'); });
-      var list = en.length ? en : voices;
-      list.forEach(function(v, i) {
-        var opt = document.createElement('option');
-        opt.value = v.voiceURI || v.name;
-        opt.textContent = v.name + (v.lang ? ' (' + v.lang + ')' : '');
-        var isSelected = ttsVoiceId ? (v.voiceURI === ttsVoiceId || v.name === ttsVoiceId) : (i === 0);
-        if (isSelected) opt.selected = true;
-        sel.appendChild(opt);
-      });
-    }
-    if (speechSynthesis.getVoices().length) fillVoices();
-    speechSynthesis.addEventListener('voiceschanged', fillVoices);
-
-    sel.addEventListener('change', function() {
-      ttsVoiceId = sel.value;
-      localStorage.setItem('yawp_tts_voice', ttsVoiceId);
-    });
-    wrap.appendChild(label);
-    wrap.appendChild(sel);
-  }
-
-  function injectKokoroToggle() {
-    var section = document.querySelector('.reader-tts-speed');
-    if (!section || section.closest('.reader-section').querySelector('.reader-tts-kokoro')) return;
-    var wrap = section.closest('.reader-section');
-    var useKokoro = localStorage.getItem('yawp_tts_kokoro') === 'true';
-    var label = document.createElement('label');
-    label.textContent = 'Engine';
-    var row = document.createElement('div');
-    row.className = 'reader-tts-kokoro reader-btn-row';
-    var browserBtn = document.createElement('button');
-    browserBtn.type = 'button';
-    browserBtn.className = 'reader-btn' + (!useKokoro ? ' active' : '');
-    browserBtn.textContent = 'Browser';
-    var kokoroBtn = document.createElement('button');
-    kokoroBtn.type = 'button';
-    kokoroBtn.className = 'reader-btn' + (useKokoro ? ' active' : '');
-    kokoroBtn.textContent = 'Kokoro';
-    kokoroBtn.title = 'Higher-quality voice (loads once, runs in browser)';
-    browserBtn.addEventListener('click', function() {
-      localStorage.setItem('yawp_tts_kokoro', 'false');
-      row.querySelectorAll('.reader-btn').forEach(function(b) { b.classList.remove('active'); });
-      browserBtn.classList.add('active');
-    });
-    kokoroBtn.addEventListener('click', function() {
-      localStorage.setItem('yawp_tts_kokoro', 'true');
-      row.querySelectorAll('.reader-btn').forEach(function(b) { b.classList.remove('active'); });
-      kokoroBtn.classList.add('active');
-      if (window.yawpKokoroTTS && !window.yawpKokoroTTS.isReady()) window.yawpKokoroTTS.load();
-    });
-    row.appendChild(browserBtn);
-    row.appendChild(kokoroBtn);
-    wrap.appendChild(label);
-    wrap.appendChild(row);
-  }
-
-  function injectTTSScopePicker() {
-    var section = document.querySelector('.reader-tts-speed');
-    if (!section || section.closest('.reader-section').querySelector('.reader-tts-scope')) return;
-    var wrap = section.closest('.reader-section');
-    var label = document.createElement('label');
-    label.textContent = 'Read';
-    var row = document.createElement('div');
-    row.className = 'reader-tts-scope reader-btn-row';
+    var scopeRow = document.createElement('div');
+    scopeRow.className = 'reader-tts-mini-row';
     var sectionBtn = document.createElement('button');
     sectionBtn.type = 'button';
-    sectionBtn.className = 'reader-btn' + (ttsScope === 'section' ? ' active' : '');
-    sectionBtn.textContent = 'This section';
+    sectionBtn.className = 'reader-btn reader-btn-sm' + (ttsScope === 'section' ? ' active' : '');
+    sectionBtn.textContent = 'Section';
     sectionBtn.setAttribute('data-tts-scope', 'section');
     var chapterBtn = document.createElement('button');
     chapterBtn.type = 'button';
-    chapterBtn.className = 'reader-btn' + (ttsScope === 'chapter' ? ' active' : '');
-    chapterBtn.textContent = 'Full chapter';
+    chapterBtn.className = 'reader-btn reader-btn-sm' + (ttsScope === 'chapter' ? ' active' : '');
+    chapterBtn.textContent = 'Chapter';
     chapterBtn.setAttribute('data-tts-scope', 'chapter');
-    sectionBtn.addEventListener('click', function() {
-      ttsScope = 'section';
-      localStorage.setItem('yawp_tts_scope', 'section');
-      row.querySelectorAll('.reader-btn').forEach(function(b) { b.classList.remove('active'); });
-      sectionBtn.classList.add('active');
+    sectionBtn.addEventListener('click', function() { ttsScope = 'section'; localStorage.setItem('yawp_tts_scope', 'section'); scopeRow.querySelectorAll('[data-tts-scope]').forEach(function(b) { b.classList.remove('active'); }); sectionBtn.classList.add('active'); });
+    chapterBtn.addEventListener('click', function() { ttsScope = 'chapter'; localStorage.setItem('yawp_tts_scope', 'chapter'); scopeRow.querySelectorAll('[data-tts-scope]').forEach(function(b) { b.classList.remove('active'); }); chapterBtn.classList.add('active'); });
+    scopeRow.appendChild(sectionBtn);
+    scopeRow.appendChild(chapterBtn);
+
+    var voiceSel = document.createElement('select');
+    voiceSel.className = 'reader-tts-voice-mini';
+    voiceSel.title = 'Voice';
+    voiceSel.setAttribute('aria-label', 'Voice');
+    var savedVoice = localStorage.getItem('yawp_tts_kokoro_voice') || 'af_bella';
+    KOKORO_VOICES.forEach(function(v) {
+      var opt = document.createElement('option');
+      opt.value = v.id;
+      opt.textContent = v.label;
+      if (v.id === savedVoice) opt.selected = true;
+      voiceSel.appendChild(opt);
     });
-    chapterBtn.addEventListener('click', function() {
-      ttsScope = 'chapter';
-      localStorage.setItem('yawp_tts_scope', 'chapter');
-      row.querySelectorAll('.reader-btn').forEach(function(b) { b.classList.remove('active'); });
-      chapterBtn.classList.add('active');
+    voiceSel.addEventListener('change', function() {
+      localStorage.setItem('yawp_tts_kokoro_voice', voiceSel.value);
     });
-    row.appendChild(sectionBtn);
-    row.appendChild(chapterBtn);
-    wrap.appendChild(label);
-    wrap.appendChild(row);
+
+    row.appendChild(speedRow);
+    row.appendChild(scopeRow);
+    row.appendChild(voiceSel);
+    section.appendChild(row);
   }
 
   // ==========================================
