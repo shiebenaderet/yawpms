@@ -41,21 +41,94 @@
   }
 
   // ==========================================
-  // Reader Panel Toggle
+  // Reader Panel: Toolbox → Aa (reading) / Pencil (search, notes, vocab)
   // ==========================================
   function initReaderPanel() {
-    var toggle = document.querySelector('.reader-toggle');
+    var toolbar = document.querySelector('.reader-toolbar');
+    var mainBtn = document.querySelector('.reader-toggle');
     var panel = document.querySelector('.reader-panel');
-    if (!toggle || !panel) return;
+    if (!toolbar || !mainBtn || !panel) return;
 
-    toggle.addEventListener('click', function(e) {
+    // Turn main button into toolbox icon; add two sub-buttons (Aa, pencil)
+    mainBtn.setAttribute('aria-label', 'Reader tools');
+    mainBtn.innerHTML = '\u2699'; // gear
+    mainBtn.classList.add('reader-toolbox-main');
+    mainBtn.title = 'Reader tools';
+
+    var subAa = document.createElement('button');
+    subAa.type = 'button';
+    subAa.className = 'reader-toggle reader-sub-toggle reader-sub-aa';
+    subAa.setAttribute('aria-label', 'Reading options');
+    subAa.innerHTML = 'Aa';
+    subAa.title = 'Reading: fonts, size, theme, highlight';
+
+    var subPencil = document.createElement('button');
+    subPencil.type = 'button';
+    subPencil.className = 'reader-toggle reader-sub-toggle reader-sub-pencil';
+    subPencil.setAttribute('aria-label', 'Search, notes, glossary');
+    subPencil.innerHTML = '\u270E'; // pencil
+    subPencil.title = 'Search, jump to section, notes, glossary';
+
+    toolbar.insertBefore(subPencil, mainBtn);
+    toolbar.insertBefore(subAa, mainBtn);
+
+    function showSubButtons(show) {
+      subAa.classList.toggle('reader-sub-visible', show);
+      subPencil.classList.toggle('reader-sub-visible', show);
+    }
+    function openPanel(mode) {
+      panel.dataset.mode = mode;
+      panel.classList.add('open');
+      showSubButtons(false);
+    }
+    function closePanel() {
+      panel.classList.remove('open');
+    }
+
+    mainBtn.addEventListener('click', function(e) {
       e.stopPropagation();
-      panel.classList.toggle('open');
+      if (panel.classList.contains('open')) {
+        closePanel();
+        showSubButtons(false);
+      } else {
+        showSubButtons(!subAa.classList.contains('reader-sub-visible'));
+      }
+    });
+
+    subAa.addEventListener('click', function(e) {
+      e.stopPropagation();
+      openPanel('reading');
+    });
+    subPencil.addEventListener('click', function(e) {
+      e.stopPropagation();
+      openPanel('tools');
     });
 
     document.addEventListener('click', function(e) {
-      if (!panel.contains(e.target) && e.target !== toggle) {
-        panel.classList.remove('open');
+      if (panel.contains(e.target) || mainBtn.contains(e.target) || subAa.contains(e.target) || subPencil.contains(e.target)) return;
+      closePanel();
+      showSubButtons(false);
+    });
+  }
+
+  // Mark panel sections as reading vs tools (so we can show one set at a time)
+  function markPanelSections() {
+    var panel = document.querySelector('.reader-panel');
+    if (!panel) return;
+    panel.querySelectorAll('.reader-search-wrap').forEach(function(el) { el.setAttribute('data-in-panel', 'tools'); });
+    panel.querySelectorAll('.reader-view-row').forEach(function(el) { el.setAttribute('data-in-panel', 'reading'); });
+    panel.querySelectorAll('.reader-reading-time').forEach(function(el) { el.setAttribute('data-in-panel', 'tools'); });
+    panel.querySelectorAll('.reader-section-jump').forEach(function(el) { el.setAttribute('data-in-panel', 'tools'); });
+    panel.querySelectorAll('.reader-bookmarks-wrap').forEach(function(el) { el.setAttribute('data-in-panel', 'tools'); });
+    panel.querySelectorAll('.reader-font-family').forEach(function(el) { el.setAttribute('data-in-panel', 'reading'); });
+    panel.querySelectorAll('.reader-reading-width').forEach(function(el) { el.setAttribute('data-in-panel', 'reading'); });
+    panel.querySelectorAll('.reader-reading-mode').forEach(function(el) { el.setAttribute('data-in-panel', 'reading'); });
+    panel.querySelectorAll('.reader-section').forEach(function(section) {
+      if (section.querySelector('[data-font-size], [data-spacing], [data-theme], [data-dyslexia], [data-line-focus], [data-highlight-color]')) {
+        section.setAttribute('data-in-panel', 'reading');
+      }
+      if (section.querySelector('[data-action="notes"], [data-action="pdf"], [data-action="glossary"]')) {
+        section.setAttribute('data-in-panel', 'tools');
       }
     });
   }
@@ -606,40 +679,81 @@
   var highlightColor = 'yellow';
   var highlights = [];
 
+  var highlightColors = [
+    { id: 'yellow', label: 'Yellow', bg: '#FFF9C4' },
+    { id: 'green', label: 'Green', bg: '#C8E6C9' },
+    { id: 'blue', label: 'Blue', bg: '#BBDEFB' },
+    { id: 'pink', label: 'Pink', bg: '#F8BBD0' }
+  ];
+
   function initHighlighting() {
-    // Load saved highlights
     var saved = localStorage.getItem('yawp_highlights_' + pageKey);
     if (saved) {
       try { highlights = JSON.parse(saved); } catch(e) { highlights = []; }
       restoreHighlights();
     }
 
-    // Color picker buttons
-    var colorBtns = document.querySelectorAll('[data-highlight-color]');
-    colorBtns.forEach(function(btn) {
-      if (btn.getAttribute('data-highlight-color') === highlightColor) btn.classList.add('active');
-      btn.addEventListener('click', function() {
-        colorBtns.forEach(function(b) { b.classList.remove('active'); });
-        btn.classList.add('active');
-        highlightColor = btn.getAttribute('data-highlight-color');
+    var section = document.querySelector('.reader-panel .reader-section');
+    section = section && [].find.call(document.querySelectorAll('.reader-panel .reader-section'), function(s) {
+      return s.querySelector('[data-highlight-color]') || (s.querySelector('label') && s.querySelector('label').textContent.indexOf('Highlight') !== -1);
+    });
+    if (!section) return;
+
+    var row = section.querySelector('.reader-btn-row');
+    if (!row) return;
+
+    var wrap = document.createElement('div');
+    wrap.className = 'reader-highlight-wrap';
+    var penBtn = document.createElement('button');
+    penBtn.type = 'button';
+    penBtn.className = 'reader-btn reader-highlight-pen';
+    penBtn.setAttribute('aria-label', 'Highlighter');
+    penBtn.title = 'Select text, then click to highlight';
+    penBtn.innerHTML = '\u270E'; // pencil
+    var colorsWrap = document.createElement('div');
+    colorsWrap.className = 'reader-highlight-colors';
+    colorsWrap.setAttribute('aria-hidden', 'true');
+    highlightColors.forEach(function(c) {
+      var circle = document.createElement('button');
+      circle.type = 'button';
+      circle.className = 'reader-btn reader-highlight-color' + (c.id === highlightColor ? ' active' : '');
+      circle.setAttribute('data-highlight-color', c.id);
+      circle.style.background = c.bg;
+      circle.title = c.label;
+      circle.setAttribute('aria-label', c.label);
+      circle.addEventListener('click', function() {
+        highlightColor = c.id;
+        colorsWrap.querySelectorAll('[data-highlight-color]').forEach(function(b) { b.classList.remove('active'); });
+        circle.classList.add('active');
+        colorsWrap.classList.remove('open');
+        colorsWrap.setAttribute('aria-hidden', 'true');
+        penBtn.title = 'Select text, then click pen to highlight';
       });
+      colorsWrap.appendChild(circle);
+    });
+    var clearBtn = document.createElement('button');
+    clearBtn.type = 'button';
+    clearBtn.className = 'reader-btn reader-highlight-clear';
+    clearBtn.textContent = 'Clear all';
+    clearBtn.addEventListener('click', function() { clearAllHighlights(); });
+
+    penBtn.addEventListener('click', function() {
+      if (colorsWrap.classList.contains('open')) {
+        colorsWrap.classList.remove('open');
+        colorsWrap.setAttribute('aria-hidden', 'true');
+        highlightSelection();
+      } else {
+        colorsWrap.classList.add('open');
+        colorsWrap.setAttribute('aria-hidden', 'false');
+      }
     });
 
-    // Highlight button
-    var highlightBtn = document.querySelector('[data-action="highlight"]');
-    if (highlightBtn) {
-      highlightBtn.addEventListener('click', function() {
-        highlightSelection();
-      });
-    }
-
-    // Clear highlights button
-    var clearBtn = document.querySelector('[data-action="clear-highlights"]');
-    if (clearBtn) {
-      clearBtn.addEventListener('click', function() {
-        clearAllHighlights();
-      });
-    }
+    wrap.appendChild(penBtn);
+    wrap.appendChild(colorsWrap);
+    wrap.appendChild(clearBtn);
+    row.parentNode.replaceChild(wrap, row);
+    var extraRow = section.querySelector('.reader-btn-row');
+    if (extraRow) extraRow.remove();
   }
 
   function highlightSelection() {
@@ -1180,8 +1294,6 @@
         '<div class="reader-btn-row reader-view-btns">' +
           '<button type="button" class="reader-btn" data-reading-mode="scroll" title="Scroll">Scroll</button>' +
           '<button type="button" class="reader-btn" data-reading-mode="page" title="Page by page">Page</button>' +
-          '<button type="button" class="reader-btn" data-font-family="serif" title="Serif font">Serif</button>' +
-          '<button type="button" class="reader-btn" data-font-family="sans" title="Sans font">Sans</button>' +
           '<button type="button" class="reader-btn" data-reading-width="normal" title="Normal width">Width</button>' +
           '<button type="button" class="reader-btn" data-reading-width="narrow" title="Narrow column">Narrow</button>' +
         '</div>' +
@@ -1216,9 +1328,30 @@
     var container = document.querySelector('.container');
     if (!container) return;
     var blocks = [];
-    var overview = document.querySelector('.overview');
+    var overview = container.querySelector('.overview');
     if (overview) blocks.push(overview);
-    document.querySelectorAll('.container > section').forEach(function(s) { blocks.push(s); });
+    container.querySelectorAll(':scope > section').forEach(function(s) { blocks.push(s); });
+
+    // Chapters like ch7 use h2.section-heading instead of <section> — build blocks by wrapping each h2 + content (reverse order so DOM stays valid)
+    if (blocks.length <= 1) {
+      var h2s = Array.from(container.querySelectorAll(':scope > h2.section-heading, :scope > h2[id]'));
+      var wrapped = [];
+      for (var hi = h2s.length - 1; hi >= 0; hi--) {
+        var h2 = h2s[hi];
+        var wrap = document.createElement('div');
+        wrap.className = 'reader-page-block';
+        wrap.appendChild(h2);
+        var next = h2.nextElementSibling;
+        while (next && next.tagName !== 'H2') {
+          var after = next.nextElementSibling;
+          wrap.appendChild(next);
+          next = after;
+        }
+        h2.parentNode.insertBefore(wrap, h2);
+        wrapped.push(wrap);
+      }
+      blocks = blocks.concat(wrapped.reverse());
+    }
     if (blocks.length === 0) return;
 
     var saved = localStorage.getItem('yawp_reading_mode') || 'scroll';
@@ -1257,11 +1390,15 @@
       document.body.classList.toggle('reading-mode-page', isPage);
       if (isPage) {
         blocks.forEach(function(b, i) { b.style.display = i === pageIndex ? 'block' : 'none'; });
+        container.querySelectorAll(':scope > *').forEach(function(el) {
+          if (blocks.indexOf(el) === -1) el.style.display = 'none';
+        });
         var bar = document.querySelector('.reader-page-nav');
         if (bar) bar.style.display = 'flex';
         updatePageNav();
       } else {
         blocks.forEach(function(b) { b.style.display = ''; });
+        container.querySelectorAll(':scope > *').forEach(function(el) { el.style.display = ''; });
         var bar = document.querySelector('.reader-page-nav');
         if (bar) bar.style.display = 'none';
       }
@@ -1584,7 +1721,7 @@
   }
 
   // ==========================================
-  // Bookmarks (Foliate-style)
+  // Bookmarks (Foliate-style) — bookmarks current scroll position; prompts for name
   // ==========================================
   function initBookmarks() {
     var panel = document.querySelector('.reader-panel');
@@ -1592,9 +1729,12 @@
     var container = document.querySelector('.container');
     if (!container) return;
     var blocks = [];
-    var overview = document.querySelector('.overview');
+    var overview = container.querySelector('.overview');
     if (overview) blocks.push(overview);
-    document.querySelectorAll('.container > section').forEach(function(s) { blocks.push(s); });
+    container.querySelectorAll(':scope > section').forEach(function(s) { blocks.push(s); });
+    if (blocks.length <= 1) {
+      container.querySelectorAll(':scope > .reader-page-block').forEach(function(b) { blocks.push(b); });
+    }
     if (blocks.length === 0) return;
 
     var storageKey = 'yawp_bookmarks_' + pageKey;
@@ -1655,7 +1795,9 @@
       var idx = getCurrentBlockIndex();
       var block = blocks[idx];
       var h2 = block ? block.querySelector('h2') : null;
-      var label = h2 ? h2.textContent : (block && block.classList.contains('overview') ? 'Chapter Overview' : 'Section ' + (idx + 1));
+      var defaultLabel = h2 ? h2.textContent.trim() : (block && block.classList.contains('overview') ? 'Chapter Overview' : 'Section ' + (idx + 1));
+      var label = window.prompt('Name this bookmark:', defaultLabel);
+      if (label == null || (label = label.trim()) === '') return;
       bookmarks.push({ index: idx, label: label });
       saveBookmarks();
     });
@@ -1884,6 +2026,7 @@
     initPDFBuilder();
     initGlossary();
     initDictionary();
+    markPanelSections();
     // Icon-tree panel disabled — flat layout with improved spacing instead
     // setTimeout(initReaderPanelTree, 100);
   }
