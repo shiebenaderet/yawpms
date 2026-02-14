@@ -169,14 +169,82 @@
   }
 
   // ==========================================
-  // Text-to-Speech (with speed control for students)
+  // Text-to-Speech (chunked, voice picker, section or full chapter)
   // ==========================================
-  var ttsUtterance = null;
   var ttsBtn = null;
   var ttsRate = parseFloat(localStorage.getItem('yawp_tts_rate') || '0.9', 10);
+  var ttsScope = localStorage.getItem('yawp_tts_scope') || 'section';
+  var ttsVoiceId = localStorage.getItem('yawp_tts_voice') || '';
+  var ttsQueue = [];
+  var TTS_CHUNK_MAX = 4000;
 
-  function getTTSRate() {
-    return ttsRate;
+  function getTTSRate() { return ttsRate; }
+
+  function getTTSVoice() {
+    var voices = speechSynthesis.getVoices();
+    if (ttsVoiceId && voices.length) {
+      var v = voices.filter(function(x) { return x.voiceURI === ttsVoiceId || x.name === ttsVoiceId; })[0];
+      if (v) return v;
+    }
+    var en = voices.filter(function(x) { return x.lang.startsWith('en'); });
+    return en[0] || voices[0] || null;
+  }
+
+  function chunkTextForTTS(text) {
+    var chunks = [];
+    text = text.replace(/\s+/g, ' ').trim();
+    if (text.length <= TTS_CHUNK_MAX) {
+      chunks.push(text);
+      return chunks;
+    }
+    var sentences = text.match(/[^.!?]+[.!?]\s*/g) || [text];
+    var current = '';
+    for (var i = 0; i < sentences.length; i++) {
+      if (current.length + sentences[i].length > TTS_CHUNK_MAX && current.length > 0) {
+        chunks.push(current.trim());
+        current = '';
+      }
+      current += sentences[i];
+    }
+    if (current.trim()) chunks.push(current.trim());
+    return chunks;
+  }
+
+  function speakChunkQueue(chunks, index) {
+    if (index >= chunks.length) {
+      ttsBtn.textContent = 'Read Aloud';
+      ttsBtn.classList.remove('active');
+      return;
+    }
+    var u = new SpeechSynthesisUtterance(chunks[index]);
+    u.rate = getTTSRate();
+    var voice = getTTSVoice();
+    if (voice) u.voice = voice;
+    u.onend = function() { speakChunkQueue(chunks, index + 1); };
+    u.onerror = function() { speakChunkQueue(chunks, index + 1); };
+    speechSynthesis.speak(u);
+  }
+
+  function getTextForTTS() {
+    var sel = window.getSelection();
+    if (sel && sel.toString().trim().length > 0) return sel.toString().trim();
+
+    if (ttsScope === 'chapter') {
+      var container = document.querySelector('.container');
+      return container ? container.textContent || '' : '';
+    }
+
+    var sections = document.querySelectorAll('section, .overview');
+    var bestSection = null;
+    var bestDist = Infinity;
+    var viewMid = window.scrollY + window.innerHeight / 2;
+    sections.forEach(function(s) {
+      var rect = s.getBoundingClientRect();
+      var elMid = window.scrollY + rect.top + rect.height / 2;
+      var dist = Math.abs(elMid - viewMid);
+      if (dist < bestDist) { bestDist = dist; bestSection = s; }
+    });
+    return bestSection ? bestSection.textContent : '';
   }
 
   function initTTS() {
@@ -184,6 +252,8 @@
     if (!ttsBtn || !window.speechSynthesis) return;
 
     injectTTSSpeedControls();
+    injectTTSVoicePicker();
+    injectTTSScopePicker();
 
     ttsBtn.addEventListener('click', function() {
       if (speechSynthesis.speaking) {
@@ -193,35 +263,13 @@
         return;
       }
 
-      var sel = window.getSelection();
-      var text = '';
-      if (sel && sel.toString().trim().length > 0) {
-        text = sel.toString();
-      } else {
-        var sections = document.querySelectorAll('section, .overview');
-        var bestSection = null;
-        var bestDist = Infinity;
-        var viewMid = window.scrollY + window.innerHeight / 2;
-        sections.forEach(function(s) {
-          var rect = s.getBoundingClientRect();
-          var elMid = window.scrollY + rect.top + rect.height / 2;
-          var dist = Math.abs(elMid - viewMid);
-          if (dist < bestDist) { bestDist = dist; bestSection = s; }
-        });
-        if (bestSection) text = bestSection.textContent;
-      }
-
+      var text = getTextForTTS();
       if (!text.trim()) return;
 
-      ttsUtterance = new SpeechSynthesisUtterance(text.slice(0, 5000));
-      ttsUtterance.rate = getTTSRate();
-      ttsUtterance.onend = function() {
-        ttsBtn.textContent = 'Read Aloud';
-        ttsBtn.classList.remove('active');
-      };
-      speechSynthesis.speak(ttsUtterance);
+      var chunks = chunkTextForTTS(text);
       ttsBtn.textContent = 'Stop Reading';
       ttsBtn.classList.add('active');
+      speakChunkQueue(chunks, 0);
     });
   }
 
@@ -254,6 +302,79 @@
       container.appendChild(btn);
     });
     section.parentNode.insertBefore(wrap, section);
+  }
+
+  function injectTTSVoicePicker() {
+    var section = document.querySelector('.reader-tts-speed');
+    if (!section || section.closest('.reader-section').querySelector('.reader-tts-voice')) return;
+    var wrap = section.closest('.reader-section');
+    var label = document.createElement('label');
+    label.textContent = 'Voice';
+    var sel = document.createElement('select');
+    sel.className = 'reader-tts-voice';
+    sel.setAttribute('aria-label', 'Text-to-speech voice');
+
+    function fillVoices() {
+      var voices = speechSynthesis.getVoices();
+      if (!voices.length) return;
+      if (sel.options.length > 1) return;
+      sel.innerHTML = '';
+      var en = voices.filter(function(v) { return v.lang.startsWith('en'); });
+      var list = en.length ? en : voices;
+      list.forEach(function(v, i) {
+        var opt = document.createElement('option');
+        opt.value = v.voiceURI || v.name;
+        opt.textContent = v.name + (v.lang ? ' (' + v.lang + ')' : '');
+        var isSelected = ttsVoiceId ? (v.voiceURI === ttsVoiceId || v.name === ttsVoiceId) : (i === 0);
+        if (isSelected) opt.selected = true;
+        sel.appendChild(opt);
+      });
+    }
+    if (speechSynthesis.getVoices().length) fillVoices();
+    speechSynthesis.addEventListener('voiceschanged', fillVoices);
+
+    sel.addEventListener('change', function() {
+      ttsVoiceId = sel.value;
+      localStorage.setItem('yawp_tts_voice', ttsVoiceId);
+    });
+    wrap.appendChild(label);
+    wrap.appendChild(sel);
+  }
+
+  function injectTTSScopePicker() {
+    var section = document.querySelector('.reader-tts-speed');
+    if (!section || section.closest('.reader-section').querySelector('.reader-tts-scope')) return;
+    var wrap = section.closest('.reader-section');
+    var label = document.createElement('label');
+    label.textContent = 'Read';
+    var row = document.createElement('div');
+    row.className = 'reader-tts-scope reader-btn-row';
+    var sectionBtn = document.createElement('button');
+    sectionBtn.type = 'button';
+    sectionBtn.className = 'reader-btn' + (ttsScope === 'section' ? ' active' : '');
+    sectionBtn.textContent = 'This section';
+    sectionBtn.setAttribute('data-tts-scope', 'section');
+    var chapterBtn = document.createElement('button');
+    chapterBtn.type = 'button';
+    chapterBtn.className = 'reader-btn' + (ttsScope === 'chapter' ? ' active' : '');
+    chapterBtn.textContent = 'Full chapter';
+    chapterBtn.setAttribute('data-tts-scope', 'chapter');
+    sectionBtn.addEventListener('click', function() {
+      ttsScope = 'section';
+      localStorage.setItem('yawp_tts_scope', 'section');
+      row.querySelectorAll('.reader-btn').forEach(function(b) { b.classList.remove('active'); });
+      sectionBtn.classList.add('active');
+    });
+    chapterBtn.addEventListener('click', function() {
+      ttsScope = 'chapter';
+      localStorage.setItem('yawp_tts_scope', 'chapter');
+      row.querySelectorAll('.reader-btn').forEach(function(b) { b.classList.remove('active'); });
+      chapterBtn.classList.add('active');
+    });
+    row.appendChild(sectionBtn);
+    row.appendChild(chapterBtn);
+    wrap.appendChild(label);
+    wrap.appendChild(row);
   }
 
   // ==========================================
@@ -744,6 +865,71 @@
   }
 
   // ==========================================
+  // Jump to Section (Foliate-style navigation)
+  // ==========================================
+  function initSectionJump() {
+    var panel = document.querySelector('.reader-panel');
+    if (!panel || panel.querySelector('.reader-section-jump')) return;
+    var items = [];
+    var overviewEl = document.querySelector('.overview');
+    if (overviewEl) items.push({ label: 'Chapter Overview', el: overviewEl });
+    document.querySelectorAll('section').forEach(function(sec, i) {
+      var h2 = sec.querySelector('h2');
+      items.push({ label: h2 ? h2.textContent : ('Section ' + (i + 1)), el: sec });
+    });
+    if (items.length === 0) return;
+    var wrap = document.createElement('div');
+    wrap.className = 'reader-section reader-section-jump';
+    wrap.innerHTML = '<label>Jump to section</label><select class="reader-jump-select" aria-label="Jump to section"><option value="">-- Choose section --</option></select>';
+    var sel = wrap.querySelector('.reader-jump-select');
+    items.forEach(function(item, idx) {
+      var opt = document.createElement('option');
+      opt.value = String(idx);
+      opt.textContent = item.label;
+      sel.appendChild(opt);
+    });
+    sel.addEventListener('change', function() {
+      var idx = parseInt(sel.value, 10);
+      if (isNaN(idx) || !items[idx]) return;
+      items[idx].el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      sel.value = '';
+    });
+    var readingTime = panel.querySelector('.reader-reading-time');
+    panel.insertBefore(wrap, readingTime ? readingTime.nextElementSibling : panel.querySelector('h4').nextElementSibling);
+  }
+
+  // ==========================================
+  // Reading Width / Narrow Column (Foliate-style)
+  // ==========================================
+  function initReadingWidth() {
+    var panel = document.querySelector('.reader-panel');
+    if (!panel || panel.querySelector('.reader-reading-width')) return;
+    var saved = localStorage.getItem('yawp_reading_width') || 'normal';
+    if (saved === 'narrow') document.body.classList.add('reading-width-narrow');
+
+    var wrap = document.createElement('div');
+    wrap.className = 'reader-section reader-reading-width';
+    wrap.innerHTML = '<label>Reading width</label><div class="reader-btn-row"></div>';
+    var row = wrap.querySelector('.reader-btn-row');
+    ['normal', 'narrow'].forEach(function(mode) {
+      var btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'reader-btn' + (saved === mode ? ' active' : '');
+      btn.textContent = mode === 'normal' ? 'Normal' : 'Narrow column';
+      btn.setAttribute('data-reading-width', mode);
+      btn.addEventListener('click', function() {
+        row.querySelectorAll('.reader-btn').forEach(function(b) { b.classList.remove('active'); });
+        btn.classList.add('active');
+        document.body.classList.toggle('reading-width-narrow', mode === 'narrow');
+        localStorage.setItem('yawp_reading_width', mode);
+      });
+      row.appendChild(btn);
+    });
+    var firstSection = panel.querySelector('.reader-section');
+    panel.insertBefore(wrap, firstSection);
+  }
+
+  // ==========================================
   // Initialize Everything
   // ==========================================
   function init() {
@@ -751,6 +937,8 @@
     initBackToTop();
     initReaderPanel();
     initReadingTime();
+    initReadingWidth();
+    initSectionJump();
     initFontSize();
     initSpacing();
     initDyslexiaFont();

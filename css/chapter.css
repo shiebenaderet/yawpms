@@ -112,6 +112,8 @@ body {
 /* ---- Container ---- */
 
 .container { max-width: 720px; margin: 0 auto; padding: 48px 24px; }
+/* Narrow reading column (Foliate-style comfortable line length) */
+body.reading-width-narrow .container { max-width: 58ch; }
 
 /* ---- Table of Contents ---- */
 
@@ -492,6 +494,19 @@ footer a:hover { border-bottom-style: solid; }
   align-items: center;
   flex-wrap: wrap;
 }
+.reader-tts-voice {
+  width: 100%;
+  max-width: 220px;
+  padding: 6px 8px;
+  font-size: 12px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background: white;
+  font-family: 'Source Sans 3', sans-serif;
+  margin-top: 4px;
+}
+.reader-tts-scope { margin-top: 4px; }
+
 .reader-tts-speed .speed-btn {
   padding: 4px 8px;
   font-size: 12px;
@@ -747,6 +762,12 @@ body.dyslexia-font .activity-box li,
 body.dyslexia-font .perspectives .perspective,
 body.dyslexia-font figcaption,
 body.dyslexia-font footer,
+body.dyslexia-font .overview p,
+body.dyslexia-font .overview h2,
+body.dyslexia-font .big-questions li,
+body.dyslexia-font .big-questions h2,
+body.dyslexia-font .toc,
+body.dyslexia-font .toc a,
 body.dyslexia-font h1, body.dyslexia-font h2, body.dyslexia-font h3, body.dyslexia-font h4 { font-family: 'OpenDyslexic', sans-serif; }
 
 body.high-contrast { background: #fff; color: #000; }
@@ -857,6 +878,8 @@ body.dark-mode .reader-section label { color: #888; }
 body.dark-mode .reader-btn { background: #252525; border-color: #444; color: #ddd; }
 body.dark-mode .reader-btn:hover { background: #333; }
 body.dark-mode .reader-btn.active { background: #4dd0c8; color: #111; border-color: #4dd0c8; }
+body.dark-mode .reader-tts-voice,
+body.dark-mode .reader-jump-select { background: #252525; border-color: #444; color: #ddd; }
 
 body.dark-mode .notes-panel { background: #1e1e1e; border-left-color: #333; box-shadow: -4px 0 20px rgba(0,0,0,.4); }
 body.dark-mode .notes-header { border-bottom-color: #333; }
