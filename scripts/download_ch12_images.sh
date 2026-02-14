@@ -17,6 +17,9 @@ declare -A IMAGES=(
   ["battle-of-chapultepec.jpg"]="https://upload.wikimedia.org/wikipedia/commons/thumb/c/ce/Battle_of_Chapultepec.jpg/640px-Battle_of_Chapultepec.jpg"
   ["gold-rush-miners.jpg"]="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2d/California_gold_rush_daguerreotype.jpg/640px-California_gold_rush_daguerreotype.jpg"
   ["mexican-cession-map.jpg"]="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4f/Mexican_Cession.png/640px-Mexican_Cession.png"
+
+  # Maps
+  ["oregon-territory-map.png"]="https://commons.wikimedia.org/wiki/Special:FilePath/Oregon_territory_1848.svg?width=600"
 )
 
 for local in "${!IMAGES[@]}"; do

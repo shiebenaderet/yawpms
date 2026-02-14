@@ -17,6 +17,9 @@ declare -A IMAGES=(
   ["seneca-falls.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/Woman%27s_Rights_Convention.jpg?width=640"
   ["sojourner-truth.jpg"]="https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/Sojourner_truth_c1870.jpg/440px-Sojourner_truth_c1870.jpg"
   ["dorothea-dix.jpg"]="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Dorothea_Lynde_Dix.jpg/440px-Dorothea_Lynde_Dix.jpg"
+
+  # Maps
+  ["underground-railroad-map.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/Undergroundrailroadsmall2.jpg?width=800"
 )
 
 for local in "${!IMAGES[@]}"; do

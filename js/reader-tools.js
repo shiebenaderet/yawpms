@@ -1,6 +1,6 @@
 /* ============================================================
    American Yawp MS — Reader Tools
-   Highlighting, Notes, TTS, Font Controls, Line Focus
+   Highlighting, Notes, Font Controls, Line Focus
    ============================================================ */
 
 (function() {
@@ -152,57 +152,6 @@
     if (theme === 'contrast') document.body.classList.add('high-contrast');
     if (theme === 'sepia') document.body.classList.add('sepia');
     if (theme === 'dark') document.body.classList.add('dark-mode');
-  }
-
-  // ==========================================
-  // Text-to-Speech
-  // ==========================================
-  var ttsUtterance = null;
-  var ttsBtn = null;
-
-  function initTTS() {
-    ttsBtn = document.querySelector('[data-tts]');
-    if (!ttsBtn || !window.speechSynthesis) return;
-
-    ttsBtn.addEventListener('click', function() {
-      if (speechSynthesis.speaking) {
-        speechSynthesis.cancel();
-        ttsBtn.textContent = 'Read Aloud';
-        ttsBtn.classList.remove('active');
-        return;
-      }
-
-      var sel = window.getSelection();
-      var text = '';
-      if (sel && sel.toString().trim().length > 0) {
-        text = sel.toString();
-      } else {
-        // Read the current section in view
-        var sections = document.querySelectorAll('section, .overview');
-        var bestSection = null;
-        var bestDist = Infinity;
-        var viewMid = window.scrollY + window.innerHeight / 2;
-        sections.forEach(function(s) {
-          var rect = s.getBoundingClientRect();
-          var elMid = window.scrollY + rect.top + rect.height / 2;
-          var dist = Math.abs(elMid - viewMid);
-          if (dist < bestDist) { bestDist = dist; bestSection = s; }
-        });
-        if (bestSection) text = bestSection.textContent;
-      }
-
-      if (!text.trim()) return;
-
-      ttsUtterance = new SpeechSynthesisUtterance(text.slice(0, 5000));
-      ttsUtterance.rate = 0.9;
-      ttsUtterance.onend = function() {
-        ttsBtn.textContent = 'Read Aloud';
-        ttsBtn.classList.remove('active');
-      };
-      speechSynthesis.speak(ttsUtterance);
-      ttsBtn.textContent = 'Stop Reading';
-      ttsBtn.classList.add('active');
-    });
   }
 
   // ==========================================
@@ -685,7 +634,6 @@
     initSpacing();
     initDyslexiaFont();
     initTheme();
-    initTTS();
     initLineFocus();
     initHighlighting();
     initNotes();

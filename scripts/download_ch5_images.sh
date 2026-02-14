@@ -17,6 +17,9 @@ declare -A IMAGES=(
   ["declaration-of-independence.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/Declaration_of_Independence_%281819%29%2C_by_John_Trumbull.jpg?width=640"
   ["surrender-cornwallis.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/Surrender_of_Lord_Cornwallis.jpg?width=640"
   ["yorktown-soldiers.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/Soldats_de_l%27Arm%C3%A9e_Continentale_%C3%A0_Yorktown.jpg?width=640"
+
+  # Maps
+  ["revolution-battles-map.png"]="https://commons.wikimedia.org/wiki/Special:FilePath/American_Revolutionary_War_battles_map.svg?width=600"
 )
 
 for local in "${!IMAGES[@]}"; do

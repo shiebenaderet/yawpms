@@ -18,6 +18,10 @@ declare -A IMAGES=(
   # Using the Robert Ottokar Lindneux painting via fair-use is not possible on Commons.
   # This URL points to a public-domain map of the Trail of Tears route as a fallback.
   ["trail-of-tears.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/Trails_of_Tears_en.png?width=640"
+
+  # Maps
+  ["trail-of-tears-map.png"]="https://commons.wikimedia.org/wiki/Special:FilePath/Trails_of_Tears_en.png?width=800"
+  ["indian-cessions-map.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/Indiancessions.jpg?width=800"
 )
 
 for local in "${!IMAGES[@]}"; do

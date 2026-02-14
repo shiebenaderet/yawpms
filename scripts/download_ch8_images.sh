@@ -16,6 +16,10 @@ declare -A IMAGES=(
   ["first-locomotive.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/The_First_Locomotive._Aug._8th%2C_1829._Horatio_Allen%2C_engineer_LCCN2003680013.jpg?width=640"
   ["lowell-mills.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/Lowell_Massachusetts_Merrimack_Mills.jpg?width=640"
   ["south-street-nyc.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/William_James_Bennett_-_View_of_South_Street%2C_from_Maiden_Lane%2C_New_York_City_-_Google_Art_Project.jpg?width=640"
+
+  # Maps
+  ["erie-canal-map.png"]="https://commons.wikimedia.org/wiki/Special:FilePath/Erie_Canal_map.png?width=800"
+  ["railroads-1860-map.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/Railroad_map_of_the_United_States_1861.jpg?width=800"
 )
 
 for local in "${!IMAGES[@]}"; do

@@ -16,6 +16,9 @@ declare -A IMAGES=(
   ["mayflower-compact.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/The_Mayflower_Compact_1620_cph.3g07155.jpg?width=640"
   ["slave-ship-brookes.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/Slaveshipposter.jpg?width=640"
   ["old-plantation.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/The_Old_Plantation.jpg?width=640"
+
+  # Maps
+  ["thirteen-colonies-map.png"]="https://commons.wikimedia.org/wiki/Special:FilePath/Thirteen_Colonies_1775.svg?width=600"
 )
 
 for local in "${!IMAGES[@]}"; do
