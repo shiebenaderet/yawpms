@@ -1383,8 +1383,26 @@
   }
 
   // ==========================================
-  // Command palette: Cmd+K / Ctrl+K — search chapter (and / for book hint)
+  // Command palette: Cmd+K / Ctrl+K — search chapter (and / for book)
   // ==========================================
+  var CHAPTERS = [
+    { num: 1, title: 'Indigenous America', href: 'ch1.html' },
+    { num: 2, title: 'Colliding Cultures', href: 'ch2.html' },
+    { num: 3, title: 'British North America', href: 'ch3.html' },
+    { num: 4, title: 'Colonial Society', href: 'ch4.html' },
+    { num: 5, title: 'The American Revolution', href: 'ch5.html' },
+    { num: 6, title: 'A New Nation', href: 'ch6.html' },
+    { num: 7, title: 'The Early Republic', href: 'ch7.html' },
+    { num: 8, title: 'The Market Revolution', href: 'ch8.html' },
+    { num: 9, title: 'Democracy in America', href: 'ch9.html' },
+    { num: 10, title: 'Religion and Reform', href: 'ch10.html' },
+    { num: 11, title: 'The Cotton Revolution', href: 'ch11.html' },
+    { num: 12, title: 'Manifest Destiny', href: 'ch12.html' },
+    { num: 13, title: 'The Sectional Crisis', href: 'ch13.html' },
+    { num: 14, title: 'The Civil War', href: 'ch14.html' },
+    { num: 15, title: 'Reconstruction', href: 'ch15.html' }
+  ];
+
   function getChapterSearchHits(q, container) {
     if (!container) return [];
     q = (q || '').trim().toLowerCase();
@@ -1403,6 +1421,62 @@
       if (hits.length >= 15) return;
     });
     return hits;
+  }
+
+  function getBookSearchHits(searchQ, onProgress) {
+    var maxHits = 25;
+    var hitsPerChapter = 3;
+    var collected = [];
+    var q = searchQ.trim().toLowerCase();
+    if (q.length < 2) return Promise.resolve([]);
+
+    function fetchChapter(ch) {
+      return fetch(ch.href).then(function(r) { return r.text(); }).then(function(html) {
+        var parser = new DOMParser();
+        var doc = parser.parseFromString(html, 'text/html');
+        var container = doc.querySelector('.container');
+        if (!container) return [];
+        var blocks = container.querySelectorAll('section, .overview');
+        var chapterHits = [];
+        blocks.forEach(function(block) {
+          var text = block.textContent;
+          var pos = text.toLowerCase().indexOf(q);
+          if (pos === -1) return;
+          var start = Math.max(0, pos - 30);
+          var end = Math.min(text.length, pos + q.length + 60);
+          var snippet = (start > 0 ? '\u2026' : '') + text.slice(start, end).replace(/\s+/g, ' ') + (end < text.length ? '\u2026' : '');
+          var h2 = block.querySelector('h2');
+          var sectionTitle = h2 ? h2.textContent : (block.classList.contains('overview') ? 'Chapter Overview' : 'Section');
+          var sectionId = block.id || (h2 && h2.id) || '';
+          chapterHits.push({
+            chapterNum: ch.num,
+            chapterTitle: ch.title,
+            href: ch.href + (sectionId ? '#' + sectionId : ''),
+            sectionTitle: sectionTitle,
+            snippet: snippet
+          });
+          if (chapterHits.length >= hitsPerChapter) return;
+        });
+        return chapterHits;
+      }).catch(function() { return []; });
+    }
+
+    var index = 0;
+    function next() {
+      if (collected.length >= maxHits || index >= CHAPTERS.length) {
+        return Promise.resolve(collected.slice(0, maxHits));
+      }
+      var ch = CHAPTERS[index++];
+      if (onProgress) onProgress('Searching Ch. ' + ch.num + '\u2026');
+      return fetchChapter(ch).then(function(chapterHits) {
+        collected = collected.concat(chapterHits);
+        if (index >= CHAPTERS.length || collected.length >= maxHits) {
+          return collected.slice(0, maxHits);
+        }
+        return next();
+      });
+    }
+    return next();
   }
 
   function initCommandPalette() {
@@ -1442,11 +1516,36 @@
       var isBookSearch = q.indexOf('/') === 0;
       var searchQ = isBookSearch ? q.slice(1).trim() : q;
       resultsEl.innerHTML = '';
-      if (isBookSearch && searchQ.length >= 2) {
-        resultsEl.innerHTML = '<div class="reader-search-empty">Whole-book search coming soon. Search this chapter above.</div>';
+      if (searchQ.length < 2) return;
+
+      if (isBookSearch) {
+        resultsEl.innerHTML = '<div class="reader-search-empty reader-search-status">Searching book\u2026</div>';
+        getBookSearchHits(searchQ, function(msg) {
+          var status = resultsEl.querySelector('.reader-search-status');
+          if (status) status.textContent = msg;
+        }).then(function(hits) {
+          resultsEl.innerHTML = '';
+          if (hits.length === 0) {
+            resultsEl.innerHTML = '<div class="reader-search-empty">No matches in the book.</div>';
+            return;
+          }
+          hits.forEach(function(h) {
+            var item = document.createElement('button');
+            item.type = 'button';
+            item.className = 'reader-search-hit reader-search-hit-book';
+            item.innerHTML = '<span class="reader-search-hit-title">Ch. ' + h.chapterNum + ': ' + escapeHtml(h.chapterTitle) + ' \u2014 ' + escapeHtml(h.sectionTitle) + '</span><span class="reader-search-hit-snippet">' + escapeHtml(h.snippet) + '</span>';
+            item.addEventListener('click', function() {
+              location.href = h.href;
+              close();
+            });
+            resultsEl.appendChild(item);
+          });
+        }).catch(function() {
+          resultsEl.innerHTML = '<div class="reader-search-empty">Search error. Try again.</div>';
+        });
         return;
       }
-      if (searchQ.length < 2) return;
+
       var hits = getChapterSearchHits(searchQ, container);
       if (hits.length === 0) {
         resultsEl.innerHTML = '<div class="reader-search-empty">No matches in this chapter.</div>';
