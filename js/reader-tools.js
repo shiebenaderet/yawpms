@@ -210,12 +210,44 @@
     return chunks;
   }
 
+  function normalizeForMatch(str) {
+    return str.replace(/\s+/g, ' ').trim().toLowerCase();
+  }
+
+  function findBlockContainingText(container, chunkText) {
+    if (!container || !chunkText) return null;
+    var needle = normalizeForMatch(chunkText).slice(0, 80);
+    var blocks = container.querySelectorAll('section, .overview');
+    for (var i = 0; i < blocks.length; i++) {
+      var blockNorm = normalizeForMatch(blocks[i].textContent);
+      if (blockNorm.indexOf(needle) !== -1) return blocks[i];
+    }
+    return null;
+  }
+
+  function clearTTSReadingHighlight() {
+    document.querySelectorAll('.tts-reading').forEach(function(el) { el.classList.remove('tts-reading'); });
+    document.querySelectorAll('.tts-reading-sentence').forEach(function(el) { el.classList.remove('tts-reading-sentence'); });
+  }
+
+  function highlightBlockForChunk(chunkText) {
+    clearTTSReadingHighlight();
+    var container = document.querySelector('.container');
+    var block = findBlockContainingText(container, chunkText);
+    if (block) {
+      block.classList.add('tts-reading');
+      block.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+  }
+
   function speakChunkQueue(chunks, index) {
     if (index >= chunks.length) {
+      clearTTSReadingHighlight();
       ttsBtn.textContent = 'Read Aloud';
       ttsBtn.classList.remove('active');
       return;
     }
+    highlightBlockForChunk(chunks[index]);
     var u = new SpeechSynthesisUtterance(chunks[index]);
     u.rate = getTTSRate();
     var voice = getTTSVoice();
@@ -254,10 +286,13 @@
     injectTTSSpeedControls();
     injectTTSVoicePicker();
     injectTTSScopePicker();
+    setTimeout(injectKokoroToggle, 100);
 
     ttsBtn.addEventListener('click', function() {
-      if (speechSynthesis.speaking) {
+      if (speechSynthesis.speaking || (window.yawpKokoroTTS && window.yawpKokoroTTS.isPlaying && window.yawpKokoroTTS.isPlaying())) {
         speechSynthesis.cancel();
+        if (window.yawpKokoroTTS && window.yawpKokoroTTS.stop) window.yawpKokoroTTS.stop();
+        clearTTSReadingHighlight();
         ttsBtn.textContent = 'Read Aloud';
         ttsBtn.classList.remove('active');
         return;
@@ -266,11 +301,50 @@
       var text = getTextForTTS();
       if (!text.trim()) return;
 
+      var useKokoro = localStorage.getItem('yawp_tts_kokoro') === 'true';
+      if (useKokoro && window.yawpKokoroTTS) {
+        var startKokoro = function() {
+          ttsBtn.textContent = 'Stop Reading';
+          ttsBtn.classList.add('active');
+          window.yawpKokoroTTS.speak(text, {
+            rate: getTTSRate(),
+            onSentence: function(sentence) { highlightSentenceInPage(sentence); },
+            onEnd: function() {
+              clearTTSReadingHighlight();
+              ttsBtn.textContent = 'Read Aloud';
+              ttsBtn.classList.remove('active');
+            }
+          });
+        };
+        if (window.yawpKokoroTTS.isReady && window.yawpKokoroTTS.isReady()) {
+          startKokoro();
+          return;
+        }
+        if (window.yawpKokoroTTS.load) {
+          ttsBtn.textContent = 'Loading…';
+          window.yawpKokoroTTS.load().then(startKokoro).catch(function() {
+            ttsBtn.textContent = 'Read Aloud';
+            speakChunkQueue(chunkTextForTTS(text), 0);
+          });
+          return;
+        }
+      }
+
       var chunks = chunkTextForTTS(text);
       ttsBtn.textContent = 'Stop Reading';
       ttsBtn.classList.add('active');
       speakChunkQueue(chunks, 0);
     });
+  }
+
+  function highlightSentenceInPage(sentence) {
+    clearTTSReadingHighlight();
+    var container = document.querySelector('.container');
+    var block = container ? findBlockContainingText(container, sentence) : null;
+    if (block) {
+      block.classList.add('tts-reading');
+      block.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
   }
 
   function injectTTSSpeedControls() {
@@ -339,6 +413,41 @@
     });
     wrap.appendChild(label);
     wrap.appendChild(sel);
+  }
+
+  function injectKokoroToggle() {
+    var section = document.querySelector('.reader-tts-speed');
+    if (!section || section.closest('.reader-section').querySelector('.reader-tts-kokoro')) return;
+    var wrap = section.closest('.reader-section');
+    var useKokoro = localStorage.getItem('yawp_tts_kokoro') === 'true';
+    var label = document.createElement('label');
+    label.textContent = 'Engine';
+    var row = document.createElement('div');
+    row.className = 'reader-tts-kokoro reader-btn-row';
+    var browserBtn = document.createElement('button');
+    browserBtn.type = 'button';
+    browserBtn.className = 'reader-btn' + (!useKokoro ? ' active' : '');
+    browserBtn.textContent = 'Browser';
+    var kokoroBtn = document.createElement('button');
+    kokoroBtn.type = 'button';
+    kokoroBtn.className = 'reader-btn' + (useKokoro ? ' active' : '');
+    kokoroBtn.textContent = 'Kokoro';
+    kokoroBtn.title = 'Higher-quality voice (loads once, runs in browser)';
+    browserBtn.addEventListener('click', function() {
+      localStorage.setItem('yawp_tts_kokoro', 'false');
+      row.querySelectorAll('.reader-btn').forEach(function(b) { b.classList.remove('active'); });
+      browserBtn.classList.add('active');
+    });
+    kokoroBtn.addEventListener('click', function() {
+      localStorage.setItem('yawp_tts_kokoro', 'true');
+      row.querySelectorAll('.reader-btn').forEach(function(b) { b.classList.remove('active'); });
+      kokoroBtn.classList.add('active');
+      if (window.yawpKokoroTTS && !window.yawpKokoroTTS.isReady()) window.yawpKokoroTTS.load();
+    });
+    row.appendChild(browserBtn);
+    row.appendChild(kokoroBtn);
+    wrap.appendChild(label);
+    wrap.appendChild(row);
   }
 
   function injectTTSScopePicker() {

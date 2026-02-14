@@ -574,6 +574,22 @@ footer a:hover { border-bottom-style: solid; }
   margin: 4px 0;
 }
 
+/* ---- TTS follow-along: highlight block being read ---- */
+section.tts-reading,
+.overview.tts-reading {
+  background: rgba(42, 127, 142, 0.12);
+  border-left: 4px solid var(--teal);
+  margin-left: -4px;
+  padding-left: 4px;
+  border-radius: 0 8px 8px 0;
+  transition: background 0.25s ease;
+}
+body.dark-mode section.tts-reading,
+body.dark-mode .overview.tts-reading {
+  background: rgba(77, 208, 200, 0.15);
+  border-left-color: #4dd0c8;
+}
+
 /* ---- Line Focus Overlay ---- */
 
 .line-focus-overlay {
