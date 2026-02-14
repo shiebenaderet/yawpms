@@ -14,7 +14,7 @@ echo ""
 
 FAIL_COUNT=0
 
-for ch in 1 2 3 4 5 7 8 9 10 11 12 13 14 15; do
+for ch in 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15; do
   script="$SCRIPT_DIR/download_ch${ch}_images.sh"
   if [ -f "$script" ]; then
     echo "--- Chapter $ch ---"
@@ -34,4 +34,4 @@ else
 fi
 echo "============================================"
 echo ""
-echo "Note: Chapter 6 images are already committed to the repository."
+echo "For maps (Beringia, 13 colonies, triangular trade, Yorktown map, US 1789, Louisiana Purchase, canals, Trail of Tears map, UGRR, Civil War, Reconstruction districts), also run: bash scripts/download_all_maps.sh"

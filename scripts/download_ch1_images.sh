@@ -16,6 +16,7 @@ declare -A IMAGES=(
   ["mesa-verde.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/Cliff_Palace_Mesa_Verde_National_Park_Colorado_USA.JPG?width=640"
   ["tenochtitlan.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/The_Great_Tenochtitlan_full_view.JPG?width=640"
   ["casta-painting.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/Casta_painting_all.jpg?width=640"
+  ["crooked-beak-mask.jpg"]="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Crooked_Beak_of_Heaven_Mask.jpg/640px-Crooked_Beak_of_Heaven_Mask.jpg"
 )
 
 for local in "${!IMAGES[@]}"; do
