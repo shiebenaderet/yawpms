@@ -63,6 +63,36 @@
   // ==========================================
   // Font Size Control
   // ==========================================
+  // ==========================================
+  // Font Family (Serif / Sans) — Foliate-style
+  // ==========================================
+  function initFontFamily() {
+    var panel = document.querySelector('.reader-panel');
+    if (!panel || panel.querySelector('.reader-font-family')) return;
+    var saved = localStorage.getItem('yawp_font_family') || 'serif';
+    if (saved === 'sans') document.body.classList.add('font-sans');
+
+    var wrap = document.createElement('div');
+    wrap.className = 'reader-section reader-font-family';
+    wrap.innerHTML = '<label>Font</label><div class="reader-btn-row"></div>';
+    var row = wrap.querySelector('.reader-btn-row');
+    ['serif', 'sans'].forEach(function(f) {
+      var btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'reader-btn' + (saved === f ? ' active' : '');
+      btn.textContent = f === 'serif' ? 'Serif' : 'Sans';
+      btn.setAttribute('data-font-family', f);
+      btn.addEventListener('click', function() {
+        document.body.classList.toggle('font-sans', f === 'sans');
+        localStorage.setItem('yawp_font_family', f);
+        row.querySelectorAll('[data-font-family]').forEach(function(b) { b.classList.remove('active'); });
+        btn.classList.add('active');
+      });
+      row.appendChild(btn);
+    });
+    panel.insertBefore(wrap, panel.querySelector('.reader-section'));
+  }
+
   function initFontSize() {
     var btns = document.querySelectorAll('[data-font-size]');
     var saved = localStorage.getItem('yawp_fontSize') || 'normal';
@@ -966,13 +996,14 @@
                 html += '<div class="dict-def">' + escapeHtml(d.definition) + '</div>';
               });
             });
+            html += '<a class="dict-wiki-link" href="https://en.wikipedia.org/wiki/Special:Search?search=' + encodeURIComponent(entry.word) + '" target="_blank" rel="noopener">Look up on Wikipedia \u2197</a>';
             popup.innerHTML = html;
           } else {
-            popup.innerHTML = '<div class="dict-error">No definition found for \u201c' + escapeHtml(word) + '\u201d</div>';
+            popup.innerHTML = '<div class="dict-error">No definition found for \u201c' + escapeHtml(word) + '\u201d</div><a class="dict-wiki-link" href="https://en.wikipedia.org/wiki/Special:Search?search=' + encodeURIComponent(word) + '" target="_blank" rel="noopener">Look up on Wikipedia \u2197</a>';
           }
         })
         .catch(function() {
-          popup.innerHTML = '<div class="dict-error">Could not look up this word. Check your connection.</div>';
+          popup.innerHTML = '<div class="dict-error">Could not look up this word.</div><a class="dict-wiki-link" href="https://en.wikipedia.org/wiki/Special:Search?search=' + encodeURIComponent(word) + '" target="_blank" rel="noopener">Look up on Wikipedia \u2197</a>';
         });
     });
 
@@ -1009,6 +1040,243 @@
     el.textContent = 'About ' + mins + ' min read';
     var h4 = panel.querySelector('h4');
     panel.insertBefore(el, h4 ? h4.nextElementSibling : null);
+  }
+
+  // ==========================================
+  // Scroll / Page View Mode (Foliate-style)
+  // ==========================================
+  function initReadingMode() {
+    var panel = document.querySelector('.reader-panel');
+    if (!panel || panel.querySelector('.reader-reading-mode')) return;
+    var container = document.querySelector('.container');
+    if (!container) return;
+    var blocks = [];
+    var overview = document.querySelector('.overview');
+    if (overview) blocks.push(overview);
+    document.querySelectorAll('.container > section').forEach(function(s) { blocks.push(s); });
+    if (blocks.length === 0) return;
+
+    var saved = localStorage.getItem('yawp_reading_mode') || 'scroll';
+    var pageIndex = Math.min(parseInt(localStorage.getItem('yawp_page_index_' + pageKey) || '0', 10), blocks.length - 1);
+    var wrap = document.createElement('div');
+    wrap.className = 'reader-section reader-reading-mode';
+    wrap.innerHTML = '<label>Reading mode</label><div class="reader-btn-row"></div>';
+    var row = wrap.querySelector('.reader-btn-row');
+    var scrollBtn = document.createElement('button');
+    scrollBtn.type = 'button';
+    scrollBtn.className = 'reader-btn' + (saved === 'scroll' ? ' active' : '');
+    scrollBtn.textContent = 'Scroll';
+    scrollBtn.setAttribute('data-reading-mode', 'scroll');
+    var pageBtn = document.createElement('button');
+    pageBtn.type = 'button';
+    pageBtn.className = 'reader-btn' + (saved === 'page' ? ' active' : '');
+    pageBtn.textContent = 'Page';
+    pageBtn.setAttribute('data-reading-mode', 'page');
+
+    function applyMode(mode) {
+      var isPage = mode === 'page';
+      document.body.classList.toggle('reading-mode-page', isPage);
+      if (isPage) {
+        blocks.forEach(function(b, i) { b.style.display = i === pageIndex ? 'block' : 'none'; });
+        var bar = document.querySelector('.reader-page-nav');
+        if (bar) bar.style.display = 'flex';
+        updatePageNav();
+      } else {
+        blocks.forEach(function(b) { b.style.display = ''; });
+        var bar = document.querySelector('.reader-page-nav');
+        if (bar) bar.style.display = 'none';
+      }
+    }
+    function updatePageNav() {
+      var prev = document.querySelector('.reader-page-prev');
+      var next = document.querySelector('.reader-page-next');
+      var label = document.querySelector('.reader-page-label');
+      if (prev) prev.disabled = pageIndex <= 0;
+      if (next) next.disabled = pageIndex >= blocks.length - 1;
+      if (label) label.textContent = (pageIndex + 1) + ' / ' + blocks.length;
+    }
+
+    scrollBtn.addEventListener('click', function() {
+      saved = 'scroll';
+      localStorage.setItem('yawp_reading_mode', 'scroll');
+      row.querySelectorAll('[data-reading-mode]').forEach(function(b) { b.classList.remove('active'); });
+      scrollBtn.classList.add('active');
+      applyMode('scroll');
+    });
+    pageBtn.addEventListener('click', function() {
+      saved = 'page';
+      localStorage.setItem('yawp_reading_mode', 'page');
+      row.querySelectorAll('[data-reading-mode]').forEach(function(b) { b.classList.remove('active'); });
+      pageBtn.classList.add('active');
+      applyMode('page');
+    });
+    row.appendChild(scrollBtn);
+    row.appendChild(pageBtn);
+    panel.insertBefore(wrap, panel.querySelector('.reader-reading-time'));
+
+    var navBar = document.createElement('div');
+    navBar.className = 'reader-page-nav';
+    navBar.style.display = 'none';
+    navBar.innerHTML = '<button type="button" class="reader-page-prev" aria-label="Previous page">&larr;</button><span class="reader-page-label"></span><button type="button" class="reader-page-next" aria-label="Next page">&rarr;</button>';
+    var prevBtn = navBar.querySelector('.reader-page-prev');
+    var nextBtn = navBar.querySelector('.reader-page-next');
+    prevBtn.addEventListener('click', function() {
+      if (pageIndex <= 0) return;
+      pageIndex--;
+      localStorage.setItem('yawp_page_index_' + pageKey, String(pageIndex));
+      blocks.forEach(function(b, i) { b.style.display = i === pageIndex ? 'block' : 'none'; });
+      updatePageNav();
+    });
+    nextBtn.addEventListener('click', function() {
+      if (pageIndex >= blocks.length - 1) return;
+      pageIndex++;
+      localStorage.setItem('yawp_page_index_' + pageKey, String(pageIndex));
+      blocks.forEach(function(b, i) { b.style.display = i === pageIndex ? 'block' : 'none'; });
+      updatePageNav();
+    });
+    document.body.appendChild(navBar);
+    if (saved === 'page') applyMode('page');
+  }
+
+  // ==========================================
+  // Full-Text Search (current chapter)
+  // ==========================================
+  function initSearch() {
+    var panel = document.querySelector('.reader-panel');
+    if (!panel || panel.querySelector('.reader-search-wrap')) return;
+    var container = document.querySelector('.container');
+    if (!container) return;
+
+    var wrap = document.createElement('div');
+    wrap.className = 'reader-section reader-search-wrap';
+    wrap.innerHTML = '<label>Search in this chapter</label><input type="search" class="reader-search-input" placeholder="Search..." aria-label="Search text"><div class="reader-search-results"></div>';
+    var input = wrap.querySelector('.reader-search-input');
+    var resultsEl = wrap.querySelector('.reader-search-results');
+    var searchTimer = null;
+
+    function runSearch(q) {
+      q = (q || '').trim().toLowerCase();
+      resultsEl.innerHTML = '';
+      if (q.length < 2) return;
+      var blocks = container.querySelectorAll('section, .overview');
+      var hits = [];
+      blocks.forEach(function(block) {
+        var text = block.textContent;
+        var pos = text.toLowerCase().indexOf(q);
+        if (pos === -1) return;
+        var start = Math.max(0, pos - 30);
+        var end = Math.min(text.length, pos + q.length + 60);
+        var snippet = (start > 0 ? '\u2026' : '') + text.slice(start, end).replace(/\s+/g, ' ') + (end < text.length ? '\u2026' : '');
+        var h2 = block.querySelector('h2');
+        hits.push({ block: block, snippet: snippet, title: h2 ? h2.textContent : (block.classList.contains('overview') ? 'Chapter Overview' : 'Section') });
+        if (hits.length >= 12) return;
+      });
+      if (hits.length === 0) {
+        resultsEl.innerHTML = '<div class="reader-search-empty">No matches found.</div>';
+        return;
+      }
+      hits.forEach(function(h) {
+        var item = document.createElement('button');
+        item.type = 'button';
+        item.className = 'reader-search-hit';
+        item.innerHTML = '<span class="reader-search-hit-title">' + escapeHtml(h.title) + '</span><span class="reader-search-hit-snippet">' + escapeHtml(h.snippet) + '</span>';
+        item.addEventListener('click', function() {
+          h.block.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          resultsEl.innerHTML = '';
+          input.value = '';
+        });
+        resultsEl.appendChild(item);
+      });
+    }
+
+    input.addEventListener('input', function() {
+      clearTimeout(searchTimer);
+      searchTimer = setTimeout(function() { runSearch(input.value); }, 200);
+    });
+    input.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') { resultsEl.innerHTML = ''; input.value = ''; input.blur(); }
+    });
+    panel.insertBefore(wrap, panel.querySelector('.reader-reading-time'));
+  }
+
+  // ==========================================
+  // Bookmarks (Foliate-style)
+  // ==========================================
+  function initBookmarks() {
+    var panel = document.querySelector('.reader-panel');
+    if (!panel || panel.querySelector('.reader-bookmarks-wrap')) return;
+    var container = document.querySelector('.container');
+    if (!container) return;
+    var blocks = [];
+    var overview = document.querySelector('.overview');
+    if (overview) blocks.push(overview);
+    document.querySelectorAll('.container > section').forEach(function(s) { blocks.push(s); });
+    if (blocks.length === 0) return;
+
+    var storageKey = 'yawp_bookmarks_' + pageKey;
+    var bookmarks = [];
+    try {
+      var saved = localStorage.getItem(storageKey);
+      if (saved) bookmarks = JSON.parse(saved);
+    } catch (e) {}
+
+    function saveBookmarks() {
+      localStorage.setItem(storageKey, JSON.stringify(bookmarks));
+      renderBookmarks();
+    }
+    function getCurrentBlockIndex() {
+      var scrollMid = window.scrollY + window.innerHeight / 2;
+      for (var i = 0; i < blocks.length; i++) {
+        var rect = blocks[i].getBoundingClientRect();
+        var top = rect.top + window.scrollY;
+        if (scrollMid >= top && scrollMid <= top + rect.height) return i;
+      }
+      return 0;
+    }
+    function renderBookmarks() {
+      var list = wrap.querySelector('.reader-bookmarks-list');
+      list.innerHTML = '';
+      if (bookmarks.length === 0) {
+        list.innerHTML = '<div class="reader-bookmarks-empty">No bookmarks. Click "Add bookmark" when reading.</div>';
+        return;
+      }
+      bookmarks.forEach(function(bm, idx) {
+        var item = document.createElement('button');
+        item.type = 'button';
+        item.className = 'reader-bookmark-item';
+        item.textContent = bm.label;
+        item.addEventListener('click', function() {
+          var el = blocks[bm.index];
+          if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
+        var del = document.createElement('button');
+        del.type = 'button';
+        del.className = 'reader-bookmark-remove';
+        del.textContent = '\u00D7';
+        del.setAttribute('aria-label', 'Remove bookmark');
+        del.addEventListener('click', function(e) {
+          e.stopPropagation();
+          bookmarks.splice(idx, 1);
+          saveBookmarks();
+        });
+        item.appendChild(del);
+        list.appendChild(item);
+      });
+    }
+
+    var wrap = document.createElement('div');
+    wrap.className = 'reader-section reader-bookmarks-wrap';
+    wrap.innerHTML = '<label>Bookmarks</label><div class="reader-btn-row"><button type="button" class="reader-btn reader-add-bookmark">Add bookmark</button></div><div class="reader-bookmarks-list"></div>';
+    wrap.querySelector('.reader-add-bookmark').addEventListener('click', function() {
+      var idx = getCurrentBlockIndex();
+      var block = blocks[idx];
+      var h2 = block ? block.querySelector('h2') : null;
+      var label = h2 ? h2.textContent : (block && block.classList.contains('overview') ? 'Chapter Overview' : 'Section ' + (idx + 1));
+      bookmarks.push({ index: idx, label: label });
+      saveBookmarks();
+    });
+    renderBookmarks();
+    panel.appendChild(wrap);
   }
 
   // ==========================================
@@ -1196,20 +1464,26 @@
     initBackToTop();
     initReaderPanel();
     initReadingTime();
+    initReadingMode();
+    initSearch();
+    initBookmarks();
     initReadingWidth();
     initSectionJump();
+    initFontFamily();
     initFontSize();
     initSpacing();
     initDyslexiaFont();
     initTheme();
-    initTTS();
+    // TTS disabled for now (was not working reliably)
+    // initTTS();
     initLineFocus();
     initHighlighting();
     initNotes();
     initPDFBuilder();
     initGlossary();
     initDictionary();
-    setTimeout(initReaderPanelTree, 100);
+    // Icon-tree panel disabled — flat layout with improved spacing instead
+    // setTimeout(initReaderPanelTree, 100);
   }
 
   if (document.readyState === 'loading') {
