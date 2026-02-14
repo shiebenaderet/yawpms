@@ -17,7 +17,7 @@ declare -A IMAGES=(
   ["common-sense.jpg"]="https://upload.wikimedia.org/wikipedia/commons/4/4a/Commonsense.jpg"
   ["declaration-of-independence.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/Declaration_of_Independence_%281819%29%2C_by_John_Trumbull.jpg?width=640"
   ["surrender-cornwallis.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/Surrender_of_Lord_Cornwallis.jpg?width=640"
-  ["yorktown-soldiers.jpg"]="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/Soldats_de_l%27Arm%C3%A9e_Continentale_%C3%A0_Yorktown.jpg/640px-Soldats_de_l%27Arm%C3%A9e_Continentale_%C3%A0_Yorktown.jpg"
+  ["yorktown-soldiers.gif"]="https://upload.wikimedia.org/wikipedia/commons/f/ff/Soldiers_of_the_Continental_Army.gif"
 )
 
 MIN_SIZE=5000

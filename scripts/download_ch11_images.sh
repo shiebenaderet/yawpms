@@ -15,7 +15,7 @@ echo "Downloading Chapter 11 images to $IMG_DIR ..."
 declare -A IMAGES=(
   ["cotton-gin.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/Eli_Whitney%27s_Cotton_Gin_Patent_Drawing%2C_03-14-1794%2C_Page_1_%285476286235%29.jpg?width=640"
   ["slave-family.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/Family_of_slaves_at_the_Gaines%27_house_LCCN96511694.jpg?width=640"
-  ["slave-auction.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/Sale_of_estates%2C_pictures_and_slaves_in_the_rotunda%2C_New_Orleans.jpg?width=640"
+  ["slave-auction.jpg"]="https://images.nypl.org/index.php?id=413059&t=w"
   ["slave-population-map.jpg"]="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/SlavePopulationUS1860.jpg/960px-SlavePopulationUS1860.jpg"
 )
 

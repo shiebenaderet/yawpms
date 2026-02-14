@@ -15,8 +15,8 @@ echo "Downloading Chapter 8 images to $IMG_DIR ..."
 declare -A IMAGES=(
   ["erie-canal.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/Erie_Canal.jpg?width=640"
   ["first-locomotive.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/The_First_locomotive._Aug._8th%2C_1829._Trial_trip_of_the_%22Stourbridge_Lion%22_LCCN93517692.jpg?width=640"
-  ["lowell-mills.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/Lowell_Massachusetts_Merrimack_Mills.jpg?width=640"
-  ["south-street-nyc.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/William_James_Bennett_-_View_of_South_Street%2C_from_Maiden_Lane%2C_New_York_City_-_Google_Art_Project.jpg?width=640"
+  ["lowell-mills.jpg"]="https://tile.loc.gov/storage-services/service/pnp/det/4a10000/4a10100/4a10114r.jpg"
+  ["south-street-nyc.jpg"]="https://upload.wikimedia.org/wikipedia/commons/thumb/b/ba/South_Street_from_Maiden_Lane%2C_New_York%2C_in_1828_MET_DP875875.jpg/640px-South_Street_from_Maiden_Lane%2C_New_York%2C_in_1828_MET_DP875875.jpg"
 )
 
 MIN_SIZE=5000

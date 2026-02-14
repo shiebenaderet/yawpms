@@ -17,7 +17,7 @@ declare -A IMAGES=(
   ["freedmens-bureau.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/The_Freedmen%27s_Bureau_-_Drawn_by_A.R._Waud._LCCN92514996.jpg?width=640"
   ["kkk-cartoon.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/Worse_than_Slavery_%281874%29%2C_by_Thomas_Nast.jpg?width=640"
   ["fifteenth-amendment.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/15th-amendment-celebration-1870.jpg?width=640"
-  ["contrabands.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/Cumberland_Landing%2C_Va._Group_of_%22contrabands%22_at_Foller%27s_house_LOC_cwpb.00101.jpg?width=640"
+  ["contrabands.jpg"]="https://cdn.loc.gov/service/pnp/cwpb/01000/01005r.jpg"
 )
 
 MIN_SIZE=5000

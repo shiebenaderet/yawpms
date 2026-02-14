@@ -12,6 +12,7 @@ W="https://commons.wikimedia.org/wiki/Special:FilePath"
 SIZE="?width=960"
 UPLOAD="https://upload.wikimedia.org/wikipedia/commons"
 MIN_SIZE=5000
+FAILED_LIST=()
 
 download() {
   local ch="$1"
@@ -28,12 +29,14 @@ download() {
   echo "  [get]  ch${ch}/${file}"
   if ! curl -sL --fail -A "$CURL_USER_AGENT" "$url" -o "$dest" 2>/dev/null; then
     echo "  [FAIL] ch${ch}/${file} — curl failed"
+    FAILED_LIST+=("Chapter ${ch}:   [FAIL] ${file} — check URL")
     rm -f "$dest"
     return 1
   fi
   size=$(stat -f%z "$dest" 2>/dev/null || stat -c%s "$dest" 2>/dev/null)
   if [ "${size:-0}" -lt "$MIN_SIZE" ]; then
     echo "  [FAIL] ch${ch}/${file} — got ${size:-0} bytes (likely error page)"
+    FAILED_LIST+=("Chapter ${ch}:   [FAIL] ${file} — got ${size:-0} bytes (likely error page)")
     rm -f "$dest"
     return 1
   fi
@@ -88,7 +91,7 @@ download 10 "ugrr-siebert-1898.png" "${W}/%22Underground%22_routes_to_Canada_%28
 
 # Chapter 11 — Cotton Revolution (same URL as download_ch11_images.sh)
 echo "Chapter 11 (Cotton Revolution)"
-download 11 "slave-population-map.jpg" "${W}/Slave_population_map_1860.jpg?width=640"
+download 11 "slave-population-map.jpg" "${UPLOAD}/thumb/5/5e/SlavePopulationUS1860.jpg/960px-SlavePopulationUS1860.jpg"
 
 # Chapter 12 — Manifest Destiny (same URL as download_ch12_images.sh)
 echo "Chapter 12 (Manifest Destiny)"
@@ -108,5 +111,18 @@ echo "Chapter 15 (Reconstruction)"
 download 15 "reconstruction-military-districts.png" "${W}/US_Reconstruction_military_districts.png?width=640"
 
 echo ""
+echo "============================================"
 echo "Done. Maps are in $BASE_DIR/images/ch1/ through ch15/."
-echo "If any [FAIL]: run this script again later (Wikimedia may rate-limit), or run the specific scripts/download_chN_images.sh for that chapter."
+echo "============================================"
+
+if [ ${#FAILED_LIST[@]} -gt 0 ]; then
+  echo ""
+  echo "--------------------------------------------"
+  echo "  Failed maps (for retry or manual check):"
+  echo "--------------------------------------------"
+  printf '  %s\n' "${FAILED_LIST[@]}"
+  echo "--------------------------------------------"
+fi
+
+echo ""
+echo "If any [FAIL]: run this script again later (Wikimedia may rate-limit), or check the URL for that file."
