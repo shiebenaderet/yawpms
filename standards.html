@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Common Core Alignment | American Yawp MS</title>
+<link rel="stylesheet" href="css/pages.css">
+<style>
+/* ---- Standards Alignment styles ---- */
+.standards-intro {
+  background: #F0F4F8;
+  border-left: 5px solid #2A7F8E;
+  padding: 24px 28px;
+  margin: 0 0 32px;
+  border-radius: 0 8px 8px 0;
+}
+.standards-intro h3 { color: #2A7F8E; font-size: 18px; margin-bottom: 8px; }
+.standards-intro p {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 14px;
+  line-height: 1.7;
+  color: #555;
+  margin-bottom: 8px;
+}
+.standards-intro p:last-child { margin-bottom: 0; }
+
+.standard-block {
+  margin: 0 0 28px;
+  padding: 20px 24px;
+  background: white;
+  border: 1px solid #eee;
+  border-radius: 8px;
+  border-left: 4px solid #1B3A5C;
+}
+.standard-block h3 {
+  font-size: 15px;
+  color: #1B3A5C;
+  margin-bottom: 4px;
+}
+.standard-block .standard-code {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #2A7F8E;
+  margin-bottom: 8px;
+}
+.standard-block .standard-text {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+  color: #555;
+  margin-bottom: 12px;
+  padding: 8px 12px;
+  background: #FAFAF8;
+  border-radius: 4px;
+}
+.standard-block .chapter-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 8px;
+}
+.ch-tag {
+  display: inline-block;
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 3px 10px;
+  border-radius: 12px;
+  background: #E3F2FD;
+  color: #1565C0;
+  text-decoration: none;
+  transition: background .2s;
+}
+.ch-tag:hover { background: #BBDEFB; }
+.standard-block .how-to {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 13px;
+  color: #666;
+  line-height: 1.6;
+  padding: 8px 12px;
+  background: #FFF9E6;
+  border-left: 3px solid #C4941D;
+  border-radius: 0 4px 4px 0;
+  margin-top: 8px;
+}
+.standard-block .how-to strong { color: #8B6914; }
+
+/* ---- Alignment matrix table ---- */
+.matrix-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 24px 0 32px;
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 12px;
+}
+.matrix-table th {
+  text-align: center;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .5px;
+  color: #1B3A5C;
+  padding: 8px 4px;
+  border-bottom: 2px solid #1B3A5C;
+  background: #F0F4F8;
+}
+.matrix-table th:first-child {
+  text-align: left;
+  min-width: 120px;
+}
+.matrix-table td {
+  padding: 6px 4px;
+  border-bottom: 1px solid #eee;
+  text-align: center;
+  vertical-align: middle;
+}
+.matrix-table td:first-child {
+  text-align: left;
+  font-weight: 600;
+  color: #1B3A5C;
+  font-size: 11px;
+}
+.matrix-table tr:hover { background: #F8FAFB; }
+.dot {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+}
+.dot-primary { background: #1B3A5C; }
+.dot-secondary { background: #2A7F8E; }
+.dot-light { background: #d0dae4; }
+
+.matrix-legend {
+  display: flex;
+  gap: 20px;
+  margin: 0 0 24px;
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 12px;
+  color: #666;
+}
+.matrix-legend span {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.section-divider {
+  border: none;
+  border-top: 2px solid #E0E0E0;
+  margin: 40px 0;
+}
+
+@media print {
+  .header, .nav-bar, footer { display: none; }
+  .container { max-width: 100%; padding: 12px; }
+  @page { margin: 0.5in; }
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>Standards Alignment</h1>
+  <div class="divider"></div>
+  <p>Common Core ELA/Literacy &mdash; Grades 6&ndash;8</p>
+</div>
+
+<nav class="nav-bar">
+  <a href="index.html">Home</a>
+  <a href="teaching.html">Teaching Materials</a>
+  <a href="cornell-notes.html">Cornell Notes</a>
+  <a href="vocabulary-cards.html">Vocabulary Cards</a>
+  <a href="teachers.html">Teachers Hub</a>
+</nav>
+
+<div class="container">
+
+<div class="standards-intro">
+  <h3>About This Alignment</h3>
+  <p>American Yawp MS is aligned to the <strong>Common Core State Standards for Literacy in History/Social Studies, Grades 6&ndash;8</strong> (RH.6-8) and <strong>Writing in History/Social Studies</strong> (WHST.6-8). Every chapter provides multiple opportunities to practice these skills through built-in features like vocabulary boxes, primary sources, discussion prompts, and analytical activities.</p>
+  <p>This page shows which standards each chapter addresses and suggests how to use the textbook's features to meet each standard.</p>
+</div>
+
+<h2>Quick Reference Matrix</h2>
+
+<p>This table shows the primary standards addressed by each chapter. Dark dots indicate a strong, direct alignment; medium dots indicate supporting coverage.</p>
+
+<div style="overflow-x: auto;">
+<table class="matrix-table">
+  <thead>
+    <tr>
+      <th>Chapter</th>
+      <th>RH.1<br><small>Cite Evidence</small></th>
+      <th>RH.2<br><small>Central Ideas</small></th>
+      <th>RH.3<br><small>Key Steps</small></th>
+      <th>RH.4<br><small>Vocabulary</small></th>
+      <th>RH.5<br><small>Text Structure</small></th>
+      <th>RH.6<br><small>Point of View</small></th>
+      <th>RH.7<br><small>Visual Info</small></th>
+      <th>RH.8<br><small>Fact vs Opinion</small></th>
+      <th>RH.9<br><small>Compare Sources</small></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td>1. Indigenous America</td><td><span class="dot dot-primary"></span></td><td><span class="dot dot-primary"></span></td><td><span class="dot dot-secondary"></span></td><td><span class="dot dot-primary"></span></td><td><span class="dot dot-secondary"></span></td><td><span class="dot dot-secondary"></span></td><td><span class="dot dot-primary"></span></td><td><span class="dot dot-light"></span></td><td><span class="dot dot-secondary"></span></td></tr>
+    <tr><td>2. Colliding Cultures</td><td><span class="dot dot-primary"></span></td><td><span class="dot dot-primary"></span></td><td><span class="dot dot-primary"></span></td><td><span class="dot dot-primary"></span></td><td><span class="dot dot-secondary"></span></td><td><span class="dot dot-primary"></span></td><td><span class="dot dot-primary"></span></td><td><span class="dot dot-secondary"></span></td><td><span class="dot dot-secondary"></span></td></tr>
+    <tr><td>3. British North America</td><td><span class="dot dot-primary"></span></td><td><span class="dot dot-primary"></span></td><td><span class="dot dot-primary"></span></td><td><span class="dot dot-primary"></span></td><td><span class="dot dot-secondary"></span></td><td><span class="dot dot-secondary"></span></td><td><span class="dot dot-primary"></span></td><td><span class="dot dot-light"></span></td><td><span class="dot dot-light"></span></td></tr>
+    <tr><td>4. Colonial Society</td><td><span class="dot dot-primary"></span></td><td><span class="dot dot-primary"></span></td><td><span class="dot dot-secondary"></span></td><td><span class="dot dot-primary"></span></td><td><span class="dot dot-secondary"></span></td><td><span class="dot dot-primary"></span></td><td><span class="dot dot-secondary"></span></td><td><span class="dot dot-primary"></span></td><td><span class="dot dot-primary"></span></td></tr>
+    <tr><td>5. The American Revolution</td><td><span class="dot dot-primary"></span></td><td><span class="dot dot-primary"></span></td><td><span class="dot dot-primary"></span></td><td><span class="dot dot-primary"></span></td><td><span class="dot dot-primary"></span></td><td><span class="dot dot-primary"></span></td><td><span class="dot dot-primary"></span></td><td><span class="dot dot-secondary"></span></td><td><span class="dot dot-primary"></span></td></tr>
+    <tr><td>6. A New Nation</td><td><span class="dot dot-primary"></span></td><td><span class="dot dot-primary"></span></td><td><span class="dot dot-primary"></span></td><td><span class="dot dot-primary"></span></td><td><span class="dot dot-primary"></span></td><td><span class="dot dot-primary"></span></td><td><span class="dot dot-secondary"></span></td><td><span class="dot dot-primary"></span></td><td><span class="dot dot-primary"></span></td></tr>
+    <tr><td>7. The Early Republic</td><td><span class="dot dot-primary"></span></td><td><span class="dot dot-primary"></span></td><td><span class="dot dot-secondary"></span></td><td><span class="dot dot-primary"></span></td><td><span class="dot dot-secondary"></span></td><td><span class="dot dot-primary"></span></td><td><span class="dot dot-primary"></span></td><td><span class="dot dot-secondary"></span></td><td><span class="dot dot-secondary"></span></td></tr>
+    <tr><td>8. The Market Revolution</td><td><span class="dot dot-primary"></span></td><td><span class="dot dot-primary"></span></td><td><span class="dot dot-primary"></span></td><td><span class="dot dot-primary"></span></td><td><span class="dot dot-primary"></span></td><td><span class="dot dot-secondary"></span></td><td><span class="dot dot-primary"></span></td><td><span class="dot dot-secondary"></span></td><td><span class="dot dot-light"></span></td></tr>
+    <tr><td>9. Democracy in America</td><td><span class="dot dot-primary"></span></td><td><span class="dot dot-primary"></span></td><td><span class="dot dot-primary"></span></td><td><span class="dot dot-primary"></span></td><td><span class="dot dot-secondary"></span></td><td><span class="dot dot-primary"></span></td><td><span class="dot dot-secondary"></span></td><td><span class="dot dot-primary"></span></td><td><span class="dot dot-primary"></span></td></tr>
+    <tr><td>10. Religion and Reform</td><td><span class="dot dot-primary"></span></td><td><span class="dot dot-primary"></span></td><td><span class="dot dot-secondary"></span></td><td><span class="dot dot-primary"></span></td><td><span class="dot dot-secondary"></span></td><td><span class="dot dot-primary"></span></td><td><span class="dot dot-secondary"></span></td><td><span class="dot dot-primary"></span></td><td><span class="dot dot-primary"></span></td></tr>
+    <tr><td>11. The Cotton Revolution</td><td><span class="dot dot-primary"></span></td><td><span class="dot dot-primary"></span></td><td><span class="dot dot-primary"></span></td><td><span class="dot dot-primary"></span></td><td><span class="dot dot-primary"></span></td><td><span class="dot dot-primary"></span></td><td><span class="dot dot-primary"></span></td><td><span class="dot dot-secondary"></span></td><td><span class="dot dot-secondary"></span></td></tr>
+    <tr><td>12. Manifest Destiny</td><td><span class="dot dot-primary"></span></td><td><span class="dot dot-primary"></span></td><td><span class="dot dot-primary"></span></td><td><span class="dot dot-primary"></span></td><td><span class="dot dot-secondary"></span></td><td><span class="dot dot-primary"></span></td><td><span class="dot dot-primary"></span></td><td><span class="dot dot-primary"></span></td><td><span class="dot dot-secondary"></span></td></tr>
+    <tr><td>13. The Sectional Crisis</td><td><span class="dot dot-primary"></span></td><td><span class="dot dot-primary"></span></td><td><span class="dot dot-primary"></span></td><td><span class="dot dot-primary"></span></td><td><span class="dot dot-primary"></span></td><td><span class="dot dot-primary"></span></td><td><span class="dot dot-secondary"></span></td><td><span class="dot dot-primary"></span></td><td><span class="dot dot-primary"></span></td></tr>
+    <tr><td>14. The Civil War</td><td><span class="dot dot-primary"></span></td><td><span class="dot dot-primary"></span></td><td><span class="dot dot-primary"></span></td><td><span class="dot dot-primary"></span></td><td><span class="dot dot-secondary"></span></td><td><span class="dot dot-primary"></span></td><td><span class="dot dot-primary"></span></td><td><span class="dot dot-secondary"></span></td><td><span class="dot dot-primary"></span></td></tr>
+    <tr><td>15. Reconstruction</td><td><span class="dot dot-primary"></span></td><td><span class="dot dot-primary"></span></td><td><span class="dot dot-primary"></span></td><td><span class="dot dot-primary"></span></td><td><span class="dot dot-secondary"></span></td><td><span class="dot dot-primary"></span></td><td><span class="dot dot-secondary"></span></td><td><span class="dot dot-primary"></span></td><td><span class="dot dot-primary"></span></td></tr>
+  </tbody>
+</table>
+</div>
+
+<div class="matrix-legend">
+  <span><span class="dot dot-primary"></span> Strong, direct alignment</span>
+  <span><span class="dot dot-secondary"></span> Supporting coverage</span>
+  <span><span class="dot dot-light"></span> Incidental</span>
+</div>
+
+<hr class="section-divider">
+
+<h2>Reading Standards for Literacy in History/Social Studies</h2>
+
+<p>These are the nine Common Core reading standards for history, grades 6&ndash;8. Each standard below shows which chapters address it most directly and how to use the textbook's features to teach it.</p>
+
+<div class="standard-block">
+  <div class="standard-code">RH.6-8.1</div>
+  <h3>Cite Specific Textual Evidence</h3>
+  <div class="standard-text">Cite specific textual evidence to support analysis of primary and secondary sources.</div>
+  <div class="chapter-tags">
+    <a class="ch-tag" href="ch1.html">Ch 1</a><a class="ch-tag" href="ch2.html">Ch 2</a><a class="ch-tag" href="ch3.html">Ch 3</a><a class="ch-tag" href="ch4.html">Ch 4</a><a class="ch-tag" href="ch5.html">Ch 5</a><a class="ch-tag" href="ch6.html">Ch 6</a><a class="ch-tag" href="ch7.html">Ch 7</a><a class="ch-tag" href="ch8.html">Ch 8</a><a class="ch-tag" href="ch9.html">Ch 9</a><a class="ch-tag" href="ch10.html">Ch 10</a><a class="ch-tag" href="ch11.html">Ch 11</a><a class="ch-tag" href="ch12.html">Ch 12</a><a class="ch-tag" href="ch13.html">Ch 13</a><a class="ch-tag" href="ch14.html">Ch 14</a><a class="ch-tag" href="ch15.html">Ch 15</a>
+  </div>
+  <div class="how-to"><strong>How to use:</strong> Every chapter includes <em>Primary Source Voices</em> and <em>Stop and Think</em> questions that require students to cite evidence from the text. Have students quote specific passages when answering discussion questions or completing chapter activities.</div>
+</div>
+
+<div class="standard-block">
+  <div class="standard-code">RH.6-8.2</div>
+  <h3>Determine Central Ideas</h3>
+  <div class="standard-text">Determine the central ideas or information of a primary or secondary source; provide an accurate summary of the source distinct from prior knowledge or opinions.</div>
+  <div class="chapter-tags">
+    <a class="ch-tag" href="ch1.html">Ch 1</a><a class="ch-tag" href="ch2.html">Ch 2</a><a class="ch-tag" href="ch3.html">Ch 3</a><a class="ch-tag" href="ch4.html">Ch 4</a><a class="ch-tag" href="ch5.html">Ch 5</a><a class="ch-tag" href="ch6.html">Ch 6</a><a class="ch-tag" href="ch7.html">Ch 7</a><a class="ch-tag" href="ch8.html">Ch 8</a><a class="ch-tag" href="ch9.html">Ch 9</a><a class="ch-tag" href="ch10.html">Ch 10</a><a class="ch-tag" href="ch11.html">Ch 11</a><a class="ch-tag" href="ch12.html">Ch 12</a><a class="ch-tag" href="ch13.html">Ch 13</a><a class="ch-tag" href="ch14.html">Ch 14</a><a class="ch-tag" href="ch15.html">Ch 15</a>
+  </div>
+  <div class="how-to"><strong>How to use:</strong> Use the <em>Big Questions</em> at the start of each chapter to focus reading. After reading, have students write summaries using the <em>Cornell Notes</em> template. The summary section specifically practices distinguishing central ideas from supporting details.</div>
+</div>
+
+<div class="standard-block">
+  <div class="standard-code">RH.6-8.3</div>
+  <h3>Identify Key Steps in a Process</h3>
+  <div class="standard-text">Identify key steps in a text's description of a process related to history/social studies (e.g., how a bill becomes law, how interest rates are raised or lowered).</div>
+  <div class="chapter-tags">
+    <a class="ch-tag" href="ch2.html">Ch 2</a><a class="ch-tag" href="ch3.html">Ch 3</a><a class="ch-tag" href="ch5.html">Ch 5</a><a class="ch-tag" href="ch6.html">Ch 6</a><a class="ch-tag" href="ch8.html">Ch 8</a><a class="ch-tag" href="ch9.html">Ch 9</a><a class="ch-tag" href="ch11.html">Ch 11</a><a class="ch-tag" href="ch12.html">Ch 12</a><a class="ch-tag" href="ch13.html">Ch 13</a><a class="ch-tag" href="ch14.html">Ch 14</a><a class="ch-tag" href="ch15.html">Ch 15</a>
+  </div>
+  <div class="how-to"><strong>How to use:</strong> Ch. 6 (how the Constitution was created through compromises), Ch. 8 (how the factory system developed), and Ch. 13 (how the sectional crisis escalated step by step) are particularly strong for this standard. Use the <em>Sequence/Timeline</em> graphic organizer to map key steps.</div>
+</div>
+
+<div class="standard-block">
+  <div class="standard-code">RH.6-8.4</div>
+  <h3>Determine Meaning of Words and Phrases</h3>
+  <div class="standard-text">Determine the meaning of words and phrases as they are used in a text, including vocabulary specific to domains related to history/social studies.</div>
+  <div class="chapter-tags">
+    <a class="ch-tag" href="ch1.html">Ch 1</a><a class="ch-tag" href="ch2.html">Ch 2</a><a class="ch-tag" href="ch3.html">Ch 3</a><a class="ch-tag" href="ch4.html">Ch 4</a><a class="ch-tag" href="ch5.html">Ch 5</a><a class="ch-tag" href="ch6.html">Ch 6</a><a class="ch-tag" href="ch7.html">Ch 7</a><a class="ch-tag" href="ch8.html">Ch 8</a><a class="ch-tag" href="ch9.html">Ch 9</a><a class="ch-tag" href="ch10.html">Ch 10</a><a class="ch-tag" href="ch11.html">Ch 11</a><a class="ch-tag" href="ch12.html">Ch 12</a><a class="ch-tag" href="ch13.html">Ch 13</a><a class="ch-tag" href="ch14.html">Ch 14</a><a class="ch-tag" href="ch15.html">Ch 15</a>
+  </div>
+  <div class="how-to"><strong>How to use:</strong> Every chapter includes <em>Vocabulary Boxes</em> with key terms defined in student-friendly language. Use the <em>Vocabulary Flash Cards</em> tool for pre-reading and review. The built-in dictionary feature (double-click any word) extends this to unfamiliar non-vocabulary words as well.</div>
+</div>
+
+<div class="standard-block">
+  <div class="standard-code">RH.6-8.5</div>
+  <h3>Describe How a Text Presents Information</h3>
+  <div class="standard-text">Describe how a text presents information (e.g., sequentially, comparatively, causally).</div>
+  <div class="chapter-tags">
+    <a class="ch-tag" href="ch5.html">Ch 5</a><a class="ch-tag" href="ch6.html">Ch 6</a><a class="ch-tag" href="ch8.html">Ch 8</a><a class="ch-tag" href="ch11.html">Ch 11</a><a class="ch-tag" href="ch13.html">Ch 13</a>
+  </div>
+  <div class="how-to"><strong>How to use:</strong> Ch. 5 (cause and effect of Revolution), Ch. 8 (comparison of subsistence vs. commercial farming), and Ch. 13 (escalating sectional crisis) are ideal for analyzing text structure. Use the <em>Cause & Effect</em> and <em>Compare & Contrast</em> graphic organizers to help students identify how information is organized.</div>
+</div>
+
+<div class="standard-block">
+  <div class="standard-code">RH.6-8.6</div>
+  <h3>Identify Author's Point of View or Purpose</h3>
+  <div class="standard-text">Identify aspects of a text that reveal an author's point of view or purpose (e.g., loaded language, inclusion or avoidance of particular facts).</div>
+  <div class="chapter-tags">
+    <a class="ch-tag" href="ch2.html">Ch 2</a><a class="ch-tag" href="ch4.html">Ch 4</a><a class="ch-tag" href="ch5.html">Ch 5</a><a class="ch-tag" href="ch6.html">Ch 6</a><a class="ch-tag" href="ch7.html">Ch 7</a><a class="ch-tag" href="ch9.html">Ch 9</a><a class="ch-tag" href="ch10.html">Ch 10</a><a class="ch-tag" href="ch11.html">Ch 11</a><a class="ch-tag" href="ch12.html">Ch 12</a><a class="ch-tag" href="ch14.html">Ch 14</a><a class="ch-tag" href="ch15.html">Ch 15</a>
+  </div>
+  <div class="how-to"><strong>How to use:</strong> <em>Multiple Perspectives</em> boxes present competing viewpoints on contested events. <em>Whose Voices Were Left Out?</em> sections explicitly address what perspectives are missing. Have students analyze primary sources for loaded language, bias, and purpose.</div>
+</div>
+
+<div class="standard-block">
+  <div class="standard-code">RH.6-8.7</div>
+  <h3>Integrate Visual Information</h3>
+  <div class="standard-text">Integrate visual information (e.g., in charts, graphs, photographs, videos, or maps) with other information in print and digital texts.</div>
+  <div class="chapter-tags">
+    <a class="ch-tag" href="ch1.html">Ch 1</a><a class="ch-tag" href="ch2.html">Ch 2</a><a class="ch-tag" href="ch3.html">Ch 3</a><a class="ch-tag" href="ch5.html">Ch 5</a><a class="ch-tag" href="ch7.html">Ch 7</a><a class="ch-tag" href="ch8.html">Ch 8</a><a class="ch-tag" href="ch11.html">Ch 11</a><a class="ch-tag" href="ch12.html">Ch 12</a><a class="ch-tag" href="ch14.html">Ch 14</a>
+  </div>
+  <div class="how-to"><strong>How to use:</strong> Every chapter includes historical images, maps, and illustrations with captions. Ask students to describe what a map or image shows before reading the surrounding text. Then have them explain how the visual adds to their understanding of the written content.</div>
+</div>
+
+<div class="standard-block">
+  <div class="standard-code">RH.6-8.8</div>
+  <h3>Distinguish Fact, Opinion, and Reasoned Judgment</h3>
+  <div class="standard-text">Distinguish among fact, opinion, and reasoned judgment in a text.</div>
+  <div class="chapter-tags">
+    <a class="ch-tag" href="ch4.html">Ch 4</a><a class="ch-tag" href="ch6.html">Ch 6</a><a class="ch-tag" href="ch9.html">Ch 9</a><a class="ch-tag" href="ch10.html">Ch 10</a><a class="ch-tag" href="ch12.html">Ch 12</a><a class="ch-tag" href="ch13.html">Ch 13</a><a class="ch-tag" href="ch15.html">Ch 15</a>
+  </div>
+  <div class="how-to"><strong>How to use:</strong> <em>Multiple Perspectives</em> boxes present different viewpoints without declaring one "correct." <em>Stop and Think</em> questions ask students to evaluate claims. Ch. 12 (Manifest Destiny as ideology) and Ch. 9 (Jackson's democracy) are especially good for distinguishing historical facts from the opinions of the people involved.</div>
+</div>
+
+<div class="standard-block">
+  <div class="standard-code">RH.6-8.9</div>
+  <h3>Analyze Primary and Secondary Sources on the Same Topic</h3>
+  <div class="standard-text">Analyze the relationship between a primary and secondary source on the same topic.</div>
+  <div class="chapter-tags">
+    <a class="ch-tag" href="ch4.html">Ch 4</a><a class="ch-tag" href="ch5.html">Ch 5</a><a class="ch-tag" href="ch6.html">Ch 6</a><a class="ch-tag" href="ch9.html">Ch 9</a><a class="ch-tag" href="ch10.html">Ch 10</a><a class="ch-tag" href="ch14.html">Ch 14</a><a class="ch-tag" href="ch15.html">Ch 15</a>
+  </div>
+  <div class="how-to"><strong>How to use:</strong> Each chapter is a secondary source that includes embedded <em>Primary Source Voices</em>. Have students compare what the textbook says about an event with what a primary source from that time says. Ask: How does the primary source support, challenge, or add to the textbook's account?</div>
+</div>
+
+<hr class="section-divider">
+
+<h2>Writing Standards for Literacy in History/Social Studies</h2>
+
+<div class="standard-block">
+  <div class="standard-code">WHST.6-8.1</div>
+  <h3>Write Arguments</h3>
+  <div class="standard-text">Write arguments focused on discipline-specific content: introduce claims, support them with evidence from credible sources, and provide a concluding statement.</div>
+  <div class="chapter-tags">
+    <a class="ch-tag" href="ch5.html">Ch 5</a><a class="ch-tag" href="ch6.html">Ch 6</a><a class="ch-tag" href="ch9.html">Ch 9</a><a class="ch-tag" href="ch10.html">Ch 10</a><a class="ch-tag" href="ch13.html">Ch 13</a><a class="ch-tag" href="ch14.html">Ch 14</a><a class="ch-tag" href="ch15.html">Ch 15</a>
+  </div>
+  <div class="how-to"><strong>How to use:</strong> <em>Chapter Activities</em> often include debate and argumentation tasks. For example, chapters covering the Revolution, Constitutional compromises, and Reconstruction all present contested questions that students can argue from different perspectives using textual evidence.</div>
+</div>
+
+<div class="standard-block">
+  <div class="standard-code">WHST.6-8.2</div>
+  <h3>Write Informative/Explanatory Texts</h3>
+  <div class="standard-text">Write informative/explanatory texts to examine a topic and convey ideas, concepts, and information through the selection, organization, and analysis of relevant content.</div>
+  <div class="chapter-tags">
+    <a class="ch-tag" href="ch1.html">Ch 1</a><a class="ch-tag" href="ch2.html">Ch 2</a><a class="ch-tag" href="ch3.html">Ch 3</a><a class="ch-tag" href="ch8.html">Ch 8</a><a class="ch-tag" href="ch11.html">Ch 11</a><a class="ch-tag" href="ch12.html">Ch 12</a>
+  </div>
+  <div class="how-to"><strong>How to use:</strong> The <em>Cornell Notes</em> summary section practices informative writing. Assign students to write explanatory paragraphs about key concepts using vocabulary terms and evidence from the chapter. <em>Stop and Think</em> questions can serve as informative writing prompts.</div>
+</div>
+
+<div class="standard-block">
+  <div class="standard-code">WHST.6-8.9</div>
+  <h3>Draw Evidence from Informational Texts</h3>
+  <div class="standard-text">Draw evidence from informational texts to support analysis, reflection, and research.</div>
+  <div class="chapter-tags">
+    <a class="ch-tag" href="ch1.html">Ch 1</a><a class="ch-tag" href="ch2.html">Ch 2</a><a class="ch-tag" href="ch3.html">Ch 3</a><a class="ch-tag" href="ch4.html">Ch 4</a><a class="ch-tag" href="ch5.html">Ch 5</a><a class="ch-tag" href="ch6.html">Ch 6</a><a class="ch-tag" href="ch7.html">Ch 7</a><a class="ch-tag" href="ch8.html">Ch 8</a><a class="ch-tag" href="ch9.html">Ch 9</a><a class="ch-tag" href="ch10.html">Ch 10</a><a class="ch-tag" href="ch11.html">Ch 11</a><a class="ch-tag" href="ch12.html">Ch 12</a><a class="ch-tag" href="ch13.html">Ch 13</a><a class="ch-tag" href="ch14.html">Ch 14</a><a class="ch-tag" href="ch15.html">Ch 15</a>
+  </div>
+  <div class="how-to"><strong>How to use:</strong> All chapter features support this standard. Require students to cite specific passages, primary sources, or data from the text in their written responses. The <em>Cornell Notes</em> cue column helps students formulate questions that they then answer with evidence.</div>
+</div>
+
+<hr class="section-divider">
+
+<h2>Feature-to-Standard Map</h2>
+
+<p>This table shows which textbook features most directly support each standard:</p>
+
+<table class="matrix-table">
+  <thead>
+    <tr>
+      <th>Textbook Feature</th>
+      <th>RH.1</th>
+      <th>RH.2</th>
+      <th>RH.3</th>
+      <th>RH.4</th>
+      <th>RH.5</th>
+      <th>RH.6</th>
+      <th>RH.7</th>
+      <th>RH.8</th>
+      <th>RH.9</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td>Big Questions</td><td><span class="dot dot-secondary"></span></td><td><span class="dot dot-primary"></span></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+    <tr><td>Vocabulary Boxes</td><td></td><td></td><td></td><td><span class="dot dot-primary"></span></td><td></td><td></td><td></td><td></td><td></td></tr>
+    <tr><td>Stop and Think</td><td><span class="dot dot-primary"></span></td><td><span class="dot dot-secondary"></span></td><td></td><td></td><td></td><td><span class="dot dot-secondary"></span></td><td></td><td><span class="dot dot-secondary"></span></td><td></td></tr>
+    <tr><td>Primary Sources</td><td><span class="dot dot-primary"></span></td><td></td><td></td><td><span class="dot dot-secondary"></span></td><td></td><td><span class="dot dot-primary"></span></td><td></td><td><span class="dot dot-primary"></span></td><td><span class="dot dot-primary"></span></td></tr>
+    <tr><td>Multiple Perspectives</td><td></td><td></td><td></td><td></td><td></td><td><span class="dot dot-primary"></span></td><td></td><td><span class="dot dot-primary"></span></td><td><span class="dot dot-primary"></span></td></tr>
+    <tr><td>Maps &amp; Images</td><td></td><td></td><td></td><td></td><td></td><td></td><td><span class="dot dot-primary"></span></td><td></td><td></td></tr>
+    <tr><td>Whose Voices Left Out?</td><td></td><td></td><td></td><td></td><td></td><td><span class="dot dot-primary"></span></td><td></td><td><span class="dot dot-secondary"></span></td><td></td></tr>
+    <tr><td>Chapter Activities</td><td><span class="dot dot-primary"></span></td><td><span class="dot dot-primary"></span></td><td><span class="dot dot-secondary"></span></td><td></td><td><span class="dot dot-secondary"></span></td><td></td><td></td><td><span class="dot dot-secondary"></span></td><td><span class="dot dot-secondary"></span></td></tr>
+    <tr><td>Story Behind the Story</td><td></td><td></td><td><span class="dot dot-secondary"></span></td><td></td><td><span class="dot dot-secondary"></span></td><td></td><td></td><td></td><td></td></tr>
+  </tbody>
+</table>
+
+<footer>
+  <p><a href="teaching.html">&larr; Back to Teaching Materials</a> | <a href="index.html">Home</a> | <a href="pacing-guide.html">Pacing Guide</a> | <a href="differentiation.html">Differentiation Guide</a></p>
+</footer>
+
+</div>
+</body>
+</html>

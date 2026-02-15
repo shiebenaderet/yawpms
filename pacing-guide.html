@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pacing Guide | American Yawp MS</title>
+<link rel="stylesheet" href="css/pages.css">
+<style>
+/* ---- Pacing Guide styles ---- */
+.pacing-intro {
+  background: #F0F4F8;
+  border-left: 5px solid #2A7F8E;
+  padding: 24px 28px;
+  margin: 0 0 32px;
+  border-radius: 0 8px 8px 0;
+}
+.pacing-intro h3 { color: #2A7F8E; font-size: 18px; margin-bottom: 8px; }
+.pacing-intro p {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 14px;
+  line-height: 1.7;
+  color: #555;
+  margin-bottom: 8px;
+}
+.pacing-intro p:last-child { margin-bottom: 0; }
+
+/* ---- Tab navigation ---- */
+.tab-bar {
+  display: flex;
+  gap: 0;
+  border-bottom: 2px solid #1B3A5C;
+  margin: 0 0 28px;
+}
+.tab-btn {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 10px 20px;
+  border: none;
+  background: transparent;
+  color: #999;
+  cursor: pointer;
+  border-bottom: 3px solid transparent;
+  margin-bottom: -2px;
+  transition: color .2s, border-color .2s;
+}
+.tab-btn:hover { color: #1B3A5C; }
+.tab-btn.active { color: #1B3A5C; border-bottom-color: #C4941D; }
+
+.tab-content { display: none; }
+.tab-content.active { display: block; }
+
+/* ---- Pacing table ---- */
+.pacing-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0 0 28px;
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 13px;
+}
+.pacing-table th {
+  text-align: left;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: #1B3A5C;
+  padding: 10px 12px;
+  border-bottom: 2px solid #1B3A5C;
+  background: #F0F4F8;
+}
+.pacing-table td {
+  padding: 10px 12px;
+  border-bottom: 1px solid #eee;
+  vertical-align: top;
+  line-height: 1.5;
+}
+.pacing-table tr:hover { background: #F8FAFB; }
+.pacing-table .ch-num {
+  font-weight: 700;
+  color: #1B3A5C;
+  white-space: nowrap;
+}
+.pacing-table .days {
+  text-align: center;
+  font-weight: 600;
+  color: #2A7F8E;
+}
+.pacing-table .activities {
+  font-size: 12px;
+  color: #666;
+}
+.pacing-table .unit-header {
+  background: #1B3A5C;
+  color: white;
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: .5px;
+}
+.pacing-table .unit-header td {
+  border-bottom: none;
+  padding: 8px 12px;
+}
+.pacing-table .assess-row {
+  background: #FFF9E6;
+}
+.pacing-table .assess-row td {
+  color: #8B6914;
+  font-weight: 600;
+  font-size: 12px;
+}
+
+.total-row {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  color: #1B3A5C;
+  text-align: right;
+  padding: 12px 0;
+  border-top: 2px solid #1B3A5C;
+  margin-top: -1px;
+}
+
+/* ---- Tips section ---- */
+.tips-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin: 20px 0 28px;
+}
+.tip-card {
+  background: #FAFAF8;
+  border: 1px solid #eee;
+  border-radius: 8px;
+  padding: 16px 20px;
+}
+.tip-card h4 {
+  font-size: 14px;
+  color: #1B3A5C;
+  margin-bottom: 6px;
+}
+.tip-card p {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 13px;
+  line-height: 1.6;
+  color: #555;
+  margin-bottom: 0;
+}
+
+@media (max-width: 600px) {
+  .tips-grid { grid-template-columns: 1fr; }
+  .tab-btn { font-size: 12px; padding: 8px 12px; }
+}
+
+@media print {
+  .header, .nav-bar, .tab-bar, footer { display: none; }
+  .tab-content { display: block !important; }
+  .container { max-width: 100%; padding: 12px; }
+  @page { margin: 0.5in; }
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>Pacing Guide</h1>
+  <div class="divider"></div>
+  <p>Scope &amp; Sequence for American History &mdash; Grades 6&ndash;8</p>
+</div>
+
+<nav class="nav-bar">
+  <a href="index.html">Home</a>
+  <a href="teaching.html">Teaching Materials</a>
+  <a href="standards.html">Standards</a>
+  <a href="differentiation.html">Differentiation</a>
+  <a href="teachers.html">Teachers Hub</a>
+</nav>
+
+<div class="container">
+
+<div class="pacing-intro">
+  <h3>How to Use This Guide</h3>
+  <p>This pacing guide offers three flexible schedules for covering all 15 chapters of American Yawp MS. Choose the schedule that fits your school's calendar. All schedules include time for activities, review, and assessment.</p>
+  <p>These are <strong>suggestions, not mandates</strong>. Adjust based on your students' needs, district requirements, and available class time. Some chapters may need more time if students are less familiar with the content; others can be compressed if students have background knowledge.</p>
+</div>
+
+<div class="tab-bar">
+  <button class="tab-btn active" onclick="showTab('full-year')">Full Year (36 weeks)</button>
+  <button class="tab-btn" onclick="showTab('semester')">Semester (18 weeks)</button>
+  <button class="tab-btn" onclick="showTab('trimester')">Trimester (12 weeks)</button>
+</div>
+
+<!-- ==================== FULL YEAR ==================== -->
+<div class="tab-content active" id="tab-full-year">
+
+<h2>Full Year &mdash; 36 Weeks (~180 days)</h2>
+<p>Recommended for a year-long American History course. Allows deep engagement with primary sources, activities, and extended projects. Assumes 5 class periods per week.</p>
+
+<table class="pacing-table">
+  <thead><tr><th>Chapter</th><th>Topic</th><th>Days</th><th>Key Activities &amp; Assessments</th></tr></thead>
+  <tbody>
+    <tr class="unit-header"><td colspan="4">Unit 1: Worlds Meet (Weeks 1&ndash;8)</td></tr>
+    <tr><td class="ch-num">Ch. 1</td><td>Indigenous America</td><td class="days">8</td><td class="activities">Map activity (migration routes), vocab cards, Three Sisters research project</td></tr>
+    <tr><td class="ch-num">Ch. 2</td><td>Colliding Cultures</td><td class="days">8</td><td class="activities">Columbian Exchange graphic organizer, primary source analysis, compare perspectives</td></tr>
+    <tr><td class="ch-num">Ch. 3</td><td>British North America</td><td class="days">8</td><td class="activities">Jamestown simulation, indentured servant vs. enslaved comparison, map colonies</td></tr>
+    <tr><td class="ch-num">Ch. 4</td><td>Colonial Society</td><td class="days">8</td><td class="activities">Middle Passage primary sources, Enlightenment thinker profiles, vocab quiz</td></tr>
+    <tr class="assess-row"><td></td><td colspan="3">Unit 1 Assessment: Document-based short essay + vocabulary review (2 days)</td></tr>
+
+    <tr class="unit-header"><td colspan="4">Unit 2: Revolution &amp; Nation Building (Weeks 9&ndash;16)</td></tr>
+    <tr><td class="ch-num">Ch. 5</td><td>The American Revolution</td><td class="days">9</td><td class="activities">Patriot vs. Loyalist debate, timeline activity, primary source letters</td></tr>
+    <tr><td class="ch-num">Ch. 6</td><td>A New Nation</td><td class="days">10</td><td class="activities">Constitutional Convention simulation, compromise analysis, Bill of Rights activity</td></tr>
+    <tr><td class="ch-num">Ch. 7</td><td>The Early Republic</td><td class="days">8</td><td class="activities">Political party comparison, Louisiana Purchase map, judicial review debate</td></tr>
+    <tr class="assess-row"><td></td><td colspan="3">Unit 2 Assessment: Argumentative paragraph + vocabulary review (2 days)</td></tr>
+
+    <tr class="unit-header"><td colspan="4">Unit 3: Growth &amp; Change (Weeks 17&ndash;24)</td></tr>
+    <tr><td class="ch-num">Ch. 8</td><td>The Market Revolution</td><td class="days">7</td><td class="activities">Factory system analysis, cause &amp; effect graphic organizer, labor then &amp; now</td></tr>
+    <tr><td class="ch-num">Ch. 9</td><td>Democracy in America</td><td class="days">8</td><td class="activities">Jacksonian democracy debate, Trail of Tears primary sources, current events connection</td></tr>
+    <tr><td class="ch-num">Ch. 10</td><td>Religion and Reform</td><td class="days">8</td><td class="activities">Reform movement gallery walk, Seneca Falls analysis, temperance primary sources</td></tr>
+    <tr><td class="ch-num">Ch. 11</td><td>The Cotton Revolution</td><td class="days">8</td><td class="activities">Cotton economy data analysis, slave narrative excerpts, Underground Railroad map</td></tr>
+    <tr class="assess-row"><td></td><td colspan="3">Unit 3 Assessment: Compare &amp; contrast essay + vocabulary review (2 days)</td></tr>
+
+    <tr class="unit-header"><td colspan="4">Unit 4: Crisis &amp; War (Weeks 25&ndash;32)</td></tr>
+    <tr><td class="ch-num">Ch. 12</td><td>Manifest Destiny</td><td class="days">8</td><td class="activities">Manifest Destiny analysis, Mexican-American War map, Gold Rush perspectives</td></tr>
+    <tr><td class="ch-num">Ch. 13</td><td>The Sectional Crisis</td><td class="days">9</td><td class="activities">Compromise timeline, Bleeding Kansas primary sources, Lincoln-Douglas analysis</td></tr>
+    <tr><td class="ch-num">Ch. 14</td><td>The Civil War</td><td class="days">10</td><td class="activities">Battle strategy maps, Emancipation Proclamation analysis, soldier letters</td></tr>
+    <tr class="assess-row"><td></td><td colspan="3">Unit 4 Assessment: Document analysis + vocabulary review (2 days)</td></tr>
+
+    <tr class="unit-header"><td colspan="4">Unit 5: Reconstruction (Weeks 33&ndash;36)</td></tr>
+    <tr><td class="ch-num">Ch. 15</td><td>Reconstruction</td><td class="days">10</td><td class="activities">Amendments analysis, Reconstruction debate, Jim Crow laws research, current events</td></tr>
+    <tr class="assess-row"><td></td><td colspan="3">Final Assessment: Cumulative project or exam (3&ndash;5 days)</td></tr>
+  </tbody>
+</table>
+<div class="total-row">Total: ~145 instructional days + ~10 assessment days + ~25 flex days = 180 days</div>
+
+</div>
+
+<!-- ==================== SEMESTER ==================== -->
+<div class="tab-content" id="tab-semester">
+
+<h2>Semester &mdash; 18 Weeks (~90 days)</h2>
+<p>For a one-semester survey course. Covers all chapters at a faster pace with fewer extended activities. Prioritizes key concepts and vocabulary. Assumes 5 class periods per week.</p>
+
+<table class="pacing-table">
+  <thead><tr><th>Chapter</th><th>Topic</th><th>Days</th><th>Focus Areas</th></tr></thead>
+  <tbody>
+    <tr class="unit-header"><td colspan="4">Unit 1: Colonial America (Weeks 1&ndash;5)</td></tr>
+    <tr><td class="ch-num">Ch. 1</td><td>Indigenous America</td><td class="days">5</td><td class="activities">Migration map, vocab cards, Big Questions discussion</td></tr>
+    <tr><td class="ch-num">Ch. 2</td><td>Colliding Cultures</td><td class="days">4</td><td class="activities">Columbian Exchange organizer, key vocabulary</td></tr>
+    <tr><td class="ch-num">Ch. 3</td><td>British North America</td><td class="days">4</td><td class="activities">Colony comparison chart, vocab quiz</td></tr>
+    <tr><td class="ch-num">Ch. 4</td><td>Colonial Society</td><td class="days">4</td><td class="activities">Middle Passage reading, Enlightenment concepts</td></tr>
+    <tr class="assess-row"><td></td><td colspan="3">Unit 1 Quiz (1 day)</td></tr>
+
+    <tr class="unit-header"><td colspan="4">Unit 2: Revolution &amp; New Nation (Weeks 6&ndash;9)</td></tr>
+    <tr><td class="ch-num">Ch. 5</td><td>The American Revolution</td><td class="days">5</td><td class="activities">Cause &amp; effect chart, key events timeline</td></tr>
+    <tr><td class="ch-num">Ch. 6</td><td>A New Nation</td><td class="days">5</td><td class="activities">Compromises chart, Constitution basics</td></tr>
+    <tr><td class="ch-num">Ch. 7</td><td>The Early Republic</td><td class="days">4</td><td class="activities">Party comparison, Louisiana Purchase</td></tr>
+    <tr class="assess-row"><td></td><td colspan="3">Unit 2 Quiz (1 day)</td></tr>
+
+    <tr class="unit-header"><td colspan="4">Unit 3: Expansion &amp; Reform (Weeks 10&ndash;13)</td></tr>
+    <tr><td class="ch-num">Ch. 8</td><td>The Market Revolution</td><td class="days">4</td><td class="activities">Economic changes chart, factory system</td></tr>
+    <tr><td class="ch-num">Ch. 9</td><td>Democracy in America</td><td class="days">5</td><td class="activities">Jacksonian era key concepts, Indian Removal</td></tr>
+    <tr><td class="ch-num">Ch. 10</td><td>Religion and Reform</td><td class="days">4</td><td class="activities">Reform movements chart, Seneca Falls</td></tr>
+    <tr><td class="ch-num">Ch. 11</td><td>The Cotton Revolution</td><td class="days">4</td><td class="activities">Slavery economy, resistance &amp; rebellion</td></tr>
+    <tr class="assess-row"><td></td><td colspan="3">Unit 3 Quiz (1 day)</td></tr>
+
+    <tr class="unit-header"><td colspan="4">Unit 4: Civil War &amp; Reconstruction (Weeks 14&ndash;18)</td></tr>
+    <tr><td class="ch-num">Ch. 12</td><td>Manifest Destiny</td><td class="days">4</td><td class="activities">Westward expansion map, Mexican-American War</td></tr>
+    <tr><td class="ch-num">Ch. 13</td><td>The Sectional Crisis</td><td class="days">5</td><td class="activities">Compromises timeline, road to war</td></tr>
+    <tr><td class="ch-num">Ch. 14</td><td>The Civil War</td><td class="days">5</td><td class="activities">Key battles, Emancipation, total war</td></tr>
+    <tr><td class="ch-num">Ch. 15</td><td>Reconstruction</td><td class="days">5</td><td class="activities">Amendments, Jim Crow, legacy discussion</td></tr>
+    <tr class="assess-row"><td></td><td colspan="3">Final Assessment (2 days)</td></tr>
+  </tbody>
+</table>
+<div class="total-row">Total: ~72 instructional days + ~6 assessment days + ~12 flex days = 90 days</div>
+
+</div>
+
+<!-- ==================== TRIMESTER ==================== -->
+<div class="tab-content" id="tab-trimester">
+
+<h2>Trimester &mdash; 12 Weeks (~60 days)</h2>
+<p>An accelerated overview. Best suited as an introduction to American History or when combined with other resources. Prioritizes essential content and vocabulary. Some chapters are paired or condensed.</p>
+
+<table class="pacing-table">
+  <thead><tr><th>Chapter</th><th>Topic</th><th>Days</th><th>Focus Areas</th></tr></thead>
+  <tbody>
+    <tr class="unit-header"><td colspan="4">Part 1: Pre-Colonial to Revolution (Weeks 1&ndash;4)</td></tr>
+    <tr><td class="ch-num">Ch. 1&ndash;2</td><td>Indigenous America &amp; Colliding Cultures</td><td class="days">5</td><td class="activities">Combined: migration, Columbian Exchange, colonization</td></tr>
+    <tr><td class="ch-num">Ch. 3&ndash;4</td><td>British Colonies &amp; Colonial Society</td><td class="days">5</td><td class="activities">Combined: colonial life, slavery, Enlightenment</td></tr>
+    <tr><td class="ch-num">Ch. 5</td><td>The American Revolution</td><td class="days">4</td><td class="activities">Causes, key events, outcome</td></tr>
+    <tr class="assess-row"><td></td><td colspan="3">Checkpoint Quiz (1 day)</td></tr>
+
+    <tr class="unit-header"><td colspan="4">Part 2: New Nation to Reform (Weeks 5&ndash;8)</td></tr>
+    <tr><td class="ch-num">Ch. 6</td><td>A New Nation</td><td class="days">4</td><td class="activities">Constitution, key compromises</td></tr>
+    <tr><td class="ch-num">Ch. 7&ndash;8</td><td>Early Republic &amp; Market Revolution</td><td class="days">4</td><td class="activities">Combined: expansion, economic change</td></tr>
+    <tr><td class="ch-num">Ch. 9&ndash;10</td><td>Democracy &amp; Reform</td><td class="days">4</td><td class="activities">Combined: Jackson, reform movements</td></tr>
+    <tr><td class="ch-num">Ch. 11</td><td>The Cotton Revolution</td><td class="days">3</td><td class="activities">Slavery, resistance, economy</td></tr>
+    <tr class="assess-row"><td></td><td colspan="3">Checkpoint Quiz (1 day)</td></tr>
+
+    <tr class="unit-header"><td colspan="4">Part 3: Crisis through Reconstruction (Weeks 9&ndash;12)</td></tr>
+    <tr><td class="ch-num">Ch. 12&ndash;13</td><td>Manifest Destiny &amp; Sectional Crisis</td><td class="days">5</td><td class="activities">Combined: expansion, slavery debate, road to war</td></tr>
+    <tr><td class="ch-num">Ch. 14</td><td>The Civil War</td><td class="days">4</td><td class="activities">Key events, Emancipation, outcome</td></tr>
+    <tr><td class="ch-num">Ch. 15</td><td>Reconstruction</td><td class="days">4</td><td class="activities">Amendments, Jim Crow, lasting legacy</td></tr>
+    <tr class="assess-row"><td></td><td colspan="3">Final Assessment (2 days)</td></tr>
+  </tbody>
+</table>
+<div class="total-row">Total: ~42 instructional days + ~4 assessment days + ~14 flex days = 60 days</div>
+
+</div>
+
+<h2>Pacing Tips</h2>
+
+<div class="tips-grid">
+  <div class="tip-card">
+    <h4>Front-Load Vocabulary</h4>
+    <p>Introduce vocabulary before reading using the flash cards. This reduces reading time and improves comprehension. Budget 10&ndash;15 minutes per chapter for vocab preview.</p>
+  </div>
+  <div class="tip-card">
+    <h4>Use Flex Days Intentionally</h4>
+    <p>Each schedule includes flex days. Use them for reteaching, student interests, current events connections, or catching up after disruptions. Don't plan content for flex days.</p>
+  </div>
+  <div class="tip-card">
+    <h4>Chunk Long Chapters</h4>
+    <p>Most chapters have 4&ndash;6 sections. Assign 1&ndash;2 sections per day with Cornell Notes. Use Stop and Think questions as check-ins between sections.</p>
+  </div>
+  <div class="tip-card">
+    <h4>Layer Assessments</h4>
+    <p>Don't wait for unit tests. Use vocabulary cards for daily warm-ups, Stop and Think for exit tickets, and chapter activities for weekly formative checks.</p>
+  </div>
+  <div class="tip-card">
+    <h4>Combine Chapters When Needed</h4>
+    <p>Chapters 1&ndash;2, 3&ndash;4, 7&ndash;8, 9&ndash;10, and 12&ndash;13 pair well. The trimester schedule shows how to combine them without losing essential content.</p>
+  </div>
+  <div class="tip-card">
+    <h4>Prioritize Primary Sources</h4>
+    <p>If time is short, focus on the primary source boxes. They're the highest-impact feature for building analytical skills and meeting Common Core standards.</p>
+  </div>
+</div>
+
+<footer>
+  <p><a href="teaching.html">&larr; Back to Teaching Materials</a> | <a href="index.html">Home</a> | <a href="standards.html">Standards Alignment</a> | <a href="differentiation.html">Differentiation Guide</a></p>
+</footer>
+
+</div>
+
+<script>
+function showTab(id) {
+  var contents = document.querySelectorAll('.tab-content');
+  var buttons = document.querySelectorAll('.tab-btn');
+  contents.forEach(function(el) { el.classList.remove('active'); });
+  buttons.forEach(function(el) { el.classList.remove('active'); });
+  document.getElementById('tab-' + id).classList.add('active');
+  // Find matching button
+  buttons.forEach(function(btn) {
+    if (btn.textContent.toLowerCase().indexOf(id.replace('-', ' ')) > -1 ||
+        (id === 'full-year' && btn.textContent.indexOf('Full Year') > -1) ||
+        (id === 'semester' && btn.textContent.indexOf('Semester') > -1) ||
+        (id === 'trimester' && btn.textContent.indexOf('Trimester') > -1)) {
+      btn.classList.add('active');
+    }
+  });
+}
+</script>
+</body>
+</html>

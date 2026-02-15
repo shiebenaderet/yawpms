@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Differentiation Guide | American Yawp MS</title>
+<link rel="stylesheet" href="css/pages.css">
+<style>
+/* ---- Differentiation Guide styles ---- */
+.diff-intro {
+  background: #F0F4F8;
+  border-left: 5px solid #2A7F8E;
+  padding: 24px 28px;
+  margin: 0 0 32px;
+  border-radius: 0 8px 8px 0;
+}
+.diff-intro h3 { color: #2A7F8E; font-size: 18px; margin-bottom: 8px; }
+.diff-intro p {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 14px;
+  line-height: 1.7;
+  color: #555;
+  margin-bottom: 8px;
+}
+.diff-intro p:last-child { margin-bottom: 0; }
+
+/* ---- Learner profile sections ---- */
+.profile-section {
+  margin: 0 0 40px;
+  padding-bottom: 32px;
+  border-bottom: 2px solid #E0E0E0;
+}
+.profile-section:last-of-type { border-bottom: none; }
+.profile-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+.profile-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  flex-shrink: 0;
+}
+.profile-ell .profile-icon { background: #E3F2FD; }
+.profile-iep .profile-icon { background: #E8F5E9; }
+.profile-adv .profile-icon { background: #FFF3E0; }
+.profile-read .profile-icon { background: #FCE4EC; }
+.profile-header h3 {
+  font-size: 20px;
+  color: #1B3A5C;
+  margin: 0;
+}
+.profile-header .subtitle {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 12px;
+  color: #999;
+  display: block;
+}
+
+/* ---- Strategy cards ---- */
+.strategy-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin: 16px 0 24px;
+}
+.strategy-card {
+  background: #FAFAF8;
+  border: 1px solid #eee;
+  border-radius: 8px;
+  padding: 16px 20px;
+  transition: border-color .2s;
+}
+.strategy-card:hover { border-color: #C4941D; }
+.strategy-card h4 {
+  font-size: 14px;
+  color: #1B3A5C;
+  margin-bottom: 6px;
+}
+.strategy-card p {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 13px;
+  line-height: 1.6;
+  color: #555;
+  margin-bottom: 0;
+}
+.strategy-card .tool-link {
+  display: inline-block;
+  margin-top: 8px;
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  color: #2A7F8E;
+  text-decoration: none;
+  border-bottom: 1px dotted #2A7F8E;
+}
+.strategy-card .tool-link:hover { border-bottom-style: solid; }
+
+/* ---- Built-in features callout ---- */
+.builtin-box {
+  background: #E8F5E9;
+  border-left: 5px solid #2E7D32;
+  padding: 24px 28px;
+  margin: 24px 0;
+  border-radius: 0 8px 8px 0;
+}
+.builtin-box h4 { color: #2E7D32; font-size: 16px; margin-bottom: 10px; }
+.builtin-box ul {
+  margin: 0 0 0 20px;
+}
+.builtin-box li {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 13px;
+  line-height: 1.6;
+  color: #555;
+  margin-bottom: 4px;
+}
+
+/* ---- Chapter-specific table ---- */
+.diff-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 16px 0 24px;
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 12px;
+}
+.diff-table th {
+  text-align: left;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: #1B3A5C;
+  padding: 8px 10px;
+  border-bottom: 2px solid #1B3A5C;
+  background: #F0F4F8;
+}
+.diff-table td {
+  padding: 8px 10px;
+  border-bottom: 1px solid #eee;
+  vertical-align: top;
+  line-height: 1.5;
+}
+.diff-table tr:hover { background: #F8FAFB; }
+.diff-table .ch-cell {
+  font-weight: 600;
+  color: #1B3A5C;
+  white-space: nowrap;
+}
+
+/* ---- Quick reference grid ---- */
+.qr-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 12px;
+  margin: 20px 0 28px;
+}
+.qr-card {
+  border: 1px solid #eee;
+  border-radius: 8px;
+  padding: 14px 16px;
+  text-align: center;
+}
+.qr-card h4 {
+  font-size: 13px;
+  color: #1B3A5C;
+  margin-bottom: 4px;
+}
+.qr-card p {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 11px;
+  color: #888;
+  margin: 0;
+  line-height: 1.4;
+}
+.qr-card a {
+  display: block;
+  margin-top: 6px;
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  color: #2A7F8E;
+  text-decoration: none;
+}
+
+@media (max-width: 700px) {
+  .strategy-grid { grid-template-columns: 1fr; }
+  .qr-grid { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 480px) {
+  .qr-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>Differentiation Guide</h1>
+  <div class="divider"></div>
+  <p>Strategies for Every Learner</p>
+</div>
+
+<nav class="nav-bar">
+  <a href="index.html">Home</a>
+  <a href="teaching.html">Teaching Materials</a>
+  <a href="standards.html">Standards</a>
+  <a href="pacing-guide.html">Pacing Guide</a>
+  <a href="teachers.html">Teachers Hub</a>
+</nav>
+
+<div class="container">
+
+<div class="diff-intro">
+  <h3>Supporting All Students</h3>
+  <p>American Yawp MS was designed with accessibility in mind. The textbook includes built-in tools for font adjustments, reading modes, and vocabulary support. This guide provides additional strategies for reaching students with diverse needs, including English Language Learners, students with IEPs, advanced learners, and struggling readers.</p>
+  <p>These are suggestions, not prescriptions. Adapt them to your students, your classroom, and your professional judgment.</p>
+</div>
+
+<h2>Built-In Accessibility Features</h2>
+
+<p>Before applying additional strategies, take advantage of the tools already built into every chapter:</p>
+
+<div class="qr-grid">
+  <div class="qr-card">
+    <h4>Dyslexia Font</h4>
+    <p>Switch to OpenDyslexic or Lexend via the reader panel</p>
+  </div>
+  <div class="qr-card">
+    <h4>Font Size &amp; Spacing</h4>
+    <p>Adjustable text size and line spacing for readability</p>
+  </div>
+  <div class="qr-card">
+    <h4>High Contrast Mode</h4>
+    <p>Dark mode and high-contrast themes for visual accessibility</p>
+  </div>
+  <div class="qr-card">
+    <h4>Dictionary Lookup</h4>
+    <p>Double-click any word for instant definition</p>
+  </div>
+  <div class="qr-card">
+    <h4>Vocabulary Boxes</h4>
+    <p>Key terms defined in-text in every chapter</p>
+    <a href="vocabulary-cards.html">Flash cards &rarr;</a>
+  </div>
+  <div class="qr-card">
+    <h4>Reading Width</h4>
+    <p>Narrow mode reduces line length for easier tracking</p>
+  </div>
+</div>
+
+<!-- ==================== ELL ==================== -->
+<div class="profile-section profile-ell">
+  <div class="profile-header">
+    <div class="profile-icon">&#127760;</div>
+    <div>
+      <h3>English Language Learners</h3>
+      <span class="subtitle">WIDA Levels 1&ndash;5 &bull; Newcomers through Long-Term ELLs</span>
+    </div>
+  </div>
+
+  <p>History textbooks are especially challenging for ELLs because they combine academic language, domain-specific vocabulary, and cultural context that students may lack. These strategies help bridge the language gap while maintaining content rigor.</p>
+
+  <div class="strategy-grid">
+    <div class="strategy-card">
+      <h4>Pre-Teach Vocabulary Visually</h4>
+      <p>Before reading, preview vocabulary terms using the flash cards. For newcomers, pair each term with an image or drawing. Have students create bilingual vocabulary cards with the term in English and their home language.</p>
+      <a class="tool-link" href="vocabulary-cards.html">Vocabulary Flash Cards &rarr;</a>
+    </div>
+    <div class="strategy-card">
+      <h4>Sentence Frames for Discussion</h4>
+      <p>Provide sentence starters for Stop and Think questions: "The author says ___ which shows that ___." "One cause of ___ was ___." "This is similar to ___ because ___." These reduce the language barrier while maintaining analytical rigor.</p>
+    </div>
+    <div class="strategy-card">
+      <h4>Chunk and Annotate</h4>
+      <p>Assign one section at a time instead of a full chapter. Have students use Cornell Notes with simplified cue questions. Allow students to annotate in their home language alongside English notes.</p>
+      <a class="tool-link" href="cornell-notes.html">Cornell Notes Template &rarr;</a>
+    </div>
+    <div class="strategy-card">
+      <h4>Visual Graphic Organizers</h4>
+      <p>Use the timeline and cause &amp; effect organizers to reduce the amount of writing required while demonstrating comprehension. Label organizers with sentence frames when possible.</p>
+      <a class="tool-link" href="graphic-organizers.html">Graphic Organizers &rarr;</a>
+    </div>
+    <div class="strategy-card">
+      <h4>Use Maps and Images First</h4>
+      <p>Before reading a section, have students examine the maps and images. Ask: "What do you see? What do you think this section is about?" This builds schema and reduces the cold-start reading challenge.</p>
+    </div>
+    <div class="strategy-card">
+      <h4>Partner Reading</h4>
+      <p>Pair ELLs with proficient readers for partner reading. The proficient reader reads aloud while the ELL follows along. After each section, both students discuss the Stop and Think question together.</p>
+    </div>
+  </div>
+
+  <div class="builtin-box">
+    <h4>Built-In Features That Help ELLs</h4>
+    <ul>
+      <li><strong>Dictionary lookup:</strong> Double-click any unfamiliar word for an instant definition</li>
+      <li><strong>Vocabulary boxes:</strong> Key terms defined in student-friendly language within the text</li>
+      <li><strong>Narrow reading width:</strong> Shorter lines reduce eye-tracking difficulty</li>
+      <li><strong>Font size controls:</strong> Larger text reduces visual strain</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ==================== IEP ==================== -->
+<div class="profile-section profile-iep">
+  <div class="profile-header">
+    <div class="profile-icon">&#128218;</div>
+    <div>
+      <h3>Students with IEPs</h3>
+      <span class="subtitle">Learning Disabilities &bull; ADHD &bull; Processing Differences</span>
+    </div>
+  </div>
+
+  <p>Students with IEPs often need modified pacing, reduced cognitive load, and multimodal access to content. American Yawp MS's built-in reader tools address many common accommodations automatically. These strategies go further.</p>
+
+  <div class="strategy-grid">
+    <div class="strategy-card">
+      <h4>Reduce and Focus</h4>
+      <p>Instead of assigning full chapters, identify 2&ndash;3 key sections that address the Big Questions. Pre-select the most important vocabulary terms (3&ndash;5 per chapter instead of all). Provide a simplified study guide that highlights only essential information.</p>
+    </div>
+    <div class="strategy-card">
+      <h4>Structured Note-Taking</h4>
+      <p>Use Cornell Notes with pre-filled cue questions so students know what to look for while reading. For students who struggle with writing, allow bulleted phrases instead of complete sentences. Accept voice-recorded summaries.</p>
+      <a class="tool-link" href="cornell-notes.html">Cornell Notes Template &rarr;</a>
+    </div>
+    <div class="strategy-card">
+      <h4>Break Tasks into Steps</h4>
+      <p>Instead of "Read Section III and answer the questions," provide: 1) Read paragraphs 1&ndash;2. 2) Find the vocabulary word. 3) Answer question A. 4) Read paragraphs 3&ndash;4. 5) Answer question B. Checkboxes help students track progress.</p>
+    </div>
+    <div class="strategy-card">
+      <h4>Multimodal Assessment</h4>
+      <p>Accept alternative demonstrations of knowledge: oral responses, drawings, graphic organizers, or recorded explanations instead of written paragraphs. Use the vocabulary flash cards for verbal quizzing instead of written tests.</p>
+      <a class="tool-link" href="vocabulary-cards.html">Vocabulary Flash Cards &rarr;</a>
+    </div>
+    <div class="strategy-card">
+      <h4>Extended Time &amp; Pacing</h4>
+      <p>Use the trimester pacing guide as a baseline and extend as needed. Combine chapters (e.g., Ch. 1&ndash;2, Ch. 3&ndash;4) to reduce the number of assessments while maintaining key content coverage.</p>
+      <a class="tool-link" href="pacing-guide.html">Pacing Guide &rarr;</a>
+    </div>
+    <div class="strategy-card">
+      <h4>Environmental Supports</h4>
+      <p>Enable the dyslexia font (OpenDyslexic or Lexend) and narrow reading width by default for students with reading disabilities. Use the line-focus tool to reduce visual distraction. Enable dark mode for students with light sensitivity.</p>
+    </div>
+  </div>
+
+  <div class="builtin-box">
+    <h4>Common IEP Accommodations Already Built In</h4>
+    <ul>
+      <li><strong>Extended time:</strong> Self-paced digital reading with bookmarks to save progress</li>
+      <li><strong>Large print:</strong> Adjustable font size in the reader panel</li>
+      <li><strong>Reduced visual clutter:</strong> Line focus mode, narrow width, clean layout</li>
+      <li><strong>Dyslexia-friendly font:</strong> OpenDyslexic and Lexend available in reader settings</li>
+      <li><strong>Color/contrast options:</strong> Sepia, dark mode, and high-contrast themes</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ==================== ADVANCED ==================== -->
+<div class="profile-section profile-adv">
+  <div class="profile-header">
+    <div class="profile-icon">&#127775;</div>
+    <div>
+      <h3>Advanced Learners</h3>
+      <span class="subtitle">Gifted &bull; Above Grade Level &bull; High-Interest Students</span>
+    </div>
+  </div>
+
+  <p>Advanced learners need depth, complexity, and independence rather than more of the same work. These strategies use the textbook's features to push analytical thinking beyond surface-level comprehension.</p>
+
+  <div class="strategy-grid">
+    <div class="strategy-card">
+      <h4>Primary Source Deep Dives</h4>
+      <p>Have advanced students read the original, unabridged versions of primary sources referenced in the chapters. Ask them to compare the original with the textbook's summary: What was included? What was left out? Why might the author have made those choices?</p>
+    </div>
+    <div class="strategy-card">
+      <h4>Cross-Chapter Connections</h4>
+      <p>Assign students to trace a theme across multiple chapters (e.g., "How did the concept of freedom change from Ch. 5 through Ch. 15?"). Use the compare &amp; contrast organizer to structure their analysis across time periods.</p>
+      <a class="tool-link" href="graphic-organizers.html">Graphic Organizers &rarr;</a>
+    </div>
+    <div class="strategy-card">
+      <h4>Current Events Research Projects</h4>
+      <p>Use the Current Events Connections as starting points for independent research. Advanced students can find their own modern connections and write essays arguing why a historical event is still relevant today.</p>
+      <a class="tool-link" href="current-events.html">Current Events &rarr;</a>
+    </div>
+    <div class="strategy-card">
+      <h4>"Whose Voices Were Left Out?" Extensions</h4>
+      <p>Challenge students to research the perspectives mentioned in these sections and write their own 1&ndash;2 paragraph additions to the chapter. What would the textbook say if it included these voices more fully?</p>
+    </div>
+    <div class="strategy-card">
+      <h4>Historiography Discussions</h4>
+      <p>For mature readers, introduce the idea that historians disagree. Have students read the "Multiple Perspectives" boxes and ask: Who is right? Can both be right? How do historians decide? This builds critical thinking beyond the textbook itself.</p>
+    </div>
+    <div class="strategy-card">
+      <h4>Peer Teaching</h4>
+      <p>Have advanced students become "chapter experts" who prepare and teach a section to a small group. Teaching requires deeper understanding than passive reading. Pair this with vocabulary card creation for terms they found challenging.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== STRUGGLING READERS ==================== -->
+<div class="profile-section profile-read">
+  <div class="profile-header">
+    <div class="profile-icon">&#128214;</div>
+    <div>
+      <h3>Struggling Readers</h3>
+      <span class="subtitle">Below Grade Level &bull; Reluctant Readers &bull; Low Confidence</span>
+    </div>
+  </div>
+
+  <p>Struggling readers need scaffolding that builds confidence without making them feel singled out. The digital format of American Yawp MS provides tools that support reading without requiring students to use "different" materials from their peers.</p>
+
+  <div class="strategy-grid">
+    <div class="strategy-card">
+      <h4>Preview Before Reading</h4>
+      <p>Before reading, have students: 1) Read the Big Questions. 2) Look at all images and maps. 3) Read all section headings. 4) Preview vocabulary terms using flash cards. This 10-minute preview dramatically improves comprehension for struggling readers.</p>
+    </div>
+    <div class="strategy-card">
+      <h4>Read Aloud / Listen Along</h4>
+      <p>Use the text-to-speech features (when available) or partner reading. Hearing the text while seeing it engages both auditory and visual processing. Even strong readers benefit from this for dense historical content.</p>
+    </div>
+    <div class="strategy-card">
+      <h4>KWL Charts for Schema Building</h4>
+      <p>Start each chapter with a KWL chart. The "K" column activates prior knowledge and gives struggling readers an entry point. The "W" column creates purpose for reading. The "L" column provides a sense of accomplishment.</p>
+      <a class="tool-link" href="graphic-organizers.html">KWL Chart &rarr;</a>
+    </div>
+    <div class="strategy-card">
+      <h4>Focus on Story, Not Facts</h4>
+      <p>Help struggling readers engage by emphasizing the narrative elements: Who are the people? What did they want? What got in their way? The "Story Behind the Story" boxes are perfect entry points for readers who connect with human stories.</p>
+    </div>
+    <div class="strategy-card">
+      <h4>Vocabulary Pre-Loading</h4>
+      <p>Before each chapter, spend a full class period on vocabulary. Use the flash cards interactively as a class. When students encounter familiar words while reading, comprehension and confidence both increase.</p>
+      <a class="tool-link" href="vocabulary-cards.html">Vocabulary Flash Cards &rarr;</a>
+    </div>
+    <div class="strategy-card">
+      <h4>Success-Based Pacing</h4>
+      <p>Assign shorter reading segments (1&ndash;2 sections per day) with clear completion goals. Celebrate finishing each section. Use the reader's bookmark feature to save progress and build a sense of momentum.</p>
+    </div>
+  </div>
+
+  <div class="builtin-box">
+    <h4>Reader Tools That Support Struggling Readers</h4>
+    <ul>
+      <li><strong>Larger font size:</strong> Reduces visual density and improves tracking</li>
+      <li><strong>Increased line spacing:</strong> Makes text less overwhelming</li>
+      <li><strong>Narrow reading width:</strong> Shorter lines are easier to track</li>
+      <li><strong>Lexend font:</strong> Designed for readability, reduces visual crowding</li>
+      <li><strong>Sepia mode:</strong> Gentler contrast reduces eye strain during long reading</li>
+      <li><strong>Section jump:</strong> Navigate to specific sections without scrolling through the whole chapter</li>
+    </ul>
+  </div>
+</div>
+
+<h2>Chapter-Specific Differentiation Notes</h2>
+
+<p>Some chapters present unique challenges. Here are targeted notes for the chapters that most often require additional support:</p>
+
+<table class="diff-table">
+  <thead>
+    <tr><th>Chapter</th><th>Challenge</th><th>ELL Strategy</th><th>IEP/Struggling Reader Strategy</th><th>Advanced Extension</th></tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="ch-cell">Ch. 1</td>
+      <td>Unfamiliar geography and pre-contact civilizations</td>
+      <td>Use maps first; label regions in home language</td>
+      <td>Focus on Three Sisters and daily life sections; skip European context</td>
+      <td>Research a specific pre-Columbian civilization in depth</td>
+    </tr>
+    <tr>
+      <td class="ch-cell">Ch. 4</td>
+      <td>Sensitive content: slavery, Middle Passage</td>
+      <td>Pre-teach with images and video clips; discuss emotional vocabulary</td>
+      <td>Read together as a class; provide processing time; allow alternative responses</td>
+      <td>Compare primary source slave narratives with textbook account</td>
+    </tr>
+    <tr>
+      <td class="ch-cell">Ch. 6</td>
+      <td>Abstract concepts: federalism, compromise, constitutional structure</td>
+      <td>Use graphic organizer to compare plans side-by-side</td>
+      <td>Focus on the Great Compromise only; simplify to "big states vs. small states"</td>
+      <td>Read Federalist/Anti-Federalist primary sources and debate</td>
+    </tr>
+    <tr>
+      <td class="ch-cell">Ch. 11</td>
+      <td>Sensitive content: slavery, resistance, violence</td>
+      <td>Focus on resistance and agency; use sentence frames for discussion</td>
+      <td>Select sections carefully; pair with a partner for emotional support</td>
+      <td>Compare slave narratives; analyze the economics of slavery using data</td>
+    </tr>
+    <tr>
+      <td class="ch-cell">Ch. 13</td>
+      <td>Dense political content: many compromises, acts, and events</td>
+      <td>Timeline graphic organizer essential; focus on 3&ndash;4 key events</td>
+      <td>Provide pre-filled timeline with key dates; students add descriptions</td>
+      <td>Analyze the Lincoln-Douglas debates using original transcripts</td>
+    </tr>
+    <tr>
+      <td class="ch-cell">Ch. 14</td>
+      <td>Military details can be overwhelming; sensitive content</td>
+      <td>Focus on maps and key turning points rather than battle details</td>
+      <td>Reduce to 3 key battles; use cause &amp; effect for Emancipation Proclamation</td>
+      <td>Research a specific battle or soldier's experience using primary sources</td>
+    </tr>
+    <tr>
+      <td class="ch-cell">Ch. 15</td>
+      <td>Complex political and social changes; Jim Crow connections to present</td>
+      <td>Use compare &amp; contrast: before vs. after the 13th, 14th, 15th Amendments</td>
+      <td>Focus on Amendments and their purpose; use visual timeline</td>
+      <td>Connect to current events; research modern voting rights issues</td>
+    </tr>
+  </tbody>
+</table>
+
+<footer>
+  <p><a href="teaching.html">&larr; Back to Teaching Materials</a> | <a href="index.html">Home</a> | <a href="standards.html">Standards Alignment</a> | <a href="pacing-guide.html">Pacing Guide</a></p>
+</footer>
+
+</div>
+</body>
+</html>
