@@ -45,6 +45,21 @@
 }
 .present-btn:hover { background: #2A7F8E; }
 .present-btn:disabled { opacity: .4; cursor: default; }
+.export-btn {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 8px 16px;
+  background: white;
+  color: #1B3A5C;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-left: 6px;
+  transition: background .2s, border-color .2s;
+}
+.export-btn:hover { background: #F0F4F8; border-color: #1B3A5C; }
+.export-btn:disabled { opacity: .4; cursor: default; }
 
 /* ---- Slide viewer ---- */
 .slide-viewer {
@@ -334,6 +349,21 @@
   .slide-content .slide-heading { font-size: 18px; }
   .slide-content ul li { font-size: 14px; }
   .slide-controls select { min-width: 200px; margin-bottom: 8px; }
+  .export-btn { display: block; margin: 6px auto 0; }
+}
+
+/* ---- Print styles ---- */
+@media print {
+  body { background: white; }
+  .header, .nav-bar, .slide-controls, .slide-nav, .slide-progress, .shortcut-help, .no-slides, footer { display: none !important; }
+  .container { max-width: 100%; padding: 0; }
+  .slide-viewer { display: block !important; position: static !important; border: none; border-radius: 0; max-width: 100%; aspect-ratio: auto; overflow: visible; }
+  .slide-viewer .slide { display: block !important; position: static !important; padding: 24px 0; page-break-inside: avoid; border-bottom: 1px solid #ddd; margin-bottom: 16px; }
+  .slide-viewer .slide-title { background: none !important; color: #1B3A5C; padding: 32px 0 16px; }
+  .slide-viewer .slide-title .divider-gold { background: #1B3A5C; }
+  .slide-viewer .slide-end { background: none !important; color: #1B3A5C; }
+  .slide-viewer .slide-image img { max-height: 300px; box-shadow: none; }
+  .slide-viewer .slide-story { background: none !important; border-left: 3px solid #C4941D; padding-left: 20px; }
 }
 </style>
 </head>
@@ -348,6 +378,7 @@
 <nav class="nav-bar">
   <a href="index.html">Home</a>
   <a href="teaching.html">Teaching Materials</a>
+  <a href="timeline.html">Timeline</a>
   <a href="vocabulary-cards.html">Vocabulary Cards</a>
   <a href="quizzes.html">Quizzes</a>
   <a href="teachers.html">Teachers Hub</a>
@@ -361,6 +392,8 @@
     <option value="">Select a chapter...</option>
   </select>
   <button class="present-btn" id="present-btn" onclick="goFullscreen()" disabled>Present Fullscreen</button>
+  <button class="export-btn" id="print-btn" onclick="printSlides()" disabled>Print / PDF</button>
+  <button class="export-btn" id="outline-btn" onclick="exportOutline()" disabled>Export Outline</button>
 </div>
 
 <div class="no-slides" id="no-slides">Select a chapter above to view the slideshow.</div>
@@ -619,11 +652,15 @@ function loadSlides(ch) {
     shortcuts.style.display = 'none';
     noSlides.style.display = 'block';
     presentBtn.disabled = true;
+    document.getElementById('print-btn').disabled = true;
+    document.getElementById('outline-btn').disabled = true;
     return;
   }
 
   noSlides.style.display = 'none';
   presentBtn.disabled = false;
+  document.getElementById('print-btn').disabled = false;
+  document.getElementById('outline-btn').disabled = false;
   var deck = SLIDES[ch];
   currentSlides = deck.slides;
   currentSlideIndex = 0;
@@ -723,6 +760,52 @@ document.addEventListener('keydown', function(e) {
   else if (e.key === 'ArrowLeft') { e.preventDefault(); prevSlide(); }
   else if (e.key === 'f' || e.key === 'F') { goFullscreen(); }
 });
+
+function printSlides() {
+  var viewer = document.getElementById('slide-viewer');
+  var slides = viewer.querySelectorAll('.slide');
+  slides.forEach(function(s) { s.classList.add('current'); });
+  window.print();
+  slides.forEach(function(s) { s.classList.remove('current'); });
+  showSlide(currentSlideIndex);
+}
+
+function exportOutline() {
+  var ch = document.getElementById('ch-select').value;
+  if (!ch || !SLIDES[ch]) return;
+  var deck = SLIDES[ch];
+  var lines = [];
+  lines.push('Chapter ' + ch + ': ' + deck.title);
+  lines.push(deck.subtitle);
+  lines.push('='.repeat(50));
+  lines.push('');
+  deck.slides.forEach(function(s) {
+    if (s.type === 'content') {
+      lines.push(s.heading);
+      s.items.forEach(function(item) { lines.push('  - ' + item); });
+      lines.push('');
+    } else if (s.type === 'vocab') {
+      lines.push(s.heading);
+      s.terms.forEach(function(t) { lines.push('  ' + t.t + ' — ' + t.d); });
+      lines.push('');
+    } else if (s.type === 'discuss') {
+      lines.push('Discussion Question:');
+      lines.push('  ' + s.question);
+      lines.push('');
+    } else if (s.type === 'story') {
+      lines.push('Story: ' + s.heading);
+      lines.push('  ' + s.text);
+      lines.push('');
+    }
+  });
+  var text = lines.join('\n');
+  var blob = new Blob([text], {type: 'text/plain'});
+  var a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'ch' + ch + '-outline.txt';
+  a.click();
+  URL.revokeObjectURL(a.href);
+}
 </script>
 </body>
 </html>
