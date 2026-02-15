@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cornell Notes | American Yawp MS</title>
+<link rel="stylesheet" href="css/pages.css">
+<style>
+/* ---- Cornell Notes styles ---- */
+.notes-intro {
+  background: #F0F4F8;
+  border-left: 5px solid #2A7F8E;
+  padding: 24px 28px;
+  margin: 0 0 32px;
+  border-radius: 0 8px 8px 0;
+}
+.notes-intro h3 { color: #2A7F8E; font-size: 18px; margin-bottom: 8px; }
+.notes-intro p {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 14px;
+  line-height: 1.7;
+  color: #555;
+  margin-bottom: 8px;
+}
+.notes-intro p:last-child { margin-bottom: 0; }
+
+.print-controls {
+  text-align: center;
+  margin: 0 0 32px;
+  padding: 16px;
+  background: #FAFAF8;
+  border: 1px dashed #ddd;
+  border-radius: 8px;
+}
+.print-controls label {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 14px;
+  color: #555;
+  margin-right: 8px;
+}
+.print-controls input, .print-controls select {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 14px;
+  padding: 6px 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-right: 16px;
+}
+.print-controls select { min-width: 180px; }
+.print-btn {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 8px 24px;
+  background: #1B3A5C;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background .2s;
+}
+.print-btn:hover { background: #2A7F8E; }
+
+/* ---- The actual notes sheet ---- */
+.cornell-sheet {
+  border: 2px solid #1B3A5C;
+  border-radius: 4px;
+  margin: 0 0 32px;
+  background: white;
+  page-break-inside: avoid;
+}
+.cornell-header {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 0;
+  border-bottom: 2px solid #1B3A5C;
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 13px;
+}
+.cornell-header div {
+  padding: 8px 12px;
+  border-right: 1px solid #ccc;
+}
+.cornell-header div:last-child { border-right: none; }
+.cornell-header label {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #1B3A5C;
+  display: block;
+  margin-bottom: 2px;
+}
+.cornell-header .fill-line {
+  border: none;
+  border-bottom: 1px solid #ccc;
+  width: 100%;
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 13px;
+  padding: 2px 0;
+  background: transparent;
+}
+
+.cornell-title {
+  text-align: center;
+  padding: 6px 12px;
+  border-bottom: 2px solid #1B3A5C;
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: #1B3A5C;
+  background: #F0F4F8;
+}
+
+.cornell-body {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  min-height: 500px;
+}
+.cornell-cue {
+  border-right: 2px solid #1B3A5C;
+  padding: 12px;
+  position: relative;
+}
+.cornell-cue-label {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #1B3A5C;
+  margin-bottom: 8px;
+}
+.cornell-cue-hint {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 10px;
+  color: #999;
+  font-style: italic;
+  line-height: 1.5;
+}
+.cornell-notes-area {
+  padding: 12px;
+  position: relative;
+}
+.cornell-notes-label {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #1B3A5C;
+  margin-bottom: 8px;
+}
+.cornell-notes-hint {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 10px;
+  color: #999;
+  font-style: italic;
+  line-height: 1.5;
+}
+
+/* Lined paper effect */
+.cornell-lines {
+  position: absolute;
+  top: 36px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: repeating-linear-gradient(
+    transparent,
+    transparent 27px,
+    #e8e8e8 27px,
+    #e8e8e8 28px
+  );
+}
+
+.cornell-summary {
+  border-top: 2px solid #1B3A5C;
+  padding: 12px;
+  min-height: 100px;
+  position: relative;
+}
+.cornell-summary-label {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #1B3A5C;
+  margin-bottom: 4px;
+}
+.cornell-summary-hint {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 10px;
+  color: #999;
+  font-style: italic;
+  line-height: 1.5;
+}
+.cornell-summary .cornell-lines {
+  top: 32px;
+}
+
+/* ---- How to use section ---- */
+.how-to {
+  background: #FFF9E6;
+  border: 1px solid #E8D89C;
+  border-radius: 8px;
+  padding: 24px 28px;
+  margin: 32px 0;
+}
+.how-to h3 { color: #8B6914; font-size: 18px; margin-bottom: 12px; }
+.how-to ol {
+  margin-left: 20px;
+  margin-bottom: 0;
+}
+.how-to li {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 14px;
+  line-height: 1.7;
+  margin-bottom: 6px;
+  color: #555;
+}
+
+/* ---- Print styles ---- */
+@media print {
+  body { background: white; }
+  .header, .nav-bar, .notes-intro, .print-controls, .how-to, footer, h2 { display: none; }
+  .container { max-width: 100%; padding: 0; margin: 0; }
+  .cornell-sheet { border: 2px solid black; margin: 0; }
+  .cornell-header div { border-right-color: #999; }
+  .cornell-title { background: #eee; }
+  .cornell-body { min-height: 700px; }
+  .cornell-cue-hint, .cornell-notes-hint, .cornell-summary-hint { color: #bbb; }
+  @page { margin: 0.5in; }
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>Cornell Notes</h1>
+  <div class="divider"></div>
+  <p>Printable Note-Taking Template</p>
+</div>
+
+<nav class="nav-bar">
+  <a href="index.html">Home</a>
+  <a href="teaching.html">Teaching Materials</a>
+  <a href="vocabulary-cards.html">Vocabulary Cards</a>
+  <a href="current-events.html">Current Events</a>
+  <a href="teachers.html">Teachers Hub</a>
+</nav>
+
+<div class="container">
+
+<h2>Cornell Notes Template</h2>
+
+<div class="notes-intro">
+  <h3>What Are Cornell Notes?</h3>
+  <p>Cornell Notes are a structured way to take notes that helps you organize information, identify key ideas, and review more effectively. The format was developed at Cornell University and is widely used in middle and high schools.</p>
+  <p>The page is divided into three sections: a narrow <strong>Cue Column</strong> on the left for questions and key words, a wide <strong>Notes</strong> section on the right for detailed notes, and a <strong>Summary</strong> section at the bottom where you write the main ideas in your own words.</p>
+</div>
+
+<div class="print-controls">
+  <label for="student-name">Name:</label>
+  <input type="text" id="student-name" placeholder="Your name">
+  <label for="chapter-select">Chapter:</label>
+  <select id="chapter-select">
+    <option value="">Select a chapter...</option>
+    <option value="Ch. 1 — Indigenous America">Ch. 1: Indigenous America</option>
+    <option value="Ch. 2 — Colliding Cultures">Ch. 2: Colliding Cultures</option>
+    <option value="Ch. 3 — British North America">Ch. 3: British North America</option>
+    <option value="Ch. 4 — Colonial Society">Ch. 4: Colonial Society</option>
+    <option value="Ch. 5 — The American Revolution">Ch. 5: The American Revolution</option>
+    <option value="Ch. 6 — A New Nation">Ch. 6: A New Nation</option>
+    <option value="Ch. 7 — The Early Republic">Ch. 7: The Early Republic</option>
+    <option value="Ch. 8 — The Market Revolution">Ch. 8: The Market Revolution</option>
+    <option value="Ch. 9 — Democracy in America">Ch. 9: Democracy in America</option>
+    <option value="Ch. 10 — Religion and Reform">Ch. 10: Religion and Reform</option>
+    <option value="Ch. 11 — The Cotton Revolution">Ch. 11: The Cotton Revolution</option>
+    <option value="Ch. 12 — Manifest Destiny">Ch. 12: Manifest Destiny</option>
+    <option value="Ch. 13 — The Sectional Crisis">Ch. 13: The Sectional Crisis</option>
+    <option value="Ch. 14 — The Civil War">Ch. 14: The Civil War</option>
+    <option value="Ch. 15 — Reconstruction">Ch. 15: Reconstruction</option>
+  </select>
+  <button class="print-btn" onclick="preparePrint()">Print Notes Sheet</button>
+</div>
+
+<div class="cornell-sheet" id="cornell-sheet">
+  <div class="cornell-header">
+    <div>
+      <label>Name</label>
+      <input type="text" class="fill-line" id="print-name" readonly>
+    </div>
+    <div>
+      <label>Chapter / Topic</label>
+      <input type="text" class="fill-line" id="print-chapter" readonly>
+    </div>
+    <div>
+      <label>Date</label>
+      <input type="text" class="fill-line" id="print-date" readonly>
+    </div>
+  </div>
+
+  <div class="cornell-title">Cornell Notes &mdash; American Yawp MS</div>
+
+  <div class="cornell-body">
+    <div class="cornell-cue">
+      <div class="cornell-cue-label">Cue Column</div>
+      <div class="cornell-cue-hint">Write questions, key words, or main ideas here after you finish your notes.</div>
+      <div class="cornell-lines"></div>
+    </div>
+    <div class="cornell-notes-area">
+      <div class="cornell-notes-label">Notes</div>
+      <div class="cornell-notes-hint">Record important details, facts, and ideas from the chapter here.</div>
+      <div class="cornell-lines"></div>
+    </div>
+  </div>
+
+  <div class="cornell-summary">
+    <div class="cornell-summary-label">Summary</div>
+    <div class="cornell-summary-hint">After reviewing your notes, write a 2&ndash;3 sentence summary of the main ideas in your own words.</div>
+    <div class="cornell-lines"></div>
+  </div>
+</div>
+
+<div class="how-to">
+  <h3>How to Use Cornell Notes</h3>
+  <ol>
+    <li><strong>Before reading:</strong> Write the chapter title and date at the top. Skim the chapter headings and vocabulary words to preview what you'll learn.</li>
+    <li><strong>During reading:</strong> Take notes in the right-hand <em>Notes</em> column. Write down key facts, details, and ideas. Use abbreviations and short phrases. Skip lines between main ideas.</li>
+    <li><strong>After reading:</strong> Go back to the left-hand <em>Cue Column</em>. Write questions about your notes, key vocabulary words, or main ideas. These become your study guide.</li>
+    <li><strong>Review:</strong> Cover the Notes column with a piece of paper. Read each cue and try to explain the answer from memory. Check your notes to see if you were right.</li>
+    <li><strong>Summarize:</strong> Write a 2&ndash;3 sentence summary at the bottom in your own words. If you can't summarize it, review the section again.</li>
+  </ol>
+</div>
+
+<footer>
+  <p><a href="teaching.html">&larr; Back to Teaching Materials</a> | <a href="index.html">Home</a> | <a href="vocabulary-cards.html">Vocabulary Cards</a> | <a href="current-events.html">Current Events</a></p>
+</footer>
+
+</div>
+
+<script>
+function preparePrint() {
+  var name = document.getElementById('student-name').value;
+  var chapter = document.getElementById('chapter-select').value;
+  var today = new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+
+  document.getElementById('print-name').value = name;
+  document.getElementById('print-chapter').value = chapter;
+  document.getElementById('print-date').value = today;
+
+  setTimeout(function() { window.print(); }, 100);
+}
+
+// Sync input fields
+document.getElementById('student-name').addEventListener('input', function() {
+  document.getElementById('print-name').value = this.value;
+});
+document.getElementById('chapter-select').addEventListener('change', function() {
+  document.getElementById('print-chapter').value = this.value;
+});
+</script>
+</body>
+</html>

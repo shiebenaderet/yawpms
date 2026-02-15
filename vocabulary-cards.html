@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vocabulary Flash Cards | American Yawp MS</title>
+<link rel="stylesheet" href="css/pages.css">
+<style>
+/* ---- Flash Card styles ---- */
+.card-controls {
+  text-align: center;
+  margin: 0 0 28px;
+  padding: 20px 24px;
+  background: #F0F4F8;
+  border-radius: 8px;
+  border: 1px solid #d0dae4;
+}
+.card-controls label {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  color: #1B3A5C;
+  margin-right: 8px;
+}
+.card-controls select {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 14px;
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  min-width: 260px;
+  background: white;
+}
+.card-controls .controls-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.progress-bar {
+  text-align: center;
+  margin: 0 0 20px;
+}
+.progress-track {
+  height: 6px;
+  background: #e0e0e0;
+  border-radius: 3px;
+  margin: 8px 0;
+  overflow: hidden;
+}
+.progress-fill {
+  height: 100%;
+  background: #2A7F8E;
+  border-radius: 3px;
+  transition: width .3s;
+  width: 0%;
+}
+.progress-text {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 13px;
+  color: #999;
+}
+
+/* ---- Flip card ---- */
+.card-stage {
+  perspective: 1000px;
+  max-width: 560px;
+  margin: 0 auto 24px;
+  min-height: 280px;
+}
+.flip-card {
+  width: 100%;
+  min-height: 280px;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform .5s;
+  cursor: pointer;
+}
+.flip-card.flipped { transform: rotateY(180deg); }
+.flip-card-front, .flip-card-back {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  backface-visibility: hidden;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 36px 40px;
+  text-align: center;
+}
+.flip-card-front {
+  background: linear-gradient(135deg, #1B3A5C 0%, #2A5A8C 100%);
+  color: white;
+  border: 3px solid #C4941D;
+}
+.flip-card-front .card-label {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  opacity: .5;
+  margin-bottom: 16px;
+}
+.flip-card-front .card-term {
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 1.3;
+}
+.flip-card-front .card-hint {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 12px;
+  opacity: .4;
+  margin-top: 20px;
+}
+.flip-card-back {
+  background: white;
+  color: #2C2C2C;
+  border: 3px solid #2A7F8E;
+  transform: rotateY(180deg);
+}
+.flip-card-back .card-label {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: #2A7F8E;
+  margin-bottom: 12px;
+}
+.flip-card-back .card-def {
+  font-size: 16px;
+  line-height: 1.7;
+  max-width: 460px;
+}
+.flip-card-back .card-chapter {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 11px;
+  color: #999;
+  margin-top: 16px;
+}
+
+/* ---- Navigation buttons ---- */
+.card-nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin: 0 0 32px;
+}
+.nav-btn {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 10px 20px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  background: white;
+  color: #1B3A5C;
+  cursor: pointer;
+  transition: background .2s, border-color .2s;
+}
+.nav-btn:hover { background: #F0F4F8; border-color: #1B3A5C; }
+.nav-btn:disabled { opacity: .3; cursor: default; }
+.nav-btn.shuffle-btn { background: #FFF9E6; border-color: #C4941D; color: #8B6914; }
+.nav-btn.shuffle-btn:hover { background: #FFF3D4; }
+.nav-btn.mark-btn { background: #E8F5E9; border-color: #2E7D32; color: #2E7D32; }
+.nav-btn.mark-btn:hover { background: #D4EDDA; }
+.nav-btn.mark-btn.known { background: #2E7D32; color: white; }
+
+.card-counter {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 14px;
+  color: #999;
+  min-width: 80px;
+  text-align: center;
+}
+
+/* ---- Chapter term list (study mode) ---- */
+.term-list-toggle {
+  text-align: center;
+  margin: 0 0 20px;
+}
+.toggle-btn {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 13px;
+  color: #2A7F8E;
+  background: none;
+  border: none;
+  cursor: pointer;
+  border-bottom: 1px dotted #2A7F8E;
+  padding: 0;
+}
+.toggle-btn:hover { border-bottom-style: solid; }
+
+.term-list {
+  display: none;
+  max-width: 560px;
+  margin: 0 auto 32px;
+  border: 1px solid #eee;
+  border-radius: 8px;
+  overflow: hidden;
+}
+.term-list.visible { display: block; }
+.term-list-item {
+  display: flex;
+  align-items: baseline;
+  padding: 10px 16px;
+  border-bottom: 1px solid #f0f0f0;
+  font-size: 14px;
+  line-height: 1.5;
+}
+.term-list-item:last-child { border-bottom: none; }
+.term-list-item .tl-term {
+  font-weight: 700;
+  color: #1B3A5C;
+  min-width: 140px;
+  flex-shrink: 0;
+  margin-right: 12px;
+}
+.term-list-item .tl-def {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 13px;
+  color: #555;
+}
+.term-list-item .tl-known {
+  color: #2E7D32;
+  margin-left: 8px;
+  flex-shrink: 0;
+  font-size: 12px;
+}
+
+/* ---- Keyboard shortcut help ---- */
+.shortcut-help {
+  text-align: center;
+  margin: 0 0 24px;
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 12px;
+  color: #bbb;
+}
+.shortcut-help kbd {
+  display: inline-block;
+  padding: 1px 6px;
+  border: 1px solid #ddd;
+  border-radius: 3px;
+  background: #f8f8f8;
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 11px;
+  color: #666;
+  margin: 0 2px;
+}
+
+@media (max-width: 600px) {
+  .card-stage { min-height: 240px; }
+  .flip-card { min-height: 240px; }
+  .flip-card-front .card-term { font-size: 22px; }
+  .flip-card-front, .flip-card-back { padding: 24px 20px; }
+  .card-nav { flex-wrap: wrap; gap: 8px; }
+  .card-controls select { min-width: 200px; }
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>Vocabulary Flash Cards</h1>
+  <div class="divider"></div>
+  <p>Interactive Study Cards for Every Chapter</p>
+</div>
+
+<nav class="nav-bar">
+  <a href="index.html">Home</a>
+  <a href="teaching.html">Teaching Materials</a>
+  <a href="cornell-notes.html">Cornell Notes</a>
+  <a href="current-events.html">Current Events</a>
+  <a href="teachers.html">Teachers Hub</a>
+</nav>
+
+<div class="container">
+
+<div class="card-controls">
+  <div class="controls-row">
+    <label for="ch-select">Chapter:</label>
+    <select id="ch-select">
+      <option value="all">All Chapters (120+ terms)</option>
+    </select>
+  </div>
+</div>
+
+<div class="progress-bar">
+  <div class="progress-text" id="progress-text">Card 1 of 1</div>
+  <div class="progress-track"><div class="progress-fill" id="progress-fill"></div></div>
+</div>
+
+<div class="card-stage" id="card-stage">
+  <div class="flip-card" id="flip-card" onclick="flipCard()">
+    <div class="flip-card-front">
+      <div class="card-label">Vocabulary Term</div>
+      <div class="card-term" id="card-term">Loading...</div>
+      <div class="card-hint">Click or press Space to reveal definition</div>
+    </div>
+    <div class="flip-card-back">
+      <div class="card-label">Definition</div>
+      <div class="card-def" id="card-def"></div>
+      <div class="card-chapter" id="card-chapter"></div>
+    </div>
+  </div>
+</div>
+
+<div class="card-nav">
+  <button class="nav-btn" id="prev-btn" onclick="prevCard()">&larr; Previous</button>
+  <span class="card-counter" id="card-counter">1 / 1</span>
+  <button class="nav-btn" id="next-btn" onclick="nextCard()">Next &rarr;</button>
+  <button class="nav-btn shuffle-btn" onclick="shuffleCards()">Shuffle</button>
+  <button class="nav-btn mark-btn" id="mark-btn" onclick="toggleKnown()">Got It</button>
+</div>
+
+<div class="shortcut-help">
+  Keyboard: <kbd>&larr;</kbd> Previous &middot; <kbd>&rarr;</kbd> Next &middot; <kbd>Space</kbd> Flip &middot; <kbd>S</kbd> Shuffle &middot; <kbd>G</kbd> Mark as known
+</div>
+
+<div class="term-list-toggle">
+  <button class="toggle-btn" onclick="toggleTermList()">Show all terms in this chapter</button>
+</div>
+
+<div class="term-list" id="term-list"></div>
+
+<footer>
+  <p><a href="teaching.html">&larr; Back to Teaching Materials</a> | <a href="index.html">Home</a> | <a href="cornell-notes.html">Cornell Notes</a> | <a href="current-events.html">Current Events</a></p>
+</footer>
+
+</div>
+
+<script>
+/* ============================================================
+   Vocabulary Data — All 15 Chapters
+   ============================================================ */
+var VOCAB = {
+  "1": {
+    title: "Indigenous America",
+    terms: [
+      { term: "Indigenous", def: "Native to a place; the original inhabitants of a region. Indigenous peoples of the Americas are also called Native Americans, American Indians, or First Nations (in Canada)." },
+      { term: "Columbian Exchange", def: "The transfer of plants, animals, diseases, people, and ideas between the Americas and Europe/Africa/Asia after 1492. Named after Christopher Columbus." },
+      { term: "Pre-Columbian", def: "Referring to the Americas before Columbus\u2019s arrival in 1492." },
+      { term: "Beringia", def: "The land bridge that connected Asia and North America during the Ice Age, allowing the first people to migrate to the Americas." },
+      { term: "Three Sisters", def: "The three main crops\u2014corn, beans, and squash\u2014grown together by many Native American societies. They were nutritious and supported each other\u2019s growth." },
+      { term: "Mesoamerica", def: "The region including modern-day Mexico and Central America, home to advanced civilizations like the Maya and Aztec." },
+      { term: "Crusades", def: "A series of religious wars (1095\u20131291) in which European Christians tried to capture Jerusalem and other holy sites from Muslim control." },
+      { term: "Caravel", def: "A small, fast sailing ship developed by the Portuguese, designed to sail into the wind and explore coastlines." },
+      { term: "Astrolabe", def: "A navigation tool used to measure the angle of the sun or stars above the horizon, helping sailors determine their latitude." },
+      { term: "Conquistador", def: "A Spanish conqueror who led military expeditions in the Americas during the 16th century. From the Spanish word for \u201cconqueror.\u201d" },
+      { term: "Encomienda", def: "A Spanish colonial system in which colonists were granted authority over Indigenous communities, forcing them to work in exchange for supposed \u201cprotection\u201d and Christian teaching. In practice, it was slavery." },
+      { term: "Casta System", def: "The racial hierarchy created by Spanish colonists in the Americas, ranking people based on their ancestry (Spanish, Indigenous, African, or mixed)." }
+    ]
+  },
+  "2": {
+    title: "Colliding Cultures",
+    terms: [
+      { term: "Colony", def: "A territory or country under the full or partial political control of another country, typically a distant one, and occupied by settlers from that country." },
+      { term: "Empire", def: "An extensive group of states or countries under a single supreme authority, often an emperor or empress." },
+      { term: "Colonization", def: "The action or process of settling among and establishing control over the indigenous people of an area." },
+      { term: "Mission", def: "A religious community or settlement, especially one established by Spanish priests in the Americas to convert Indigenous peoples to Christianity." },
+      { term: "Mestizo/Mestiza", def: "A person of mixed European and Indigenous American ancestry." },
+      { term: "Mestizaje", def: "The mixing of different races or cultures, particularly referring to the mixing of European and Indigenous peoples in Latin America." },
+      { term: "Privateer", def: "A private person or ship authorized by a government to attack foreign vessels during wartime." },
+      { term: "Puritan", def: "A member of a group of English Protestants who wanted to \u201cpurify\u201d the Church of England by eliminating Catholic practices." },
+      { term: "Enclosure", def: "The process in England of consolidating small landholdings into larger farms, which forced many peasants off the land." }
+    ]
+  },
+  "3": {
+    title: "British North America",
+    terms: [
+      { term: "Joint-stock company", def: "A business owned by investors who buy shares of stock; used to fund early English colonies like Jamestown." },
+      { term: "Cash crop", def: "A crop produced for its commercial value rather than for use by the grower, such as tobacco." },
+      { term: "Indentured servant", def: "A person who agreed to work for a certain number of years in exchange for passage to America, room and board." },
+      { term: "Headright system", def: "A system used in Virginia that gave colonists 50 acres of land for each person whose passage they paid to Virginia." },
+      { term: "Freedom dues", def: "Supplies given to indentured servants when their contract ended, often including tools, clothes, and sometimes land." },
+      { term: "Planter elite", def: "Wealthy landowners who owned large plantations and enslaved people in the Southern colonies." }
+    ]
+  },
+  "4": {
+    title: "Colonial Society",
+    terms: [
+      { term: "Middle Passage", def: "The voyage that brought enslaved Africans across the Atlantic Ocean to North America and the West Indies." },
+      { term: "Slave code", def: "Laws that defined the status of enslaved people and the rights of slaveholders, limiting the rights and activities of enslaved people." },
+      { term: "Mercantilism", def: "An economic policy where a country tries to export more than it imports and accumulate wealth, especially gold and silver." },
+      { term: "Enlightenment", def: "An intellectual movement in the 1700s that emphasized reason, science, and respect for humanity." },
+      { term: "Natural rights", def: "Rights that people are born with and that no government can take away, such as life, liberty, and property." },
+      { term: "Social contract", def: "An agreement among people to form a government and obey its laws in exchange for protection of their rights." }
+    ]
+  },
+  "5": {
+    title: "The American Revolution",
+    terms: [
+      { term: "Revolution", def: "A fundamental change in political organization or in a government; the overthrow of one government and the substitution of another." },
+      { term: "Patriot", def: "American colonists who supported independence from Great Britain during the American Revolution." },
+      { term: "Loyalist", def: "American colonists who remained loyal to Great Britain during the American Revolution." },
+      { term: "\u201cNo taxation without representation\u201d", def: "A slogan expressing the colonists\u2019 belief that they should not be taxed by a government (British Parliament) in which they had no elected representatives." },
+      { term: "Boycott", def: "To refuse to buy or use goods or services as a form of protest." },
+      { term: "Sons of Liberty", def: "A secret organization formed by American colonists to protest British taxes and policies." }
+    ]
+  },
+  "6": {
+    title: "A New Nation",
+    terms: [
+      { term: "Articles of Confederation", def: "The first constitution of the United States (1781\u20131789), which created a weak central government." },
+      { term: "Constitution", def: "The supreme law of the United States, establishing the framework of the national government and the rights of citizens." },
+      { term: "Compromise", def: "An agreement in which each side gives up something it wants in order to end a dispute." },
+      { term: "Convention", def: "A formal meeting or assembly for a particular purpose, such as the Constitutional Convention of 1787." },
+      { term: "Virginia Plan", def: "A proposal at the Constitutional Convention that called for representation in Congress based on state population." },
+      { term: "New Jersey Plan", def: "A proposal at the Constitutional Convention that called for equal representation for each state in Congress." },
+      { term: "Great Compromise", def: "The agreement at the Constitutional Convention that created a two-house Congress: the Senate (equal representation) and the House of Representatives (representation based on population)." },
+      { term: "Three-Fifths Compromise", def: "The agreement that three-fifths of a state\u2019s enslaved population would be counted for representation and taxation purposes." },
+      { term: "Slave Trade Compromise", def: "The agreement that Congress could not ban the international slave trade until 1808." },
+      { term: "Fugitive Slave Clause", def: "A provision in the Constitution requiring that escaped enslaved people be returned to their enslavers." }
+    ]
+  },
+  "7": {
+    title: "The Early Republic",
+    terms: [
+      { term: "Gabriel\u2019s Rebellion", def: "An attempted slave rebellion in Virginia in 1800, led by an enslaved blacksmith named Gabriel." },
+      { term: "Haitian Revolution", def: "A successful anti-slavery and anti-colonial revolution in Haiti (1791\u20131804) that resulted in the establishment of Haiti as a free republic." },
+      { term: "Polygenesis", def: "The theory that different races descended from different origins; used to justify slavery and racism." },
+      { term: "Abolitionist", def: "A person who wanted to end, or abolish, slavery." },
+      { term: "White supremacy", def: "The belief that white people are superior to people of other races and should dominate society." },
+      { term: "Democratic-Republicans", def: "A political party founded by Thomas Jefferson and James Madison that favored states\u2019 rights and a limited federal government." },
+      { term: "Republican Motherhood", def: "The idea that women had an important political role as mothers who would raise virtuous, civic-minded sons." },
+      { term: "Louisiana Purchase", def: "The 1803 purchase by the United States of French territory extending from the Mississippi River to the Rocky Mountains, doubling the size of the nation." },
+      { term: "Embargo Act of 1807", def: "A law that prohibited American ships from trading in all foreign ports, intended to pressure Britain and France but hurt the American economy." },
+      { term: "Peaceable coercion", def: "Jefferson\u2019s policy of using economic pressure rather than military force to defend American interests." },
+      { term: "Judicial review", def: "The power of the Supreme Court to declare laws unconstitutional, established in Marbury v. Madison (1803)." }
+    ]
+  },
+  "8": {
+    title: "The Market Revolution",
+    terms: [
+      { term: "Market Revolution", def: "The transformation of the American economy in the early 1800s from a subsistence economy to a market economy based on cash crops and manufacturing." },
+      { term: "Subsistence farming", def: "Farming to produce just enough food to feed one\u2019s family, with little left over to sell." },
+      { term: "Commercial agriculture", def: "Farming to produce crops to sell for profit." },
+      { term: "Factory system", def: "A method of manufacturing using machinery and division of labor in a centralized location." },
+      { term: "Strike (turn-out)", def: "When workers refuse to work until their demands for better pay or working conditions are met." },
+      { term: "Labor union", def: "An organization of workers formed to protect their rights and interests." }
+    ]
+  },
+  "9": {
+    title: "Democracy in America",
+    terms: [
+      { term: "Jacksonian democracy", def: "The political movement toward greater democracy for the common white man during Andrew Jackson\u2019s presidency." },
+      { term: "Suffrage", def: "The right to vote." },
+      { term: "Universal white male suffrage", def: "The extension of voting rights to all white men, regardless of property ownership." },
+      { term: "Spoils system", def: "The practice of giving government jobs to political supporters." },
+      { term: "Corrupt bargain", def: "The accusation that John Quincy Adams won the 1824 presidential election through a deal with Henry Clay." },
+      { term: "Inauguration", def: "The ceremony of swearing in a president and beginning a new presidential term." },
+      { term: "Tariff", def: "A tax on imported goods." },
+      { term: "Nullification", def: "The theory that a state could reject a federal law it deemed unconstitutional." },
+      { term: "States\u2019 rights", def: "The belief that states should have more power than the federal government." },
+      { term: "Veto", def: "The president\u2019s power to reject a bill passed by Congress." },
+      { term: "Speculation", def: "Buying land or goods hoping to sell them later at a higher price." },
+      { term: "Panic", def: "A financial crisis, often involving bank failures and economic depression." }
+    ]
+  },
+  "10": {
+    title: "Religion and Reform",
+    terms: [
+      { term: "Reform", def: "A change to improve something, especially an institution or practice." },
+      { term: "Activism", def: "Taking action to bring about political or social change." },
+      { term: "Grassroots", def: "Ordinary people in a community or organization, especially in politics; movements that start with common people rather than leaders." },
+      { term: "Second Great Awakening", def: "A religious revival movement in the early 1800s that emphasized personal salvation and social reform." },
+      { term: "Camp meeting", def: "A large outdoor religious gathering that could last for days, popular during the Second Great Awakening." },
+      { term: "Perfectionism", def: "The religious belief that people could achieve moral perfection and a sinless life." },
+      { term: "Evangelical Christianity", def: "A form of Protestant Christianity emphasizing personal conversion, the Bible\u2019s authority, and spreading the faith." },
+      { term: "Declaration of Sentiments", def: "A document written at the Seneca Falls Convention (1848) demanding equal rights for women, modeled after the Declaration of Independence." },
+      { term: "Temperance", def: "Moderation in or abstinence from alcohol; the temperance movement sought to limit or ban alcohol consumption." },
+      { term: "Common school", def: "A free public elementary school open to children of all social classes." },
+      { term: "Utopian community", def: "An experimental community designed to create a perfect or ideal society." },
+      { term: "Rehabilitation", def: "The process of helping someone return to a normal, productive life, especially after imprisonment." }
+    ]
+  },
+  "11": {
+    title: "The Cotton Revolution",
+    terms: [
+      { term: "King Cotton", def: "A phrase expressing the importance of cotton to the Southern economy before the Civil War." },
+      { term: "Commodity", def: "A raw material or agricultural product that can be bought and sold." },
+      { term: "Planter", def: "A large-scale farmer, especially one who owned a plantation and enslaved people." },
+      { term: "Domestic slave trade", def: "The buying and selling of enslaved people within the United States." },
+      { term: "Task system", def: "A system of enslaved labor in which workers were assigned specific tasks to complete each day, after which their time was their own." },
+      { term: "Gang system", def: "A system of enslaved labor in which groups of workers performed the same task under an overseer\u2019s supervision from dawn to dusk." },
+      { term: "Overseer", def: "A person who supervised enslaved workers on a plantation." },
+      { term: "Underground Railroad", def: "A secret network of people and places that helped enslaved people escape to freedom in the North or Canada." },
+      { term: "Fugitive Slave Act (1850)", def: "A federal law requiring that escaped enslaved people be returned to their enslavers, even if they reached free states." },
+      { term: "Slave rebellion", def: "An uprising or revolt by enslaved people against their enslavers." }
+    ]
+  },
+  "12": {
+    title: "Manifest Destiny",
+    terms: [
+      { term: "Manifest Destiny", def: "The 19th-century belief that the United States was destined to expand across North America to the Pacific Ocean." },
+      { term: "Annexation", def: "Adding a territory to an existing country." },
+      { term: "Cession", def: "The formal giving up of territory by a state or nation." },
+      { term: "Mexican Cession", def: "Land Mexico gave to the United States after the Mexican-American War (1848), including present-day California, Nevada, Utah, and parts of other states." },
+      { term: "Treaty of Guadalupe Hidalgo", def: "The treaty ending the Mexican-American War (1848), in which Mexico ceded about half its territory to the United States." },
+      { term: "Provoke", def: "To deliberately cause a reaction or response, often anger or conflict." },
+      { term: "Forty-Niners", def: "People who went to California during the Gold Rush of 1849." },
+      { term: "Genocide", def: "The deliberate and systematic destruction of a racial, political, or cultural group." },
+      { term: "Foreign Miners\u2019 Tax", def: "A California law requiring foreign-born miners (mostly Mexicans and Chinese) to pay a monthly tax." }
+    ]
+  },
+  "13": {
+    title: "The Sectional Crisis",
+    terms: [
+      { term: "Sectionalism", def: "Loyalty to the interests of one\u2019s own region or section of the country rather than to the nation as a whole." },
+      { term: "Free labor", def: "The belief that labor should be voluntary and workers should be able to advance economically through hard work; contrasted with enslaved labor." },
+      { term: "Secession", def: "The act of withdrawing from an organization or political entity, especially a state leaving the Union." },
+      { term: "Popular sovereignty", def: "The idea that settlers in a territory should decide for themselves whether to allow slavery." },
+      { term: "Fugitive Slave Act", def: "Part of the Compromise of 1850 requiring citizens to assist in the capture of runaway enslaved people and denying fugitives the right to a jury trial." },
+      { term: "Compromise of 1850", def: "A series of laws intended to settle disputes between slave and free states, including admitting California as a free state and creating a stricter Fugitive Slave Act." },
+      { term: "Kansas-Nebraska Act (1854)", def: "A law that created the territories of Kansas and Nebraska and allowed popular sovereignty to determine whether they would allow slavery." },
+      { term: "Border Ruffians", def: "Pro-slavery activists from Missouri who crossed into Kansas to vote illegally and intimidate anti-slavery settlers during \u201cBleeding Kansas.\u201d" },
+      { term: "Republican Party", def: "A political party founded in 1854 by opponents of slavery\u2019s expansion into new territories." }
+    ]
+  },
+  "14": {
+    title: "The Civil War",
+    terms: [
+      { term: "Confederacy", def: "The government formed by the Southern states that seceded from the Union." },
+      { term: "Union", def: "The United States of America, especially the Northern states during the Civil War." },
+      { term: "Emancipation", def: "The act of freeing people from slavery or oppression." },
+      { term: "Emancipation Proclamation", def: "An executive order issued by President Lincoln on January 1, 1863, declaring enslaved people in Confederate states to be free." },
+      { term: "Contraband", def: "Enslaved people who escaped to Union lines during the Civil War; the Union treated them as confiscated enemy property." },
+      { term: "Total war", def: "A military strategy that targets not only enemy soldiers but also the economic resources and civilian infrastructure that support them." },
+      { term: "Siege", def: "A military operation in which forces surround a city or fortress to force its surrender by cutting off supplies." },
+      { term: "Casualties", def: "People killed, wounded, captured, or missing in a war or battle." }
+    ]
+  },
+  "15": {
+    title: "Reconstruction",
+    terms: [
+      { term: "Reconstruction", def: "The period (1865\u20131877) after the Civil War when the Southern states were reorganized and reintegrated into the Union." },
+      { term: "Freedpeople", def: "Formerly enslaved people who were freed during or after the Civil War." },
+      { term: "Second Founding", def: "The transformation of the Constitution through the Thirteenth, Fourteenth, and Fifteenth Amendments during Reconstruction." },
+      { term: "Black Codes", def: "Laws passed by Southern states after the Civil War to restrict the rights and freedoms of Black people." },
+      { term: "Vagrancy laws", def: "Laws that made it illegal to be unemployed; used to force freedpeople into labor contracts." },
+      { term: "Presidential Reconstruction", def: "President Andrew Johnson\u2019s lenient plan for bringing Southern states back into the Union with few protections for freedpeople." },
+      { term: "Radical Republicans", def: "Republicans in Congress who wanted to punish the South and guarantee rights for freedpeople." },
+      { term: "Fourteenth Amendment (1868)", def: "A constitutional amendment guaranteeing citizenship and equal protection under the law to all people born in the United States." },
+      { term: "Fifteenth Amendment (1870)", def: "A constitutional amendment guaranteeing that the right to vote could not be denied based on race, color, or previous condition of servitude." },
+      { term: "Reconstruction Acts (1867)", def: "Laws passed by Congress that divided the South into military districts and required new state constitutions guaranteeing Black male suffrage." },
+      { term: "Compromise of 1877", def: "An informal agreement that resolved the disputed 1876 presidential election; Republicans won the presidency in exchange for withdrawing federal troops from the South, ending Reconstruction." },
+      { term: "Jim Crow", def: "State and local laws enforcing racial segregation in the Southern United States from the 1870s to the 1960s." },
+      { term: "Sharecropping", def: "A system of agriculture where landowners allowed tenants to use their land in exchange for a share of the crops produced." },
+      { term: "Poll tax", def: "A fee required to vote, used to prevent poor people, especially Black people, from voting." }
+    ]
+  }
+};
+
+/* ============================================================
+   Flash Card Logic
+   ============================================================ */
+var currentCards = [];
+var currentIndex = 0;
+var knownCards = {};
+
+// Load known cards from localStorage
+try {
+  var saved = localStorage.getItem('yawpms-vocab-known');
+  if (saved) knownCards = JSON.parse(saved);
+} catch(e) {}
+
+function saveKnown() {
+  try { localStorage.setItem('yawpms-vocab-known', JSON.stringify(knownCards)); } catch(e) {}
+}
+
+function buildChapterSelect() {
+  var sel = document.getElementById('ch-select');
+  for (var ch in VOCAB) {
+    var opt = document.createElement('option');
+    opt.value = ch;
+    opt.textContent = 'Ch. ' + ch + ': ' + VOCAB[ch].title + ' (' + VOCAB[ch].terms.length + ' terms)';
+    sel.appendChild(opt);
+  }
+  sel.addEventListener('change', function() { loadChapter(this.value); });
+}
+
+function loadChapter(ch) {
+  currentCards = [];
+  if (ch === 'all') {
+    for (var c in VOCAB) {
+      VOCAB[c].terms.forEach(function(t) {
+        currentCards.push({ term: t.term, def: t.def, chapter: 'Ch. ' + c + ': ' + VOCAB[c].title });
+      });
+    }
+  } else {
+    VOCAB[ch].terms.forEach(function(t) {
+      currentCards.push({ term: t.term, def: t.def, chapter: 'Ch. ' + ch + ': ' + VOCAB[ch].title });
+    });
+  }
+  currentIndex = 0;
+  unflip();
+  showCard();
+  updateTermList();
+}
+
+function showCard() {
+  if (currentCards.length === 0) return;
+  var card = currentCards[currentIndex];
+  document.getElementById('card-term').textContent = card.term;
+  document.getElementById('card-def').textContent = card.def;
+  document.getElementById('card-chapter').textContent = card.chapter;
+  document.getElementById('card-counter').textContent = (currentIndex + 1) + ' / ' + currentCards.length;
+  document.getElementById('prev-btn').disabled = currentIndex === 0;
+  document.getElementById('next-btn').disabled = currentIndex === currentCards.length - 1;
+
+  // Progress
+  var pct = ((currentIndex + 1) / currentCards.length * 100).toFixed(0);
+  document.getElementById('progress-fill').style.width = pct + '%';
+
+  var knownCount = 0;
+  currentCards.forEach(function(c) { if (knownCards[c.term]) knownCount++; });
+  document.getElementById('progress-text').textContent =
+    'Card ' + (currentIndex + 1) + ' of ' + currentCards.length +
+    (knownCount > 0 ? ' \u00b7 ' + knownCount + ' marked as known' : '');
+
+  // Mark button state
+  var markBtn = document.getElementById('mark-btn');
+  if (knownCards[card.term]) {
+    markBtn.classList.add('known');
+    markBtn.textContent = 'Known';
+  } else {
+    markBtn.classList.remove('known');
+    markBtn.textContent = 'Got It';
+  }
+}
+
+function flipCard() {
+  document.getElementById('flip-card').classList.toggle('flipped');
+}
+
+function unflip() {
+  document.getElementById('flip-card').classList.remove('flipped');
+}
+
+function nextCard() {
+  if (currentIndex < currentCards.length - 1) {
+    currentIndex++;
+    unflip();
+    setTimeout(showCard, 50);
+  }
+}
+
+function prevCard() {
+  if (currentIndex > 0) {
+    currentIndex--;
+    unflip();
+    setTimeout(showCard, 50);
+  }
+}
+
+function shuffleCards() {
+  for (var i = currentCards.length - 1; i > 0; i--) {
+    var j = Math.floor(Math.random() * (i + 1));
+    var temp = currentCards[i];
+    currentCards[i] = currentCards[j];
+    currentCards[j] = temp;
+  }
+  currentIndex = 0;
+  unflip();
+  showCard();
+}
+
+function toggleKnown() {
+  if (currentCards.length === 0) return;
+  var term = currentCards[currentIndex].term;
+  if (knownCards[term]) {
+    delete knownCards[term];
+  } else {
+    knownCards[term] = true;
+  }
+  saveKnown();
+  showCard();
+  updateTermList();
+}
+
+function toggleTermList() {
+  var list = document.getElementById('term-list');
+  list.classList.toggle('visible');
+}
+
+function updateTermList() {
+  var list = document.getElementById('term-list');
+  var html = '';
+  currentCards.forEach(function(card) {
+    var isKnown = knownCards[card.term];
+    html += '<div class="term-list-item">' +
+      '<span class="tl-term">' + escapeHtml(card.term) + '</span>' +
+      '<span class="tl-def">' + escapeHtml(card.def) + '</span>' +
+      (isKnown ? '<span class="tl-known">\u2713</span>' : '') +
+      '</div>';
+  });
+  list.innerHTML = html;
+}
+
+function escapeHtml(str) {
+  var div = document.createElement('div');
+  div.textContent = str;
+  return div.innerHTML;
+}
+
+// Keyboard shortcuts
+document.addEventListener('keydown', function(e) {
+  if (e.target.tagName === 'SELECT' || e.target.tagName === 'INPUT') return;
+  if (e.key === 'ArrowRight') { e.preventDefault(); nextCard(); }
+  else if (e.key === 'ArrowLeft') { e.preventDefault(); prevCard(); }
+  else if (e.key === ' ') { e.preventDefault(); flipCard(); }
+  else if (e.key === 's' || e.key === 'S') { shuffleCards(); }
+  else if (e.key === 'g' || e.key === 'G') { toggleKnown(); }
+});
+
+// Initialize
+buildChapterSelect();
+loadChapter('all');
+</script>
+</body>
+</html>
