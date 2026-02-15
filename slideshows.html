@@ -190,6 +190,56 @@
   opacity: .7;
 }
 
+/* ---- Image slide ---- */
+.slide-image {
+  background: #f8f8f8;
+  padding: 32px 48px;
+  justify-content: center;
+  align-items: center;
+}
+.slide-image img {
+  max-width: 100%;
+  max-height: 60%;
+  object-fit: contain;
+  border-radius: 4px;
+  box-shadow: 0 4px 12px rgba(0,0,0,.15);
+  margin-bottom: 16px;
+}
+.slide-image .img-caption {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 14px;
+  color: #555;
+  text-align: center;
+  max-width: 600px;
+  line-height: 1.4;
+}
+
+/* ---- Story slide ---- */
+.slide-story {
+  background: linear-gradient(135deg, #FFF9E6 0%, #FFF5D6 100%);
+  padding: 48px 64px;
+}
+.slide-story .story-label {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: #C4941D;
+  margin-bottom: 12px;
+}
+.slide-story .story-heading {
+  font-size: 26px;
+  color: #1B3A5C;
+  margin-bottom: 16px;
+  line-height: 1.3;
+}
+.slide-story .story-text {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 17px;
+  line-height: 1.6;
+  color: #333;
+}
+
 /* ---- Slide navigation ---- */
 .slide-nav {
   display: flex;
@@ -342,11 +392,14 @@ var SLIDES = {
 "1": { title:"Indigenous America", subtitle:"The New World Before Columbus \u2014 and After", slides:[
   {type:"title"},
   {type:"content", heading:"Big Questions", items:["How did the first Americans arrive, and how did they create such diverse civilizations?","What was the Columbian Exchange and how did it transform both hemispheres?","How did European contact reshape Indigenous life in the Americas?"]},
+  {type:"image", src:"images/ch1/beringia-land-bridge.png", caption:"The Beringia land bridge connected Asia to North America during the Ice Age, allowing the first people to migrate to the Americas 12,000\u201320,000 years ago."},
   {type:"content", heading:"The First Americans", items:["During the Ice Age, a land bridge called Beringia connected Asia to North America","People migrated across Beringia 12,000\u201320,000 years ago","Over thousands of years, they spread across North and South America","They developed diverse cultures, languages, and ways of life"]},
+  {type:"image", src:"images/ch1/cahokia-mounds.jpg", caption:"Cahokia Mounds near present-day St. Louis. At its peak around 1050 CE, this city had a population of 30,000, larger than London at the time."},
   {type:"content", heading:"Diverse Civilizations", items:["Cahokia (near St. Louis): population of 30,000 \u2014 larger than London","Maya and Aztec empires in Mesoamerica built massive cities","The Three Sisters (corn, beans, squash) supported agriculture across the continent","Hundreds of distinct languages and cultures existed before contact"]},
   {type:"vocab", heading:"Key Vocabulary", terms:[{t:"Indigenous",d:"Native to a place; the original inhabitants"},{t:"Beringia",d:"Land bridge connecting Asia and North America"},{t:"Three Sisters",d:"Corn, beans, and squash grown together"},{t:"Columbian Exchange",d:"Transfer of plants, animals, and diseases between hemispheres"}]},
   {type:"content", heading:"European Exploration", items:["The Crusades sparked European interest in Asian trade goods","New technology: caravel ships, astrolabes, compasses","Columbus reached the Americas in 1492, seeking a route to Asia","This began a massive exchange of plants, animals, and diseases"]},
   {type:"content", heading:"The Columbian Exchange", items:["To the Americas: wheat, horses, cattle, diseases (smallpox, measles)","From the Americas: corn, potatoes, tomatoes, tobacco, chocolate","European diseases killed an estimated 90% of Indigenous peoples","The exchange permanently transformed both hemispheres"]},
+  {type:"story", heading:"The Great Dying", text:"When European diseases reached the Americas, they spread faster than the Europeans themselves. Indigenous peoples had no immunity to smallpox, measles, or typhus. Entire villages were wiped out. An estimated 90% of the Indigenous population died within a century of contact. This demographic catastrophe \u2014 sometimes called 'The Great Dying' \u2014 was the largest loss of human life in history, fundamentally reshaping Indigenous societies and making European conquest possible."},
   {type:"content", heading:"Spanish Conquest", items:["Conquistadors like Cort\u00e9s conquered Indigenous empires","The encomienda system forced Indigenous peoples into labor","The casta system ranked people by racial ancestry","The Pueblo Revolt (1680) \u2014 successful Indigenous resistance"]},
   {type:"discuss", question:"If 90% of a population was wiped out by disease, how would that change every aspect of a society \u2014 its government, economy, culture, and ability to resist invasion?"},
   {type:"end"}
@@ -561,6 +614,17 @@ function loadSlides(ch) {
       html += '<div class="' + cls + ' slide-discuss" id="slide-' + i + '">';
       html += '<div class="discuss-label">Discussion Question</div>';
       html += '<div class="discuss-q">' + esc(s.question) + '</div>';
+      html += '</div>';
+    } else if (s.type === 'image') {
+      html += '<div class="' + cls + ' slide-image" id="slide-' + i + '">';
+      html += '<img src="' + esc(s.src) + '" alt="' + esc(s.caption) + '">';
+      html += '<div class="img-caption">' + esc(s.caption) + '</div>';
+      html += '</div>';
+    } else if (s.type === 'story') {
+      html += '<div class="' + cls + ' slide-story" id="slide-' + i + '">';
+      html += '<div class="story-label">Story Behind the Story</div>';
+      html += '<div class="story-heading">' + esc(s.heading) + '</div>';
+      html += '<div class="story-text">' + esc(s.text) + '</div>';
       html += '</div>';
     } else if (s.type === 'end') {
       html += '<div class="' + cls + ' slide-end" id="slide-' + i + '">';
