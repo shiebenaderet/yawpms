@@ -190,6 +190,56 @@
   opacity: .7;
 }
 
+/* ---- Image slide ---- */
+.slide-image {
+  background: #f8f8f8;
+  padding: 32px 48px;
+  justify-content: center;
+  align-items: center;
+}
+.slide-image img {
+  max-width: 100%;
+  max-height: 60%;
+  object-fit: contain;
+  border-radius: 4px;
+  box-shadow: 0 4px 12px rgba(0,0,0,.15);
+  margin-bottom: 16px;
+}
+.slide-image .img-caption {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 14px;
+  color: #555;
+  text-align: center;
+  max-width: 600px;
+  line-height: 1.4;
+}
+
+/* ---- Story slide ---- */
+.slide-story {
+  background: linear-gradient(135deg, #FFF9E6 0%, #FFF5D6 100%);
+  padding: 48px 64px;
+}
+.slide-story .story-label {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: #C4941D;
+  margin-bottom: 12px;
+}
+.slide-story .story-heading {
+  font-size: 26px;
+  color: #1B3A5C;
+  margin-bottom: 16px;
+  line-height: 1.3;
+}
+.slide-story .story-text {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 17px;
+  line-height: 1.6;
+  color: #333;
+}
+
 /* ---- Slide navigation ---- */
 .slide-nav {
   display: flex;
@@ -342,11 +392,14 @@ var SLIDES = {
 "1": { title:"Indigenous America", subtitle:"The New World Before Columbus \u2014 and After", slides:[
   {type:"title"},
   {type:"content", heading:"Big Questions", items:["How did the first Americans arrive, and how did they create such diverse civilizations?","What was the Columbian Exchange and how did it transform both hemispheres?","How did European contact reshape Indigenous life in the Americas?"]},
+  {type:"image", src:"images/ch1/beringia-land-bridge.png", caption:"The Beringia land bridge connected Asia to North America during the Ice Age, allowing the first people to migrate to the Americas 12,000\u201320,000 years ago."},
   {type:"content", heading:"The First Americans", items:["During the Ice Age, a land bridge called Beringia connected Asia to North America","People migrated across Beringia 12,000\u201320,000 years ago","Over thousands of years, they spread across North and South America","They developed diverse cultures, languages, and ways of life"]},
+  {type:"image", src:"images/ch1/cahokia-mounds.jpg", caption:"Cahokia Mounds near present-day St. Louis. At its peak around 1050 CE, this city had a population of 30,000, larger than London at the time."},
   {type:"content", heading:"Diverse Civilizations", items:["Cahokia (near St. Louis): population of 30,000 \u2014 larger than London","Maya and Aztec empires in Mesoamerica built massive cities","The Three Sisters (corn, beans, squash) supported agriculture across the continent","Hundreds of distinct languages and cultures existed before contact"]},
   {type:"vocab", heading:"Key Vocabulary", terms:[{t:"Indigenous",d:"Native to a place; the original inhabitants"},{t:"Beringia",d:"Land bridge connecting Asia and North America"},{t:"Three Sisters",d:"Corn, beans, and squash grown together"},{t:"Columbian Exchange",d:"Transfer of plants, animals, and diseases between hemispheres"}]},
   {type:"content", heading:"European Exploration", items:["The Crusades sparked European interest in Asian trade goods","New technology: caravel ships, astrolabes, compasses","Columbus reached the Americas in 1492, seeking a route to Asia","This began a massive exchange of plants, animals, and diseases"]},
   {type:"content", heading:"The Columbian Exchange", items:["To the Americas: wheat, horses, cattle, diseases (smallpox, measles)","From the Americas: corn, potatoes, tomatoes, tobacco, chocolate","European diseases killed an estimated 90% of Indigenous peoples","The exchange permanently transformed both hemispheres"]},
+  {type:"story", heading:"The Great Dying", text:"When European diseases reached the Americas, they spread faster than the Europeans themselves. Indigenous peoples had no immunity to smallpox, measles, or typhus. Entire villages were wiped out. An estimated 90% of the Indigenous population died within a century of contact. This demographic catastrophe \u2014 sometimes called 'The Great Dying' \u2014 was the largest loss of human life in history, fundamentally reshaping Indigenous societies and making European conquest possible."},
   {type:"content", heading:"Spanish Conquest", items:["Conquistadors like Cort\u00e9s conquered Indigenous empires","The encomienda system forced Indigenous peoples into labor","The casta system ranked people by racial ancestry","The Pueblo Revolt (1680) \u2014 successful Indigenous resistance"]},
   {type:"discuss", question:"If 90% of a population was wiped out by disease, how would that change every aspect of a society \u2014 its government, economy, culture, and ability to resist invasion?"},
   {type:"end"}
@@ -354,9 +407,12 @@ var SLIDES = {
 "2": { title:"Colliding Cultures", subtitle:"Spanish Missions, French Fur Traders, and Colonial Competition", slides:[
   {type:"title"},
   {type:"content", heading:"Three Colonial Approaches", items:["Spain: Missions to convert Indigenous peoples to Christianity","France: Fur trade partnerships with Indigenous nations","England: Settlement colonies seeking land and resources","Each approach shaped different relationships with Indigenous peoples"]},
+  {type:"image", src:"images/ch2/waldseemuller-map.jpg", caption:"Early European map showing how Europeans viewed and imagined the Americas in the age of exploration."},
   {type:"content", heading:"Spanish Missions", items:["Religious settlements designed to convert and assimilate Indigenous peoples","Located in Florida, New Mexico, Texas, and California","Used the encomienda system for forced labor","Met fierce resistance, including the Pueblo Revolt of 1680"]},
+  {type:"image", src:"images/ch2/de-bry-spanish-cruelty.jpg", caption:"Contemporary depiction of Spanish colonial violence against Indigenous peoples. These images were used by other European powers to criticize Spain."},
+  {type:"story", heading:"The Pueblo Revolt of 1680", text:"In 1680, Pueblo peoples in New Mexico rose up against Spanish colonizers in one of the most successful Indigenous resistance movements in North American history. Led by a religious leader named Pop\u00e9, they coordinated a unified uprising across dozens of pueblos. They killed 400 Spanish colonists and drove the remaining 2,000 out of New Mexico. For 12 years, the Pueblo peoples lived free of Spanish rule, reviving their traditional religions and ways of life. Though the Spanish eventually returned, the revolt forced them to adopt less brutal policies."},
   {type:"content", heading:"French Fur Trade", items:["Based on partnerships and alliances with Indigenous peoples","Samuel de Champlain founded Quebec in 1608","Smaller settlements focused on trade, not conquest","Indigenous peoples maintained more autonomy under French colonialism"]},
-  {type:"vocab", heading:"Key Vocabulary", terms:[{t:"Colony",d:"Territory under political control of another country"},{t:"Mission",d:"Religious settlement for converting Indigenous peoples"},{t:"Privateer",d:"Private ship authorized to attack foreign vessels"},{t:"Mestizo/Mestiza",d:"Person of mixed European and Indigenous ancestry"}]},
+  {type:"vocab", heading:"Key Vocabulary", terms:[{t:"Colony",d:"Territory under political control of another country"},{t:"Mission",d:"Religious settlement for converting Indigenous peoples"},{t:"Privateer",d:"Private ship authorized to attack foreign vessels"},{t:"Mestizo/Mestiza",d:"Person of mixed European and Indigenous ancestry"},{t:"Encomienda",d:"Spanish colonial labor system granting colonists control over Indigenous workers"},{t:"Conquistador",d:"Spanish military conqueror"}]},
   {type:"content", heading:"English Colonization Begins", items:["Puritans sought religious freedom from the Church of England","Enclosure movement pushed poor English people off their land","Joint-stock companies funded colonial ventures","Different motivations: religion, profit, escape from poverty"]},
   {type:"content", heading:"Indigenous Resistance", items:["The Pueblo Revolt (1680): Led by Pop\u00e9, drove Spanish out for 12 years","Indigenous nations played European powers against each other","Alliances shifted based on which Europeans offered better terms","Resistance took many forms: military, diplomatic, cultural"]},
   {type:"discuss", question:"How did the different European approaches to colonization \u2014 missions, fur trade, settlement \u2014 lead to different outcomes for Indigenous peoples?"},
@@ -364,9 +420,12 @@ var SLIDES = {
 ]},
 "3": { title:"British North America", subtitle:"Jamestown, Plymouth, and the Roots of Colonial America", slides:[
   {type:"title"},
+  {type:"image", src:"images/ch3/thirteen-colonies-1775.png", caption:"Map of the thirteen British colonies that would eventually become the United States."},
   {type:"content", heading:"Jamestown (1607)", items:["First permanent English settlement in North America","Founded by the Virginia Company (joint-stock company)","Nearly failed due to disease, starvation, and conflict","Tobacco saved the colony \u2014 John Rolfe made it profitable"]},
+  {type:"story", heading:"The Starving Time", text:"The winter of 1609-1610 was Jamestown's darkest hour. Of the 500 colonists who entered the winter, only 60 survived to spring. They ate horses, dogs, cats, rats, shoe leather \u2014 anything they could find. Some resorted to cannibalism. Disease, starvation, and conflict with the Powhatan Confederacy brought the colony to the brink of total collapse. In May 1610, the survivors actually abandoned Jamestown and began sailing home. Only the arrival of a supply ship convinced them to turn back. This near-disaster shaped Virginia's brutal future policies toward Indigenous peoples and labor."},
   {type:"content", heading:"Labor in the Colonies", items:["Indentured servants: worked 4\u20137 years for passage to America","Headright system: 50 acres per person whose passage was paid","Freedom dues given when contracts ended","Gradual shift toward enslaved African labor after 1676"]},
-  {type:"vocab", heading:"Key Vocabulary", terms:[{t:"Joint-stock company",d:"Business funded by investors who buy shares"},{t:"Cash crop",d:"Crop grown for commercial sale, like tobacco"},{t:"Indentured servant",d:"Worker bound for a set number of years"},{t:"Planter elite",d:"Wealthy landowners with large plantations"}]},
+  {type:"image", src:"images/ch3/slave-ship-brookes.jpg", caption:"Diagram of a slave ship showing the horrific conditions of the Middle Passage that brought enslaved Africans to the Americas."},
+  {type:"vocab", heading:"Key Vocabulary", terms:[{t:"Joint-stock company",d:"Business funded by investors who buy shares"},{t:"Cash crop",d:"Crop grown for commercial sale, like tobacco"},{t:"Indentured servant",d:"Worker bound for a set number of years"},{t:"Planter elite",d:"Wealthy landowners with large plantations"},{t:"Headright system",d:"50 acres given per person whose passage was paid"},{t:"Covenant",d:"Binding agreement, especially for religious communities"}]},
   {type:"content", heading:"Bacon\u2019s Rebellion (1676)", items:["Nathaniel Bacon led frontier settlers against the colonial government","Revealed tensions between wealthy planters and poor settlers","After the rebellion, Virginia turned to enslaved African labor","Enslavement was permanent, hereditary, and race-based"]},
   {type:"content", heading:"The Shift to Slavery", items:["Before 1676: mostly indentured servants (could become free)","After 1676: increasing reliance on enslaved Africans","Slave codes stripped all rights from enslaved people","Slavery became the foundation of the Southern economy"]},
   {type:"discuss", question:"Why did Virginia\u2019s labor system shift from indentured servitude to racial slavery? What does this tell us about the relationship between economics and racism?"},
@@ -561,6 +620,17 @@ function loadSlides(ch) {
       html += '<div class="' + cls + ' slide-discuss" id="slide-' + i + '">';
       html += '<div class="discuss-label">Discussion Question</div>';
       html += '<div class="discuss-q">' + esc(s.question) + '</div>';
+      html += '</div>';
+    } else if (s.type === 'image') {
+      html += '<div class="' + cls + ' slide-image" id="slide-' + i + '">';
+      html += '<img src="' + esc(s.src) + '" alt="' + esc(s.caption) + '">';
+      html += '<div class="img-caption">' + esc(s.caption) + '</div>';
+      html += '</div>';
+    } else if (s.type === 'story') {
+      html += '<div class="' + cls + ' slide-story" id="slide-' + i + '">';
+      html += '<div class="story-label">Story Behind the Story</div>';
+      html += '<div class="story-heading">' + esc(s.heading) + '</div>';
+      html += '<div class="story-text">' + esc(s.text) + '</div>';
       html += '</div>';
     } else if (s.type === 'end') {
       html += '<div class="' + cls + ' slide-end" id="slide-' + i + '">';
