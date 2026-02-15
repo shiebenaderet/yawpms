@@ -366,6 +366,7 @@
   .slide-viewer .slide-story { background: none !important; border-left: 3px solid #C4941D; padding-left: 20px; }
 }
 </style>
+<script src="https://cdn.jsdelivr.net/gh/gitbrent/PptxGenJS@3.12.0/dist/pptxgen.bundle.js"></script>
 </head>
 <body>
 
@@ -393,7 +394,7 @@
   </select>
   <button class="present-btn" id="present-btn" onclick="goFullscreen()" disabled>Present Fullscreen</button>
   <button class="export-btn" id="print-btn" onclick="printSlides()" disabled>Print / PDF</button>
-  <button class="export-btn" id="outline-btn" onclick="exportOutline()" disabled>Export Outline</button>
+  <button class="export-btn" id="pptx-btn" onclick="exportPptx()" disabled>Export PowerPoint</button>
 </div>
 
 <div class="no-slides" id="no-slides">Select a chapter above to view the slideshow.</div>
@@ -653,14 +654,14 @@ function loadSlides(ch) {
     noSlides.style.display = 'block';
     presentBtn.disabled = true;
     document.getElementById('print-btn').disabled = true;
-    document.getElementById('outline-btn').disabled = true;
+    document.getElementById('pptx-btn').disabled = true;
     return;
   }
 
   noSlides.style.display = 'none';
   presentBtn.disabled = false;
   document.getElementById('print-btn').disabled = false;
-  document.getElementById('outline-btn').disabled = false;
+  document.getElementById('pptx-btn').disabled = false;
   var deck = SLIDES[ch];
   currentSlides = deck.slides;
   currentSlideIndex = 0;
@@ -770,41 +771,84 @@ function printSlides() {
   showSlide(currentSlideIndex);
 }
 
-function exportOutline() {
+function exportPptx() {
   var ch = document.getElementById('ch-select').value;
   if (!ch || !SLIDES[ch]) return;
   var deck = SLIDES[ch];
-  var lines = [];
-  lines.push('Chapter ' + ch + ': ' + deck.title);
-  lines.push(deck.subtitle);
-  lines.push('='.repeat(50));
-  lines.push('');
+  var pptx = new PptxGenJS();
+
+  // Slide dimensions (widescreen 16:9)
+  pptx.defineLayout({ name:'WIDE', width:10, height:5.625 });
+  pptx.layout = 'WIDE';
+
+  // Theme colors
+  var navy = '1B3A5C';
+  var gold = 'C4941D';
+  var teal = '2A7F8E';
+  var white = 'FFFFFF';
+  var light = 'F0F4F8';
+  var warmBg = 'FFF9E6';
+
   deck.slides.forEach(function(s) {
-    if (s.type === 'content') {
-      lines.push(s.heading);
-      s.items.forEach(function(item) { lines.push('  - ' + item); });
-      lines.push('');
+    var slide;
+
+    if (s.type === 'title') {
+      slide = pptx.addSlide();
+      slide.background = { fill: navy };
+      slide.addText('Chapter ' + ch, { x: 0.5, y: 1.0, w: 9, h: 0.5, fontSize: 14, color: white, align: 'center', fontFace: 'Arial', transparency: 50, letterSpacing: 3 });
+      slide.addText(deck.title, { x: 0.5, y: 1.6, w: 9, h: 1.2, fontSize: 36, color: white, align: 'center', fontFace: 'Georgia', bold: true });
+      slide.addShape(pptx.ShapeType.rect, { x: 4.2, y: 2.85, w: 1.6, h: 0.06, fill: { color: gold } });
+      slide.addText(deck.subtitle, { x: 1.5, y: 3.1, w: 7, h: 0.8, fontSize: 16, color: white, align: 'center', fontFace: 'Arial', transparency: 30 });
+
+    } else if (s.type === 'content') {
+      slide = pptx.addSlide();
+      slide.addText(s.heading, { x: 0.7, y: 0.4, w: 8.6, h: 0.7, fontSize: 24, color: navy, fontFace: 'Georgia', bold: true, border: { pt: 0, color: gold }, borderPt: [0,0,2,0] });
+      slide.addShape(pptx.ShapeType.rect, { x: 0.7, y: 1.1, w: 8.6, h: 0.04, fill: { color: gold } });
+      var bullets = s.items.map(function(item) {
+        return { text: item, options: { fontSize: 17, color: '333333', fontFace: 'Arial', bullet: { code: '25B8', color: gold }, lineSpacingMultiple: 1.5, paraSpaceBefore: 4 } };
+      });
+      slide.addText(bullets, { x: 0.9, y: 1.4, w: 8.2, h: 3.8, valign: 'top' });
+
     } else if (s.type === 'vocab') {
-      lines.push(s.heading);
-      s.terms.forEach(function(t) { lines.push('  ' + t.t + ' — ' + t.d); });
-      lines.push('');
+      slide = pptx.addSlide();
+      slide.background = { fill: light };
+      slide.addText(s.heading, { x: 0.7, y: 0.4, w: 8.6, h: 0.7, fontSize: 24, color: navy, fontFace: 'Georgia', bold: true });
+      slide.addShape(pptx.ShapeType.rect, { x: 0.7, y: 1.1, w: 8.6, h: 0.04, fill: { color: teal } });
+      var vocabRows = [];
+      s.terms.forEach(function(t) {
+        vocabRows.push({ text: t.t, options: { fontSize: 17, color: navy, fontFace: 'Arial', bold: true, paraSpaceBefore: 8 } });
+        vocabRows.push({ text: t.d, options: { fontSize: 15, color: '555555', fontFace: 'Arial', paraSpaceBefore: 2 } });
+      });
+      slide.addText(vocabRows, { x: 0.9, y: 1.4, w: 8.2, h: 3.8, valign: 'top' });
+
     } else if (s.type === 'discuss') {
-      lines.push('Discussion Question:');
-      lines.push('  ' + s.question);
-      lines.push('');
+      slide = pptx.addSlide();
+      slide.background = { fill: warmBg };
+      slide.addText('DISCUSSION QUESTION', { x: 0.5, y: 1.0, w: 9, h: 0.5, fontSize: 13, color: gold, align: 'center', fontFace: 'Arial', bold: true, letterSpacing: 2 });
+      slide.addText(s.question, { x: 1.2, y: 1.8, w: 7.6, h: 2.5, fontSize: 24, color: navy, align: 'center', fontFace: 'Georgia', italic: true, lineSpacingMultiple: 1.5 });
+
     } else if (s.type === 'story') {
-      lines.push('Story: ' + s.heading);
-      lines.push('  ' + s.text);
-      lines.push('');
+      slide = pptx.addSlide();
+      slide.background = { fill: warmBg };
+      slide.addText('STORY BEHIND THE STORY', { x: 0.7, y: 0.3, w: 8.6, h: 0.4, fontSize: 12, color: gold, fontFace: 'Arial', bold: true, letterSpacing: 2 });
+      slide.addText(s.heading, { x: 0.7, y: 0.8, w: 8.6, h: 0.7, fontSize: 26, color: navy, fontFace: 'Georgia', bold: true });
+      slide.addText(s.text, { x: 0.7, y: 1.7, w: 8.6, h: 3.5, fontSize: 14, color: '333333', fontFace: 'Arial', lineSpacingMultiple: 1.5, valign: 'top' });
+
+    } else if (s.type === 'image') {
+      slide = pptx.addSlide();
+      slide.background = { fill: 'F8F8F8' };
+      slide.addText(s.caption, { x: 0.8, y: 2.0, w: 8.4, h: 1.5, fontSize: 16, color: '555555', align: 'center', fontFace: 'Arial', italic: true, lineSpacingMultiple: 1.4 });
+      slide.addText('[Image: see web version]', { x: 2.5, y: 0.5, w: 5, h: 1.2, fontSize: 13, color: '999999', align: 'center', fontFace: 'Arial' });
+
+    } else if (s.type === 'end') {
+      slide = pptx.addSlide();
+      slide.background = { fill: navy };
+      slide.addText('End of Chapter ' + ch, { x: 0.5, y: 1.8, w: 9, h: 1.0, fontSize: 28, color: white, align: 'center', fontFace: 'Georgia', bold: true });
+      slide.addText(deck.title, { x: 0.5, y: 2.9, w: 9, h: 0.8, fontSize: 16, color: white, align: 'center', fontFace: 'Arial', transparency: 30 });
     }
   });
-  var text = lines.join('\n');
-  var blob = new Blob([text], {type: 'text/plain'});
-  var a = document.createElement('a');
-  a.href = URL.createObjectURL(blob);
-  a.download = 'ch' + ch + '-outline.txt';
-  a.click();
-  URL.revokeObjectURL(a.href);
+
+  pptx.writeFile({ fileName: 'Ch' + ch + ' - ' + deck.title + '.pptx' });
 }
 </script>
 </body>
