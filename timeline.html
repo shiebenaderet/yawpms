@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Interactive Timeline | American Yawp MS</title>
+<link rel="stylesheet" href="css/pages.css">
+<style>
+/* ---- Timeline controls ---- */
+.tl-controls {
+  text-align: center;
+  margin: 0 0 32px;
+  padding: 16px 24px;
+  background: #F0F4F8;
+  border-radius: 8px;
+  border: 1px solid #d0dae4;
+}
+.tl-controls label {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  color: #1B3A5C;
+  margin-right: 8px;
+}
+.tl-controls select {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 14px;
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  min-width: 240px;
+  background: white;
+}
+
+/* ---- Legend ---- */
+.tl-legend {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 16px;
+  margin: 0 0 28px;
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 13px;
+  color: #666;
+}
+.tl-legend-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.tl-legend-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+/* ---- Timeline container ---- */
+.timeline {
+  position: relative;
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 0 0 40px;
+}
+.timeline::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 24px;
+  bottom: 0;
+  width: 3px;
+  background: linear-gradient(to bottom, #1B3A5C, #2A7F8E, #C4941D);
+  border-radius: 2px;
+}
+
+/* ---- Era dividers ---- */
+.tl-era {
+  position: relative;
+  margin: 32px 0 20px 0;
+  padding-left: 56px;
+}
+.tl-era-label {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: #1B3A5C;
+  background: #F0F4F8;
+  display: inline-block;
+  padding: 4px 16px;
+  border-radius: 12px;
+  border: 1px solid #d0dae4;
+}
+.tl-era::before {
+  content: '';
+  position: absolute;
+  left: 18px;
+  top: 50%;
+  width: 15px;
+  height: 15px;
+  background: #1B3A5C;
+  border-radius: 50%;
+  border: 3px solid #F0F4F8;
+  transform: translateY(-50%);
+}
+
+/* ---- Timeline events ---- */
+.tl-event {
+  position: relative;
+  margin: 0 0 16px;
+  padding: 14px 20px 14px 56px;
+  background: white;
+  border: 1px solid #e8e8e8;
+  border-radius: 8px;
+  transition: box-shadow .2s, border-color .2s, transform .15s;
+  cursor: default;
+}
+.tl-event:hover {
+  box-shadow: 0 4px 16px rgba(0,0,0,.08);
+  border-color: #C4941D;
+  transform: translateX(4px);
+}
+.tl-event::before {
+  content: '';
+  position: absolute;
+  left: 19px;
+  top: 18px;
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  border: 3px solid white;
+  box-shadow: 0 0 0 1px rgba(0,0,0,.1);
+}
+.tl-event.cat-political::before { background: #1B3A5C; }
+.tl-event.cat-social::before { background: #2A7F8E; }
+.tl-event.cat-economic::before { background: #C4941D; }
+.tl-event.cat-military::before { background: #B71C1C; }
+.tl-event.cat-cultural::before { background: #6A1B9A; }
+
+.tl-date {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  color: #999;
+  margin-bottom: 2px;
+}
+.tl-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: #1B3A5C;
+  margin-bottom: 4px;
+  line-height: 1.3;
+}
+.tl-desc {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #555;
+  margin-bottom: 4px;
+}
+.tl-chapter {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 12px;
+  color: #999;
+}
+.tl-chapter a {
+  color: #2A7F8E;
+  text-decoration: none;
+  border-bottom: 1px dotted #2A7F8E;
+}
+.tl-chapter a:hover { border-bottom-style: solid; }
+
+/* Hidden events for filtering */
+.tl-event.hidden { display: none; }
+.tl-era.hidden { display: none; }
+
+/* ---- Count display ---- */
+.tl-count {
+  text-align: center;
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 13px;
+  color: #999;
+  margin-bottom: 24px;
+}
+
+@media (max-width: 600px) {
+  .timeline::before { left: 16px; }
+  .tl-era { padding-left: 44px; }
+  .tl-era::before { left: 10px; }
+  .tl-event { padding-left: 44px; }
+  .tl-event::before { left: 11px; }
+  .tl-controls select { min-width: 180px; }
+}
+
+@media print {
+  .tl-controls, .tl-legend, .tl-count, .header, .nav-bar, footer { display: none !important; }
+  .container { max-width: 100%; }
+  .tl-event { break-inside: avoid; border-color: #ddd; }
+  .tl-event:hover { box-shadow: none; transform: none; }
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>Interactive Timeline</h1>
+  <div class="divider"></div>
+  <p>Key Events in American History, Pre-Contact through Reconstruction</p>
+</div>
+
+<nav class="nav-bar">
+  <a href="index.html">Home</a>
+  <a href="teaching.html">Teaching Materials</a>
+  <a href="slideshows.html">Slideshows</a>
+  <a href="quizzes.html">Quizzes</a>
+  <a href="teachers.html">Teachers Hub</a>
+</nav>
+
+<div class="container" style="max-width:800px;">
+
+<div class="tl-controls">
+  <label for="tl-filter">Filter:</label>
+  <select id="tl-filter" onchange="filterTimeline()">
+    <option value="all">All Events</option>
+    <option value="political">Political &amp; Legal</option>
+    <option value="social">Social &amp; Cultural</option>
+    <option value="economic">Economic</option>
+    <option value="military">Military &amp; Conflict</option>
+    <option value="cultural">Ideas &amp; Movements</option>
+  </select>
+  <select id="tl-chapter" onchange="filterTimeline()" style="margin-left:8px;">
+    <option value="all">All Chapters</option>
+    <option value="1">Ch. 1: Indigenous America</option>
+    <option value="2">Ch. 2: Colliding Cultures</option>
+    <option value="3">Ch. 3: British North America</option>
+    <option value="4">Ch. 4: Colonial Society</option>
+    <option value="5">Ch. 5: The American Revolution</option>
+    <option value="6">Ch. 6: A New Nation</option>
+    <option value="7">Ch. 7: The Early Republic</option>
+    <option value="8">Ch. 8: The Market Revolution</option>
+    <option value="9">Ch. 9: Democracy in America</option>
+    <option value="10">Ch. 10: Religion and Reform</option>
+    <option value="11">Ch. 11: The Cotton Revolution</option>
+    <option value="12">Ch. 12: Manifest Destiny</option>
+    <option value="13">Ch. 13: The Sectional Crisis</option>
+    <option value="14">Ch. 14: The Civil War</option>
+    <option value="15">Ch. 15: Reconstruction</option>
+  </select>
+</div>
+
+<div class="tl-legend">
+  <span class="tl-legend-item"><span class="tl-legend-dot" style="background:#1B3A5C;"></span> Political &amp; Legal</span>
+  <span class="tl-legend-item"><span class="tl-legend-dot" style="background:#2A7F8E;"></span> Social &amp; Cultural</span>
+  <span class="tl-legend-item"><span class="tl-legend-dot" style="background:#C4941D;"></span> Economic</span>
+  <span class="tl-legend-item"><span class="tl-legend-dot" style="background:#B71C1C;"></span> Military &amp; Conflict</span>
+  <span class="tl-legend-item"><span class="tl-legend-dot" style="background:#6A1B9A;"></span> Ideas &amp; Movements</span>
+</div>
+
+<div class="tl-count" id="tl-count"></div>
+
+<div class="timeline" id="timeline"></div>
+
+<footer>
+  <p><a href="teaching.html">&larr; Back to Teaching Materials</a> | <a href="index.html">Home</a> | <a href="slideshows.html">Slideshows</a> | <a href="quizzes.html">Quizzes</a></p>
+</footer>
+
+</div>
+
+<script>
+var EVENTS = [
+  // Era: Pre-Columbian & Contact
+  {era:"Pre-Columbian & Contact"},
+  {date:"~20,000 BCE", sort:-20000, title:"First Americans Arrive", desc:"People cross the Beringia land bridge from Asia to North America during the Ice Age.", cat:"social", ch:1},
+  {date:"~1050 CE", sort:1050, title:"Cahokia at Its Peak", desc:"The city of Cahokia near present-day St. Louis reaches a population of 30,000 \u2014 larger than London at the time.", cat:"social", ch:1},
+  {date:"1492", sort:1492, title:"Columbus Reaches the Americas", desc:"Christopher Columbus lands in the Caribbean, beginning the Columbian Exchange between hemispheres.", cat:"political", ch:1},
+
+  // Era: Colonization (1500s-1600s)
+  {era:"Colonization (1500s\u20131600s)"},
+  {date:"1519\u20131521", sort:1519, title:"Spanish Conquest of the Aztecs", desc:"Hern\u00e1n Cort\u00e9s conquers the Aztec Empire with the help of Indigenous allies and European diseases.", cat:"military", ch:2},
+  {date:"1607", sort:1607, title:"Jamestown Founded", desc:"The first permanent English settlement in North America. Many settlers die from starvation and disease.", cat:"political", ch:3},
+  {date:"1619", sort:1619, title:"First Enslaved Africans Arrive in Virginia", desc:"About 20 enslaved Africans are brought to Jamestown, beginning centuries of slavery in North America.", cat:"social", ch:3},
+  {date:"1620", sort:1620, title:"Pilgrims Land at Plymouth", desc:"Pilgrims establish Plymouth Colony in Massachusetts, seeking religious freedom.", cat:"social", ch:3},
+  {date:"1676", sort:1676, title:"Bacon\u2019s Rebellion", desc:"Frontier settlers rebel against Virginia\u2019s colonial government. Afterward, Virginia shifts toward race-based slavery.", cat:"political", ch:3},
+  {date:"1680", sort:1680, title:"Pueblo Revolt", desc:"Pueblo peoples drive the Spanish out of New Mexico for 12 years \u2014 the most successful Indigenous uprising in North American history.", cat:"military", ch:2},
+  {date:"1692", sort:1692, title:"Salem Witch Trials", desc:"Mass hysteria in Salem, Massachusetts leads to the execution of 20 people accused of witchcraft.", cat:"social", ch:4},
+
+  // Era: Colonial & Revolutionary Period
+  {era:"Colonial & Revolutionary Period (1700s)"},
+  {date:"1730s\u20131740s", sort:1735, title:"The Great Awakening", desc:"A massive religious revival sweeps through the colonies, emphasizing personal faith and challenging established churches.", cat:"cultural", ch:4},
+  {date:"1754\u20131763", sort:1754, title:"French and Indian War", desc:"Britain and France fight for control of North America. Britain wins but goes deeply into debt.", cat:"military", ch:4},
+  {date:"1765", sort:1765, title:"Stamp Act", desc:"Britain taxes the colonies directly for the first time, sparking protests and the cry \u2018No taxation without representation!\u2019", cat:"political", ch:5},
+  {date:"1770", sort:1770, title:"Boston Massacre", desc:"British soldiers kill five colonists in Boston, fueling anti-British sentiment.", cat:"military", ch:5},
+  {date:"1773", sort:1773, title:"Boston Tea Party", desc:"Colonists dump 342 chests of tea into Boston Harbor to protest the Tea Act.", cat:"political", ch:5},
+  {date:"1775", sort:1775, title:"Battles of Lexington and Concord", desc:"The first shots of the American Revolution are fired \u2014 \u2018the shot heard round the world.\u2019", cat:"military", ch:5},
+  {date:"1776", sort:1776, title:"Declaration of Independence", desc:"Thomas Jefferson drafts the Declaration, asserting that \u2018all men are created equal\u2019 and listing grievances against King George III.", cat:"political", ch:5},
+  {date:"1777\u20131778", sort:1777, title:"Winter at Valley Forge", desc:"Washington\u2019s army endures a brutal winter. Von Steuben trains the soldiers into a professional fighting force.", cat:"military", ch:5},
+  {date:"1781", sort:1781, title:"Battle of Yorktown", desc:"The final major battle of the Revolution. British General Cornwallis surrenders, effectively ending the war.", cat:"military", ch:5},
+  {date:"1783", sort:1783, title:"Treaty of Paris", desc:"Britain formally recognizes American independence.", cat:"political", ch:5},
+  {date:"1787", sort:1787, title:"Constitutional Convention", desc:"Delegates meet in Philadelphia to create the U.S. Constitution, replacing the weak Articles of Confederation.", cat:"political", ch:6},
+  {date:"1788", sort:1788, title:"Constitution Ratified", desc:"The Constitution is ratified after intense debate between Federalists and Anti-Federalists.", cat:"political", ch:6},
+  {date:"1791", sort:1791, title:"Bill of Rights Ratified", desc:"The first ten amendments guarantee individual freedoms including speech, religion, and due process.", cat:"political", ch:6},
+
+  // Era: The Early Republic
+  {era:"The Early Republic (1800\u20131840s)"},
+  {date:"1800", sort:1800, title:"Gabriel\u2019s Rebellion", desc:"An enslaved blacksmith named Gabriel organizes 1,000+ enslaved people for a revolt in Virginia. The plot is discovered and Gabriel is executed.", cat:"social", ch:7},
+  {date:"1803", sort:1803, title:"Louisiana Purchase", desc:"President Jefferson buys 828,000 square miles from France for $15 million, doubling the size of the United States.", cat:"political", ch:7},
+  {date:"1803", sort:1803.5, title:"Marbury v. Madison", desc:"The Supreme Court establishes the power of judicial review \u2014 the ability to strike down unconstitutional laws.", cat:"political", ch:7},
+  {date:"1804\u20131806", sort:1804, title:"Lewis and Clark Expedition", desc:"Meriwether Lewis and William Clark explore the Louisiana Territory and reach the Pacific Ocean.", cat:"social", ch:7},
+  {date:"1807", sort:1807, title:"Embargo Act", desc:"Jefferson bans all foreign trade to pressure Britain and France. It backfires, hurting the American economy.", cat:"economic", ch:7},
+  {date:"1812\u20131815", sort:1812, title:"War of 1812", desc:"The U.S. fights Britain again over impressment and western expansion. The British burn Washington, D.C.", cat:"military", ch:7},
+  {date:"1825", sort:1825, title:"Erie Canal Opens", desc:"The 363-mile canal connects the Great Lakes to the Atlantic, transforming commerce and making NYC the nation\u2019s economic hub.", cat:"economic", ch:8},
+  {date:"1828", sort:1828, title:"Andrew Jackson Elected", desc:"Jackson wins the presidency as a \u2018man of the people,\u2019 expanding democracy for white men while excluding all others.", cat:"political", ch:9},
+  {date:"1830", sort:1830, title:"Indian Removal Act", desc:"Jackson signs the law forcing Indigenous peoples east of the Mississippi to relocate to Oklahoma territory.", cat:"political", ch:9},
+  {date:"1831", sort:1831, title:"Nat Turner\u2019s Rebellion", desc:"Enslaved preacher Nat Turner leads an armed uprising in Virginia, killing ~55 white people. Turner is captured and executed.", cat:"military", ch:11},
+  {date:"1831", sort:1831.5, title:"The Liberator Published", desc:"William Lloyd Garrison begins publishing his abolitionist newspaper, demanding the immediate end of slavery.", cat:"cultural", ch:10},
+  {date:"1838\u20131839", sort:1838, title:"Trail of Tears", desc:"The Cherokee are forced to march from their homeland to Oklahoma. About 4,000 die on the journey.", cat:"social", ch:9},
+
+  // Era: Expansion & Crisis
+  {era:"Expansion & Crisis (1840s\u20131860)"},
+  {date:"1845", sort:1845, title:"\u2018Manifest Destiny\u2019 Coined", desc:"Journalist John O\u2019Sullivan argues the U.S. is destined to expand across the continent.", cat:"cultural", ch:12},
+  {date:"1846\u20131848", sort:1846, title:"Mexican-American War", desc:"The U.S. provokes war with Mexico and wins California, Nevada, Utah, and more in the Treaty of Guadalupe Hidalgo.", cat:"military", ch:12},
+  {date:"1848", sort:1848, title:"Seneca Falls Convention", desc:"The first women\u2019s rights convention. Elizabeth Cady Stanton and Lucretia Mott declare \u2018all men and women are created equal.\u2019", cat:"cultural", ch:10},
+  {date:"1848", sort:1848.5, title:"Gold Discovered in California", desc:"James Marshall finds gold at Sutter\u2019s Mill. By 1849, 300,000 people flood into California.", cat:"economic", ch:12},
+  {date:"1850", sort:1850, title:"Compromise of 1850", desc:"California enters as a free state; the Fugitive Slave Act requires return of escaped enslaved people.", cat:"political", ch:13},
+  {date:"1852", sort:1852, title:"Uncle Tom\u2019s Cabin Published", desc:"Harriet Beecher Stowe\u2019s novel turns Northern public opinion against slavery.", cat:"cultural", ch:13},
+  {date:"1854", sort:1854, title:"Kansas-Nebraska Act", desc:"Popular sovereignty in new territories leads to violent clashes known as \u2018Bleeding Kansas.\u2019", cat:"political", ch:13},
+  {date:"1857", sort:1857, title:"Dred Scott Decision", desc:"The Supreme Court rules that Black people are not citizens and cannot sue in federal court.", cat:"political", ch:13},
+  {date:"1859", sort:1859, title:"John Brown\u2019s Raid on Harpers Ferry", desc:"Abolitionist John Brown raids a federal armory, hoping to spark a slave uprising. He is captured and hanged.", cat:"military", ch:13},
+  {date:"1860", sort:1860, title:"Lincoln Elected President", desc:"Abraham Lincoln wins the presidency without a single Southern vote. South Carolina secedes within weeks.", cat:"political", ch:13},
+
+  // Era: Civil War & Reconstruction
+  {era:"Civil War & Reconstruction (1861\u20131877)"},
+  {date:"1861", sort:1861, title:"Civil War Begins", desc:"Confederate forces attack Fort Sumter in April. Eleven Southern states form the Confederate States of America.", cat:"military", ch:14},
+  {date:"1862", sort:1862, title:"Battle of Antietam", desc:"The bloodiest single day in American history. The Union \u2018victory\u2019 gives Lincoln political cover for the Emancipation Proclamation.", cat:"military", ch:14},
+  {date:"1863", sort:1863, title:"Emancipation Proclamation", desc:"Lincoln declares all enslaved people in Confederate states \u2018forever free,\u2019 transforming the war into a fight to end slavery.", cat:"political", ch:14},
+  {date:"1863", sort:1863.3, title:"Battle of Gettysburg", desc:"The bloodiest battle of the war (50,000+ casualties) marks the turning point. The Confederacy never recovers.", cat:"military", ch:14},
+  {date:"1863", sort:1863.5, title:"54th Massachusetts at Fort Wagner", desc:"One of the first Black regiments charges a Confederate fort under heavy fire, proving Black soldiers\u2019 courage and resolve.", cat:"military", ch:14},
+  {date:"1865", sort:1865, title:"Lee Surrenders at Appomattox", desc:"General Lee surrenders to General Grant on April 9, effectively ending the Civil War.", cat:"military", ch:14},
+  {date:"1865", sort:1865.3, title:"Lincoln Assassinated", desc:"John Wilkes Booth shoots President Lincoln at Ford\u2019s Theatre on April 14. Lincoln dies the next morning.", cat:"political", ch:14},
+  {date:"1865", sort:1865.5, title:"13th Amendment Ratified", desc:"Slavery is abolished throughout the United States.", cat:"political", ch:15},
+  {date:"1868", sort:1868, title:"14th Amendment Ratified", desc:"Grants citizenship and equal protection under the law to all people born in the United States.", cat:"political", ch:15},
+  {date:"1870", sort:1870, title:"15th Amendment Ratified", desc:"Prohibits denying the right to vote based on race.", cat:"political", ch:15},
+  {date:"1870", sort:1870.5, title:"Hiram Revels Elected to U.S. Senate", desc:"Revels becomes the first Black U.S. Senator, representing Mississippi during Reconstruction.", cat:"political", ch:15},
+  {date:"1877", sort:1877, title:"Compromise of 1877: Reconstruction Ends", desc:"Federal troops withdraw from the South. Jim Crow laws will enforce racial segregation for nearly a century.", cat:"political", ch:15}
+];
+
+function buildTimeline() {
+  var container = document.getElementById('timeline');
+  var html = '';
+  EVENTS.forEach(function(e, i) {
+    if (e.era) {
+      html += '<div class="tl-era" data-era="' + i + '"><span class="tl-era-label">' + esc(e.era) + '</span></div>';
+    } else {
+      html += '<div class="tl-event cat-' + e.cat + '" data-cat="' + e.cat + '" data-ch="' + e.ch + '">';
+      html += '<div class="tl-date">' + esc(e.date) + '</div>';
+      html += '<div class="tl-title">' + esc(e.title) + '</div>';
+      html += '<div class="tl-desc">' + esc(e.desc) + '</div>';
+      html += '<div class="tl-chapter"><a href="ch' + e.ch + '.html">Chapter ' + e.ch + '</a></div>';
+      html += '</div>';
+    }
+  });
+  container.innerHTML = html;
+  updateCount();
+}
+
+function filterTimeline() {
+  var cat = document.getElementById('tl-filter').value;
+  var ch = document.getElementById('tl-chapter').value;
+  var events = document.querySelectorAll('.tl-event');
+  var eras = document.querySelectorAll('.tl-era');
+  events.forEach(function(el) {
+    var matchCat = (cat === 'all' || el.getAttribute('data-cat') === cat);
+    var matchCh = (ch === 'all' || el.getAttribute('data-ch') === ch);
+    el.classList.toggle('hidden', !(matchCat && matchCh));
+  });
+  // Hide era headers if all their events are hidden
+  eras.forEach(function(era) {
+    var next = era.nextElementSibling;
+    var hasVisible = false;
+    while (next && !next.classList.contains('tl-era')) {
+      if (next.classList.contains('tl-event') && !next.classList.contains('hidden')) {
+        hasVisible = true;
+        break;
+      }
+      next = next.nextElementSibling;
+    }
+    era.classList.toggle('hidden', !hasVisible);
+  });
+  updateCount();
+}
+
+function updateCount() {
+  var visible = document.querySelectorAll('.tl-event:not(.hidden)').length;
+  var total = document.querySelectorAll('.tl-event').length;
+  var text = visible === total ? 'Showing all ' + total + ' events' : 'Showing ' + visible + ' of ' + total + ' events';
+  document.getElementById('tl-count').textContent = text;
+}
+
+function esc(str) {
+  var d = document.createElement('div');
+  d.textContent = str;
+  return d.innerHTML;
+}
+
+buildTimeline();
+</script>
+</body>
+</html>
