@@ -48,14 +48,20 @@
     var panel = document.querySelector('.reader-panel');
     if (!toggle || !panel) return;
 
+    toggle.setAttribute('aria-expanded', 'false');
+    panel.setAttribute('id', 'reader-panel');
+    toggle.setAttribute('aria-controls', 'reader-panel');
+
     toggle.addEventListener('click', function(e) {
       e.stopPropagation();
-      panel.classList.toggle('open');
+      var isOpen = panel.classList.toggle('open');
+      toggle.setAttribute('aria-expanded', isOpen);
     });
 
     document.addEventListener('click', function(e) {
       if (!panel.contains(e.target) && e.target !== toggle) {
         panel.classList.remove('open');
+        toggle.setAttribute('aria-expanded', 'false');
       }
     });
   }
@@ -69,10 +75,13 @@
     applyFontSize(saved);
 
     btns.forEach(function(btn) {
-      if (btn.getAttribute('data-font-size') === saved) btn.classList.add('active');
+      var isActive = btn.getAttribute('data-font-size') === saved;
+      if (isActive) btn.classList.add('active');
+      btn.setAttribute('aria-pressed', isActive);
       btn.addEventListener('click', function() {
-        btns.forEach(function(b) { b.classList.remove('active'); });
+        btns.forEach(function(b) { b.classList.remove('active'); b.setAttribute('aria-pressed', 'false'); });
         btn.classList.add('active');
+        btn.setAttribute('aria-pressed', 'true');
         var size = btn.getAttribute('data-font-size');
         applyFontSize(size);
         localStorage.setItem('yawp_fontSize', size);
@@ -95,10 +104,13 @@
     applySpacing(saved);
 
     btns.forEach(function(btn) {
-      if (btn.getAttribute('data-spacing') === saved) btn.classList.add('active');
+      var isActive = btn.getAttribute('data-spacing') === saved;
+      if (isActive) btn.classList.add('active');
+      btn.setAttribute('aria-pressed', isActive);
       btn.addEventListener('click', function() {
-        btns.forEach(function(b) { b.classList.remove('active'); });
+        btns.forEach(function(b) { b.classList.remove('active'); b.setAttribute('aria-pressed', 'false'); });
         btn.classList.add('active');
+        btn.setAttribute('aria-pressed', 'true');
         var sp = btn.getAttribute('data-spacing');
         applySpacing(sp);
         localStorage.setItem('yawp_spacing', sp);
@@ -118,11 +130,13 @@
     var btn = document.querySelector('[data-dyslexia]');
     if (!btn) return;
     var saved = localStorage.getItem('yawp_dyslexia') === 'true';
+    btn.setAttribute('aria-pressed', saved);
     if (saved) { document.body.classList.add('dyslexia-font'); btn.classList.add('active'); }
 
     btn.addEventListener('click', function() {
       var on = document.body.classList.toggle('dyslexia-font');
       btn.classList.toggle('active');
+      btn.setAttribute('aria-pressed', on);
       localStorage.setItem('yawp_dyslexia', on);
     });
   }
@@ -136,10 +150,13 @@
     applyTheme(saved);
 
     btns.forEach(function(btn) {
-      if (btn.getAttribute('data-theme') === saved) btn.classList.add('active');
+      var isActive = btn.getAttribute('data-theme') === saved;
+      if (isActive) btn.classList.add('active');
+      btn.setAttribute('aria-pressed', isActive);
       btn.addEventListener('click', function() {
-        btns.forEach(function(b) { b.classList.remove('active'); });
+        btns.forEach(function(b) { b.classList.remove('active'); b.setAttribute('aria-pressed', 'false'); });
         btn.classList.add('active');
+        btn.setAttribute('aria-pressed', 'true');
         var theme = btn.getAttribute('data-theme');
         applyTheme(theme);
         localStorage.setItem('yawp_theme', theme);
@@ -168,9 +185,12 @@
     overlayTop = overlayContainer.querySelector('.line-focus-top');
     overlayBottom = overlayContainer.querySelector('.line-focus-bottom');
 
+    btn.setAttribute('aria-pressed', 'false');
+
     btn.addEventListener('click', function() {
       lineFocusActive = !lineFocusActive;
       btn.classList.toggle('active');
+      btn.setAttribute('aria-pressed', lineFocusActive);
       overlayContainer.classList.toggle('active');
     });
 
@@ -202,10 +222,14 @@
     // Color picker buttons
     var colorBtns = document.querySelectorAll('[data-highlight-color]');
     colorBtns.forEach(function(btn) {
-      if (btn.getAttribute('data-highlight-color') === highlightColor) btn.classList.add('active');
+      var isActive = btn.getAttribute('data-highlight-color') === highlightColor;
+      if (isActive) btn.classList.add('active');
+      btn.setAttribute('aria-pressed', isActive);
+      btn.setAttribute('aria-label', btn.getAttribute('data-highlight-color') + ' highlight');
       btn.addEventListener('click', function() {
-        colorBtns.forEach(function(b) { b.classList.remove('active'); });
+        colorBtns.forEach(function(b) { b.classList.remove('active'); b.setAttribute('aria-pressed', 'false'); });
         btn.classList.add('active');
+        btn.setAttribute('aria-pressed', 'true');
         highlightColor = btn.getAttribute('data-highlight-color');
       });
     });
@@ -298,14 +322,18 @@
     var closeBtn = panel ? panel.querySelector('.notes-close') : null;
 
     if (notesBtn && panel) {
+      notesBtn.setAttribute('aria-expanded', 'false');
       notesBtn.addEventListener('click', function() {
-        panel.classList.toggle('open');
+        var isOpen = panel.classList.toggle('open');
+        notesBtn.setAttribute('aria-expanded', isOpen);
         renderNotes();
       });
     }
     if (closeBtn) {
+      closeBtn.setAttribute('aria-label', 'Close notes');
       closeBtn.addEventListener('click', function() {
         panel.classList.remove('open');
+        if (notesBtn) notesBtn.setAttribute('aria-expanded', 'false');
       });
     }
 
@@ -346,7 +374,7 @@
     var html = '';
     notes.forEach(function(note, i) {
       html += '<div class="note-item">';
-      html += '<button class="note-delete" data-note-index="' + i + '">&times;</button>';
+      html += '<button class="note-delete" data-note-index="' + i + '" aria-label="Delete note">&times;</button>';
       if (note.selectedText) {
         html += '<div class="note-text-preview">"' + escapeHtml(note.selectedText.slice(0, 100)) + (note.selectedText.length > 100 ? '...' : '') + '"</div>';
       }
@@ -380,9 +408,12 @@
     var overlay = document.querySelector('.pdf-modal-overlay');
     if (!pdfBtn || !overlay) return;
 
+    pdfBtn.setAttribute('aria-expanded', 'false');
+
     pdfBtn.addEventListener('click', function() {
       buildSectionList();
       overlay.classList.add('open');
+      pdfBtn.setAttribute('aria-expanded', 'true');
     });
 
     // Cancel button
@@ -390,12 +421,16 @@
     if (cancelBtn) {
       cancelBtn.addEventListener('click', function() {
         overlay.classList.remove('open');
+        pdfBtn.setAttribute('aria-expanded', 'false');
       });
     }
 
     // Click outside to close
     overlay.addEventListener('click', function(e) {
-      if (e.target === overlay) overlay.classList.remove('open');
+      if (e.target === overlay) {
+        overlay.classList.remove('open');
+        pdfBtn.setAttribute('aria-expanded', 'false');
+      }
     });
 
     // Select all toggle
@@ -514,7 +549,7 @@
     // Render glossary
     var body = panel.querySelector('.glossary-body');
     if (body && terms.length > 0) {
-      var html = '<div class="glossary-search"><input type="text" placeholder="Search terms..." class="glossary-search-input"></div>';
+      var html = '<div class="glossary-search"><input type="text" placeholder="Search terms..." class="glossary-search-input" aria-label="Search glossary terms"></div>';
       terms.forEach(function(t) {
         html += '<div class="glossary-term-item">';
         html += '<div class="glossary-term-word">' + escapeHtml(t.term) + '</div>';
@@ -539,12 +574,17 @@
       body.innerHTML = '<div class="glossary-empty">No vocabulary terms found on this page.</div>';
     }
 
+    glossaryBtn.setAttribute('aria-expanded', 'false');
+
     glossaryBtn.addEventListener('click', function() {
-      panel.classList.toggle('open');
+      var isOpen = panel.classList.toggle('open');
+      glossaryBtn.setAttribute('aria-expanded', isOpen);
     });
     if (closeBtn) {
+      closeBtn.setAttribute('aria-label', 'Close glossary');
       closeBtn.addEventListener('click', function() {
         panel.classList.remove('open');
+        glossaryBtn.setAttribute('aria-expanded', 'false');
       });
     }
   }
@@ -555,6 +595,9 @@
   function initDictionary() {
     var popup = document.createElement('div');
     popup.className = 'dict-popup';
+    popup.setAttribute('role', 'status');
+    popup.setAttribute('aria-live', 'polite');
+    popup.setAttribute('aria-label', 'Dictionary lookup');
     popup.style.display = 'none';
     document.body.appendChild(popup);
 
