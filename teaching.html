@@ -5,13 +5,179 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Teaching Materials | American Yawp MS</title>
 <link rel="stylesheet" href="css/pages.css">
+<style>
+/* ---- Teaching Materials specific styles ---- */
+.resource-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin: 28px 0 36px;
+}
+.resource-card {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 24px 28px;
+  background: white;
+  transition: box-shadow .2s, border-color .2s;
+  position: relative;
+}
+.resource-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,.06); border-color: #C4941D; }
+.resource-card h3 {
+  font-size: 17px;
+  color: #1B3A5C;
+  margin-bottom: 4px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.resource-card h3 .icon {
+  font-size: 22px;
+  flex-shrink: 0;
+}
+.resource-card .subtitle {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 12px;
+  color: #999;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 10px;
+}
+.resource-card p {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+  margin-bottom: 14px;
+  color: #555;
+}
+.resource-card .card-link {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  color: #2A7F8E;
+  text-decoration: none;
+  border-bottom: 1px dotted #2A7F8E;
+}
+.resource-card .card-link:hover { border-bottom-style: solid; }
+.resource-card .badge-coming {
+  display: inline-block;
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .5px;
+  padding: 2px 8px;
+  border-radius: 10px;
+  text-transform: uppercase;
+  background: #FFF3E0;
+  color: #E65100;
+  margin-left: 8px;
+  vertical-align: middle;
+}
+.resource-card .badge-new {
+  display: inline-block;
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .5px;
+  padding: 2px 8px;
+  border-radius: 10px;
+  text-transform: uppercase;
+  background: #E8F5E9;
+  color: #2E7D32;
+  margin-left: 8px;
+  vertical-align: middle;
+}
+
+.approach-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin: 20px 0 28px;
+}
+.approach-card {
+  background: #F8FAFB;
+  border-left: 3px solid #2A7F8E;
+  padding: 16px 20px;
+  border-radius: 0 6px 6px 0;
+}
+.approach-card strong {
+  display: block;
+  font-size: 15px;
+  color: #1B3A5C;
+  margin-bottom: 4px;
+}
+.approach-card p {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 13.5px;
+  line-height: 1.6;
+  margin-bottom: 0;
+  color: #555;
+}
+
+.feature-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px 24px;
+  margin: 16px 0 28px;
+  list-style: none;
+  padding: 0;
+}
+.feature-list li {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
+  padding: 6px 0 6px 24px;
+  position: relative;
+  border-bottom: 1px solid #f0f0f0;
+}
+.feature-list li::before {
+  content: "\2713";
+  position: absolute;
+  left: 2px;
+  color: #2E7D32;
+  font-weight: 700;
+}
+
+.standards-box {
+  background: #F0F4F8;
+  border: 1px solid #d0dae4;
+  border-radius: 8px;
+  padding: 24px 28px;
+  margin: 28px 0;
+}
+.standards-box h3 {
+  font-size: 18px;
+  color: #1B3A5C;
+  margin-bottom: 12px;
+}
+.standards-box p {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 14px;
+  line-height: 1.7;
+  color: #555;
+}
+.standards-box ul {
+  margin: 8px 0 0 20px;
+}
+.standards-box li {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+  color: #555;
+}
+
+@media (max-width: 700px) {
+  .resource-grid { grid-template-columns: 1fr; }
+  .approach-grid { grid-template-columns: 1fr; }
+  .feature-list { grid-template-columns: 1fr; }
+}
+</style>
 </head>
 <body>
 
 <div class="header">
   <h1>Teaching Materials</h1>
   <div class="divider"></div>
-  <p>Resources for Educators</p>
+  <p>Free Resources for Educators &mdash; Grades 6&ndash;8</p>
 </div>
 
 <nav class="nav-bar">
@@ -26,36 +192,142 @@
 
 <div class="container">
 
+<h2>Student Resources</h2>
+
+<p>These resources are designed to be used alongside the textbook chapters. All are free, open-source, and printable.</p>
+
+<div class="resource-grid">
+
+  <div class="resource-card">
+    <h3><span class="icon">&#128221;</span> Cornell Notes Template <span class="badge-new">New</span></h3>
+    <div class="subtitle">Printable &bull; All Chapters</div>
+    <p>A clean, printable Cornell Notes sheet with cue column, notes section, and summary area. Works with any chapter. Includes a guide for students who haven't used Cornell Notes before.</p>
+    <a class="card-link" href="cornell-notes.html">Open Template &rarr;</a>
+  </div>
+
+  <div class="resource-card">
+    <h3><span class="icon">&#127183;</span> Vocabulary Flash Cards <span class="badge-new">New</span></h3>
+    <div class="subtitle">Interactive &bull; Per Chapter</div>
+    <p>Interactive digital flash cards for every vocabulary term in every chapter. Click to flip, navigate with arrows, shuffle, and track your progress. Over 120 terms across 15 chapters.</p>
+    <a class="card-link" href="vocabulary-cards.html">Study Vocabulary &rarr;</a>
+  </div>
+
+  <div class="resource-card">
+    <h3><span class="icon">&#128203;</span> Graphic Organizers <span class="badge-new">New</span></h3>
+    <div class="subtitle">Printable &bull; All Chapters</div>
+    <p>Five printable templates: Cause &amp; Effect, Compare &amp; Contrast, Timeline, Main Idea &amp; Details, and KWL Chart. Select, print, and use with any chapter.</p>
+    <a class="card-link" href="graphic-organizers.html">View Organizers &rarr;</a>
+  </div>
+
+  <div class="resource-card">
+    <h3><span class="icon">&#128218;</span> Chapter Quizzes <span class="badge-new">New</span></h3>
+    <div class="subtitle">Interactive &bull; Per Chapter</div>
+    <p>Self-checking quizzes with multiple choice and short answer questions for all 15 chapters. Instant feedback helps students identify areas to review.</p>
+    <a class="card-link" href="quizzes.html">Take a Quiz &rarr;</a>
+  </div>
+
+  <div class="resource-card">
+    <h3><span class="icon">&#128197;</span> Interactive Timeline <span class="badge-new">New</span></h3>
+    <div class="subtitle">Interactive &bull; All Chapters</div>
+    <p>Visual timeline of 60+ key events from pre-contact through Reconstruction. Filter by category or chapter. Color-coded by type: political, social, economic, military, and cultural.</p>
+    <a class="card-link" href="timeline.html">Explore Timeline &rarr;</a>
+  </div>
+
+</div>
+
+<h2>Teacher Resources</h2>
+
+<div class="resource-grid">
+
+  <div class="resource-card">
+    <h3><span class="icon">&#128240;</span> Current Events Connections <span class="badge-new">New</span></h3>
+    <div class="subtitle">Curated Links &bull; Per Chapter</div>
+    <p>Modern news stories and current events tied to historical concepts in each chapter. Helps students see why history matters today. Updated periodically.</p>
+    <a class="card-link" href="current-events.html">View Connections &rarr;</a>
+  </div>
+
+  <div class="resource-card">
+    <h3><span class="icon">&#127916;</span> Slideshows <span class="badge-new">New</span></h3>
+    <div class="subtitle">Interactive &bull; Per Chapter</div>
+    <p>Ready-to-project slide presentations for all 15 chapters with key ideas, vocabulary, discussion prompts, and review. Fullscreen mode for classroom projection.</p>
+    <a class="card-link" href="slideshows.html">View Slideshows &rarr;</a>
+  </div>
+
+  <div class="resource-card">
+    <h3><span class="icon">&#128197;</span> Pacing Guide <span class="badge-new">New</span></h3>
+    <div class="subtitle">Three Schedules &bull; Full Course</div>
+    <p>Scope and sequence for covering all 15 chapters with three flexible schedules: full year (36 weeks), semester (18 weeks), and trimester (12 weeks).</p>
+    <a class="card-link" href="pacing-guide.html">View Pacing Guide &rarr;</a>
+  </div>
+
+  <div class="resource-card">
+    <h3><span class="icon">&#128736;</span> Standards Alignment <span class="badge-new">New</span></h3>
+    <div class="subtitle">Common Core &bull; Grades 6&ndash;8</div>
+    <p>Chapter-by-chapter alignment to Common Core ELA/Literacy standards (RH.6-8 and WHST.6-8) with a quick-reference matrix and teaching suggestions.</p>
+    <a class="card-link" href="standards.html">View Standards &rarr;</a>
+  </div>
+
+  <div class="resource-card">
+    <h3><span class="icon">&#129309;</span> Differentiation Guide <span class="badge-new">New</span></h3>
+    <div class="subtitle">Strategies &bull; All Learners</div>
+    <p>Targeted strategies for English Language Learners, students with IEPs, advanced learners, and struggling readers. Includes chapter-specific notes for sensitive content.</p>
+    <a class="card-link" href="differentiation.html">View Guide &rarr;</a>
+  </div>
+
+</div>
+
 <h2>Built-In Pedagogical Features</h2>
 
-<p>Every chapter in American Yawp MS includes teaching-ready features designed to engage students and promote critical thinking:</p>
+<p>Every chapter already includes teaching-ready features designed to engage students and promote critical thinking:</p>
 
-<ul>
-  <li><strong>Big Questions</strong> — Essential questions that frame each chapter</li>
-  <li><strong>Vocabulary Boxes</strong> — Key terms defined in student-friendly language</li>
-  <li><strong>Stop and Think Questions</strong> — Analytical prompts embedded throughout the text</li>
-  <li><strong>Primary Source Voices</strong> — Historical documents with context</li>
-  <li><strong>Multiple Perspectives Boxes</strong> — Competing viewpoints on contested events</li>
-  <li><strong>"Story Behind the Story" Callouts</strong> — Engaging details that make history memorable</li>
-  <li><strong>"Whose Voices Were Left Out?" Sections</strong> — Explicit attention to marginalized perspectives</li>
-  <li><strong>Chapter Activities</strong> — Evidence-based discussions, debates, and rankings</li>
+<ul class="feature-list">
+  <li><strong>Big Questions</strong> &mdash; Essential questions framing each chapter</li>
+  <li><strong>Vocabulary Boxes</strong> &mdash; Key terms in student-friendly language</li>
+  <li><strong>Stop and Think</strong> &mdash; Analytical prompts throughout the text</li>
+  <li><strong>Primary Source Voices</strong> &mdash; Historical documents with context</li>
+  <li><strong>Multiple Perspectives</strong> &mdash; Competing viewpoints on events</li>
+  <li><strong>Story Behind the Story</strong> &mdash; Engaging historical details</li>
+  <li><strong>Whose Voices Were Left Out?</strong> &mdash; Marginalized perspectives</li>
+  <li><strong>Chapter Activities</strong> &mdash; Evidence-based discussions and debates</li>
 </ul>
 
-<h2>Suggested Teaching Approaches</h2>
+<h2>Teaching Approaches</h2>
 
-<p><strong>Use the "Big Questions" as anchors.</strong> Start each chapter by introducing the Big Questions. Revisit them at the end to assess understanding.</p>
+<div class="approach-grid">
+  <div class="approach-card">
+    <strong>Anchor with Big Questions</strong>
+    <p>Start each chapter by introducing the Big Questions. Revisit them at the end to assess understanding and track growth.</p>
+  </div>
+  <div class="approach-card">
+    <strong>Pair-Share Discussions</strong>
+    <p>Turn "Stop and Think" questions into think-pair-share activities. Students discuss with a partner before sharing with the class.</p>
+  </div>
+  <div class="approach-card">
+    <strong>Formative Assessment</strong>
+    <p>Use chapter activities to reveal what students understand and what they're still wrestling with. Low-stakes, high-insight.</p>
+  </div>
+  <div class="approach-card">
+    <strong>DBQ Practice</strong>
+    <p>Leverage primary source boxes for document-based question practice or as writing prompts. Build analytical skills early.</p>
+  </div>
+  <div class="approach-card">
+    <strong>Perspective Research</strong>
+    <p>Extend "Whose Voices Were Left Out?" by asking students to research additional perspectives or create entries for their communities.</p>
+  </div>
+  <div class="approach-card">
+    <strong>Vocabulary Building</strong>
+    <p>Use vocabulary boxes for pre-reading activities. Have students predict meanings, then check as they read. Review with flash cards.</p>
+  </div>
+</div>
 
-<p><strong>Turn "Stop and Think" questions into pair-share discussions.</strong> Have students discuss these questions with a partner before sharing with the class.</p>
-
-<p><strong>Use chapter activities as formative assessments.</strong> The activities are designed to reveal what students understand and what they're still wrestling with.</p>
-
-<p><strong>Leverage primary sources for document-based questions.</strong> The primary source boxes can be used for DBQ practice or as writing prompts.</p>
-
-<p><strong>Build on "Whose Voices Were Left Out?"</strong> Ask students to research additional perspectives or create their own "Whose Voices Were Left Out?" entries for their local communities.</p>
-
-<div class="coming-soon">
-  <h3>Coming Soon</h3>
-  <p>We're developing additional teaching materials including lesson plans, student notebooks, review materials, and alignment guides for state standards. If you're a teacher interested in contributing or piloting materials, please reach out via the <a href="https://github.com/shiebenaderet/yawpms">GitHub repository</a>.</p>
+<div class="standards-box">
+  <h3>Standards Alignment (Preview)</h3>
+  <p>American Yawp MS is designed to support the following frameworks. A detailed alignment guide is in development:</p>
+  <ul>
+    <li><strong>C3 Framework</strong> &mdash; Dimension 2 (History) and Dimension 4 (Communicating Conclusions)</li>
+    <li><strong>Common Core ELA/Literacy</strong> &mdash; RH.6-8.1 through RH.6-8.9 (Reading History)</li>
+    <li><strong>NCSS Themes</strong> &mdash; Culture; Time, Continuity & Change; People, Places & Environments; Power, Authority & Governance</li>
+  </ul>
 </div>
 
 <h2>Using This in Your Classroom</h2>
@@ -63,10 +335,11 @@
 <p>American Yawp MS is designed to be flexible. You can:</p>
 
 <ul>
-  <li>Assign chapters as independent reading</li>
+  <li>Assign chapters as independent reading with Cornell Notes</li>
   <li>Project chapters on a screen for whole-class reading</li>
   <li>Print individual sections for small-group work</li>
   <li>Use chapters as the foundation for inquiry-based units</li>
+  <li>Pair chapters with vocabulary flash cards for pre-reading or review</li>
   <li>Adapt and remix chapters to fit your curriculum (under CC BY-SA 4.0)</li>
 </ul>
 
@@ -79,7 +352,7 @@
 <p>Visit the <a href="https://github.com/shiebenaderet/yawpms">GitHub repository</a> to share feedback, report issues, or contribute improvements.</p>
 
 <footer>
-  <p><a href="index.html">← Back to home</a> | <a href="introduction.html">Introduction</a> | <a href="about.html">About</a> | <a href="contributors.html">Contributors</a> | <a href="whopays.html">Who Pays?</a></p>
+  <p><a href="index.html">&larr; Back to home</a> | <a href="introduction.html">Introduction</a> | <a href="about.html">About</a> | <a href="contributors.html">Contributors</a> | <a href="teachers.html">Teachers Hub</a> | <a href="whopays.html">Who Pays?</a></p>
 </footer>
 
 </div>

@@ -1,0 +1,855 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chapter Slideshows | American Yawp MS</title>
+<link rel="stylesheet" href="css/pages.css">
+<style>
+.slide-controls {
+  text-align: center;
+  margin: 0 0 24px;
+  padding: 20px 24px;
+  background: #F0F4F8;
+  border-radius: 8px;
+  border: 1px solid #d0dae4;
+}
+.slide-controls label {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  color: #1B3A5C;
+  margin-right: 8px;
+}
+.slide-controls select {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 14px;
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  min-width: 280px;
+  background: white;
+  margin-right: 12px;
+}
+.present-btn {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 8px 24px;
+  background: #1B3A5C;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background .2s;
+}
+.present-btn:hover { background: #2A7F8E; }
+.present-btn:disabled { opacity: .4; cursor: default; }
+.export-btn {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 8px 16px;
+  background: white;
+  color: #1B3A5C;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-left: 6px;
+  transition: background .2s, border-color .2s;
+}
+.export-btn:hover { background: #F0F4F8; border-color: #1B3A5C; }
+.export-btn:disabled { opacity: .4; cursor: default; }
+
+/* ---- Slide viewer ---- */
+.slide-viewer {
+  max-width: 800px;
+  margin: 0 auto 24px;
+  background: white;
+  border: 2px solid #1B3A5C;
+  border-radius: 8px;
+  overflow: hidden;
+  aspect-ratio: 16/9;
+  position: relative;
+  display: none;
+}
+.slide-viewer.active { display: block; }
+
+.slide {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  padding: 48px 64px;
+}
+.slide.current { display: flex; }
+
+/* Slide types */
+.slide-title {
+  background: linear-gradient(135deg, #1B3A5C 0%, #2A5A8C 100%);
+  color: white;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+}
+.slide-title .slide-ch {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  opacity: .5;
+  margin-bottom: 12px;
+}
+.slide-title h2 { font-size: 36px; margin-bottom: 8px; line-height: 1.2; }
+.slide-title .slide-sub {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 16px;
+  opacity: .7;
+  max-width: 500px;
+}
+.slide-title .divider-gold {
+  width: 60px;
+  height: 3px;
+  background: #C4941D;
+  margin: 16px auto;
+}
+
+.slide-content {
+  background: white;
+}
+.slide-content .slide-heading {
+  font-size: 24px;
+  color: #1B3A5C;
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid #C4941D;
+}
+.slide-content ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.slide-content ul li {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 18px;
+  line-height: 1.5;
+  padding: 6px 0 6px 28px;
+  position: relative;
+  color: #333;
+}
+.slide-content ul li::before {
+  content: "\25B8";
+  position: absolute;
+  left: 4px;
+  color: #C4941D;
+  font-size: 14px;
+}
+
+.slide-vocab {
+  background: #F0F4F8;
+}
+.slide-vocab .slide-heading {
+  font-size: 24px;
+  color: #1B3A5C;
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid #2A7F8E;
+}
+.slide-vocab .vocab-item {
+  margin-bottom: 12px;
+}
+.slide-vocab .vocab-item strong {
+  font-size: 17px;
+  color: #1B3A5C;
+}
+.slide-vocab .vocab-item span {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 15px;
+  color: #555;
+  display: block;
+  margin-top: 2px;
+}
+
+.slide-discuss {
+  background: #FFF9E6;
+  text-align: center;
+  align-items: center;
+}
+.slide-discuss .discuss-label {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: #C4941D;
+  margin-bottom: 16px;
+}
+.slide-discuss .discuss-q {
+  font-size: 24px;
+  line-height: 1.5;
+  color: #1B3A5C;
+  max-width: 600px;
+  font-style: italic;
+}
+
+.slide-end {
+  background: linear-gradient(135deg, #1B3A5C 0%, #2A5A8C 100%);
+  color: white;
+  text-align: center;
+  align-items: center;
+}
+.slide-end h2 { font-size: 28px; margin-bottom: 8px; }
+.slide-end p {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 16px;
+  opacity: .7;
+}
+
+/* ---- Image slide ---- */
+.slide-image {
+  background: #f8f8f8;
+  padding: 32px 48px;
+  justify-content: center;
+  align-items: center;
+}
+.slide-image img {
+  max-width: 100%;
+  max-height: 60%;
+  object-fit: contain;
+  border-radius: 4px;
+  box-shadow: 0 4px 12px rgba(0,0,0,.15);
+  margin-bottom: 16px;
+}
+.slide-image .img-caption {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 14px;
+  color: #555;
+  text-align: center;
+  max-width: 600px;
+  line-height: 1.4;
+}
+
+/* ---- Story slide ---- */
+.slide-story {
+  background: linear-gradient(135deg, #FFF9E6 0%, #FFF5D6 100%);
+  padding: 48px 64px;
+}
+.slide-story .story-label {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: #C4941D;
+  margin-bottom: 12px;
+}
+.slide-story .story-heading {
+  font-size: 26px;
+  color: #1B3A5C;
+  margin-bottom: 16px;
+  line-height: 1.3;
+}
+.slide-story .story-text {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 17px;
+  line-height: 1.6;
+  color: #333;
+}
+
+/* ---- Slide navigation ---- */
+.slide-nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin: 0 0 24px;
+}
+.snav-btn {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 8px 20px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  background: white;
+  color: #1B3A5C;
+  cursor: pointer;
+  transition: background .2s;
+}
+.snav-btn:hover { background: #F0F4F8; }
+.snav-btn:disabled { opacity: .3; cursor: default; }
+.slide-counter {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 14px;
+  color: #999;
+  min-width: 80px;
+  text-align: center;
+}
+.slide-progress {
+  height: 4px;
+  background: #e0e0e0;
+  border-radius: 2px;
+  max-width: 800px;
+  margin: 0 auto 16px;
+  overflow: hidden;
+}
+.slide-progress-fill {
+  height: 100%;
+  background: #C4941D;
+  transition: width .3s;
+}
+
+.shortcut-help {
+  text-align: center;
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 12px;
+  color: #bbb;
+  margin: 0 0 24px;
+}
+.shortcut-help kbd {
+  display: inline-block;
+  padding: 1px 6px;
+  border: 1px solid #ddd;
+  border-radius: 3px;
+  background: #f8f8f8;
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 11px;
+  color: #666;
+}
+
+.no-slides {
+  text-align: center;
+  padding: 48px 24px;
+  color: #999;
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 16px;
+}
+
+/* ---- Fullscreen presentation mode ---- */
+.slide-viewer:fullscreen,
+.slide-viewer:-webkit-full-screen {
+  border: none;
+  border-radius: 0;
+  max-width: 100%;
+  aspect-ratio: auto;
+}
+.slide-viewer:fullscreen .slide,
+.slide-viewer:-webkit-full-screen .slide {
+  padding: 64px 100px;
+}
+.slide-viewer:fullscreen .slide-title h2,
+.slide-viewer:-webkit-full-screen .slide-title h2 { font-size: 48px; }
+.slide-viewer:fullscreen .slide-content .slide-heading,
+.slide-viewer:-webkit-full-screen .slide-content .slide-heading { font-size: 32px; }
+.slide-viewer:fullscreen .slide-content ul li,
+.slide-viewer:-webkit-full-screen .slide-content ul li { font-size: 24px; }
+
+@media (max-width: 700px) {
+  .slide { padding: 24px 32px; }
+  .slide-title h2 { font-size: 24px; }
+  .slide-content .slide-heading { font-size: 18px; }
+  .slide-content ul li { font-size: 14px; }
+  .slide-controls select { min-width: 200px; margin-bottom: 8px; }
+  .export-btn { display: block; margin: 6px auto 0; }
+}
+
+/* ---- Print styles ---- */
+@media print {
+  body { background: white; }
+  .header, .nav-bar, .slide-controls, .slide-nav, .slide-progress, .shortcut-help, .no-slides, footer { display: none !important; }
+  .container { max-width: 100%; padding: 0; }
+  .slide-viewer { display: block !important; position: static !important; border: none; border-radius: 0; max-width: 100%; aspect-ratio: auto; overflow: visible; }
+  .slide-viewer .slide { display: block !important; position: static !important; padding: 24px 0; page-break-inside: avoid; border-bottom: 1px solid #ddd; margin-bottom: 16px; }
+  .slide-viewer .slide-title { background: none !important; color: #1B3A5C; padding: 32px 0 16px; }
+  .slide-viewer .slide-title .divider-gold { background: #1B3A5C; }
+  .slide-viewer .slide-end { background: none !important; color: #1B3A5C; }
+  .slide-viewer .slide-image img { max-height: 300px; box-shadow: none; }
+  .slide-viewer .slide-story { background: none !important; border-left: 3px solid #C4941D; padding-left: 20px; }
+}
+</style>
+<script src="https://cdn.jsdelivr.net/gh/gitbrent/PptxGenJS@3.12.0/dist/pptxgen.bundle.js"></script>
+</head>
+<body>
+
+<div class="header">
+  <h1>Chapter Slideshows</h1>
+  <div class="divider"></div>
+  <p>Ready-to-Project Presentations for Every Chapter</p>
+</div>
+
+<nav class="nav-bar">
+  <a href="index.html">Home</a>
+  <a href="teaching.html">Teaching Materials</a>
+  <a href="timeline.html">Timeline</a>
+  <a href="vocabulary-cards.html">Vocabulary Cards</a>
+  <a href="quizzes.html">Quizzes</a>
+  <a href="teachers.html">Teachers Hub</a>
+</nav>
+
+<div class="container">
+
+<div class="slide-controls">
+  <label for="ch-select">Chapter:</label>
+  <select id="ch-select" onchange="loadSlides(this.value)">
+    <option value="">Select a chapter...</option>
+  </select>
+  <button class="present-btn" id="present-btn" onclick="goFullscreen()" disabled>Present Fullscreen</button>
+  <button class="export-btn" id="print-btn" onclick="printSlides()" disabled>Print / PDF</button>
+  <button class="export-btn" id="pptx-btn" onclick="exportPptx()" disabled>Export PowerPoint</button>
+</div>
+
+<div class="no-slides" id="no-slides">Select a chapter above to view the slideshow.</div>
+
+<div class="slide-progress" id="slide-progress" style="display:none;">
+  <div class="slide-progress-fill" id="progress-fill"></div>
+</div>
+
+<div class="slide-viewer" id="slide-viewer"></div>
+
+<div class="slide-nav" id="slide-nav" style="display:none;">
+  <button class="snav-btn" id="prev-btn" onclick="prevSlide()">&larr; Previous</button>
+  <span class="slide-counter" id="slide-counter">1 / 1</span>
+  <button class="snav-btn" id="next-btn" onclick="nextSlide()">Next &rarr;</button>
+</div>
+
+<div class="shortcut-help" id="shortcut-help" style="display:none;">
+  <kbd>&larr;</kbd> Previous &middot; <kbd>&rarr;</kbd> Next &middot; <kbd>F</kbd> Fullscreen &middot; <kbd>Esc</kbd> Exit fullscreen
+</div>
+
+<footer>
+  <p><a href="teaching.html">&larr; Back to Teaching Materials</a> | <a href="index.html">Home</a> | <a href="quizzes.html">Quizzes</a> | <a href="vocabulary-cards.html">Vocabulary Cards</a></p>
+</footer>
+
+</div>
+
+<script>
+var SLIDES = {
+"1": { title:"Indigenous America", subtitle:"The New World Before Columbus \u2014 and After", slides:[
+  {type:"title"},
+  {type:"content", heading:"Big Questions", items:["How did the first Americans arrive, and how did they create such diverse civilizations?","What was the Columbian Exchange and how did it transform both hemispheres?","How did European contact reshape Indigenous life in the Americas?"]},
+  {type:"image", src:"images/ch1/beringia-land-bridge.png", caption:"The Beringia land bridge connected Asia to North America during the Ice Age, allowing the first people to migrate to the Americas 12,000\u201320,000 years ago."},
+  {type:"content", heading:"The First Americans", items:["During the Ice Age, a land bridge called Beringia connected Asia to North America","People migrated across Beringia 12,000\u201320,000 years ago","Over thousands of years, they spread across North and South America","They developed diverse cultures, languages, and ways of life"]},
+  {type:"image", src:"images/ch1/cahokia-mounds.jpg", caption:"Cahokia Mounds near present-day St. Louis. At its peak around 1050 CE, this city had a population of 30,000, larger than London at the time."},
+  {type:"content", heading:"Diverse Civilizations", items:["Cahokia (near St. Louis): population of 30,000 \u2014 larger than London","Maya and Aztec empires in Mesoamerica built massive cities","The Three Sisters (corn, beans, squash) supported agriculture across the continent","Hundreds of distinct languages and cultures existed before contact"]},
+  {type:"vocab", heading:"Key Vocabulary", terms:[{t:"Indigenous",d:"Native to a place; the original inhabitants"},{t:"Beringia",d:"Land bridge connecting Asia and North America"},{t:"Three Sisters",d:"Corn, beans, and squash grown together"},{t:"Columbian Exchange",d:"Transfer of plants, animals, and diseases between hemispheres"}]},
+  {type:"content", heading:"European Exploration", items:["The Crusades sparked European interest in Asian trade goods","New technology: caravel ships, astrolabes, compasses","Columbus reached the Americas in 1492, seeking a route to Asia","This began a massive exchange of plants, animals, and diseases"]},
+  {type:"content", heading:"The Columbian Exchange", items:["To the Americas: wheat, horses, cattle, diseases (smallpox, measles)","From the Americas: corn, potatoes, tomatoes, tobacco, chocolate","European diseases killed an estimated 90% of Indigenous peoples","The exchange permanently transformed both hemispheres"]},
+  {type:"story", heading:"The Great Dying", text:"When European diseases reached the Americas, they spread faster than the Europeans themselves. Indigenous peoples had no immunity to smallpox, measles, or typhus. Entire villages were wiped out. An estimated 90% of the Indigenous population died within a century of contact. This demographic catastrophe \u2014 sometimes called 'The Great Dying' \u2014 was the largest loss of human life in history, fundamentally reshaping Indigenous societies and making European conquest possible."},
+  {type:"content", heading:"Spanish Conquest", items:["Conquistadors like Cort\u00e9s conquered Indigenous empires","The encomienda system forced Indigenous peoples into labor","The casta system ranked people by racial ancestry","The Pueblo Revolt (1680) \u2014 successful Indigenous resistance"]},
+  {type:"discuss", question:"If 90% of a population was wiped out by disease, how would that change every aspect of a society \u2014 its government, economy, culture, and ability to resist invasion?"},
+  {type:"end"}
+]},
+"2": { title:"Colliding Cultures", subtitle:"Spanish Missions, French Fur Traders, and Colonial Competition", slides:[
+  {type:"title"},
+  {type:"content", heading:"Three Colonial Approaches", items:["Spain: Missions to convert Indigenous peoples to Christianity","France: Fur trade partnerships with Indigenous nations","England: Settlement colonies seeking land and resources","Each approach shaped different relationships with Indigenous peoples"]},
+  {type:"image", src:"images/ch2/waldseemuller-map.jpg", caption:"Early European map showing how Europeans viewed and imagined the Americas in the age of exploration."},
+  {type:"content", heading:"Spanish Missions", items:["Religious settlements designed to convert and assimilate Indigenous peoples","Located in Florida, New Mexico, Texas, and California","Used the encomienda system for forced labor","Met fierce resistance, including the Pueblo Revolt of 1680"]},
+  {type:"image", src:"images/ch2/de-bry-spanish-cruelty.jpg", caption:"Contemporary depiction of Spanish colonial violence against Indigenous peoples. These images were used by other European powers to criticize Spain."},
+  {type:"story", heading:"The Pueblo Revolt of 1680", text:"In 1680, Pueblo peoples in New Mexico rose up against Spanish colonizers in one of the most successful Indigenous resistance movements in North American history. Led by a religious leader named Pop\u00e9, they coordinated a unified uprising across dozens of pueblos. They killed 400 Spanish colonists and drove the remaining 2,000 out of New Mexico. For 12 years, the Pueblo peoples lived free of Spanish rule, reviving their traditional religions and ways of life. Though the Spanish eventually returned, the revolt forced them to adopt less brutal policies."},
+  {type:"content", heading:"French Fur Trade", items:["Based on partnerships and alliances with Indigenous peoples","Samuel de Champlain founded Quebec in 1608","Smaller settlements focused on trade, not conquest","Indigenous peoples maintained more autonomy under French colonialism"]},
+  {type:"vocab", heading:"Key Vocabulary", terms:[{t:"Colony",d:"Territory under political control of another country"},{t:"Mission",d:"Religious settlement for converting Indigenous peoples"},{t:"Privateer",d:"Private ship authorized to attack foreign vessels"},{t:"Mestizo/Mestiza",d:"Person of mixed European and Indigenous ancestry"},{t:"Encomienda",d:"Spanish colonial labor system granting colonists control over Indigenous workers"},{t:"Conquistador",d:"Spanish military conqueror"}]},
+  {type:"content", heading:"English Colonization Begins", items:["Puritans sought religious freedom from the Church of England","Enclosure movement pushed poor English people off their land","Joint-stock companies funded colonial ventures","Different motivations: religion, profit, escape from poverty"]},
+  {type:"content", heading:"Indigenous Resistance", items:["The Pueblo Revolt (1680): Led by Pop\u00e9, drove Spanish out for 12 years","Indigenous nations played European powers against each other","Alliances shifted based on which Europeans offered better terms","Resistance took many forms: military, diplomatic, cultural"]},
+  {type:"discuss", question:"How did the different European approaches to colonization \u2014 missions, fur trade, settlement \u2014 lead to different outcomes for Indigenous peoples?"},
+  {type:"end"}
+]},
+"3": { title:"British North America", subtitle:"Jamestown, Plymouth, and the Roots of Colonial America", slides:[
+  {type:"title"},
+  {type:"image", src:"images/ch3/thirteen-colonies-1775.png", caption:"Map of the thirteen British colonies that would eventually become the United States."},
+  {type:"content", heading:"Jamestown (1607)", items:["First permanent English settlement in North America","Founded by the Virginia Company (joint-stock company)","Nearly failed due to disease, starvation, and conflict","Tobacco saved the colony \u2014 John Rolfe made it profitable"]},
+  {type:"story", heading:"The Starving Time", text:"The winter of 1609-1610 was Jamestown's darkest hour. Of the 500 colonists who entered the winter, only 60 survived to spring. They ate horses, dogs, cats, rats, shoe leather \u2014 anything they could find. Some resorted to cannibalism. Disease, starvation, and conflict with the Powhatan Confederacy brought the colony to the brink of total collapse. In May 1610, the survivors actually abandoned Jamestown and began sailing home. Only the arrival of a supply ship convinced them to turn back. This near-disaster shaped Virginia's brutal future policies toward Indigenous peoples and labor."},
+  {type:"content", heading:"Labor in the Colonies", items:["Indentured servants: worked 4\u20137 years for passage to America","Headright system: 50 acres per person whose passage was paid","Freedom dues given when contracts ended","Gradual shift toward enslaved African labor after 1676"]},
+  {type:"image", src:"images/ch3/slave-ship-brookes.jpg", caption:"Diagram of a slave ship showing the horrific conditions of the Middle Passage that brought enslaved Africans to the Americas."},
+  {type:"vocab", heading:"Key Vocabulary", terms:[{t:"Joint-stock company",d:"Business funded by investors who buy shares"},{t:"Cash crop",d:"Crop grown for commercial sale, like tobacco"},{t:"Indentured servant",d:"Worker bound for a set number of years"},{t:"Planter elite",d:"Wealthy landowners with large plantations"},{t:"Headright system",d:"50 acres given per person whose passage was paid"},{t:"Covenant",d:"Binding agreement, especially for religious communities"}]},
+  {type:"content", heading:"Bacon\u2019s Rebellion (1676)", items:["Nathaniel Bacon led frontier settlers against the colonial government","Revealed tensions between wealthy planters and poor settlers","After the rebellion, Virginia turned to enslaved African labor","Enslavement was permanent, hereditary, and race-based"]},
+  {type:"content", heading:"The Shift to Slavery", items:["Before 1676: mostly indentured servants (could become free)","After 1676: increasing reliance on enslaved Africans","Slave codes stripped all rights from enslaved people","Slavery became the foundation of the Southern economy"]},
+  {type:"discuss", question:"Why did Virginia\u2019s labor system shift from indentured servitude to racial slavery? What does this tell us about the relationship between economics and racism?"},
+  {type:"end"}
+]},
+"4": { title:"Colonial Society", subtitle:"Slavery, Commerce, and the Seeds of Revolution", slides:[
+  {type:"title"},
+  {type:"image", src:"images/ch4/triangular-trade.png", caption:"The triangular trade route connected Europe, Africa, and the Americas in a system of commerce built on slavery."},
+  {type:"content", heading:"The Middle Passage", items:["Brutal transatlantic voyage bringing enslaved Africans to the Americas","Horrific conditions: overcrowding, disease, violence","Many people died during the crossing","Survivors faced a lifetime of forced labor"]},
+  {type:"story", heading:"Olaudah Equiano's Journey", text:"Olaudah Equiano was kidnapped from his home in West Africa at age 11 and forced onto a slave ship. He later wrote a powerful account of the Middle Passage: 'The closeness of the place, and the heat of the climate, added to the number in the ship, which was so crowded that each had scarcely room to turn himself, almost suffocated us.' Many captives died during the voyage. Equiano survived, was eventually able to purchase his freedom, and became a leading voice in the abolitionist movement. His autobiography became one of the most influential antislavery works ever written."},
+  {type:"content", heading:"Colonial Regions", items:["New England: small farms, fishing, shipbuilding, religious communities","Middle Colonies: diverse populations, grain farming, trade","Southern Colonies: large plantations, cash crops, enslaved labor","Each region developed distinct cultures and economies"]},
+  {type:"image", src:"images/ch4/whitefield-preaching.jpg", caption:"George Whitefield preaching during the Great Awakening, which drew huge crowds and challenged traditional religious authority."},
+  {type:"vocab", heading:"Key Vocabulary", terms:[{t:"Middle Passage",d:"Voyage bringing enslaved Africans across the Atlantic"},{t:"Mercantilism",d:"Policy that colonies exist to benefit the mother country"},{t:"Enlightenment",d:"Intellectual movement emphasizing reason and rights"},{t:"Social contract",d:"Agreement between people and their government"}]},
+  {type:"content", heading:"The Great Awakening (1730s\u20131740s)", items:["Religious revival that swept through the colonies","Preachers like Jonathan Edwards and George Whitefield drew huge crowds","Emphasized personal choice and individual salvation","Challenged traditional authority \u2014 planted seeds of democracy"]},
+  {type:"content", heading:"Enlightenment Ideas", items:["Natural rights: life, liberty, property (John Locke)","Social contract: government must protect people\u2019s rights","Reason and science over tradition and superstition","These ideas would fuel the American Revolution"]},
+  {type:"content", heading:"The French and Indian War (1754\u20131763)", items:["Britain and France fought for control of North America","Indigenous nations allied with both sides","Britain won \u2014 gained Canada and territory east of Mississippi","Britain\u2019s war debt led to new taxes on the colonies"]},
+  {type:"discuss", question:"How did the Enlightenment ideas of natural rights and social contract challenge the existing colonial order \u2014 including slavery?"},
+  {type:"end"}
+]},
+"5": { title:"The American Revolution", subtitle:"Taxes, Tea, and the Birth of a Nation", slides:[
+  {type:"title"},
+  {type:"image", src:"images/ch5/boston-massacre.jpg", caption:"The Boston Massacre (1770): British soldiers fired into a crowd of colonists, killing five people and inflaming colonial anger."},
+  {type:"content", heading:"Road to Revolution", items:["Stamp Act (1765): tax on printed materials sparked outrage","Boston Massacre (1770): British soldiers killed five colonists","Boston Tea Party (1773): colonists dumped tea to protest taxes","Intolerable Acts (1774): Britain punished Massachusetts"]},
+  {type:"image", src:"images/ch5/common-sense.jpg", caption:"Thomas Paine's Common Sense (1776) was a bestselling pamphlet that convinced many colonists to support independence."},
+  {type:"content", heading:"Key Ideas", items:["\u201cNo taxation without representation\u201d \u2014 colonists had no voice in Parliament","Thomas Paine\u2019s Common Sense (1776) argued for full independence","Declaration of Independence (July 4, 1776) declared natural rights","Inspired by Enlightenment thinkers, especially John Locke"]},
+  {type:"image", src:"images/ch5/declaration-of-independence.jpg", caption:"The Declaration of Independence, signed July 4, 1776, proclaimed that 'all men are created equal' with rights to 'life, liberty, and the pursuit of happiness.'"},
+  {type:"vocab", heading:"Key Vocabulary", terms:[{t:"Patriot",d:"Colonist who supported independence"},{t:"Loyalist",d:"Colonist who remained loyal to Britain"},{t:"Boycott",d:"Refusing to buy goods as a form of protest"},{t:"Sons of Liberty",d:"Secret organization protesting British policies"}]},
+  {type:"content", heading:"The War", items:["Lexington and Concord (April 1775): \u201cthe shot heard round the world\u201d","Valley Forge (1777\u20131778): harsh winter that tested the army","Saratoga (1777): turning point \u2014 brought French alliance","Yorktown (1781): British surrender ended the war"]},
+  {type:"content", heading:"Who Fought?", items:["Ordinary farmers, artisans, and merchants joined the Continental Army","About 5,000 Black soldiers fought for American independence","Women supported the war as nurses, spies, and camp followers","Indigenous nations fought on both sides"]},
+  {type:"discuss", question:"The Declaration says \u2018all men are created equal.\u2019 How did the reality of slavery, women\u2019s exclusion, and Indigenous removal contradict these ideals?"},
+  {type:"end"}
+]},
+"6": { title:"A New Nation", subtitle:"From the Articles of Confederation to the Constitution", slides:[
+  {type:"title"},
+  {type:"content", heading:"The Articles of Confederation", items:["America\u2019s first constitution (1781\u20131789)","Created a weak central government with no power to tax","No executive branch, no national courts","Shays\u2019s Rebellion (1786) exposed its fatal weaknesses"]},
+  {type:"image", src:"images/ch6/independence-hall.jpg", caption:"Independence Hall in Philadelphia, where the Constitutional Convention met in secret during the summer of 1787."},
+  {type:"content", heading:"The Constitutional Convention (1787)", items:["55 delegates met in Philadelphia to create a new government","Virginia Plan: representation based on population (big states)","New Jersey Plan: equal representation for all states (small states)","The Great Compromise: two-house Congress combining both"]},
+  {type:"story", heading:"The Sword That Broke America", text:"In 1786, Daniel Shays \u2014 a veteran of the Revolutionary War \u2014 led a rebellion of Massachusetts farmers who were losing their land to debt and taxes. Shays' Rebellion revealed that the national government under the Articles of Confederation was too weak to respond to crises. It couldn't raise an army or collect taxes. This rebellion terrified America's leaders and convinced them that a stronger national government was urgently needed. Within months, delegates gathered in Philadelphia to write a new Constitution. Without Shays' Rebellion, we might still be governed by the Articles of Confederation."},
+  {type:"vocab", heading:"Key Vocabulary", terms:[{t:"Great Compromise",d:"Created Senate + House of Representatives"},{t:"Three-Fifths Compromise",d:"Enslaved people counted as 3/5 for representation"},{t:"Federalist",d:"Supporter of a strong central government"},{t:"Bill of Rights",d:"First 10 amendments protecting individual liberties"},{t:"Anti-Federalist",d:"Opponent of strong central government, favoring states' rights"}]},
+  {type:"content", heading:"Compromises Over Slavery", items:["Three-Fifths Compromise: enslaved people counted as 3/5 for representation","Slave Trade Compromise: couldn\u2019t ban slave trade until 1808","Fugitive Slave Clause: escaped enslaved people must be returned","The Constitution never used the word \u2018slave\u2019"]},
+  {type:"content", heading:"Ratification and the Bill of Rights", items:["Federalists supported the Constitution; Anti-Federalists opposed it","The Federalist Papers argued for ratification","Bill of Rights (1791) added to protect individual liberties","Freedom of speech, religion, press, assembly, and more"]},
+  {type:"content", heading:"The Election of 1800", items:["First peaceful transfer of power between political parties","John Adams (Federalist) lost to Thomas Jefferson (Democratic-Republican)","Proved that democracy could work without violence","Set a precedent followed for over 200 years"]},
+  {type:"discuss", question:"The Founders compromised on slavery to create the Constitution. Was this a necessary compromise or a moral failure? Could they have done better?"},
+  {type:"end"}
+]},
+"7": { title:"The Early Republic", subtitle:"Expansion, Slavery, and Growing Pains", slides:[
+  {type:"title"},
+  {type:"image", src:"images/ch7/louisiana-purchase.jpg", caption:"The Louisiana Purchase (1803) doubled the size of the United States, adding territory from the Mississippi River to the Rocky Mountains."},
+  {type:"content", heading:"Jefferson\u2019s America", items:["Louisiana Purchase (1803): doubled the size of the United States","Lewis and Clark explored the new territory","Judicial review established in Marbury v. Madison (1803)","Embargo Act (1807): banned foreign trade, hurt the economy"]},
+  {type:"story", heading:"Gabriel's Plan", text:"In the summer of 1800, an enslaved blacksmith named Gabriel organized a sophisticated plan to rebel in Richmond, Virginia. He recruited over 1,000 enslaved people to march on the capital, seize weapons, and demand freedom. Gabriel's plan was meticulous \u2014 he made swords and bayonets in secret. But on the night of the uprising, a massive thunderstorm washed out roads and bridges, forcing a delay. Two enslaved people betrayed the plot to their enslavers. Gabriel and 26 others were hanged. Yet Gabriel's Rebellion terrified slaveholders and proved that enslaved people would fight for their freedom."},
+  {type:"content", heading:"Slavery and Resistance", items:["Gabriel\u2019s Rebellion (1800): planned slave revolt in Virginia","Haitian Revolution (1791\u20131804): first independent Black republic","Slaveholders lived in fear of similar uprisings","Abolitionists began speaking out against slavery"]},
+  {type:"image", src:"images/ch7/lewis-and-clark.jpg", caption:"Lewis and Clark's expedition (1804-1806) explored the Louisiana Territory and reached the Pacific Ocean."},
+  {type:"vocab", heading:"Key Vocabulary", terms:[{t:"Louisiana Purchase",d:"Doubled U.S. size for $15 million"},{t:"Judicial review",d:"Supreme Court can strike down unconstitutional laws"},{t:"Republican Motherhood",d:"Women\u2019s role as raisers of virtuous citizens"},{t:"Embargo Act",d:"Banned American foreign trade to pressure Britain/France"}]},
+  {type:"content", heading:"The War of 1812", items:["Causes: British impressment of American sailors, support for Indigenous resistance","Tecumseh tried to unite Indigenous tribes against U.S. expansion","British burned Washington, D.C. in 1814","War ended in a draw but boosted American nationalism"]},
+  {type:"content", heading:"Indigenous Resistance", items:["Tecumseh built a confederacy of Indigenous nations","Argued that no single tribe could sell land \u2014 it belonged to all","His efforts were defeated at the Battle of Tippecanoe (1811)","After the War of 1812, Indigenous power east of the Mississippi declined"]},
+  {type:"discuss", question:"Jefferson wrote that \u2018all men are created equal\u2019 but owned enslaved people. How should we understand this contradiction?"},
+  {type:"end"}
+]},
+"8": { title:"The Market Revolution", subtitle:"Canals, Factories, and the Remaking of American Life", slides:[
+  {type:"title"},
+  {type:"content", heading:"What Changed?", items:["America shifted from subsistence farming to a market economy","New transportation: Erie Canal (1825), steamboats, railroads","Factories replaced home workshops","People moved to cities for work"]},
+  {type:"image", src:"images/ch8/erie-canal.jpg", caption:"The Erie Canal (1825) connected the Great Lakes to the Atlantic Ocean, transforming American commerce and making New York the nation's economic center."},
+  {type:"content", heading:"Transportation Revolution", items:["Erie Canal connected Great Lakes to Atlantic Ocean","Steamboats made river travel faster and cheaper","Railroads began spreading across the country","The National Road was the first major federal highway"]},
+  {type:"story", heading:"Clinton's Ditch", text:"When New York Governor DeWitt Clinton proposed digging a 363-mile canal from Albany to Buffalo, critics mocked it as 'Clinton's Ditch' \u2014 an impossible fantasy. The project seemed absurd: it would be the longest canal in the world, crossing rivers, valleys, and hills. But Clinton persisted. Thousands of workers, many Irish immigrants, spent eight years digging by hand. When the Erie Canal opened in 1825, it was a marvel. Travel time from New York to Buffalo dropped from weeks to days. Shipping costs plummeted. New York City became America's commercial capital. The 'ditch' had changed the nation."},
+  {type:"image", src:"images/ch8/lowell-mills.jpg", caption:"The Lowell Mills in Massachusetts employed thousands of young women in textile factories, marking the beginning of American industrialization."},
+  {type:"vocab", heading:"Key Vocabulary", terms:[{t:"Market Revolution",d:"Shift from subsistence to commercial economy"},{t:"Factory system",d:"Centralized production using machinery"},{t:"Strike",d:"Workers refusing to work until demands are met"},{t:"Labor union",d:"Organization of workers protecting their interests"}]},
+  {type:"content", heading:"Factory Life", items:["Lowell Mills employed young women from farming families","Long hours (12\u201314 hours/day), low pay, strict rules","Workers organized strikes (\u2018turn-outs\u2019) for better conditions","Early labor movement planted seeds for future unions"]},
+  {type:"content", heading:"Cotton and Slavery", items:["Cotton gin (1793) made cotton hugely profitable","Paradox: the gin increased demand for enslaved labor","Cotton became America\u2019s most valuable export","Northern factories processed cotton picked by enslaved people"]},
+  {type:"discuss", question:"How were Northern factory workers and Southern enslaved people connected by the cotton economy? Who benefited most from this system?"},
+  {type:"end"}
+]},
+"9": { title:"Democracy in America", subtitle:"Andrew Jackson, Indian Removal, and Who Gets to Vote", slides:[
+  {type:"title"},
+  {type:"content", heading:"Jacksonian Democracy", items:["Voting expanded to all white men (no property requirement)","Andrew Jackson elected 1828 \u2014 \u2018man of the people\u2019","Spoils system: government jobs for political supporters","But \u2018democracy\u2019 excluded women, Black people, and Indigenous peoples"]},
+  {type:"image", src:"images/ch9/trail-of-tears-map.jpg", caption:"Map showing the forced removal routes of the Trail of Tears, where thousands of Cherokee and other Indigenous peoples were marched from their homelands to Oklahoma."},
+  {type:"content", heading:"Indian Removal", items:["Indian Removal Act (1830): forced relocation of Indigenous peoples","Trail of Tears (1838\u20131839): Cherokee forced to Oklahoma","About 4,000 Cherokee died on the march","Sequoyah had created a Cherokee writing system \u2014 they had their own newspaper and constitution"]},
+  {type:"image", src:"images/ch9/trail-of-tears.jpg", caption:"Depiction of the Trail of Tears showing the suffering of Cherokee people during their forced removal westward."},
+  {type:"vocab", heading:"Key Vocabulary", terms:[{t:"Suffrage",d:"The right to vote"},{t:"Spoils system",d:"Giving government jobs to political supporters"},{t:"Nullification",d:"A state declaring a federal law unconstitutional"},{t:"Tariff",d:"A tax on imported goods"},{t:"Indian Removal Act",d:"Federal policy forcing Native Americans from their lands"}]},
+  {type:"content", heading:"The Bank War", items:["Jackson opposed the Second Bank of the United States","He saw it as a tool of wealthy Eastern elites","Vetoed the bank\u2019s recharter in 1832","Removal of federal deposits led to economic instability"]},
+  {type:"content", heading:"The Nullification Crisis", items:["South Carolina tried to nullify federal tariff laws","John C. Calhoun argued states could reject federal laws","Jackson threatened military force to enforce the tariff","Compromise reached, but states\u2019 rights debate continued"]},
+  {type:"discuss", question:"Jackson expanded voting for white men while forcing Indigenous peoples off their land. Can a leader be both democratic and oppressive at the same time?"},
+  {type:"end"}
+]},
+"10": { title:"Religion and Reform", subtitle:"Abolition, Women\u2019s Rights, and the Fight to Perfect America", slides:[
+  {type:"title"},
+  {type:"content", heading:"The Second Great Awakening", items:["Religious revival emphasizing individual choice and moral improvement","Camp meetings drew thousands of people","Taught that people could perfect themselves and society","Directly inspired reform movements across America"]},
+  {type:"image", src:"images/ch10/frederick-douglass.jpg", caption:"Frederick Douglass escaped slavery and became one of the most powerful voices for abolition, proving through his own brilliance that enslaved people were fully equal."},
+  {type:"content", heading:"The Abolition Movement", items:["William Lloyd Garrison: published The Liberator (1831)","Frederick Douglass: escaped slavery, became powerful speaker","Harriet Tubman: guided ~70 people to freedom via Underground Railroad","Sojourner Truth: linked abolition to women\u2019s rights"]},
+  {type:"story", heading:"Douglass Speaks", text:"When Frederick Douglass stood before a crowd in Rochester, New York on July 5, 1852, people expected a patriotic speech. Instead, Douglass delivered one of the most powerful addresses in American history. 'What, to the American slave, is your 4th of July?' he asked. 'To him, your celebration is a sham.' He challenged white Americans to see their own hypocrisy \u2014 celebrating freedom while millions remained enslaved. The audience sat in stunned silence. Douglass had been born into slavery, secretly taught himself to read, and escaped to the North. Now he used the very ideals of the Declaration of Independence as a weapon against the nation that had enslaved him."},
+  {type:"vocab", heading:"Key Vocabulary", terms:[{t:"Second Great Awakening",d:"Religious revival inspiring social reform"},{t:"Abolitionist",d:"Person who fought to end slavery"},{t:"Declaration of Sentiments",d:"1848 document demanding women\u2019s equality"},{t:"Temperance",d:"Movement to limit or ban alcohol"}]},
+  {type:"image", src:"images/ch10/seneca-falls.jpg", caption:"The Seneca Falls Convention (1848) launched the women's rights movement. It would take 72 more years before women won the right to vote."},
+  {type:"content", heading:"Women\u2019s Rights", items:["Seneca Falls Convention (1848): first women\u2019s rights convention","Declaration of Sentiments: \u2018all men and women are created equal\u2019","Led by Elizabeth Cady Stanton and Lucretia Mott","Women wouldn\u2019t gain voting rights until 1920 (72 years later)"]},
+  {type:"content", heading:"Other Reform Movements", items:["Temperance: campaign to ban alcohol","Education: Horace Mann pushed for free public schools","Prison reform: rehabilitation instead of punishment","Utopian communities: experimental \u2018perfect\u2019 societies"]},
+  {type:"discuss", question:"Many abolitionists were also women\u2019s rights activists. Why do you think these two movements were connected?"},
+  {type:"end"}
+]},
+"11": { title:"The Cotton Revolution", subtitle:"Slavery, Resistance, and the Economy That Divided America", slides:[
+  {type:"title"},
+  {type:"content", heading:"King Cotton", items:["Cotton gin (1793) made cotton enormously profitable","By 1860, cotton was over 50% of all U.S. exports","The South became the world\u2019s leading cotton producer","Cotton\u2019s profitability made slaveholders more committed to slavery"]},
+  {type:"image", src:"images/ch11/slave-auction.jpg", caption:"Enslaved families were torn apart at auction. About one million people were forcibly relocated from the Upper to the Lower South in the domestic slave trade."},
+  {type:"content", heading:"The Domestic Slave Trade", items:["About one million enslaved people forcibly relocated from Upper to Lower South","Families torn apart at slave auctions","Enslaved people marched in coffles (chains) hundreds of miles","This was the largest forced migration in U.S. history"]},
+  {type:"vocab", heading:"Key Vocabulary", terms:[{t:"King Cotton",d:"Phrase expressing cotton\u2019s economic dominance"},{t:"Domestic slave trade",d:"Buying and selling enslaved people within the U.S."},{t:"Underground Railroad",d:"Secret network helping enslaved people escape"},{t:"Overseer",d:"Person who supervised enslaved workers"}]},
+  {type:"content", heading:"Life Under Slavery", items:["Task system vs. gang system: different forms of forced labor","Overseers used violence to maintain control","Enslaved people were denied education, freedom of movement, and family stability","Despite everything, enslaved people maintained culture, faith, and community"]},
+  {type:"story", heading:"Nat Turner's Rebellion", text:"In August 1831, an enslaved preacher named Nat Turner led the most dramatic slave rebellion in American history. Turner believed God had chosen him for a special mission. When a solar eclipse darkened the sky, he took it as a sign. Starting with a handful of followers, Turner's group moved from plantation to plantation in Southampton County, Virginia, growing to about 70 rebels. They killed around 55 white people before militia forces crushed the uprising. Turner hid for two months before being captured and executed. The aftermath was devastating: white mobs killed over 200 Black people in retaliation, and Southern states passed even harsher slave codes. But Turner's rebellion showed that enslaved people would risk everything for freedom."},
+  {type:"image", src:"images/ch11/underground-railroad.jpg", caption:"The Underground Railroad was a secret network of safe houses and routes that helped thousands of enslaved people escape to freedom in the North and Canada."},
+  {type:"content", heading:"Resistance", items:["Day-to-day resistance: working slowly, breaking tools, feigning illness","Running away: Underground Railroad helped thousands escape north","Nat Turner\u2019s Rebellion (1831): armed uprising in Virginia","Maintaining family bonds, religion, and culture was itself resistance"]},
+  {type:"discuss", question:"Enslaved people resisted in many ways beyond armed rebellion. Why is it important to recognize all forms of resistance, not just violent ones?"},
+  {type:"end"}
+]},
+"12": { title:"Manifest Destiny", subtitle:"Westward Expansion and the Cost of Empire", slides:[
+  {type:"title"},
+  {type:"content", heading:"Manifest Destiny", items:["Belief that the U.S. was destined to expand coast to coast","John O\u2019Sullivan coined the term in 1845","Used to justify taking land from Indigenous peoples and Mexico","Combined nationalism, racism, and religious conviction"]},
+  {type:"image", src:"images/ch12/manifest-destiny-painting.jpg", caption:"'American Progress' by John Gast (1872) shows the idea of Manifest Destiny \u2014 a goddess-like figure leading settlers westward while Indigenous peoples and animals flee."},
+  {type:"content", heading:"The Mexican-American War (1846\u20131848)", items:["President Polk provoked war with Mexico over Texas border","Mexico lost about half its territory in the Treaty of Guadalupe Hidalgo","U.S. gained California, Nevada, Utah, and more","Mexican citizens in ceded territory became second-class citizens"]},
+  {type:"vocab", heading:"Key Vocabulary", terms:[{t:"Manifest Destiny",d:"Belief in U.S. destiny to expand across the continent"},{t:"Annexation",d:"Adding territory to an existing country"},{t:"Mexican Cession",d:"Territory Mexico gave up after the war"},{t:"Forty-Niners",d:"Gold Rush migrants to California in 1849"}]},
+  {type:"story", heading:"Gold Fever", text:"On January 24, 1848, a carpenter named James Marshall spotted something glittering in a sawmill ditch in Coloma, California. 'Boys, I believe I have found a gold mine,' he told his workers. Despite attempts to keep the discovery secret, word spread like wildfire. By 1849, over 300,000 people from around the world had flooded into California. They came from China, Mexico, Chile, Europe, and across America. San Francisco grew from a village of 200 to a city of 36,000 in two years. Most miners found nothing. Many died of disease. But the Gold Rush transformed California \u2014 and devastated Indigenous Californians, who lost their lands and were subjected to violence and forced labor that amounted to genocide."},
+  {type:"image", src:"images/ch12/gold-rush.jpg", caption:"Miners during the California Gold Rush (1849). Thousands came from around the world seeking fortune, transforming the American West."},
+  {type:"content", heading:"The California Gold Rush (1849)", items:["Gold discovered at Sutter\u2019s Mill in 1848","Thousands of \u2018Forty-Niners\u2019 rushed to California","Foreign Miners\u2019 Tax discriminated against non-white miners","Indigenous Californians faced genocide and forced labor"]},
+  {type:"content", heading:"The Slavery Question", items:["New territory reignited the slavery debate","Should new states be free or slave?","Wilmot Proviso tried (and failed) to ban slavery in new territory","This question would dominate the next decade and lead to Civil War"]},
+  {type:"discuss", question:"Was westward expansion progress or imperialism? Who benefited, and who paid the cost?"},
+  {type:"end"}
+]},
+"13": { title:"The Sectional Crisis", subtitle:"Compromise, Conflict, and the Road to War", slides:[
+  {type:"title"},
+  {type:"content", heading:"Compromise of 1850", items:["California admitted as a free state","Stricter Fugitive Slave Act: required return of escaped enslaved people","Slave trade (not slavery) ended in Washington, D.C.","Temporarily eased tensions, but didn\u2019t solve the problem"]},
+  {type:"content", heading:"The Crisis Deepens", items:["Uncle Tom\u2019s Cabin (1852): turned Northern opinion against slavery","Kansas-Nebraska Act (1854): popular sovereignty led to violence","Bleeding Kansas: pro- and anti-slavery forces fought in Kansas","Republican Party founded (1854) to oppose slavery\u2019s expansion"]},
+  {type:"image", src:"images/ch13/bleeding-kansas.jpg", caption:"'Bleeding Kansas' \u2014 pro-slavery and anti-slavery settlers fought violently over whether Kansas would enter the Union as a free or slave state."},
+  {type:"vocab", heading:"Key Vocabulary", terms:[{t:"Sectionalism",d:"Loyalty to one\u2019s region over the nation"},{t:"Popular sovereignty",d:"Letting settlers vote on slavery in territories"},{t:"Secession",d:"Withdrawing from the Union"},{t:"Free labor",d:"Belief in voluntary, compensated work"}]},
+  {type:"story", heading:"John Brown's Last Stand", text:"On the night of October 16, 1859, a white abolitionist named John Brown led 21 men \u2014 including five Black men \u2014 in a raid on the federal armory at Harpers Ferry, Virginia. His plan was audacious: seize weapons, arm enslaved people, and spark a massive uprising across the South. The raid failed within 36 hours. Marines led by Colonel Robert E. Lee stormed the armory. Brown was wounded, captured, tried, and sentenced to hang. At his execution, Brown handed a guard a note: 'I, John Brown, am now quite certain that the crimes of this guilty land will never be purged away but with blood.' He was right. The Civil War began 18 months later. To Northerners, Brown was a martyr. To Southerners, he was proof that the North wanted to destroy their way of life."},
+  {type:"image", src:"images/ch13/john-brown.jpg", caption:"John Brown's raid on Harpers Ferry (1859) failed as a military operation but electrified the nation and pushed it closer to Civil War."},
+  {type:"content", heading:"The Breaking Point", items:["Dred Scott decision (1857): Black people are not citizens","John Brown\u2019s raid on Harpers Ferry (1859): attempted slave uprising","Lincoln elected president (1860) without any Southern votes","South Carolina secedes in December 1860; others follow"]},
+  {type:"content", heading:"Why Compromise Failed", items:["Each compromise only delayed the fundamental conflict","The question of slavery in new territories couldn\u2019t be avoided","Both sides saw the issue as existential \u2014 about their way of life","Violence replaced negotiation as the path forward"]},
+  {type:"discuss", question:"At what point was compromise no longer possible? Could the Civil War have been avoided, or was it inevitable?"},
+  {type:"end"}
+]},
+"14": { title:"The Civil War", subtitle:"Emancipation, Sacrifice, and the Fight for the Union", slides:[
+  {type:"title"},
+  {type:"content", heading:"The War Begins", items:["Fort Sumter attacked April 1861 \u2014 the war begins","11 Southern states formed the Confederate States of America","The Union had more people, industry, and railroads","The Confederacy had experienced military officers and fought on home territory"]},
+  {type:"image", src:"images/ch14/civil-war-battle.jpg", caption:"The Battle of Gettysburg (July 1863) was the bloodiest battle of the Civil War, with over 50,000 casualties in three days. It marked the turning point of the war."},
+  {type:"content", heading:"Key Battles", items:["Antietam (Sept. 1862): bloodiest single day in American history","Gettysburg (July 1863): turning point in the East","Vicksburg (July 1863): Union gained control of the Mississippi","Sherman\u2019s March to the Sea (1864): total war in Georgia"]},
+  {type:"vocab", heading:"Key Vocabulary", terms:[{t:"Emancipation",d:"The act of freeing people from slavery"},{t:"Contraband",d:"Enslaved people who escaped to Union lines"},{t:"Total war",d:"Targeting civilian infrastructure, not just soldiers"},{t:"Casualties",d:"People killed, wounded, captured, or missing"}]},
+  {type:"story", heading:"The 54th Massachusetts", text:"When the Union Army began recruiting Black soldiers in 1863, many white people doubted they would fight. The 54th Massachusetts Infantry proved them wrong. Led by white Colonel Robert Gould Shaw, the regiment was made up of free Black men from across the North, including two sons of Frederick Douglass. On July 18, 1863, the 54th charged Fort Wagner in South Carolina under heavy fire. Shaw was killed on the ramparts. Nearly half the regiment was killed, wounded, or captured. The Confederates buried Shaw in a mass grave with his Black soldiers, intending it as an insult. Shaw's family said it was the greatest honor he could receive. The 54th's bravery silenced doubters and opened the door for 180,000 Black men to serve in the Union Army."},
+  {type:"image", src:"images/ch14/black-soldiers.jpg", caption:"Black soldiers of the Union Army. About 180,000 Black men served, fighting both for the Union and for their own freedom."},
+  {type:"content", heading:"Emancipation", items:["Emancipation Proclamation (Jan. 1, 1863): freed enslaved people in Confederate states","Transformed the war into a fight to end slavery","About 180,000 Black soldiers served in the Union Army","Enslaved people freed themselves by fleeing to Union lines"]},
+  {type:"content", heading:"The Human Cost", items:["Approximately 750,000 soldiers died \u2014 more than all other U.S. wars combined","Families torn apart on both sides","Cities and farms across the South destroyed","The war left deep scars that took generations to heal"]},
+  {type:"image", src:"images/ch14/appomattox.jpg", caption:"General Robert E. Lee surrendered to General Ulysses S. Grant at Appomattox Court House on April 9, 1865, effectively ending the Civil War."},
+  {type:"content", heading:"The War Ends", items:["Lee surrendered to Grant at Appomattox Court House, April 1865","Lincoln assassinated by John Wilkes Booth, April 14, 1865","The Union was preserved and slavery was ended","But the question remained: What comes next?"]},
+  {type:"discuss", question:"The Emancipation Proclamation only freed enslaved people in Confederate states. Was this a moral stand or a military strategy? Can it be both?"},
+  {type:"end"}
+]},
+"15": { title:"Reconstruction", subtitle:"Freedom, Terror, and the Unfinished Revolution", slides:[
+  {type:"title"},
+  {type:"content", heading:"The Second Founding", items:["13th Amendment (1865): abolished slavery","14th Amendment (1868): citizenship and equal protection","15th Amendment (1870): voting rights regardless of race","Together, these transformed the Constitution"]},
+  {type:"content", heading:"Presidential vs. Radical Reconstruction", items:["Andrew Johnson: lenient plan with few protections for freedpeople","Radical Republicans: demanded rights for freedpeople, punishment for the South","Congress overrode Johnson\u2019s vetoes to pass Reconstruction Acts","Military districts established to enforce new laws"]},
+  {type:"vocab", heading:"Key Vocabulary", terms:[{t:"Freedpeople",d:"Formerly enslaved people freed during/after the war"},{t:"Black Codes",d:"Laws restricting Black people\u2019s rights after the war"},{t:"Sharecropping",d:"Farming system that trapped families in debt"},{t:"Jim Crow",d:"Laws enforcing racial segregation in the South"}]},
+  {type:"image", src:"images/ch15/black-legislators.jpg", caption:"Black men elected to office during Reconstruction, including Hiram Revels (the first Black U.S. Senator) and other leaders who helped rebuild the South."},
+  {type:"content", heading:"Black Achievement During Reconstruction", items:["Hiram Revels: first Black U.S. Senator (1870)","Over 1,500 Black men held elected office across the South","Freedmen\u2019s Bureau built schools and provided services","Black churches and communities flourished"]},
+  {type:"story", heading:"Robert Smalls: From Enslaved to Congressman", text:"Robert Smalls was born into slavery in Beaufort, South Carolina. During the Civil War, he worked as a pilot on a Confederate military ship called the Planter. One night in May 1862, while the white officers were ashore, Smalls and other enslaved crew members made a daring escape. Smalls put on the captain's hat, steered past five Confederate checkpoints \u2014 giving the correct signals at each one \u2014 and delivered the ship to the Union Navy. He became an instant hero. After the war, Smalls bought his former enslaver's house, served in the South Carolina legislature, and was elected to the U.S. Congress, where he served five terms. His life showed what was possible when Black Americans had freedom and opportunity \u2014 and what was at stake when Reconstruction ended."},
+  {type:"content", heading:"The Backlash", items:["Black Codes restricted freedpeople\u2019s rights immediately after the war","Ku Klux Klan used terror and violence against Black voters","Sharecropping trapped Black families in cycles of debt","Poll taxes and literacy tests later stripped away voting rights"]},
+  {type:"image", src:"images/ch15/reconstruction-ends.jpg", caption:"After 1877, Jim Crow laws enforced racial segregation across the South, undoing many gains of Reconstruction for nearly a century."},
+  {type:"content", heading:"Reconstruction Ends", items:["Compromise of 1877: federal troops withdrawn from the South","Jim Crow laws enforced racial segregation for decades","The promise of equality would go unfulfilled for nearly a century","The \u2018unfinished revolution\u2019 would not resume until the Civil Rights Movement"]},
+  {type:"discuss", question:"Reconstruction has been called America\u2019s \u2018unfinished revolution.\u2019 What was left unfinished, and are those issues still unfinished today?"},
+  {type:"end"}
+]}
+};
+
+var currentSlides = [];
+var currentSlideIndex = 0;
+
+// Build select
+var sel = document.getElementById('ch-select');
+for (var ch in SLIDES) {
+  var opt = document.createElement('option');
+  opt.value = ch;
+  opt.textContent = 'Ch. ' + ch + ': ' + SLIDES[ch].title;
+  sel.appendChild(opt);
+}
+
+function loadSlides(ch) {
+  var viewer = document.getElementById('slide-viewer');
+  var nav = document.getElementById('slide-nav');
+  var progress = document.getElementById('slide-progress');
+  var shortcuts = document.getElementById('shortcut-help');
+  var noSlides = document.getElementById('no-slides');
+  var presentBtn = document.getElementById('present-btn');
+
+  if (!ch || !SLIDES[ch]) {
+    viewer.classList.remove('active');
+    nav.style.display = 'none';
+    progress.style.display = 'none';
+    shortcuts.style.display = 'none';
+    noSlides.style.display = 'block';
+    presentBtn.disabled = true;
+    document.getElementById('print-btn').disabled = true;
+    document.getElementById('pptx-btn').disabled = true;
+    return;
+  }
+
+  noSlides.style.display = 'none';
+  presentBtn.disabled = false;
+  document.getElementById('print-btn').disabled = false;
+  document.getElementById('pptx-btn').disabled = false;
+  var deck = SLIDES[ch];
+  currentSlides = deck.slides;
+  currentSlideIndex = 0;
+
+  var html = '';
+  deck.slides.forEach(function(s, i) {
+    var cls = 'slide' + (i === 0 ? ' current' : '');
+    if (s.type === 'title') {
+      html += '<div class="' + cls + ' slide-title" id="slide-' + i + '">';
+      html += '<div class="slide-ch">Chapter ' + ch + '</div>';
+      html += '<h2>' + esc(deck.title) + '</h2>';
+      html += '<div class="divider-gold"></div>';
+      html += '<div class="slide-sub">' + esc(deck.subtitle) + '</div>';
+      html += '</div>';
+    } else if (s.type === 'content') {
+      html += '<div class="' + cls + ' slide-content" id="slide-' + i + '">';
+      html += '<div class="slide-heading">' + esc(s.heading) + '</div>';
+      html += '<ul>';
+      s.items.forEach(function(item) { html += '<li>' + esc(item) + '</li>'; });
+      html += '</ul></div>';
+    } else if (s.type === 'vocab') {
+      html += '<div class="' + cls + ' slide-vocab" id="slide-' + i + '">';
+      html += '<div class="slide-heading">' + esc(s.heading) + '</div>';
+      s.terms.forEach(function(t) {
+        html += '<div class="vocab-item"><strong>' + esc(t.t) + '</strong><span>' + esc(t.d) + '</span></div>';
+      });
+      html += '</div>';
+    } else if (s.type === 'discuss') {
+      html += '<div class="' + cls + ' slide-discuss" id="slide-' + i + '">';
+      html += '<div class="discuss-label">Discussion Question</div>';
+      html += '<div class="discuss-q">' + esc(s.question) + '</div>';
+      html += '</div>';
+    } else if (s.type === 'image') {
+      html += '<div class="' + cls + ' slide-image" id="slide-' + i + '">';
+      html += '<img src="' + esc(s.src) + '" alt="' + esc(s.caption) + '">';
+      html += '<div class="img-caption">' + esc(s.caption) + '</div>';
+      html += '</div>';
+    } else if (s.type === 'story') {
+      html += '<div class="' + cls + ' slide-story" id="slide-' + i + '">';
+      html += '<div class="story-label">Story Behind the Story</div>';
+      html += '<div class="story-heading">' + esc(s.heading) + '</div>';
+      html += '<div class="story-text">' + esc(s.text) + '</div>';
+      html += '</div>';
+    } else if (s.type === 'end') {
+      html += '<div class="' + cls + ' slide-end" id="slide-' + i + '">';
+      html += '<h2>End of Chapter ' + ch + '</h2>';
+      html += '<p>' + esc(deck.title) + '</p>';
+      html += '</div>';
+    }
+  });
+
+  viewer.innerHTML = html;
+  viewer.classList.add('active');
+  nav.style.display = 'flex';
+  progress.style.display = 'block';
+  shortcuts.style.display = 'block';
+  updateSlideUI();
+}
+
+function showSlide(idx) {
+  if (idx < 0 || idx >= currentSlides.length) return;
+  var prev = document.getElementById('slide-' + currentSlideIndex);
+  if (prev) prev.classList.remove('current');
+  currentSlideIndex = idx;
+  var next = document.getElementById('slide-' + idx);
+  if (next) next.classList.add('current');
+  updateSlideUI();
+}
+
+function nextSlide() { showSlide(currentSlideIndex + 1); }
+function prevSlide() { showSlide(currentSlideIndex - 1); }
+
+function updateSlideUI() {
+  var total = currentSlides.length;
+  document.getElementById('slide-counter').textContent = (currentSlideIndex + 1) + ' / ' + total;
+  document.getElementById('prev-btn').disabled = currentSlideIndex === 0;
+  document.getElementById('next-btn').disabled = currentSlideIndex === total - 1;
+  var pct = ((currentSlideIndex + 1) / total * 100).toFixed(0);
+  document.getElementById('progress-fill').style.width = pct + '%';
+}
+
+function goFullscreen() {
+  var viewer = document.getElementById('slide-viewer');
+  if (viewer.requestFullscreen) viewer.requestFullscreen();
+  else if (viewer.webkitRequestFullscreen) viewer.webkitRequestFullscreen();
+}
+
+function esc(str) {
+  var d = document.createElement('div');
+  d.textContent = str;
+  return d.innerHTML;
+}
+
+document.addEventListener('keydown', function(e) {
+  if (e.target.tagName === 'SELECT' || e.target.tagName === 'INPUT') return;
+  if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); nextSlide(); }
+  else if (e.key === 'ArrowLeft') { e.preventDefault(); prevSlide(); }
+  else if (e.key === 'f' || e.key === 'F') { goFullscreen(); }
+});
+
+function printSlides() {
+  var viewer = document.getElementById('slide-viewer');
+  var slides = viewer.querySelectorAll('.slide');
+  slides.forEach(function(s) { s.classList.add('current'); });
+  window.print();
+  slides.forEach(function(s) { s.classList.remove('current'); });
+  showSlide(currentSlideIndex);
+}
+
+function exportPptx() {
+  var ch = document.getElementById('ch-select').value;
+  if (!ch || !SLIDES[ch]) return;
+  var deck = SLIDES[ch];
+  var pptx = new PptxGenJS();
+
+  // Slide dimensions (widescreen 16:9)
+  pptx.defineLayout({ name:'WIDE', width:10, height:5.625 });
+  pptx.layout = 'WIDE';
+
+  // Theme colors
+  var navy = '1B3A5C';
+  var gold = 'C4941D';
+  var teal = '2A7F8E';
+  var white = 'FFFFFF';
+  var light = 'F0F4F8';
+  var warmBg = 'FFF9E6';
+
+  deck.slides.forEach(function(s) {
+    var slide;
+
+    if (s.type === 'title') {
+      slide = pptx.addSlide();
+      slide.background = { fill: navy };
+      slide.addText('Chapter ' + ch, { x: 0.5, y: 1.0, w: 9, h: 0.5, fontSize: 14, color: white, align: 'center', fontFace: 'Arial', transparency: 50, letterSpacing: 3 });
+      slide.addText(deck.title, { x: 0.5, y: 1.6, w: 9, h: 1.2, fontSize: 36, color: white, align: 'center', fontFace: 'Georgia', bold: true });
+      slide.addShape(pptx.ShapeType.rect, { x: 4.2, y: 2.85, w: 1.6, h: 0.06, fill: { color: gold } });
+      slide.addText(deck.subtitle, { x: 1.5, y: 3.1, w: 7, h: 0.8, fontSize: 16, color: white, align: 'center', fontFace: 'Arial', transparency: 30 });
+
+    } else if (s.type === 'content') {
+      slide = pptx.addSlide();
+      slide.addText(s.heading, { x: 0.7, y: 0.4, w: 8.6, h: 0.7, fontSize: 24, color: navy, fontFace: 'Georgia', bold: true, border: { pt: 0, color: gold }, borderPt: [0,0,2,0] });
+      slide.addShape(pptx.ShapeType.rect, { x: 0.7, y: 1.1, w: 8.6, h: 0.04, fill: { color: gold } });
+      var bullets = s.items.map(function(item) {
+        return { text: item, options: { fontSize: 17, color: '333333', fontFace: 'Arial', bullet: { code: '25B8', color: gold }, lineSpacingMultiple: 1.5, paraSpaceBefore: 4 } };
+      });
+      slide.addText(bullets, { x: 0.9, y: 1.4, w: 8.2, h: 3.8, valign: 'top' });
+
+    } else if (s.type === 'vocab') {
+      slide = pptx.addSlide();
+      slide.background = { fill: light };
+      slide.addText(s.heading, { x: 0.7, y: 0.4, w: 8.6, h: 0.7, fontSize: 24, color: navy, fontFace: 'Georgia', bold: true });
+      slide.addShape(pptx.ShapeType.rect, { x: 0.7, y: 1.1, w: 8.6, h: 0.04, fill: { color: teal } });
+      var vocabRows = [];
+      s.terms.forEach(function(t) {
+        vocabRows.push({ text: t.t, options: { fontSize: 17, color: navy, fontFace: 'Arial', bold: true, paraSpaceBefore: 8 } });
+        vocabRows.push({ text: t.d, options: { fontSize: 15, color: '555555', fontFace: 'Arial', paraSpaceBefore: 2 } });
+      });
+      slide.addText(vocabRows, { x: 0.9, y: 1.4, w: 8.2, h: 3.8, valign: 'top' });
+
+    } else if (s.type === 'discuss') {
+      slide = pptx.addSlide();
+      slide.background = { fill: warmBg };
+      slide.addText('DISCUSSION QUESTION', { x: 0.5, y: 1.0, w: 9, h: 0.5, fontSize: 13, color: gold, align: 'center', fontFace: 'Arial', bold: true, letterSpacing: 2 });
+      slide.addText(s.question, { x: 1.2, y: 1.8, w: 7.6, h: 2.5, fontSize: 24, color: navy, align: 'center', fontFace: 'Georgia', italic: true, lineSpacingMultiple: 1.5 });
+
+    } else if (s.type === 'story') {
+      slide = pptx.addSlide();
+      slide.background = { fill: warmBg };
+      slide.addText('STORY BEHIND THE STORY', { x: 0.7, y: 0.3, w: 8.6, h: 0.4, fontSize: 12, color: gold, fontFace: 'Arial', bold: true, letterSpacing: 2 });
+      slide.addText(s.heading, { x: 0.7, y: 0.8, w: 8.6, h: 0.7, fontSize: 26, color: navy, fontFace: 'Georgia', bold: true });
+      slide.addText(s.text, { x: 0.7, y: 1.7, w: 8.6, h: 3.5, fontSize: 14, color: '333333', fontFace: 'Arial', lineSpacingMultiple: 1.5, valign: 'top' });
+
+    } else if (s.type === 'image') {
+      slide = pptx.addSlide();
+      slide.background = { fill: 'F8F8F8' };
+      slide.addText(s.caption, { x: 0.8, y: 2.0, w: 8.4, h: 1.5, fontSize: 16, color: '555555', align: 'center', fontFace: 'Arial', italic: true, lineSpacingMultiple: 1.4 });
+      slide.addText('[Image: see web version]', { x: 2.5, y: 0.5, w: 5, h: 1.2, fontSize: 13, color: '999999', align: 'center', fontFace: 'Arial' });
+
+    } else if (s.type === 'end') {
+      slide = pptx.addSlide();
+      slide.background = { fill: navy };
+      slide.addText('End of Chapter ' + ch, { x: 0.5, y: 1.8, w: 9, h: 1.0, fontSize: 28, color: white, align: 'center', fontFace: 'Georgia', bold: true });
+      slide.addText(deck.title, { x: 0.5, y: 2.9, w: 9, h: 0.8, fontSize: 16, color: white, align: 'center', fontFace: 'Arial', transparency: 30 });
+    }
+  });
+
+  pptx.writeFile({ fileName: 'Ch' + ch + ' - ' + deck.title + '.pptx' });
+}
+</script>
+</body>
+</html>

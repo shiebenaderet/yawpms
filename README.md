@@ -51,7 +51,7 @@ Each chapter includes:
 - **Stop and Think questions** — Analytical prompts, not recall quizzes
 - **Vocabulary boxes** — Key terms with student-friendly definitions
 - **Chapter activities** — Debates, rankings, and evidence-based discussions
-- **Built-in reader tools** — Text resizing, dyslexia-friendly font, line focus, text-to-speech, highlighting, notes, sepia/high-contrast themes, and selective Print/PDF
+- **Built-in reader tools** — Text size and line spacing (including extra-wide), **OpenDyslexic** font option, line focus, read-aloud with speed control, reading-time estimate, highlighting, notes, sepia/dark/high-contrast themes, and selective Print/PDF. Respects reduced-motion preferences.
 
 ---
 
@@ -99,12 +99,14 @@ open ch1.html
 
 ### Download Images
 
-Images are sourced from *The American Yawp* (CC BY-SA 4.0) and Wikimedia Commons (public domain). Download them with the provided scripts:
+Images are sourced from *The American Yawp* (CC BY-SA 4.0) and Wikimedia Commons (public domain). To get **all** chapter images and maps in the right place (so they load in the browser), run from the repo root:
 
 ```bash
-bash scripts/download_ch1_images.sh   # chapters 1–5 and 7 have download scripts
-bash scripts/download_ch7_images.sh
+bash scripts/download_all_images.sh   # ch1–ch15 (including ch6)
+bash scripts/download_all_maps.sh     # maps only (Beringia, 13 colonies, triangular trade, etc.)
 ```
+
+Or run per-chapter scripts, e.g. `bash scripts/download_ch1_images.sh`. See **IMAGES_AUDIT.md** if images don’t load (wrong folder or missing files).
 
 ---
 
@@ -163,11 +165,14 @@ yawpms/
 ├── js/
 │   └── reader-tools.js           # Reader tools (highlighting, notes, TTS, PDF, etc.)
 ├── images/
-│   ├── ch6/                      # Chapter 6 images
-│   └── ch7/                      # Chapter 7 images
+│   ├── ch1/ … ch15/              # Chapter images and maps (run scripts to populate)
 ├── scripts/
-│   ├── download_ch1_images.sh    # Image download scripts (ch1–ch5, ch7)
+│   ├── download_all_images.sh    # Download all chapter images (ch1–ch15)
+│   ├── download_all_maps.sh      # Download all maps into images/chN
+│   ├── download_ch1_images.sh … download_ch15_images.sh
 │   └── ...
+├── IMAGES_AUDIT.md               # Image reference & troubleshooting
+├── MAPS.md                       # Maps plan and sources
 └── README.md
 ```
 

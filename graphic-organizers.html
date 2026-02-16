@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Graphic Organizers | American Yawp MS</title>
+<link rel="stylesheet" href="css/pages.css">
+<style>
+/* ---- Graphic Organizer styles ---- */
+.org-intro {
+  background: #F0F4F8;
+  border-left: 5px solid #2A7F8E;
+  padding: 24px 28px;
+  margin: 0 0 32px;
+  border-radius: 0 8px 8px 0;
+}
+.org-intro h3 { color: #2A7F8E; font-size: 18px; margin-bottom: 8px; }
+.org-intro p {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 14px;
+  line-height: 1.7;
+  color: #555;
+  margin-bottom: 8px;
+}
+.org-intro p:last-child { margin-bottom: 0; }
+
+.print-controls {
+  text-align: center;
+  margin: 0 0 24px;
+}
+.print-btn {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 8px 24px;
+  background: #1B3A5C;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background .2s;
+}
+.print-btn:hover { background: #2A7F8E; }
+
+/* ---- Shared organizer styles ---- */
+.organizer {
+  border: 2px solid #1B3A5C;
+  border-radius: 4px;
+  margin: 0 0 40px;
+  background: white;
+  page-break-inside: avoid;
+  page-break-after: always;
+}
+.organizer:last-of-type { page-break-after: avoid; }
+.org-title {
+  text-align: center;
+  padding: 8px 12px;
+  background: #F0F4F8;
+  border-bottom: 2px solid #1B3A5C;
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: #1B3A5C;
+}
+.org-header {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border-bottom: 1px solid #ccc;
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 12px;
+}
+.org-header div {
+  padding: 6px 10px;
+}
+.org-header div:first-child { border-right: 1px solid #ccc; }
+.org-header label {
+  font-size: 9px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #1B3A5C;
+}
+.org-subtitle {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 11px;
+  color: #999;
+  font-style: italic;
+  text-align: center;
+  padding: 6px 10px;
+  border-bottom: 1px solid #eee;
+}
+
+/* ---- Lines helper ---- */
+.lined-area {
+  position: relative;
+  min-height: 120px;
+  background-image: repeating-linear-gradient(
+    transparent, transparent 25px, #e8e8e8 25px, #e8e8e8 26px
+  );
+  padding: 6px 10px;
+}
+
+/* ---- Cause & Effect ---- */
+.ce-body {
+  display: grid;
+  grid-template-columns: 1fr 40px 1fr;
+  min-height: 500px;
+}
+.ce-col {
+  padding: 0;
+}
+.ce-col-label {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #1B3A5C;
+  text-align: center;
+  padding: 8px;
+  background: #F8FAFB;
+  border-bottom: 1px solid #ddd;
+}
+.ce-arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  color: #C4941D;
+  border-left: 1px solid #ccc;
+  border-right: 1px solid #ccc;
+}
+.ce-row {
+  border-bottom: 1px solid #ddd;
+  min-height: 100px;
+  padding: 8px 10px;
+  position: relative;
+}
+.ce-row-num {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  color: #ccc;
+  position: absolute;
+  top: 4px;
+  left: 4px;
+}
+
+/* ---- Compare & Contrast (Venn-style) ---- */
+.cc-body {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  min-height: 500px;
+}
+.cc-col {
+  border-right: 1px solid #ccc;
+  padding: 0;
+}
+.cc-col:last-child { border-right: none; }
+.cc-col-label {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #1B3A5C;
+  text-align: center;
+  padding: 8px;
+  background: #F8FAFB;
+  border-bottom: 1px solid #ddd;
+}
+.cc-both .cc-col-label { background: #FFF9E6; color: #8B6914; }
+
+/* ---- Timeline ---- */
+.tl-body { min-height: 500px; }
+.tl-row {
+  display: grid;
+  grid-template-columns: 100px 1fr;
+  border-bottom: 1px solid #ddd;
+  min-height: 60px;
+}
+.tl-date {
+  border-right: 2px solid #1B3A5C;
+  padding: 8px 10px;
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  color: #1B3A5C;
+  text-align: right;
+  position: relative;
+}
+.tl-date::after {
+  content: "";
+  position: absolute;
+  right: -6px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #C4941D;
+  border: 2px solid #1B3A5C;
+}
+.tl-event {
+  padding: 8px 12px;
+}
+
+/* ---- Main Idea & Details ---- */
+.mid-body { min-height: 500px; padding: 12px; }
+.mid-main {
+  border: 2px solid #1B3A5C;
+  border-radius: 8px;
+  padding: 12px 16px;
+  text-align: center;
+  margin: 0 auto 20px;
+  max-width: 400px;
+  min-height: 60px;
+  background: #F0F4F8;
+}
+.mid-main-label {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #1B3A5C;
+  margin-bottom: 4px;
+}
+.mid-details {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 12px;
+}
+.mid-detail {
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  padding: 8px 10px;
+  min-height: 120px;
+}
+.mid-detail-label {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #2A7F8E;
+  margin-bottom: 4px;
+}
+.mid-connector {
+  text-align: center;
+  color: #ccc;
+  font-size: 18px;
+  margin: 8px 0;
+}
+
+/* ---- KWL Chart ---- */
+.kwl-body {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  min-height: 500px;
+}
+.kwl-col {
+  border-right: 1px solid #ccc;
+}
+.kwl-col:last-child { border-right: none; }
+.kwl-col-label {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  color: #1B3A5C;
+  text-align: center;
+  padding: 10px 8px;
+  background: #F8FAFB;
+  border-bottom: 1px solid #ddd;
+}
+.kwl-col-label small {
+  display: block;
+  font-weight: 400;
+  font-size: 10px;
+  color: #999;
+  margin-top: 2px;
+}
+
+/* ---- Organizer picker ---- */
+.org-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 12px;
+  margin: 0 0 32px;
+}
+.org-pick {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 16px;
+  text-align: center;
+  cursor: pointer;
+  transition: border-color .2s, box-shadow .2s;
+  background: white;
+}
+.org-pick:hover { border-color: #C4941D; box-shadow: 0 2px 8px rgba(0,0,0,.06); }
+.org-pick.active { border-color: #1B3A5C; border-width: 2px; }
+.org-pick h4 {
+  font-size: 14px;
+  color: #1B3A5C;
+  margin-bottom: 2px;
+}
+.org-pick p {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 11px;
+  color: #999;
+  margin: 0;
+  line-height: 1.4;
+}
+
+@media (max-width: 600px) {
+  .org-grid { grid-template-columns: 1fr 1fr; }
+  .mid-details { grid-template-columns: 1fr; }
+  .cc-body { grid-template-columns: 1fr; }
+  .cc-col { border-right: none; border-bottom: 1px solid #ccc; }
+}
+
+@media print {
+  body { background: white; }
+  .header, .nav-bar, .org-intro, .print-controls, .org-grid, .how-to-use, footer, h2.screen-only { display: none; }
+  .container { max-width: 100%; padding: 0; margin: 0; }
+  .organizer { border-color: black; }
+  .organizer.print-hide { display: none; }
+  @page { margin: 0.4in; }
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>Graphic Organizers</h1>
+  <div class="divider"></div>
+  <p>Printable Templates for Reading &amp; Analysis</p>
+</div>
+
+<nav class="nav-bar">
+  <a href="index.html">Home</a>
+  <a href="teaching.html">Teaching Materials</a>
+  <a href="cornell-notes.html">Cornell Notes</a>
+  <a href="vocabulary-cards.html">Vocabulary Cards</a>
+  <a href="teachers.html">Teachers Hub</a>
+</nav>
+
+<div class="container">
+
+<div class="org-intro">
+  <h3>Five Printable Organizers</h3>
+  <p>These graphic organizers work with any chapter. Choose the one that fits your lesson, then print it for students. Each template includes a name/chapter header and lined areas for writing.</p>
+  <p>Click an organizer below to jump to it, or scroll to see all five. When you print, only the selected organizer will appear on the page.</p>
+</div>
+
+<h2 class="screen-only">Choose an Organizer</h2>
+
+<div class="org-grid">
+  <div class="org-pick active" onclick="selectOrg('cause-effect')">
+    <h4>Cause &amp; Effect</h4>
+    <p>What happened and why</p>
+  </div>
+  <div class="org-pick" onclick="selectOrg('compare-contrast')">
+    <h4>Compare &amp; Contrast</h4>
+    <p>Similarities and differences</p>
+  </div>
+  <div class="org-pick" onclick="selectOrg('timeline')">
+    <h4>Timeline</h4>
+    <p>Events in order</p>
+  </div>
+  <div class="org-pick" onclick="selectOrg('main-idea')">
+    <h4>Main Idea &amp; Details</h4>
+    <p>Central idea with support</p>
+  </div>
+  <div class="org-pick" onclick="selectOrg('kwl')">
+    <h4>KWL Chart</h4>
+    <p>Know, Want to Know, Learned</p>
+  </div>
+</div>
+
+<div class="print-controls">
+  <button class="print-btn" onclick="window.print()">Print Selected Organizer</button>
+</div>
+
+<!-- ==================== CAUSE & EFFECT ==================== -->
+<div class="organizer" id="org-cause-effect">
+  <div class="org-title">Cause &amp; Effect</div>
+  <div class="org-header">
+    <div><label>Name:</label></div>
+    <div><label>Chapter / Topic:</label></div>
+  </div>
+  <div class="org-subtitle">For each event, identify what caused it and what effects it had.</div>
+  <div class="ce-body">
+    <div class="ce-col">
+      <div class="ce-col-label">Cause (Why did it happen?)</div>
+      <div class="ce-row"><span class="ce-row-num">1</span></div>
+      <div class="ce-row"><span class="ce-row-num">2</span></div>
+      <div class="ce-row"><span class="ce-row-num">3</span></div>
+      <div class="ce-row"><span class="ce-row-num">4</span></div>
+      <div class="ce-row"><span class="ce-row-num">5</span></div>
+    </div>
+    <div class="ce-arrow">
+      <div>&rarr;<br>&rarr;<br>&rarr;<br>&rarr;<br>&rarr;</div>
+    </div>
+    <div class="ce-col">
+      <div class="ce-col-label">Effect (What happened as a result?)</div>
+      <div class="ce-row"><span class="ce-row-num">1</span></div>
+      <div class="ce-row"><span class="ce-row-num">2</span></div>
+      <div class="ce-row"><span class="ce-row-num">3</span></div>
+      <div class="ce-row"><span class="ce-row-num">4</span></div>
+      <div class="ce-row"><span class="ce-row-num">5</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== COMPARE & CONTRAST ==================== -->
+<div class="organizer print-hide" id="org-compare-contrast">
+  <div class="org-title">Compare &amp; Contrast</div>
+  <div class="org-header">
+    <div><label>Name:</label></div>
+    <div><label>Chapter / Topic:</label></div>
+  </div>
+  <div class="org-subtitle">List unique characteristics in the outer columns. List shared characteristics in the middle.</div>
+  <div class="cc-body">
+    <div class="cc-col">
+      <div class="cc-col-label">Only in:<br><span style="border-bottom:1px solid #ccc;display:inline-block;width:100px;">&nbsp;</span></div>
+      <div class="lined-area" style="min-height:460px;"></div>
+    </div>
+    <div class="cc-col cc-both">
+      <div class="cc-col-label">Both / Similar</div>
+      <div class="lined-area" style="min-height:460px;"></div>
+    </div>
+    <div class="cc-col">
+      <div class="cc-col-label">Only in:<br><span style="border-bottom:1px solid #ccc;display:inline-block;width:100px;">&nbsp;</span></div>
+      <div class="lined-area" style="min-height:460px;"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== TIMELINE ==================== -->
+<div class="organizer print-hide" id="org-timeline">
+  <div class="org-title">Timeline</div>
+  <div class="org-header">
+    <div><label>Name:</label></div>
+    <div><label>Chapter / Topic:</label></div>
+  </div>
+  <div class="org-subtitle">List key events in chronological order. Include the date and a brief description of each event.</div>
+  <div class="tl-body">
+    <div class="tl-row"><div class="tl-date"></div><div class="tl-event"></div></div>
+    <div class="tl-row"><div class="tl-date"></div><div class="tl-event"></div></div>
+    <div class="tl-row"><div class="tl-date"></div><div class="tl-event"></div></div>
+    <div class="tl-row"><div class="tl-date"></div><div class="tl-event"></div></div>
+    <div class="tl-row"><div class="tl-date"></div><div class="tl-event"></div></div>
+    <div class="tl-row"><div class="tl-date"></div><div class="tl-event"></div></div>
+    <div class="tl-row"><div class="tl-date"></div><div class="tl-event"></div></div>
+    <div class="tl-row"><div class="tl-date"></div><div class="tl-event"></div></div>
+    <div class="tl-row"><div class="tl-date"></div><div class="tl-event"></div></div>
+    <div class="tl-row"><div class="tl-date"></div><div class="tl-event"></div></div>
+  </div>
+</div>
+
+<!-- ==================== MAIN IDEA & DETAILS ==================== -->
+<div class="organizer print-hide" id="org-main-idea">
+  <div class="org-title">Main Idea &amp; Supporting Details</div>
+  <div class="org-header">
+    <div><label>Name:</label></div>
+    <div><label>Chapter / Topic:</label></div>
+  </div>
+  <div class="org-subtitle">Write the main idea in the top box. Support it with three details from the text below.</div>
+  <div class="mid-body">
+    <div class="mid-main">
+      <div class="mid-main-label">Main Idea</div>
+    </div>
+    <div class="mid-connector">&darr;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&darr;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&darr;</div>
+    <div class="mid-details">
+      <div class="mid-detail">
+        <div class="mid-detail-label">Detail 1</div>
+        <div class="lined-area" style="min-height:150px;"></div>
+      </div>
+      <div class="mid-detail">
+        <div class="mid-detail-label">Detail 2</div>
+        <div class="lined-area" style="min-height:150px;"></div>
+      </div>
+      <div class="mid-detail">
+        <div class="mid-detail-label">Detail 3</div>
+        <div class="lined-area" style="min-height:150px;"></div>
+      </div>
+    </div>
+    <div class="mid-connector" style="margin-top:16px;">&darr;</div>
+    <div class="mid-main" style="background:#FFF9E6;border-color:#C4941D;">
+      <div class="mid-main-label" style="color:#8B6914;">Summary (In Your Own Words)</div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== KWL CHART ==================== -->
+<div class="organizer print-hide" id="org-kwl">
+  <div class="org-title">KWL Chart</div>
+  <div class="org-header">
+    <div><label>Name:</label></div>
+    <div><label>Chapter / Topic:</label></div>
+  </div>
+  <div class="org-subtitle">Fill in K and W before reading. Fill in L after reading.</div>
+  <div class="kwl-body">
+    <div class="kwl-col">
+      <div class="kwl-col-label">K &mdash; Know<small>What I already know</small></div>
+      <div class="lined-area" style="min-height:460px;"></div>
+    </div>
+    <div class="kwl-col">
+      <div class="kwl-col-label">W &mdash; Want to Know<small>What I want to learn</small></div>
+      <div class="lined-area" style="min-height:460px;"></div>
+    </div>
+    <div class="kwl-col">
+      <div class="kwl-col-label">L &mdash; Learned<small>What I learned</small></div>
+      <div class="lined-area" style="min-height:460px;"></div>
+    </div>
+  </div>
+</div>
+
+<div class="how-to-use">
+  <h2>Suggested Uses by Chapter</h2>
+  <ul>
+    <li><strong>Cause &amp; Effect:</strong> Ch. 5 (causes of Revolution), Ch. 8 (Market Revolution), Ch. 13 (road to Civil War)</li>
+    <li><strong>Compare &amp; Contrast:</strong> Ch. 3 (colonies), Ch. 6 (Virginia Plan vs. New Jersey Plan), Ch. 11 (task vs. gang system)</li>
+    <li><strong>Timeline:</strong> Ch. 2 (European exploration), Ch. 9 (Jackson&rsquo;s presidency), Ch. 14 (Civil War battles)</li>
+    <li><strong>Main Idea &amp; Details:</strong> Any chapter section &mdash; great for daily reading assignments with Cornell Notes</li>
+    <li><strong>KWL Chart:</strong> Any chapter &mdash; use as a pre-reading and post-reading assessment</li>
+  </ul>
+</div>
+
+<footer>
+  <p><a href="teaching.html">&larr; Back to Teaching Materials</a> | <a href="index.html">Home</a> | <a href="cornell-notes.html">Cornell Notes</a> | <a href="vocabulary-cards.html">Vocabulary Cards</a></p>
+</footer>
+
+</div>
+
+<script>
+function selectOrg(id) {
+  var orgs = document.querySelectorAll('.organizer');
+  var picks = document.querySelectorAll('.org-pick');
+
+  orgs.forEach(function(el) { el.classList.add('print-hide'); });
+  picks.forEach(function(el) { el.classList.remove('active'); });
+
+  var target = document.getElementById('org-' + id);
+  target.classList.remove('print-hide');
+  target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+  // Highlight the matching picker
+  picks.forEach(function(el) {
+    if (el.getAttribute('onclick').indexOf(id) > -1) {
+      el.classList.add('active');
+    }
+  });
+}
+</script>
+</body>
+</html>

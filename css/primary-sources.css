@@ -1,0 +1,521 @@
+/* ============================================================
+   American Yawp MS — Primary Source Reader Styles
+   ============================================================ */
+
+/* ---- Chapter intro ---- */
+.ps-chapter-intro {
+  background: #F0F4F8;
+  border-radius: 10px;
+  padding: 28px 32px;
+  margin-bottom: 40px;
+  border: 1px solid #d0dae4;
+}
+.ps-chapter-intro h2 {
+  font-size: 20px;
+  color: #1B3A5C;
+  margin: 0 0 8px;
+  padding: 0;
+  border: none;
+}
+.ps-chapter-intro p {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 15px;
+  line-height: 1.6;
+  color: #555;
+  margin-bottom: 12px;
+}
+.ps-chapter-intro p:last-child { margin-bottom: 0; }
+
+.ps-skills-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-top: 16px;
+  list-style: none;
+  margin-left: 0;
+}
+.ps-skills-list li {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 14px;
+  background: white;
+  padding: 10px 14px;
+  border-radius: 6px;
+  border: 1px solid #ddd;
+  line-height: 1.4;
+}
+.ps-skills-list li strong {
+  color: #1B3A5C;
+  display: block;
+  margin-bottom: 2px;
+}
+
+/* ---- Source card ---- */
+.ps-source {
+  background: white;
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  padding: 0;
+  margin-bottom: 48px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0,0,0,.04);
+}
+
+/* Source header with number and type badge */
+.ps-source-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 28px;
+  background: #F8F9FA;
+  border-bottom: 1px solid #e8e8e8;
+}
+.ps-source-num {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  color: #999;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+}
+.ps-type {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding: 4px 12px;
+  border-radius: 20px;
+  color: white;
+}
+.ps-type-document { background: #8D6E63; }
+.ps-type-visual { background: #2A7F8E; }
+.ps-type-material { background: #C4941D; }
+.ps-type-song { background: #6A1B9A; }
+
+/* Source body */
+.ps-source-body {
+  padding: 28px;
+}
+
+.ps-source-body h2 {
+  font-size: 24px;
+  color: #1B3A5C;
+  margin: 0 0 6px;
+  padding: 0;
+  border: none;
+  line-height: 1.3;
+}
+
+.ps-meta {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 14px;
+  color: #888;
+  margin-bottom: 20px;
+}
+
+/* Before You Read context box */
+.ps-context {
+  background: #FFF9E6;
+  border-left: 4px solid #C4941D;
+  padding: 20px 24px;
+  margin-bottom: 24px;
+  border-radius: 0 8px 8px 0;
+}
+.ps-context h3 {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #C4941D;
+  margin-bottom: 8px;
+}
+.ps-context p {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 15px;
+  line-height: 1.65;
+  color: #555;
+  margin-bottom: 0;
+}
+
+/* The source excerpt / primary text */
+.ps-excerpt {
+  background: #FAFAF8;
+  border-left: 4px solid #8D6E63;
+  padding: 24px 28px;
+  margin-bottom: 24px;
+  border-radius: 0 8px 8px 0;
+}
+.ps-excerpt p {
+  font-family: 'Libre Baskerville', Georgia, serif;
+  font-size: 16px;
+  line-height: 1.85;
+  color: #3a3a3a;
+  margin-bottom: 12px;
+  font-style: italic;
+}
+.ps-excerpt p:last-child { margin-bottom: 0; }
+.ps-excerpt .ps-excerpt-note {
+  font-family: 'Source Sans 3', sans-serif;
+  font-style: normal;
+  font-size: 13px;
+  color: #999;
+  margin-top: 12px;
+}
+
+/* Image sources */
+.ps-image-source {
+  margin-bottom: 24px;
+  text-align: center;
+}
+.ps-image-source img {
+  max-width: 100%;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  box-shadow: 0 2px 12px rgba(0,0,0,.08);
+}
+.ps-image-source .ps-img-caption {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 13px;
+  color: #888;
+  margin-top: 10px;
+  font-style: italic;
+}
+
+/* Vocabulary box */
+.ps-vocab {
+  background: #E8F5E9;
+  border-left: 4px solid #2E7D32;
+  padding: 16px 24px;
+  margin-bottom: 24px;
+  border-radius: 0 8px 8px 0;
+}
+.ps-vocab h3 {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #2E7D32;
+  margin-bottom: 8px;
+}
+.ps-vocab ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.ps-vocab li {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #444;
+  margin-bottom: 4px;
+  padding-left: 0;
+}
+.ps-vocab li strong {
+  color: #2E7D32;
+}
+
+/* Question sections */
+.ps-questions {
+  margin-bottom: 24px;
+}
+.ps-q-group {
+  background: #F0F4F8;
+  border-radius: 8px;
+  padding: 20px 24px;
+  margin-bottom: 12px;
+}
+.ps-q-group h3 {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  color: #1B3A5C;
+  margin-bottom: 10px;
+}
+.ps-q-group ol, .ps-q-group ul {
+  margin-left: 20px;
+  margin-bottom: 0;
+}
+.ps-q-group li {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+  color: #444;
+  margin-bottom: 6px;
+}
+.ps-q-group li:last-child { margin-bottom: 0; }
+.ps-q-group p {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+  color: #444;
+  margin-bottom: 0;
+}
+
+/* Sourcing questions get a teal accent */
+.ps-q-sourcing { border-left: 4px solid #2A7F8E; }
+.ps-q-sourcing h3 { color: #2A7F8E; }
+
+/* Close reading questions get navy accent */
+.ps-q-reading { border-left: 4px solid #1B3A5C; }
+.ps-q-reading h3 { color: #1B3A5C; }
+
+/* Corroboration gets gold accent */
+.ps-q-corroboration { border-left: 4px solid #C4941D; }
+.ps-q-corroboration h3 { color: #C4941D; }
+
+/* Guided observation (for visuals) */
+.ps-q-observation { border-left: 4px solid #6A1B9A; }
+.ps-q-observation h3 { color: #6A1B9A; }
+
+/* Citation */
+.ps-citation {
+  border-top: 1px solid #e8e8e8;
+  padding: 16px 28px;
+  background: #F8F9FA;
+}
+.ps-citation h3 {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #aaa;
+  margin-bottom: 4px;
+}
+.ps-citation p {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 13px;
+  line-height: 1.5;
+  color: #777;
+  margin-bottom: 0;
+}
+
+/* ---- Source navigation (jump links at top) ---- */
+.ps-source-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 32px;
+}
+.ps-source-nav a {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 13px;
+  color: #2A7F8E;
+  text-decoration: none;
+  background: #F0F4F8;
+  padding: 8px 14px;
+  border-radius: 6px;
+  border: 1px solid #d0dae4;
+  transition: background .2s, border-color .2s;
+}
+.ps-source-nav a:hover {
+  background: #e0edf0;
+  border-color: #2A7F8E;
+}
+
+/* ---- Worksheet section ---- */
+.ps-worksheet {
+  background: #F0F4F8;
+  border: 2px dashed #aaa;
+  border-radius: 12px;
+  padding: 32px;
+  margin: 48px 0;
+  page-break-before: always;
+}
+.ps-worksheet h2 {
+  font-size: 22px;
+  color: #1B3A5C;
+  margin: 0 0 8px;
+  padding: 0;
+  border: none;
+}
+.ps-worksheet .ps-ws-subtitle {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 14px;
+  color: #888;
+  margin-bottom: 20px;
+}
+.ps-worksheet ol {
+  margin-left: 20px;
+}
+.ps-worksheet li {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 15px;
+  line-height: 1.6;
+  color: #444;
+  margin-bottom: 16px;
+}
+.ps-worksheet li strong {
+  color: #1B3A5C;
+}
+.ps-ws-line {
+  display: block;
+  border-bottom: 1px solid #ccc;
+  height: 28px;
+  margin-top: 4px;
+}
+
+/* ---- Landing page grid ---- */
+.ps-chapter-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+  margin-bottom: 32px;
+}
+.ps-chapter-card {
+  display: flex;
+  align-items: center;
+  background: white;
+  border: 1px solid #e0e0e0;
+  border-radius: 10px;
+  padding: 18px 24px;
+  text-decoration: none;
+  color: inherit;
+  transition: box-shadow .2s, border-color .2s, transform .15s;
+}
+.ps-chapter-card:hover {
+  box-shadow: 0 4px 16px rgba(0,0,0,.08);
+  border-color: #C4941D;
+  transform: translateX(4px);
+}
+.ps-chapter-card .ps-card-num {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  color: white;
+  background: #1B3A5C;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-right: 16px;
+}
+.ps-chapter-card .ps-card-body {
+  flex: 1;
+  min-width: 0;
+}
+.ps-chapter-card .ps-card-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: #1B3A5C;
+  margin-bottom: 2px;
+}
+.ps-chapter-card .ps-card-desc {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 13px;
+  color: #888;
+}
+.ps-chapter-card .ps-card-count {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  color: #2A7F8E;
+  background: #e0f0f3;
+  padding: 4px 10px;
+  border-radius: 12px;
+  flex-shrink: 0;
+  margin-left: 12px;
+}
+
+/* ---- Chapter list (landing page) ---- */
+.ps-chapter-list {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 8px;
+  margin-bottom: 32px;
+}
+.ps-chapter-link {
+  display: flex;
+  align-items: center;
+  background: white;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 14px 20px;
+  text-decoration: none;
+  color: inherit;
+  transition: box-shadow .2s, border-color .2s, transform .15s;
+}
+.ps-chapter-link:hover {
+  box-shadow: 0 3px 12px rgba(0,0,0,.07);
+  border-color: #C4941D;
+  transform: translateX(4px);
+}
+.ps-ch-num {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  color: white;
+  background: #1B3A5C;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-right: 14px;
+}
+.ps-ch-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: #1B3A5C;
+}
+
+/* ---- Print / PDF button ---- */
+.ps-print-bar {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 24px;
+}
+.ps-print-btn {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  color: #1B3A5C;
+  background: #F0F4F8;
+  border: 1px solid #d0dae4;
+  border-radius: 6px;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: background .2s, border-color .2s;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.ps-print-btn:hover {
+  background: #e0edf0;
+  border-color: #2A7F8E;
+  color: #2A7F8E;
+}
+.ps-print-btn svg {
+  width: 16px;
+  height: 16px;
+  fill: currentColor;
+}
+
+/* ---- Print styles ---- */
+@media print {
+  .header, .nav-bar, .ps-source-nav, .ps-print-bar, footer { display: none !important; }
+  .ps-chapter-intro { display: none !important; }
+  .container { max-width: 100%; padding: 0; }
+  .ps-source { break-inside: avoid; border: 1px solid #ccc; box-shadow: none; margin-bottom: 24px; }
+  .ps-source-body { padding: 20px; }
+  .ps-q-group { break-inside: avoid; }
+  .ps-worksheet { break-before: page; border-style: solid; }
+  .ps-image-source img { max-width: 100%; max-height: 400px; object-fit: contain; }
+}
+
+/* ---- Responsive ---- */
+@media (max-width: 600px) {
+  .ps-source-body { padding: 20px; }
+  .ps-citation { padding: 12px 20px; }
+  .ps-source-header { padding: 12px 20px; }
+  .ps-skills-list { grid-template-columns: 1fr; }
+  .ps-chapter-card { padding: 14px 16px; }
+}

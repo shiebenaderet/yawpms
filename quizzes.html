@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chapter Quizzes | American Yawp MS</title>
+<link rel="stylesheet" href="css/pages.css">
+<style>
+.quiz-controls {
+  text-align: center;
+  margin: 0 0 28px;
+  padding: 20px 24px;
+  background: #F0F4F8;
+  border-radius: 8px;
+  border: 1px solid #d0dae4;
+}
+.quiz-controls label {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  color: #1B3A5C;
+  margin-right: 8px;
+}
+.quiz-controls select {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 14px;
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  min-width: 280px;
+  background: white;
+}
+
+/* Question styles */
+.quiz-area { max-width: 640px; margin: 0 auto; }
+.question-block {
+  background: white;
+  border: 1px solid #eee;
+  border-radius: 8px;
+  padding: 20px 24px;
+  margin: 0 0 20px;
+  transition: border-color .2s;
+}
+.question-block.correct { border-color: #2E7D32; background: #f6fdf6; }
+.question-block.incorrect { border-color: #C62828; background: #fef6f6; }
+
+.q-number {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #2A7F8E;
+  margin-bottom: 6px;
+}
+.q-text {
+  font-size: 15px;
+  line-height: 1.6;
+  margin-bottom: 14px;
+  color: #1B3A5C;
+  font-weight: 600;
+}
+
+/* Multiple choice */
+.mc-options { list-style: none; padding: 0; margin: 0; }
+.mc-options li {
+  margin-bottom: 6px;
+}
+.mc-options label {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 8px 12px;
+  border: 1px solid #eee;
+  border-radius: 6px;
+  cursor: pointer;
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
+  transition: background .15s, border-color .15s;
+}
+.mc-options label:hover { background: #F8FAFB; border-color: #ccc; }
+.mc-options input[type="radio"] { margin-top: 3px; flex-shrink: 0; }
+.mc-options label.selected { background: #E3F2FD; border-color: #1565C0; }
+.mc-options label.correct-answer { background: #E8F5E9; border-color: #2E7D32; }
+.mc-options label.wrong-answer { background: #FFEBEE; border-color: #C62828; }
+
+/* Short answer */
+.sa-input {
+  width: 100%;
+  padding: 10px 12px;
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  transition: border-color .2s;
+}
+.sa-input:focus { outline: none; border-color: #2A7F8E; }
+.sa-hint {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 11px;
+  color: #999;
+  margin-top: 4px;
+}
+
+/* Feedback */
+.q-feedback {
+  display: none;
+  margin-top: 12px;
+  padding: 10px 14px;
+  border-radius: 6px;
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 13px;
+  line-height: 1.5;
+}
+.q-feedback.show { display: block; }
+.q-feedback.fb-correct { background: #E8F5E9; color: #1B5E20; border-left: 3px solid #2E7D32; }
+.q-feedback.fb-incorrect { background: #FFEBEE; color: #B71C1C; border-left: 3px solid #C62828; }
+
+/* Submit / score */
+.quiz-actions {
+  text-align: center;
+  margin: 28px 0;
+}
+.submit-btn {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  padding: 12px 36px;
+  background: #1B3A5C;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background .2s;
+}
+.submit-btn:hover { background: #2A7F8E; }
+.submit-btn:disabled { opacity: .4; cursor: default; }
+
+.score-box {
+  display: none;
+  text-align: center;
+  padding: 24px;
+  margin: 24px 0;
+  border-radius: 8px;
+  border: 2px solid #1B3A5C;
+}
+.score-box.show { display: block; }
+.score-number {
+  font-size: 48px;
+  font-weight: 700;
+  color: #1B3A5C;
+  line-height: 1;
+}
+.score-label {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 14px;
+  color: #666;
+  margin-top: 4px;
+}
+.score-message {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 15px;
+  margin-top: 12px;
+  color: #555;
+}
+.retry-btn {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 8px 20px;
+  background: white;
+  color: #1B3A5C;
+  border: 1px solid #1B3A5C;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-top: 16px;
+  transition: background .2s;
+}
+.retry-btn:hover { background: #F0F4F8; }
+
+.no-quiz {
+  text-align: center;
+  padding: 48px 24px;
+  color: #999;
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 16px;
+}
+
+@media (max-width: 600px) {
+  .quiz-controls select { min-width: 200px; }
+  .question-block { padding: 16px; }
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>Chapter Quizzes</h1>
+  <div class="divider"></div>
+  <p>Test Your Knowledge &mdash; Instant Feedback</p>
+</div>
+
+<nav class="nav-bar">
+  <a href="index.html">Home</a>
+  <a href="teaching.html">Teaching Materials</a>
+  <a href="vocabulary-cards.html">Vocabulary Cards</a>
+  <a href="cornell-notes.html">Cornell Notes</a>
+  <a href="teachers.html">Teachers Hub</a>
+</nav>
+
+<div class="container">
+
+<div class="quiz-controls">
+  <label for="ch-select">Choose a chapter:</label>
+  <select id="ch-select" onchange="loadQuiz(this.value)">
+    <option value="">Select a chapter...</option>
+  </select>
+</div>
+
+<div class="no-quiz" id="no-quiz">Select a chapter above to begin the quiz.</div>
+
+<div class="quiz-area" id="quiz-area"></div>
+
+<div class="quiz-actions" id="quiz-actions" style="display:none;">
+  <button class="submit-btn" id="submit-btn" onclick="gradeQuiz()">Check My Answers</button>
+</div>
+
+<div class="score-box" id="score-box">
+  <div class="score-number" id="score-number">0/0</div>
+  <div class="score-label">questions correct</div>
+  <div class="score-message" id="score-message"></div>
+  <button class="retry-btn" onclick="loadQuiz(document.getElementById('ch-select').value)">Try Again</button>
+</div>
+
+<footer>
+  <p><a href="teaching.html">&larr; Back to Teaching Materials</a> | <a href="index.html">Home</a> | <a href="vocabulary-cards.html">Vocabulary Cards</a></p>
+</footer>
+
+</div>
+
+<script>
+var QUIZZES = {
+"1": { title: "Indigenous America", questions: [
+  { type:"mc", q:"Approximately what percentage of Indigenous people died from European diseases after contact?", options:["25%","50%","75%","90%"], answer:3, explain:"Historians estimate that roughly 90% of the Indigenous population of the Americas died from diseases like smallpox, measles, and influenza brought by Europeans." },
+  { type:"mc", q:"What was Beringia?", options:["An ancient city in Mexico","A land bridge connecting Asia and North America","A type of Native American dwelling","A Spanish colonial settlement"], answer:1, explain:"Beringia was the land bridge that connected Asia and North America during the Ice Age, allowing the first people to migrate to the Americas." },
+  { type:"mc", q:"What were the 'Three Sisters' in Native American agriculture?", options:["Three rivers used for irrigation","Corn, beans, and squash","Three types of pottery","Three trading partners"], answer:1, explain:"The Three Sisters — corn, beans, and squash — were planted together by many Native American societies. They supported each other's growth and provided balanced nutrition." },
+  { type:"mc", q:"What was the Columbian Exchange?", options:["A stock market in colonial America","The transfer of plants, animals, and diseases between the Americas and the Old World","A peace treaty between Columbus and Indigenous peoples","A trade route across the Pacific Ocean"], answer:1, explain:"The Columbian Exchange was the widespread transfer of plants, animals, diseases, people, and ideas between the Americas and Europe/Africa/Asia after 1492." },
+  { type:"mc", q:"Cahokia, near present-day St. Louis, was notable because it:", options:["Was the first European settlement","Had a population larger than London at its peak","Was where Columbus first landed","Was built entirely underground"], answer:1, explain:"Around 1050 CE, Cahokia had a population of up to 30,000 people, making it larger than London at that time. It was the largest pre-Columbian city north of Mexico." },
+  { type:"sa", q:"What was the encomienda system, and why was it harmful to Indigenous peoples?", accept:["encomienda","forced labor","slavery","work"], explain:"The encomienda system granted Spanish colonists authority over Indigenous communities, forcing them to work in exchange for supposed 'protection' and Christian teaching. In practice, it was a form of slavery that led to widespread abuse, overwork, and death." },
+  { type:"sa", q:"Name one way Indigenous peoples resisted European colonization.", accept:["pueblo revolt","rebellion","resist","fought","warfare","alliance"], explain:"Indigenous peoples resisted in many ways, including armed rebellion (like the Pueblo Revolt of 1680), forming alliances against colonizers, maintaining cultural practices, and refusing to convert to Christianity." },
+  { type:"sa", q:"Why did European explorers like Columbus sail west across the Atlantic?", accept:["trade","spice","asia","india","gold","wealth","route"], explain:"European explorers were looking for a westward sea route to Asia (especially India and China) to access valuable spices, silk, and gold. The Crusades and overland trade had made Europeans eager to find direct routes to Asian markets." }
+]},
+"2": { title: "Colliding Cultures", questions: [
+  { type:"mc", q:"What was the primary purpose of Spanish missions in the Americas?", options:["To find gold","To convert Indigenous peoples to Christianity","To establish democratic governments","To build universities"], answer:1, explain:"Spanish missions were religious communities established primarily to convert Indigenous peoples to Christianity and assimilate them into Spanish culture." },
+  { type:"mc", q:"How did the French approach to colonization differ from the Spanish?", options:["The French used more military force","The French focused on fur trading partnerships with Indigenous peoples","The French built larger cities","The French enslaved more people"], answer:1, explain:"Unlike the Spanish mission system, the French built their colonial economy around the fur trade, forming partnerships and alliances with Indigenous peoples rather than attempting to conquer and convert them." },
+  { type:"mc", q:"Samuel de Champlain founded which settlement in 1608?", options:["Jamestown","Plymouth","Quebec","Montreal"], answer:2, explain:"Samuel de Champlain founded Quebec in 1608, which became the center of New France and the French fur trade in North America." },
+  { type:"mc", q:"The Pueblo Revolt of 1680 was significant because:", options:["It was the first European settlement","It successfully drove the Spanish out of New Mexico for 12 years","It established the first colonial democracy","It ended the fur trade"], answer:1, explain:"Led by Popé, the Pueblo Revolt of 1680 successfully expelled the Spanish from New Mexico for 12 years, making it one of the most successful Indigenous resistance movements in colonial history." },
+  { type:"mc", q:"What is a 'mestizo/mestiza'?", options:["A Spanish soldier","A type of colonial currency","A person of mixed European and Indigenous ancestry","A Native American leader"], answer:2, explain:"Mestizo/mestiza refers to a person of mixed European and Indigenous American ancestry, reflecting the racial mixing that occurred throughout Spanish colonial America." },
+  { type:"sa", q:"What was a privateer, and how did they relate to colonial competition?", accept:["privateer","ship","attack","government","authorized","pirate"], explain:"A privateer was a private person or ship authorized by a government to attack foreign vessels during wartime. European nations used privateers to weaken rival colonial powers without officially going to war." },
+  { type:"sa", q:"Why did the Puritans leave England for the Americas?", accept:["purify","church","religion","worship","catholic","reform"], explain:"The Puritans wanted to 'purify' the Church of England by eliminating what they saw as remaining Catholic practices. They left for the Americas to establish communities where they could worship according to their own beliefs." },
+  { type:"sa", q:"How did European colonization affect Indigenous populations?", accept:["disease","died","death","population","smallpox","decline","destroy"], explain:"European colonization devastated Indigenous populations through disease (smallpox, measles), warfare, forced labor, displacement from ancestral lands, and the destruction of traditional ways of life." }
+]},
+"3": { title: "British North America", questions: [
+  { type:"mc", q:"Jamestown, the first permanent English settlement, was founded in:", options:["1492","1588","1607","1620"], answer:2, explain:"Jamestown was founded in 1607 in present-day Virginia, making it the first permanent English settlement in North America." },
+  { type:"mc", q:"What crop saved the Jamestown colony from failure?", options:["Corn","Cotton","Rice","Tobacco"], answer:3, explain:"John Rolfe introduced tobacco cultivation to Virginia, and it became the colony's first profitable cash crop, saving Jamestown from economic failure." },
+  { type:"mc", q:"An indentured servant was someone who:", options:["Was enslaved for life","Agreed to work for a set number of years in exchange for passage to America","Volunteered for military service","Owned a small farm"], answer:1, explain:"Indentured servants agreed to work for typically 4-7 years in exchange for passage to America, room, and board. After their term ended, they received 'freedom dues' and were released." },
+  { type:"mc", q:"Bacon's Rebellion (1676) was important because it:", options:["Established religious freedom","Led to the Declaration of Independence","Accelerated the shift from indentured servitude to enslaved African labor","Created the first colonial legislature"], answer:2, explain:"After Bacon's Rebellion, Virginia's planter elite increasingly turned to enslaved African labor instead of indentured servants, who could become free and potentially rebellious." },
+  { type:"mc", q:"The headright system gave colonists:", options:["The right to vote","50 acres of land for each person whose passage they paid","Free tools and seeds","A seat in the colonial legislature"], answer:1, explain:"The headright system gave colonists 50 acres of land for each person whose passage to Virginia they paid, encouraging immigration and benefiting wealthy planters who could afford to bring many workers." },
+  { type:"sa", q:"What was the House of Burgesses, and why was it historically significant?", accept:["burgesses","assembly","representative","legislature","elected","government","1619"], explain:"The House of Burgesses (established 1619) was the first representative assembly in the English colonies. It allowed colonists to have a voice in their own governance and set a precedent for democratic self-government in America." },
+  { type:"sa", q:"How did the Virginia colony's labor system change over time?", accept:["indentured","slave","enslaved","african","labor","change"], explain:"Virginia initially relied on indentured servants (mostly poor English workers), but after Bacon's Rebellion (1676), the colony increasingly shifted to enslaved African labor. This transition was driven by the planter elite wanting a permanent, controlled workforce." },
+  { type:"sa", q:"What were 'freedom dues' in the colonial period?", accept:["freedom dues","supplies","tools","land","clothes","end","contract","servant"], explain:"Freedom dues were supplies given to indentured servants when their contract ended, often including tools, clothes, and sometimes land. They were meant to help former servants start independent lives." }
+]},
+"4": { title: "Colonial Society", questions: [
+  { type:"mc", q:"The Middle Passage refers to:", options:["A mountain pass used by settlers","The voyage that brought enslaved Africans across the Atlantic","A trade route between the colonies","A section of the Constitution"], answer:1, explain:"The Middle Passage was the brutal transatlantic voyage that transported enslaved Africans to the Americas. Conditions were horrific, and many people died during the crossing." },
+  { type:"mc", q:"What economic theory held that colonies existed to benefit the mother country?", options:["Capitalism","Socialism","Mercantilism","Feudalism"], answer:2, explain:"Mercantilism was the economic policy under which a country tried to export more than it imported and accumulate wealth. Colonies existed to provide raw materials and markets for the mother country." },
+  { type:"mc", q:"The Great Awakening was:", options:["A scientific revolution","A religious revival movement in the 1730s-1740s","A colonial rebellion","An economic boom"], answer:1, explain:"The Great Awakening was a religious revival movement that swept through the colonies in the 1730s and 1740s, emphasizing personal religious experience over traditional church authority." },
+  { type:"mc", q:"The Enlightenment introduced the idea of:", options:["Divine right of kings","Natural rights that no government can take away","Rule by religious leaders","Abolishing all government"], answer:1, explain:"Enlightenment thinkers argued that people are born with natural rights — such as life, liberty, and property — that no government can take away. These ideas profoundly influenced the American Revolution." },
+  { type:"mc", q:"The French and Indian War (1754-1763) resulted in:", options:["France gaining control of all North America","Britain gaining control of Canada and French territory east of the Mississippi","Spain controlling the entire continent","The colonies gaining independence"], answer:1, explain:"The Treaty of Paris (1763) ended the French and Indian War and gave Britain control of Canada and all French territory east of the Mississippi River." },
+  { type:"sa", q:"What was the social contract theory, and who promoted it?", accept:["social contract","agreement","government","protect","rights","locke","people"], explain:"The social contract theory held that people agree to form a government and obey its laws in exchange for protection of their rights. Promoted by thinkers like John Locke, this idea argued that government power comes from the consent of the governed." },
+  { type:"sa", q:"What were slave codes, and what was their purpose?", accept:["slave code","laws","restrict","rights","enslaved","control"], explain:"Slave codes were laws that defined the status of enslaved people and the rights of slaveholders. They severely restricted the activities and rights of enslaved people — including prohibiting reading, assembly, and movement — to maintain control." },
+  { type:"sa", q:"Describe one way the Great Awakening changed colonial society.", accept:["awakening","challenge","authority","church","individual","equal","choice","revival"], explain:"The Great Awakening challenged traditional religious authority by emphasizing personal conversion and individual choice. It democratized religion, allowed ordinary people to become preachers, and planted seeds of equality that would influence revolutionary thinking." }
+]},
+"5": { title: "The American Revolution", questions: [
+  { type:"mc", q:"The Stamp Act of 1765 taxed:", options:["Tea and coffee","Printed materials like newspapers and legal documents","Imported cloth","Land and property"], answer:1, explain:"The Stamp Act required colonists to pay a tax on printed materials including newspapers, legal documents, playing cards, and more. It was one of the first direct taxes imposed on the colonies by Parliament." },
+  { type:"mc", q:"The phrase 'no taxation without representation' meant:", options:["Colonists wanted lower taxes","Colonists believed Parliament shouldn't tax them without elected colonial representatives","Colonists wanted to abolish all taxes","Colonists refused to pay any debts"], answer:1, explain:"Colonists argued that since they had no elected representatives in the British Parliament, Parliament had no right to tax them. This became a rallying cry for colonial resistance." },
+  { type:"mc", q:"Which battle is considered the turning point that brought French support to the American cause?", options:["Bunker Hill","Lexington and Concord","Saratoga","Yorktown"], answer:2, explain:"The American victory at the Battle of Saratoga (1777) convinced France that the Americans could actually win, leading France to formally ally with the colonies and provide crucial military and financial support." },
+  { type:"mc", q:"Thomas Paine's 'Common Sense' (1776) argued for:", options:["Loyalty to the king","Complete independence from Britain","A compromise with Parliament","Moving the capital to Philadelphia"], answer:1, explain:"Thomas Paine's pamphlet 'Common Sense' made a powerful, plain-language argument for complete independence from Britain. It became a bestseller and helped shift public opinion toward independence." },
+  { type:"mc", q:"The British surrendered at which battle, ending the Revolutionary War?", options:["Bunker Hill","Valley Forge","Saratoga","Yorktown"], answer:3, explain:"British General Cornwallis surrendered at Yorktown, Virginia in October 1781, effectively ending the Revolutionary War. The Americans, with crucial French naval and military support, trapped the British army." },
+  { type:"sa", q:"What role did the Sons of Liberty play in the resistance to British policies?", accept:["sons of liberty","protest","boycott","resistance","tax","organize","tea"], explain:"The Sons of Liberty were a secret organization formed to protest British taxes and policies. They organized boycotts, staged public protests (including the Boston Tea Party), and used both peaceful and violent tactics to resist British authority." },
+  { type:"sa", q:"How did the Declaration of Independence reflect Enlightenment ideas?", accept:["natural rights","enlightenment","life","liberty","created equal","consent","governed","locke"], explain:"The Declaration of Independence drew directly on Enlightenment ideas, especially John Locke's concept of natural rights (life, liberty, and the pursuit of happiness) and the social contract theory that government derives its power from the consent of the governed." },
+  { type:"sa", q:"What was the significance of the Boston Tea Party?", accept:["tea","protest","tax","parliament","britain","east india","harbor"], explain:"The Boston Tea Party (December 1773) was a dramatic act of protest against the Tea Act. Colonists dumped 342 chests of British tea into Boston Harbor. Britain responded with the punitive Intolerable Acts, which pushed more colonists toward supporting independence." }
+]},
+"6": { title: "A New Nation", questions: [
+  { type:"mc", q:"Shays's Rebellion (1786-1787) demonstrated:", options:["The strength of the Articles of Confederation","The weakness of the Articles of Confederation","The popularity of George Washington","The power of state governments"], answer:1, explain:"Shays's Rebellion, in which debt-ridden farmers in Massachusetts took up arms, exposed the inability of the federal government under the Articles of Confederation to maintain order or raise an army, building support for a stronger constitution." },
+  { type:"mc", q:"The Great Compromise at the Constitutional Convention created:", options:["The Bill of Rights","A two-house legislature with both equal and proportional representation","The Electoral College","The Supreme Court"], answer:1, explain:"The Great Compromise created a two-house Congress: the Senate (equal representation — 2 per state) and the House of Representatives (proportional representation based on population), satisfying both large and small states." },
+  { type:"mc", q:"Under the Three-Fifths Compromise, enslaved people were counted as:", options:["Full persons for representation","Not counted at all","Three-fifths of a person for representation and taxation","One-half of a person"], answer:2, explain:"The Three-Fifths Compromise counted three-fifths of a state's enslaved population for purposes of representation in Congress and taxation, giving slaveholding states more political power without giving enslaved people any rights." },
+  { type:"mc", q:"The Bill of Rights consists of:", options:["The preamble to the Constitution","The first 10 amendments to the Constitution","The Articles of Confederation","The Declaration of Independence"], answer:1, explain:"The Bill of Rights is the first 10 amendments to the Constitution, ratified in 1791. They protect individual liberties such as freedom of speech, religion, press, and the right to a fair trial." },
+  { type:"mc", q:"The Federalist Papers were written primarily to:", options:["Oppose the Constitution","Support ratification of the Constitution","Declare independence from Britain","Propose amendments"], answer:1, explain:"The Federalist Papers, written by Alexander Hamilton, James Madison, and John Jay, were a series of essays arguing in favor of ratifying the Constitution, explaining how the new government would work." },
+  { type:"sa", q:"What was the Virginia Plan and how did it differ from the New Jersey Plan?", accept:["virginia","new jersey","population","equal","representation","large","small"], explain:"The Virginia Plan proposed representation based on state population (favoring large states), while the New Jersey Plan proposed equal representation for each state (favoring small states). The Great Compromise combined both ideas into a two-house legislature." },
+  { type:"sa", q:"Why was the Election of 1800 historically significant?", accept:["1800","peaceful","transfer","power","party","jefferson","adams"], explain:"The Election of 1800 was the first peaceful transfer of power between political parties in American history. John Adams (Federalist) lost to Thomas Jefferson (Democratic-Republican), and Adams peacefully stepped aside, setting a critical precedent for democracy." },
+  { type:"sa", q:"How did the Constitution address slavery without using the word 'slave'?", accept:["three-fifths","fugitive","slave trade","compromise","count","return"], explain:"The Constitution addressed slavery through the Three-Fifths Compromise (counting enslaved people for representation), the Fugitive Slave Clause (requiring return of escaped enslaved people), and the Slave Trade Compromise (allowing Congress to ban the international slave trade after 1808) — all without ever using the word 'slave.'" }
+]},
+"7": { title: "The Early Republic", questions: [
+  { type:"mc", q:"The Louisiana Purchase (1803) was significant because it:", options:["Ended the War of 1812","Doubled the size of the United States","Freed enslaved people in the South","Established the first national bank"], answer:1, explain:"The Louisiana Purchase doubled the size of the United States by acquiring French territory stretching from the Mississippi River to the Rocky Mountains for about $15 million." },
+  { type:"mc", q:"Gabriel's Rebellion (1800) was:", options:["A protest against taxes","An attempted slave revolt in Virginia","A battle in the War of 1812","A political campaign"], answer:1, explain:"Gabriel's Rebellion was a planned slave revolt in Virginia in 1800, led by an enslaved blacksmith named Gabriel. It was betrayed before it could begin, but it terrified slaveholders across the South." },
+  { type:"mc", q:"The Haitian Revolution resulted in:", options:["France gaining more colonies","The first independent Black republic in the world","British control of the Caribbean","The end of all slavery in the Americas"], answer:1, explain:"The Haitian Revolution (1791-1804) resulted in Haiti becoming the first independent Black republic, inspiring enslaved people and terrifying slaveholders throughout the Americas." },
+  { type:"mc", q:"Judicial review — the power of the Supreme Court to declare laws unconstitutional — was established in:", options:["The Constitution itself","Marbury v. Madison (1803)","The Bill of Rights","The Federalist Papers"], answer:1, explain:"Judicial review was established by Chief Justice John Marshall in the landmark case Marbury v. Madison (1803), giving the Supreme Court the power to strike down laws it found unconstitutional." },
+  { type:"mc", q:"The Embargo Act of 1807:", options:["Declared war on France","Banned American ships from trading with foreign nations","Ended the slave trade","Created a national bank"], answer:1, explain:"The Embargo Act of 1807 prohibited American ships from trading in all foreign ports. Jefferson intended it to pressure Britain and France, but it devastated the American economy instead." },
+  { type:"sa", q:"What was 'Republican Motherhood' and why was it significant?", accept:["republican motherhood","women","mothers","raise","civic","virtue","political","sons","role"], explain:"Republican Motherhood was the idea that women had an important political role as mothers who would raise virtuous, civic-minded sons. While it kept women out of formal politics, it elevated the importance of women's education and gave them a recognized public purpose." },
+  { type:"sa", q:"How did the Haitian Revolution affect the United States?", accept:["haiti","fear","inspire","enslaved","slaveholder","louisiana","purchase"], explain:"The Haitian Revolution both inspired enslaved people in the U.S. (like Gabriel) and terrified slaveholders. It also indirectly led to the Louisiana Purchase, as Napoleon sold the territory after losing Haiti and abandoning his plans for a Western Hemisphere empire." },
+  { type:"sa", q:"Why did Tecumseh try to unite Indigenous tribes?", accept:["tecumseh","unite","resist","expansion","american","land","confederacy"], explain:"Tecumseh attempted to unite Indigenous tribes into a confederacy to resist American westward expansion and defend their remaining lands. He argued that no single tribe could sell land because it belonged to all Indigenous peoples collectively." }
+]},
+"8": { title: "The Market Revolution", questions: [
+  { type:"mc", q:"The Market Revolution transformed America from:", options:["An industrial economy to an agricultural one","A subsistence economy to a commercial market economy","A democracy to a monarchy","An urban society to a rural one"], answer:1, explain:"The Market Revolution transformed America from a subsistence economy (where families produced mostly for their own use) to a commercial market economy based on cash crops, manufacturing, and trade." },
+  { type:"mc", q:"The Erie Canal (completed 1825) connected:", options:["The Mississippi River to the Gulf of Mexico","The Great Lakes to the Atlantic Ocean","The Ohio River to Lake Michigan","Boston to Philadelphia"], answer:1, explain:"The Erie Canal connected the Great Lakes to the Atlantic Ocean via the Hudson River, dramatically reducing shipping costs and opening western markets to eastern commerce." },
+  { type:"mc", q:"The Lowell mills in Massachusetts were notable for employing primarily:", options:["Enslaved workers","Immigrant men","Young women from farming families","Children under 10"], answer:2, explain:"The Lowell mills recruited young women from New England farming families to work in the textile factories. Known as 'Lowell Mill Girls,' they lived in company boarding houses and worked long hours." },
+  { type:"mc", q:"The cotton gin (1793) had the unexpected effect of:", options:["Ending slavery","Increasing demand for enslaved labor","Making cotton unprofitable","Moving cotton farming to the North"], answer:1, explain:"While the cotton gin made processing cotton faster, it also made cotton far more profitable, leading to a massive expansion of cotton farming and an increased demand for enslaved labor to plant and harvest it." },
+  { type:"mc", q:"A 'strike' or 'turn-out' in the early 1800s was when:", options:["Workers received bonuses","Workers refused to work until their demands were met","Factories closed permanently","New machines were installed"], answer:1, explain:"A strike (or turn-out) was when workers collectively refused to work until their demands for better pay or working conditions were met. Early factory workers, including the Lowell Mill Girls, staged some of America's first strikes." },
+  { type:"sa", q:"How did transportation improvements change the American economy?", accept:["canal","railroad","steamboat","transport","connect","market","trade","cheaper","cost"], explain:"Canals (like the Erie Canal), steamboats, and railroads dramatically reduced the cost and time of shipping goods, connecting regional economies into a national market. Farmers could now sell crops far from home, and manufactured goods could reach distant customers." },
+  { type:"sa", q:"What is the difference between subsistence farming and commercial agriculture?", accept:["subsistence","commercial","sell","profit","family","market","own use"], explain:"Subsistence farming means producing just enough food to feed one's own family, with little left over. Commercial agriculture means farming to produce crops to sell for profit in the market. The Market Revolution shifted many American farmers from subsistence to commercial farming." }
+]},
+"9": { title: "Democracy in America", questions: [
+  { type:"mc", q:"The Indian Removal Act (1830) led to:", options:["Voting rights for Indigenous peoples","The forced relocation of Indigenous peoples from the Southeast to Oklahoma","The creation of reservations in the East","Peace treaties with all tribes"], answer:1, explain:"The Indian Removal Act authorized the president to negotiate removal treaties with Indigenous nations east of the Mississippi. It led to the forced relocation of the Cherokee, Choctaw, Creek, Chickasaw, and Seminole peoples." },
+  { type:"mc", q:"The Trail of Tears refers to:", options:["A famous speech by Andrew Jackson","The forced march of the Cherokee to Oklahoma, killing about 4,000 people","A Civil War battle","The route of the Underground Railroad"], answer:1, explain:"The Trail of Tears (1838-1839) was the forced removal of the Cherokee people from their homeland to Indian Territory (Oklahoma). About 4,000 Cherokee died from exposure, disease, and starvation during the march." },
+  { type:"mc", q:"The 'spoils system' meant:", options:["Elected officials served without pay","Government jobs were given to political supporters","Only wealthy people could hold office","Elections were held every year"], answer:1, explain:"The spoils system was the practice of giving government jobs to political supporters after winning an election. Andrew Jackson championed this practice, arguing it made government more democratic." },
+  { type:"mc", q:"The Nullification Crisis involved South Carolina's attempt to:", options:["Secede from the Union","Reject a federal tariff law it considered unconstitutional","Ban slavery within its borders","Elect its own president"], answer:1, explain:"During the Nullification Crisis (1832-1833), South Carolina attempted to 'nullify' (declare void) federal tariff laws it believed unfairly harmed Southern interests. President Jackson threatened to use force, and a compromise was reached." },
+  { type:"mc", q:"'Jacksonian democracy' expanded voting rights primarily for:", options:["All Americans","White men regardless of property ownership","Women and minorities","Enslaved people"], answer:1, explain:"Jacksonian democracy expanded voting rights for white men by eliminating property ownership requirements, but deliberately excluded women, Black people, and Indigenous peoples from political participation." },
+  { type:"sa", q:"Why did Andrew Jackson oppose the Second Bank of the United States?", accept:["bank","elite","wealthy","corrupt","power","common","people","monopoly"], explain:"Jackson believed the Bank was a corrupt institution that favored wealthy Eastern elites over common people. He saw it as a monopoly that concentrated too much economic power in the hands of a few and vetoed its recharter in 1832." },
+  { type:"sa", q:"Who was Sequoyah and what did he accomplish?", accept:["sequoyah","cherokee","alphabet","syllabary","writing","written","language"], explain:"Sequoyah was a Cherokee scholar who created a written syllabary (alphabet) for the Cherokee language. This allowed the Cherokee to publish newspapers, write a constitution, and maintain written records — achievements that made their forced removal even more unjust." },
+  { type:"sa", q:"How did Jacksonian democracy expand rights for some while restricting them for others?", accept:["white","men","women","black","indigenous","native","vote","exclude","expand"], explain:"Jacksonian democracy eliminated property requirements so all white men could vote, but it simultaneously reinforced the exclusion of women, Black people, and Indigenous peoples. Indian Removal actively stripped Indigenous peoples of their rights and homelands." }
+]},
+"10": { title: "Religion and Reform", questions: [
+  { type:"mc", q:"The Seneca Falls Convention (1848) was:", options:["A meeting to end slavery","The first women's rights convention in the United States","A religious revival meeting","A political party convention"], answer:1, explain:"The Seneca Falls Convention, organized by Elizabeth Cady Stanton and Lucretia Mott, was the first women's rights convention in American history. It produced the Declaration of Sentiments demanding equal rights for women." },
+  { type:"mc", q:"The Declaration of Sentiments was modeled after:", options:["The Constitution","The Declaration of Independence","The Bible","The Federalist Papers"], answer:1, explain:"The Declaration of Sentiments deliberately echoed the Declaration of Independence, beginning 'We hold these truths to be self-evident: that all men and women are created equal,' to argue that women deserved the same rights as men." },
+  { type:"mc", q:"William Lloyd Garrison is best known for:", options:["Inventing the cotton gin","Publishing 'The Liberator,' calling for immediate abolition of slavery","Leading the temperance movement","Founding public schools"], answer:1, explain:"William Lloyd Garrison published 'The Liberator' beginning in 1831, demanding the immediate and complete abolition of slavery. He was one of the most outspoken and uncompromising abolitionists in American history." },
+  { type:"mc", q:"The Second Great Awakening emphasized:", options:["Strict Calvinist predestination","Individual choice and personal salvation","Rejection of all organized religion","Scientific reasoning over faith"], answer:1, explain:"The Second Great Awakening emphasized individual choice, personal conversion, and the ability of people to improve themselves and society. This optimistic message inspired many reform movements." },
+  { type:"mc", q:"The temperance movement sought to:", options:["End slavery","Limit or ban alcohol consumption","Expand voting rights","Reform prisons"], answer:1, explain:"The temperance movement sought to limit or ban alcohol consumption, arguing that drinking caused poverty, domestic violence, and social problems. It was one of the largest reform movements of the era." },
+  { type:"sa", q:"How did the Second Great Awakening inspire reform movements?", accept:["awakening","reform","improve","perfect","sin","moral","society","individual","change"], explain:"The Second Great Awakening taught that individuals could improve themselves and perfect society by fighting sin. This inspired people to tackle social problems they saw as sinful — slavery, alcohol abuse, lack of education, and the mistreatment of women — leading to the abolition, temperance, education reform, and women's rights movements." },
+  { type:"sa", q:"Name two abolitionists and describe their contributions.", accept:["douglass","garrison","tubman","truth","stanton","abolition","escape","liberator","speech","underground"], explain:"Key abolitionists include Frederick Douglass (escaped slavery, became a powerful speaker and writer), William Lloyd Garrison (published The Liberator), Harriet Tubman (escaped slavery, guided ~70 people to freedom via the Underground Railroad), and Sojourner Truth (delivered powerful speeches linking abolition and women's rights)." },
+  { type:"sa", q:"What was a 'common school' and why was it important?", accept:["common school","free","public","education","horace mann","children","class"], explain:"Common schools were free public elementary schools open to children of all social classes, championed by Horace Mann. They were important because they established the principle that all children — regardless of wealth — deserved an education, laying the foundation for America's public school system." }
+]},
+"11": { title: "The Cotton Revolution", questions: [
+  { type:"mc", q:"By the 1850s, cotton represented what share of all U.S. exports?", options:["About 10%","About 25%","More than 50%","About 75%"], answer:2, explain:"By 1860, cotton represented more than half of all U.S. exports. The phrase 'King Cotton' reflected cotton's dominance in the American economy and its importance to the global textile industry." },
+  { type:"mc", q:"The domestic slave trade forcibly relocated approximately how many enslaved people from the Upper to Lower South?", options:["About 50,000","About 250,000","About one million","About five million"], answer:2, explain:"The domestic slave trade forcibly moved about one million enslaved people from the Upper South (Virginia, Maryland) to the Lower South (Alabama, Mississippi, Louisiana) between 1790 and 1860, tearing apart families." },
+  { type:"mc", q:"Nat Turner's Rebellion (1831) took place in:", options:["South Carolina","Louisiana","Virginia","Georgia"], answer:2, explain:"Nat Turner's Rebellion occurred in Southampton County, Virginia in 1831. Turner led a group of enslaved people in an uprising that killed about 60 white people before being suppressed." },
+  { type:"mc", q:"What is the difference between the task system and the gang system?", options:["Task workers were free; gang workers were enslaved","Task workers completed assigned tasks then had free time; gang workers labored dawn to dusk under overseers","Task workers worked in factories; gang workers worked on farms","There was no difference"], answer:1, explain:"Under the task system, enslaved workers were assigned specific daily tasks and had some free time after completing them. Under the gang system, groups worked from dawn to dusk under constant supervision. The task system was more common in rice cultivation, the gang system in cotton." },
+  { type:"mc", q:"The Underground Railroad was:", options:["An actual railroad built underground","A network of people and safe houses that helped enslaved people escape to freedom","A secret political organization","A system of underground tunnels"], answer:1, explain:"The Underground Railroad was a secret network of people (called 'conductors') and safe houses (called 'stations') that helped enslaved people escape to freedom in the North or Canada." },
+  { type:"sa", q:"How did the cotton gin increase rather than decrease slavery?", accept:["cotton gin","profitable","demand","expand","more","increase","labor","plantation"], explain:"While the cotton gin made processing cotton faster, it made cotton cultivation enormously profitable. This led to a massive expansion of cotton plantations across the Deep South, which dramatically increased the demand for enslaved labor to plant and harvest the cotton." },
+  { type:"sa", q:"Describe two ways enslaved people resisted slavery.", accept:["resist","rebel","run","escape","slow","sabotage","culture","religion","underground","literacy"], explain:"Enslaved people resisted in many ways: day-to-day resistance (working slowly, breaking tools, feigning illness), running away via the Underground Railroad, maintaining cultural traditions and family bonds, learning to read despite prohibitions, and in rare cases, armed rebellion (like Nat Turner's)." },
+  { type:"sa", q:"What was the Fugitive Slave Act of 1850 and why was it controversial?", accept:["fugitive","return","free state","north","capture","citizen","assist","controversial"], explain:"The Fugitive Slave Act of 1850 required that escaped enslaved people be returned to their enslavers even if they had reached free states. It also required ordinary citizens to assist in their capture. It was deeply controversial because it forced Northerners to participate in the slave system." }
+]},
+"12": { title: "Manifest Destiny", questions: [
+  { type:"mc", q:"'Manifest Destiny' was the belief that:", options:["Slavery should be abolished","The United States was destined to expand across North America","All people are created equal","The government should stay small"], answer:1, explain:"Manifest Destiny was the 19th-century belief that the United States was destined — and had a divine right — to expand across the North American continent from the Atlantic to the Pacific Ocean." },
+  { type:"mc", q:"The Treaty of Guadalupe Hidalgo (1848) ended:", options:["The War of 1812","The Civil War","The Mexican-American War","The Revolutionary War"], answer:2, explain:"The Treaty of Guadalupe Hidalgo ended the Mexican-American War in 1848. Mexico ceded about half its territory to the United States, including present-day California, Nevada, Utah, and parts of several other states." },
+  { type:"mc", q:"The Forty-Niners were:", options:["Soldiers in the Mexican-American War","People who went to California during the Gold Rush of 1849","The first 49 states to join the Union","A group of abolitionists"], answer:1, explain:"The Forty-Niners were the thousands of people who rushed to California in 1849 seeking gold after its discovery at Sutter's Mill. The Gold Rush transformed California and accelerated its path to statehood." },
+  { type:"mc", q:"The Mexican Cession included present-day:", options:["Texas and Oklahoma","Florida and Georgia","California, Nevada, Utah, and parts of other western states","Oregon and Washington"], answer:2, explain:"The Mexican Cession — the territory Mexico gave up after the Mexican-American War — included present-day California, Nevada, Utah, and parts of Arizona, New Mexico, Colorado, and Wyoming." },
+  { type:"mc", q:"The Foreign Miners' Tax in California targeted:", options:["All miners equally","Foreign-born miners, especially Mexicans and Chinese","Only British miners","Only miners who found gold"], answer:1, explain:"The Foreign Miners' Tax required foreign-born miners (primarily Mexican and Chinese miners) to pay a monthly tax, discriminating against non-white miners and reflecting racial prejudice during the Gold Rush." },
+  { type:"sa", q:"How did the Mexican-American War intensify the debate over slavery?", accept:["slavery","territory","new","expand","free","slave","state","wilmot","compromise"], explain:"The vast territory gained from Mexico raised the question of whether slavery would be allowed in the new lands. This intensified the sectional conflict between North and South, as both sides saw the new territory as crucial to their political and economic future." },
+  { type:"sa", q:"What impact did westward expansion have on Indigenous peoples?", accept:["indigenous","native","land","removal","genocide","destroy","displace","disease","trail"], explain:"Westward expansion devastated Indigenous peoples through forced removal from ancestral lands, broken treaties, warfare, destruction of food sources (like the buffalo), spread of disease, and in many cases, genocide. Indigenous populations in California alone declined dramatically during the Gold Rush era." }
+]},
+"13": { title: "The Sectional Crisis", questions: [
+  { type:"mc", q:"The Compromise of 1850 included:", options:["Abolishing slavery nationwide","Admitting California as a free state and passing a stricter Fugitive Slave Act","Making all new territories slave states","Ending the slave trade in Washington, D.C., and freeing all enslaved people"], answer:1, explain:"The Compromise of 1850 admitted California as a free state, passed a stricter Fugitive Slave Act, and ended the slave trade (but not slavery) in Washington, D.C. It was an attempt to balance the interests of free and slave states." },
+  { type:"mc", q:"Harriet Beecher Stowe's 'Uncle Tom's Cabin' (1852) was significant because it:", options:["Was the first novel ever written","Turned Northern public opinion against slavery","Supported the institution of slavery","Was banned in all states"], answer:1, explain:"Uncle Tom's Cabin dramatized the horrors of slavery for a mass audience. It became the best-selling novel of the 19th century and turned many Northerners against slavery, enraging Southerners." },
+  { type:"mc", q:"The Kansas-Nebraska Act (1854) allowed slavery to be decided by:", options:["Congress","The president","Popular sovereignty — settlers voting in the territory","The Supreme Court"], answer:2, explain:"The Kansas-Nebraska Act used popular sovereignty — letting settlers in the territories vote on whether to allow slavery. This led to violent conflict in Kansas as pro- and anti-slavery forces flooded the territory." },
+  { type:"mc", q:"The Dred Scott decision (1857) ruled that:", options:["Enslaved people were citizens","Congress could ban slavery in territories","Black people were not citizens and had no rights","Slavery was unconstitutional"], answer:2, explain:"In the Dred Scott decision, the Supreme Court ruled that Black people were not citizens of the United States and had no right to sue in federal court, and that Congress had no power to ban slavery in the territories." },
+  { type:"mc", q:"Abraham Lincoln was elected president in:", options:["1856","1858","1860","1864"], answer:2, explain:"Abraham Lincoln won the presidential election of 1860 without carrying a single Southern state. His election, on a platform opposing slavery's expansion, prompted Southern states to begin seceding." },
+  { type:"sa", q:"What was 'Bleeding Kansas' and why did it happen?", accept:["bleeding kansas","violence","popular sovereignty","pro-slavery","anti-slavery","vote","border ruffian"], explain:"'Bleeding Kansas' (1854-1859) was a period of violent conflict in Kansas Territory between pro-slavery and anti-slavery settlers. It happened because the Kansas-Nebraska Act let settlers vote on slavery, leading both sides to flood Kansas and resort to violence to control the outcome." },
+  { type:"sa", q:"Why did Lincoln's election in 1860 lead to Southern secession?", accept:["lincoln","election","secession","slavery","expand","south","threat","republican","without"], explain:"Lincoln won without any Southern electoral votes, on a Republican platform opposing slavery's expansion. Southerners feared that a president hostile to slavery's expansion would eventually threaten slavery where it already existed, so they chose to leave the Union rather than accept his presidency." },
+  { type:"sa", q:"What was the Republican Party's position on slavery when it was founded in 1854?", accept:["republican","slavery","expansion","territory","oppose","stop","spread","free"], explain:"The Republican Party was founded in 1854 specifically to oppose the expansion of slavery into new territories. It did not initially call for abolishing slavery where it already existed, but it firmly opposed allowing slavery to spread to the West." }
+]},
+"14": { title: "The Civil War", questions: [
+  { type:"mc", q:"The Civil War began with the attack on:", options:["Gettysburg","Fort Sumter","Washington, D.C.","Antietam"], answer:1, explain:"The Civil War began on April 12, 1861, when Confederate forces attacked Fort Sumter, a federal fort in Charleston Harbor, South Carolina." },
+  { type:"mc", q:"The Emancipation Proclamation (January 1, 1863):", options:["Freed all enslaved people in the United States","Freed enslaved people in Confederate states","Ended the Civil War","Gave Black men the right to vote"], answer:1, explain:"The Emancipation Proclamation declared enslaved people in Confederate states to be free. It did not apply to border states that remained in the Union. It transformed the war into a fight to end slavery." },
+  { type:"mc", q:"The Battle of Gettysburg (July 1863) was significant because:", options:["It was the first battle of the war","It was the turning point that ended Confederate offensive operations in the North","It freed enslaved people","The South won a decisive victory"], answer:1, explain:"The Battle of Gettysburg was the bloodiest battle of the war and a turning point. After this defeat, the Confederacy was never able to mount a major offensive into Northern territory again." },
+  { type:"mc", q:"Approximately how many Black soldiers served in the Union Army?", options:["About 10,000","About 50,000","About 180,000","About 500,000"], answer:2, explain:"Approximately 180,000 Black soldiers served in the Union Army, making up about 10% of Union forces. They served with distinction despite facing discrimination, lower pay, and the threat of execution if captured by Confederates." },
+  { type:"mc", q:"General Sherman's 'March to the Sea' is an example of:", options:["Guerrilla warfare","Total war","A naval battle","A peace negotiation"], answer:1, explain:"Sherman's March to the Sea (1864) was an example of total war — targeting not just enemy soldiers but also the economic resources and civilian infrastructure that supported the Confederate war effort." },
+  { type:"sa", q:"How did the purpose of the Civil War change over time?", accept:["union","slavery","emancipation","preserve","end","free","evolve","change","began"], explain:"The war began as a fight to preserve the Union, not to end slavery. But as the war dragged on, Lincoln issued the Emancipation Proclamation (1863), transforming it into a war to end slavery as well. The service of Black soldiers further cemented this shift." },
+  { type:"sa", q:"What does 'contraband' mean in the context of the Civil War?", accept:["contraband","enslaved","escaped","union","lines","confiscated","property","free"], explain:"'Contraband' referred to enslaved people who escaped to Union lines during the Civil War. Union General Benjamin Butler declared them 'contraband of war' (confiscated enemy property), allowing the army to shelter them rather than return them to enslavers." },
+  { type:"sa", q:"Why was the fall of Vicksburg (July 1863) strategically important?", accept:["vicksburg","mississippi","river","control","split","confederacy","two","supply"], explain:"The fall of Vicksburg gave the Union complete control of the Mississippi River, effectively splitting the Confederacy in two and cutting off Texas, Arkansas, and Louisiana from the rest of the South. This severed crucial supply lines." }
+]},
+"15": { title: "Reconstruction", questions: [
+  { type:"mc", q:"The 13th Amendment (1865):", options:["Gave women the right to vote","Abolished slavery throughout the United States","Granted citizenship to all people born in the U.S.","Prohibited denying voting rights based on race"], answer:1, explain:"The 13th Amendment permanently abolished slavery and involuntary servitude throughout the United States, completing what the Emancipation Proclamation had begun." },
+  { type:"mc", q:"Black Codes were laws designed to:", options:["Protect the rights of freedpeople","Restrict the freedom and rights of Black people after the Civil War","Establish public schools for Black children","Grant land to formerly enslaved people"], answer:1, explain:"Black Codes were laws passed by Southern states after the Civil War to restrict the rights and freedoms of Black people, including limiting where they could work, imposing curfews, and criminalizing unemployment." },
+  { type:"mc", q:"The Compromise of 1877 effectively ended Reconstruction by:", options:["Passing new civil rights laws","Withdrawing federal troops from the South","Amending the Constitution","Electing a Black president"], answer:1, explain:"The Compromise of 1877 resolved the disputed 1876 presidential election: Republican Rutherford B. Hayes became president in exchange for withdrawing federal troops from the South, ending Reconstruction and federal protection of Black rights." },
+  { type:"mc", q:"Sharecropping was a system where:", options:["Formerly enslaved people received 40 acres and a mule","Landowners let tenants farm their land in exchange for a share of the crops","The government distributed free land to all citizens","Workers were paid a fair hourly wage"], answer:1, explain:"Sharecropping was a system where landowners allowed tenants to use their land in exchange for a share of the crops produced. In practice, it trapped many Black families in cycles of poverty and debt, creating a new form of economic bondage." },
+  { type:"mc", q:"Who were the Radical Republicans?", options:["Southerners who supported the Confederacy","Republicans in Congress who wanted to guarantee rights for freedpeople and punish the South","Moderate politicians who sought compromise","The group that assassinated Lincoln"], answer:1, explain:"Radical Republicans were members of Congress who pushed for strong protections for freedpeople, including voting rights, civil rights, and land redistribution. They opposed President Andrew Johnson's lenient Reconstruction plans." },
+  { type:"sa", q:"What are the 13th, 14th, and 15th Amendments, and why are they called the 'Second Founding'?", accept:["13th","14th","15th","abolish","citizenship","vote","equal","second founding","transform","constitution"], explain:"The 13th Amendment abolished slavery, the 14th guaranteed citizenship and equal protection, and the 15th prohibited denying voting rights based on race. They are called the 'Second Founding' because they fundamentally transformed the Constitution, redefining citizenship and rights in ways the original founders did not." },
+  { type:"sa", q:"How were poll taxes and literacy tests used to prevent Black people from voting?", accept:["poll tax","literacy test","vote","prevent","poor","read","grandfather","disenfranchise"], explain:"Poll taxes required a fee to vote, which many formerly enslaved people (who had no wealth) couldn't afford. Literacy tests required applicants to read and interpret complex texts, which was nearly impossible for people who had been denied education under slavery. 'Grandfather clauses' exempted whites whose ancestors could vote, making these restrictions apply almost exclusively to Black voters." },
+  { type:"sa", q:"What was the Freedmen's Bureau and what did it do?", accept:["freedmen","bureau","education","school","hospital","land","legal","assist","formerly enslaved"], explain:"The Freedmen's Bureau was a federal agency that provided assistance to formerly enslaved people and poor whites in the South, including education (establishing schools), healthcare, legal aid, and help negotiating labor contracts. It was one of the first federal social welfare agencies." }
+]}
+};
+
+// Build select
+var sel = document.getElementById('ch-select');
+for (var ch in QUIZZES) {
+  var opt = document.createElement('option');
+  opt.value = ch;
+  opt.textContent = 'Ch. ' + ch + ': ' + QUIZZES[ch].title;
+  sel.appendChild(opt);
+}
+
+var submitted = false;
+
+function loadQuiz(ch) {
+  submitted = false;
+  var area = document.getElementById('quiz-area');
+  var actions = document.getElementById('quiz-actions');
+  var scoreBox = document.getElementById('score-box');
+  var noQuiz = document.getElementById('no-quiz');
+  scoreBox.classList.remove('show');
+
+  if (!ch || !QUIZZES[ch]) {
+    area.innerHTML = '';
+    actions.style.display = 'none';
+    noQuiz.style.display = 'block';
+    return;
+  }
+  noQuiz.style.display = 'none';
+  actions.style.display = 'block';
+  document.getElementById('submit-btn').disabled = false;
+
+  var quiz = QUIZZES[ch];
+  var html = '';
+  quiz.questions.forEach(function(q, i) {
+    html += '<div class="question-block" id="qb-' + i + '">';
+    html += '<div class="q-number">' + (q.type === 'mc' ? 'Multiple Choice' : 'Short Answer') + ' &mdash; Question ' + (i+1) + '</div>';
+    html += '<div class="q-text">' + escapeHtml(q.q) + '</div>';
+
+    if (q.type === 'mc') {
+      html += '<ul class="mc-options">';
+      q.options.forEach(function(opt, j) {
+        html += '<li><label id="opt-' + i + '-' + j + '"><input type="radio" name="q' + i + '" value="' + j + '" onchange="selectOption(this)"> ' + escapeHtml(opt) + '</label></li>';
+      });
+      html += '</ul>';
+    } else {
+      html += '<input type="text" class="sa-input" id="sa-' + i + '" placeholder="Type your answer...">';
+      html += '<div class="sa-hint">Include key terms in your answer</div>';
+    }
+    html += '<div class="q-feedback" id="fb-' + i + '"></div>';
+    html += '</div>';
+  });
+  area.innerHTML = html;
+  area.scrollIntoView({ behavior: 'smooth' });
+}
+
+function selectOption(radio) {
+  if (submitted) return;
+  var name = radio.name;
+  var labels = document.querySelectorAll('.mc-options label');
+  // Clear selections for this question only
+  var qIndex = name.replace('q','');
+  for (var j = 0; j < 4; j++) {
+    var lbl = document.getElementById('opt-' + qIndex + '-' + j);
+    if (lbl) lbl.classList.remove('selected');
+  }
+  radio.parentElement.classList.add('selected');
+}
+
+function gradeQuiz() {
+  if (submitted) return;
+  submitted = true;
+  document.getElementById('submit-btn').disabled = true;
+  var ch = document.getElementById('ch-select').value;
+  var quiz = QUIZZES[ch];
+  var correct = 0;
+  var total = quiz.questions.length;
+
+  quiz.questions.forEach(function(q, i) {
+    var fb = document.getElementById('fb-' + i);
+    var block = document.getElementById('qb-' + i);
+    var isCorrect = false;
+
+    if (q.type === 'mc') {
+      var selected = document.querySelector('input[name="q' + i + '"]:checked');
+      var selectedVal = selected ? parseInt(selected.value) : -1;
+
+      // Highlight correct answer
+      var correctLabel = document.getElementById('opt-' + i + '-' + q.answer);
+      if (correctLabel) correctLabel.classList.add('correct-answer');
+
+      if (selectedVal === q.answer) {
+        isCorrect = true;
+      } else if (selected) {
+        selected.parentElement.classList.add('wrong-answer');
+      }
+    } else {
+      var input = document.getElementById('sa-' + i);
+      var answer = (input.value || '').toLowerCase().trim();
+      if (answer.length > 0) {
+        isCorrect = q.accept.some(function(kw) { return answer.indexOf(kw.toLowerCase()) > -1; });
+      }
+      input.readOnly = true;
+    }
+
+    if (isCorrect) {
+      correct++;
+      block.classList.add('correct');
+      fb.className = 'q-feedback show fb-correct';
+      fb.innerHTML = '<strong>Correct!</strong> ' + escapeHtml(q.explain);
+    } else {
+      block.classList.add('incorrect');
+      fb.className = 'q-feedback show fb-incorrect';
+      fb.innerHTML = '<strong>Not quite.</strong> ' + escapeHtml(q.explain);
+    }
+  });
+
+  // Show score
+  var scoreBox = document.getElementById('score-box');
+  document.getElementById('score-number').textContent = correct + ' / ' + total;
+  var pct = Math.round(correct / total * 100);
+  var msg = '';
+  if (pct === 100) msg = 'Perfect score! You really know this chapter.';
+  else if (pct >= 80) msg = 'Great job! Review the questions you missed and try again.';
+  else if (pct >= 60) msg = 'Good effort. Re-read the chapter and use the vocabulary cards to strengthen your knowledge.';
+  else msg = 'Keep studying! Use the vocabulary cards and re-read the chapter, then try again.';
+  document.getElementById('score-message').textContent = msg;
+  scoreBox.classList.add('show');
+  scoreBox.scrollIntoView({ behavior: 'smooth' });
+}
+
+function escapeHtml(str) {
+  var div = document.createElement('div');
+  div.textContent = str;
+  return div.innerHTML;
+}
+</script>
+</body>
+</html>
