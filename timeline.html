@@ -217,6 +217,24 @@
 }
 .tl-chapter a:hover { border-bottom-style: solid; }
 
+/* Category badge (WCAG: text label alongside color) */
+.tl-cat-badge {
+  display: inline-block;
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .8px;
+  padding: 2px 8px;
+  border-radius: 3px;
+  margin-bottom: 6px;
+}
+.cat-political .tl-cat-badge { background: #E8EDF3; color: #1B3A5C; }
+.cat-social .tl-cat-badge   { background: #E0F2F1; color: #1E6A75; }
+.cat-economic .tl-cat-badge { background: #FDF3E0; color: #8A6914; }
+.cat-military .tl-cat-badge { background: #FFEBEE; color: #B71C1C; }
+.cat-cultural .tl-cat-badge { background: #F3E5F5; color: #6A1B9A; }
+
 /* Hidden events for filtering */
 .tl-event.hidden { display: none; }
 .tl-era.hidden { display: none; }
@@ -412,7 +430,9 @@ function buildTimeline() {
       if (e.img) {
         html += '<div class="tl-event-img" style="background-image:url(\'' + e.img + '\')" role="img" aria-label="' + esc(e.title) + '"></div>';
       }
+      var catLabels = {political:'Political &amp; Legal',social:'Social &amp; Cultural',economic:'Economic',military:'Military &amp; Conflict',cultural:'Ideas &amp; Movements'};
       html += '<div class="tl-event-body">';
+      html += '<div class="tl-cat-badge">' + (catLabels[e.cat] || e.cat) + '</div>';
       html += '<div class="tl-date">' + esc(e.date) + '</div>';
       html += '<div class="tl-title">' + esc(e.title) + '</div>';
       html += '<div class="tl-desc">' + esc(e.desc) + '</div>';

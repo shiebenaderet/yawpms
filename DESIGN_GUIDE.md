@@ -1,6 +1,6 @@
 # American Yawp MS — Design & Styling Guide
 
-**Version:** 1.0.1
+**Version:** 1.0.2
 **Last Updated:** 2026-02-16
 **Status:** Living Document
 
@@ -396,6 +396,44 @@ p {
 ---
 
 ## Version History
+
+### Version 1.0.2 (2026-02-16)
+
+**Stage 2 — Accessibility Enhancements:**
+- ✅ Added ARIA landmarks to all 15 chapter pages (`<main>`, `<aside>`, `<nav>` with aria-labels)
+- ✅ Added comprehensive ARIA attributes to reader tools (`aria-expanded`, `aria-pressed`, `aria-label`, `aria-live`)
+- ✅ Added tablet breakpoint (768px) for chapter and supporting pages
+- ✅ Standardized navigation across all 34 supporting pages (`aria-label`, `aria-current="page"`)
+
+**Ch6/Ch7 Callout Box Standardization:**
+- ✅ Converted vocab boxes from `dl/dt/dd` to `p/strong` format
+- ✅ Converted stop-think from `ol/li` to `p` format
+- ✅ Converted primary-source from `blockquote` to `p` with `p.source-citation`
+- ✅ Fixed "Whose Voices Were Left Out?" sections (`class="voices-left-out"` with `<p>` children)
+- ✅ Fixed activity boxes (`class="activity-box"`)
+- ✅ Removed emojis from h3 headings and normalized casing
+- ✅ Fixed container closing tags (`</div>` → `</main>`)
+
+**Stage 3 — Polish & Consistency:**
+- ✅ Timeline: Added visible category text badges (WCAG: not color-only)
+- ✅ Quizzes: Added ✓/✗ icons to feedback and answer labels
+- ✅ Primary sources: Increased caption font-size from 13px to 14px
+- ✅ Vocabulary cards: Added smooth easing to flip animation (`cubic-bezier(.4, 0, .2, 1)`)
+
+**Files Changed:**
+- `ch1-15.html` — ARIA landmarks, skip links, semantic elements
+- `ch6.html`, `ch7.html` — Complete callout box restructuring
+- `css/chapter.css` — Tablet breakpoint
+- `css/pages.css` — Tablet breakpoint, `aria-current` styling
+- `css/primary-sources.css` — Caption font-size (13px → 14px)
+- `js/reader-tools.js` — Comprehensive ARIA attributes
+- `timeline.html` — Category text badges
+- `quizzes.html` — Feedback icons (✓/✗)
+- `vocabulary-cards.html` — Flip animation easing
+- `index.html` — Nav semantics
+- 32+ supporting pages — Nav aria-labels
+
+---
 
 ### Version 1.0.1 (2026-02-16)
 
