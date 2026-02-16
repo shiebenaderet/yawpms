@@ -1,0 +1,73 @@
+{
+  "audit_date": "2026-02-16",
+  "summary": {
+    "total_references": 125,
+    "found_on_disk": 95,
+    "missing": 30,
+    "orphaned": 12,
+    "name_mismatches": 9,
+    "alt_text": {
+      "total_img_tags": 126,
+      "with_alt": 126,
+      "empty_alt": 0,
+      "missing_alt": 0
+    }
+  },
+  "missing_images": [
+    { "type": "map", "path": "images/ch1/beringia-map.jpg", "referenced_by": "ch1.html:89", "download_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Beringia_land_bridge-noaagov.gif?width=800", "similar_on_disk": "beringia-land-bridge.png" },
+    { "type": "map", "path": "images/ch1/native-cultures-map.png", "referenced_by": "ch1.html:129", "download_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Early_Localization_Native_Americans_USA.jpg?width=800", "similar_on_disk": null },
+    { "type": "map", "path": "images/ch10/underground-railroad-map.jpg", "referenced_by": "ch10.html:169", "download_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Undergroundrailroadsmall2.jpg?width=800", "similar_on_disk": null },
+    { "type": "map", "path": "images/ch11/domestic-slave-trade-map.png", "referenced_by": "ch11.html:142", "download_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Slave_trade_routes_in_the_USA.svg?width=800", "similar_on_disk": null },
+    { "type": "map", "path": "images/ch12/oregon-territory-map.png", "referenced_by": "ch12.html:120", "download_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Oregon_territory_1848.svg?width=600", "similar_on_disk": null },
+    { "type": "map", "path": "images/ch13/compromise-1850-map.png", "referenced_by": "ch13.html:94", "download_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Compromise_of_1850.png?width=800", "similar_on_disk": null },
+    { "type": "map", "path": "images/ch14/anaconda-plan-map.jpg", "referenced_by": "ch14.html:102", "download_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Scott-anaconda.jpg?width=800", "similar_on_disk": "anaconda-plan.jpg" },
+    { "type": "map", "path": "images/ch14/civil-war-states-map.png", "referenced_by": "ch14.html:91", "download_url": "https://commons.wikimedia.org/wiki/Special:FilePath/US_Secession_map_1861.svg?width=800", "similar_on_disk": null },
+    { "type": "map", "path": "images/ch15/reconstruction-districts-map.png", "referenced_by": "ch15.html:149", "download_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Reconstruction_Military_Districts.svg?width=600", "similar_on_disk": null },
+    { "type": "map", "path": "images/ch2/columbus-voyages-map.png", "referenced_by": "ch2.html:68", "download_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Viajes_de_colon_en.svg?width=800", "similar_on_disk": null },
+    { "type": "map", "path": "images/ch2/european-claims-map.png", "referenced_by": "ch2.html:297", "download_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Non-Native_Nations_Claim_over_NAFTA_countries_1750.png?width=800", "similar_on_disk": null },
+    { "type": "map", "path": "images/ch3/thirteen-colonies-map.png", "referenced_by": "ch3.html:68", "download_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Thirteen_Colonies_1775.svg?width=600", "similar_on_disk": "thirteen-colonies-1775.png" },
+    { "type": "map", "path": "images/ch4/triangular-trade-map.png", "referenced_by": "ch4.html:83", "download_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Triangle_trade2.png?width=800", "similar_on_disk": "triangular-trade.png" },
+    { "type": "map", "path": "images/ch5/revolution-battles-map.png", "referenced_by": "ch5.html:229", "download_url": "https://commons.wikimedia.org/wiki/Special:FilePath/American_Revolutionary_War_battles_map.svg?width=600", "similar_on_disk": null },
+    { "type": "map", "path": "images/ch6/us-territory-1789-map.png", "referenced_by": "ch6.html:230", "download_url": null, "similar_on_disk": "us-territory-1789.png" },
+    { "type": "map", "path": "images/ch7/lewis-clark-expedition-map.png", "referenced_by": "ch7.html:222", "download_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Lewis_and_clark-expedition.jpg?width=800", "similar_on_disk": null },
+    { "type": "map", "path": "images/ch7/louisiana-purchase-map.png", "referenced_by": "ch7.html:198", "download_url": "https://commons.wikimedia.org/wiki/Special:FilePath/LouisianaPurchase.png?width=800", "similar_on_disk": "louisiana-purchase.jpg" },
+    { "type": "map", "path": "images/ch8/erie-canal-map.png", "referenced_by": "ch8.html:90", "download_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Erie_Canal_map.png?width=800", "similar_on_disk": "erie-canal.jpg" },
+    { "type": "photo", "path": "images/ch8/lowell-mills.jpg", "referenced_by": "ch8.html:138", "download_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Lowell_Massachusetts_Merrimack_Mills.jpg?width=640", "similar_on_disk": null },
+    { "type": "map", "path": "images/ch8/railroads-1860-map.jpg", "referenced_by": "ch8.html:111", "download_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Railroad_map_of_the_United_States_1861.jpg?width=800", "similar_on_disk": "canals-railroads-1840.jpg" },
+    { "type": "photo", "path": "images/ch8/south-street-nyc.jpg", "referenced_by": "ch8.html:205", "download_url": "https://commons.wikimedia.org/wiki/Special:FilePath/William_James_Bennett_-_View_of_South_Street%2C_from_Maiden_Lane%2C_New_York_City_-_Google_Art_Project.jpg?width=640", "similar_on_disk": null },
+    { "type": "map", "path": "images/ch9/indian-cessions-map.jpg", "referenced_by": "ch9.html:213", "download_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Indiancessions.jpg?width=800", "similar_on_disk": null },
+    { "type": "map", "path": "images/ch9/trail-of-tears-map.png", "referenced_by": "ch9.html:196", "download_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Trails_of_Tears_en.png?width=800", "similar_on_disk": "trail-of-tears-map.jpg" },
+    { "type": "primary-source", "path": "primary-sources/images/ch1-birch-bark.jpg", "referenced_by": "primary-sources/ch1-sources.html:215", "download_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Box_(birchbark),_probably_southeastern_Ojibwa,_post-1865_-_Native_American_collection_-_Peabody_Museum,_Harvard_University_-_DSC05471.JPG?width=800", "similar_on_disk": null },
+    { "type": "primary-source", "path": "primary-sources/images/ch1-monks-mound.jpg", "referenced_by": "primary-sources/ch1-sources.html:120", "download_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Monks_Mound_in_July.JPG?width=800", "similar_on_disk": null },
+    { "type": "primary-source", "path": "primary-sources/images/ch11-slave-broadside.jpg", "referenced_by": "primary-sources/ch11-sources.html:176", "download_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Slave_Auction_Ad.jpg?width=600", "similar_on_disk": null },
+    { "type": "primary-source", "path": "primary-sources/images/ch14-contraband-camp.jpg", "referenced_by": "primary-sources/ch14-sources.html:237", "download_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Contraband_camp,_Richmond,_Va,_1865_-_NARA_-_524494.jpg?width=800", "similar_on_disk": null },
+    { "type": "primary-source", "path": "primary-sources/images/ch6-providential-detection.jpg", "referenced_by": "primary-sources/ch6-sources.html:234", "download_url": "https://commons.wikimedia.org/wiki/Special:FilePath/The_Providential_Detection.jpg?width=800", "similar_on_disk": null },
+    { "type": "primary-source", "path": "primary-sources/images/ch7-fort-mchenry.jpg", "referenced_by": "primary-sources/ch7-sources.html:232", "download_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Ft._Henry_bombardement_1814.jpg?width=800", "similar_on_disk": null },
+    { "type": "primary-source", "path": "primary-sources/images/ch9-cherokee-phoenix.jpg", "referenced_by": "primary-sources/ch9-sources.html:231", "download_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Cherokee_Phoenix_first_issue.jpg?width=800", "similar_on_disk": null }
+  ],
+  "orphaned_files": [
+    "images/ch1/beringia-land-bridge.png",
+    "images/ch1/crooked-beak-mask.jpg",
+    "images/ch1/native-cultural-regions.jpg",
+    "images/ch13/bleeding-kansas.jpg",
+    "images/ch14/anaconda-plan.jpg",
+    "images/ch14/civil-war-1861.jpg",
+    "images/ch15/reconstruction-military-districts.png",
+    "images/ch3/burning-of-jamestown.jpg",
+    "images/ch3/thirteen-colonies-1775.png",
+    "images/ch3/virginia-fishing.jpg",
+    "images/ch4/slave-trade-routes.jpg",
+    "images/ch8/canals-railroads-1840.jpg"
+  ],
+  "name_mismatches": [
+    { "html_wants": "images/ch1/beringia-map.jpg", "disk_has": "images/ch1/beringia-land-bridge.png" },
+    { "html_wants": "images/ch14/anaconda-plan-map.jpg", "disk_has": "images/ch14/anaconda-plan.jpg" },
+    { "html_wants": "images/ch3/thirteen-colonies-map.png", "disk_has": "images/ch3/thirteen-colonies-1775.png" },
+    { "html_wants": "images/ch4/triangular-trade-map.png", "disk_has": "images/ch4/triangular-trade.png" },
+    { "html_wants": "images/ch6/us-territory-1789-map.png", "disk_has": "images/ch6/us-territory-1789.png" },
+    { "html_wants": "images/ch7/louisiana-purchase-map.png", "disk_has": "images/ch7/louisiana-purchase.jpg" },
+    { "html_wants": "images/ch8/erie-canal-map.png", "disk_has": "images/ch8/erie-canal.jpg" },
+    { "html_wants": "images/ch8/railroads-1860-map.jpg", "disk_has": "images/ch8/canals-railroads-1840.jpg" },
+    { "html_wants": "images/ch9/trail-of-tears-map.png", "disk_has": "images/ch9/trail-of-tears-map.jpg" }
+  ]
+}
