@@ -53,7 +53,7 @@ body {
 }
 .nav-bar a:hover { border-bottom-color: #C4941D; }
 
-.container { max-width: 720px; margin: 0 auto; padding: 48px 24px; }
+.container { max-width: 640px; margin: 0 auto; padding: 48px 24px; }
 
 h2 { font-size: 28px; color: #1B3A5C; margin: 48px 0 20px; padding-bottom: 12px; border-bottom: 2px solid #E0E0E0; }
 h2:first-of-type { margin-top: 0; }
