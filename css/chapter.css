@@ -315,27 +315,36 @@ p:last-child { margin-bottom: 0; }
 
 /* Multiple Perspectives */
 .perspectives { background: #F7F2FD; border-left: 4px solid #7C3AED; }
-.perspectives h3 { color: #7C3AED; }
+.perspectives h3 { color: #7C3AED; border-bottom-color: rgba(124,58,237,.15); }
 .perspectives .perspective {
   margin-bottom: 14px;
   font-family: 'Source Sans 3', sans-serif;
-  font-size: 15px;
-  line-height: 1.65;
-  padding-left: 4px;
+  font-size: 16px;
+  line-height: 1.7;
+  padding-left: 14px;
+  border-left: 3px solid rgba(124,58,237,.2);
+}
+.perspectives .perspective + .perspective {
+  padding-top: 14px;
+  border-top: 1px solid rgba(124,58,237,.08);
 }
 .perspectives .perspective:last-child { margin-bottom: 0; }
 .perspectives .perspective strong {
   color: #5B21B6;
   font-weight: 700;
+  font-size: 14px;
+  letter-spacing: .3px;
+  display: block;
+  margin-bottom: 4px;
 }
 
 /* Key Idea */
 .key-idea { background: #F0F7F0; border-left: 4px solid #2E7D32; }
-.key-idea h3 { color: #2E7D32; }
+.key-idea h3 { color: #2E7D32; border-bottom-color: rgba(46,125,50,.18); }
 .key-idea p {
   font-family: 'Source Sans 3', sans-serif;
-  font-size: 15px;
-  line-height: 1.65;
+  font-size: 16px;
+  line-height: 1.75;
   margin-bottom: 10px;
 }
 .key-idea p:last-child { margin-bottom: 0; }
@@ -377,15 +386,21 @@ p:last-child { margin-bottom: 0; }
 
 /* Whose Voices Were Left Out */
 .voices-left-out { background: #FDF2F5; border-left: 4px solid #C2185B; }
-.voices-left-out h3 { color: #C2185B; }
+.voices-left-out h3 { color: #C2185B; border-bottom-color: rgba(194,24,91,.15); }
 .voices-left-out p {
   font-family: 'Source Sans 3', sans-serif;
-  font-size: 15px;
-  line-height: 1.7;
-  margin-bottom: 10px;
+  font-size: 16px;
+  line-height: 1.75;
+  margin-bottom: 12px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid rgba(194,24,91,.08);
 }
-.voices-left-out p:last-child { margin-bottom: 0; }
-.voices-left-out strong { color: #AD1457; }
+.voices-left-out p:last-child { margin-bottom: 0; padding-bottom: 0; border-bottom: none; }
+.voices-left-out strong {
+  color: #AD1457;
+  font-size: 14px;
+  letter-spacing: .3px;
+}
 
 /* Activity Box */
 .activity-box {
@@ -1228,26 +1243,26 @@ body.font-large p { font-size: 19px; }
 body.font-large .vocab-box p,
 body.font-large .vocab-box .term-row,
 body.font-large .stop-think p,
-body.font-large .perspectives .perspective,
-body.font-large .key-idea p,
 body.font-large .primary-source p,
 body.font-large .story-box p,
-body.font-large .voices-left-out p,
 body.font-large .activity-box p,
 body.font-large .activity-box li { font-size: 17px; }
+body.font-large .perspectives .perspective,
+body.font-large .key-idea p,
+body.font-large .voices-left-out p { font-size: 18px; }
 
 body.font-xlarge { font-size: 21px; }
 body.font-xlarge p { font-size: 21px; }
 body.font-xlarge .vocab-box p,
 body.font-xlarge .vocab-box .term-row,
 body.font-xlarge .stop-think p,
-body.font-xlarge .perspectives .perspective,
-body.font-xlarge .key-idea p,
 body.font-xlarge .primary-source p,
 body.font-xlarge .story-box p,
-body.font-xlarge .voices-left-out p,
 body.font-xlarge .activity-box p,
 body.font-xlarge .activity-box li { font-size: 19px; }
+body.font-xlarge .perspectives .perspective,
+body.font-xlarge .key-idea p,
+body.font-xlarge .voices-left-out p { font-size: 20px; }
 
 body.spacing-wide { line-height: 2.2; }
 body.spacing-wide p { line-height: 2.2; }
@@ -1352,12 +1367,13 @@ body.dark-mode .stop-think h3 { color: #c9a035; }
 body.dark-mode .stop-think p { color: #b0b0b0; }
 
 body.dark-mode .perspectives { background: #1a1525; border-left-color: #a78bfa; }
-body.dark-mode .perspectives h3 { color: #a78bfa; }
-body.dark-mode .perspectives .perspective { color: #ccc; }
+body.dark-mode .perspectives h3 { color: #a78bfa; border-bottom-color: rgba(167,139,250,.2); }
+body.dark-mode .perspectives .perspective { color: #ccc; border-left-color: rgba(167,139,250,.25); }
+body.dark-mode .perspectives .perspective + .perspective { border-top-color: rgba(167,139,250,.12); }
 body.dark-mode .perspectives .perspective strong { color: #c4b5fd; }
 
 body.dark-mode .key-idea { background: #101e10; border-left-color: #66bb6a; }
-body.dark-mode .key-idea h3 { color: #66bb6a; }
+body.dark-mode .key-idea h3 { color: #66bb6a; border-bottom-color: rgba(102,187,106,.2); }
 body.dark-mode .key-idea p { color: #ccc; }
 
 body.dark-mode .primary-source { background: #1c1410; border-left-color: #e57652; }
@@ -1370,8 +1386,8 @@ body.dark-mode .story-box h3 { color: #e0952a; }
 body.dark-mode .story-box p { color: #ccc; }
 
 body.dark-mode .voices-left-out { background: #1c1018; border-left-color: #e05588; }
-body.dark-mode .voices-left-out h3 { color: #e05588; }
-body.dark-mode .voices-left-out p { color: #ccc; }
+body.dark-mode .voices-left-out h3 { color: #e05588; border-bottom-color: rgba(224,85,136,.2); }
+body.dark-mode .voices-left-out p { color: #ccc; border-bottom-color: rgba(224,85,136,.1); }
 body.dark-mode .voices-left-out strong { color: #f06090; }
 
 body.dark-mode .activity-box { background: #1e1e1e; border-color: #333; border-top-color: #7ab8e0; }
