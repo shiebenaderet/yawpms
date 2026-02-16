@@ -466,13 +466,49 @@
   color: #1B3A5C;
 }
 
+/* ---- Print / PDF button ---- */
+.ps-print-bar {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 24px;
+}
+.ps-print-btn {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  color: #1B3A5C;
+  background: #F0F4F8;
+  border: 1px solid #d0dae4;
+  border-radius: 6px;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: background .2s, border-color .2s;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.ps-print-btn:hover {
+  background: #e0edf0;
+  border-color: #2A7F8E;
+  color: #2A7F8E;
+}
+.ps-print-btn svg {
+  width: 16px;
+  height: 16px;
+  fill: currentColor;
+}
+
 /* ---- Print styles ---- */
 @media print {
-  .header, .nav-bar, .ps-source-nav, footer { display: none !important; }
+  .header, .nav-bar, .ps-source-nav, .ps-print-bar, footer { display: none !important; }
+  .ps-chapter-intro { display: none !important; }
   .container { max-width: 100%; padding: 0; }
   .ps-source { break-inside: avoid; border: 1px solid #ccc; box-shadow: none; margin-bottom: 24px; }
+  .ps-source-body { padding: 20px; }
   .ps-q-group { break-inside: avoid; }
   .ps-worksheet { break-before: page; border-style: solid; }
+  .ps-image-source img { max-width: 100%; max-height: 400px; object-fit: contain; }
 }
 
 /* ---- Responsive ---- */
