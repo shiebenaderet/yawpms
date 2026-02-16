@@ -422,6 +422,50 @@
   margin-left: 12px;
 }
 
+/* ---- Chapter list (landing page) ---- */
+.ps-chapter-list {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 8px;
+  margin-bottom: 32px;
+}
+.ps-chapter-link {
+  display: flex;
+  align-items: center;
+  background: white;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 14px 20px;
+  text-decoration: none;
+  color: inherit;
+  transition: box-shadow .2s, border-color .2s, transform .15s;
+}
+.ps-chapter-link:hover {
+  box-shadow: 0 3px 12px rgba(0,0,0,.07);
+  border-color: #C4941D;
+  transform: translateX(4px);
+}
+.ps-ch-num {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  color: white;
+  background: #1B3A5C;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-right: 14px;
+}
+.ps-ch-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: #1B3A5C;
+}
+
 /* ---- Print styles ---- */
 @media print {
   .header, .nav-bar, .ps-source-nav, footer { display: none !important; }
