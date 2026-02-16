@@ -83,7 +83,9 @@
 .mc-options input[type="radio"] { margin-top: 3px; flex-shrink: 0; }
 .mc-options label.selected { background: #E3F2FD; border-color: #1565C0; }
 .mc-options label.correct-answer { background: #E8F5E9; border-color: #2E7D32; }
+.mc-options label.correct-answer::after { content: ' \2713'; font-weight: 700; color: #2E7D32; margin-left: auto; }
 .mc-options label.wrong-answer { background: #FFEBEE; border-color: #C62828; }
+.mc-options label.wrong-answer::after { content: ' \2717'; font-weight: 700; color: #C62828; margin-left: auto; }
 
 /* Short answer */
 .sa-input {
@@ -497,11 +499,11 @@ function gradeQuiz() {
       correct++;
       block.classList.add('correct');
       fb.className = 'q-feedback show fb-correct';
-      fb.innerHTML = '<strong>Correct!</strong> ' + escapeHtml(q.explain);
+      fb.innerHTML = '<strong>\u2713 Correct!</strong> ' + escapeHtml(q.explain);
     } else {
       block.classList.add('incorrect');
       fb.className = 'q-feedback show fb-incorrect';
-      fb.innerHTML = '<strong>Not quite.</strong> ' + escapeHtml(q.explain);
+      fb.innerHTML = '<strong>\u2717 Not quite.</strong> ' + escapeHtml(q.explain);
     }
   });
 
