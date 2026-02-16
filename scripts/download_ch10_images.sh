@@ -6,7 +6,6 @@
 set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
-source "$SCRIPT_DIR/download_common.sh"
 IMG_DIR="$SCRIPT_DIR/../images/ch10"
 mkdir -p "$IMG_DIR"
 
@@ -16,34 +15,25 @@ declare -A IMAGES=(
   ["camp-meeting-revival.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/Camp_meeting_of_the_Methodists_in_N._America_J._Milbert_del_M._Dubourg_sculp_(cropped).jpg?width=640"
   ["frederick-douglass.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/Frederick_Douglass_%28circa_1879%29.jpg?width=440"
   ["seneca-falls.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/Woman%27s_Rights_Convention.jpg?width=640"
-  ["sojourner-truth.jpg"]="https://upload.wikimedia.org/wikipedia/commons/thumb/b/bc/Sojourner_truth_c1870.jpg/440px-Sojourner_truth_c1870.jpg"
-  ["dorothea-dix.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/Dix-Dorothea-LOC.jpg?width=440"
+  ["sojourner-truth.jpg"]="https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/Sojourner_truth_c1870.jpg/440px-Sojourner_truth_c1870.jpg"
+  ["dorothea-dix.jpg"]="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Dorothea_Lynde_Dix.jpg/440px-Dorothea_Lynde_Dix.jpg"
+
+  # Maps
+  ["underground-railroad-map.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/Undergroundrailroadsmall2.jpg?width=800"
 )
 
-MIN_SIZE=5000
 for local in "${!IMAGES[@]}"; do
   url="${IMAGES[$local]}"
   dest="$IMG_DIR/$local"
-  if [ -f "$dest" ] && [ "$(stat -f%z "$dest" 2>/dev/null || stat -c%s "$dest" 2>/dev/null)" -ge "$MIN_SIZE" ]; then
-    echo "  [skip] $local"
+  if [ -f "$dest" ]; then
+    echo "  [skip] $local already exists"
   else
     echo "  [download] $local"
-    sleep 2
-    if ! curl -sL --fail --max-time 60 -A "$CURL_USER_AGENT" "$url" -o "$dest" 2>/dev/null; then
-      echo "  [retry in 5s] $local"
-      sleep 5
-      curl -sL --fail --max-time 60 -A "$CURL_USER_AGENT" "$url" -o "$dest" 2>/dev/null || true
-    fi
-    if [ -f "$dest" ]; then
-      size=$(stat -f%z "$dest" 2>/dev/null || stat -c%s "$dest" 2>/dev/null)
-      if [ "${size:-0}" -lt "$MIN_SIZE" ]; then
-        echo "  [FAILED] $local — got ${size:-0} bytes (likely error page)"
-        rm -f "$dest"
-      else
-        echo "  [ok] $local"
-      fi
+    if curl -sL --fail "$url" -o "$dest" 2>/dev/null; then
+      echo "  [ok] $local"
     else
-      echo "  [FAILED] $local — check URL"
+      echo "  [FAILED] $local — check URL: $url"
+      rm -f "$dest"
     fi
   fi
 done

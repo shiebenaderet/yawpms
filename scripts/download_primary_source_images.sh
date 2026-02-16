@@ -23,10 +23,10 @@ echo ""
 
 declare -A IMAGES=(
   # Ch1 Source 1.2 — Monks Mound, Cahokia (photo, public domain)
-  ["ch1-monks-mound.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/Monks_Mound_in_July.jpg?width=800"
+  ["ch1-monks-mound.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/Monks_Mound_in_July.JPG?width=800"
 
-  # Ch1 Source 1.4 — Birch bark basket, Abenaki (Peabody Museum)
-  ["ch1-birch-bark.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/Birch_Bark_Basket%2C_Abenaki_-_Peabody_Museum_Harvard.jpg?width=800"
+  # Ch1 Source 1.4 — Birch bark box, southeastern Ojibwa (Peabody Museum)
+  ["ch1-birch-bark.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/Box_(birchbark),_probably_southeastern_Ojibwa,_post-1865_-_Native_American_collection_-_Peabody_Museum,_Harvard_University_-_DSC05471.JPG?width=800"
 
   # Ch2 Source 2.3 — De Bry, Columbus Landing on Hispaniola (1594)
   ["ch2-columbus-landing.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/Columbus_landing_on_Hispaniola.JPG?width=800"
@@ -41,22 +41,22 @@ declare -A IMAGES=(
   ["ch6-providential-detection.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/The_Providential_Detection.jpg?width=800"
 
   # Ch7 Source 7.4 — Bombardment of Fort McHenry (Bower, c. 1814)
-  ["ch7-fort-mchenry.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/Ft._Henry_bombardridge_1814.jpg?width=800"
+  ["ch7-fort-mchenry.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/Ft._Henry_bombardement_1814.jpg?width=800"
 
   # Ch8 Source 8.4 — Erie Canal view
   ["ch8-erie-canal.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/Erie_Canal.jpg?width=800"
 
-  # Ch9 Source 9.4 — Cherokee Phoenix newspaper masthead (1828)
-  ["ch9-cherokee-phoenix.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/Cherokee_phoenix.jpg?width=800"
+  # Ch9 Source 9.4 — Cherokee Phoenix newspaper first issue (1828)
+  ["ch9-cherokee-phoenix.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/Cherokee_Phoenix_first_issue.jpg?width=800"
 
-  # Ch11 Source 11.3 — Slave trader broadside poster
-  ["ch11-slave-broadside.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/Slavetradeposter.jpg?width=600"
+  # Ch11 Source 11.3 — Slave auction broadside/advertisement
+  ["ch11-slave-broadside.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/Slave_Auction_Ad.jpg?width=600"
 
   # Ch12 Source 12.3 — John Gast, "American Progress" (1872)
   ["ch12-american-progress.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/American_Progress_%28John_Gast_painting%29.jpg?width=800"
 
   # Ch14 Source 14.4 — Contraband camp, Richmond VA (c. 1865)
-  ["ch14-contraband-camp.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/Contraband_camp_Richmand_Virginia.jpg?width=800"
+  ["ch14-contraband-camp.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/Contraband_camp,_Richmond,_Va,_1865_-_NARA_-_524494.jpg?width=800"
 
   # Ch15 Source 15.4 — Thomas Nast, "Worse Than Slavery" (1874)
   ["ch15-worse-than-slavery.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/Worse_than_Slavery_%281874%29%2C_by_Thomas_Nast.jpg?width=600"

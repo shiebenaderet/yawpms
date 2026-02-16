@@ -6,7 +6,6 @@
 set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
-source "$SCRIPT_DIR/download_common.sh"
 IMG_DIR="$SCRIPT_DIR/../images/ch2"
 mkdir -p "$IMG_DIR"
 
@@ -14,39 +13,28 @@ echo "Downloading Chapter 2 images to $IMG_DIR ..."
 
 declare -A IMAGES=(
   ["champlain-habitation.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/Champlain_Habitation_de_Quebec.jpg?width=640"
-  ["waldseemuller-map.jpg"]="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c0/Waldseemuller_map_2.jpg/960px-Waldseemuller_map_2.jpg"
-  ["de-bry-spanish-cruelty.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/Conquistadors_espagnols_utilisant_les_Am%C3%A9rindiens_comme_porteurs.jpg?width=640"
-  ["secotan-village.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/De_Bry_-_America_Part_1_-_Algonquin_village_-_HLABG.png?width=640"
-  ["negotiating-peace.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/Treaty_of_Penn_with_Indians_by_Benjamin_West.jpg?width=640"
-  ["castello-plan.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/Castelloplan.jpg?width=640"
-  ["new-orleans-1726.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/Nouvelle_Orleans_1728_map.jpg?width=960"
-  ["battle-gravelines.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/La_batalla_de_Gravelinas,_por_Nicholas_Hilliard.jpg?width=640"
+  ["waldseemuller-map.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/Waldseem%C3%BCller_map_2.jpg?width=640"
+  ["de-bry-spanish-cruelty.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/Perros_De_Bry.jpg?width=640"
+  ["secotan-village.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/Village_of_Secoton.jpg?width=640"
+  ["negotiating-peace.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/Negotiating_peace_with_the_Indians.jpg?width=640"
+
+  # Maps
+  ["columbus-voyages-map.png"]="https://commons.wikimedia.org/wiki/Special:FilePath/Viajes_de_colon_en.svg?width=800"
+  ["european-claims-map.png"]="https://commons.wikimedia.org/wiki/Special:FilePath/Non-Native_Nations_Claim_over_NAFTA_countries_1750.png?width=800"
 )
 
-MIN_SIZE=5000
 for local in "${!IMAGES[@]}"; do
   url="${IMAGES[$local]}"
   dest="$IMG_DIR/$local"
-  if [ -f "$dest" ] && [ "$(stat -f%z "$dest" 2>/dev/null || stat -c%s "$dest" 2>/dev/null)" -ge "$MIN_SIZE" ]; then
+  if [ -f "$dest" ]; then
     echo "  [skip] $local already exists"
   else
     echo "  [download] $local"
-    sleep 2
-    if ! curl -sL --fail --max-time 60 -A "$CURL_USER_AGENT" "$url" -o "$dest" 2>/dev/null; then
-      echo "  [retry in 5s] $local"
-      sleep 5
-      curl -sL --fail --max-time 60 -A "$CURL_USER_AGENT" "$url" -o "$dest" 2>/dev/null || true
-    fi
-    if [ -f "$dest" ]; then
-      size=$(stat -f%z "$dest" 2>/dev/null || stat -c%s "$dest" 2>/dev/null)
-      if [ "${size:-0}" -lt "$MIN_SIZE" ]; then
-        echo "  [FAILED] $local — got ${size:-0} bytes (likely error page)"
-        rm -f "$dest"
-      else
-        echo "  [ok] $local"
-      fi
+    if curl -sL --fail "$url" -o "$dest" 2>/dev/null; then
+      echo "  [ok] $local"
     else
-      echo "  [FAILED] $local — check URL"
+      echo "  [FAILED] $local — check URL: $url"
+      rm -f "$dest"
     fi
   fi
 done

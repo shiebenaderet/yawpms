@@ -6,7 +6,6 @@
 set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
-source "$SCRIPT_DIR/download_common.sh"
 IMG_DIR="$SCRIPT_DIR/../images/ch3"
 mkdir -p "$IMG_DIR"
 
@@ -14,37 +13,26 @@ echo "Downloading Chapter 3 images to $IMG_DIR ..."
 
 declare -A IMAGES=(
   ["pocahontas.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/Pocahontas_by_Simon_van_de_Passe.jpg?width=640"
-  ["mayflower-compact.jpg"]="https://upload.wikimedia.org/wikipedia/commons/thumb/6/63/The_Mayflower_Compact_1620_cph.3g07155.jpg/960px-The_Mayflower_Compact_1620_cph.3g07155.jpg"
+  ["mayflower-compact.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/The_Mayflower_Compact_1620_cph.3g07155.jpg?width=640"
   ["slave-ship-brookes.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/Slaveshipposter.jpg?width=640"
-  ["old-plantation.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/SlaveDanceand_Music.jpg?width=640"
-  ["burning-of-jamestown.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/Howard_Pyle_-_The_Burning_of_Jamestown.jpg?width=640"
-  ["virginia-fishing.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/The_Carte_of_all_the_Coast_of_Virginia_by_Theodor_de_Bry_1585_1586.jpg?width=640"
+  ["old-plantation.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/The_Old_Plantation.jpg?width=640"
+
+  # Maps
+  ["thirteen-colonies-map.png"]="https://commons.wikimedia.org/wiki/Special:FilePath/Thirteen_Colonies_1775.svg?width=600"
 )
 
-MIN_SIZE=5000
 for local in "${!IMAGES[@]}"; do
   url="${IMAGES[$local]}"
   dest="$IMG_DIR/$local"
-  if [ -f "$dest" ] && [ "$(stat -f%z "$dest" 2>/dev/null || stat -c%s "$dest" 2>/dev/null)" -ge "$MIN_SIZE" ]; then
+  if [ -f "$dest" ]; then
     echo "  [skip] $local already exists"
   else
     echo "  [download] $local"
-    sleep 2
-    if ! curl -sL --fail --max-time 60 -A "$CURL_USER_AGENT" "$url" -o "$dest" 2>/dev/null; then
-      echo "  [retry in 5s] $local"
-      sleep 5
-      curl -sL --fail --max-time 60 -A "$CURL_USER_AGENT" "$url" -o "$dest" 2>/dev/null || true
-    fi
-    if [ -f "$dest" ]; then
-      size=$(stat -f%z "$dest" 2>/dev/null || stat -c%s "$dest" 2>/dev/null)
-      if [ "${size:-0}" -lt "$MIN_SIZE" ]; then
-        echo "  [FAILED] $local — got ${size:-0} bytes (likely error page)"
-        rm -f "$dest"
-      else
-        echo "  [ok] $local"
-      fi
+    if curl -sL --fail "$url" -o "$dest" 2>/dev/null; then
+      echo "  [ok] $local"
     else
-      echo "  [FAILED] $local — check URL"
+      echo "  [FAILED] $local — check URL: $url"
+      rm -f "$dest"
     fi
   fi
 done

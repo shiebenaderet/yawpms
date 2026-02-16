@@ -6,7 +6,6 @@
 set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
-source "$SCRIPT_DIR/download_common.sh"
 IMG_DIR="$SCRIPT_DIR/../images/ch15"
 mkdir -p "$IMG_DIR"
 
@@ -17,33 +16,24 @@ declare -A IMAGES=(
   ["freedmens-bureau.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/The_Freedmen%27s_Bureau_-_Drawn_by_A.R._Waud._LCCN92514996.jpg?width=640"
   ["kkk-cartoon.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/Worse_than_Slavery_%281874%29%2C_by_Thomas_Nast.jpg?width=640"
   ["fifteenth-amendment.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/15th-amendment-celebration-1870.jpg?width=640"
-  ["contrabands.jpg"]="https://cdn.loc.gov/service/pnp/cwpb/01000/01005r.jpg"
+  ["contrabands.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/Cumberland_Landing%2C_Va._Group_of_%22contrabands%22_at_Foller%27s_house_LOC_cwpb.00101.jpg?width=640"
+
+  # Maps
+  ["reconstruction-districts-map.png"]="https://commons.wikimedia.org/wiki/Special:FilePath/Reconstruction_Military_Districts.svg?width=600"
 )
 
-MIN_SIZE=5000
 for local in "${!IMAGES[@]}"; do
   url="${IMAGES[$local]}"
   dest="$IMG_DIR/$local"
-  if [ -f "$dest" ] && [ "$(stat -f%z "$dest" 2>/dev/null || stat -c%s "$dest" 2>/dev/null)" -ge "$MIN_SIZE" ]; then
-    echo "  [skip] $local"
+  if [ -f "$dest" ]; then
+    echo "  [skip] $local already exists"
   else
     echo "  [download] $local"
-    sleep 2
-    if ! curl -sL --fail --max-time 60 -A "$CURL_USER_AGENT" "$url" -o "$dest" 2>/dev/null; then
-      echo "  [retry in 5s] $local"
-      sleep 5
-      curl -sL --fail --max-time 60 -A "$CURL_USER_AGENT" "$url" -o "$dest" 2>/dev/null || true
-    fi
-    if [ -f "$dest" ]; then
-      size=$(stat -f%z "$dest" 2>/dev/null || stat -c%s "$dest" 2>/dev/null)
-      if [ "${size:-0}" -lt "$MIN_SIZE" ]; then
-        echo "  [FAILED] $local — got ${size:-0} bytes (likely error page)"
-        rm -f "$dest"
-      else
-        echo "  [ok] $local"
-      fi
+    if curl -sL --fail "$url" -o "$dest" 2>/dev/null; then
+      echo "  [ok] $local"
     else
-      echo "  [FAILED] $local — check URL"
+      echo "  [FAILED] $local — check URL: $url"
+      rm -f "$dest"
     fi
   fi
 done

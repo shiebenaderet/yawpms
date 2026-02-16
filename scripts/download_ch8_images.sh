@@ -6,7 +6,6 @@
 set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
-source "$SCRIPT_DIR/download_common.sh"
 IMG_DIR="$SCRIPT_DIR/../images/ch8"
 mkdir -p "$IMG_DIR"
 
@@ -14,35 +13,27 @@ echo "Downloading Chapter 8 images to $IMG_DIR ..."
 
 declare -A IMAGES=(
   ["erie-canal.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/Erie_Canal.jpg?width=640"
-  ["first-locomotive.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/The_First_locomotive._Aug._8th%2C_1829._Trial_trip_of_the_%22Stourbridge_Lion%22_LCCN93517692.jpg?width=640"
-  ["lowell-mills.jpg"]="https://tile.loc.gov/storage-services/service/pnp/det/4a10000/4a10100/4a10114r.jpg"
-  ["south-street-nyc.jpg"]="https://upload.wikimedia.org/wikipedia/commons/thumb/b/ba/South_Street_from_Maiden_Lane%2C_New_York%2C_in_1828_MET_DP875875.jpg/640px-South_Street_from_Maiden_Lane%2C_New_York%2C_in_1828_MET_DP875875.jpg"
+  ["first-locomotive.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/The_First_Locomotive._Aug._8th%2C_1829._Horatio_Allen%2C_engineer_LCCN2003680013.jpg?width=640"
+  ["lowell-mills.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/Lowell_Massachusetts_Merrimack_Mills.jpg?width=640"
+  ["south-street-nyc.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/William_James_Bennett_-_View_of_South_Street%2C_from_Maiden_Lane%2C_New_York_City_-_Google_Art_Project.jpg?width=640"
+
+  # Maps
+  ["erie-canal-map.png"]="https://commons.wikimedia.org/wiki/Special:FilePath/Erie_Canal_map.png?width=800"
+  ["railroads-1860-map.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/Railroad_map_of_the_United_States_1861.jpg?width=800"
 )
 
-MIN_SIZE=5000
 for local in "${!IMAGES[@]}"; do
   url="${IMAGES[$local]}"
   dest="$IMG_DIR/$local"
-  if [ -f "$dest" ] && [ "$(stat -f%z "$dest" 2>/dev/null || stat -c%s "$dest" 2>/dev/null)" -ge "$MIN_SIZE" ]; then
-    echo "  [skip] $local"
+  if [ -f "$dest" ]; then
+    echo "  [skip] $local already exists"
   else
     echo "  [download] $local"
-    sleep 2
-    if ! curl -sL --fail --max-time 60 -A "$CURL_USER_AGENT" "$url" -o "$dest" 2>/dev/null; then
-      echo "  [retry in 5s] $local"
-      sleep 5
-      curl -sL --fail --max-time 60 -A "$CURL_USER_AGENT" "$url" -o "$dest" 2>/dev/null || true
-    fi
-    if [ -f "$dest" ]; then
-      size=$(stat -f%z "$dest" 2>/dev/null || stat -c%s "$dest" 2>/dev/null)
-      if [ "${size:-0}" -lt "$MIN_SIZE" ]; then
-        echo "  [FAILED] $local — got ${size:-0} bytes (likely error page)"
-        rm -f "$dest"
-      else
-        echo "  [ok] $local"
-      fi
+    if curl -sL --fail "$url" -o "$dest" 2>/dev/null; then
+      echo "  [ok] $local"
     else
-      echo "  [FAILED] $local — check URL"
+      echo "  [FAILED] $local — check URL: $url"
+      rm -f "$dest"
     fi
   fi
 done
