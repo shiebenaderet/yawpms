@@ -22,6 +22,44 @@ body {
   line-height: 1.8;
 }
 
+/* ---- Skip Link (Accessibility) ---- */
+
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  background: var(--teal);
+  color: white;
+  padding: 12px 20px;
+  text-decoration: none;
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  z-index: 1000;
+  border-radius: 0 0 4px 0;
+}
+.skip-link:focus {
+  top: 0;
+}
+
+/* ---- Focus Indicators (Accessibility) ---- */
+
+*:focus-visible {
+  outline: 3px solid var(--teal);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+a:focus-visible {
+  outline: 3px solid var(--teal);
+  outline-offset: 2px;
+}
+
+button:focus-visible {
+  outline: 3px solid var(--teal);
+  outline-offset: 2px;
+}
+
 /* ---- Title Page ---- */
 
 .title-page {
@@ -93,7 +131,7 @@ body {
 
 /* ---- Container ---- */
 
-.container { max-width: 720px; margin: 0 auto; padding: 48px 24px; }
+.container { max-width: 640px; margin: 0 auto; padding: 48px 24px; }
 
 /* ---- Table of Contents ---- */
 
@@ -187,9 +225,9 @@ p:last-child { margin-bottom: 0; }
 .vocab-box h3 { color: var(--teal); }
 .vocab-box p {
   font-family: 'Source Sans 3', sans-serif;
-  font-size: 15px;
+  font-size: 16px;
   margin-bottom: 10px;
-  line-height: 1.65;
+  line-height: 1.7;
   padding-left: 4px;
 }
 .vocab-box p:last-child { margin-bottom: 0; }
