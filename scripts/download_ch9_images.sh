@@ -22,7 +22,7 @@ declare -A IMAGES=(
 
   # Maps
   ["trail-of-tears-map.png"]="https://commons.wikimedia.org/wiki/Special:FilePath/Trails_of_Tears_en.png?width=800"
-  ["indian-cessions-map.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/Indiancessions.jpg?width=800"
+  ["indian-cessions-map.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/Map_from_Indian_land_cessions_in_the_United_States_by_Charles_C._Royce_11.jpg?width=800"
 )
 
 MIN_SIZE=5000

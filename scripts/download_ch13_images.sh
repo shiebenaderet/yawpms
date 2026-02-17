@@ -19,7 +19,7 @@ declare -A IMAGES=(
   ["reynolds-political-map.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/Reynolds%27s_Political_Map_of_the_United_States_1856.jpg?width=640"
 
   # Maps
-  ["compromise-1850-map.png"]="https://commons.wikimedia.org/wiki/Special:FilePath/Compromise_of_1850.png?width=800"
+  ["compromise-1850-map.png"]="https://commons.wikimedia.org/wiki/Special:FilePath/United_States_1850-1853-03.png?width=800"
 )
 
 MIN_SIZE=5000

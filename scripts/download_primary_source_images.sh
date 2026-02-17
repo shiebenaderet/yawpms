@@ -38,7 +38,7 @@ declare -A IMAGES=(
   ["ch4-join-or-die.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/Benjamin_Franklin_-_Join_or_Die.jpg?width=800"
 
   # Ch6 Source 6.4 — "The Providential Detection" (c. 1800)
-  ["ch6-providential-detection.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/The_Providential_Detection.jpg?width=800"
+  ["ch6-providential-detection.jpg"]="https://www.americanyawp.com/reader/wp-content/uploads/server.np-2-1-1000x1166.jpeg"
 
   # Ch7 Source 7.4 — Bombardment of Fort McHenry (Bower, c. 1814)
   ["ch7-fort-mchenry.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/Ft._Henry_bombardement_1814.jpg?width=800"

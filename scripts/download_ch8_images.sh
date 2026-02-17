@@ -15,8 +15,8 @@ echo "Downloading Chapter 8 images to $IMG_DIR ..."
 declare -A IMAGES=(
   ["erie-canal.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/Erie_Canal.jpg?width=640"
   ["first-locomotive.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/The_First_Locomotive._Aug._8th%2C_1829._Horatio_Allen%2C_engineer_LCCN2003680013.jpg?width=640"
-  ["lowell-mills.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/Lowell_Massachusetts_Merrimack_Mills.jpg?width=640"
-  ["south-street-nyc.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/William_James_Bennett_-_View_of_South_Street%2C_from_Maiden_Lane%2C_New_York_City_-_Google_Art_Project.jpg?width=640"
+  ["lowell-mills.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/Lowell%2C_Mass.%2C_mills_on_Merrimack_River%3B_LOC%3B_det.4a18323.jpg?width=640"
+  ["south-street-nyc.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/View_of_South_Street%2C_from_Maiden_Lane%2C_New_York_City_MET_DT5570.jpg?width=640"
 
   # Maps
   ["erie-canal-map.png"]="https://commons.wikimedia.org/wiki/Special:FilePath/Erie_Canal_map.png?width=800"
