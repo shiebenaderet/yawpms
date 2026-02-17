@@ -6,6 +6,7 @@
 set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+source "$SCRIPT_DIR/download_common.sh"
 IMG_DIR="$SCRIPT_DIR/../images/ch10"
 mkdir -p "$IMG_DIR"
 
@@ -29,7 +30,7 @@ for local in "${!IMAGES[@]}"; do
     echo "  [skip] $local already exists"
   else
     echo "  [download] $local"
-    if curl -sL --fail "$url" -o "$dest" 2>/dev/null; then
+    if curl -sL --fail --max-time 60 -A "$CURL_USER_AGENT" "$url" -o "$dest" 2>/dev/null; then
       echo "  [ok] $local"
     else
       echo "  [FAILED] $local — check URL: $url"

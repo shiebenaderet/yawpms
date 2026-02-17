@@ -21,6 +21,7 @@ declare -A IMAGES=(
   ["execution-louis-xvi.jpg"]="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d0/Execution_of_Louis_XVI.jpg/800px-Execution_of_Louis_XVI.jpg"
   ["anti-jefferson-cartoon.jpeg"]="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3b/Jefferson-LOC.jpg/500px-Jefferson-LOC.jpg"
   ["us-capitol-1800.jpg"]="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/USCapitol1800.jpg/800px-USCapitol1800.jpg"
+  ["us-territory-1789-map.png"]="https://commons.wikimedia.org/wiki/Special:FilePath/United_States_1789-08-1790.png?width=800"
 )
 
 MIN_SIZE=5000
