@@ -19,7 +19,7 @@ declare -A IMAGES=(
   ["slave-population-map.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/Slave_population_map_1860.jpg?width=640"
 
   # Maps
-  ["domestic-slave-trade-map.png"]="https://commons.wikimedia.org/wiki/Special:FilePath/Slave_trade_routes_in_the_USA.svg?width=800"
+  ["domestic-slave-trade-map.png"]="https://commons.wikimedia.org/wiki/Special:FilePath/Map_of_slavery_and_slave_trade_in_the_United_States_1830%E2%80%931850_by_Albert_Bushnell_Hart_%281906%29.jpg?width=800"
 )
 
 for local in "${!IMAGES[@]}"; do

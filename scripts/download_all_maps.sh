@@ -96,7 +96,7 @@ download 4 "triangular-trade-map.png" "${W}/Triangle_trade2.png?width=800"
 # ── Chapter 5 — American Revolution ──
 echo "Chapter 5 (American Revolution)"
 download 5 "siege-of-yorktown.gif"       "${W}/US_Army_52415_Siege_of_Yorktown_Map.gif?width=800"
-download 5 "revolution-battles-map.png"  "${W}/American_Revolutionary_War_battles_map.svg?width=600"
+download 5 "revolution-battles-map.png"  "${W}/American_Revolution_Campaigns_1775_to_1781.jpg?width=600"
 
 # ── Chapter 6 — A New Nation ──
 echo "Chapter 6 (A New Nation)"
@@ -115,7 +115,7 @@ download 8 "railroads-1860-map.jpg"     "${W}/Railroad_map_of_the_United_States_
 # ── Chapter 9 — Democracy in America ──
 echo "Chapter 9 (Democracy in America)"
 download 9 "trail-of-tears-map.png"   "${W}/Trails_of_Tears_en.png?width=800"
-download 9 "indian-cessions-map.jpg"  "${W}/Indiancessions.jpg?width=800"
+download 9 "indian-cessions-map.jpg"  "${W}/Map_from_Indian_land_cessions_in_the_United_States_by_Charles_C._Royce_11.jpg?width=800"
 
 # ── Chapter 10 — Religion & Reform ──
 echo "Chapter 10 (Religion & Reform)"
@@ -123,7 +123,7 @@ download 10 "underground-railroad-map.jpg" "${W}/Undergroundrailroadsmall2.jpg?w
 
 # ── Chapter 11 — Cotton Revolution ──
 echo "Chapter 11 (Cotton Revolution)"
-download 11 "domestic-slave-trade-map.png" "${W}/Slave_trade_routes_in_the_USA.svg?width=800"
+download 11 "domestic-slave-trade-map.png" "${W}/Map_of_slavery_and_slave_trade_in_the_United_States_1830%E2%80%931850_by_Albert_Bushnell_Hart_%281906%29.jpg?width=800"
 download 11 "slave-population-map.jpg"     "${UPLOAD}/thumb/5/5e/SlavePopulationUS1860.jpg/960px-SlavePopulationUS1860.jpg"
 
 # ── Chapter 12 — Manifest Destiny ──
@@ -134,7 +134,7 @@ download 12 "oregon-territory-map.png"    "${W}/Oregon_Territory_1848.svg?width=
 # ── Chapter 13 — Sectional Crisis ──
 echo "Chapter 13 (Sectional Crisis)"
 download 13 "reynolds-political-map.jpg"  "${W}/Reynolds%27s_Political_Map_of_the_United_States_1856.jpg?width=640"
-download 13 "compromise-1850-map.png"     "${W}/Compromise_of_1850.png?width=800"
+download 13 "compromise-1850-map.png"     "${W}/United_States_1850-1853-03.png?width=800"
 
 # ── Chapter 14 — Civil War ──
 echo "Chapter 14 (Civil War)"

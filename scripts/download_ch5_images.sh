@@ -20,7 +20,7 @@ declare -A IMAGES=(
   ["yorktown-soldiers.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/Soldats_de_l%27Arm%C3%A9e_Continentale_%C3%A0_Yorktown.jpg?width=640"
 
   # Maps
-  ["revolution-battles-map.png"]="https://commons.wikimedia.org/wiki/Special:FilePath/American_Revolutionary_War_battles_map.svg?width=600"
+  ["revolution-battles-map.png"]="https://commons.wikimedia.org/wiki/Special:FilePath/American_Revolution_Campaigns_1775_to_1781.jpg?width=600"
 )
 
 for local in "${!IMAGES[@]}"; do

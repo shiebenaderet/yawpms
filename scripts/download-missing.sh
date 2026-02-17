@@ -60,18 +60,15 @@ echo ""
 
 # Ch5: American Revolution battles map
 download "images/ch5/revolution-battles-map.png" \
-  "$UPLOAD/thumb/7/7e/American_Revolutionary_War_battles_map.svg/600px-American_Revolutionary_War_battles_map.svg.png" \
-  "$W/American_Revolutionary_War_battles_map.svg?width=600"
+  "$W/American_Revolution_Campaigns_1775_to_1781.jpg?width=600"
 
 # Ch9: Indian land cessions
 download "images/ch9/indian-cessions-map.jpg" \
-  "$UPLOAD/thumb/8/82/Indiancessions.jpg/800px-Indiancessions.jpg" \
-  "$UPLOAD/8/82/Indiancessions.jpg"
+  "$W/Map_from_Indian_land_cessions_in_the_United_States_by_Charles_C._Royce_11.jpg?width=800"
 
 # Ch11: Domestic slave trade routes
 download "images/ch11/domestic-slave-trade-map.png" \
-  "$UPLOAD/thumb/1/19/Slave_trade_routes_in_the_USA.svg/800px-Slave_trade_routes_in_the_USA.svg.png" \
-  "$W/Slave_trade_routes_in_the_USA.svg?width=800"
+  "$W/Map_of_slavery_and_slave_trade_in_the_United_States_1830%E2%80%931850_by_Albert_Bushnell_Hart_%281906%29.jpg?width=800"
 
 # Ch12: Oregon Territory 1848 (NB: uppercase T in Territory)
 download "images/ch12/oregon-territory-map.png" \
@@ -80,8 +77,7 @@ download "images/ch12/oregon-territory-map.png" \
 
 # Ch13: Compromise of 1850
 download "images/ch13/compromise-1850-map.png" \
-  "$UPLOAD/thumb/0/02/Compromise_of_1850.png/800px-Compromise_of_1850.png" \
-  "$W/Compromise_of_1850.png?width=800"
+  "$W/United_States_1850-1853-03.png?width=800"
 
 # Ch15: Reconstruction military districts (NB: lowercase m,d)
 download "images/ch15/reconstruction-districts-map.png" \
@@ -92,20 +88,17 @@ download "images/ch15/reconstruction-districts-map.png" \
 
 # Ch8: Lowell mills
 download "images/ch8/lowell-mills.jpg" \
-  "$UPLOAD/thumb/0/00/Lowell_Massachusetts_Merrimack_Mills.jpg/640px-Lowell_Massachusetts_Merrimack_Mills.jpg" \
-  "$W/Lowell_Massachusetts_Merrimack_Mills.jpg?width=640"
+  "$W/Lowell%2C_Mass.%2C_mills_on_Merrimack_River%3B_LOC%3B_det.4a18323.jpg?width=640"
 
 # Ch8: South Street NYC (Bennett painting)
 download "images/ch8/south-street-nyc.jpg" \
-  "$UPLOAD/thumb/7/77/William_James_Bennett_-_View_of_South_Street%2C_from_Maiden_Lane%2C_New_York_City_-_Google_Art_Project.jpg/640px-William_James_Bennett_-_View_of_South_Street%2C_from_Maiden_Lane%2C_New_York_City_-_Google_Art_Project.jpg" \
-  "$W/William_James_Bennett_-_View_of_South_Street%2C_from_Maiden_Lane%2C_New_York_City_-_Google_Art_Project.jpg?width=640"
+  "$W/View_of_South_Street%2C_from_Maiden_Lane%2C_New_York_City_MET_DT5570.jpg?width=640"
 
 # ── Primary Sources (1) ──
 
 # Ch6: The Providential Detection
 download "primary-sources/images/ch6-providential-detection.jpg" \
-  "$UPLOAD/thumb/f/f8/The_Providential_Detection.jpg/800px-The_Providential_Detection.jpg" \
-  "$UPLOAD/f/f8/The_Providential_Detection.jpg"
+  "https://www.americanyawp.com/reader/wp-content/uploads/server.np-2-1-1000x1166.jpeg"
 
 echo ""
 echo "============================================"
