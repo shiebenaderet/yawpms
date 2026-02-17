@@ -696,17 +696,59 @@
 
   // ==========================================
   // Read Aloud (Browser SpeechSynthesis)
+  // Click any paragraph to start from there;
+  // highlights the current paragraph as it reads.
   // ==========================================
   var ttsUtterance = null;
   var ttsPlaying = false;
   var ttsPaused = false;
+  var ttsNodes = [];       // ordered list of readable elements
+  var ttsIndex = 0;        // current position in ttsNodes
+  var ttsStartIndex = 0;   // where the user chose to start
+  var ttsClickMode = false; // true when user is picking a start paragraph
+
+  function getTTSNodes() {
+    // Collect every readable block inside sections, overview, and big-questions
+    var nodes = [];
+    var containers = document.querySelectorAll('section, .overview, .big-questions');
+    containers.forEach(function(c) {
+      c.querySelectorAll('h2, h3, p, li').forEach(function(el) {
+        // Skip elements inside reader tools / panels
+        if (el.closest('.reader-panel, .notes-panel, .glossary-panel, .pdf-modal-overlay')) return;
+        var text = el.textContent.trim();
+        if (text.length > 0) nodes.push(el);
+      });
+    });
+    return nodes;
+  }
+
+  function clearTTSHighlight() {
+    document.querySelectorAll('.tts-speaking').forEach(function(el) {
+      el.classList.remove('tts-speaking');
+    });
+  }
+
+  function clearTTSStartMark() {
+    document.querySelectorAll('.tts-start-mark').forEach(function(el) {
+      el.classList.remove('tts-start-mark');
+    });
+  }
+
+  function scrollIntoViewIfNeeded(el) {
+    var rect = el.getBoundingClientRect();
+    if (rect.top < 60 || rect.bottom > window.innerHeight - 40) {
+      el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+  }
 
   function initReadAloud() {
     var btn = document.querySelector('[data-action="read-aloud"]');
+    var pickBtn = document.querySelector('[data-action="tts-pick-start"]');
     var speedSlider = document.querySelector('.tts-speed');
     var speedLabel = document.querySelector('.tts-speed-label');
     if (!btn || !('speechSynthesis' in window)) {
       if (btn) btn.style.display = 'none';
+      if (pickBtn) pickBtn.style.display = 'none';
       return;
     }
 
@@ -721,18 +763,61 @@
       });
     }
 
+    // "Start Here" pick mode — click a paragraph to mark it as TTS start
+    if (pickBtn) {
+      pickBtn.addEventListener('click', function() {
+        if (ttsPlaying) return; // don't allow while playing
+        ttsClickMode = !ttsClickMode;
+        pickBtn.classList.toggle('active', ttsClickMode);
+        document.body.classList.toggle('tts-pick-mode', ttsClickMode);
+        if (!ttsClickMode) {
+          // exiting pick mode
+          pickBtn.setAttribute('aria-pressed', 'false');
+        } else {
+          pickBtn.setAttribute('aria-pressed', 'true');
+        }
+      });
+    }
+
+    // Click handler for picking the start paragraph
+    document.addEventListener('click', function(e) {
+      if (!ttsClickMode) return;
+      // Only respond to clicks on readable content
+      var target = e.target.closest('section p, section h2, section h3, section li, .overview p, .overview h2, .big-questions li');
+      if (!target) return;
+      if (target.closest('.reader-panel, .notes-panel, .glossary-panel')) return;
+
+      e.preventDefault();
+      e.stopPropagation();
+
+      // Refresh nodes and find the clicked one
+      ttsNodes = getTTSNodes();
+      var idx = ttsNodes.indexOf(target);
+      if (idx === -1) return;
+
+      ttsStartIndex = idx;
+      clearTTSStartMark();
+      target.classList.add('tts-start-mark');
+
+      // Exit pick mode
+      ttsClickMode = false;
+      if (pickBtn) {
+        pickBtn.classList.remove('active');
+        pickBtn.setAttribute('aria-pressed', 'false');
+      }
+      document.body.classList.remove('tts-pick-mode');
+    }, true);
+
+    // Main play/pause button
     btn.addEventListener('click', function() {
       if (ttsPlaying && !ttsPaused) {
-        // Pause
         speechSynthesis.pause();
         ttsPaused = true;
         btn.textContent = 'Resume';
-        btn.setAttribute('aria-pressed', 'true');
         return;
       }
 
       if (ttsPaused) {
-        // Resume
         speechSynthesis.resume();
         ttsPaused = false;
         btn.textContent = 'Pause';
@@ -741,57 +826,55 @@
 
       // Start reading
       speechSynthesis.cancel();
+      ttsNodes = getTTSNodes();
+      if (ttsNodes.length === 0) return;
 
-      // Get readable text: sections in order
-      var sections = document.querySelectorAll('section');
-      var text = '';
-      sections.forEach(function(sec) {
-        // Skip reader tools, nav, etc.
-        var clone = sec.cloneNode(true);
-        // Remove callout labels (h3) that are just visual labels
-        clone.querySelectorAll('.vocab-box h3, .stop-think h3, .perspectives h3, .key-idea h3, .primary-source h3, .story-box h3, .voices-left-out h3').forEach(function(el) { el.remove(); });
-        text += clone.textContent.trim() + ' ';
-      });
-
-      if (!text.trim()) return;
-
-      // Split into chunks (speechSynthesis can choke on long text)
-      var chunks = [];
-      var sentences = text.match(/[^.!?]+[.!?]+\s*/g) || [text];
-      var current = '';
-      sentences.forEach(function(s) {
-        if ((current + s).length > 300) {
-          if (current) chunks.push(current.trim());
-          current = s;
-        } else {
-          current += s;
-        }
-      });
-      if (current.trim()) chunks.push(current.trim());
-
+      ttsIndex = ttsStartIndex;
       var rate = speedSlider ? parseFloat(speedSlider.value) : savedRate;
-      var chunkIndex = 0;
 
-      function speakNext() {
-        if (chunkIndex >= chunks.length) {
-          ttsPlaying = false;
-          ttsPaused = false;
-          btn.textContent = 'Read Aloud';
-          btn.classList.remove('active');
-          btn.setAttribute('aria-pressed', 'false');
+      function speakNode() {
+        if (ttsIndex >= ttsNodes.length) {
+          stopTTS();
           return;
         }
-        ttsUtterance = new SpeechSynthesisUtterance(chunks[chunkIndex]);
-        ttsUtterance.rate = rate;
-        ttsUtterance.onend = function() {
-          chunkIndex++;
-          speakNext();
-        };
-        ttsUtterance.onerror = function() {
-          chunkIndex++;
-          speakNext();
-        };
-        speechSynthesis.speak(ttsUtterance);
+
+        var el = ttsNodes[ttsIndex];
+        var text = el.textContent.trim();
+        if (!text) { ttsIndex++; speakNode(); return; }
+
+        // Highlight the current element
+        clearTTSHighlight();
+        el.classList.add('tts-speaking');
+        scrollIntoViewIfNeeded(el);
+
+        // Split long text into <=300-char chunks so speechSynthesis doesn't choke
+        var chunks = [];
+        var sentences = text.match(/[^.!?]+[.!?]+\s*/g) || [text];
+        var current = '';
+        sentences.forEach(function(s) {
+          if ((current + s).length > 300) {
+            if (current) chunks.push(current.trim());
+            current = s;
+          } else {
+            current += s;
+          }
+        });
+        if (current.trim()) chunks.push(current.trim());
+
+        var ci = 0;
+        function speakChunk() {
+          if (ci >= chunks.length) {
+            ttsIndex++;
+            speakNode();
+            return;
+          }
+          ttsUtterance = new SpeechSynthesisUtterance(chunks[ci]);
+          ttsUtterance.rate = rate;
+          ttsUtterance.onend = function() { ci++; speakChunk(); };
+          ttsUtterance.onerror = function() { ci++; speakChunk(); };
+          speechSynthesis.speak(ttsUtterance);
+        }
+        speakChunk();
       }
 
       ttsPlaying = true;
@@ -799,20 +882,24 @@
       btn.textContent = 'Pause';
       btn.classList.add('active');
       btn.setAttribute('aria-pressed', 'true');
-      speakNext();
+      clearTTSStartMark();
+      speakNode();
     });
+
+    function stopTTS() {
+      speechSynthesis.cancel();
+      ttsPlaying = false;
+      ttsPaused = false;
+      clearTTSHighlight();
+      btn.textContent = 'Read Aloud';
+      btn.classList.remove('active');
+      btn.setAttribute('aria-pressed', 'false');
+    }
 
     // Stop button
     var stopBtn = document.querySelector('[data-action="stop-reading"]');
     if (stopBtn) {
-      stopBtn.addEventListener('click', function() {
-        speechSynthesis.cancel();
-        ttsPlaying = false;
-        ttsPaused = false;
-        btn.textContent = 'Read Aloud';
-        btn.classList.remove('active');
-        btn.setAttribute('aria-pressed', 'false');
-      });
+      stopBtn.addEventListener('click', stopTTS);
     }
   }
 

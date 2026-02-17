@@ -2,7 +2,7 @@
    American Yawp MS — Shared Chapter Stylesheet
    ============================================================ */
 
-@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:wght@400;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:wght@400;600;700&display=swap');
 
 :root {
   --navy: #1B3A5C;
@@ -784,7 +784,7 @@ body.font-sans .perspectives .perspective,
 body.font-sans figcaption,
 body.font-sans footer { font-family: 'Source Sans 3', 'Segoe UI', sans-serif; }
 
-body.dyslexia-font { font-family: 'Lexend', 'OpenDyslexic', sans-serif; word-spacing: 0.12em; letter-spacing: 0.03em; }
+body.dyslexia-font { font-family: 'OpenDyslexic', 'Comic Sans MS', sans-serif; word-spacing: 0.12em; letter-spacing: 0.03em; }
 body.dyslexia-font .series,
 body.dyslexia-font .attribution,
 body.dyslexia-font .vocab-box p,
@@ -797,7 +797,7 @@ body.dyslexia-font .activity-box p,
 body.dyslexia-font .activity-box li,
 body.dyslexia-font .perspectives .perspective,
 body.dyslexia-font figcaption,
-body.dyslexia-font footer { font-family: 'Lexend', 'OpenDyslexic', sans-serif; }
+body.dyslexia-font footer { font-family: 'OpenDyslexic', 'Comic Sans MS', sans-serif; }
 
 body.high-contrast { background: #fff; color: #000; }
 body.high-contrast .title-page { background: #000; }
@@ -1334,6 +1334,60 @@ body.dark-mode .search-empty { color: #666; }
 }
 
 body.dark-mode .tts-speed-label { color: #888; }
+
+/* ---- TTS Paragraph Highlighting ---- */
+
+.tts-speaking {
+  background: #fff3cd;
+  border-left: 4px solid var(--gold);
+  padding-left: 12px;
+  transition: background 0.3s ease;
+}
+body.dark-mode .tts-speaking {
+  background: #332b00;
+  border-left-color: #e8b94e;
+}
+body.sepia .tts-speaking {
+  background: #f0e4c0;
+}
+body.high-contrast .tts-speaking {
+  background: #ffffcc;
+  border-left-color: #000;
+}
+
+/* Start-here marker (user picked a start paragraph) */
+.tts-start-mark {
+  border-left: 4px solid var(--teal);
+  padding-left: 12px;
+  background: #e0f7fa;
+}
+body.dark-mode .tts-start-mark {
+  background: #0a2025;
+  border-left-color: #4dd0c8;
+}
+
+/* Pick-mode cursor: show pointer over readable content */
+body.tts-pick-mode section p,
+body.tts-pick-mode section h2,
+body.tts-pick-mode section h3,
+body.tts-pick-mode section li,
+body.tts-pick-mode .overview p,
+body.tts-pick-mode .overview h2,
+body.tts-pick-mode .big-questions li {
+  cursor: pointer;
+  outline: 2px dashed transparent;
+  transition: outline-color 0.15s;
+}
+body.tts-pick-mode section p:hover,
+body.tts-pick-mode section h2:hover,
+body.tts-pick-mode section h3:hover,
+body.tts-pick-mode section li:hover,
+body.tts-pick-mode .overview p:hover,
+body.tts-pick-mode .overview h2:hover,
+body.tts-pick-mode .big-questions li:hover {
+  outline-color: var(--teal);
+  background: rgba(42, 127, 142, 0.07);
+}
 
 /* ---- Reduced Motion ---- */
 
