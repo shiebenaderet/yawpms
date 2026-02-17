@@ -1,19 +1,51 @@
 #!/usr/bin/env bash
 # ============================================================
-#  audit_images.sh — Comprehensive image & map audit
+#  audit_images.sh — Comprehensive image & map audit  (v2.0)
 # ============================================================
 #  Checks every image referenced in HTML against the filesystem,
 #  cross-references download scripts for recovery URLs, finds
 #  name mismatches and orphaned files, and reports alt text gaps.
 #
-#  Usage:  bash scripts/audit_images.sh
-#  Output: Colour-coded terminal report + audit-results.json
+#  New in v2.0:
+#    - Version tracking in JSON output
+#    - --download flag: generate a ready-to-run download script
+#    - --fix-names flag: auto-rename disk files that mismatch
+#    - --clean flag: remove orphaned files
+#    - Wikimedia Commons API fallback for images without URLs
+#    - download-commands.sh generation for missing images
+#
+#  Usage:
+#    bash scripts/audit_images.sh              # audit only
+#    bash scripts/audit_images.sh --download   # audit + emit download script
+#    bash scripts/audit_images.sh --fix-names  # audit + rename mismatches
+#    bash scripts/audit_images.sh --clean      # audit + remove orphans
+#    bash scripts/audit_images.sh --all        # all of the above
 # ============================================================
+
+AUDIT_VERSION="2.0"
 
 set -eo pipefail
 
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 REPORT="$ROOT/audit-results.json"
+DOWNLOAD_SCRIPT="$ROOT/scripts/download-missing.sh"
+
+# ── Parse flags ──────────────────────────────────────────────
+DO_DOWNLOAD=false
+DO_FIXNAMES=false
+DO_CLEAN=false
+for arg in "$@"; do
+  case "$arg" in
+    --download)   DO_DOWNLOAD=true  ;;
+    --fix-names)  DO_FIXNAMES=true  ;;
+    --clean)      DO_CLEAN=true     ;;
+    --all)        DO_DOWNLOAD=true; DO_FIXNAMES=true; DO_CLEAN=true ;;
+    --help|-h)
+      echo "Usage: bash scripts/audit_images.sh [--download] [--fix-names] [--clean] [--all]"
+      exit 0
+      ;;
+  esac
+done
 
 # Colours (no-op if piped)
 if [ -t 1 ]; then
@@ -38,6 +70,7 @@ MISMATCH_FILE="$TMP_DIR/mismatch.txt"
 echo ""
 echo -e "${BLD}============================================${RST}"
 echo -e "${BLD}  Image & Map Audit — American Yawp MS${RST}"
+echo -e "${BLD}  Version $AUDIT_VERSION${RST}"
 echo -e "${BLD}============================================${RST}"
 echo ""
 
@@ -52,7 +85,6 @@ echo -e "${CYN}Phase 1: Scanning HTML files for image references...${RST}"
 for f in "$ROOT"/*.html; do
   [ -f "$f" ] || continue
   fname=$(basename "$f")
-  # Extract src="..." values that look like image paths
   { grep -on 'src="[^"]*"' "$f" || true; } | while IFS=: read -r linenum match; do
     imgpath=$(echo "$match" | sed 's/^src="//;s/"$//')
     case "$imgpath" in
@@ -71,7 +103,6 @@ for f in "$ROOT"/primary-sources/*.html; do
     imgpath=$(echo "$match" | sed 's/^src="//;s/"$//')
     case "$imgpath" in
       *.jpg|*.jpeg|*.png|*.gif|*.svg|*.webp)
-        # Primary source src paths are relative to primary-sources/
         echo "$fname:$linenum:primary-sources/$imgpath" >> "$HTML_REFS"
         ;;
     esac
@@ -143,13 +174,21 @@ echo -e "${CYN}Phase 3: Extracting download URLs from scripts...${RST}"
 for script in "$ROOT"/scripts/download_ch*_images.sh "$ROOT"/scripts/download_primary_source_images.sh "$ROOT"/scripts/download_all_maps.sh; do
   [ -f "$script" ] || continue
   sname=$(basename "$script")
-  # Extract ["filename"]="url" pairs
   { grep -o '\["[^"]*"\]="[^"]*"' "$script" 2>/dev/null || true; } | while read -r pair; do
     filename=$(echo "$pair" | sed 's/\[\"//;s/\"\]=\".*$//')
     url=$(echo "$pair" | sed 's/.*\]=\"//;s/\"$//')
     echo -e "$filename\t$url\t$sname" >> "$SCRIPT_URLS"
   done
 done
+
+# Also extract "download N filename url" patterns from download_all_maps.sh
+if [ -f "$ROOT/scripts/download_all_maps.sh" ]; then
+  { grep '^download ' "$ROOT/scripts/download_all_maps.sh" 2>/dev/null || true; } | while read -r _ chnum fname url; do
+    fname=$(echo "$fname" | tr -d '"')
+    url=$(echo "$url" | tr -d '"')
+    [ -n "$fname" ] && [ -n "$url" ] && echo -e "$fname\t$url\tdownload_all_maps.sh" >> "$SCRIPT_URLS"
+  done
+fi
 
 script_count=$(wc -l < "$SCRIPT_URLS")
 echo -e "  $script_count declared downloads across all scripts"
@@ -177,7 +216,7 @@ while IFS='' read -r img_path; do
     basename_img=$(basename "$img_path")
     dir_img=$(dirname "$img_path")
 
-    # Method 1: Download URL from scripts
+    # Method 1: Download URL from scripts (exact filename match)
     script_url=$(grep "^${basename_img}	" "$SCRIPT_URLS" | head -1 | cut -f2 || true)
     script_name=$(grep "^${basename_img}	" "$SCRIPT_URLS" | head -1 | cut -f3 || true)
 
@@ -225,6 +264,22 @@ while IFS='' read -r img_path; do
       maps_url=$(grep -i "$stem" "$SCRIPT_URLS" | head -1 | cut -f2 || true)
     fi
 
+    # Method 5: Try Wikimedia Commons API (filename heuristic)
+    wiki_url=""
+    if [ -z "$script_url" ] && [ -z "$maps_url" ]; then
+      # Build a search-friendly name from the filename
+      wiki_search=$(echo "$stem" | sed 's/-/ /g;s/_/ /g;s/map$//;s/  / /g' | sed 's/^ *//;s/ *$//')
+      # Only attempt if curl is available and we have a reasonable search term
+      if command -v curl >/dev/null 2>&1 && [ ${#wiki_search} -gt 3 ]; then
+        wiki_result=$(curl -s --max-time 5 \
+          "https://commons.wikimedia.org/w/api.php?action=query&list=search&srsearch=${wiki_search// /+}&srnamespace=6&srlimit=1&format=json" 2>/dev/null || true)
+        wiki_title=$(echo "$wiki_result" | grep -o '"title":"File:[^"]*"' | head -1 | sed 's/"title":"File://;s/"//' || true)
+        if [ -n "$wiki_title" ]; then
+          wiki_url="https://commons.wikimedia.org/wiki/Special:FilePath/${wiki_title// /_}?width=800"
+        fi
+      fi
+    fi
+
     # Classify type
     img_type="photo"
     if [[ "$img_path" == *map* ]] || [[ "$img_path" == *-map.* ]]; then
@@ -233,8 +288,8 @@ while IFS='' read -r img_path; do
       img_type="primary-source"
     fi
 
-    # Record
-    echo "${img_type}|${img_path}|${sources}|${script_url:-}|${diff_ext:-}|${similar:-}|${maps_url:-}|${script_name:-}" >> "$MISSING_FILE"
+    # Record: type|path|sources|script_url|diff_ext|similar|maps_url|script_name|wiki_url
+    echo "${img_type}|${img_path}|${sources}|${script_url:-}|${diff_ext:-}|${similar:-}|${maps_url:-}|${script_name:-}|${wiki_url:-}" >> "$MISSING_FILE"
 
     # Check for name mismatch
     if [ -n "$diff_ext" ] || [ -n "$similar" ]; then
@@ -272,7 +327,6 @@ ALT_TOTAL=0
 ALT_PRESENT=0
 ALT_EMPTY=0
 
-# Count across all HTML files
 for f in "$ROOT"/*.html "$ROOT"/primary-sources/*.html; do
   [ -f "$f" ] || continue
   count=$(grep -c '<img ' "$f" 2>/dev/null || true)
@@ -329,13 +383,15 @@ if [ -s "$MISSING_FILE" ]; then
   if [ "$map_count" -gt 0 ]; then
     echo -e "  ${BLD}── Missing Maps ($map_count) ──${RST}"
     echo ""
-    grep '^map|' "$MISSING_FILE" | sort -t'|' -k2 | while IFS='|' read -r type path sources url diffext similar mapsurl scriptname; do
+    grep '^map|' "$MISSING_FILE" | sort -t'|' -k2 | while IFS='|' read -r type path sources url diffext similar mapsurl scriptname wikiurl; do
       echo -e "    ${RED}✗${RST} $path"
       echo -e "      Referenced by: $sources"
       if [ -n "$url" ]; then
         echo -e "      ${GRN}✓ Download URL (${scriptname}):${RST} $url"
       elif [ -n "$mapsurl" ]; then
         echo -e "      ${GRN}✓ Partial URL match:${RST} $mapsurl"
+      elif [ -n "$wikiurl" ]; then
+        echo -e "      ${CYN}? Wikimedia API suggestion:${RST} $wikiurl"
       else
         echo -e "      ${RED}✗ No download URL found${RST}"
       fi
@@ -353,11 +409,13 @@ if [ -s "$MISSING_FILE" ]; then
   if [ "$photo_count" -gt 0 ]; then
     echo -e "  ${BLD}── Missing Photos ($photo_count) ──${RST}"
     echo ""
-    grep '^photo|' "$MISSING_FILE" | sort -t'|' -k2 | while IFS='|' read -r type path sources url diffext similar mapsurl scriptname; do
+    grep '^photo|' "$MISSING_FILE" | sort -t'|' -k2 | while IFS='|' read -r type path sources url diffext similar mapsurl scriptname wikiurl; do
       echo -e "    ${RED}✗${RST} $path"
       echo -e "      Referenced by: $sources"
       if [ -n "$url" ]; then
         echo -e "      ${GRN}✓ Download URL (${scriptname}):${RST} $url"
+      elif [ -n "$wikiurl" ]; then
+        echo -e "      ${CYN}? Wikimedia API suggestion:${RST} $wikiurl"
       else
         echo -e "      ${RED}✗ No download URL found${RST}"
       fi
@@ -372,11 +430,13 @@ if [ -s "$MISSING_FILE" ]; then
   if [ "$ps_count" -gt 0 ]; then
     echo -e "  ${BLD}── Missing Primary Source Images ($ps_count) ──${RST}"
     echo ""
-    grep '^primary-source|' "$MISSING_FILE" | sort -t'|' -k2 | while IFS='|' read -r type path sources url diffext similar mapsurl scriptname; do
+    grep '^primary-source|' "$MISSING_FILE" | sort -t'|' -k2 | while IFS='|' read -r type path sources url diffext similar mapsurl scriptname wikiurl; do
       echo -e "    ${RED}✗${RST} $path"
       echo -e "      Referenced by: $sources"
       if [ -n "$url" ]; then
         echo -e "      ${GRN}✓ Download URL (${scriptname}):${RST} $url"
+      elif [ -n "$wikiurl" ]; then
+        echo -e "      ${CYN}? Wikimedia API suggestion:${RST} $wikiurl"
       else
         echo -e "      ${RED}✗ No download URL found${RST}"
       fi
@@ -415,13 +475,14 @@ echo -e "${CYN}Writing JSON report to audit-results.json...${RST}"
 
 {
 echo '{'
+echo "  \"audit_version\": \"$AUDIT_VERSION\","
 echo '  "audit_date": "'$(date +%Y-%m-%d)'",'
 echo '  "summary": {'
-echo "    \"total_references\": $total_unique,"
+echo "    \"total_references\":      $total_unique,"
 echo "    \"found_on_disk\": $FOUND,"
 echo "    \"missing\": $MISSING,"
 echo "    \"orphaned\": $ORPHANS,"
-echo "    \"name_mismatches\": $MISMATCH_COUNT,"
+echo "    \"name_mismatches\":        $MISMATCH_COUNT,"
 echo '    "alt_text": {'
 echo "      \"total_img_tags\": $ALT_TOTAL,"
 echo "      \"with_alt\": $ALT_PRESENT,"
@@ -434,13 +495,21 @@ echo '  },'
 echo '  "missing_images": ['
 if [ -s "$MISSING_FILE" ]; then
   first=1
-  while IFS='|' read -r type path sources url diffext similar mapsurl scriptname; do
+  while IFS='|' read -r type path sources url diffext similar mapsurl scriptname wikiurl; do
     [ "$first" -eq 1 ] && first=0 || echo ','
-    effective_url="${url:-${mapsurl:-null}}"
+    effective_url="${url:-${mapsurl:-${wikiurl:-null}}}"
     [ "$effective_url" = "null" ] || effective_url="\"$effective_url\""
+    url_source="null"
+    if [ -n "$url" ]; then
+      url_source="\"script:${scriptname}\""
+    elif [ -n "$mapsurl" ]; then
+      url_source="\"partial-match\""
+    elif [ -n "$wikiurl" ]; then
+      url_source="\"wikimedia-api\""
+    fi
     similar_val="${similar:-${diffext:-null}}"
     [ "$similar_val" = "null" ] || similar_val="\"$similar_val\""
-    echo -n "    { \"type\": \"$type\", \"path\": \"$path\", \"referenced_by\": \"$(echo "$sources" | sed 's/"/\\"/g')\", \"download_url\": $effective_url, \"similar_on_disk\": $similar_val }"
+    echo -n "    { \"type\": \"$type\", \"path\": \"$path\", \"referenced_by\": \"$(echo "$sources" | sed 's/"/\\"/g')\", \"download_url\": $effective_url, \"url_source\": $url_source, \"similar_on_disk\": $similar_val }"
   done < "$MISSING_FILE"
   echo ''
 fi
@@ -474,6 +543,107 @@ echo '}'
 } > "$REPORT"
 
 # ═══════════════════════════════════════════════════════════════
+#  PHASE 9 — Generate download script for missing images
+# ═══════════════════════════════════════════════════════════════
+if [ "$DO_DOWNLOAD" = true ] && [ -s "$MISSING_FILE" ]; then
+  echo ""
+  echo -e "${CYN}Generating download script: scripts/download-missing.sh${RST}"
+
+  {
+    echo '#!/usr/bin/env bash'
+    echo '# Auto-generated by audit_images.sh v'"$AUDIT_VERSION"' on '"$(date +%Y-%m-%d)"
+    echo '# Downloads all missing images identified by the audit.'
+    echo '#'
+    echo '# Usage:  bash scripts/download-missing.sh'
+    echo ''
+    echo 'set -eo pipefail'
+    echo 'ROOT="$(cd "$(dirname "$0")/.." && pwd)"'
+    echo 'UA="YawpMS-ImageBot/1.0 (educational textbook project)"'
+    echo ''
+    echo 'download() {'
+    echo '  local dest="$1" url="$2"'
+    echo '  local dir; dir=$(dirname "$dest")'
+    echo '  mkdir -p "$ROOT/$dir"'
+    echo '  echo -n "  Downloading $dest ... "'
+    echo '  for attempt in 1 2 3; do'
+    echo '    if curl -sL --fail --max-time 60 -A "$UA" "$url" -o "$ROOT/$dest" 2>/dev/null; then'
+    echo '      local size; size=$(stat -c%s "$ROOT/$dest" 2>/dev/null || echo 0)'
+    echo '      if [ "$size" -gt 1000 ]; then'
+    echo '        echo "OK ($(( size / 1024 ))KB)"'
+    echo '        return 0'
+    echo '      fi'
+    echo '    fi'
+    echo '    sleep $((attempt * 2))'
+    echo '  done'
+    echo '  echo "FAILED"'
+    echo '  return 1'
+    echo '}'
+    echo ''
+    echo "echo \"Downloading missing images...\""
+    echo "echo \"\""
+
+    download_count=0
+    while IFS='|' read -r type path sources url diffext similar mapsurl scriptname wikiurl; do
+      effective_url="${url:-${mapsurl:-${wikiurl:-}}}"
+      if [ -n "$effective_url" ]; then
+        echo "download \"$path\" \"$effective_url\""
+        download_count=$((download_count + 1))
+      else
+        echo "# NO URL: $path (referenced by $sources)"
+      fi
+    done < "$MISSING_FILE"
+
+    echo ''
+    echo "echo \"\""
+    echo "echo \"Done. $download_count images attempted.\""
+  } > "$DOWNLOAD_SCRIPT"
+
+  chmod +x "$DOWNLOAD_SCRIPT"
+  echo -e "  Generated with $download_count download commands"
+  echo -e "  Run: ${BLD}bash scripts/download-missing.sh${RST}"
+fi
+
+# ═══════════════════════════════════════════════════════════════
+#  PHASE 10 — Auto-fix name mismatches
+# ═══════════════════════════════════════════════════════════════
+if [ "$DO_FIXNAMES" = true ] && [ -s "$MISMATCH_FILE" ]; then
+  echo ""
+  echo -e "${CYN}Fixing name mismatches...${RST}"
+  fixed=0
+  while IFS='|' read -r missing candidate; do
+    src="$ROOT/$candidate"
+    dest="$ROOT/$missing"
+    if [ -f "$src" ]; then
+      mkdir -p "$(dirname "$dest")"
+      cp "$src" "$dest"
+      echo -e "  ${GRN}✓${RST} Copied $candidate → $missing"
+      fixed=$((fixed + 1))
+    else
+      echo -e "  ${RED}✗${RST} Source not found: $candidate"
+    fi
+  done < "$MISMATCH_FILE"
+  echo -e "  Fixed $fixed of $MISMATCH_COUNT mismatches"
+fi
+
+# ═══════════════════════════════════════════════════════════════
+#  PHASE 11 — Clean up orphaned files
+# ═══════════════════════════════════════════════════════════════
+if [ "$DO_CLEAN" = true ] && [ -s "$ORPHAN_FILE" ]; then
+  echo ""
+  echo -e "${CYN}Removing orphaned files...${RST}"
+  removed=0
+  while IFS='|' read -r path size; do
+    full="$ROOT/$path"
+    if [ -f "$full" ]; then
+      rm "$full"
+      echo -e "  ${GRN}✓${RST} Removed $path ($size)"
+      removed=$((removed + 1))
+    fi
+  done < "$ORPHAN_FILE"
+  echo -e "  Removed $removed of $ORPHANS orphaned files"
+fi
+
+# ═══════════════════════════════════════════════════════════════
 #  RECOMMENDATIONS
 # ═══════════════════════════════════════════════════════════════
 echo ""
@@ -485,27 +655,35 @@ echo ""
 rec=1
 
 if [ "$MISSING" -gt 0 ]; then
-  # Count those with URLs vs without
-  with_url=$(awk -F'|' '$4 != "" || $7 != ""' "$MISSING_FILE" | wc -l)
+  with_url=$(awk -F'|' '$4 != "" || $7 != "" || $9 != ""' "$MISSING_FILE" | wc -l)
   without_url=$((MISSING - with_url))
 
   echo -e "  ${GRN}${rec}.${RST} Run download scripts to fetch $with_url images that have URLs:"
   echo -e "     ${CYN}bash scripts/download_all_images.sh${RST}"
   echo -e "     ${CYN}bash scripts/download_all_maps.sh${RST}"
   echo -e "     ${CYN}bash scripts/download_primary_source_images.sh${RST}"
+  if [ "$DO_DOWNLOAD" = true ]; then
+    echo -e "     ${CYN}bash scripts/download-missing.sh${RST}  (auto-generated)"
+  else
+    echo -e "     or run: ${CYN}bash scripts/audit_images.sh --download${RST} to generate a single download script"
+  fi
   echo ""
   rec=$((rec + 1))
 fi
 
 if [ "$MISMATCH_COUNT" -gt 0 ]; then
-  echo -e "  ${GRN}${rec}.${RST} Fix $MISMATCH_COUNT name mismatches: rename the file on disk"
-  echo -e "     to match the HTML src, OR update the HTML to match the file."
+  if [ "$DO_FIXNAMES" = true ]; then
+    echo -e "  ${GRN}${rec}.${RST} Name mismatches were auto-fixed above."
+  else
+    echo -e "  ${GRN}${rec}.${RST} Fix $MISMATCH_COUNT name mismatches:"
+    echo -e "     ${CYN}bash scripts/audit_images.sh --fix-names${RST}"
+  fi
   echo ""
   rec=$((rec + 1))
 fi
 
 if [ "$MISSING" -gt 0 ]; then
-  without_url=$(awk -F'|' '$4 == "" && $7 == ""' "$MISSING_FILE" | wc -l)
+  without_url=$(awk -F'|' '$4 == "" && $7 == "" && $9 == ""' "$MISSING_FILE" | wc -l)
   if [ "$without_url" -gt 0 ]; then
     echo -e "  ${GRN}${rec}.${RST} $without_url images have NO download URL. Find sources and"
     echo -e "     add to the download scripts, or source them manually."
@@ -515,8 +693,12 @@ if [ "$MISSING" -gt 0 ]; then
 fi
 
 if [ "$ORPHANS" -gt 0 ]; then
-  echo -e "  ${GRN}${rec}.${RST} Review $ORPHANS orphaned files — old versions or unused assets."
-  echo -e "     Consider removing to reduce repo size."
+  if [ "$DO_CLEAN" = true ]; then
+    echo -e "  ${GRN}${rec}.${RST} Orphaned files were cleaned up above."
+  else
+    echo -e "  ${GRN}${rec}.${RST} Review $ORPHANS orphaned files — old versions or unused assets."
+    echo -e "     ${CYN}bash scripts/audit_images.sh --clean${RST}  to remove them"
+  fi
   echo ""
 fi
 

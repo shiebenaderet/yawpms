@@ -1,11 +1,12 @@
 {
-  "audit_date": "2026-02-16",
+  "audit_version": "2.0",
+  "audit_date": "2026-02-17",
   "summary": {
-    "total_references":      125,
-    "found_on_disk": 112,
-    "missing": 13,
-    "orphaned": 12,
-    "name_mismatches":        4,
+    "total_references":      123,
+    "found_on_disk": 114,
+    "missing": 9,
+    "orphaned": 10,
+    "name_mismatches":        0,
     "alt_text": {
       "total_img_tags": 126,
       "with_alt": 126,
@@ -14,38 +15,28 @@
     }
   },
   "missing_images": [
-    { "type": "map", "path": "images/ch11/domestic-slave-trade-map.png", "referenced_by": "ch11.html:142", "download_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Slave_trade_routes_in_the_USA.svg?width=800", "similar_on_disk": null },
-    { "type": "map", "path": "images/ch12/oregon-territory-map.png", "referenced_by": "ch12.html:120", "download_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Oregon_territory_1848.svg?width=600", "similar_on_disk": null },
-    { "type": "map", "path": "images/ch13/compromise-1850-map.png", "referenced_by": "ch13.html:94", "download_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Compromise_of_1850.png?width=800", "similar_on_disk": null },
-    { "type": "map", "path": "images/ch15/reconstruction-districts-map.png", "referenced_by": "ch15.html:149", "download_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Reconstruction_Military_Districts.svg?width=600", "similar_on_disk": null },
-    { "type": "map", "path": "images/ch3/thirteen-colonies-map.png", "referenced_by": "ch3.html:68", "download_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Thirteen_Colonies_1775.svg?width=600", "similar_on_disk": "thirteen-colonies-1775.png" },
-    { "type": "map", "path": "images/ch5/revolution-battles-map.png", "referenced_by": "ch5.html:229", "download_url": "https://commons.wikimedia.org/wiki/Special:FilePath/American_Revolutionary_War_battles_map.svg?width=600", "similar_on_disk": null },
-    { "type": "map", "path": "images/ch6/us-territory-1789-map.png", "referenced_by": "ch6.html:230", "download_url": null, "similar_on_disk": "us-territory-1789.png" },
-    { "type": "map", "path": "images/ch8/erie-canal-map.png", "referenced_by": "ch8.html:90", "download_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Erie_Canal_map.png?width=800", "similar_on_disk": "erie-canal.jpg" },
-    { "type": "photo", "path": "images/ch8/lowell-mills.jpg", "referenced_by": "ch8.html:138", "download_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Lowell_Massachusetts_Merrimack_Mills.jpg?width=640", "similar_on_disk": null },
-    { "type": "map", "path": "images/ch8/railroads-1860-map.jpg", "referenced_by": "ch8.html:111", "download_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Railroad_map_of_the_United_States_1861.jpg?width=800", "similar_on_disk": "canals-railroads-1840.jpg" },
-    { "type": "photo", "path": "images/ch8/south-street-nyc.jpg", "referenced_by": "ch8.html:205", "download_url": "https://commons.wikimedia.org/wiki/Special:FilePath/William_James_Bennett_-_View_of_South_Street%2C_from_Maiden_Lane%2C_New_York_City_-_Google_Art_Project.jpg?width=640", "similar_on_disk": null },
-    { "type": "map", "path": "images/ch9/indian-cessions-map.jpg", "referenced_by": "ch9.html:213", "download_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Indiancessions.jpg?width=800", "similar_on_disk": null },
-    { "type": "primary-source", "path": "primary-sources/images/ch6-providential-detection.jpg", "referenced_by": "primary-sources/ch6-sources.html:234", "download_url": "https://commons.wikimedia.org/wiki/Special:FilePath/The_Providential_Detection.jpg?width=800", "similar_on_disk": null }
+    { "type": "map", "path": "images/ch11/domestic-slave-trade-map.png", "referenced_by": "ch11.html:142", "download_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Slave_trade_routes_in_the_USA.svg?width=800", "url_source": "script:download_ch11_images.sh", "similar_on_disk": null },
+    { "type": "map", "path": "images/ch12/oregon-territory-map.png", "referenced_by": "ch12.html:120", "download_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Oregon_territory_1848.svg?width=600", "url_source": "script:download_ch12_images.sh", "similar_on_disk": null },
+    { "type": "map", "path": "images/ch13/compromise-1850-map.png", "referenced_by": "ch13.html:94", "download_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Compromise_of_1850.png?width=800", "url_source": "script:download_ch13_images.sh", "similar_on_disk": null },
+    { "type": "map", "path": "images/ch15/reconstruction-districts-map.png", "referenced_by": "ch15.html:149", "download_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Reconstruction_Military_Districts.svg?width=600", "url_source": "script:download_ch15_images.sh", "similar_on_disk": null },
+    { "type": "map", "path": "images/ch5/revolution-battles-map.png", "referenced_by": "ch5.html:229", "download_url": "https://commons.wikimedia.org/wiki/Special:FilePath/American_Revolutionary_War_battles_map.svg?width=600", "url_source": "script:download_ch5_images.sh", "similar_on_disk": null },
+    { "type": "photo", "path": "images/ch8/lowell-mills.jpg", "referenced_by": "ch8.html:138", "download_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Lowell_Massachusetts_Merrimack_Mills.jpg?width=640", "url_source": "script:download_ch8_images.sh", "similar_on_disk": null },
+    { "type": "photo", "path": "images/ch8/south-street-nyc.jpg", "referenced_by": "ch8.html:205", "download_url": "https://commons.wikimedia.org/wiki/Special:FilePath/William_James_Bennett_-_View_of_South_Street%2C_from_Maiden_Lane%2C_New_York_City_-_Google_Art_Project.jpg?width=640", "url_source": "script:download_ch8_images.sh", "similar_on_disk": null },
+    { "type": "map", "path": "images/ch9/indian-cessions-map.jpg", "referenced_by": "ch9.html:213", "download_url": "https://commons.wikimedia.org/wiki/Special:FilePath/Indiancessions.jpg?width=800", "url_source": "script:download_ch9_images.sh", "similar_on_disk": null },
+    { "type": "primary-source", "path": "primary-sources/images/ch6-providential-detection.jpg", "referenced_by": "primary-sources/ch6-sources.html:234", "download_url": "https://commons.wikimedia.org/wiki/Special:FilePath/The_Providential_Detection.jpg?width=800", "url_source": "script:download_primary_source_images.sh", "similar_on_disk": null }
   ],
   "orphaned_files": [
     "images/ch1/beringia-land-bridge.png",
     "images/ch1/crooked-beak-mask.jpg",
     "images/ch1/native-cultural-regions.jpg",
     "images/ch13/bleeding-kansas.jpg",
-    "images/ch14/anaconda-plan.jpg",
     "images/ch14/civil-war-1861.jpg",
     "images/ch15/reconstruction-military-districts.png",
     "images/ch3/burning-of-jamestown.jpg",
-    "images/ch3/thirteen-colonies-1775.png",
     "images/ch3/virginia-fishing.jpg",
     "images/ch4/slave-trade-routes.jpg",
     "images/ch8/canals-railroads-1840.jpg"
   ],
   "name_mismatches": [
-    { "html_wants": "images/ch3/thirteen-colonies-map.png", "disk_has": "images/ch3/thirteen-colonies-1775.png" },
-    { "html_wants": "images/ch6/us-territory-1789-map.png", "disk_has": "images/ch6/us-territory-1789.png" },
-    { "html_wants": "images/ch8/erie-canal-map.png", "disk_has": "images/ch8/erie-canal.jpg" },
-    { "html_wants": "images/ch8/railroads-1860-map.jpg", "disk_has": "images/ch8/canals-railroads-1840.jpg" }
   ]
 }
