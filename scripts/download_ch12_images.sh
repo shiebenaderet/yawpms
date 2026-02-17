@@ -20,7 +20,7 @@ declare -A IMAGES=(
   ["mexican-cession-map.jpg"]="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4f/Mexican_Cession.png/640px-Mexican_Cession.png"
 
   # Maps
-  ["oregon-territory-map.png"]="https://commons.wikimedia.org/wiki/Special:FilePath/Oregon_territory_1848.svg?width=600"
+  ["oregon-territory-map.png"]="https://commons.wikimedia.org/wiki/Special:FilePath/Oregon_Territory_1848.svg?width=600"
 )
 
 for local in "${!IMAGES[@]}"; do
