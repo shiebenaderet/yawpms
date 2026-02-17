@@ -1,11 +1,11 @@
 {
   "audit_date": "2026-02-16",
   "summary": {
-    "total_references": 125,
+    "total_references":      125,
     "found_on_disk": 95,
     "missing": 30,
     "orphaned": 12,
-    "name_mismatches": 9,
+    "name_mismatches":        9,
     "alt_text": {
       "total_img_tags": 126,
       "with_alt": 126,
