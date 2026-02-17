@@ -1,0 +1,101 @@
+name: Content Revision
+description: Propose a change to chapter text, narrative, or educational content
+title: "[Revision] Chapter [NUMBER]: "
+labels: ["content-revision"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Proposing a chapter revision? Great — your expertise makes this textbook better.
+
+        **Important:** Changes to chapter text can affect companion resources (vocabulary cards, quizzes, slideshows, etc.). The checklist below helps us track what else needs updating.
+
+  - type: dropdown
+    id: chapter
+    attributes:
+      label: Chapter
+      description: Which chapter does this affect?
+      options:
+        - "1 — Indigenous America"
+        - "2 — Colliding Cultures"
+        - "3 — British North America"
+        - "4 — Colonial Society"
+        - "5 — The American Revolution"
+        - "6 — A New Nation"
+        - "7 — The Early Republic"
+        - "8 — The Market Revolution"
+        - "9 — Democracy in America"
+        - "10 — Religion and Reform"
+        - "11 — The Cotton Revolution"
+        - "12 — Manifest Destiny"
+        - "13 — The Sectional Crisis"
+        - "14 — The Civil War"
+        - "15 — Reconstruction"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: revision-type
+    attributes:
+      label: Type of revision
+      options:
+        - "Factual correction"
+        - "Rewrite for clarity or age-appropriateness"
+        - "Add missing perspective or voice"
+        - "New or revised 'Story Behind the Story' box"
+        - "New or revised primary source"
+        - "New or revised 'Stop and Think' question"
+        - "Structural reorganization"
+        - "Other"
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: What should change and why?
+      description: Describe the revision. Include the specific section or paragraph if possible.
+      placeholder: |
+        Section III currently says "..." but this oversimplifies the role of...
+
+        Suggested revision: "..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: sources
+    attributes:
+      label: Sources or references
+      description: If this is a factual correction or new content, cite your sources.
+      placeholder: |
+        - Foner, Eric. *Give Me Liberty!* (6th ed.), pp. 234-236
+        - Primary source: Letter from Abigail Adams, March 31, 1776
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: downstream-impact
+    attributes:
+      label: Downstream impact checklist
+      description: Check any companion resources that may need updating as a result of this revision. If unsure, leave unchecked — a reviewer will assess.
+      options:
+        - label: "Vocabulary cards — key terms added, removed, or redefined"
+        - label: "Quizzes — questions that reference changed content"
+        - label: "Slideshows — slides covering the revised section"
+        - label: "Primary sources — source selections or context affected"
+        - label: "Pacing guide — timing or scope of the section changed"
+        - label: "Standards alignment — coverage of a standard affected"
+        - label: "Timeline — dates or events added or removed"
+        - label: "Graphic organizers — structure or categories changed"
+        - label: "Cornell notes — key topics or questions affected"
+        - label: "Search index — needs rebuilding (run build_search_index.sh)"
+
+  - type: textarea
+    id: downstream-notes
+    attributes:
+      label: Notes on downstream updates
+      description: Any details about what specifically needs updating in companion resources.
+      placeholder: |
+        The vocabulary card for "salutary neglect" should be updated to match the new definition in the revised paragraph.
+    validations:
+      required: false

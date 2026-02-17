@@ -1,0 +1,81 @@
+name: Image Update
+description: Propose adding, replacing, or fixing an image or map
+title: "[Image] Chapter [NUMBER]: "
+labels: ["images"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this template to report broken images, suggest new images, or propose replacements.
+
+        All images must be public domain (Wikimedia Commons) or CC BY-SA 4.0 compatible.
+
+  - type: dropdown
+    id: chapter
+    attributes:
+      label: Chapter
+      description: Which chapter does this affect?
+      options:
+        - "N/A — site-wide or general"
+        - "1 — Indigenous America"
+        - "2 — Colliding Cultures"
+        - "3 — British North America"
+        - "4 — Colonial Society"
+        - "5 — The American Revolution"
+        - "6 — A New Nation"
+        - "7 — The Early Republic"
+        - "8 — The Market Revolution"
+        - "9 — Democracy in America"
+        - "10 — Religion and Reform"
+        - "11 — The Cotton Revolution"
+        - "12 — Manifest Destiny"
+        - "13 — The Sectional Crisis"
+        - "14 — The Civil War"
+        - "15 — Reconstruction"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: update-type
+    attributes:
+      label: Type of update
+      options:
+        - "Broken or missing image"
+        - "Replace with better image"
+        - "Add new image"
+        - "Add or replace map"
+        - "Fix alt text or caption"
+        - "Image license concern"
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+      description: Describe the issue or proposed change. Include the image filename or section if possible.
+      placeholder: |
+        The image "images/ch5/boston-massacre.jpg" fails to load.
+
+        OR
+
+        Section II could use a map showing troop movements at Yorktown.
+    validations:
+      required: true
+
+  - type: textarea
+    id: source-url
+    attributes:
+      label: Source URL
+      description: If proposing a new image, provide the Wikimedia Commons or public domain source URL.
+      placeholder: "https://commons.wikimedia.org/wiki/File:Example.jpg"
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: license-check
+    attributes:
+      label: License verification
+      description: Confirm the image meets licensing requirements.
+      options:
+        - label: "This image is public domain or licensed under CC BY-SA 4.0 (or compatible)"
