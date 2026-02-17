@@ -129,7 +129,7 @@ download 11 "slave-population-map.jpg"     "${UPLOAD}/thumb/5/5e/SlavePopulation
 # ── Chapter 12 — Manifest Destiny ──
 echo "Chapter 12 (Manifest Destiny)"
 download 12 "mexican-cession-map.jpg"     "${UPLOAD}/thumb/4/4f/Mexican_Cession.png/640px-Mexican_Cession.png"
-download 12 "oregon-territory-map.png"    "${W}/Oregon_territory_1848.svg?width=600"
+download 12 "oregon-territory-map.png"    "${W}/Oregon_Territory_1848.svg?width=600"
 
 # ── Chapter 13 — Sectional Crisis ──
 echo "Chapter 13 (Sectional Crisis)"
@@ -143,7 +143,7 @@ download 14 "civil-war-states-map.png"    "${W}/US_Secession_map_1861.svg?width=
 
 # ── Chapter 15 — Reconstruction ──
 echo "Chapter 15 (Reconstruction)"
-download 15 "reconstruction-districts-map.png" "${W}/Reconstruction_Military_Districts.svg?width=600"
+download 15 "reconstruction-districts-map.png" "${W}/Reconstruction_military_districts.svg?width=600"
 
 # ── Summary ──
 echo ""
