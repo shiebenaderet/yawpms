@@ -45,6 +45,8 @@
   <p>Between 1850 and 1861, the United States came apart. For decades, politicians had managed to hold the country together through a series of compromises over slavery. But each new compromise only delayed the crisis and deepened the anger on both sides. The question at the heart of it all was deceptively simple: would slavery be allowed to expand into the new western territories? Northerners increasingly said no. Southerners increasingly said that any attempt to stop slavery's expansion was an attack on their way of life. Compromise by compromise, election by election, the bonds holding the Union together snapped. By the time Abraham Lincoln was elected president in November 1860, the nation was fracturing. Within months, Southern states would leave the Union, and the deadliest war in American history would begin.</p>
 </div>
 
+<div class="reading-time"></div>
+
 <div class="big-questions">
   <h2>Big Questions</h2>
   <ul>
@@ -361,10 +363,19 @@
       </div>
     </div>
     <div class="reader-section">
+      <label>Font</label>
+      <div class="reader-btn-row">
+        <button class="reader-btn active" data-font-family="serif">Serif</button>
+        <button class="reader-btn" data-font-family="sans">Sans-serif</button>
+        <button class="reader-btn" data-font-family="dyslexia">Dyslexia</button>
+      </div>
+    </div>
+    <div class="reader-section">
       <label>Line Spacing</label>
       <div class="reader-btn-row">
         <button class="reader-btn active" data-spacing="normal">Normal</button>
         <button class="reader-btn" data-spacing="wide">Wide</button>
+        <button class="reader-btn" data-spacing="xwide">X-Wide</button>
       </div>
     </div>
     <div class="reader-section">
@@ -379,8 +390,18 @@
     <div class="reader-section">
       <label>Accessibility</label>
       <div class="reader-btn-row">
-        <button class="reader-btn" data-dyslexia>Dyslexia Font</button>
         <button class="reader-btn" data-line-focus>Line Focus</button>
+      </div>
+    </div>
+    <div class="reader-section">
+      <label>Read Aloud</label>
+      <div class="reader-btn-row">
+        <button class="reader-btn" data-action="read-aloud">Read Aloud</button>
+        <button class="reader-btn" data-action="stop-reading">Stop</button>
+      </div>
+      <div class="tts-controls">
+        <span class="tts-speed-label">1.0x</span>
+        <input type="range" class="tts-speed" min="0.5" max="2" step="0.1" value="1" aria-label="Reading speed">
       </div>
     </div>
     <div class="reader-section">
@@ -448,7 +469,6 @@
   <div class="glossary-hint">Double-click any word in the text to look it up</div>
 </div>
 
-<script type="module" src="js/tts-kokoro.js"></script>
 <script src="js/reader-tools.js"></script>
 
 <script src="js/search.js"></script>

@@ -45,6 +45,8 @@
   <p>In the first half of the 1800s, cotton became the most valuable commodity in the American economy, and enslaved labor was the engine that produced it. A single invention -- the cotton gin -- transformed the South, binding millions of African Americans to a brutal system of forced labor that spread westward across the continent. But enslaved people were never merely victims. They built families, created vibrant cultures, maintained their dignity, and resisted their bondage in ways both dramatic and quiet. Meanwhile, white Southerners constructed an elaborate defense of slavery, calling it a "positive good" rather than acknowledging it as the moral catastrophe it was. The story of the Cotton Revolution is the story of how America's greatest wealth was built on its greatest injustice.</p>
 </div>
 
+<div class="reading-time"></div>
+
 <div class="big-questions">
   <h2>Big Questions</h2>
   <ul>
@@ -376,10 +378,19 @@
       </div>
     </div>
     <div class="reader-section">
+      <label>Font</label>
+      <div class="reader-btn-row">
+        <button class="reader-btn active" data-font-family="serif">Serif</button>
+        <button class="reader-btn" data-font-family="sans">Sans-serif</button>
+        <button class="reader-btn" data-font-family="dyslexia">Dyslexia</button>
+      </div>
+    </div>
+    <div class="reader-section">
       <label>Line Spacing</label>
       <div class="reader-btn-row">
         <button class="reader-btn active" data-spacing="normal">Normal</button>
         <button class="reader-btn" data-spacing="wide">Wide</button>
+        <button class="reader-btn" data-spacing="xwide">X-Wide</button>
       </div>
     </div>
     <div class="reader-section">
@@ -394,8 +405,18 @@
     <div class="reader-section">
       <label>Accessibility</label>
       <div class="reader-btn-row">
-        <button class="reader-btn" data-dyslexia>Dyslexia Font</button>
         <button class="reader-btn" data-line-focus>Line Focus</button>
+      </div>
+    </div>
+    <div class="reader-section">
+      <label>Read Aloud</label>
+      <div class="reader-btn-row">
+        <button class="reader-btn" data-action="read-aloud">Read Aloud</button>
+        <button class="reader-btn" data-action="stop-reading">Stop</button>
+      </div>
+      <div class="tts-controls">
+        <span class="tts-speed-label">1.0x</span>
+        <input type="range" class="tts-speed" min="0.5" max="2" step="0.1" value="1" aria-label="Reading speed">
       </div>
     </div>
     <div class="reader-section">
@@ -463,7 +484,6 @@
   <div class="glossary-hint">Double-click any word in the text to look it up</div>
 </div>
 
-<script type="module" src="js/tts-kokoro.js"></script>
 <script src="js/reader-tools.js"></script>
 
 <script src="js/search.js"></script>

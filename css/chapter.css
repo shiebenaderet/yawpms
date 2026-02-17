@@ -766,6 +766,24 @@ body.font-xlarge .voices-left-out p { font-size: 20px; }
 body.spacing-wide { line-height: 2.2; }
 body.spacing-wide p { line-height: 2.2; }
 
+body.spacing-xwide { line-height: 2.5; }
+body.spacing-xwide p { line-height: 2.5; }
+
+body.font-sans { font-family: 'Source Sans 3', 'Segoe UI', sans-serif; }
+body.font-sans .series,
+body.font-sans .attribution,
+body.font-sans .vocab-box p,
+body.font-sans .stop-think p,
+body.font-sans .key-idea p,
+body.font-sans .primary-source p,
+body.font-sans .story-box p,
+body.font-sans .voices-left-out p,
+body.font-sans .activity-box p,
+body.font-sans .activity-box li,
+body.font-sans .perspectives .perspective,
+body.font-sans figcaption,
+body.font-sans footer { font-family: 'Source Sans 3', 'Segoe UI', sans-serif; }
+
 body.dyslexia-font { font-family: 'Lexend', 'OpenDyslexic', sans-serif; word-spacing: 0.12em; letter-spacing: 0.03em; }
 body.dyslexia-font .series,
 body.dyslexia-font .attribution,
@@ -1284,6 +1302,54 @@ body.dark-mode .search-result-preview { color: #888; }
 body.dark-mode .search-result-meta { color: #666; }
 body.dark-mode .search-hint { border-top-color: #333; color: #555; }
 body.dark-mode .search-empty { color: #666; }
+
+/* ---- Reading Time Estimate ---- */
+
+.reading-time {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 13px;
+  color: #999;
+  text-align: center;
+  margin-bottom: 32px;
+  letter-spacing: .3px;
+}
+
+/* ---- Read Aloud Controls ---- */
+
+.tts-controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 4px;
+}
+.tts-speed {
+  width: 80px;
+  height: 4px;
+  accent-color: var(--teal);
+}
+.tts-speed-label {
+  font-size: 11px;
+  color: #888;
+  min-width: 32px;
+}
+
+body.dark-mode .tts-speed-label { color: #888; }
+
+/* ---- Reduced Motion ---- */
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .progress-bar { transition: none; }
+  .notes-panel { transition: none; }
+  .glossary-panel { transition: none; }
+  .search-overlay { transition: none; }
+  .search-modal { transition: none; }
+}
 
 /* ---- Print Styles ---- */
 

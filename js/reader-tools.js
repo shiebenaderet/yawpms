@@ -119,26 +119,38 @@
   }
 
   function applySpacing(sp) {
-    document.body.classList.remove('spacing-wide');
+    document.body.classList.remove('spacing-wide', 'spacing-xwide');
     if (sp === 'wide') document.body.classList.add('spacing-wide');
+    if (sp === 'xwide') document.body.classList.add('spacing-xwide');
   }
 
   // ==========================================
-  // Dyslexia-Friendly Font
+  // Font Family Control
   // ==========================================
-  function initDyslexiaFont() {
-    var btn = document.querySelector('[data-dyslexia]');
-    if (!btn) return;
-    var saved = localStorage.getItem('yawp_dyslexia') === 'true';
-    btn.setAttribute('aria-pressed', saved);
-    if (saved) { document.body.classList.add('dyslexia-font'); btn.classList.add('active'); }
+  function initFontFamily() {
+    var btns = document.querySelectorAll('[data-font-family]');
+    var saved = localStorage.getItem('yawp_fontFamily') || 'serif';
+    applyFontFamily(saved);
 
-    btn.addEventListener('click', function() {
-      var on = document.body.classList.toggle('dyslexia-font');
-      btn.classList.toggle('active');
-      btn.setAttribute('aria-pressed', on);
-      localStorage.setItem('yawp_dyslexia', on);
+    btns.forEach(function(btn) {
+      var isActive = btn.getAttribute('data-font-family') === saved;
+      if (isActive) btn.classList.add('active');
+      btn.setAttribute('aria-pressed', isActive);
+      btn.addEventListener('click', function() {
+        btns.forEach(function(b) { b.classList.remove('active'); b.setAttribute('aria-pressed', 'false'); });
+        btn.classList.add('active');
+        btn.setAttribute('aria-pressed', 'true');
+        var ff = btn.getAttribute('data-font-family');
+        applyFontFamily(ff);
+        localStorage.setItem('yawp_fontFamily', ff);
+      });
     });
+  }
+
+  function applyFontFamily(ff) {
+    document.body.classList.remove('font-sans', 'dyslexia-font');
+    if (ff === 'sans') document.body.classList.add('font-sans');
+    if (ff === 'dyslexia') document.body.classList.add('dyslexia-font');
   }
 
   // ==========================================
@@ -667,6 +679,144 @@
   }
 
   // ==========================================
+  // Reading Time Estimate
+  // ==========================================
+  function initReadingTime() {
+    var el = document.querySelector('.reading-time');
+    if (!el) return;
+    // Count words in all sections and callout boxes
+    var content = document.querySelectorAll('section, .overview, .big-questions');
+    var wordCount = 0;
+    content.forEach(function(node) {
+      wordCount += node.textContent.split(/\s+/).filter(Boolean).length;
+    });
+    var minutes = Math.ceil(wordCount / 200); // ~200 wpm for middle school readers
+    el.textContent = 'About ' + minutes + ' min read';
+  }
+
+  // ==========================================
+  // Read Aloud (Browser SpeechSynthesis)
+  // ==========================================
+  var ttsUtterance = null;
+  var ttsPlaying = false;
+  var ttsPaused = false;
+
+  function initReadAloud() {
+    var btn = document.querySelector('[data-action="read-aloud"]');
+    var speedSlider = document.querySelector('.tts-speed');
+    var speedLabel = document.querySelector('.tts-speed-label');
+    if (!btn || !('speechSynthesis' in window)) {
+      if (btn) btn.style.display = 'none';
+      return;
+    }
+
+    var savedRate = parseFloat(localStorage.getItem('yawp_ttsRate')) || 1;
+    if (speedSlider) {
+      speedSlider.value = savedRate;
+      if (speedLabel) speedLabel.textContent = savedRate.toFixed(1) + 'x';
+      speedSlider.addEventListener('input', function() {
+        var rate = parseFloat(speedSlider.value);
+        if (speedLabel) speedLabel.textContent = rate.toFixed(1) + 'x';
+        localStorage.setItem('yawp_ttsRate', rate);
+      });
+    }
+
+    btn.addEventListener('click', function() {
+      if (ttsPlaying && !ttsPaused) {
+        // Pause
+        speechSynthesis.pause();
+        ttsPaused = true;
+        btn.textContent = 'Resume';
+        btn.setAttribute('aria-pressed', 'true');
+        return;
+      }
+
+      if (ttsPaused) {
+        // Resume
+        speechSynthesis.resume();
+        ttsPaused = false;
+        btn.textContent = 'Pause';
+        return;
+      }
+
+      // Start reading
+      speechSynthesis.cancel();
+
+      // Get readable text: sections in order
+      var sections = document.querySelectorAll('section');
+      var text = '';
+      sections.forEach(function(sec) {
+        // Skip reader tools, nav, etc.
+        var clone = sec.cloneNode(true);
+        // Remove callout labels (h3) that are just visual labels
+        clone.querySelectorAll('.vocab-box h3, .stop-think h3, .perspectives h3, .key-idea h3, .primary-source h3, .story-box h3, .voices-left-out h3').forEach(function(el) { el.remove(); });
+        text += clone.textContent.trim() + ' ';
+      });
+
+      if (!text.trim()) return;
+
+      // Split into chunks (speechSynthesis can choke on long text)
+      var chunks = [];
+      var sentences = text.match(/[^.!?]+[.!?]+\s*/g) || [text];
+      var current = '';
+      sentences.forEach(function(s) {
+        if ((current + s).length > 300) {
+          if (current) chunks.push(current.trim());
+          current = s;
+        } else {
+          current += s;
+        }
+      });
+      if (current.trim()) chunks.push(current.trim());
+
+      var rate = speedSlider ? parseFloat(speedSlider.value) : savedRate;
+      var chunkIndex = 0;
+
+      function speakNext() {
+        if (chunkIndex >= chunks.length) {
+          ttsPlaying = false;
+          ttsPaused = false;
+          btn.textContent = 'Read Aloud';
+          btn.classList.remove('active');
+          btn.setAttribute('aria-pressed', 'false');
+          return;
+        }
+        ttsUtterance = new SpeechSynthesisUtterance(chunks[chunkIndex]);
+        ttsUtterance.rate = rate;
+        ttsUtterance.onend = function() {
+          chunkIndex++;
+          speakNext();
+        };
+        ttsUtterance.onerror = function() {
+          chunkIndex++;
+          speakNext();
+        };
+        speechSynthesis.speak(ttsUtterance);
+      }
+
+      ttsPlaying = true;
+      ttsPaused = false;
+      btn.textContent = 'Pause';
+      btn.classList.add('active');
+      btn.setAttribute('aria-pressed', 'true');
+      speakNext();
+    });
+
+    // Stop button
+    var stopBtn = document.querySelector('[data-action="stop-reading"]');
+    if (stopBtn) {
+      stopBtn.addEventListener('click', function() {
+        speechSynthesis.cancel();
+        ttsPlaying = false;
+        ttsPaused = false;
+        btn.textContent = 'Read Aloud';
+        btn.classList.remove('active');
+        btn.setAttribute('aria-pressed', 'false');
+      });
+    }
+  }
+
+  // ==========================================
   // Initialize Everything
   // ==========================================
   function init() {
@@ -675,7 +825,7 @@
     initReaderPanel();
     initFontSize();
     initSpacing();
-    initDyslexiaFont();
+    initFontFamily();
     initTheme();
     initLineFocus();
     initHighlighting();
@@ -683,6 +833,8 @@
     initPDFBuilder();
     initGlossary();
     initDictionary();
+    initReadingTime();
+    initReadAloud();
   }
 
   if (document.readyState === 'loading') {
