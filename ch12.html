@@ -45,6 +45,8 @@
   <p>Between the 1830s and 1850s, the United States expanded from the Mississippi River to the Pacific Ocean. Americans called this expansion "Manifest Destiny"—the belief that God intended them to spread their civilization across the entire continent. This expansion took many forms: families loading covered wagons and heading west on the Oregon Trail, a war of conquest against Mexico, and a frenzied gold rush in California. But the story of westward expansion is not simply a story of adventure and opportunity. It is also a story of invasion, displacement, and destruction. For the Mexican citizens who suddenly found themselves living in a foreign country, for the Native peoples who were driven from their homelands, and for the California Indians who faced outright genocide, Manifest Destiny meant devastation.</p>
 </div>
 
+<div class="reading-time"></div>
+
 <div class="big-questions">
   <h2>Big Questions</h2>
   <ul>
@@ -357,10 +359,19 @@
       </div>
     </div>
     <div class="reader-section">
+      <label>Font</label>
+      <div class="reader-btn-row">
+        <button class="reader-btn active" data-font-family="serif">Serif</button>
+        <button class="reader-btn" data-font-family="sans">Sans-serif</button>
+        <button class="reader-btn" data-font-family="dyslexia">Dyslexia</button>
+      </div>
+    </div>
+    <div class="reader-section">
       <label>Line Spacing</label>
       <div class="reader-btn-row">
         <button class="reader-btn active" data-spacing="normal">Normal</button>
         <button class="reader-btn" data-spacing="wide">Wide</button>
+        <button class="reader-btn" data-spacing="xwide">X-Wide</button>
       </div>
     </div>
     <div class="reader-section">
@@ -375,8 +386,18 @@
     <div class="reader-section">
       <label>Accessibility</label>
       <div class="reader-btn-row">
-        <button class="reader-btn" data-dyslexia>Dyslexia Font</button>
         <button class="reader-btn" data-line-focus>Line Focus</button>
+      </div>
+    </div>
+    <div class="reader-section">
+      <label>Read Aloud</label>
+      <div class="reader-btn-row">
+        <button class="reader-btn" data-action="read-aloud">Read Aloud</button>
+        <button class="reader-btn" data-action="stop-reading">Stop</button>
+      </div>
+      <div class="tts-controls">
+        <span class="tts-speed-label">1.0x</span>
+        <input type="range" class="tts-speed" min="0.5" max="2" step="0.1" value="1" aria-label="Reading speed">
       </div>
     </div>
     <div class="reader-section">
@@ -444,7 +465,6 @@
   <div class="glossary-hint">Double-click any word in the text to look it up</div>
 </div>
 
-<script type="module" src="js/tts-kokoro.js"></script>
 <script src="js/reader-tools.js"></script>
 
 <script src="js/search.js"></script>

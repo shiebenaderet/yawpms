@@ -45,6 +45,8 @@
   <p>Europeans called the Americas "the New World." But for the tens of millions of Native Americans living there, it was anything but new. For over 10,000 years, Indigenous peoples built cities, farmed the land, governed themselves, traded across vast networks, and created hundreds of distinct cultures and languages. The arrival of Europeans in 1492 changed everything. It brought violence, disease, and exploitation—but also resistance, survival, and adaptation. This is the story of the Americas before and after contact, and the catastrophic collision that transformed both worlds forever.</p>
 </div>
 
+<div class="reading-time"></div>
+
 <div class="big-questions">
   <h2>Big Questions</h2>
   <ul>
@@ -414,10 +416,19 @@
       </div>
     </div>
     <div class="reader-section">
+      <label>Font</label>
+      <div class="reader-btn-row">
+        <button class="reader-btn active" data-font-family="serif">Serif</button>
+        <button class="reader-btn" data-font-family="sans">Sans-serif</button>
+        <button class="reader-btn" data-font-family="dyslexia">Dyslexia</button>
+      </div>
+    </div>
+    <div class="reader-section">
       <label>Line Spacing</label>
       <div class="reader-btn-row">
         <button class="reader-btn active" data-spacing="normal">Normal</button>
         <button class="reader-btn" data-spacing="wide">Wide</button>
+        <button class="reader-btn" data-spacing="xwide">X-Wide</button>
       </div>
     </div>
     <div class="reader-section">
@@ -432,8 +443,18 @@
     <div class="reader-section">
       <label>Accessibility</label>
       <div class="reader-btn-row">
-        <button class="reader-btn" data-dyslexia>Dyslexia Font</button>
         <button class="reader-btn" data-line-focus>Line Focus</button>
+      </div>
+    </div>
+    <div class="reader-section">
+      <label>Read Aloud</label>
+      <div class="reader-btn-row">
+        <button class="reader-btn" data-action="read-aloud">Read Aloud</button>
+        <button class="reader-btn" data-action="stop-reading">Stop</button>
+      </div>
+      <div class="tts-controls">
+        <span class="tts-speed-label">1.0x</span>
+        <input type="range" class="tts-speed" min="0.5" max="2" step="0.1" value="1" aria-label="Reading speed">
       </div>
     </div>
     <div class="reader-section">

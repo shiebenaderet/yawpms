@@ -45,6 +45,8 @@
   <p>After Columbus, a rush of European nations scrambled to claim the Americas. Spain built an empire of missions, mines, and forced labor stretching from Florida to California. France forged alliances with Native peoples through the fur trade. The Dutch built a trading empire along the Hudson River. And England—late to the game—began planting colonies that would eventually outgrow them all. But this chapter isn't just about Europeans. Native peoples were not passive victims. They traded, negotiated, played European powers against each other, fought back, and adapted. The collision of cultures reshaped every society it touched.</p>
 </div>
 
+<div class="reading-time"></div>
+
 <div class="big-questions">
   <h2>Big Questions</h2>
   <ul>
@@ -370,10 +372,19 @@
       </div>
     </div>
     <div class="reader-section">
+      <label>Font</label>
+      <div class="reader-btn-row">
+        <button class="reader-btn active" data-font-family="serif">Serif</button>
+        <button class="reader-btn" data-font-family="sans">Sans-serif</button>
+        <button class="reader-btn" data-font-family="dyslexia">Dyslexia</button>
+      </div>
+    </div>
+    <div class="reader-section">
       <label>Line Spacing</label>
       <div class="reader-btn-row">
         <button class="reader-btn active" data-spacing="normal">Normal</button>
         <button class="reader-btn" data-spacing="wide">Wide</button>
+        <button class="reader-btn" data-spacing="xwide">X-Wide</button>
       </div>
     </div>
     <div class="reader-section">
@@ -388,8 +399,18 @@
     <div class="reader-section">
       <label>Accessibility</label>
       <div class="reader-btn-row">
-        <button class="reader-btn" data-dyslexia>Dyslexia Font</button>
         <button class="reader-btn" data-line-focus>Line Focus</button>
+      </div>
+    </div>
+    <div class="reader-section">
+      <label>Read Aloud</label>
+      <div class="reader-btn-row">
+        <button class="reader-btn" data-action="read-aloud">Read Aloud</button>
+        <button class="reader-btn" data-action="stop-reading">Stop</button>
+      </div>
+      <div class="tts-controls">
+        <span class="tts-speed-label">1.0x</span>
+        <input type="range" class="tts-speed" min="0.5" max="2" step="0.1" value="1" aria-label="Reading speed">
       </div>
     </div>
     <div class="reader-section">
@@ -457,7 +478,6 @@
   <div class="glossary-hint">Double-click any word in the text to look it up</div>
 </div>
 
-<script type="module" src="js/tts-kokoro.js"></script>
 <script src="js/reader-tools.js"></script>
 
 <script src="js/search.js"></script>
