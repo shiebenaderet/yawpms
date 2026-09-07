@@ -22,7 +22,10 @@ echo ""
 # All images are public domain (pre-1929 or US government works).
 
 declare -A IMAGES=(
-  # Ch1 Source 1.2 — Monks Mound, Cahokia (photo, public domain)
+  # Ch1 Source 1.2 — Monks Mound engraving, History of Madison County, Illinois, 1882 (public domain)
+  ["ch1-monks-mound-1882.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/Cahokia_monks_mound_McAdams_1887.jpg?width=800"
+
+  # Ch1 Source 1.2 — Monks Mound, Cahokia (modern photo by Skubasteve834, CC BY-SA 3.0 — attribution required in caption)
   ["ch1-monks-mound.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/Monks_Mound_in_July.JPG?width=800"
 
   # Ch1 Source 1.4 — Birch bark box, southeastern Ojibwa (Peabody Museum)

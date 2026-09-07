@@ -291,6 +291,21 @@
   color: #777;
   margin-bottom: 0;
 }
+.ps-citation p.ps-source-link {
+  margin-top: 8px;
+}
+.ps-source-link a {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  color: #2A7F8E;
+  text-decoration: none;
+  margin-right: 18px;
+}
+.ps-source-link a:hover,
+.ps-source-link a:focus {
+  text-decoration: underline;
+}
 
 /* ---- Source navigation (jump links at top) ---- */
 .ps-source-nav {
