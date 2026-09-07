@@ -46,13 +46,15 @@ declare -A IMAGES=(
   # Ch7 Source 7.4 — Bombardment of Fort McHenry (Bower, c. 1814)
   ["ch7-fort-mchenry.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/Ft._Henry_bombardement_1814.jpg?width=800"
 
-  # Ch8 Source 8.4 — Erie Canal view
-  ["ch8-erie-canal.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/Erie_Canal.jpg?width=800"
+  # Ch8 Source 8.4 — John William Hill, "View on the Erie Canal," watercolor, 1831 (NYPL, no known restrictions)
+  ["ch8-erie-canal-1831.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/(View_on_the_Erie_Canal.)_(3990756054).jpg?width=800"
 
   # Ch9 Source 9.4 — Cherokee Phoenix newspaper first issue (1828)
   ["ch9-cherokee-phoenix.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/Cherokee_Phoenix_first_issue.jpg?width=800"
 
-  # Ch11 Source 11.3 — Slave auction broadside/advertisement
+  # Ch11 Source 11.3 — DeSaussure auction broadside, Charleston, 1852 (Wofford College Littlejohn Collection, CC BY-SA 4.0)
+  ["ch11-slave-broadside-1852.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/Wofford_College_Littlejohn_Ephemera_Advertisement,_broadside_Gang_of_25_Sea_Island_Cotton_and_Rice_Negroes_for_sale_by_Louis_D._DeSaussure,_Charleston,_S.C.,_1852_02.jpg?width=800"
+  # (Unused, kept for reference: 1769 Charleston import broadside — good candidate for ch3/ch4)
   ["ch11-slave-broadside.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/Slave_Auction_Ad.jpg?width=600"
 
   # Ch12 Source 12.3 — John Gast, "American Progress" (1872)
