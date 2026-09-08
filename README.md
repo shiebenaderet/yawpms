@@ -59,23 +59,25 @@ Each chapter includes:
 
 The primary focus of this project is **Volume I**, covering pre-Columbian America through Reconstruction. These 15 chapters align with most middle school U.S. history curricula.
 
-| Chapter | Title | Status |
-|---------|-------|--------|
-| 1 | [Indigenous America](https://shiebenaderet.github.io/yawpms/ch1.html) | ✓ Draft |
-| 2 | [Colliding Cultures](https://shiebenaderet.github.io/yawpms/ch2.html) | ✓ Draft |
-| 3 | [British North America](https://shiebenaderet.github.io/yawpms/ch3.html) | ✓ Draft |
-| 4 | [Colonial Society](https://shiebenaderet.github.io/yawpms/ch4.html) | ✓ Draft |
-| 5 | [The American Revolution](https://shiebenaderet.github.io/yawpms/ch5.html) | ✓ Draft |
-| 6 | [A New Nation (1786-1800)](https://shiebenaderet.github.io/yawpms/ch6.html) | ✓ Draft |
-| 7 | [The Early Republic (1800-1824)](https://shiebenaderet.github.io/yawpms/ch7.html) | ✓ Draft |
-| 8 | [The Market Revolution](https://shiebenaderet.github.io/yawpms/ch8.html) | ✓ Draft |
-| 9 | [Democracy in America](https://shiebenaderet.github.io/yawpms/ch9.html) | ✓ Draft |
-| 10 | [Religion and Reform](https://shiebenaderet.github.io/yawpms/ch10.html) | ✓ Draft |
-| 11 | [The Cotton Revolution](https://shiebenaderet.github.io/yawpms/ch11.html) | ✓ Draft |
-| 12 | [Manifest Destiny](https://shiebenaderet.github.io/yawpms/ch12.html) | ✓ Draft |
-| 13 | [The Sectional Crisis](https://shiebenaderet.github.io/yawpms/ch13.html) | ✓ Draft |
-| 14 | [The Civil War](https://shiebenaderet.github.io/yawpms/ch14.html) | ✓ Draft |
-| 15 | [Reconstruction](https://shiebenaderet.github.io/yawpms/ch15.html) | ✓ Draft |
+<!-- BEGIN generated:status-table -->
+| Chapter | Title | Status | Reviewers |
+|---------|-------|--------|-----------|
+| 1 | [Indigenous America](https://americanyawpms.com/ch1.html) | Draft | 0 / 3 |
+| 2 | [Colliding Cultures](https://americanyawpms.com/ch2.html) | Draft | 0 / 3 |
+| 3 | [British North America](https://americanyawpms.com/ch3.html) | Draft | 0 / 3 |
+| 4 | [Colonial Society](https://americanyawpms.com/ch4.html) | Draft | 0 / 3 |
+| 5 | [The American Revolution](https://americanyawpms.com/ch5.html) | Draft | 0 / 3 |
+| 6 | [A New Nation](https://americanyawpms.com/ch6.html) | Draft | 0 / 3 |
+| 7 | [The Early Republic](https://americanyawpms.com/ch7.html) | Draft | 0 / 3 |
+| 8 | [The Market Revolution](https://americanyawpms.com/ch8.html) | Draft | 0 / 3 |
+| 9 | [Democracy in America](https://americanyawpms.com/ch9.html) | Draft | 0 / 3 |
+| 10 | [Religion and Reform](https://americanyawpms.com/ch10.html) | Draft | 0 / 3 |
+| 11 | [The Cotton Revolution](https://americanyawpms.com/ch11.html) | Draft | 0 / 3 |
+| 12 | [Manifest Destiny](https://americanyawpms.com/ch12.html) | Draft | 0 / 3 |
+| 13 | [The Sectional Crisis](https://americanyawpms.com/ch13.html) | Draft | 0 / 3 |
+| 14 | [The Civil War](https://americanyawpms.com/ch14.html) | Draft | 0 / 3 |
+| 15 | [Reconstruction](https://americanyawpms.com/ch15.html) | Draft | 0 / 3 |
+<!-- END generated:status-table -->
 
 **Volume II** (1877–present) is planned for future development. Most middle school curricula end with Reconstruction, and most high schools start American history at or after this point. If there's demand for a middle school adaptation of Volume II, we'll build it.
 

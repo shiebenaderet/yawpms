@@ -121,3 +121,8 @@ By contributing, you agree that your contributions will be licensed under the [C
 ## Questions?
 
 Open an [issue](https://github.com/shiebenaderet/yawpms/issues) or check the [README](README.md) for more context about the project.
+
+## For maintainers
+
+When a chapter review arrives, follow [TRIAGE.md](TRIAGE.md) — the ten-step intake loop.
+How reviews are counted toward the 3-reviewer bar is defined in [REVIEW_STATUS.md](REVIEW_STATUS.md).

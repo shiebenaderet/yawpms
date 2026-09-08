@@ -236,42 +236,42 @@ Three ordering constraints drive this list. (1) The roadmap's explicit trap: scr
 
 ## M2 — Review pipeline before review #1
 
-- [ ] **M2-1** Create data/chapters.json as the single hand-edited chapter-status source (15 entries; number, title, status, reviewers[], review_slot_issue, chapter_sha)  
+- [x] **M2-1** Create data/chapters.json as the single hand-edited chapter-status source (15 entries; number, title, status, reviewers[], review_slot_issue, chapter_sha)  
   `S` `[sonnet]`  
   *Done when `python3 -c "import json;c=json.load(open('data/chapters.json'))['chapters'];assert len(c)==15 and all({'number','title','status','reviewers','review_slot_issue','chapter_sha'}<=set(x) for x in c)"` exits 0 and the 15 titles match the current REVIEW_STATUS.md table exactly.*  
   > There is no data/ directory yet. Titles differ between surfaces today — README.md carries "A New Nation (1786-1800)" and "The Early Republic (1800-1824)" while REVIEW_STATUS.md and teachers.html carry the short forms; pick one canonical title per chapter here and let M2-2 handle the README's date-range suffix, or the first generator run will produce a diff.  
 
-- [ ] **M2-2** Write scripts/build_status.sh and add BEGIN/END generated markers around the three existing status tables in REVIEW_STATUS.md, README.md and teachers.html  
+- [x] **M2-2** Write scripts/build_status.sh and add BEGIN/END generated markers around the three existing status tables in REVIEW_STATUS.md, README.md and teachers.html  
   `M` `[sonnet]` · after: `M2-1`  
   *Done when `bash scripts/build_status.sh && bash scripts/build_status.sh && git diff --exit-code` exits 0 on a clean checkout, i.e. the regenerated tables are byte-identical to the committed ones and the second run is a no-op.*  
   > Three different table shapes: REVIEW_STATUS.md is Ch/Title/Status/Reviewers/Notes markdown; README.md:62-78 is Chapter/Title/Status with a github.io link and a "✓ " prefix; teachers.html:194-220 is an HTML <table class="review-table"> with <span class="status-badge status-draft">. Match the em-dash/entity conventions of each file. Pure bash + python3/jq only — no build step exists in this repo.  
 
-- [ ] **M2-3** Add a generated reviewer section to contributors.html and emit it from scripts/build_status.sh  
+- [x] **M2-3** Add a generated reviewer section to contributors.html and emit it from scripts/build_status.sh  
   `S` `[sonnet]` · after: `M2-2`  
   *Done when `grep -c 'BEGIN GENERATED reviewers' contributors.html` returns 1 and `bash scripts/build_status.sh && git diff --exit-code` exits 0 with the section rendering a "No reviewers yet" placeholder while reviewers[] is empty everywhere.*  
   > contributors.html has no reviewer section today — it goes between "Project Creator" and "Special Thanks". Only reviewers who set consent-to-credit (M2-6) are ever listed, so the generator must key off that field, not merely off reviewers[] length.  
 
-- [ ] **M2-4** Add a status-drift job to .github/workflows/site-check.yml that re-runs build_status.sh and fails on any diff  
+- [x] **M2-4** Add a status-drift job to .github/workflows/site-check.yml that re-runs build_status.sh and fails on any diff  
   `S` `[sonnet]` · after: `M2-2`, `M2-3`, `M0-6`  
   *Done when a PR that hand-edits one `0 / 3` cell in teachers.html shows the site-check status-drift job red, and the same PR goes green once the `bash scripts/build_status.sh` output is committed to it.*  
   > Blocked by the M0 DoD item that creates .github/workflows/site-check.yml on push-to-main + pull_request. Add a job to that file — do NOT create a second workflow, or M5's "exactly one workflow" finish line cannot be met. Keep the script POSIX/BSD-safe: the existing content-change-check.yml uses GNU-only `grep -oP`, which is a known trap here.  
 
-- [ ] **M2-5** Write the review-counting rule paragraph into REVIEW_STATUS.md, outside the generated markers  
+- [x] **M2-5** Write the review-counting rule paragraph into REVIEW_STATUS.md, outside the generated markers  
   `S` `[fable]` · after: `M2-2`  
   *Done when `grep -c 'How Reviews Are Counted' REVIEW_STATUS.md` returns 1, that section names which of chapter-review.yml's three overall-assessment verdicts increment N/3, that a review pins to a chapter short SHA, that a substantive rewrite resets the count, and who adjudicates, and `bash scripts/build_status.sh && git diff --exit-code` still exits 0.*  
   > Must be written before the first review is recorded — that is the whole point of the DoD item. Place it below the generated table region so the generator cannot clobber it. The three existing verdicts are "Ready", "Needs revision", "Needs significant work" (chapter-review.yml, id: overall-assessment); decide explicitly whether "Needs significant work" counts toward 3/3. The maintainer's own classroom pilot never counts as a third (M9).  
 
-- [ ] **M2-6** Add consent-to-credit, display name, chapter version (short SHA), grade level and piloted-in-class fields to .github/ISSUE_TEMPLATE/chapter-review.yml  
+- [x] **M2-6** Add consent-to-credit, display name, chapter version (short SHA), grade level and piloted-in-class fields to .github/ISSUE_TEMPLATE/chapter-review.yml  
   `S` `[sonnet]` · after: `M2-5`  
   *Done when `grep -cE 'id: (consent-to-credit|display-name|chapter-sha|grade-level|piloted-in-class)' .github/ISSUE_TEMPLATE/chapter-review.yml` returns 5 and a test issue opened from the template on GitHub renders all five fields.*  
   > Depends on M2-5 because the counting rule defines what "chapter version" means and therefore what the SHA field must ask for. Consent-to-credit should be a checkboxes field (opt-in, unchecked default) — contributors.html (M2-3) lists only reviewers who checked it. Do not disturb the existing `chapter` dropdown option strings; M2-7's labeler parses them.  
 
-- [ ] **M2-7** Create the 15 review:chNN labels and add an issue-labeler job to site-check.yml that applies one from the chapter-review.yml dropdown  
+- [~] **M2-7** *(labeler job done; 15 labels need `gh` run)*  Create the 15 review:chNN labels and add an issue-labeler job to site-check.yml that applies one from the chapter-review.yml dropdown  
   `M` `[sonnet]` · after: `M2-6`, `M0-6`  
   *Done when `gh label list --limit 100 | grep -c '^review:ch'` returns 15 and a test issue filed from chapter-review.yml with Chapter "6 — A New Nation" selected carries label `review:ch06` after the site-check labeler job runs.*  
   > This repo currently has only the nine GitHub default labels — the `review`, `chapter-feedback`, `feedback`, and `review-slot` labels named by the four existing issue templates do not exist, so GitHub is silently dropping them; create those too. The labeler must be an `on: issues` job inside site-check.yml, not a new workflow file (M5 requires exactly one). Zero-pad to review:ch06 so sorting matches the chapter order.  
 
-- [ ] **M2-8** Remove the "Full Chapter Review" option from the Google Form and drop the form path from teachers.html's review instructions  
+- [~] **M2-8** *(teachers.html done; Google Form edit is manual)*  Remove the "Full Chapter Review" option from the Google Form and drop the form path from teachers.html's review instructions  
   `S` `[sonnet]` · after: `M2-6`  
   *Done when `grep -c 'Full Chapter Review\" in the feedback type' teachers.html` returns 0 and the live form at https://forms.gle/xzSs9fkXc9LEye3g9 offers no "Full Chapter Review" choice in its feedback-type question.*  
   > Only teachers.html:245 (step 3 of "How to Do a Full Chapter Review") sends reviewers to the form; the teachers.html:184 channel card titled "Full Chapter Review" already links to the GitHub template and should stay. The Google Form edit itself is a maintainer action outside the repo — it cannot be done by a script. Sequenced after M2-6 so the surviving path collects strictly more than the form did.  
@@ -281,22 +281,22 @@ Three ordering constraints drive this list. (1) The roadmap's explicit trap: scr
   *Done when `gh issue list --label review-slot --state open --limit 30 --json number | jq length` returns 15 and every review_slot_issue value in data/chapters.json matches one of those numbers.*  
   > GitHub caps pinned issues at 3 per repo, so "15 pinned Review slot issues" cannot be taken literally — pin one "Review slots" index issue and label the other fifteen, and confirm that reading with the maintainer. The repo has zero issues today, so these will be #1-#15. Each body should link the M2-5 counting rule and the chapter's primary-sources page, and state that commenting claims the slot.  
 
-- [ ] **M2-10** Emit a generated "claim a chapter" pointer on teachers.html aimed at the slot issue with the fewest reviewers  
+- [x] **M2-10** Emit a generated "claim a chapter" pointer on teachers.html aimed at the slot issue with the fewest reviewers  
   `S` `[sonnet]` · after: `M2-9`, `M2-2`  
   *Done when the generated pointer in teachers.html links the review_slot_issue of the lowest-reviewer-count chapter in data/chapters.json (verified by bumping one chapter's reviewers count, re-running, and seeing the link move), and `bash scripts/build_status.sh && git diff --exit-code` exits 0.*  
   > All 15 chapters sit at 0/3 today, so the tie-break rule must be explicit (lowest chapter number wins) or the output is nondeterministic and the M2-4 drift job will flap.  
 
-- [ ] **M2-11** Write TRIAGE.md: the review-intake loop in 10 steps or fewer, executable by an AI assistant from an issue URL alone  
+- [x] **M2-11** Write TRIAGE.md: the review-intake loop in 10 steps or fewer, executable by an AI assistant from an issue URL alone  
   `M` `[fable]` · after: `M2-9`, `M2-6`, `M2-5`, `M2-2`  
   *Done when `grep -cE '^[0-9]+\.' TRIAGE.md` returns 10 or fewer and every step names a concrete file path or runnable command, including data/chapters.json, scripts/build_status.sh, and the gh command used to read the issue.*  
   > Written after the artifacts it references exist, otherwise the steps name files that are not there. Must cover: read issue → apply the M2-5 counting rule → edit data/chapters.json only → run build_status.sh → open PRs for factual-error items → reply and close. M9 walks this end-to-end on the first real review and corrects it.  
 
-- [ ] **M2-12** Correct CLAUDE.md's "Adding a chapter" step 6 to name data/chapters.json instead of three hand-edited status surfaces  
+- [x] **M2-12** Correct CLAUDE.md's "Adding a chapter" step 6 to name data/chapters.json instead of three hand-edited status surfaces  
   `S` `[sonnet]` · after: `M2-2`  
   *Done when `grep -c 'Chapter status in \*\*three\*\* places' CLAUDE.md` returns 0 and step 6 of the "Adding a chapter" list names data/chapters.json and `bash scripts/build_status.sh`.*  
   > Required by ROADMAP.md's "Review cadence" rule (update CLAUDE.md when a milestone changes a fact it asserts) and by the DoD phrase "the only hand-edited source" — CLAUDE.md:177 currently instructs the opposite. CLAUDE.md is the only file with this instruction; MAINTENANCE.md and CONTRIBUTING.md do not mention status tables.  
 
-- [ ] **M2-13** Write docs/RECRUITMENT.md with three send-ready recruitment variants (email/listserv, social post, GitHub Discussions post)  
+- [x] **M2-13** Write docs/RECRUITMENT.md with three send-ready recruitment variants (email/listserv, social post, GitHub Discussions post)  
   `S` `[fable]` · after: `M2-9`, `M2-8`  
   *Done when docs/RECRUITMENT.md holds three clearly labeled variants, each containing a github.com/shiebenaderet/yawpms/issues/ review-slot URL, and `grep -c forms.gle docs/RECRUITMENT.md` returns 0.*  
   > There is no docs/ directory yet. The message must link slot issues (M2-9) and must not advertise the retired Google Form review path (M2-8). Be honest about the AI-drafted status, per the framing already on teachers.html — recruiting reviewers under a softer claim is exactly what this project's disclosure rules forbid.  

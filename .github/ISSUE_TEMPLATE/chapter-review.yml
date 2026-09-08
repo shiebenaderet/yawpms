@@ -1,6 +1,6 @@
 name: Chapter Review
 description: Submit a full review of a chapter
-title: "Review: Chapter [NUMBER] — [TITLE]"
+title: "Review ch00: [CHAPTER TITLE]"
 labels: ["review", "chapter-feedback"]
 body:
   - type: markdown
@@ -29,6 +29,38 @@ body:
         - "13 — The Sectional Crisis"
         - "14 — The Civil War"
         - "15 — Reconstruction"
+    validations:
+      required: true
+
+  - type: input
+    id: chapter-version
+    attributes:
+      label: Chapter version
+      description: >
+        The short commit SHA shown in the grey banner at the top of the chapter page.
+        Reviews are pinned to a version so we can tell whether a later edit already
+        addressed your feedback. If you can't find it, today's date is fine.
+      placeholder: "e.g. 58e1af7 — or 2026-09-08"
+    validations:
+      required: true
+
+  - type: input
+    id: grade-level
+    attributes:
+      label: Grade level you teach
+      description: Helps us weigh age-appropriateness feedback.
+      placeholder: "e.g. 8th grade, or 6–8 combined"
+    validations:
+      required: false
+
+  - type: dropdown
+    id: piloted
+    attributes:
+      label: Did you use this chapter with students?
+      options:
+        - "No — I read it but haven't taught it"
+        - "Yes — I taught it in a classroom"
+        - "Yes — I used parts of it"
     validations:
       required: true
 
@@ -99,14 +131,31 @@ body:
     validations:
       required: false
 
+  - type: input
+    id: display-name
+    attributes:
+      label: Name for credit (optional)
+      description: How you'd like to be listed if you consent to being credited below.
+      placeholder: "e.g. Jordan Rivera, Lincoln Middle School"
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: consent-to-credit
+    attributes:
+      label: Credit
+      options:
+        - label: "You may list me as a reviewer on the contributors page."
+          required: false
+
   - type: dropdown
     id: overall-assessment
     attributes:
       label: Overall assessment
       description: In your judgment, is this chapter ready for classroom use?
       options:
-        - "Ready — minor issues only, could be used now"
-        - "Needs revision — solid foundation but has specific problems to fix"
-        - "Needs significant work — major factual, structural, or pedagogical issues"
+        - "Ready — minor issues only, could be used now (counts toward 3/3)"
+        - "Needs revision — solid foundation but has specific problems to fix (counts once those are closed)"
+        - "Needs significant work — major factual, structural, or pedagogical issues (does not count; chapter goes back for revision)"
     validations:
       required: true

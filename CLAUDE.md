@@ -174,8 +174,10 @@ figures carry.
    `SLIDES` (slideshows.html:425)
 5. Edit `scripts/build_search_index.sh` — both `i <= 15` and `chapterTitles` are
    hard-coded; a ch16 is silently unindexed
-6. Chapter status in **three** places: `REVIEW_STATUS.md`, the `README.md` table, and
-   the `teachers.html` table
+6. A chapter entry in `data/chapters.json`, then `bash scripts/build_status.sh` —
+   this regenerates the status tables in `REVIEW_STATUS.md`, `README.md`,
+   `teachers.html` and `contributors.html`. **Never hand-edit those four surfaces**;
+   CI fails on drift.
 
 ### Before finishing
 
@@ -193,6 +195,12 @@ There is no test suite, linter config, or formatter in this repo.
   supplies it); the section `<h2>` hard-codes one.
 - Never put anything but whitespace between `<section id="…">` and its `<h2>` — the
   search indexer's regex silently drops the section otherwise.
+
+### Handling an incoming review
+
+`TRIAGE.md` is the ten-step loop from "a review issue exists" to "the status tables are
+correct." It is written to be executable from an issue URL alone. Counting policy lives
+in `REVIEW_STATUS.md`; `TRIAGE.md` is procedure only.
 
 ### Git
 

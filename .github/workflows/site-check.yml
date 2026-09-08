@@ -7,6 +7,8 @@ on:
   push:
     branches: [main]
   pull_request:
+  issues:
+    types: [opened, edited]
   schedule:
     # 09:00 UTC on the 1st of each month
     - cron: '0 9 1 * *'
@@ -76,6 +78,52 @@ jobs:
         # Without it the script always exited 0, so a gate built on it could
         # never fire -- which is how 14 broken references survived unnoticed.
         run: bash scripts/audit_images.sh --strict
+
+  status-drift:
+    name: Chapter status tables match data/chapters.json
+    if: github.event_name == 'push' || github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Regenerate and fail on drift
+        # The three status tables used to be hand-synced across three files in
+        # three different shapes, and that sync had never once been performed.
+        run: |
+          bash scripts/build_status.sh
+          git diff --exit-code -- REVIEW_STATUS.md README.md teachers.html contributors.html \
+            || { echo "::error::Status tables drifted. Edit data/chapters.json and run: bash scripts/build_status.sh"; exit 1; }
+
+  label-review:
+    name: Label review issues by chapter
+    if: github.event_name == 'issues'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      issues: write
+    steps:
+      - uses: actions/github-script@v7
+        with:
+          script: |
+            const issue = context.payload.issue;
+            const labels = (issue.labels || []).map(l => l.name);
+            if (!labels.includes('review') && !labels.includes('review-slot')) return;
+
+            // The chapter dropdown renders as "### Chapter\n\n7 — The Early Republic"
+            const m = (issue.body || '').match(/###\s*Chapter\s*\n+\s*(\d{1,2})\b/);
+            if (!m) { core.info('No chapter found in body; nothing to label.'); return; }
+
+            const n = String(parseInt(m[1], 10)).padStart(2, '0');
+            const want = `review:ch${n}`;
+            if (labels.includes(want)) { core.info(`Already labelled ${want}.`); return; }
+
+            await github.rest.issues.addLabels({
+              owner: context.repo.owner, repo: context.repo.repo,
+              issue_number: issue.number, labels: [want],
+            });
+            core.info(`Applied ${want} to #${issue.number}.`);
 
   link-check:
     name: Primary source links (monthly)
