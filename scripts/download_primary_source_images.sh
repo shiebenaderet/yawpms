@@ -54,8 +54,15 @@ declare -A IMAGES=(
 
   # Ch11 Source 11.3 — DeSaussure auction broadside, Charleston, 1852 (Wofford College Littlejohn Collection, CC BY-SA 4.0)
   ["ch11-slave-broadside-1852.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/Wofford_College_Littlejohn_Ephemera_Advertisement,_broadside_Gang_of_25_Sea_Island_Cotton_and_Rice_Negroes_for_sale_by_Louis_D._DeSaussure,_Charleston,_S.C.,_1852_02.jpg?width=800"
-  # (Unused, kept for reference: 1769 Charleston import broadside — good candidate for ch3/ch4)
-  ["ch11-slave-broadside.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/Slave_Auction_Ad.jpg?width=600"
+  # Ch4 Source 4.5 — 1769 Charleston transatlantic import broadside.
+  # "Charlestown, July 24th, 1769... a cargo of ninety-four prime, healthy Negroes...
+  # in the brigantine Dembia, Francis Bare, master, from Sierra-Leone, by David & John Deas."
+  # Genuine Early American Imprint: Evans 41926, [Charleston, S.C. : s.n., 1769],
+  # 1 sheet, 32 x 20 cm, relief cuts and ornamental border. Public domain.
+  # NOTE: every circulating copy is a reproduction -- no free scan of the original
+  # sheet exists. Commons' own Credit field points at Pinterest, so cite Evans,
+  # not the Commons credit chain.
+  ["ch4-slave-import-1769.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/Slave_Auction_Ad.jpg?width=800"
 
   # Ch12 Source 12.3 — John Gast, "American Progress" (1872)
   ["ch12-american-progress.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/American_Progress_%28John_Gast_painting%29.jpg?width=800"

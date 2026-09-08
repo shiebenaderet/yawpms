@@ -404,7 +404,7 @@ M3-4, M3-5, M3-6 and M3-10 have no blockers and can start on day one. M3-13 is l
 
 **ch5 by Oct 15 · ch6 by Oct 31 · ch7 by Nov 15 · ch8 by Dec 20**
 
-- [ ] **M4-1** Write the chapter accuracy-audit method into MAINTENANCE.md and scaffold docs/ACCURACY_AUDIT.md  
+- [x] **M4-1** Write the chapter accuracy-audit method into MAINTENANCE.md and scaffold docs/ACCURACY_AUDIT.md  
   `S` `[fable]`  
   *Done when MAINTENANCE.md contains a `## Chapter Accuracy Audit` section naming the five claim types (date, proper name, statistic, direct quotation, causal claim) and the four verdicts (verified / corrected / caveated / could not verify), and docs/ACCURACY_AUDIT.md exists carrying the header row `| Claim | Type | Verdict | Yawp source | Independent source | PR |` plus a `### Chapter N` heading for each of 5, 6, 7, 8.*  
   > docs/ does not exist in this repo yet — mkdir docs; nothing in .gitignore blocks it. Write the method generic enough that M6 replays it on ch9-ch15 with no edits. Mirror the Primary Source Reader audit that produced the 61/61 verified ps-source-link invariant: every claim gets the corresponding American Yawp chapter plus one independent reference, not one source.  
@@ -429,17 +429,17 @@ M3-4, M3-5, M3-6 and M3-10 have no blockers and can start on day one. M3-13 is l
   *Done when no figure in ch5-ch8 references an image lacking a verified source URL, IMAGES_AUDIT.md has one row per swap giving old file, new file, reason and license, and `bash scripts/audit_images.sh` reports 0 missing refs.*  
   > Depends on M0-1: the unfixed audit_images.sh reports zero missing while 16 refs are broken, so its 0 is not evidence. Each replacement also needs its entry updated in scripts/download_chN_images.sh (or download_all_maps.sh for the map figures). The roadmap explicitly does not promise zero unknowns across all 124 images — replace only what ch5-ch8 actually shows.  
 
-- [ ] **M4-6** Add an in-page sourcing caveat to Source 9.3 (Burnett Trail of Tears memoir) in primary-sources/ch9-sources.html  
+- [x] **M4-6** Add an in-page sourcing caveat to Source 9.3 (Burnett Trail of Tears memoir) in primary-sources/ch9-sources.html  
   `S` `[fable]`  
   *Done when the `#source-9-3` block contains a caveat naming both the 52-year gap (1838 events, written 1890) and the contested authenticity of the memoir, framed as a source-reliability exercise, and `grep -c 'ps-source-link' primary-sources/ch9-sources.html` still returns 4.*  
   > ch9 sits outside M4's ch5-ch8 range on purpose — closed here so a reviewer does not re-find it. Use the already-styled but unused `.ps-excerpt-note` hook (css/primary-sources.css:158) or extend the existing `.ps-context` block; do not invent a new ps- class. The block's existing sourcing question already asks why Burnett waited 52 years, so the caveat must add the authenticity dispute rather than restate the gap.  
 
-- [ ] **M4-7** Place the 1769 Charleston slave-importation broadside (primary-sources/images/ch11-slave-broadside.jpg) as a new source in primary-sources/ch4-sources.html or ch3-sources.html  
+- [x] **M4-7** Place the 1769 Charleston slave-importation broadside (primary-sources/images/ch11-slave-broadside.jpg) as a new source in primary-sources/ch4-sources.html or ch3-sources.html  
   `M` `[fable]`  
   *Done when the chosen file has 5 `ps-source` blocks and 5 `ps-source-link` paragraphs with the new block also listed in its `.ps-source-nav`, the image renamed to the flat chN-<slug> convention, the 'Unused, kept for reference' comment removed from scripts/download_primary_source_images.sh, and CLAUDE.md section 2.2's source count updated from 61 to 62 — or an open issue records the decision to decline.*  
   > The file is committed but referenced by no page; its ch11- prefix is misleading and the manifest itself already flags it as a ch3/ch4 candidate (scripts/download_primary_source_images.sh lines 57-58). ch11-sources.html Source 11.3 uses the separate 1852 DeSaussure broadside — do not touch that one. Fetch Commons extmetadata for `Slave_Auction_Ad.jpg` and confirm it really is the 1769 importation broadside before writing alt text or caption (CLAUDE.md 2.1); ch4 'Colonial Society' is the likelier home given Source 4.1 is the 1705 Virginia Slave Code.  
 
-- [ ] **M4-8** Resolve the primary-sources/images/ch8-erie-canal.jpg orphan (16 image files against 15 manifest entries)  
+- [x] **M4-8** Resolve the primary-sources/images/ch8-erie-canal.jpg orphan (16 image files against 15 manifest entries)  
   `S` `[sonnet]`  
   *Done when `ls primary-sources/images | wc -l` equals the count of `["…"]=` entries in scripts/download_primary_source_images.sh, either because the orphan was git rm'd or because it is now referenced by a primary-sources/*.html page and has its own manifest entry with artist/date/collection/license.*  
   > ch8-sources.html Source 8.4 already uses ch8-erie-canal-1831.jpg, so the orphan is a duplicate rather than a gap — deletion is the likely answer. Do not confuse it with images/ch8/erie-canal.jpg, which ch8.html (title-page background and a figure), timeline.html and slideshows.html all reference and which must stay.  

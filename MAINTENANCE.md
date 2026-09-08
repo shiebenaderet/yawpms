@@ -140,6 +140,47 @@ All callout boxes must follow these standard patterns:
 
 ---
 
+## Chapter Accuracy Audit Method
+
+The method that produced the Primary Source Reader audit, written down so it can be
+replayed chapter by chapter. Ledgers live in `docs/ACCURACY_AUDIT.md`.
+
+**One row per checkable claim.** Every date, proper name, statistic, direct quotation,
+and causal claim in the chapter gets a row. A paragraph asserting three things is three
+rows, because they can fail independently.
+
+**Two sources per claim, not one.** The corresponding *American Yawp* chapter, plus one
+independent reference. Agreement between the adaptation and its own parent text proves
+only that the adaptation copied faithfully.
+
+**Four verdicts, and no fifth:**
+
+| Verdict | Meaning |
+|---|---|
+| `verified` | Both sources support it as written |
+| `corrected` | It was wrong; the fix is in a merged PR |
+| `caveated` | Defensible but contested, oversimplified, or resting on a disputed source; the page now says so |
+| `could not verify` | Neither source settles it. **Never silently upgraded to verified.** |
+
+**`could not verify` is a handoff, not a shrug.** Each chapter's unresolved rows become
+one GitHub issue linked from that chapter's Review slot, so a volunteer's hour is spent
+confirming a short list rather than discovering from scratch.
+
+**Corrections fan out.** A chapter text change is not done until that chapter's quiz
+answers, vocabulary deck, slideshow text and timeline entries move with it, in the same
+PR, with `site-check.yml` green.
+
+**Check the images too.** Every figcaption in the chapter gets an attribution clause and,
+where one exists, a link to the original. Anything whose provenance cannot be established
+is replaced, and the swap is logged in `IMAGES_AUDIT.md`.
+
+**A resolving reference is not a correct one.** A file existing on disk says nothing about
+whether the picture shows what the caption claims. Read the image.
+
+**Watch for the confident false source.** Source 9.3 was quoted as eyewitness testimony
+for over a century before muster records showed the author was not there. A source being
+famous, moving, and widely reprinted is not evidence that it is real.
+
 ## Quarterly Review Checklist
 
 Run these checks every 3 months:
