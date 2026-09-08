@@ -209,10 +209,12 @@ session trailer.
   skip-existing guard — it will overwrite good tracked images with error pages.
   `scripts/download_ch6_images.sh` is canonical. Deleting the root copy is a good
   cleanup task.
-- **`scripts/build_search_index.sh` has a real regex bug.** `<(?:section[^>]*>)?\s*<h2…`
-  makes the section prefix effectively mandatory, so **ch6 and ch7 index zero
-  sections**, and every one of the 97 indexed sections has `id: ""` — all search
-  results link to the top of the chapter with no anchor.
+- **`scripts/build_search_index.sh` has two real regex bugs.** In
+  `<(?:section[^>]*>)?\s*<h2[^>]*(?:id="([^"]*)")?[^>]*>` the leading literal `<` makes the
+  "optional" `<section…>` prefix effectively mandatory, so **ch6 and ch7 index zero**
+  **sections**; and the greedy `<h2[^>]*` consumes the id before the optional capture group
+  can reach it, so **all 89 indexed sections carry `id: ""`** and every search result links
+  to the top of a chapter with no anchor. Note ids live on `<section>`, not `<h2>`.
 - **ch6.html and ch7.html are not templates.** Zero `<section>` elements, so reading
   time, read-aloud, and the PDF section picker are all degraded there. They carry four
   classes with no CSS anywhere: `body-text`, `section-heading`, `subtitle`,
