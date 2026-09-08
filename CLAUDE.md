@@ -254,9 +254,17 @@ Feature-to-Standard Map. What's missing is **C3 Framework** and **NCSS**, which
 - **haiku subagents** — mechanical verification: link checking, HTML validation,
   metadata lookups, reading-level checks.
 
-Project subagents live in `.claude/agents/`. *(This directory does not exist yet — it
-is created by the subagent-definition task. Until then, delegate with the general
-`Agent` tool and an explicit model override.)*
+Project subagents live in `.claude/agents/`:
+
+| Agent | Model | Use for |
+|---|---|---|
+| `link-checker` | haiku | Curl external hrefs (browser UA, 20s timeout, retry once) and report non-200s |
+| `html-validator` | haiku | `html-validate` + tag balance + skip link / landmark / alt checks |
+| `image-provenance-auditor` | sonnet | Verify an image's real artist, date, and license against every claim the page makes |
+| `reading-level-checker` | haiku | Grade-level estimate, excluding quoted primary sources |
+
+All four are read-only and report rather than edit. The agent registry loads at session
+start, so an agent added mid-session is not callable until the session restarts.
 
 ---
 

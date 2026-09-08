@@ -81,6 +81,11 @@ start immediately.
   *Done when a single verification run confirms: audit reports 0 missing with identical counts on both platforms, the latest site-check.yml run on main is green with all three jobs present, both deleted files are absent, and the CSS and doc greps in M0-10/M0-11 pass.*  
   > Mechanical only — no judgment calls. If the two platforms disagree on any count, that is an M0-2 regression and reopens it rather than being logged as a pass.  
 
+- [ ] **M0-13** Add `audit-results.json` to .gitignore  
+  `S` `[sonnet]`  
+  *Done when `git status --porcelain` is empty immediately after `bash scripts/audit_images.sh` runs.*  
+  > Tracked three times historically and removed in 286963f, but never ignored — so every audit run reappears as an untracked file. Fixed once, never made unable to recur: the exact pattern M0 exists to correct.
+
 <details><summary>Why this order</summary>
 
 The audit script is the measuring instrument for the whole milestone, so it is fixed first (M0-1, M0-2): with the current `src="..."`-only regex it prints `Missing from disk: 0` while 14 paths are broken, so any image fix done before it is unverifiable and any CI gate built on it would be a gate that can never fire. Portability (M0-2) comes before CI because ubuntu-latest and the maintainer's macOS must produce the same count or a green local run means nothing. The image fixes (M0-3 mechanical, M0-4 editorial) come after the instrument and before the workflow, because the DoD requires site-check.yml to be green on its first run — a workflow merged before the images would land red on main. M0-5 logs licenses only once both fix passes have decided what the final filenames are. site-check.yml must exist (M0-6) before the html-validate (M0-7) and monthly link-check (M0-8) jobs can be added to it; the roadmap allows exactly one workflow file, so these are jobs, not new files. M0-9, M0-10 and M0-11 are dependency-free and can run in parallel with everything above; M0-11 in particular does not wait on the image work, since CONTRIBUTING.md's "not stored in the repo" claim is already false for all 124 tracked images. M0-12 is last because it re-checks every other task's assertion on both platforms.
