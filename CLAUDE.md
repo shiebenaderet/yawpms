@@ -217,21 +217,9 @@ session trailer.
   skip-existing guard — it will overwrite good tracked images with error pages.
   `scripts/download_ch6_images.sh` is canonical. Deleting the root copy is a good
   cleanup task.
-- **`scripts/build_search_index.sh` has two real regex bugs.** In
-  `<(?:section[^>]*>)?\s*<h2[^>]*(?:id="([^"]*)")?[^>]*>` the leading literal `<` makes the
-  "optional" `<section…>` prefix effectively mandatory, so **ch6 and ch7 index zero**
-  **sections**; and the greedy `<h2[^>]*` consumes the id before the optional capture group
-  can reach it, so **all 89 indexed sections carry `id: ""`** and every search result links
-  to the top of a chapter with no anchor. Note ids live on `<section>`, not `<h2>`.
-- **ch6.html and ch7.html are not templates.** Zero `<section>` elements, so reading
-  time, read-aloud, and the PDF section picker are all degraded there. They carry four
-  classes with no CSS anywhere: `body-text`, `section-heading`, `subtitle`,
-  `attribution-footer`. They are also the only two files using
-  `<div class="attribution">` (a Do-NOT-Use violation, but in the title block, not a
-  citation — do not blind-fix).
-- **`.chapter-resources` / `.resource-links` ship unstyled** in 10 chapters (zero CSS
-  rules), and their 30 `?ch=N` links are inert — nothing reads `location.search`.
-  Do not propagate this block to the other 5 chapters.
+- **The 30 `?ch=N` links in `.chapter-resources` are inert** — nothing reads
+  `location.search` yet. M5 wires them up; until then they land on chapter 1 of each
+  tool. The block itself is now styled and safe to use.
 - **Deliberate decisions recorded in git, not bugs:** Lexend was reverted in `ed317a7`;
   OpenDyslexic ships with a Comic Sans fallback and no `@font-face` on purpose;
   `js/tts-kokoro.js` was intentionally orphaned in PR #42. Commit bodies are the

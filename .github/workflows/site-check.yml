@@ -79,6 +79,61 @@ jobs:
         # never fire -- which is how 14 broken references survived unnoticed.
         run: bash scripts/audit_images.sh --strict
 
+  chapter-structure:
+    name: Chapter structure
+    if: github.event_name == 'push' || github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Every chapter has sections and none of the unstyled classes
+        # ch6 and ch7 shipped with zero <section> elements, which silently broke
+        # reading time, read-aloud, the Print/PDF picker and search indexing.
+        run: |
+          fail=0
+          for f in ch*.html; do
+            n=$(grep -c '<section' "$f" || true)
+            if [ "$n" -lt 6 ]; then echo "::error file=$f::only $n <section> elements"; fail=1; fi
+            for cls in 'class="body-text"' 'class="section-heading"' 'class="subtitle"' \
+                       'class="attribution-footer"' '<div class="attribution"'; do
+              if grep -q "$cls" "$f"; then echo "::error file=$f::uses $cls"; fail=1; fi
+            done
+          done
+          exit $fail
+
+  search-index-fresh:
+    name: Search index is current
+    if: github.event_name == 'push' || github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Rebuild and fail on drift
+        run: |
+          bash scripts/build_search_index.sh
+          git diff --exit-code -- js/search-index.json \
+            || { echo "::error::Chapter text changed without rebuilding. Run: bash scripts/build_search_index.sh"; exit 1; }
+      - name: No section may be missing its anchor
+        run: |
+          node -e '
+            const j = JSON.parse(require("fs").readFileSync("js/search-index.json","utf8"));
+            const bad = j.flatMap(c => (c.sections||[]).filter(s => !s.id).map(s => c.file));
+            if (bad.length) { console.error("::error::" + bad.length + " indexed sections have no anchor id"); process.exit(1); }
+            console.log(j.reduce((t,c)=>t+(c.sections||[]).length,0) + " sections, all with anchors.");
+          '
+
+  companion-sync:
+    name: Companion resources in sync
+    if: github.event_name == 'push' || github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - run: bash scripts/check_companion_sync.sh
+
   status-drift:
     name: Chapter status tables match data/chapters.json
     if: github.event_name == 'push' || github.event_name == 'pull_request'

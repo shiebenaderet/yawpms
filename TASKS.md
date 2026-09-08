@@ -152,72 +152,72 @@ The audit script is the measuring instrument for the whole milestone, so it is f
 
 **Hard deadline ~Nov 10 (pacing week 10)**
 
-- [ ] **M1-1** Write scripts/check_companion_sync.sh with three independent failure arms: chapter .vocab-box term missing from VOCAB (vocabulary-cards.html), chapter key absent from QUIZZES/VOCAB/SLIDES, and a timeline.html/slideshows.html chapter anchor whose id does not exist in chN.html  
+- [x] **M1-1** Write scripts/check_companion_sync.sh with three independent failure arms: chapter .vocab-box term missing from VOCAB (vocabulary-cards.html), chapter key absent from QUIZZES/VOCAB/SLIDES, and a timeline.html/slideshows.html chapter anchor whose id does not exist in chN.html  
   `S` `[sonnet]`  
   *Done when `bash scripts/check_companion_sync.sh` exits non-zero on current main, names 18 missing ch6 terms and 12 missing ch7 terms, and prints 57/57 for resolved timeline anchors.*  
   > Verified inputs: QUIZZES (quizzes.html:245), VOCAB (vocabulary-cards.html:339) and SLIDES (slideshows.html:425) each already have all 15 keys, so that arm passes today. Anchors live as `ch:N, anchor:"…"` keys in timeline.html (57 refs, 42 unique) — there is no href form. slideshows.html currently has ZERO chapter anchors; scan it for `chN.html#id` anyway so the arm stays correct if slides gain links. Match `id="…"` anywhere in the chapter file, not `<section id=`, so the script gives the same 57/57 before and after M1-2/M1-3. Normalize HTML entities and \u escapes when comparing terms — ch7 has `Gabriel&rsquo;s Rebellion` in the box vs `Gabriel’s Rebellion` in the deck.  
 
-- [ ] **M1-2** Wrap the ten section-heading h2 blocks in ch6.html in <section id="…">, moving intro, shays, convention, ratification, slavery, hamilton, whiskey, french, election and conclusion off the h2 and onto the section  
+- [x] **M1-2** Wrap the ten section-heading h2 blocks in ch6.html in <section id="…">, moving intro, shays, convention, ratification, slavery, hamilton, whiskey, french, election and conclusion off the h2 and onto the section  
   `M` `[sonnet]` · after: `M1-1`  
   *Done when `grep -c '^<section id=' ch6.html` returns 10, `grep -c '<h2[^>]*id=' ch6.html` returns 0, and `bash scripts/check_companion_sync.sh` still prints 57/57 for timeline anchors.*  
   > Do NOT wrap the three h2s in .toc, .overview and .big-questions (ch6.html:33, 49, 58) — they have no ids and are separate blocks in the ch1–ch5/ch8–ch15 pattern. Per CLAUDE.md, nothing but whitespace may sit between `<section id=…>` and its `<h2>` or the indexer silently drops the section. Each section ends where the next section-heading h2 begins; the last (conclusion) closes before `<div class="chapter-resources">` at ch6.html:491. ch6 uses `&mdash;` — keep the entity encoding. ch6 is the largest chapter (53KB, 13 h2 total) and carries the ~Nov 10 pacing deadline.  
 
-- [ ] **M1-3** Wrap the seven section-heading h2 blocks in ch7.html in <section id="…">, moving intro7, slavery7, republicanism, jefferson-pres, native, war1812 and conclusion7 off the h2 and onto the section  
+- [x] **M1-3** Wrap the seven section-heading h2 blocks in ch7.html in <section id="…">, moving intro7, slavery7, republicanism, jefferson-pres, native, war1812 and conclusion7 off the h2 and onto the section  
   `M` `[sonnet]` · after: `M1-1`  
   *Done when `grep -c '^<section id=' ch7.html` returns 7, `grep -c '<h2[^>]*id=' ch7.html` returns 0, and `bash scripts/check_companion_sync.sh` still prints 57/57 for timeline anchors.*  
   > Same rules as M1-2: skip the .toc/.overview/.big-questions h2s (ch7.html:33, 46, 54), no non-whitespace between section and h2, keep `&mdash;`. Last section closes before `<div class="chapter-resources">` at ch7.html:418. Three of the 57 timeline anchors point here (jefferson-pres, slavery7, war1812).  
 
-- [ ] **M1-4** Strip the five unstyled/banned class usages from ch6.html and ch7.html: 74 `class="body-text"` paragraphs, any leftover `class="section-heading"`, `<div class="subtitle">` → `<div class="chapter-subtitle">`, `<div class="attribution">` → `<p class="attribution">`, and `<div class="attribution-footer">` → a `<footer>` block matching ch5.html:348  
+- [x] **M1-4** Strip the five unstyled/banned class usages from ch6.html and ch7.html: 74 `class="body-text"` paragraphs, any leftover `class="section-heading"`, `<div class="subtitle">` → `<div class="chapter-subtitle">`, `<div class="attribution">` → `<p class="attribution">`, and `<div class="attribution-footer">` → a `<footer>` block matching ch5.html:348  
   `S` `[sonnet]` · after: `M1-2`, `M1-3`  
   *Done when `grep -E 'class="body-text"|class="section-heading"|class="subtitle"|attribution-footer|<div class="attribution"' ch6.html ch7.html | wc -l` returns 0.*  
   > Counts verified: body-text 46 in ch6 + 28 in ch7; section-heading 10 + 7 (M1-2/M1-3 should already have removed these); subtitle at line 24 of each; div.attribution at line 25 of each; attribution-footer at ch6.html:504 and ch7.html:430. All four replacement classes already have CSS — `.chapter-subtitle` and `.attribution` are in chapter.css, `footer` has 3 rules; the five banned ones have zero rules anywhere, so nothing renders differently by accident. `pdf-subtitle` (ch6.html:615, ch7.html:541) must survive — do not use a bare `subtitle` grep to edit.  
 
-- [ ] **M1-5** Verify the ch6/ch7 restructure is structural only by diffing tag-stripped visible text against the pre-M1 blobs from `git show`  
+- [x] **M1-5** Verify the ch6/ch7 restructure is structural only by diffing tag-stripped visible text against the pre-M1 blobs from `git show`  
   `S` `[haiku]` · after: `M1-4`  
   *Done when a text-extraction diff between the restructure PR's own merge-base and head is byte-identical for ch6.html and ch7.html.*  
   > Use the same strip as build_search_index.sh (drop <script>/<style>, strip tags, collapse whitespace) so entity handling matches. Record the pre-M1 SHA before M1-2 starts; f4e5cf9 is the last commit before this milestone. Run it against ch6 as soon as M1-4 lands for ch6 rather than waiting for ch7 — ch6 has the Nov 10 deadline. Diff the PR's own merge-base, NOT a hardcoded pre-milestone SHA — otherwise any M4 text edit landing during M1 fails this check even though the restructure is correct.  
 
-- [ ] **M1-6** Verify in a browser that ch6.html and ch7.html now show a reading-time estimate, start Read Aloud, and list every section in the Print/PDF picker  
+- [~] **M1-6** *(needs a browser check by the maintainer)*  Verify in a browser that ch6.html and ch7.html now show a reading-time estimate, start Read Aloud, and list every section in the Print/PDF picker  
   `S` `[haiku]` · after: `M1-4`  
   *Done when, served over `python3 -m http.server 8000`, ch6.html and ch7.html each render a non-empty "About N min read", Read Aloud begins speaking, and the PDF picker lists 10 (ch6) and 7 (ch7) section rows beyond the Title/TOC/Overview/Big Questions/Activity entries.*  
   > All three features key off `document.querySelectorAll('section, …')` in js/reader-tools.js — reading time at line 688, Read Aloud node collection at 713, PDF picker at 484 — which is why they are dead in ch6/ch7 today. Must be served over HTTP, not `open ch6.html` (CLAUDE.md section 3).  
 
-- [ ] **M1-7** Fix both regex bugs in scripts/build_search_index.sh — make the `<section…>` prefix genuinely optional and capture the id non-greedily from `<section id>` with an `h2` fallback — then rebuild and commit js/search-index.json  
+- [x] **M1-7** Fix both regex bugs in scripts/build_search_index.sh — make the `<section…>` prefix genuinely optional and capture the id non-greedily from `<section id>` with an `h2` fallback — then rebuild and commit js/search-index.json  
   `M` `[sonnet]` · after: `M1-4`  
   *Done when `bash scripts/build_search_index.sh` prints "15 chapters indexed" and a node pass over js/search-index.json reports ch6 with 10 sections, ch7 with 7, and 0 sections whose `id` is the empty string.*  
   > MUST come after M1-2/M1-3 — running it first re-indexes ch6/ch7 as empty and forces a second rebuild and a second index commit. Current state: 15 chapters, 89 sections, ch6=0, ch7=0, and 89/89 ids empty. Real trap: once the `<section>` prefix is truly optional the regex also matches the .toc/.overview/.big-questions h2s in all 15 files, none of which carry an id — drop id-less matches or the "0 entries with id: ''" clause can never pass. Also note js/search-index.json is a tracked file, so it must be committed in the same commit as the script fix.  
 
-- [ ] **M1-8** Verify in a browser that a search result now lands on a section anchor rather than the top of a chapter  
+- [~] **M1-8** *(needs a browser check by the maintainer)*  Verify in a browser that a search result now lands on a section anchor rather than the top of a chapter  
   `S` `[haiku]` · after: `M1-7`  
   *Done when, served over localhost, typing "Whiskey Rebellion" into the chapter search returns a result whose anchor href is exactly `ch6.html#whiskey` and following it scrolls to section VII.*  
   > js/search.js:212 builds `basePath + hit.file + (hit.id ? '#' + hit.id : '')`, so this can still fail on a correct index if basePath is wrong from a subdirectory — check from a chapter page, not only index.html. Search hangs forever on `file://` (XMLHttpRequest), so HTTP is mandatory.  
 
-- [ ] **M1-9** Backfill the 18 ch6 and 12 ch7 vocab terms that exist in chapter .vocab-box blocks but are missing from VOCAB in vocabulary-cards.html  
+- [x] **M1-9** Backfill the 18 ch6 and 12 ch7 vocab terms that exist in chapter .vocab-box blocks but are missing from VOCAB in vocabulary-cards.html  
   `M` `[sonnet]` · after: `M1-1`  
   *Done when `bash scripts/check_companion_sync.sh` reports 0 missing terms for ch6 and ch7.*  
   > Definitions already exist verbatim in the chapter boxes, so this is a copy, not authoring. ch6 missing: Ratify, Federalists, Anti-Federalists, Bill of Rights, Secretary of the Treasury, Bank of the United States, Strict construction, Loose construction, Excise tax, Impressment, Jay's Treaty (1794), French Revolution, Alien Act (1798), Sedition Act (1798), XYZ Affair, Electoral College, Peaceful transfer of power, Judicial review. ch7 missing: Suffrage, Second Great Awakening, Play-off system, Tecumseh, Tenskwatawa (The Prophet), Confederacy, War Hawks, Impressment, Treaty of Ghent, Hartford Convention, Monroe Doctrine, American System. VOCAB uses \u escapes for curly quotes and em dashes — match the file's existing encoding. Impressment and Judicial review appear in both chapters' boxes; each deck gets its own copy.  
 
-- [ ] **M1-10** Backfill the 8 pre-existing drifted vocab terms in ch5, ch9, ch10, ch12 and ch14 so check_companion_sync.sh can pass on all 15 chapters  
+- [x] **M1-10** Backfill the 8 pre-existing drifted vocab terms in ch5, ch9, ch10, ch12 and ch14 so check_companion_sync.sh can pass on all 15 chapters  
   `S` `[sonnet]` · after: `M1-9`  
   *Done when `bash scripts/check_companion_sync.sh` exits 0 with no missing terms reported for any of the 15 chapters.*  
   > Found during M1 verification, not listed in the roadmap, but required or the M1-13 CI job can never be added without turning main red. The 8: ch5 "No taxation without representation"; ch9 States' rights; ch10 Suffrage and Convention; ch12 Treaty of Guadalupe Hidalgo (1848) and Foreign Miners' Tax; ch14 Secession and Confederacy (Confederate States of America). The ch5 term is wrapped in typographic quotes inside the box — decide once whether the comparison strips quotes or the deck entry keeps them, and apply the same rule in the script. ch10's Suffrage/Convention duplicate ch6/ch7 deck entries; that is fine, decks are per-chapter. This is NOT the M6 'thin deck' expansion — do not add terms that no .vocab-box contains.  
 
-- [ ] **M1-11** Add a section-count / banned-class job to .github/workflows/site-check.yml that fails when any chapter has fewer <section id> blocks than h2 ids or when body-text, section-heading, subtitle, attribution-footer or <div class="attribution"> reappears in any ch*.html  
+- [x] **M1-11** Add a section-count / banned-class job to .github/workflows/site-check.yml that fails when any chapter has fewer <section id> blocks than h2 ids or when body-text, section-heading, subtitle, attribution-footer or <div class="attribution"> reappears in any ch*.html  
   `S` `[sonnet]` · after: `M1-4`, `M0-6`  
   *Done when the job exits 0 on main and exits non-zero on a scratch commit that re-adds `class="body-text"` to one paragraph of ch6.html, both observed in the Actions run.*  
   > Roadmap requires this to ship in the SAME PR as M1-2/M1-3/M1-4 — adding it earlier turns main red. site-check.yml is created in M0; there must be exactly one workflow file, so add a job, not a new file. Use POSIX grep only, no `grep -oP` — content-change-check.yml's GNU-only `grep -oP` is the existing bug to avoid repeating. The pattern must not match `pdf-subtitle` or `chapter-subtitle`.  
 
-- [ ] **M1-12** Add a search-index freshness job to .github/workflows/site-check.yml that re-runs scripts/build_search_index.sh and fails on `git diff --exit-code js/search-index.json`  
+- [x] **M1-12** Add a search-index freshness job to .github/workflows/site-check.yml that re-runs scripts/build_search_index.sh and fails on `git diff --exit-code js/search-index.json`  
   `S` `[sonnet]` · after: `M1-7`, `M0-6`  
   *Done when the job exits 0 on main and exits non-zero on a scratch commit that edits a ch6.html h2 without rebuilding the index, both observed in the Actions run.*  
   > Ships in the same PR as M1-7. This is the guard that makes a stale index unshippable — the current advisory content-change-check.yml only posts a comment and never fails. build_search_index.sh output is deterministic (JSON.stringify with indent 0) so the diff is stable; it needs node on the runner, and its `stat -c%s || stat -f%z` fallback already works on ubuntu-latest.  
 
-- [ ] **M1-13** Add a companion-sync job to .github/workflows/site-check.yml that runs scripts/check_companion_sync.sh and fails on a non-zero exit  
+- [x] **M1-13** Add a companion-sync job to .github/workflows/site-check.yml that runs scripts/check_companion_sync.sh and fails on a non-zero exit  
   `S` `[sonnet]` · after: `M1-10`, `M0-6`, `M1-1`  
   *Done when the job exits 0 on main and exits non-zero on a scratch commit that deletes one term from VOCAB["6"] in vocabulary-cards.html, both observed in the Actions run.*  
   > Gated on M1-10, not just M1-9: the 8 ch5/ch9/ch10/ch12/ch14 drifted terms would keep main red otherwise. Ships in the same PR as M1-9/M1-10. Must run on push to main and pull_request like the rest of site-check.yml.  
 
-- [ ] **M1-14** Correct the two CLAUDE.md section 4 trap entries that M1 invalidates — the build_search_index.sh two-regex-bug bullet and the "ch6.html and ch7.html are not templates" bullet  
+- [x] **M1-14** Correct the two CLAUDE.md section 4 trap entries that M1 invalidates — the build_search_index.sh two-regex-bug bullet and the "ch6.html and ch7.html are not templates" bullet  
   `S` `[sonnet]` · after: `M1-7`, `M1-4`  
   *Done when `grep -c 'ch6 and ch7 index zero\|all 89 indexed sections carry\|Zero <section> elements' CLAUDE.md` returns 0.*  
   > Called for by the roadmap's Review cadence section, which names the section 4 search-index bug specifically. Leave the `<div class="attribution">` do-not-blind-fix note's history intact but state that it was resolved in M1; do not touch the .chapter-resources bullet (M0/M5 own that) or the .claude/agents/ note in section 5.  

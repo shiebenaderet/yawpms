@@ -41,17 +41,34 @@ for (let i = 1; i <= 15; i++) {
   if (!fs.existsSync(file)) continue;
   const html = fs.readFileSync(file, "utf8");
 
-  // Extract sections by splitting on <section> or <h2>
+  // Extract sections. Two bugs used to live in this regex:
+  //   1. It began with a literal "<" followed by an OPTIONAL (?:section[^>]*>)?
+  //      group, so a match required "<" then "<h2" -- i.e. the section prefix was
+  //      effectively mandatory. ch6 and ch7, which had no <section> elements,
+  //      indexed zero sections.
+  //   2. The greedy <h2[^>]* consumed the whole attribute list before the
+  //      optional (?:id="...")? group could reach it, so every captured id was ""
+  //      and every search result linked to the top of a chapter with no anchor.
+  // Ids live on <section>, not <h2>; the h2 branch is a fallback.
   const sections = [];
-  const h2Re = /<(?:section[^>]*>)?\s*<h2[^>]*(?:id="([^"]*)")?[^>]*>(.*?)<\/h2>/gi;
+  const h2Re = /(?:<section\b([^>]*)>\s*)?<h2\b([^>]*)>(.*?)<\/h2>/gi;
+  const idOf = attrs => {
+    const m = /\bid="([^"]*)"/.exec(attrs || "");
+    return m ? m[1] : "";
+  };
   let match;
   const h2Positions = [];
 
   while ((match = h2Re.exec(html)) !== null) {
+    const id = idOf(match[1]) || idOf(match[2]);
+    // Skip headings with no anchor -- the chapter TOC, Overview and Big
+    // Questions blocks. Indexing them would produce search results that land at
+    // the top of the chapter, which is the defect this fix exists to remove.
+    if (!id) continue;
     h2Positions.push({
       pos: match.index,
-      id: match[1] || "",
-      title: match[2].replace(/<[^>]*>/g, "").trim()
+      id: id,
+      title: match[3].replace(/<[^>]*>/g, "").trim()
     });
   }
 
