@@ -18,6 +18,12 @@ declare -A IMAGES=(
   ["uncle-toms-cabin.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/Uncle_Tom%27s_Cabin_cover.jpg?width=440"
   ["reynolds-political-map.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/Reynolds%27s_Political_Map_of_the_United_States_1856.jpg?width=640"
 
+  # Bleeding Kansas -- ruins of the Free State Hotel after the Sack of Lawrence.
+  # Unknown engraver; published 1856 in Sara T. D. Robinson, "Kansas; Its Interior
+  # and Exterior Life". Public domain. State Historical Society of Missouri.
+  # NOTE: partisan source (the author was the Free-State governor's wife).
+  ["bleeding-kansas.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/Sacking-lawrence.jpg?width=1400"
+
   # Maps
   ["compromise-1850-map.png"]="https://commons.wikimedia.org/wiki/Special:FilePath/United_States_1850-1853-03.png?width=800"
 )

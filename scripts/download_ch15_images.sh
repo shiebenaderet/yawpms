@@ -13,6 +13,12 @@ mkdir -p "$IMG_DIR"
 echo "Downloading Chapter 15 images to $IMG_DIR ..."
 
 declare -A IMAGES=(
+  # Jim Crow -- "Colored Waiting Room", Durham NC bus station. Jack Delano,
+  # May 1940. Public domain (US Farm Security Administration / OWI collection).
+  # Library of Congress, digital ID fsa.8a33837.
+  # NOTE: 1940 photograph illustrating a post-1877 system; the caption dates it.
+  ["reconstruction-ends.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/JimCrowInDurhamNC.jpg?width=1400"
+
   ["reconstruction-congress.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/The_first_colored_senator_and_representatives_-_in_the_41st_and_42nd_Congress_of_the_United_States_LCCN98501907.jpg?width=640"
   ["freedmens-bureau.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/The_Freedmen%27s_Bureau_-_Drawn_by_A.R._Waud._LCCN92514996.jpg?width=640"
   ["kkk-cartoon.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/Worse_than_Slavery_%281874%29%2C_by_Thomas_Nast.jpg?width=640"

@@ -13,6 +13,17 @@ mkdir -p "$IMG_DIR"
 echo "Downloading Chapter 14 images to $IMG_DIR ..."
 
 declare -A IMAGES=(
+  # Gettysburg -- "A Harvest of Death". Negative by Timothy H. O'Sullivan,
+  # 4 July 1863; positive print by Alexander Gardner, 1866. Public domain
+  # (PD-old). J. Paul Getty Museum via Google Art Project.
+  # NOTE: depicts battlefield dead. Used deliberately; see slideshows.html caption.
+  ["civil-war-battle.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/Timothy_H._O%27Sullivan_(American_-_A_Harvest_of_Death_-_Google_Art_Project.jpg?width=1400"
+
+  # Appomattox -- "Lee Surrendering to Grant at Appomattox", Alonzo Chappel, 1870.
+  # Public domain. Smithsonian American Art Museum, accession 1981.139.
+  # NOTE: painted ~5 years after the event; no photograph of the surrender exists.
+  ["appomattox.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/Alonzo_Chappel_-_Lee_Surrendering_to_Grant_at_Appomattox_-_1981.139_-_Smithsonian_American_Art_Museum.jpg?width=1400"
+
   ["fort-sumter.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/Bombardment_of_Fort_Sumter%2C_Charleston_Harbor.jpg?width=640"
   ["usct-soldiers.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/District_of_Columbia._Company_E%2C_4th_U.S._Colored_Infantry%2C_at_Fort_Lincoln_LOC_cwpb.04294.tif?width=640"
   ["field-hospital.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/Amputation_being_performed_in_a_hospital_tent%2C_Gettysburg%2C_07-1863_-_NARA_-_520203.jpg?width=640"
