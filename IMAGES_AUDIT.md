@@ -144,3 +144,55 @@ The [American Yawp](https://www.americanyawp.com) uses many of the same images w
 2. **Run both** `download_all_images.sh` and `download_all_maps.sh` so every referenced image and map is present under `images/`.
 3. **Chapter 6** is now covered by `download_ch6_images.sh` and by `download_all_images.sh`.
 4. **Optional improvements:** add a few key Yawp images (Prehistoric Settlement or Crooked Beak for ch1; Castello Plan, New Orleans 1726, Virginia fishing, Gravelines for ch2) and place them as in the table above.
+
+
+## 2026-09-08 — slideshow/timeline reference repair (TASKS.md M0-3, M0-4)
+
+`audit_images.sh` reported 0 missing while 14 unique paths were broken: it matched
+`src="..."` only, not the JS `src:`/`img:` keys used by `slideshows.html` and
+`timeline.html`. None of the 14 appeared in any download script — they were filenames
+invented to fill slots, for images nobody ever sourced.
+
+**Repointed (8)** — reference fixed, file NOT renamed, because the on-disk names are used
+by chapter pages and download scripts:
+
+| Broken reference | Now points to |
+|---|---|
+| `ch1/beringia-land-bridge.png` | `ch1/beringia-map.jpg` |
+| `ch3/thirteen-colonies-1775.png` | `ch3/thirteen-colonies-map.png` |
+| `ch4/triangular-trade.png` | `ch4/triangular-trade-map.png` |
+| `ch11/underground-railroad.jpg` | `ch10/underground-railroad-map.jpg` |
+| `ch12/gold-rush.jpg` | `ch12/gold-rush-miners.jpg` |
+| `ch12/manifest-destiny-painting.jpg` | `ch12/american-progress.jpg` |
+| `ch14/black-soldiers.jpg` | `ch14/usct-soldiers.jpg` |
+| `ch15/black-legislators.jpg` | `ch15/reconstruction-congress.jpg` |
+
+**Newly sourced (7)** — each verified by viewing the actual image and confirming
+artist/date/license from Commons `extmetadata`:
+
+| File | Work | License |
+|---|---|---|
+| `ch13/bleeding-kansas.jpg` | Ruins of the Free State Hotel, Lawrence, 1856 engraving | PD |
+| `ch14/civil-war-battle.jpg` | O'Sullivan, "A Harvest of Death", 4 Jul 1863 | PD |
+| `ch14/appomattox.jpg` | Chappel, Lee Surrendering to Grant, 1870 | PD |
+| `ch15/reconstruction-ends.jpg` | Delano, "Colored Waiting Room", Durham NC, 1940 | PD |
+| `ch3/burning-of-jamestown.jpg` | "The Burning of Jamestown", engraving, 1857 | PD |
+| `ch14/emancipation-contrabands.jpg` | Waud, Harper's Weekly, 31 Jan 1863 | PD |
+| `ch14/fords-theatre.jpg` | Ford's Theatre in mourning, 1865 | PD |
+| `ch3/jamestown-burial.jpg` | James Fort excavation, Smithsonian | **CC BY-SA 3.0** |
+
+**Two filename-vs-event mismatches corrected.** `burning-of-jamestown.jpg` served both
+"Jamestown Founded" (1607) and "Bacon's Rebellion" (1676); the burning *is* Bacon's
+Rebellion, so it now serves 1676 only and 1607 got its own image.
+`civil-war-1861.jpg` served "Emancipation Proclamation" (1863) and "Lincoln
+Assassinated" (1865); both now have their own.
+
+**First non-public-domain image in the repo.** `ch3/jamestown-burial.jpg` is CC BY-SA
+3.0 with `AttributionRequired: true`. `timeline.html` had no field capable of carrying
+credit, so an optional `credit:` field was added to the entry schema and is rendered
+under the description. Any future CC-licensed timeline image must use it.
+
+**Still open:** `timeline.html` line for 1619 ("First Enslaved Africans Arrive in
+Virginia") uses `ch3/old-plantation.jpg`, a c.1785–95 watercolor — roughly 170 years
+after the event. Not a broken reference, so out of scope for M0; flagged for the M4/M6
+accuracy pass.

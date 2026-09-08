@@ -162,6 +162,16 @@
   min-height: 100px;
   flex-shrink: 0;
   background-size: cover;
+}
+.tl-credit {
+  font-size: 12px;
+  line-height: 1.45;
+  color: #6b6257;
+  margin-top: 6px;
+  font-style: italic;
+}
+body.dark-mode .tl-credit {
+  color: #9a9186;
   background-position: center;
   background-color: #e8e8e8;
 }
@@ -351,7 +361,7 @@ var EVENTS = [
   // Era: Colonization (1500s-1600s)
   {era:"Colonization (1500s\u20131600s)"},
   {date:"1519\u20131521", sort:1519, title:"Spanish Conquest of the Aztecs", desc:"Hern\u00e1n Cort\u00e9s conquers the Aztec Empire with the help of Indigenous allies and European diseases.", cat:"military", ch:2, anchor:"spanish-america", img:"images/ch1/tenochtitlan.jpg"},
-  {date:"1607", sort:1607, title:"Jamestown Founded", desc:"The first permanent English settlement in North America. Many settlers die from starvation and disease.", cat:"political", ch:3, anchor:"jamestown", img:"images/ch3/burning-of-jamestown.jpg"},
+  {date:"1607", sort:1607, title:"Jamestown Founded", desc:"The first permanent English settlement in North America. Many settlers die from starvation and disease.", cat:"political", ch:3, anchor:"jamestown", img:"images/ch3/jamestown-burial.jpg", alt:"Archaeologists excavating a burial pit at the James Fort site, with two colonists\u2019 skeletons lying side by side", credit:"Modern photograph of the Jamestown dig \u2014 Smithsonian Institution, CC BY-SA 3.0"},
   {date:"1619", sort:1619, title:"First Enslaved Africans Arrive in Virginia", desc:"About 20 enslaved Africans are brought to Jamestown, beginning centuries of slavery in North America.", cat:"social", ch:3, anchor:"slavery-begins", img:"images/ch3/old-plantation.jpg"},
   {date:"1620", sort:1620, title:"Pilgrims Land at Plymouth", desc:"Pilgrims establish Plymouth Colony in Massachusetts, seeking religious freedom.", cat:"social", ch:3, anchor:"new-england", img:"images/ch3/mayflower-compact.jpg"},
   {date:"1676", sort:1676, title:"Bacon\u2019s Rebellion", desc:"Frontier settlers rebel against Virginia\u2019s colonial government. Afterward, Virginia shifts toward race-based slavery.", cat:"political", ch:3, anchor:"bacons-rebellion", img:"images/ch3/burning-of-jamestown.jpg"},
@@ -406,11 +416,11 @@ var EVENTS = [
   {era:"Civil War & Reconstruction (1861\u20131877)"},
   {date:"1861", sort:1861, title:"Civil War Begins", desc:"Confederate forces attack Fort Sumter in April. Eleven Southern states form the Confederate States of America.", cat:"military", ch:14, anchor:"war-begins", img:"images/ch14/fort-sumter.jpg"},
   {date:"1862", sort:1862, title:"Battle of Antietam", desc:"The bloodiest single day in American history. The Union \u2018victory\u2019 gives Lincoln political cover for the Emancipation Proclamation.", cat:"military", ch:14, anchor:"battles", img:"images/ch14/antietam-dead.jpg"},
-  {date:"1863", sort:1863, title:"Emancipation Proclamation", desc:"Lincoln declares all enslaved people in Confederate states \u2018forever free,\u2019 transforming the war into a fight to end slavery.", cat:"political", ch:14, anchor:"emancipation", img:"images/ch14/civil-war-1861.jpg"},
+  {date:"1863", sort:1863, title:"Emancipation Proclamation", desc:"Lincoln declares all enslaved people in Confederate states \u2018forever free,\u2019 transforming the war into a fight to end slavery.", cat:"political", ch:14, anchor:"emancipation", img:"images/ch14/emancipation-contrabands.jpg"},
   {date:"1863", sort:1863.3, title:"Battle of Gettysburg", desc:"The bloodiest battle of the war (50,000+ casualties) marks the turning point. The Confederacy never recovers.", cat:"military", ch:14, anchor:"battles", img:"images/ch14/field-hospital.jpg"},
   {date:"1863", sort:1863.5, title:"54th Massachusetts at Fort Wagner", desc:"One of the first Black regiments charges a Confederate fort under heavy fire, proving Black soldiers\u2019 courage and resolve.", cat:"military", ch:14, anchor:"emancipation", img:"images/ch14/usct-soldiers.jpg"},
   {date:"1865", sort:1865, title:"Lee Surrenders at Appomattox", desc:"General Lee surrenders to General Grant on April 9, effectively ending the Civil War.", cat:"military", ch:14, anchor:"end", img:"images/ch14/soldier-family.jpg"},
-  {date:"1865", sort:1865.3, title:"Lincoln Assassinated", desc:"John Wilkes Booth shoots President Lincoln at Ford\u2019s Theatre on April 14. Lincoln dies the next morning.", cat:"political", ch:14, anchor:"end", img:"images/ch14/civil-war-1861.jpg"},
+  {date:"1865", sort:1865.3, title:"Lincoln Assassinated", desc:"John Wilkes Booth shoots President Lincoln at Ford\u2019s Theatre on April 14. Lincoln dies the next morning.", cat:"political", ch:14, anchor:"end", img:"images/ch14/fords-theatre.jpg"},
   {date:"1865", sort:1865.5, title:"13th Amendment Ratified", desc:"Slavery is abolished throughout the United States.", cat:"political", ch:15, anchor:"presidential", img:"images/ch15/contrabands.jpg"},
   {date:"1868", sort:1868, title:"14th Amendment Ratified", desc:"Grants citizenship and equal protection under the law to all people born in the United States.", cat:"political", ch:15, anchor:"radical", img:"images/ch15/freedmens-bureau.jpg"},
   {date:"1870", sort:1870, title:"15th Amendment Ratified", desc:"Prohibits denying the right to vote based on race.", cat:"political", ch:15, anchor:"radical", img:"images/ch15/fifteenth-amendment.jpg"},
@@ -428,7 +438,7 @@ function buildTimeline() {
       html += '<div class="tl-event cat-' + e.cat + '" data-cat="' + e.cat + '" data-ch="' + e.ch + '">';
       html += '<div class="tl-event-inner">';
       if (e.img) {
-        html += '<div class="tl-event-img" style="background-image:url(\'' + e.img + '\')" role="img" aria-label="' + esc(e.title) + '"></div>';
+        html += '<div class="tl-event-img" style="background-image:url(\'' + e.img + '\')" role="img" aria-label="' + esc(e.alt || e.title) + '"></div>';
       }
       var catLabels = {political:'Political &amp; Legal',social:'Social &amp; Cultural',economic:'Economic',military:'Military &amp; Conflict',cultural:'Ideas &amp; Movements'};
       html += '<div class="tl-event-body">';
@@ -436,6 +446,7 @@ function buildTimeline() {
       html += '<div class="tl-date">' + esc(e.date) + '</div>';
       html += '<div class="tl-title">' + esc(e.title) + '</div>';
       html += '<div class="tl-desc">' + esc(e.desc) + '</div>';
+      if (e.credit) { html += '<div class="tl-credit">' + esc(e.credit) + '</div>'; }
       var href = 'ch' + e.ch + '.html' + (e.anchor ? '#' + e.anchor : '');
       html += '<div class="tl-chapter"><a href="' + href + '">Read in Chapter ' + e.ch + ' &rarr;</a></div>';
       html += '</div></div></div>';

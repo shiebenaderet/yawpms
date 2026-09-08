@@ -13,6 +13,18 @@ mkdir -p "$IMG_DIR"
 echo "Downloading Chapter 14 images to $IMG_DIR ..."
 
 declare -A IMAGES=(
+  # Emancipation Proclamation -- "Contrabands coming into camp in consequence of
+  # the proclamation", drawn by Alfred R. Waud, Harper's Weekly, 31 Jan 1863.
+  # Public domain. Library of Congress LCCN 92501365.
+  # Chosen to show self-emancipated people acting, not Lincoln signing.
+  ["emancipation-contrabands.jpg"]="https://upload.wikimedia.org/wikipedia/commons/c/cf/Contrabands_coming_into_camp_in_consequence_of_the_proclamation_-_drawn_by_Mr._A.R._Waud._LCCN92501365.jpg"
+
+  # Lincoln's assassination -- Ford's Theatre draped in mourning crepe, 1865.
+  # Unattributed photographer; public domain. National Archives 528949.
+  # Deliberately the site, not the shooting: no eyewitness image of the murder
+  # exists, so every depiction of it is invention presented as witness.
+  ["fords-theatre.jpg"]="https://upload.wikimedia.org/wikipedia/commons/a/a7/Fords_Theatre_1865.jpg"
+
   # Gettysburg -- "A Harvest of Death". Negative by Timothy H. O'Sullivan,
   # 4 July 1863; positive print by Alexander Gardner, 1866. Public domain
   # (PD-old). J. Paul Getty Museum via Google Art Project.

@@ -17,6 +17,32 @@ start immediately.
 
 ## Discovered during execution
 
+**2026-09-08 — M0-3/M0-4/M0-5 landed.** The 14 broken references were not lost images:
+none appeared in any download script. They were filenames invented to fill slide and
+timeline slots for pictures nobody ever sourced. Consequences for later milestones:
+
+- **Two filenames each served two unrelated events.** `burning-of-jamestown.jpg` was on
+  both "Jamestown Founded" (1607) and "Bacon's Rebellion" (1676) — the burning *is*
+  Bacon's Rebellion, so it now serves 1676 only. `civil-war-1861.jpg` was on
+  "Emancipation Proclamation" (1863) and "Lincoln Assassinated" (1865). **M4/M6 should
+  assume this class of error exists elsewhere** and check filename against caption, not
+  just existence on disk.
+- **The repo now has its first non-public-domain image.** `ch3/jamestown-burial.jpg` is
+  CC BY-SA 3.0 with attribution required. `timeline.html` had no field able to carry a
+  credit, so an optional `credit:` (and `alt:`) field was added to the entry schema and
+  rendered under the description, with a dark-mode CSS counterpart. Any future
+  CC-licensed timeline image must use it.
+- **A resolving reference is not a correct one.** After sourcing, every path resolved
+  while the 1607 entry still showed a 1676 burning. An existence check cannot catch a
+  caption/image mismatch — M0-8's CI job will not either. Only reading the image does.
+- **Flagged for M4, not fixed here:** the 1619 entry ("First Enslaved Africans Arrive in
+  Virginia") uses `ch3/old-plantation.jpg`, a c.1785–95 watercolor ~170 years later. Not
+  a broken reference, so out of M0 scope.
+- **Not yet done in M0:** M0-1 and M0-2 (the audit script's regex and macOS portability)
+  remain open — these fixes were made by direct extraction instead. M0-8's failing
+  image-ref job still waits on them.
+
+
 **2026-09-07 — M0-6/M0-7 landed.** Notes that change later work:
 
 - **`html-validate` found 12 real WCAG failures**, not just style noise: every `<th>` in
@@ -60,17 +86,17 @@ start immediately.
   *Done when `grep -n 'stat -c\|grep -oP\|grep -P\|sed -i ' scripts/audit_images.sh` returns 0 matches and the script prints the same 'Missing from disk' and 'Orphaned files' counts on macOS and on ubuntu-latest.*  
   > `stat -c%s` currently fails silently on macOS via `|| echo 0`, so every orphan reports as 0KB. Use `wc -c < "$f"` rather than branching on `stat -f%z` vs `stat -c%s`. Same file as M0-1, so sequence them to avoid a conflict.  
 
-- [ ] **M0-3** Repoint the 9 mechanical name-mismatch `src:`/`img:` keys in slideshows.html and timeline.html at the filenames that already exist on disk or are declared in scripts/download_all_maps.sh  
+- [x] **M0-3** Repoint the 9 mechanical name-mismatch `src:`/`img:` keys in slideshows.html and timeline.html at the filenames that already exist on disk or are declared in scripts/download_all_maps.sh  
   `S` `[sonnet]` · after: `M0-1`  
   *Done when `bash scripts/audit_images.sh | grep 'Missing from disk'` prints 5 and no slideshow/timeline caption or alt text still describes the old filename's subject.*  
   > Candidates confirmed on disk: beringia-land-bridge.png→beringia-map.jpg, thirteen-colonies-1775.png→thirteen-colonies-map.png, triangular-trade.png→triangular-trade-map.png, gold-rush.jpg→gold-rush-miners.jpg, manifest-destiny-painting.jpg→american-progress.jpg, black-soldiers.jpg→usct-soldiers.jpg, black-legislators.jpg→reconstruction-congress.jpg, civil-war-1861.jpg→civil-war-states-map.png. underground-railroad.jpg→underground-railroad-map.jpg is declared in download_all_maps.sh but absent from disk, so run that script. The fixed audit's 'LIKELY NAME MISMATCHES' section is the authority on the final list. Two of these swap a scene for a map (civil-war-1861, underground-railroad) — the caption must change with the file.  
 
-- [ ] **M0-4** Source, license-verify and commit replacement images for the ~5 broken refs with no disk candidate (ch13/bleeding-kansas, ch14/appomattox, ch14/civil-war-battle, ch15/reconstruction-ends, ch3/burning-of-jamestown), adding each to its scripts/download_chN_images.sh  
+- [x] **M0-4** Source, license-verify and commit replacement images for the ~5 broken refs with no disk candidate (ch13/bleeding-kansas, ch14/appomattox, ch14/civil-war-battle, ch15/reconstruction-ends, ch3/burning-of-jamestown), adding each to its scripts/download_chN_images.sh  
   `M` `[fable]` · after: `M0-1`, `M0-3`  
   *Done when `bash scripts/audit_images.sh | grep 'Missing from disk'` prints 0 and every new file has an artist/date/collection/license comment line in its per-chapter download script.*  
   > CLAUDE.md 2.1 is binding: look at the actual image, fetch Wikimedia extmetadata (action=query&prop=imageinfo&iiprop=extmetadata), confirm artist/date/license, and never write a caption from a filename. IMAGES_AUDIT.md already claims ch3 uses Pyle's *Burning of Jamestown* (1676) — that file was never committed, so this is a real gap, not a rename. Slideshow and timeline captions must be written from the chosen image, not carried over.  
 
-- [ ] **M0-5** Record all 14 resolved image paths in IMAGES_AUDIT.md with old ref, replacement filename, and license/attribution line  
+- [x] **M0-5** Record all 14 resolved image paths in IMAGES_AUDIT.md with old ref, replacement filename, and license/attribution line  
   `S` `[sonnet]` · after: `M0-3`, `M0-4`  
   *Done when `grep -c` in IMAGES_AUDIT.md returns at least 1 for each of the 14 old filenames and each entry carries a license string.*  
   > Must run after both fix passes so the logged replacement names are final. IMAGES_AUDIT.md's 'Recent changes' paragraph currently claims the Jamestown image is already in the chapter HTML — correct that claim in the same edit.  
