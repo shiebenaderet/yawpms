@@ -266,7 +266,7 @@ Three ordering constraints drive this list. (1) The roadmap's explicit trap: scr
   *Done when `grep -cE 'id: (consent-to-credit|display-name|chapter-sha|grade-level|piloted-in-class)' .github/ISSUE_TEMPLATE/chapter-review.yml` returns 5 and a test issue opened from the template on GitHub renders all five fields.*  
   > Depends on M2-5 because the counting rule defines what "chapter version" means and therefore what the SHA field must ask for. Consent-to-credit should be a checkboxes field (opt-in, unchecked default) — contributors.html (M2-3) lists only reviewers who checked it. Do not disturb the existing `chapter` dropdown option strings; M2-7's labeler parses them.  
 
-- [~] **M2-7** *(labeler job done; 15 labels need `gh` run)*  Create the 15 review:chNN labels and add an issue-labeler job to site-check.yml that applies one from the chapter-review.yml dropdown  
+- [x] **M2-7**  Create the 15 review:chNN labels and add an issue-labeler job to site-check.yml that applies one from the chapter-review.yml dropdown  
   `M` `[sonnet]` · after: `M2-6`, `M0-6`  
   *Done when `gh label list --limit 100 | grep -c '^review:ch'` returns 15 and a test issue filed from chapter-review.yml with Chapter "6 — A New Nation" selected carries label `review:ch06` after the site-check labeler job runs.*  
   > This repo currently has only the nine GitHub default labels — the `review`, `chapter-feedback`, `feedback`, and `review-slot` labels named by the four existing issue templates do not exist, so GitHub is silently dropping them; create those too. The labeler must be an `on: issues` job inside site-check.yml, not a new workflow file (M5 requires exactly one). Zero-pad to review:ch06 so sorting matches the chapter order.  
@@ -276,7 +276,7 @@ Three ordering constraints drive this list. (1) The roadmap's explicit trap: scr
   *Done when `grep -c 'Full Chapter Review\" in the feedback type' teachers.html` returns 0 and the live form at https://forms.gle/xzSs9fkXc9LEye3g9 offers no "Full Chapter Review" choice in its feedback-type question.*  
   > Only teachers.html:245 (step 3 of "How to Do a Full Chapter Review") sends reviewers to the form; the teachers.html:184 channel card titled "Full Chapter Review" already links to the GitHub template and should stay. The Google Form edit itself is a maintainer action outside the repo — it cannot be done by a script. Sequenced after M2-6 so the surviving path collects strictly more than the form did.  
 
-- [ ] **M2-9** Open 15 "Review slot" issues (one per chapter, labeled review-slot + review:chNN, claiming = commenting) and backfill their numbers into data/chapters.json  
+- [x] **M2-9** Open 15 "Review slot" issues (one per chapter, labeled review-slot + review:chNN, claiming = commenting) and backfill their numbers into data/chapters.json  
   `M` `[sonnet]` · after: `M2-7`, `M2-5`, `M2-1`  
   *Done when `gh issue list --label review-slot --state open --limit 30 --json number | jq length` returns 15 and every review_slot_issue value in data/chapters.json matches one of those numbers.*  
   > GitHub caps pinned issues at 3 per repo, so "15 pinned Review slot issues" cannot be taken literally — pin one "Review slots" index issue and label the other fifteen, and confirm that reading with the maintainer. The repo has zero issues today, so these will be #1-#15. Each body should link the M2-5 counting rule and the chapter's primary-sources page, and state that commenting claims the slot.  
