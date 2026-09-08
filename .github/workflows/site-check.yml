@@ -134,6 +134,47 @@ jobs:
           node-version: '20'
       - run: bash scripts/check_companion_sync.sh
 
+  banner-and-social:
+    name: Chapter banners and social meta
+    if: github.event_name == 'push' || github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Banners regenerate identically
+        run: |
+          bash scripts/build_status.sh
+          git diff --exit-code -- ch*.html \
+            || { echo "::error::Chapter banners drifted. Edit data/chapters.json and run: bash scripts/build_status.sh"; exit 1; }
+      - name: Every chapter carries a banner with its three links
+        run: |
+          fail=0
+          for f in ch*.html; do
+            for needle in 'class="chapter-banner"' 'Report an error' 'Primary sources'; do
+              grep -q "$needle" "$f" || { echo "::error file=$f::banner missing \"$needle\""; fail=1; }
+            done
+          done
+          exit $fail
+      - name: Every page has description, OG tags and a favicon
+        run: |
+          fail=0
+          for f in *.html primary-sources/*.html; do
+            for needle in 'name="description"' 'og:title' 'og:image' 'rel="icon"'; do
+              grep -q "$needle" "$f" || { echo "::error file=$f::missing $needle"; fail=1; }
+            done
+          done
+          exit $fail
+      - name: Primary source pages link back to their chapter
+        run: |
+          fail=0
+          for i in $(seq 1 15); do
+            f="primary-sources/ch$i-sources.html"
+            grep -q "\.\./ch$i\.html" "$f" || { echo "::error file=$f::no backlink to ch$i.html"; fail=1; }
+          done
+          exit $fail
+
   status-drift:
     name: Chapter status tables match data/chapters.json
     if: github.event_name == 'push' || github.event_name == 'pull_request'

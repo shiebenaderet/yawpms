@@ -320,62 +320,62 @@ Three real ordering traps drive this sequence. (1) The generator must exist befo
 
 ## M3 — Every chapter is a door, and the front door tells the truth
 
-- [ ] **M3-1** Add `.chapter-banner` rules to `css/chapter.css` — one-line layout, link row, plus the matching `body.dark-mode` block  
+- [x] **M3-1** Add `.chapter-banner` rules to `css/chapter.css` — one-line layout, link row, plus the matching `body.dark-mode` block  
   `S` `[sonnet]`  
   *Done when `grep -c '\.chapter-banner' css/chapter.css` returns at least 4 and `grep -cE 'body\.dark-mode[^{]*\.chapter-banner' css/chapter.css` returns at least 1.*  
   > Must land before M3-2 stamps 15 files. `.chapter-resources` shipped into 10 chapters with zero CSS rules (CLAUDE.md section 4) — do not repeat it. CLAUDE.md 2.4 makes the `body.dark-mode` counterpart mandatory for every new chapter.css rule. Container is capped at max-width 640px; the banner must stay on one line inside it.  
 
-- [ ] **M3-2** Extend `scripts/build_status.sh` to stamp the banner into all 15 `chN.html` between `<!-- BANNER:START -->` / `<!-- BANNER:END -->` markers  
+- [x] **M3-2** Extend `scripts/build_status.sh` to stamp the banner into all 15 `chN.html` between `<!-- BANNER:START -->` / `<!-- BANNER:END -->` markers  
   `M` `[sonnet]` · after: `M3-1`, `M2-2`, `M1-5`  
   *Done when `bash scripts/build_status.sh && bash scripts/build_status.sh && git diff --exit-code` exits 0 and `grep -l '<!-- BANNER:START -->' ch*.html | wc -l` prints 15.*  
   > Insert anchor is identical in all 15 files (verified): the `.title-page` closing `</div>` immediately followed by `<main id="main-content" class="container">`. Banner carries status + 'reviewed by N of 3 educators' + short SHA (`git log -1 --format=%h -- chN.html`, not the repo HEAD) + AI-assisted-draft disclosure + three links: Report an error (`issues/new?template=feedback.yml`), Review this chapter (`issues/new?template=chapter-review.yml`), Primary sources (`primary-sources/chN-sources.html` — chapters currently link there 0 times). One template, no per-file hand edits. Per CLAUDE.md style rules, emit `&mdash;` when writing ch6.html/ch7.html and a literal em dash elsewhere. Blocked by M1 because stamping before the ch6/ch7 restructure means redoing the insert and polluting M1's required structural-only diff.  
 
-- [ ] **M3-3** Add a `banner` job to `.github/workflows/site-check.yml` that regenerates, diffs, and asserts banner contents in every `ch*.html`  
+- [x] **M3-3** Add a `banner` job to `.github/workflows/site-check.yml` that regenerates, diffs, and asserts banner contents in every `ch*.html`  
   `S` `[sonnet]` · after: `M3-2`, `M0-6`  
   *Done when a branch that hand-edits one banner line in `ch3.html` makes the `banner` job in `.github/workflows/site-check.yml` fail, and the same job passes on unmodified `main`.*  
   > Two assertions: `bash scripts/build_status.sh` then `git diff --exit-code` (enforces 'no hand edits'), and a grep per chapter for 'of 3 educators', the AI-assisted-draft phrase, and all three link hrefs. Confirm M2's existing drift step actually includes `ch*.html` in its diff scope — if it only diffs the four status tables, chapters are the fourth unguarded surface. Use POSIX grep only; the existing `content-change-check.yml` uses GNU-only `grep -oP` and cannot run locally on macOS.  
 
-- [ ] **M3-4** Add a `backlinks` step to `site-check.yml` asserting each `primary-sources/chN-sources.html` links to `../chN.html`  
+- [x] **M3-4** Add a `backlinks` step to `site-check.yml` asserting each `primary-sources/chN-sources.html` links to `../chN.html`  
   `S` `[sonnet]` · after: `M0-6`  
   *Done when `for n in $(seq 1 15); do grep -q "href=\"../ch$n.html\"" primary-sources/ch$n-sources.html || echo MISSING $n; done` prints nothing and the identical loop runs as a failing step in `site-check.yml`.*  
   > Verified: all 15 files already carry 2 correct back-links each (the `.ps-nav` line and the footer line), so this DoD item is already satisfied in content — the deliverable is the guard that keeps it true, not a fix. Do not 'normalize' the two link texts; CLAUDE.md 2.2 warns against homogenizing primary-source link wording.  
 
-- [ ] **M3-5** Add a visible "For Teachers" block to `index.html` linking all 10 tool pages  
+- [x] **M3-5** Add a visible "For Teachers" block to `index.html` linking all 10 tool pages  
   `M` `[sonnet]`  
   *Done when `grep -oE 'href="(cornell-notes|current-events|differentiation|graphic-organizers|pacing-guide|quizzes|slideshows|standards|timeline|vocabulary-cards)\.html"' index.html | sort -u | wc -l` prints 10.*  
   > The 10 pages are exactly those linked from `teaching.html` but absent from `index.html` (verified by diffing their href sets). Layout gotcha: `index.html` sets `body { overflow: hidden }` and `.page { height: 100vh }`, so an appended block is clipped, not scrolled to — the DoD word is 'visible'. `index.html` links no stylesheet at all; its CSS is an inline `<style>` and `css/index.css` does not exist (README.md:164 is wrong).  
 
-- [ ] **M3-6** Create and commit `favicon.ico` and a 1200x630 `images/site/og-default.jpg`  
+- [x] **M3-6** Create and commit `favicon.ico` and a 1200x630 `images/site/og-default.jpg`  
   `S` `[sonnet]`  
   *Done when `git ls-files favicon.ico images/site/og-default.jpg` lists both and `sips -g pixelWidth -g pixelHeight images/site/og-default.jpg` reports 1200 x 630.*  
   > The repo has no favicon or icon file of any kind today (verified) and `images/site/` holds only `westward-banner.jpg`. Must land before M3-7/M3-8 or every card renders imageless. Chapter pages can instead point `og:image` at their existing title-page background (e.g. `images/ch5/boston-massacre.jpg`) — all 15 exist and are already licensed in `IMAGES_AUDIT.md`. Do not confuse `images/ch8/erie-canal.jpg` (a live chapter title image) with `primary-sources/images/ch8-erie-canal.jpg` (the orphan M4 resolves).  
 
-- [ ] **M3-7** Add `meta description`, OG/Twitter card tags and the favicon link to all 33 root `*.html` files  
+- [x] **M3-7** Add `meta description`, OG/Twitter card tags and the favicon link to all 33 root `*.html` files  
   `M` `[sonnet]` · after: `M3-6`  
   *Done when `for f in *.html; do grep -q 'name="description"' "$f" && grep -q 'og:image' "$f" && grep -q 'rel="icon"' "$f" || echo "$f"; done` prints nothing.*  
   > Verified greenfield: 0 of 48 files carry any of the three today. `og:url` and `og:image` must be absolute on `https://americanyawpms.com` (the CNAME); do not use the github.io host, which 301s. Per-chapter `og:title` should reuse the existing `<title>` text and `og:image` the chapter's own title-page background. Run `npx html-validate` on changed pages per CLAUDE.md before finishing.  
 
-- [ ] **M3-8** Add `meta description`, OG/Twitter card tags and the favicon link to the 15 `primary-sources/ch*-sources.html` files  
+- [x] **M3-8** Add `meta description`, OG/Twitter card tags and the favicon link to the 15 `primary-sources/ch*-sources.html` files  
   `S` `[sonnet]` · after: `M3-6`  
   *Done when `for f in primary-sources/ch*-sources.html; do grep -q 'name="description"' "$f" && grep -q 'og:image' "$f" && grep -q 'rel="icon"' "$f" || echo "$f"; done` prints nothing and `grep -l 'rel="icon" href="favicon' primary-sources/*.html` returns nothing.*  
   > Split from M3-7 because these files sit one directory down — a relative `href="favicon.ico"` or `images/site/...` resolves to nothing here and fails silently while the 33 root files look fine (their existing links already use `../css/pages.css`). The second grep clause is the trap check. These files use `&mdash;` encoding per CLAUDE.md.  
 
-- [ ] **M3-9** Verify the unfurl: confirm a shared chapter URL renders a title/description/image card in Slack and Google Classroom  
+- [~] **M3-9** *(needs the maintainer's account)*  Verify the unfurl: confirm a shared chapter URL renders a title/description/image card in Slack and Google Classroom  
   `S` `[haiku]` · after: `M3-7`, `M3-8`  
   *Done when `curl -s https://americanyawpms.com/ch5.html | grep -c 'og:'` returns at least 4 and screenshots of the `https://americanyawpms.com/ch5.html` unfurl in both Slack and Google Classroom are attached to the M3 tracking issue.*  
   > Requires the tags to be deployed to `main` — GitHub Pages serves the live domain and both crawlers fetch it, so this cannot be checked from the working tree. Slack caches unfurls per URL; use a fresh chapter or append a cache-busting query the first time.  
 
-- [ ] **M3-10** Open and pin a GitHub Discussion "Volume II: is there demand?" with the gating opening post  
+- [~] **M3-10** *(needs the maintainer's account)*  Open and pin a GitHub Discussion "Volume II: is there demand?" with the gating opening post  
   `S` `[fable]`  
   *Done when the Discussion is pinned in `shiebenaderet/yawpms` and its opening post states both that Volume II is not planned until chapters reach 3/3 and an explicit list of what a "yes" would require.*  
   > This is a public commitment statement, so it needs judgment about what the project can honestly promise — CLAUDE.md section 1 and README.md:80 both frame Volume II as conditional, and the roadmap's 'Deliberately not scheduled' section refuses to promise 3/3 at all. The post must not read as a soft yes. Existing Volume II copy to stay consistent with: `index.html:374`, `about.html:61`, `README.md:80`.  
 
-- [ ] **M3-11** Link the Volume II Discussion from the `.vol-placeholder` block in `index.html`  
+- [x] **M3-11** Link the Volume II Discussion from the `.vol-placeholder` block in `index.html`  
   `S` `[sonnet]` · after: `M3-10`, `M3-5`  
   *Done when `grep -c 'github.com/shiebenaderet/yawpms/discussions/' index.html` returns at least 1 and the match sits inside the `div.volume` that contains `p.vol-placeholder`.*  
   > Needs the Discussion URL from M3-10, so it cannot go first. Sequenced after M3-5 only to serialize the two `index.html` edits. The target block is `index.html:371-375` (the 'Volume II: Since 1877' `div.volume`); the styling hook `.vol-placeholder` is defined in the inline `<style>` at index.html:194.  
 
-- [ ] **M3-12** Add a Volume II demand question to the Google Form at forms.gle/xzSs9fkXc9LEye3g9  
+- [~] **M3-12** *(needs the maintainer's account)*  Add a Volume II demand question to the Google Form at forms.gle/xzSs9fkXc9LEye3g9  
   `S` `[sonnet]` · after: `M3-10`, `M2-8`  
   *Done when opening https://forms.gle/xzSs9fkXc9LEye3g9 shows a "Would you use a Volume II (1877–present)?" question and one test submission for it appears in the linked response Sheet.*  
   > Same form that M2-4 edits to remove the 'Full Chapter Review' option — do both in one editing session so the form is touched once. The form is linked from `teachers.html:171` and `teachers.html:245`; the second link's surrounding text tells reviewers to note 'Full Chapter Review' there and will need updating when M2-4 lands. Question wording should match the Discussion's framing from M3-10.  

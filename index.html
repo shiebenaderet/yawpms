@@ -4,6 +4,22 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>The American Yawp — Middle School Edition</title>
+<!-- SOCIAL:START -->
+<meta name="description" content="A free, open-source American history textbook for grades 6–8.Adapted from The American Yawp, the collaboratively built college textbook.">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="The American Yawp MS">
+<meta property="og:title" content="The American Yawp — Middle School Edition">
+<meta property="og:description" content="A free, open-source American history textbook for grades 6–8.Adapted from The American Yawp, the collaboratively built college textbook.">
+<meta property="og:url" content="https://americanyawpms.com/index.html">
+<meta property="og:image" content="https://americanyawpms.com/images/site/og-default.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="The American Yawp — Middle School Edition">
+<meta name="twitter:description" content="A free, open-source American history textbook for grades 6–8.Adapted from The American Yawp, the collaboratively built college textbook.">
+<meta name="twitter:image" content="https://americanyawpms.com/images/site/og-default.jpg">
+<!-- SOCIAL:END -->
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:wght@400;600;700&display=swap');
 
@@ -14,7 +30,13 @@ body {
   color: #2C2C2C;
   background: #0D2137;
   line-height: 1.6;
-  overflow: hidden;
+  /* Was `overflow: hidden` -- the landing page was locked to a single
+     non-scrolling viewport. Changed so the "For Teachers" block below the hero
+     is reachable (TASKS.md M3-5). The hero itself is unchanged: .page is still
+     height:100vh and fills the screen on load. Revert this one line to restore
+     the locked behaviour. */
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 
 /* ---- Full-viewport wrapper ---- */
@@ -190,6 +212,33 @@ body {
   position: relative;
   top: -3px;
 }
+
+/* For Teachers tool grid.
+   Sits BELOW .page, which is a deliberate single-viewport hero (height:100vh) --
+   putting content inside it overlaps the chapter list. */
+.teacher-tools {
+  background: #FAFAF8;
+  border-top: 1px solid #e3ddd2;
+  padding: 56px 32px 64px;
+}
+.teacher-tools > * { max-width: 960px; margin-left: auto; margin-right: auto; }
+.teacher-tools h2 { margin: 0 0 6px; color: #1B3A5C; }
+.teacher-tools > p { color: #6b6257; margin: 0 0 20px; }
+.tool-grid {
+  list-style: none; padding: 0; margin: 0;
+  display: grid; gap: 10px;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+}
+.tool-grid a {
+  display: block; padding: 12px 14px; text-decoration: none;
+  border: 1px solid #e3ddd2; border-radius: 6px; background: #fff;
+  transition: border-color .2s, box-shadow .2s;
+}
+.tool-grid a:hover, .tool-grid a:focus-visible {
+  border-color: #C4941D; box-shadow: 0 1px 4px rgba(0,0,0,.06);
+}
+.tool-grid strong { display: block; color: #1B3A5C; }
+.tool-grid span { display: block; font-size: 13px; color: #6b6257; margin-top: 2px; }
 
 /* Volume II placeholder */
 .vol-placeholder {
@@ -371,12 +420,13 @@ footer .footer-links a { margin: 0 5px; }
   <div class="volume">
     <h2>Volume II: Since 1877</h2>
     <div class="vol-sub">The Gilded Age through the 21st Century</div>
-    <p class="vol-placeholder">Planned for future development. Most middle school curricula cover through Reconstruction. If there is demand for Volume II, we'll build it.</p>
+    <p class="vol-placeholder">Planned for future development. Most middle school curricula cover through Reconstruction. If there is demand for Volume II, we&rsquo;ll build it &mdash; <a href="https://github.com/shiebenaderet/yawpms/discussions">tell us you&rsquo;d use it</a>.</p>
   </div>
 
 </div>
 
 </div>
+
 
 <footer>
   <div class="license-line">
@@ -393,6 +443,25 @@ footer .footer-links a { margin: 0 5px; }
   </div>
 </footer>
 
+</div>
+<div class="teacher-tools">
+  <h2>For Teachers</h2>
+  <p>Everything here is free, openly licensed, and printable. No account, no ads.</p>
+  <ul class="tool-grid">
+      <li><a href="teachers.html"><strong>Teachers Hub</strong><span>Chapter status, how to review, FAQ</span></a></li>
+      <li><a href="teaching.html"><strong>Teaching Guide</strong><span>Using the book in a classroom</span></a></li>
+      <li><a href="pacing-guide.html"><strong>Pacing Guide</strong><span>Week-by-week for a full year</span></a></li>
+      <li><a href="standards.html"><strong>Standards Alignment</strong><span>Common Core RH.6-8 and WHST</span></a></li>
+      <li><a href="quizzes.html"><strong>Quizzes</strong><span>Per-chapter comprehension checks</span></a></li>
+      <li><a href="vocabulary-cards.html"><strong>Vocabulary Cards</strong><span>179 terms across 15 chapters</span></a></li>
+      <li><a href="slideshows.html"><strong>Slideshows</strong><span>Ready-to-project decks</span></a></li>
+      <li><a href="timeline.html"><strong>Timeline</strong><span>Every era, one scroll</span></a></li>
+      <li><a href="cornell-notes.html"><strong>Cornell Notes</strong><span>Printable note-taking frames</span></a></li>
+      <li><a href="graphic-organizers.html"><strong>Graphic Organizers</strong><span>Cause/effect, compare, sequence</span></a></li>
+      <li><a href="differentiation.html"><strong>Differentiation</strong><span>Supports for IEP and multilingual readers</span></a></li>
+      <li><a href="current-events.html"><strong>Current Events</strong><span>Connecting history to now</span></a></li>
+      <li><a href="primary-source-reader.html"><strong>Primary Source Reader</strong><span>61 sources, all with verified originals</span></a></li>
+  </ul>
 </div>
 <script src="js/search.js"></script>
 </body>
