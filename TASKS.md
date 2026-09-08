@@ -15,6 +15,35 @@ start immediately.
 
 ---
 
+## Discovered during execution
+
+**2026-09-07 — M0-6/M0-7 landed.** Notes that change later work:
+
+- **`html-validate` found 12 real WCAG failures**, not just style noise: every `<th>` in
+  `pacing-guide.html`'s three tables lacked a `scope` attribute (rule `wcag/h63`), so
+  screen readers could not associate headers with cells on a teacher-facing page. Fixed
+  (`scope="col"`). `DESIGN_GUIDE.md` claims the accessibility audit passed — **M7 should
+  treat its ✅ rows as unverified.**
+- **5 raw `&` characters** in `standards.html` and `teaching.html` are now `&amp;`.
+- **`.htmlvalidate.json` disables exactly three stylistic rules** —
+  `no-implicit-button-type` (542 hits), `no-inline-style` (128), `void-style` (56) — and
+  leaves every correctness and accessibility rule on. The repo passes clean at exit 0.
+  Re-enabling any of the three means fixing 700+ findings first.
+- **The link checker must distinguish bot-blocked from dead.** A first pass flagged 5
+  failures; all 5 were false. `founders.archives.gov` answers `202` with a **zero-byte**
+  body, and `encyclopediavirginia.org` answers `403` to any non-browser client — both
+  serve fine to humans. The job now classifies `403/429/202/503` as *blocked*
+  (informational) and only genuine 4xx/5xx/000 as *broken* (opens an issue). Verified
+  full sweep: **62 URLs, 0 broken, 3 blocked** (all Encyclopedia Virginia).
+- **`html-validate` is not installed and there is no `package.json`**; CI uses
+  `npx --yes`. `CLAUDE.md`'s "run `npx html-validate`" instruction prompts locally
+  without `--yes`.
+- **M0-8 was deliberately not done here.** It depends on M0-2 and M0-4 (the audit-script
+  fix and the editorial image picks), and landing a failing image job before those would
+  put main red by design.
+
+---
+
 
 # Q4 2026
 
@@ -46,12 +75,12 @@ start immediately.
   *Done when `grep -c` in IMAGES_AUDIT.md returns at least 1 for each of the 14 old filenames and each entry carries a license string.*  
   > Must run after both fix passes so the logged replacement names are final. IMAGES_AUDIT.md's 'Recent changes' paragraph currently claims the Jamestown image is already in the chapter HTML — correct that claim in the same edit.  
 
-- [ ] **M0-6** Create .github/workflows/site-check.yml (push to main + pull_request) with an html-validate job and a committed .htmlvalidate.json the repo already passes  
+- [x] **M0-6** Create .github/workflows/site-check.yml (push to main + pull_request) with an html-validate job and a committed .htmlvalidate.json the repo already passes  
   `S` `[sonnet]`  
   *Done when a PR introducing an unclosed <section> in ch1.html fails the html-validate job, a no-op PR passes, and site-check.yml is the only workflow file besides content-change-check.yml.*  
   > Re-cut so the workflow exists WITHOUT waiting on maintainer image picks — html-validate and the link-check are dependency-free. Only the failing image-ref job (M0-8) must land after M0-4. Pick a ruleset the 48 hand-written files pass today so the gate catches regressions instead of demanding a mass rewrite. Every job added here later MUST gate on `if: github.event_name == ...` or it runs on every trigger.  
 
-- [ ] **M0-7** Add a monthly scheduled link-check job to site-check.yml that curls every href inside the 61 <p class="ps-source-link"> blocks  
+- [x] **M0-7** Add a monthly scheduled link-check job to site-check.yml that curls every href inside the 61 <p class="ps-source-link"> blocks  
   `M` `[sonnet]` · after: `M0-6`  
   *Done when the job has both a monthly `schedule:` cron and `workflow_dispatch`, carries `if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'`, a manual dispatch checks 62 URLs, and an injected bad URL exits non-zero naming the file and source id.*  
   > 61 blocks but 62 anchors — source 1.2 (Cahokia) deliberately carries two links per CLAUDE.md 2.2. Use a browser User-Agent and a 20s timeout so CI and the local link-checker subagent agree; Archive.org rate-limits and some library catalogs 403 non-browser agents. MUST be event-gated or the 62-URL sweep runs on every PR and breaks M0-6's green-on-first-run.  

@@ -1,0 +1,227 @@
+name: Site check
+
+# One workflow, several jobs. Every job MUST gate on github.event_name — otherwise
+# each trigger runs every job, and the monthly 62-URL link sweep would fire on every
+# pull request.
+on:
+  push:
+    branches: [main]
+  pull_request:
+  schedule:
+    # 09:00 UTC on the 1st of each month
+    - cron: '0 9 1 * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  html-validate:
+    name: HTML validation
+    if: github.event_name == 'push' || github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Collect changed pages
+        id: pages
+        run: |
+          set -euo pipefail
+          if [ "${{ github.event_name }}" = "pull_request" ]; then
+            BASE="${{ github.event.pull_request.base.sha }}"
+          else
+            BASE="${{ github.event.before }}"
+          fi
+
+          # A new branch, a force push, or a first commit gives an unusable base.
+          # Fall back to validating everything rather than silently checking nothing.
+          if [ -z "$BASE" ] || [ "$BASE" = "0000000000000000000000000000000000000000" ] \
+             || ! git cat-file -e "$BASE^{commit}" 2>/dev/null; then
+            echo "Base unusable ($BASE) — validating all pages."
+            FILES=$(ls ch*.html primary-sources/*.html)
+          else
+            FILES=$(git diff --name-only --diff-filter=d "$BASE" HEAD \
+              | grep -E '^(ch[0-9]+\.html|primary-sources/.*\.html)$' || true)
+          fi
+
+          if [ -z "$FILES" ]; then
+            echo "none=true" >> "$GITHUB_OUTPUT"
+            echo "No chapter or primary-source pages changed."
+          else
+            echo "none=false" >> "$GITHUB_OUTPUT"
+            { echo "files<<EOF"; echo "$FILES"; echo "EOF"; } >> "$GITHUB_OUTPUT"
+            echo "Validating:"; echo "$FILES"
+          fi
+
+      - name: Run html-validate
+        if: steps.pages.outputs.none == 'false'
+        run: npx --yes html-validate ${{ steps.pages.outputs.files }}
+
+  link-check:
+    name: Primary source links (monthly)
+    if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      issues: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check every ps-source-link URL
+        id: check
+        run: |
+          set -uo pipefail
+          UA='Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0 Safari/537.36'
+
+          # Pair each link with the source id of the .ps-source block containing it.
+          # 61 blocks hold 62 anchors: source 1.2 (Cahokia) carries two on purpose.
+          for f in primary-sources/*.html; do
+            awk -v FILE="$f" '
+              match($0, /id="source-[0-9]+-[0-9]+"/) {
+                sid = substr($0, RSTART+4, RLENGTH-5)
+              }
+              /class="ps-source-link"/ {
+                line = $0
+                while (match(line, /href="[^"]+"/)) {
+                  url = substr(line, RSTART+6, RLENGTH-7)
+                  print FILE "\t" sid "\t" url
+                  line = substr(line, RSTART+RLENGTH)
+                }
+              }
+            ' "$f"
+          done > links.tsv
+
+          TOTAL=$(wc -l < links.tsv | tr -d ' ')
+          echo "Checking $TOTAL URLs."
+          : > broken.tsv
+          : > blocked.tsv
+
+          probe() {  # -> "<code> <bytes>"
+            curl -sS -o /dev/null -w '%{http_code} %{size_download}' -L --max-time 20 \
+              -A "$UA" \
+              -H 'Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8' \
+              -H 'Accept-Language: en-US,en;q=0.9' \
+              --compressed "$1" 2>/dev/null
+          }
+
+          while IFS=$'\t' read -r file sid url; do
+            read -r code bytes <<< "$(probe "$url")"
+            case "$code" in 2*) ok=1 ;; *) ok=0 ;; esac
+            # A 2xx with an empty body is a challenge page, not content.
+            [ "$ok" = 1 ] && [ "${bytes:-0}" -eq 0 ] && ok=0
+
+            if [ "$ok" = 0 ]; then
+              sleep 3
+              read -r code bytes <<< "$(probe "$url")"
+              case "$code" in 2*) ok=1 ;; *) ok=0 ;; esac
+              [ "$ok" = 1 ] && [ "${bytes:-0}" -eq 0 ] && ok=0
+            fi
+
+            if [ "$ok" = 1 ]; then
+              continue
+            fi
+
+            # Distinguish "the host refuses robots" from "the page is gone". Only the
+            # latter is actionable; conflating them trains the maintainer to ignore
+            # this issue. Verified against real hosts: founders.archives.gov answers
+            # 202 with 0 bytes and encyclopediavirginia.org answers 403 to any
+            # non-browser client, yet both serve fine to humans.
+            case "$code" in
+              403|429|202|503)
+                printf '%s\t%s\t%s\t%s\n' "$code" "$file" "$sid" "$url" >> blocked.tsv
+                echo "BLOCKED $code  $sid  $url" ;;
+              *)
+                printf '%s\t%s\t%s\t%s\n' "$code" "$file" "$sid" "$url" >> broken.tsv
+                echo "BROKEN  $code  $sid  $url" ;;
+            esac
+          done < links.tsv
+
+          BROKEN=$(wc -l < broken.tsv | tr -d ' ')
+          BLOCKED=$(wc -l < blocked.tsv | tr -d ' ')
+          {
+            echo "total=$TOTAL"
+            echo "broken=$BROKEN"
+            echo "blocked=$BLOCKED"
+          } >> "$GITHUB_OUTPUT"
+          echo "$TOTAL checked - $BROKEN broken, $BLOCKED bot-blocked (not actionable)."
+
+      - name: Open, update, or close the tracking issue
+        uses: actions/github-script@v7
+        env:
+          BROKEN: ${{ steps.check.outputs.broken }}
+          BLOCKED: ${{ steps.check.outputs.blocked }}
+          TOTAL: ${{ steps.check.outputs.total }}
+        with:
+          script: |
+            const fs = require('fs');
+            const TITLE = 'Broken primary source links';
+            const count = Number(process.env.BROKEN || '0');
+            const blocked = Number(process.env.BLOCKED || '0');
+            const total = process.env.TOTAL;
+
+            const { data: open } = await github.rest.issues.listForRepo({
+              owner: context.repo.owner, repo: context.repo.repo,
+              state: 'open', labels: 'link-check', per_page: 10,
+            });
+            const existing = open.find(i => i.title === TITLE);
+
+            if (count === 0) {
+              if (existing) {
+                await github.rest.issues.createComment({
+                  owner: context.repo.owner, repo: context.repo.repo,
+                  issue_number: existing.number,
+                  body: `All ${total} primary source links resolved on the latest run (${blocked} bot-blocked but not dead). Closing.`,
+                });
+                await github.rest.issues.update({
+                  owner: context.repo.owner, repo: context.repo.repo,
+                  issue_number: existing.number, state: 'closed',
+                });
+              }
+              core.info(`No broken links (${total} checked, ${blocked} bot-blocked).`);
+              return;
+            }
+
+            const rows = fs.readFileSync('broken.tsv', 'utf8').trim().split('\n')
+              .map(l => l.split('\t'))
+              .map(([code, file, sid, url]) =>
+                `| \`${code}\` | ${sid || '—'} | [link](${url}) | \`${file}\` |`)
+              .join('\n');
+
+            const body = [
+              `**${count} of ${total}** primary source links appear to be dead.`,
+              '',
+              `Each was retried once. A further **${blocked}** returned 403/429/202 — those hosts`,
+              'refuse non-browser clients and are *not* counted as broken, because they serve',
+              'fine to humans. A `000` means the request never completed at all.',
+              '',
+              '| Status | Source | URL | File |',
+              '|---|---|---|---|',
+              rows,
+              '',
+              '---',
+              'Every `.ps-source` block must keep a working `<p class="ps-source-link">`',
+              '(CLAUDE.md §2.2). Replace a dead URL with a verified equivalent rather than',
+              'removing the link.',
+              '',
+              `_Updated by the monthly link check on ${new Date().toISOString().slice(0, 10)}._`,
+            ].join('\n');
+
+            if (existing) {
+              await github.rest.issues.update({
+                owner: context.repo.owner, repo: context.repo.repo,
+                issue_number: existing.number, body,
+              });
+              core.info(`Updated issue #${existing.number}.`);
+            } else {
+              await github.rest.issues.create({
+                owner: context.repo.owner, repo: context.repo.repo,
+                title: TITLE, body, labels: ['link-check'],
+              });
+            }
+            core.setFailed(`${count} broken primary source link(s).`);
