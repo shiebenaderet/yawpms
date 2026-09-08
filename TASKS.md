@@ -177,7 +177,7 @@ The audit script is the measuring instrument for the whole milestone, so it is f
   *Done when a text-extraction diff between the restructure PR's own merge-base and head is byte-identical for ch6.html and ch7.html.*  
   > Use the same strip as build_search_index.sh (drop <script>/<style>, strip tags, collapse whitespace) so entity handling matches. Record the pre-M1 SHA before M1-2 starts; f4e5cf9 is the last commit before this milestone. Run it against ch6 as soon as M1-4 lands for ch6 rather than waiting for ch7 — ch6 has the Nov 10 deadline. Diff the PR's own merge-base, NOT a hardcoded pre-milestone SHA — otherwise any M4 text edit landing during M1 fails this check even though the restructure is correct.  
 
-- [~] **M1-6** *(needs a browser check by the maintainer)*  Verify in a browser that ch6.html and ch7.html now show a reading-time estimate, start Read Aloud, and list every section in the Print/PDF picker  
+- [x] **M1-6**  Verify in a browser that ch6.html and ch7.html now show a reading-time estimate, start Read Aloud, and list every section in the Print/PDF picker  
   `S` `[haiku]` · after: `M1-4`  
   *Done when, served over `python3 -m http.server 8000`, ch6.html and ch7.html each render a non-empty "About N min read", Read Aloud begins speaking, and the PDF picker lists 10 (ch6) and 7 (ch7) section rows beyond the Title/TOC/Overview/Big Questions/Activity entries.*  
   > All three features key off `document.querySelectorAll('section, …')` in js/reader-tools.js — reading time at line 688, Read Aloud node collection at 713, PDF picker at 484 — which is why they are dead in ch6/ch7 today. Must be served over HTTP, not `open ch6.html` (CLAUDE.md section 3).  
@@ -187,7 +187,7 @@ The audit script is the measuring instrument for the whole milestone, so it is f
   *Done when `bash scripts/build_search_index.sh` prints "15 chapters indexed" and a node pass over js/search-index.json reports ch6 with 10 sections, ch7 with 7, and 0 sections whose `id` is the empty string.*  
   > MUST come after M1-2/M1-3 — running it first re-indexes ch6/ch7 as empty and forces a second rebuild and a second index commit. Current state: 15 chapters, 89 sections, ch6=0, ch7=0, and 89/89 ids empty. Real trap: once the `<section>` prefix is truly optional the regex also matches the .toc/.overview/.big-questions h2s in all 15 files, none of which carry an id — drop id-less matches or the "0 entries with id: ''" clause can never pass. Also note js/search-index.json is a tracked file, so it must be committed in the same commit as the script fix.  
 
-- [~] **M1-8** *(needs a browser check by the maintainer)*  Verify in a browser that a search result now lands on a section anchor rather than the top of a chapter  
+- [x] **M1-8**  Verify in a browser that a search result now lands on a section anchor rather than the top of a chapter  
   `S` `[haiku]` · after: `M1-7`  
   *Done when, served over localhost, typing "Whiskey Rebellion" into the chapter search returns a result whose anchor href is exactly `ch6.html#whiskey` and following it scrolls to section VII.*  
   > js/search.js:212 builds `basePath + hit.file + (hit.id ? '#' + hit.id : '')`, so this can still fail on a correct index if basePath is wrong from a subdirectory — check from a chapter page, not only index.html. Search hangs forever on `file://` (XMLHttpRequest), so HTTP is mandatory.  
@@ -222,7 +222,7 @@ The audit script is the measuring instrument for the whole milestone, so it is f
   *Done when `grep -c 'ch6 and ch7 index zero\|all 89 indexed sections carry\|Zero <section> elements' CLAUDE.md` returns 0.*  
   > Called for by the roadmap's Review cadence section, which names the section 4 search-index bug specifically. Leave the `<div class="attribution">` do-not-blind-fix note's history intact but state that it was resolved in M1; do not touch the .chapter-resources bullet (M0/M5 own that) or the .claude/agents/ note in section 5.  
 
-- [ ] **M1-15** Re-run every M1 mechanical check in one pass on main and record the results  
+- [x] **M1-15** Re-run every M1 mechanical check in one pass on main and record the results  
   `S` `[haiku]` · after: `M1-5`, `M1-6`, `M1-8`, `M1-11`, `M1-12`, `M1-13`, `M1-14`  
   *Done when a single script run reports: ch6=10 and ch7=7 `^<section id=` lines, 0 banned-class hits across ch6/ch7, 0 `<h2 … id=` in either file, check_companion_sync.sh exit 0 with 57/57 anchors, index 15 chapters with 0 empty ids, and all three site-check.yml jobs green on the latest main commit.*  
   > Mechanical only — this task re-verifies, it does not fix. Anything red here goes back to the owning task rather than being patched inside this one. The browser items (M1-6, M1-8) are already signed off and are not re-run here.  

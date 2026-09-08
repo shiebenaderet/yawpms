@@ -682,8 +682,10 @@
   // Reading Time Estimate
   // ==========================================
   function initReadingTime() {
-    var el = document.querySelector('.reading-time');
-    if (!el) return;
+    // The chapter banner carries one; older markup had a standalone div.
+    // Fill every match so both shapes work.
+    var els = document.querySelectorAll('.reading-time');
+    if (!els.length) return;
     // Count words in all sections and callout boxes
     var content = document.querySelectorAll('section, .overview, .big-questions');
     var wordCount = 0;
@@ -691,7 +693,8 @@
       wordCount += node.textContent.split(/\s+/).filter(Boolean).length;
     });
     var minutes = Math.ceil(wordCount / 200); // ~200 wpm for middle school readers
-    el.textContent = 'About ' + minutes + ' min read';
+    var label = 'About ' + minutes + ' min read';
+    els.forEach(function (el) { el.textContent = label; });
   }
 
   // ==========================================

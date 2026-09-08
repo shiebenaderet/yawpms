@@ -27,6 +27,7 @@ const BAR = d.review_bar;
 const chapters = d.chapters;
 const SITE = "https://americanyawpms.com";
 
+let bannersChanged = 0;
 const esc = s => String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
 const counted = c => (c.reviewers || []).filter(r => r.counts !== false).length;
 
@@ -92,6 +93,45 @@ if (!credited.length) {
   }).join("\n") + "\n</ul>";
 }
 
+// --- chapter banners -------------------------------------------------------
+// Disclosure belongs on the page a student or evaluating teacher actually
+// opens, not only on teachers.html. Generated, so it can never become a
+// fourth hand-synced status surface.
+const REPO = "https://github.com/shiebenaderet/yawpms";
+const slug = { "Draft": "draft", "Under Review": "under-review", "Approved": "approved" };
+
+for (const c of chapters) {
+  const file = `ch${c.number}.html`;
+  if (!fs.existsSync(file)) continue;
+  const st = statusOf(c);
+  const n = counted(c);
+  const bits = [`Reviewed by ${n} of ${BAR} educators`];
+  bits.push(c.accuracy_pass
+    ? `AI-assisted fact check completed ${c.accuracy_pass}; not yet reviewed by a historian`
+    : "AI-assisted draft, not yet reviewed by a historian");
+  if (c.chapter_sha) bits.push(`version ${c.chapter_sha}`);
+
+  const report = `${REPO}/issues/new?template=content-revision.yml&amp;title=${encodeURIComponent(`Chapter ${c.number}: `)}`;
+  const links = [`<a href="${report}">Report an error</a>`];
+  if (c.review_slot_issue) links.push(`<a href="${REPO}/issues/${c.review_slot_issue}">Review this chapter</a>`);
+  links.push(`<a href="primary-sources/ch${c.number}-sources.html">Primary sources</a>`);
+
+  const banner =
+    `<div class="chapter-banner" data-status="${slug[st]}">\n` +
+    `  <span class="cb-status">${st}</span>\n` +
+    `  <span class="cb-detail">${bits.join(" &middot; ")}</span>\n` +
+    `  <span class="reading-time cb-readtime"></span>\n` +
+    `  <span class="cb-links">${links.join("\n    ")}</span>\n` +
+    `</div>`;
+
+  const src = fs.readFileSync(file, "utf8");
+  const B = "<!-- BANNER:START -->", E = "<!-- BANNER:END -->";
+  const i = src.indexOf(B), j = src.indexOf(E);
+  if (i === -1 || j === -1) throw new Error(`${file}: missing BANNER markers`);
+  const out = src.slice(0, i + B.length) + "\n" + banner + "\n" + src.slice(j);
+  if (out !== src) { fs.writeFileSync(file, out); bannersChanged++; }
+}
+
 const changed = [
   replaceRegion("REVIEW_STATUS.md", "status-table", rs),
   replaceRegion("README.md", "status-table", rm),
@@ -100,7 +140,10 @@ const changed = [
 ];
 
 const n = changed.filter(Boolean).length;
-console.log(n === 0 ? "Status surfaces already up to date (no-op)." : `Updated ${n} of 4 status surfaces.`);
+const total = n + bannersChanged;
+console.log(total === 0
+  ? "Status surfaces and chapter banners already up to date (no-op)."
+  : `Updated ${n} of 4 status surfaces and ${bannersChanged} chapter banner(s).`);
 const approved = chapters.filter(c => statusOf(c) === "Approved").length;
 const reviews = chapters.reduce((t,c) => t + counted(c), 0);
 console.log(`${chapters.length} chapters, ${reviews} counted review(s), ${approved} approved.`);
