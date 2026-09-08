@@ -306,7 +306,7 @@ p {
 |-------------|---------------|----------|
 | **Contrast ratios** | ✅ Audited — all pass WCAG AA/AAA | ✅ Complete |
 | **Non-text contrast** | ✅ Callout borders meet 3:1 ratio | ✅ Complete |
-| **Alt text** | ✅ 99.2% coverage (125/126 images) | ✅ Complete |
+| **Alt text** | ✅ 100% coverage (127/127 images) | ✅ Complete |
 | **Color independence** | Confirm callouts distinguishable without color perception | Medium |
 | **Focus order** | Test keyboard navigation flow | Medium |
 | **Screen reader testing** | Test with NVDA, JAWS, VoiceOver | Medium |
@@ -368,7 +368,7 @@ p {
 ### Priority 1 (High) — Accessibility Compliance
 
 - [x] **Contrast Audit**: All text/background combinations pass WCAG AA/AAA (audited v1.0.1)
-- [x] **Alt Text Audit**: 99.2% coverage (125/126 images) — descriptive alt on all (audited v1.0.1)
+- [x] **Alt Text Audit**: 100% coverage (127/127 images) — descriptive alt on all (re-verified 2026-09-08)
 - [x] **Non-text Contrast**: Callout borders meet 3:1 ratio (audited v1.0.1)
 - [ ] **Screen Reader Testing**: Test with assistive technologies (NVDA, JAWS, VoiceOver)
 

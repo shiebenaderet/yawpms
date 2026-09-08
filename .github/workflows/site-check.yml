@@ -63,6 +63,20 @@ jobs:
         if: steps.pages.outputs.none == 'false'
         run: npx --yes html-validate ${{ steps.pages.outputs.files }}
 
+  image-refs:
+    name: Image references
+    # Gated like every other job: without this the monthly cron would run it too.
+    if: github.event_name == 'push' || github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Every referenced image exists on disk
+        # --strict makes audit_images.sh exit non-zero when anything is missing.
+        # Without it the script always exited 0, so a gate built on it could
+        # never fire -- which is how 14 broken references survived unnoticed.
+        run: bash scripts/audit_images.sh --strict
+
   link-check:
     name: Primary source links (monthly)
     if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'

@@ -343,6 +343,53 @@ p:last-child { margin-bottom: 0; }
 }
 
 /* Activity Box */
+/* Chapter resources — links to the companion study tools.
+   Present in 10 of 15 chapters. Shipped with no CSS at all until now, so the
+   block rendered as a bare pile of emoji links (TASKS.md M0-10). */
+.chapter-resources {
+  background: #FAFAFA;
+  border: 1px solid #ddd;
+  border-top: 4px solid var(--navy);
+  border-radius: 6px;
+  padding: 28px;
+  margin: 40px 0;
+}
+.chapter-resources h3 {
+  font-family: 'Source Sans 3', sans-serif;
+  color: var(--navy);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  margin: 0 0 8px;
+}
+.chapter-resources p {
+  margin: 0 0 16px;
+}
+.resource-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.resource-links a {
+  display: inline-block;
+  color: var(--navy);
+  text-decoration: none;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 8px 14px;
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 15px;
+  transition: background .2s, color .2s, border-color .2s;
+}
+.resource-links a:hover,
+.resource-links a:focus-visible {
+  background: var(--navy);
+  border-color: var(--navy);
+  color: #fff;
+}
+
 .activity-box {
   background: #FAFAFA;
   border: 1px solid #ddd;
@@ -885,6 +932,13 @@ body.dark-mode .voices-left-out { background: #1c1018; border-left-color: #e0558
 body.dark-mode .voices-left-out h3 { color: #e05588; border-bottom-color: rgba(224,85,136,.2); }
 body.dark-mode .voices-left-out p { color: #ccc; border-bottom-color: rgba(224,85,136,.1); }
 body.dark-mode .voices-left-out strong { color: #f06090; }
+
+body.dark-mode .chapter-resources { background: #1e1e1e; border-color: #333; border-top-color: #7ab8e0; }
+body.dark-mode .chapter-resources h3 { color: #7ab8e0; }
+body.dark-mode .chapter-resources p { color: #ccc; }
+body.dark-mode .resource-links a { background: #262626; border-color: #333; color: #7ab8e0; }
+body.dark-mode .resource-links a:hover,
+body.dark-mode .resource-links a:focus-visible { background: #7ab8e0; border-color: #7ab8e0; color: #12232e; }
 
 body.dark-mode .activity-box { background: #1e1e1e; border-color: #333; border-top-color: #7ab8e0; }
 body.dark-mode .activity-box h3 { color: #7ab8e0; border-bottom-color: #333; }

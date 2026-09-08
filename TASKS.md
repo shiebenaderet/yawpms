@@ -76,12 +76,12 @@ timeline slots for pictures nobody ever sourced. Consequences for later mileston
 
 ## M0 — Truth tooling and week-one triage
 
-- [ ] **M0-1** Fix Phase 1 of scripts/audit_images.sh to extract refs matching `(src|img)[[:space:]]*[:=][[:space:]]*"` from all 48 root and primary-sources HTML files, not just `src="..."`  
+- [x] **M0-1** Fix Phase 1 of scripts/audit_images.sh to extract refs matching `(src|img)[[:space:]]*[:=][[:space:]]*"` from all 48 root and primary-sources HTML files, not just `src="..."`  
   `S` `[sonnet]`  
   *Done when `bash scripts/audit_images.sh | grep 'Missing from disk'` prints 14 (was 0) and audit-results.json's missing_images array contains images/ch11/underground-railroad.jpg and images/ch3/burning-of-jamestown.jpg.*  
   > The roadmap says '16 broken refs'; that is 16 raw references (12 in slideshows.html, 4 in timeline.html) over 14 unique paths — beringia-land-bridge.png and bleeding-kansas.jpg each appear in both files. The audit dedups via `sort -u`, so its counter reads 14. Do not 'correct' the roadmap; both numbers are right at different granularity.  
 
-- [ ] **M0-2** Replace the GNU-only `stat -c%s` calls in scripts/audit_images.sh (line 314, and line 570 inside the generated download-missing.sh heredoc) with a portable size probe  
+- [x] **M0-2** Replace the GNU-only `stat -c%s` calls in scripts/audit_images.sh (line 314, and line 570 inside the generated download-missing.sh heredoc) with a portable size probe  
   `S` `[sonnet]` · after: `M0-1`  
   *Done when `grep -n 'stat -c\|grep -oP\|grep -P\|sed -i ' scripts/audit_images.sh` returns 0 matches and the script prints the same 'Missing from disk' and 'Orphaned files' counts on macOS and on ubuntu-latest.*  
   > `stat -c%s` currently fails silently on macOS via `|| echo 0`, so every orphan reports as 0KB. Use `wc -c < "$f"` rather than branching on `stat -f%z` vs `stat -c%s`. Same file as M0-1, so sequence them to avoid a conflict.  
@@ -111,32 +111,32 @@ timeline slots for pictures nobody ever sourced. Consequences for later mileston
   *Done when the job has both a monthly `schedule:` cron and `workflow_dispatch`, carries `if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'`, a manual dispatch checks 62 URLs, and an injected bad URL exits non-zero naming the file and source id.*  
   > 61 blocks but 62 anchors — source 1.2 (Cahokia) deliberately carries two links per CLAUDE.md 2.2. Use a browser User-Agent and a 20s timeout so CI and the local link-checker subagent agree; Archive.org rate-limits and some library catalogs 403 non-browser agents. MUST be event-gated or the 62-URL sweep runs on every PR and breaks M0-6's green-on-first-run.  
 
-- [ ] **M0-8** Add the failing image-ref job to site-check.yml that runs scripts/audit_images.sh and fails when any reference is missing  
+- [x] **M0-8** Add the failing image-ref job to site-check.yml that runs scripts/audit_images.sh and fails when any reference is missing  
   `S` `[sonnet]` · after: `M0-6`, `M0-2`, `M0-4`  
   *Done when the job exits non-zero on a PR that deletes any file under images/, carries `if: github.event_name != 'schedule'`, and its first run on main after M0-4 merges is green.*  
   > audit_images.sh currently exits 0 regardless of findings — parse the count or add --strict rather than relying on its status. Lands after the editorial picks so main is never red by design.  
 
-- [ ] **M0-9** git rm the root-level download_ch6_images.sh and js/tts-kokoro.js  
+- [x] **M0-9** git rm the root-level download_ch6_images.sh and js/tts-kokoro.js  
   `S` `[sonnet]`  
   *Done when `ls download_ch6_images.sh js/tts-kokoro.js` reports no such file for both and `grep -rl 'tts-kokoro' --exclude-dir=.git .` returns only CLAUDE.md and ROADMAP.md.*  
   > scripts/download_ch6_images.sh is the canonical copy and stays. The root duplicate pulls over plain http:// with no skip-existing guard and will overwrite good tracked images with error pages. tts-kokoro.js was intentionally orphaned in PR #42 and is loaded by zero pages — deleting it is the roadmap's decision, not a reversal. Update CLAUDE.md section 4's trap entries in the same commit.  
 
-- [ ] **M0-10** Add minimal .chapter-resources / .resource-links rules to css/chapter.css, each with a body.dark-mode counterpart  
+- [x] **M0-10** Add minimal .chapter-resources / .resource-links rules to css/chapter.css, each with a body.dark-mode counterpart  
   `S` `[sonnet]`  
   *Done when `grep -c 'chapter-resources\|resource-links' css/chapter.css` is greater than 0 with at least one `body.dark-mode` counterpart rule, and the block in ch2.html no longer renders as an unstyled default `<ul>`.*  
   > Exactly 10 chapters carry the block (ch2, ch4, ch5, ch6, ch7, ch9, ch10, ch11, ch12, ch13) and css/ has zero rules for it today. CLAUDE.md 2.4 requires a body.dark-mode counterpart for every new chapter.css rule. Do NOT propagate the block to the other 5 chapters (that is M5-2) and do NOT wire the 30 inert `?ch=N` links (also M5).  
 
-- [ ] **M0-11** Correct three stale doc claims: CONTRIBUTING.md's "they're not stored in the repo", README.md's "under construction" for the Primary Source Reader (lines 120 and 160), and teaching.html:325's "in development" standards guide  
+- [x] **M0-11** Correct three stale doc claims: CONTRIBUTING.md's "they're not stored in the repo", README.md's "under construction" for the Primary Source Reader (lines 120 and 160), and teaching.html:325's "in development" standards guide  
   `S` `[sonnet]`  
   *Done when `grep -in "not stored in the repo" CONTRIBUTING.md`, `grep -in 'under construction' README.md`, and `grep -in 'in development' teaching.html` all return 0 matches.*  
   > All 124 images under images/ and 16 under primary-sources/images/ are tracked, so CONTRIBUTING.md's download instruction at lines 105-107 is actively wrong today — this does not wait on the image fixes. teaching.html must say the Common Core section shipped while being honest that C3/NCSS are still absent; the full rewording to 'shipped, with a link' is M8's job, so keep the edit to removing the false 'in development' framing.  
 
-- [ ] **M0-12** Verify every M0 done-when line mechanically on both macOS and ubuntu-latest and record the results  
+- [x] **M0-12** Verify every M0 done-when line mechanically on both macOS and ubuntu-latest and record the results  
   `S` `[haiku]` · after: `M0-2`, `M0-5`, `M0-6`, `M0-7`, `M0-8`, `M0-9`, `M0-10`, `M0-11`  
   *Done when a single verification run confirms: audit reports 0 missing with identical counts on both platforms, the latest site-check.yml run on main is green with all three jobs present, both deleted files are absent, and the CSS and doc greps in M0-10/M0-11 pass.*  
   > Mechanical only — no judgment calls. If the two platforms disagree on any count, that is an M0-2 regression and reopens it rather than being logged as a pass.  
 
-- [ ] **M0-13** Add `audit-results.json` to .gitignore  
+- [x] **M0-13** Add `audit-results.json` to .gitignore  
   `S` `[sonnet]`  
   *Done when `git status --porcelain` is empty immediately after `bash scripts/audit_images.sh` runs.*  
   > Tracked three times historically and removed in 286963f, but never ignored — so every audit run reappears as an untracked file. Fixed once, never made unable to recur: the exact pattern M0 exists to correct.

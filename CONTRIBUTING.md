@@ -102,9 +102,9 @@ This is a static HTML site — no build tools required.
 git clone https://github.com/shiebenaderet/yawpms.git
 cd yawpms
 
-# Download images (they're not stored in the repo)
-bash scripts/download_all_images.sh
-bash scripts/download_all_maps.sh
+# All images are already committed -- nothing to download to view the site.
+# The download scripts exist to re-fetch or add images, and double as the
+# provenance record (source URL, artist, date, license) for each file.
 
 # Open any chapter in your browser
 open ch1.html

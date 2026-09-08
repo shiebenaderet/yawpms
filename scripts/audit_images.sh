@@ -38,6 +38,7 @@ for arg in "$@"; do
   case "$arg" in
     --download)   DO_DOWNLOAD=true  ;;
     --fix-names)  DO_FIXNAMES=true  ;;
+    --strict) STRICT=true; shift ;;
     --clean)      DO_CLEAN=true     ;;
     --all)        DO_DOWNLOAD=true; DO_FIXNAMES=true; DO_CLEAN=true ;;
     --help|-h)
@@ -85,8 +86,8 @@ echo -e "${CYN}Phase 1: Scanning HTML files for image references...${RST}"
 for f in "$ROOT"/*.html; do
   [ -f "$f" ] || continue
   fname=$(basename "$f")
-  { grep -on 'src="[^"]*"' "$f" || true; } | while IFS=: read -r linenum match; do
-    imgpath=$(echo "$match" | sed 's/^src="//;s/"$//')
+  { grep -onE '(src|img)[[:space:]]*[:=][[:space:]]*"[^"]*"' "$f" || true; } | while IFS=: read -r linenum match; do
+    imgpath=$(echo "$match" | sed -E 's/^(src|img)[[:space:]]*[:=][[:space:]]*"//;s/"$//')
     case "$imgpath" in
       *.jpg|*.jpeg|*.png|*.gif|*.svg|*.webp)
         echo "$fname:$linenum:$imgpath" >> "$HTML_REFS"
@@ -99,8 +100,8 @@ done
 for f in "$ROOT"/primary-sources/*.html; do
   [ -f "$f" ] || continue
   fname="primary-sources/$(basename "$f")"
-  { grep -on 'src="[^"]*"' "$f" || true; } | while IFS=: read -r linenum match; do
-    imgpath=$(echo "$match" | sed 's/^src="//;s/"$//')
+  { grep -onE '(src|img)[[:space:]]*[:=][[:space:]]*"[^"]*"' "$f" || true; } | while IFS=: read -r linenum match; do
+    imgpath=$(echo "$match" | sed -E 's/^(src|img)[[:space:]]*[:=][[:space:]]*"//;s/"$//')
     case "$imgpath" in
       *.jpg|*.jpeg|*.png|*.gif|*.svg|*.webp)
         echo "$fname:$linenum:primary-sources/$imgpath" >> "$HTML_REFS"
@@ -311,7 +312,7 @@ ORPHANS=0
 
 while IFS='' read -r disk_file; do
   if ! grep -qxF "$disk_file" "$UNIQUE_REFS" 2>/dev/null; then
-    size=$(stat -c%s "$ROOT/$disk_file" 2>/dev/null || echo "0")
+    size=$(wc -c < "$ROOT/$disk_file" 2>/dev/null | tr -d " " || echo "0")
     kb=$(( size / 1024 ))
     echo "$disk_file|${kb}KB" >> "$ORPHAN_FILE"
     ORPHANS=$((ORPHANS + 1))
@@ -567,7 +568,7 @@ if [ "$DO_DOWNLOAD" = true ] && [ -s "$MISSING_FILE" ]; then
     echo '  echo -n "  Downloading $dest ... "'
     echo '  for attempt in 1 2 3; do'
     echo '    if curl -sL --fail --max-time 60 -A "$UA" "$url" -o "$ROOT/$dest" 2>/dev/null; then'
-    echo '      local size; size=$(stat -c%s "$ROOT/$dest" 2>/dev/null || echo 0)'
+    echo '      local size; size=$(wc -c < "$ROOT/$dest" 2>/dev/null | tr -d " " || echo 0)'
     echo '      if [ "$size" -gt 1000 ]; then'
     echo '        echo "OK ($(( size / 1024 ))KB)"'
     echo '        return 0'
@@ -704,3 +705,11 @@ fi
 
 echo -e "${BLD}Full JSON report:${RST} $REPORT"
 echo ""
+
+# --strict makes this usable as a CI gate: exit non-zero when any referenced
+# image is absent from disk. Without it the script always exits 0, which is why
+# a workflow built on it could never fail.
+if [ "${STRICT:-false}" = true ] && [ "$MISSING" -gt 0 ]; then
+  echo -e "${RED}FAIL:${RST} $MISSING referenced image(s) missing from disk." >&2
+  exit 1
+fi

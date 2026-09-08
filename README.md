@@ -157,11 +157,10 @@ yawpms/
 ├── contributors.html             # Contributors page
 ├── teaching.html                 # Teaching materials
 ├── whopays.html                  # Who pays for this?
-├── primary-source-reader.html    # Primary source reader (under construction)
+├── primary-source-reader.html    # Primary source reader (61 sources, all with verified original-source links)
 ├── css/
 │   ├── chapter.css               # Shared chapter stylesheet
 │   ├── pages.css                 # Shared supporting-page stylesheet
-│   └── index.css                 # Landing page stylesheet
 ├── js/
 │   └── reader-tools.js           # Reader tools (highlighting, notes, TTS, PDF, etc.)
 ├── images/
