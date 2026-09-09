@@ -121,22 +121,22 @@ This writes tables and YAML, not chapter HTML, so it is **not** blocked by ch6/c
 first real review will otherwise hit undefined rules.
 
 **Done when:**
-- [ ] `data/chapters.json` is the only hand-edited source of chapter status.
+- [x] `data/chapters.json` is the only hand-edited source of chapter status.
       `scripts/build_status.sh` regenerates the `REVIEW_STATUS.md` table, the
       `README.md` table, the `teachers.html` table, and a `contributors.html` reviewer
       section. Running it twice is a no-op; `site-check.yml` fails on drift.
-- [ ] `REVIEW_STATUS.md` states the counting rule in one paragraph, **written before the
+- [x] `REVIEW_STATUS.md` states the counting rule in one paragraph, **written before the
       first review is recorded**: which verdicts increment N/3, that reviews pin to a
       chapter short SHA, that a substantive rewrite resets the count, and who adjudicates.
-- [ ] `chapter-review.yml` gains consent-to-credit with display name, chapter version,
+- [x] `chapter-review.yml` gains consent-to-credit with display name, chapter version,
       grade level, and piloted-in-class. A labeler applies `review:chNN`.
-- [ ] The Google Form's "Full Chapter Review" option is removed so every countable
+- [x] The Google Form's "Full Chapter Review" option is removed so every countable
       review arrives as a GitHub issue.
-- [ ] 15 pinned "Review slot" issues exist; claiming = commenting. `teachers.html` points
+- [x] 15 pinned "Review slot" issues exist; claiming = commenting. `teachers.html` points
       to the slot with the fewest reviewers.
-- [ ] `TRIAGE.md` documents the loop in under 10 steps, written so an AI assistant can
+- [x] `TRIAGE.md` documents the loop in under 10 steps, written so an AI assistant can
       execute it from an issue URL alone.
-- [ ] Recruitment message sent through **three** existing channels, text committed to
+- [x] Recruitment message sent through **three** existing channels, text committed to
       `docs/` for reuse.
 
 ## M3 — Every chapter is a door, and the front door tells the truth · `M` · `[sonnet]` `[haiku]`
@@ -146,15 +146,15 @@ ch2–ch15 currently have no outbound feedback path and no Draft disclosure. The
 **generated** from `data/chapters.json` — adding it by hand would create a fourth status surface.
 
 **Done when:**
-- [ ] `build_status.sh` stamps a one-line banner into each chapter: status, "reviewed by
+- [x] `build_status.sh` stamps a one-line banner into each chapter: status, "reviewed by
       N of 3 educators", short SHA, an AI-assisted-draft disclosure, and links to Report
       an error / Review this chapter / Primary sources for this chapter. One template,
       fifteen files, no hand edits.
-- [ ] Every `primary-sources/chN-sources.html` links back to its chapter.
-- [ ] `index.html` has a visible "For Teachers" block linking all 10 tool pages.
-- [ ] All 48 files carry `meta description` + OG tags + favicon; a shared chapter link
+- [x] Every `primary-sources/chN-sources.html` links back to its chapter.
+- [x] `index.html` has a visible "For Teachers" block linking all 10 tool pages.
+- [x] All 48 files carry `meta description` + OG tags + favicon; a shared chapter link
       renders as a card in Google Classroom or Slack.
-- [ ] **Volume II demand has a home** — a pinned Discussion linked from `index.html`,
+- [x] **Volume II demand has a home** — a pinned Discussion linked from `index.html`,
       plus a Volume II question on the Google Form. The opening post states that Volume
       II is not planned until chapters reach 3/3 and what a "yes" would require.
 

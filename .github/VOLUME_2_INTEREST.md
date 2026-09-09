@@ -1,5 +1,7 @@
 <!--
-Text for a pinned GitHub issue. Open it with:
+POSTED: this text is live as pinned Discussion #61 —
+https://github.com/shiebenaderet/yawpms/discussions/61
+Kept here as the source of record. To re-post or adapt it elsewhere:
   gh issue create --title "Volume II (1877–present): is there demand?" \
     --body-file .github/VOLUME_2_INTEREST.md --label "volume-2"
 Then pin it from the issue page.

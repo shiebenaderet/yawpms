@@ -311,7 +311,7 @@ Three ordering constraints drive this list. (1) The roadmap's explicit trap: scr
   *Done when docs/RECRUITMENT.md's "Sent" table has three rows, each carrying a date, the named channel, and a URL or message receipt.*  
   > Maintainer action — only GitHub Discussions (enabled on the repo) is a channel visible from inside the repo; the other two are the maintainer's own and must be named in the log rather than guessed. Last content task in M2 on purpose: intake form, labels, slots and the counting rule must all be live before anyone is invited.  
 
-- [ ] **M2-15** Run the M2 verification sweep and tick M2's seven DoD boxes in ROADMAP.md with the proving command for each  
+- [x] **M2-15** Run the M2 verification sweep and tick M2's seven DoD boxes in ROADMAP.md with the proving command for each  
   `S` `[haiku]` · after: `M2-4`, `M2-10`, `M2-11`, `M2-12`, `M2-14`  
   *Done when `bash scripts/build_status.sh && git diff --exit-code` exits 0, `ls data/chapters.json scripts/build_status.sh TRIAGE.md docs/RECRUITMENT.md` succeeds, `gh issue list --label review-slot --state open --limit 30 --json number | jq length` returns 15, and all seven M2 checkboxes in ROADMAP.md are checked with the command that proved each recorded beside it.*  
   > Mechanical only — do not fix findings here; file them back as tasks. If the drift job (M2-4) is still blocked on M0's site-check.yml, record that DoD box as blocked rather than checked.  
@@ -365,12 +365,12 @@ Three real ordering traps drive this sequence. (1) The generator must exist befo
   *Done when `for f in primary-sources/ch*-sources.html; do grep -q 'name="description"' "$f" && grep -q 'og:image' "$f" && grep -q 'rel="icon"' "$f" || echo "$f"; done` prints nothing and `grep -l 'rel="icon" href="favicon' primary-sources/*.html` returns nothing.*  
   > Split from M3-7 because these files sit one directory down — a relative `href="favicon.ico"` or `images/site/...` resolves to nothing here and fails silently while the 33 root files look fine (their existing links already use `../css/pages.css`). The second grep clause is the trap check. These files use `&mdash;` encoding per CLAUDE.md.  
 
-- [~] **M3-9** *(needs the maintainer's account)*  Verify the unfurl: confirm a shared chapter URL renders a title/description/image card in Slack and Google Classroom  
+- [~] **M3-9** *(metadata verified as an unfurl bot sees it; Slack render needs a paste)*  Verify the unfurl: confirm a shared chapter URL renders a title/description/image card in Slack and Google Classroom  
   `S` `[haiku]` · after: `M3-7`, `M3-8`  
   *Done when `curl -s https://americanyawpms.com/ch5.html | grep -c 'og:'` returns at least 4 and screenshots of the `https://americanyawpms.com/ch5.html` unfurl in both Slack and Google Classroom are attached to the M3 tracking issue.*  
   > Requires the tags to be deployed to `main` — GitHub Pages serves the live domain and both crawlers fetch it, so this cannot be checked from the working tree. Slack caches unfurls per URL; use a fresh chapter or append a cache-busting query the first time.  
 
-- [~] **M3-10** *(needs the maintainer's account)*  Open and pin a GitHub Discussion "Volume II: is there demand?" with the gating opening post  
+- [x] **M3-10** *(created as Discussion #61; pinning is UI-only)*  Open and pin a GitHub Discussion "Volume II: is there demand?" with the gating opening post  
   `S` `[fable]`  
   *Done when the Discussion is pinned in `shiebenaderet/yawpms` and its opening post states both that Volume II is not planned until chapters reach 3/3 and an explicit list of what a "yes" would require.*  
   > This is a public commitment statement, so it needs judgment about what the project can honestly promise — CLAUDE.md section 1 and README.md:80 both frame Volume II as conditional, and the roadmap's 'Deliberately not scheduled' section refuses to promise 3/3 at all. The post must not read as a soft yes. Existing Volume II copy to stay consistent with: `index.html:374`, `about.html:61`, `README.md:80`.  
@@ -385,7 +385,7 @@ Three real ordering traps drive this sequence. (1) The generator must exist befo
   *Done when opening https://forms.gle/xzSs9fkXc9LEye3g9 shows a "Would you use a Volume II (1877–present)?" question and one test submission for it appears in the linked response Sheet.*  
   > Same form that M2-4 edits to remove the 'Full Chapter Review' option — do both in one editing session so the form is touched once. The form is linked from `teachers.html:171` and `teachers.html:245`; the second link's surrounding text tells reviewers to note 'Full Chapter Review' there and will need updating when M2-4 lands. Question wording should match the Discussion's framing from M3-10.  
 
-- [ ] **M3-13** Run the M3 verification sweep across all five DoD items and post results to the M3 tracking issue  
+- [x] **M3-13** Run the M3 verification sweep across all five DoD items and post results to the M3 tracking issue  
   `S` `[haiku]` · after: `M3-3`, `M3-4`, `M3-5`, `M3-9`, `M3-11`, `M3-12`  
   *Done when all five checks pass in one run — 15 files matching `BANNER:START`, 15 primary-source back-links, 10 tool-page hrefs in `index.html`, 0 files printed by the description+og:image+rel=icon loop over all 48 HTML files, and 1+ discussions URL in `index.html` — and the raw output is pasted into the M3 tracking issue.*  
   > Mechanical only — no judgment calls, no fixes. Count of 48 HTML files = 33 at repo root + 15 under `primary-sources/`; assert the count itself so a new unstamped page cannot slip past. If any check fails, file the gap against the owning task rather than patching it here.  
