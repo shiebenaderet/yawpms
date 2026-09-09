@@ -10,7 +10,7 @@ before classrooms reach it — not in a single sweep that finishes after the yea
 | Ch | Title | Target | Status | verified | corrected | caveated | could not verify |
 |----|-------|--------|--------|----------|-----------|----------|------------------|
 | 5 | The American Revolution | Oct 15, 2026 | **applied 2026-09-08** | 130 | 34 applied | &mdash; | 3 |
-| 6 | A New Nation | Oct 31, 2026 | **ledger complete, 33 pending sign-off** | 198 | 35 | — | 7 |
+| 6 | A New Nation | Oct 31, 2026 | **applied 2026-09-09** | 198 | 35 | — | 7 |
 | 7 | The Early Republic | Nov 15, 2026 | not started | — | — | — | — |
 | 8 | The Market Revolution | Dec 20, 2026 | not started | — | — | — | — |
 | 9–11 | — | Jan–Feb 2027 | M6 | — | — | — | — |
@@ -571,3 +571,28 @@ Review sheet: https://claude.ai/code/artifact/04006738-3f87-4512-bf5b-621d2c280c
 - **Adams's supporters called Jefferson "a coward."** (Story Behind the Story: The Insults of 1800, paragraph 2) — Quotation marks are a promise. If the word is a characterization rather than a quotation, it should not be inside them.
 - **"Library of Congress." (credit line for the Federal Pillars cartoon)** (Section I, figcaption line 100 — figure 1, federal-pillars.j) — Do not upgrade to verified. The credit may well be right, but nothing in the repo or in LOC's own catalog confirms it, and the manifest asserts a different source.
 
+
+#### Applied 2026-09-09
+
+Two licence violations were the most consequential findings, both live on the site:
+
+- **`us-territory-1789-map.png`** is **CC BY 2.5 by Wikimedia user Golbez**, with
+  `AttributionRequired: true`. Both figcaptions credited it as "public domain, Wikimedia
+  Commons" and named no creator. The map is used twice in ch6, so the violation appeared
+  twice. Both now name Golbez and the licence.
+- **`independence-hall.jpg`** is **CC BY-SA 3.0 by Antoine Taveneaux**, photographed in
+  2011. The caption named the licence but not the photographer, which a share-alike licence
+  requires, and did not disclose that it is a modern photograph of a historic room.
+
+The manifest header claimed "Images sourced from Wikimedia Commons (public domain)" as a
+blanket statement across all nine figures. That header is what made both violations easy to
+miss: it asserted a licence for images it had never checked. Replaced with a note that
+licences vary per entry and that two figures require named attribution.
+
+**A process failure worth recording.** Applying corrections by batch string-replacement put
+an adjudicator's *instruction text* into a figcaption — the Independence Hall caption briefly
+contained "No change needed at line 506…" on the live page path. It was caught by scanning
+the file for instruction-shaped fragments before commit, and the caption was rebuilt from the
+pre-edit baseline. Adjudicator `final_replacement` fields are not always clean prose; some are
+multi-part instructions. **Screen every replacement for instruction language before applying,
+and diff the visible text afterwards.**
