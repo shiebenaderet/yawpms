@@ -478,9 +478,14 @@ finishing the refutation pass more important here, not less.
 - *Claim:* "James Madison locked the windows."
 - *Proposed:* James Madison showed up eleven days early and wrote a whole new plan of government.
 
-### Not yet adjudicated (37)
+### Not yet adjudicated — 37 rows
 
 Flagged by an auditor, never refuted. **Do not treat as findings.**
+
+The list below is *indicative, not exact*. Matching adjudicator output back to auditor rows
+is unreliable because adjudicators rephrase the claim they were handed, so this list
+over-counts. The authoritative figures come from the run itself: **118 flagged, 81
+adjudicated, 37 outstanding.** Resume the run rather than working from this list.
 
 - `caveated` §I, figure 1 figcaption (ch6.html line 100) — Figure 1 figcaption: the cartoon is titled "The Federal Pillars"
 - `corrected` §I, figure 1 figcaption (ch6.html line 100) — The cartoon was published "August 2, 1789"
