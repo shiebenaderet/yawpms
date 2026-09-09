@@ -141,10 +141,15 @@ timeline slots for pictures nobody ever sourced. Consequences for later mileston
   *Done when `git status --porcelain` is empty immediately after `bash scripts/audit_images.sh` runs.*  
   > Tracked three times historically and removed in 286963f, but never ignored — so every audit run reappears as an untracked file. Fixed once, never made unable to recur: the exact pattern M0 exists to correct.
 
-- [ ] **M4-18** Add a manifest-integrity arm to site-check.yml: every `images/chN/` file referenced by a chapter has a manifest entry, and every manifest entry matches a file on disk  
+- [~] **M4-18** *(checker written and finding real defects; CI gate waits on M4-19)*  Add a manifest-integrity arm to site-check.yml: every `images/chN/` file referenced by a chapter has a manifest entry, and every manifest entry matches a file on disk  
   `S` `[sonnet]` · after: `M0-6`  
   *Done when a PR that references an unmanifested image fails CI.*  
   > Found during the ch5 figure audit: two ch5 images were referenced with no provenance record and `audit_images.sh --strict` passed anyway, because existence on disk is not provenance.
+
+- [ ] **M4-19** Record provenance for the six unmanifested images, then wire `check_image_manifest.sh` into site-check.yml  
+  `M` `[fable]` · after: `M4-18`  
+  *Done when `bash scripts/check_image_manifest.sh` exits 0 and the CI job is green on its first run.*  
+  > `images/ch2/new-orleans-1726.jpg`, `ch2/castello-plan.jpg`, `ch2/battle-gravelines.jpg`, `ch7/louisiana-purchase.jpg`, `ch9/trail-of-tears-map.jpg`, `ch10/ugrr-siebert-1898.png`. Each figcaption already asserts "public domain, Wikimedia Commons" with no record of which Commons file — an unverifiable licence claim, which CLAUDE.md 2.1 forbids. Three of the six lost their manifest entries in commit 389f4a6 ("Cleaned up images scripts/images"), so this is a regression the checker would have caught. Do NOT wire the CI gate before these are fixed: landing a red gate on main is the trap M0 exists to avoid.
 
 <details><summary>Why this order</summary>
 

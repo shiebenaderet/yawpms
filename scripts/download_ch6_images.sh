@@ -13,6 +13,11 @@ mkdir -p "$IMG_DIR"
 echo "Downloading Chapter 6 images to $IMG_DIR ..."
 
 declare -A IMAGES=(
+  # "The Federal Edifice" woodcut, Massachusetts Centinel, Boston, 2 August 1788.
+  # Celebrates the ELEVENTH pillar -- New York, which ratified 26 July 1788 -- hence the
+  # Commons filename. N. Carolina is shown being raised, Rhode Island broken. Public domain.
+  # Library of Congress, Serial and Government Publications Division. Evans 30323.
+  # NOTE: the caption said 1789 until 2026-09-09; a print dated 1789 would be news of nothing.
   ["federal-pillars.jpg"]="https://upload.wikimedia.org/wikipedia/commons/thumb/0/03/Eleventh_Pillar.jpg/600px-Eleventh_Pillar.jpg"
   ["shays-shattuck.jpg"]="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4f/Shays%27_Rebellion.jpg/600px-Shays%27_Rebellion.jpg"
   ["independence-hall.jpg"]="https://upload.wikimedia.org/wikipedia/commons/thumb/5/54/Independence_Hall_10.jpg/800px-Independence_Hall_10.jpg"

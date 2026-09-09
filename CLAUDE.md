@@ -182,10 +182,20 @@ figures carry.
 ### Before finishing
 
 ```bash
-npx html-validate <changed pages>
+npx --yes html-validate <changed pages>
+bash scripts/audit_images.sh --strict        # every referenced image exists
+bash scripts/check_image_manifest.sh         # every image has a provenance record
+bash scripts/check_companion_sync.sh         # vocab/quiz/slides/timeline in step
+bash scripts/build_status.sh                 # regenerate status surfaces; must be a no-op
 ```
 
 There is no test suite, linter config, or formatter in this repo.
+
+**Existence is not provenance.** `audit_images.sh --strict` only asks whether a referenced
+file is on disk. An image can be present, referenced and rendering while nobody has
+recorded its artist, date or licence &mdash; which makes a "public domain" caption
+unverifiable. `check_image_manifest.sh` is the check for that, and it currently reports six
+real cases (TASKS.md M4-19).
 
 ### Style details
 
