@@ -13,6 +13,9 @@ mkdir -p "$IMG_DIR"
 echo "Downloading Chapter 10 images to $IMG_DIR ..."
 
 declare -A IMAGES=(
+  # "Underground Routes to Canada", Wilbur H. Siebert (1866-1961), 1898, from
+  # "The Underground Railroad from Slavery to Freedom". Public domain.
+  ["ugrr-siebert-1898.png"]="https://commons.wikimedia.org/wiki/Special:FilePath/%22Underground%22_routes_to_Canada_(Siebert_1898).png?width=960"
   ["camp-meeting-revival.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/Camp_meeting_of_the_Methodists_in_N._America_J._Milbert_del_M._Dubourg_sculp_(cropped).jpg?width=640"
   ["frederick-douglass.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/Frederick_Douglass_%28circa_1879%29.jpg?width=440"
   ["seneca-falls.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/Woman%27s_Rights_Convention.jpg?width=640"

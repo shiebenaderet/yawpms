@@ -13,6 +13,11 @@ mkdir -p "$IMG_DIR"
 echo "Downloading Chapter 9 images to $IMG_DIR ..."
 
 declare -A IMAGES=(
+  # Trail of Tears removal routes -- MODERN National Park Service map for the Trail of
+  # Tears National Historic Trail. Its legend names the trail, and it labels Oklahoma,
+  # a state that did not exist until 1907. Public domain (US Govt work).
+  # Caption must not imply a period document.
+  ["trail-of-tears-map.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/Trails_of_Tears_en.png?width=960"
   ["andrew-jackson.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/Andrew_Jackson_by_Ralph_Eleaser_Whiteside_Earl.jpg?width=640"
   ["county-election.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/George_Caleb_Bingham_-_The_County_Election.jpg?width=640"
   # NOTE: The Lindneux "Trail of Tears" painting (1942) is under copyright.

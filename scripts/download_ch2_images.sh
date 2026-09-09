@@ -13,6 +13,13 @@ mkdir -p "$IMG_DIR"
 echo "Downloading Chapter 2 images to $IMG_DIR ..."
 
 declare -A IMAGES=(
+  # New Amsterdam 1660 -- 1916 REDRAFT by John Wolcott Adams (1874-1925) of the original
+  # Castello Plan survey. Public domain. NOT a 1660 document; the cartouche says "Redraft".
+  ["castello-plan.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/Redraft_of_the_Castello_Plan_New_Amsterdam_in_1660_by_John_Wolcott_Adams.jpg?width=960"
+
+  # Spanish Armada off Gravelines, anonymous English School, painted between 1588 and 1600 --
+  # so the caption's "period painting" is accurate. Public domain.
+  ["battle-gravelines.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/Escudo_real_hisp%C3%A1nico_no_English_ships_and_the_Spanish_Armada%2C_August_1588.jpg?width=960"
   ["champlain-habitation.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/Champlain_Habitation_de_Quebec.jpg?width=640"
   ["waldseemuller-map.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/Waldseem%C3%BCller_map_2.jpg?width=640"
   ["de-bry-spanish-cruelty.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/Perros_De_Bry.jpg?width=640"
