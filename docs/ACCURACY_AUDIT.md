@@ -10,7 +10,7 @@ before classrooms reach it — not in a single sweep that finishes after the yea
 | Ch | Title | Target | Status | verified | corrected | caveated | could not verify |
 |----|-------|--------|--------|----------|-----------|----------|------------------|
 | 5 | The American Revolution | Oct 15, 2026 | **applied 2026-09-08** | 130 | 34 applied | &mdash; | 3 |
-| 6 | A New Nation | Oct 31, 2026 | not started | — | — | — | — |
+| 6 | A New Nation | Oct 31, 2026 | **audit done, adjudication 81/118** | 198 | — | — | 7 |
 | 7 | The Early Republic | Nov 15, 2026 | not started | — | — | — | — |
 | 8 | The Market Revolution | Dec 20, 2026 | not started | — | — | — | — |
 | 9–11 | — | Jan–Feb 2027 | M6 | — | — | — | — |
@@ -311,3 +311,223 @@ asserting manifest/reference/disk agreement is a live gap** (see TASKS.md).
 **The siege-of-Yorktown map is a modern teaching map**, not a period plan: it carries NATO
 unit symbols (XXX corps, XX division), a circled atlas plate number, and vector typography.
 The caption said "Plan of the Siege of Yorktown," which implied a 1781 document. Corrected.
+
+---
+
+## Chapter 6 — A New Nation
+
+**Audited 2026-09-09. INCOMPLETE — do not apply from this ledger yet.**
+
+323 checkable claims across ten sections plus ten figures, verified against
+[The American Yawp ch. 6](https://www.americanyawp.com/text/06-a-new-nation/) plus an
+independent reference. All eleven audit arms completed.
+
+| | Count |
+|---|---|
+| claims audited | 323 |
+| verified | 198 |
+| flagged (corrected + caveated) | 118 |
+| could not verify | 7 |
+| **adjudicated** | **81** |
+| upheld | 27 |
+| overturned | 54 |
+| **NOT adjudicated** | **37** |
+
+> **Stopped by a session limit, not finished.** 37 flagged rows never reached the
+> refutation pass. They are unresolved, not cleared, and nothing from this ledger has been
+> applied to `ch6.html`. Resume with the run id recorded below before applying anything.
+
+**The overturn rate on what did complete is 67%** — 54 of 81.
+On ch5 it was 40%. A rate this high says the auditors over-flagged on ch6, which makes
+finishing the refutation pass more important here, not less.
+
+### Upheld so far
+
+**1. `caveated` — /Users/shiebenaderet/Developer/yawpms/ch6.html, line 100 — §I "Introduction: The**
+
+- *Claim:* Figure 1 figcaption (§I): the cartoon is titled "The Federal Pillars"
+- *Proposed:* "The Federal Edifice" (often reprinted as "The Federal Pillars")
+
+**2. `corrected` — /Users/shiebenaderet/Developer/yawpms/ch6.html, line 100 — §I "Introduction: The**
+
+- *Claim:* The cartoon was published "August 2, 1789" — figcaption: "\"The Federal Pillars,\" from The Massachusetts Centinel, August 2, 1789."
+- *Proposed:* August 2, 1788 Full corrected figcaption sentence in place: "The Federal Pillars," from <em>The Massachusetts Centinel</em>, August 2, 1788.
+
+**3. `corrected` — /Users/shiebenaderet/Developer/yawpms/ch6.html, §I "Introduction: The Sword and **
+
+- *Claim:* "Each pillar represents a state ratifying the Constitution." — §I, figure 1 figcaption, ch6.html line 100. Full line as written: `"The Federal Pillars," from <em>The Massachusetts Centinel</em>, Augus
+- *Proposed:* "The Federal Edifice," from <em>The Massachusetts Centinel</em>, August 2, 1788. Each pillar is a state. Eleven stand upright&mdash;the eleventh is New York, which had ratified just a week before. A hand from the clouds is hauling North Carolina's pillar up, and Rhode Island's lies broken on the gro
+
+**4. `corrected` — /Users/shiebenaderet/Developer/yawpms/ch6.html line 100 — §I "Introduction: The **
+
+- *Claim:* "The last pillar, North Carolina, is shown rising to join the others." (verified verbatim in the ch6.html figcaption; the auditor quoted it accurately, not partially)
+- *Proposed:* Full replacement figcaption for line 100 (only the middle sentence changed; publication line and credit preserved): "The Federal Pillars," from <em>The Massachusetts Centinel</em>, August 2, 1789. Each pillar represents a state ratifying the Constitution. Eleven stand. A hand reaches out of the clou
+
+**5. `corrected` — /Users/shiebenaderet/Developer/yawpms/ch6.html, line 105 — §I "Introduction: The**
+
+- *Claim:* "A few years later, Daniel Shays sold that sword." (asserting the sword sale happened several years after Lafayette's c. 1780 gift)
+- *Proposed:* Within months, Daniel Shays sold that sword. He had six children at home and debts he couldn't pay.
+
+**6. `corrected` — /Users/shiebenaderet/Developer/yawpms/ch6.html, §I "Introduction: The Sword and **
+
+- *Claim:* "A few years later, Daniel Shays sold that sword. He needed the money to keep his farm." (ch6.html line 105 — the auditor quoted only the second sentence)
+- *Proposed:* Before the year was out, Daniel Shays sold that sword. The army owed him years of back pay, his debts were piling up, and, he pointed out, he already owned a sword. Other officers were disgusted—a gentleman was supposed to keep a gift like that forever. Shays needed the money more than the honor. Th
+
+**7. `corrected` — /Users/shiebenaderet/Developer/yawpms/ch6.html, line 111 — §I "Introduction: The**
+
+- *Claim:* Vocabulary box, "Articles of Confederation" entry: "America's first constitution (1781–1789). It created a national government so weak it couldn't collect taxes, raise an army, or settle disputes betw
+- *Proposed:* Replace the vocabulary entry at line 111 with: <p><strong>Articles of Confederation:</strong> America's first constitution (1781&ndash;1789). It created a national government so weak it couldn't collect taxes, raise an army, or make the states follow its own laws.</p> (Only the third item changes. "
+
+**8. `corrected` — /Users/shiebenaderet/Developer/yawpms/ch6.html, line 132 — Section II, "Shays's **
+
+- *Claim:* "He had charged British positions at Saratoga."
+- *Proposed:* He had been in the fighting at Saratoga.
+
+**9. `corrected` — /Users/shiebenaderet/Developer/yawpms/ch6.html line 132 — Section II, "Shays's R**
+
+- *Claim:* "He had watched a man hanged for treason against the United States."
+- *Proposed:* He had watched a man hanged as a British spy.
+
+**10. `corrected` — /Users/shiebenaderet/Developer/yawpms/ch6.html, line 138 — Section II ("Shays's **
+
+- *Claim:* "His neighbors were outraged—not at Shays, but at a government that forced a war hero to sell his sword to survive. It became a rallying cry: if the country couldn't take care of the men who had fough
+- *Proposed:* The criticism landed on Shays, not on the government. Fellow officers called the sale dishonorable, and historians repeated that judgment for two hundred years. Shays had an answer: he already owned a working sword, and like most Continental soldiers, he had gone long stretches without pay. He neede
+
+**11. `corrected` — /Users/shiebenaderet/Developer/yawpms/ch6.html, line 139 — Section II (Shays's R**
+
+- *Claim:* "His sixty-eight-acre farm in Shutesbury was everything his family had."
+- *Proposed:* His rocky hill farm in Pelham was everything his family had.
+
+**12. `corrected` — /Users/shiebenaderet/Developer/yawpms/ch6.html line 139 — Section II "Shays's Re**
+
+- *Claim:* "Shays had a wife, Abigail, and six children. His sixty-eight-acre farm in Shutesbury was everything his family had. When the courts came for it, Shays didn't write a letter. He gathered his neighbors
+- *Proposed:* When the courts came after him for debt, Shays didn't reach for a gun. His town sent petitions to Boston, along with dozens of other towns, asking for relief from their debts and lower court fees. Boston ignored them. And when his neighbors first marched on the Northampton courthouse in the summer o
+
+**13. `corrected` — /Users/shiebenaderet/Developer/yawpms/ch6.html, lines 146-150 — Section II, "Sha**
+
+- *Claim:* Citation: "— A correspondent in Shrewsbury, Massachusetts, after the rebellion turned violent, January 1787" attached to the quotation "The seeds of war are now sown."
+- *Proposed:* &mdash; A correspondent in Shrewsbury, Massachusetts, December 1786, after rebel leader Job Shattuck was hunted down, wounded, and jailed
+
+**14. `corrected` — /Users/shiebenaderet/Developer/yawpms/ch6.html, line 194 — section id="constitut**
+
+- *Claim:* "The first thing the delegates do is take a vow of secrecy." (ch6.html, Constitutional Convention section, line 194)
+- *Proposed:* On the very first day, May 25, the delegates elect George Washington to preside. Four days later they adopt a rule of secrecy: nothing said in this room can be shared with anyone&mdash;not the press, not their families, not even other politicians.
+
+**15. `caveated` — /Users/shiebenaderet/Developer/yawpms/ch6.html — Section III, "The Constitutiona**
+
+- *Claim:* "To make sure no one outside can eavesdrop, they nail the windows shut" (ch6.html line 194), and the Independence Hall figure caption "with the windows nailed shut in the middle of summer" (line 189).
+- *Proposed:* Body text (line 194), replacing the final sentence of the paragraph: "Then, to make sure no one outside can eavesdrop, they shut the windows, pull the curtains, and post guards at the doors." Figure caption (line 189): "The Assembly Room in Independence Hall, Philadelphia. In this room, with the win
+
+**16. `caveated` — /Users/shiebenaderet/Developer/yawpms/ch6.html line 202 — "Story Behind the Stor**
+
+- *Claim:* Franklin "was too ill to walk."
+- *Proposed:* Benjamin Franklin, at eighty-one the oldest delegate, was in constant pain from gout and a stone in his bladder, and he could barely walk.
+
+**17. `corrected` — /Users/shiebenaderet/Developer/yawpms/ch6.html line 202 — "Story Behind the Stor**
+
+- *Claim:* Franklin "was too ill to walk. He was carried to the Convention every day in a sedan chair—a covered seat hoisted by four prisoners from the Walnut Street Jail."
+- *Proposed:* &lt;p&gt;&lt;strong&gt;Benjamin Franklin&lt;/strong&gt;, at eighty-one the oldest delegate, was in constant pain from gout and a stone in his bladder. On his worst days he was carried the few hundred yards from his house to the State House in a sedan chair&amp;mdash;a covered seat lifted on poles by
+
+**18. `corrected` — /Users/shiebenaderet/Developer/yawpms/ch6.html, "The Constitutional Convention" **
+
+- *Claim:* PRIMARY SOURCE box titled "Primary Source: George Washington on the Secrecy Rule": "Nothing spoken in the house be printed, or otherwise published or communicated without leave. Gossip or misunderstan
+- *Proposed:* Replace ch6.html lines 219-223 with: &lt;div class="primary-source"&gt; &lt;h3&gt;Primary Source: The Secrecy Rule&mdash;and Washington Enforcing It&lt;/h3&gt; &lt;p&gt;"That nothing spoken in the house be printed, or otherwise published or communicated without leave."&lt;/p&gt; &lt;p class="source-
+
+**19. `corrected` — /Users/shiebenaderet/Developer/yawpms/ch6.html, line 260 — Section IV "Ratifying**
+
+- *Claim:* "The original Constitution said nothing about... the right to a fair trial." (full sentence: "They had a point. The original Constitution said nothing about freedom of speech, freedom of religion, the
+- *Proposed:* They had a point. The original Constitution said nothing about freedom of speech, freedom of religion, or protection from unreasonable searches. It did promise a jury to anyone accused of a crime&mdash;but it said nothing about having a lawyer, getting a speedy trial, or a ban on cruel punishments. 
+
+**20. `caveated` — /Users/shiebenaderet/Developer/yawpms/ch6.html:262 — Section IV, ¶4, first sente**
+
+- *Claim:* "State by state, the vote was agonizingly close." (ch6.html line 262, Section IV "Ratifying the Constitution: The People Decide," paragraph 4, opening sentence)
+- *Proposed:* In some states it was easy&mdash;Delaware, New Jersey, and Georgia approved the Constitution unanimously. But where Anti-Federalists were strong, the vote was agonizingly close: Massachusetts said yes 187 to 168, Virginia 89 to 79, and New York by just three votes, 30 to 27.
+
+**21. `corrected` — ch6.html line 271, Section IV (ratification), "Story Behind the Story" box — "Th**
+
+- *Claim:* "And leading the parade was a float called \"The Grand Federal Edifice\"—a miniature temple held up by thirteen pillars, one for each state."
+- *Proposed:* And the centerpiece of the whole parade was a float called "The Grand Federal Edifice"&mdash;a thirty-six-foot temple held up by thirteen pillars, one for each state, pulled by ten white horses.
+
+**22. `corrected` — ch6.html, Section V ("Slavery and the New Nation"), paragraph 2 (line 294)**
+
+- *Claim:* "In the South, enslaved people made up nearly 40% of the total population."
+- *Proposed:* In the South as a whole, about one in three people was enslaved&mdash;and in South Carolina it was more than four in ten.
+
+**23. `corrected` — /Users/shiebenaderet/Developer/yawpms/ch6.html line 328 — Section VI ("Hamilton **
+
+- *Claim:* "Loose construction: Hamilton's view that the Constitution allows the government to do anything it doesn't specifically forbid."
+- *Proposed:* Loose construction: Hamilton's view that the government can use any reasonable method to carry out the jobs the Constitution gives it, even if that exact method isn't listed.
+
+**24. `corrected` — /Users/shiebenaderet/Developer/yawpms/ch6.html line 344 — Story Behind the Story**
+
+- *Claim:* "His opponents loved to remind everyone of his origins. They called him 'the bastard brat of a Scotch pedlar.' Hamilton used it as fuel."
+- *Proposed:* His opponents never let him forget where he came from. A year and a half after Hamilton died, John Adams was still calling him "a bastard brat of a Scotch pedler" in a private letter.
+
+**25. `corrected` — /Users/shiebenaderet/Developer/yawpms/ch6.html line 356 — Section VI ("Hamilton **
+
+- *Claim:* Citation: "— Thomas Jefferson, in a letter begging James Madison to attack Hamilton's ideas in print, 1790s"
+- *Proposed:* — Thomas Jefferson, in a letter begging James Madison to answer Hamilton in print, July 7, 1793. (By then the two were also fighting over foreign policy: Hamilton had published newspaper essays defending Washington's power to keep America out of Europe's war, and Madison answered him in print.)
+
+**26. `corrected` — /Users/shiebenaderet/Developer/yawpms/ch6.html, line 393 — Section V (Whiskey Re**
+
+- *Claim:* "Washington crushed both the Whiskey Rebellion and (through the states) Shays's Rebellion."
+- *Proposed:* Washington crushed the Whiskey Rebellion in 1794. Eight years earlier, when Shays's farmers rebelled, Washington was still a private citizen and Massachusetts had to put that rebellion down alone.
+
+**27. `corrected` — /Users/shiebenaderet/Developer/yawpms/ch6.html, section X "Wrapping Up: A Nation**
+
+- *Claim:* "James Madison locked the windows."
+- *Proposed:* James Madison showed up eleven days early and wrote a whole new plan of government.
+
+### Not yet adjudicated (37)
+
+Flagged by an auditor, never refuted. **Do not treat as findings.**
+
+- `caveated` §I, figure 1 figcaption (ch6.html line 100) — Figure 1 figcaption: the cartoon is titled "The Federal Pillars"
+- `corrected` §I, figure 1 figcaption (ch6.html line 100) — The cartoon was published "August 2, 1789"
+- `corrected` §I, paragraph 2 — "A few years later, Daniel Shays sold that sword."
+- `corrected` §I, paragraph 2 — "He needed the money to keep his farm."
+- `corrected` §I, vocabulary box — Under the Articles the national government "couldn't ... settle disputes between states"
+- `caveated` Paragraph 1 — "when the war ended, the government that owed him years of back pay simply… didn't pay"
+- `corrected` Story Behind the Story box, second paragraph — "When the courts came for it, Shays didn't write a letter. He gathered his neighbors, and they marched."
+- `caveated` Key Idea box — "It became the single most important reason why men like Washington and Madison agreed to meet in Philadelphia
+- `caveated` Figure caption — Caption gloss: the two are "shown rising 'illustrious from the Jail.' Not everyone thought they were villains.
+- `caveated` Story Behind the Story box, Franklin entry — Franklin "was carried to the Convention every day in a sedan chair — a covered seat hoisted by four prisoners 
+- `caveated` Story Behind the Story box, Madison entry — Madison "used the time to write the Virginia Plan."
+- `caveated` Paragraph 6 — "The solution came from Roger Sherman of Connecticut... This 'Great Compromise' saved the Convention."
+- `corrected` Primary Source box 1 (after paragraph 6) — PRIMARY SOURCE box attributed to George Washington: "Nothing spoken in the house be printed, or otherwise publ
+- `caveated` ¶3 — "The original Constitution said nothing about... freedom of religion."
+- `caveated` ¶4 — "State by state, the vote was agonizingly close."
+- `corrected` Story Behind the Story — "Leading the parade was a float called 'The Grand Federal Edifice.'"
+- `caveated` Paragraph 1 — "…and his mother die of yellow fever."
+- `caveated` Paragraph 1 — "…all before he was thirteen."
+- `caveated` Story Behind the Story — "The fifteen-year-old Hamilton wrote a letter…"
+- `caveated` Paragraph 4, first sentence — "Thomas Jefferson… was horrified" by Hamilton's plan (assumption + Bank + whiskey tax).
+- `caveated` Story Behind the Story, sentence 1 — "the national government under the Articles couldn't do anything — Massachusetts had to handle it alone."
+- `caveated` Vocabulary box, definition 4 (line 407) — "XYZ Affair: A scandal in which French officials demanded bribes before they would negotiate with American dip
+- `caveated` Body paragraph 2 (line 419) — "...and then thousands of its own citizens during the Reign of Terror."
+- `caveated` Body paragraph 3 (line 421) — "...Congress passed two of the most controversial laws in American history."
+- `corrected` Body paragraph 4 (line 423) — Quotation: the Sedition Act criminalized publishing "false, scandalous, or malicious" writing about the presid
+- `caveated` First figure caption, final sentence — Caption frames the 1797 cartoon as evidence that "Campaign propaganda in 1800 was brutal."
+- `caveated` Paragraph 3 — "Instead, they unleashed their supporters and hired newspaper writers to destroy each other in print."
+- `caveated` Story Behind the Story: The Insults of 1800, sentence 1 — "Jefferson hired a journalist named James Callender to attack Adams."
+- `corrected` Story Behind the Story: The Insults of 1800, sentence 2 — "Callender called President Adams 'old, querulous, bald, blind, crippled, and toothless.'"
+- `corrected` Story Behind the Story: The Insults of 1800, sentence 3 — "He also mocked Adams's weight, earning the president the nickname 'His Rotundity.'"
+- `caveated` Story Behind the Story: The Insults of 1800, paragraph 2 — Jefferson "would destroy Christianity, burn all the Bibles, and invite chaos."
+- `caveated` Story Behind the Story: The Insults of 1800, paragraph 2 — "Martha Washington herself reportedly told a visiting minister that Jefferson was 'one of the most detestable 
+- `caveated` Paragraph after the insults box — Jefferson won "in part because his old enemy Alexander Hamilton, who despised both men, considered Burr even m
+- `caveated` Paragraph beginning "But here is the remarkable part" — "John Adams left. He packed his bags, walked out of the brand-new White House, and went home to Massachusetts.
+- `corrected` Primary Source: Jefferson on the "Revolution of 1800" — Primary-source block quotation: "The revolution of 1800 was as real a revolution in the principles of our gove
+- `caveated` Second figure caption, credit line — Second figure credited to "Wikimedia."
+- `caveated` Final body paragraph — "in 1803, Chief Justice John Marshall decided the landmark case Marbury v. Madison"
+- `caveated` Key Idea box, final sentence — "That precedent [of peaceful transfer] has held for over two hundred years."
+- `caveated` Key Idea box — "Adams and Jefferson hated each other's politics, but both loved the republic enough to let the system work."
+- `caveated` Section heading and paragraph 1 — Section title: "The Election of 1800: The Nastiest Campaign in History" and opening line "If you think modern 
+
+### Resume
+
+```
+Workflow({scriptPath: '.../yawpms-ch6-accuracy-ledger-wf_563055da-cb4.js',
+          resumeFromRunId: 'wf_563055da-cb4'})
+```
+Completed agents replay from cache; only the 37 failed refutations re-run.
+
