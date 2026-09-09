@@ -10,7 +10,7 @@ before classrooms reach it — not in a single sweep that finishes after the yea
 | Ch | Title | Target | Status | verified | corrected | caveated | could not verify |
 |----|-------|--------|--------|----------|-----------|----------|------------------|
 | 5 | The American Revolution | Oct 15, 2026 | **applied 2026-09-08** | 130 | 34 applied | &mdash; | 3 |
-| 6 | A New Nation | Oct 31, 2026 | **audit done, adjudication 81/118** | 198 | — | — | 7 |
+| 6 | A New Nation | Oct 31, 2026 | **ledger complete, 33 pending sign-off** | 198 | 35 | — | 7 |
 | 7 | The Early Republic | Nov 15, 2026 | not started | — | — | — | — |
 | 8 | The Market Revolution | Dec 20, 2026 | not started | — | — | — | — |
 | 9–11 | — | Jan–Feb 2027 | M6 | — | — | — | — |
@@ -535,4 +535,39 @@ Workflow({scriptPath: '.../yawpms-ch6-accuracy-ledger-wf_563055da-cb4.js',
           resumeFromRunId: 'wf_563055da-cb4'})
 ```
 Completed agents replay from cache; only the 37 failed refutations re-run.
+
+
+### Adjudication complete — 2026-09-09
+
+All **118 of 118** flagged claims adversarially checked after the session limit lifted.
+**35 upheld, 83 overturned — a 70% overturn rate**, against 40% on ch5.
+Nearly three quarters of what the auditors flagged did not survive a second look, which makes
+the refutation pass most of the work on this chapter rather than a formality.
+
+| | Count |
+|---|---|
+| claims audited | 323 |
+| verified | 198 |
+| flagged | 118 |
+| upheld | 35 |
+| overturned | 83 |
+| could not verify | 7 |
+| **pending sign-off** | **33** |
+
+Two upheld rows were applied ahead of the rest, because both were verifiable without an
+adjudicator: the Federal Edifice figure was dated 1789 for an August 1788 print, and its
+caption called North Carolina "the last pillar" when Rhode Island is drawn broken in the
+same image. Both are live.
+
+Review sheet: https://claude.ai/code/artifact/04006738-3f87-4512-bf5b-621d2c280c5f
+
+#### Could not verify
+
+- **Map credit: "(Public domain, Wikimedia Commons)"** (§I, figure 2 figcaption (ch6.html line 118)) — Handoff row, not a shrug: the map's CONTENT is verified (two rows above, by reading the image). What cannot be verified is its provenance clause. MAINTENANCE.md requires 'an attrib
+- **"…still insisting that everything he did was to protect the rights he had fought for in 1776."** (Paragraph 5) — Per the method, this stays could_not_verify — it is not upgraded because it sounds like something he would have said. It is a sentiment placed in a dead man's mouth with no source 
+- **"Bakers pulled a float with an oven baking 'Federal Bread.'"** (Story Behind the Story) — Bakers were in the procession, so the claim is plausible, not invented. But the oven and the quoted phrase "Federal Bread" are in quotation marks in the text, and I could not confi
+- **Adams's supporters called Jefferson "a mean-spirited, low-lived fellow."** (Story Behind the Story: The Insults of 1800, paragraph 2) — Do not upgrade this to verified because it 'sounds like 1800.' It is a quotation whose original printing nobody has produced. For a book that models source-checking to students, an
+- **Adams's supporters called Jefferson "a howling atheist."** (Story Behind the Story: The Insults of 1800, paragraph 2) — The documented insults are just as vivid as the undocumented one and carry a citation. Swapping them costs nothing.
+- **Adams's supporters called Jefferson "a coward."** (Story Behind the Story: The Insults of 1800, paragraph 2) — Quotation marks are a promise. If the word is a characterization rather than a quotation, it should not be inside them.
+- **"Library of Congress." (credit line for the Federal Pillars cartoon)** (Section I, figcaption line 100 — figure 1, federal-pillars.j) — Do not upgrade to verified. The credit may well be right, but nothing in the repo or in LOC's own catalog confirms it, and the manifest asserts a different source.
 
