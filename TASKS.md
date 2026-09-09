@@ -141,6 +141,11 @@ timeline slots for pictures nobody ever sourced. Consequences for later mileston
   *Done when `git status --porcelain` is empty immediately after `bash scripts/audit_images.sh` runs.*  
   > Tracked three times historically and removed in 286963f, but never ignored — so every audit run reappears as an untracked file. Fixed once, never made unable to recur: the exact pattern M0 exists to correct.
 
+- [ ] **M4-18** Add a manifest-integrity arm to site-check.yml: every `images/chN/` file referenced by a chapter has a manifest entry, and every manifest entry matches a file on disk  
+  `S` `[sonnet]` · after: `M0-6`  
+  *Done when a PR that references an unmanifested image fails CI.*  
+  > Found during the ch5 figure audit: two ch5 images were referenced with no provenance record and `audit_images.sh --strict` passed anyway, because existence on disk is not provenance.
+
 <details><summary>Why this order</summary>
 
 The audit script is the measuring instrument for the whole milestone, so it is fixed first (M0-1, M0-2): with the current `src="..."`-only regex it prints `Missing from disk: 0` while 14 paths are broken, so any image fix done before it is unverifiable and any CI gate built on it would be a gate that can never fire. Portability (M0-2) comes before CI because ubuntu-latest and the maintainer's macOS must produce the same count or a green local run means nothing. The image fixes (M0-3 mechanical, M0-4 editorial) come after the instrument and before the workflow, because the DoD requires site-check.yml to be green on its first run — a workflow merged before the images would land red on main. M0-5 logs licenses only once both fix passes have decided what the final filenames are. site-check.yml must exist (M0-6) before the html-validate (M0-7) and monthly link-check (M0-8) jobs can be added to it; the roadmap allows exactly one workflow file, so these are jobs, not new files. M0-9, M0-10 and M0-11 are dependency-free and can run in parallel with everything above; M0-11 in particular does not wait on the image work, since CONTRIBUTING.md's "not stored in the repo" claim is already false for all 124 tracked images. M0-12 is last because it re-checks every other task's assertion on both platforms.
@@ -409,22 +414,22 @@ M3-4, M3-5, M3-6 and M3-10 have no blockers and can start on day one. M3-13 is l
   *Done when MAINTENANCE.md contains a `## Chapter Accuracy Audit` section naming the five claim types (date, proper name, statistic, direct quotation, causal claim) and the four verdicts (verified / corrected / caveated / could not verify), and docs/ACCURACY_AUDIT.md exists carrying the header row `| Claim | Type | Verdict | Yawp source | Independent source | PR |` plus a `### Chapter N` heading for each of 5, 6, 7, 8.*  
   > docs/ does not exist in this repo yet — mkdir docs; nothing in .gitignore blocks it. Write the method generic enough that M6 replays it on ch9-ch15 with no edits. Mirror the Primary Source Reader audit that produced the 61/61 verified ps-source-link invariant: every claim gets the corresponding American Yawp chapter plus one independent reference, not one source.  
 
-- [ ] **M4-2** Fill the Chapter 5 ledger in docs/ACCURACY_AUDIT.md against ch5.html (The American Revolution)  
+- [x] **M4-2** Fill the Chapter 5 ledger in docs/ACCURACY_AUDIT.md against ch5.html (The American Revolution)  
   `L` `[fable]` · after: `M4-1`  
   *Done when the `### Chapter 5` table has one row per date, proper name, statistic, direct quotation and causal claim in ch5.html, zero rows with an empty Verdict cell, and every row naming both the American Yawp ch5 section and one independent reference.*  
   > Calendar-bound: ch5 by Oct 15. Do not batch with ch6-ch8 — the milestone's whole premise is that each chapter is checked the month before classrooms reach it. ch5.html also holds `.primary-source` boxes; those correctly carry no source link (CLAUDE.md 2.2) — audit their quoted text, do not add links.  
 
-- [ ] **M4-3** Merge a correction PR for every Chapter 5 `corrected` row, updating QUIZZES["5"], VOCAB["5"], SLIDES["5"] and ch:5 timeline entries in the same PR  
+- [x] **M4-3** Merge a correction PR for every Chapter 5 `corrected` row, updating QUIZZES["5"], VOCAB["5"], SLIDES["5"] and ch:5 timeline entries in the same PR  
   `M` `[fable]` · after: `M4-2`, `M0-6`  
   *Done when every `corrected` row in the Chapter 5 ledger cites a merged PR number, and each of those PRs touches ch5.html plus every companion object repeating the corrected claim (`QUIZZES["5"]` in quizzes.html, `VOCAB["5"]` in vocabulary-cards.html, `SLIDES["5"]` in slideshows.html, `ch:5` entries in timeline.html), with site-check.yml green on the merge commit.*  
   > Blocked by M0-3 because 'site-check.yml green' is meaningless while CI is advisory and never fails. A correction that shifts a quiz `answer` index must also rewrite that question's `explain` string — the two drift silently otherwise.  
 
-- [ ] **M4-4** Add an attribution clause and a `View original` link to all 42 figcaptions in ch5.html, ch6.html, ch7.html and ch8.html  
+- [~] **M4-4** *(ch5 figures done; ch6-ch8 pending)*  Add an attribution clause and a `View original` link to all 42 figcaptions in ch5.html, ch6.html, ch7.html and ch8.html  
   `L` `[fable]` · after: `M4-1`  
   *Done when `grep -o 'View original' ch5.html ch6.html ch7.html ch8.html | wc -l` returns 42 and every `<figcaption>` in those four files contains a parenthetical attribution clause.*  
   > Ordering trap: this edits ch6.html and ch7.html, the same two files M1-2/M1-3 restructure wholesale by ~Nov 10, and ch6's own deadline is Oct 31 — land the ch6/ch7 figcaptions before M1-2/M1-3 open its branch, or rebase onto it. Mirror the ps-source-link wording but do NOT use the `ps-source-link` class here; it belongs to the 61 reader blocks. Source URLs come from scripts/download_ch5_images.sh through download_ch8_images.sh and scripts/download_all_maps.sh — curl-verify each, and match the file's em-dash encoding (`&mdash;` in ch6/ch7, literal — in ch5/ch8).  
 
-- [ ] **M4-5** Replace ch5-ch8 images whose provenance cannot be curl-verified and log every swap in IMAGES_AUDIT.md  
+- [x] **M4-5** Replace ch5-ch8 images whose provenance cannot be curl-verified and log every swap in IMAGES_AUDIT.md  
   `M` `[fable]` · after: `M4-4`, `M0-1`  
   *Done when no figure in ch5-ch8 references an image lacking a verified source URL, IMAGES_AUDIT.md has one row per swap giving old file, new file, reason and license, and `bash scripts/audit_images.sh` reports 0 missing refs.*  
   > Depends on M0-1: the unfixed audit_images.sh reports zero missing while 16 refs are broken, so its 0 is not evidence. Each replacement also needs its entry updated in scripts/download_chN_images.sh (or download_all_maps.sh for the map figures). The roadmap explicitly does not promise zero unknowns across all 124 images — replace only what ch5-ch8 actually shows.  
@@ -479,7 +484,7 @@ M3-4, M3-5, M3-6 and M3-10 have no blockers and can start on day one. M3-13 is l
   *Done when exactly four open issues exist, one naming each of chapters 5-8, each listing that chapter's `could not verify` ledger rows verbatim, and each linked by a comment on the matching pinned Review slot issue.*  
   > Cross-milestone: blocked by M2-5's 15 pinned Review slot issues — without them there is nothing to link from. One issue per chapter, never one per row: the point is that a volunteer confirms a short list instead of discovering the same items from scratch.  
 
-- [ ] **M4-16** Add the fact-check line to the generated chapter banner via data/chapters.json and scripts/build_status.sh  
+- [x] **M4-16** Add the fact-check line to the generated chapter banner via data/chapters.json and scripts/build_status.sh  
   `M` `[sonnet]` · after: `M4-3`, `M4-10`, `M4-12`, `M4-14`, `M3-2`  
   *Done when data/chapters.json carries a fact-check date for chapters 5-8, `bash scripts/build_status.sh` stamps "AI-assisted fact check completed <date>; not yet reviewed by a historian" into exactly ch5.html, ch6.html, ch7.html and ch8.html and into no other chapter, and a second run of the script produces no diff.*  
   > Real cross-milestone dependency that the milestone map's 'M4 blocked by —' line hides: the banner is generated by M3-1's build_status.sh from data/chapters.json, so this item cannot ship before M3-1 exists. Never hand-stamp the line into a chapter — that creates the fourth status surface M2/M3 exist to eliminate. Wording is fixed by the roadmap so it cannot be misread as human review; do not paraphrase it.  

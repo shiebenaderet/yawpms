@@ -9,7 +9,7 @@ before classrooms reach it — not in a single sweep that finishes after the yea
 
 | Ch | Title | Target | Status | verified | corrected | caveated | could not verify |
 |----|-------|--------|--------|----------|-----------|----------|------------------|
-| 5 | The American Revolution | Oct 15, 2026 | **ledger complete** | 130 | 19 | 38 | 3 |
+| 5 | The American Revolution | Oct 15, 2026 | **applied 2026-09-08** | 130 | 34 applied | &mdash; | 3 |
 | 6 | A New Nation | Oct 31, 2026 | not started | — | — | — | — |
 | 7 | The Early Republic | Nov 15, 2026 | not started | — | — | — | — |
 | 8 | The Market Revolution | Dec 20, 2026 | not started | — | — | — | — |
@@ -89,8 +89,10 @@ Auditors misread their own cited sources, mistook grade-appropriate compression 
 and in one case misdescribed a map that the adjudicator checked by cropping and upscaling
 its legend. The adversarial pass is not ceremony.
 
-> **Coverage gap:** 17 of the 57 flagged rows were not adjudicated —
-> the workflow capped the adjudication phase at 40. Those rows are unresolved, not cleared.
+> **Coverage gap closed.** A second run adjudicated the remaining 17 rows and overturned
+> 9 of them — a higher rate than the first run. All 57 flagged claims are now adversarially
+> checked: **34 upheld, 23 overturned**. The skipped rows were not a random sample; the cap
+> fell such that it had missed the entire conclusion section and nearly every figure row.
 
 ### Upheld — changes to make
 
@@ -288,3 +290,24 @@ Recorded so the same objections are not re-raised by the next reviewer.
 - **"[Black Loyalists'] stories of courage and betrayal are rarely told."** (conclusion, Whose Voices Were Left Out — "Enslaved people who fled to the British") — An editorial claim about the historical record rather than about the past. Not upgraded to verified. Handoff: either soften to "stories most textbooks leave out" (which the book can stand behind about
 - **"Their [Loyalists'] perspective on the Revolution is almost never told in American schools."** (conclusion, Whose Voices Were Left Out — "Loyalist families") — Same class of claim as the Black Loyalist row. Flagged for a human reviewer rather than corrected, since a defensible weaker version ("rarely told from their own point of view") may be what is meant.
 
+
+
+### Applied 2026-09-08
+
+All 34 upheld corrections are in `ch5.html`. Visible text grew by ~4,400 characters, almost
+entirely because caveats add context rather than replace it.
+
+**Companion fan-out:** none required. `QUIZZES["5"]`, `VOCAB["5"]`, `SLIDES["5"]` and the
+eight `ch:5` timeline entries were checked against every corrected claim and none repeated
+one. That is a finding, not a skipped step.
+
+**Manifest defect found during the figure audit.** `scripts/download_ch5_images.sh` listed
+`yorktown-soldiers.jpg` while the committed file is `.gif`, and `siege-of-yorktown.gif` had
+no entry at all. Both are now recorded with provenance. `audit_images.sh --strict` passed
+throughout, because it only asks whether referenced files exist on disk — an image can be
+present, referenced, and rendering while having no provenance record whatsoever. **A CI arm
+asserting manifest/reference/disk agreement is a live gap** (see TASKS.md).
+
+**The siege-of-Yorktown map is a modern teaching map**, not a period plan: it carries NATO
+unit symbols (XXX corps, XX division), a circled atlas plate number, and vector typography.
+The caption said "Plan of the Siege of Yorktown," which implied a 1781 document. Corrected.
