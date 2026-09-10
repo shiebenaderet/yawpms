@@ -11,7 +11,7 @@ before classrooms reach it — not in a single sweep that finishes after the yea
 |----|-------|--------|--------|----------|-----------|----------|------------------|
 | 5 | The American Revolution | Oct 15, 2026 | **applied 2026-09-08** | 130 | 34 applied | &mdash; | 3 |
 | 6 | A New Nation | Oct 31, 2026 | **applied 2026-09-09** | 198 | 35 | — | 7 |
-| 7 | The Early Republic | Nov 15, 2026 | not started | — | — | — | — |
+| 7 | The Early Republic | Nov 15, 2026 | **ledger complete, 64 pending** | 165 | — | — | 4 |
 | 8 | The Market Revolution | Dec 20, 2026 | not started | — | — | — | — |
 | 9–11 | — | Jan–Feb 2027 | M6 | — | — | — | — |
 | 12–15 | — | Mar 2027 | M6 | — | — | — | — |
@@ -596,3 +596,47 @@ the file for instruction-shaped fragments before commit, and the caption was reb
 pre-edit baseline. Adjudicator `final_replacement` fields are not always clean prose; some are
 multi-part instructions. **Screen every replacement for instruction language before applying,
 and diff the visible text afterwards.**
+
+---
+
+## Chapter 7 — The Early Republic
+
+**Audited 2026-09-09. Ledger complete; 64 corrections pending sign-off.**
+
+297 claims across seven sections and nineteen figures &mdash; the most figures in any chapter
+so far &mdash; verified against [The American Yawp ch. 7](https://www.americanyawp.com/text/07-the-early-republic/)
+plus an independent reference, then every flagged row re-checked by a refutation pass.
+
+| | Count |
+|---|---|
+| claims audited | 297 |
+| verified | 165 |
+| flagged | 128 |
+| **upheld** | **64** |
+| overturned | 64 |
+| could not verify | 4 |
+
+**An exact 50% split** &mdash; 64 upheld, 64 refused. Overturn rates now run
+40% (ch5), 70% (ch6), 50% (ch7), which makes ch6 the outlier rather than the trend.
+
+**37 of the 64 upheld changes are licensing or attribution** &mdash; more than half.
+Seven ch7 captions claimed no licence at all, ending in a bare "Wikimedia." which names a host,
+not a creator. The manifest header hedged "public domain / CC BY-SA" across all nineteen
+figures: a claim that covers every outcome and commits to none, so no caption inheriting it
+could ever be checked against it. That is the third chapter running in which a blanket header
+claim was the thing concealing real defects.
+
+Review sheet: https://claude.ai/code/artifact/4bf04d7e-a77b-4486-9e70-914a92b0d116
+
+**Not propagated:** the chapter says Paine called the nation an "asylum" for liberty. His words
+in *Common Sense* are "an asylum for mankind," written about colonies that were not yet a
+nation. The phrasing is inherited verbatim from the parent text, so the site was grepped: it
+appears only in ch7.
+
+#### Could not verify
+
+- **Figcaption attribution: "Library of Congress."** (ch7.html line 146 (figcaption)) — Not a claim I can call wrong — only one I cannot confirm, which per the method stays could_not_verify rather than being nudged to verified because it sounds plausible. Th
+- **Figure credit: the Louisiana Purchase map on line 248 is from the "National Archives, public domain."** (ch7.html line 249 (figcaption for images/ch7/louisiana-purch) — Do not upgrade this to verified. The suggested replacement drops the unverified National Archives credit and substitutes what the plate itself states, which is checkable 
+- **"visiting dozens of Native nations"** (ch7.html line 319, story-box) — "Dozens" implies 24 or more and no source I checked counts them. Yawp's own "many" is the defensible word. Downgrade rather than guess.
+- **Figcaption: "This 1812 political cartoon from Philadelphia … William Charles, 1812. Library of Congress."** (figcaption, line 383 (images/ch7/british-indians-cartoon.jpg) — Read the image: it does depict a British officer in red coat paying for scalps beside two Native figures over a fallen American soldier, so the caption describes the pict
+
