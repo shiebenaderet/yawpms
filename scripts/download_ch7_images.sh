@@ -27,24 +27,35 @@ declare -A IMAGES=(
   # Wyoming, the Dakotas) over 1803 territory, so the caption must not present it as
   # a period document.
   ["louisiana-purchase.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/Frank_bond_1912_louisiana_and_the_louisiana_purchase.jpg?width=960"
-
-  ["america-guided-by-wisdom.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/America_guided_by_wisdom.jpg?width=640"
-  ["haitian-revolution.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/Bataille_de_San_Domingo.jpg?width=640"
+  # Library of Congress, LC control no. 2010634241; no known restrictions on publication
+  ["america-guided-by-wisdom.jpg"]="https://tile.loc.gov/storage-services/service/pnp/ds/04700/04764r.jpg"
+  ["haitian-revolution.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/January_Suchodolski_-_Legionaries_at_San_Domingo_-_MP_2606_-_National_Museum_in_Warsaw.jpg?width=960"
   ["banneker-almanac.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/Benjamin_Banneker's_Pennsylvania%2C_Delaware%2C_Maryland%2C_and_Virginia_Almanac_and_Ephemeris%2C_for_the_Year_of_Our_Lord_1795.jpg?width=440"
-  ["james-peale-family.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/James_Peale_The_Artist_and_His_Family.jpg?width=640"
+  # "The Peale Family" by CHARLES WILLSON Peale, begun c.1773, finished 1809.
+  # New-York Historical Society. Public domain.
+  # *** The Commons file is MISNAMED "The artist and his family james peale.jpg" and
+  # *** its metadata says "James Peale, 1795". That is a different, smaller painting.
+  # *** The image on disk is unmistakably C.W. Peale's group portrait: eleven figures,
+  # *** the painter with a palette at left, busts on a shelf, the dog Argus in front.
+  # *** Verified from the artifact, not from the Commons record.
+  ["james-peale-family.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/The_artist_and_his_family_james_peale.jpg?width=640"
   ["camp-meeting.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/Camp_meeting_of_the_Methodists_in_N._America_J._Milbert_del_M._Dubourg_sculp_(cropped).jpg?width=640"
   ["jefferson-banner.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/Jefferson_campaign_banner%2C_1800.jpg?width=640"
   ["monticello.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/Thomas_Jefferson's_Monticello.JPG?width=640"
   ["lewis-and-clark.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/Lewis_and_clark-expedition.jpg?width=640"
   ["john-marshall.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/John_Marshall_by_Henry_Inman%2C_1832.jpg?width=440"
-  ["uss-chesapeake.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/Chesapeake_Leopard.jpg?width=640"
-  ["red-jacket.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/Red_Jacket_by_Charles_Bird_King.jpg?width=440"
+  ["uss-chesapeake.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/Onlyshotofchesapeake.jpg"
+  # LOC LC-DIG-pga-07567, item 2013645353 (public domain)
+  ["red-jacket.jpg"]="https://tile.loc.gov/storage-services/service/pnp/pga/07500/07567r.jpg"
+  # Tenskwatawa (the Shawnee Prophet). A line ENGRAVING, not a painting, and not
+  # drawn from life. The caption claimed "painted by George Catlin in 1831" until
+  # 2026-09-11; Catlin's Tenskwatawa is a full-colour oil and looks nothing like
+  # this. Commons carries no artist or date for the file. Public domain.
   ["tenskwatawa.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/Tenskwatawa.jpg?width=440"
-  ["british-indians-cartoon.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/A_scene_on_the_frontiers_as_practiced_by_the_humane_British_and_their_worthy_allies.jpg?width=640"
+  ["british-indians-cartoon.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/A_scene_on_the_frontiers_as_practiced_by_the_humane_British_and_their_worthy_allies%21_LCCN2002708980.jpg?width=640"
   ["washington-burning.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/Burning_of_Washington_1814.jpg?width=640"
   ["battle-of-new-orleans.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/Battle_of_New_Orleans.jpg?width=640"
-  ["hartford-convention.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/Hartford_Convention_or_Leap_No_Leap.jpg?width=640"
-
+  ["hartford-convention.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/TheHartfordConventionOrLeapNoLeap.jpg?width=640"
   # Maps
   ["louisiana-purchase-map.png"]="https://commons.wikimedia.org/wiki/Special:FilePath/LouisianaPurchase.png?width=800"
   # Lewis and Clark route, 1804-1806. MODERN map (2007) by Wikimedia contributors
