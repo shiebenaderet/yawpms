@@ -670,3 +670,30 @@ route description attached to a painting of canoes on a river.
 
 This needs a decision rather than a correction: **remove the duplicate**, or **replace it with
 an actual route map**. Not applied.
+
+### Image provenance closed — 2026-09-11
+
+Every image referenced anywhere in the repo now has a manifest entry, every entry matches a
+file on disk, and `check_image_manifest.sh` runs in CI as a failing gate.
+
+Eight images had no provenance record at all. The gap was never bookkeeping: **three of the
+eight turned out to carry a wrong or missing licence once someone looked**, and a fourth was
+a duplicate of another figure wearing a "Map" badge.
+
+The last two:
+
+- **`ch7/louisiana-purchase.jpg`** — Map No. 4 from Frank Bond, *Historical Sketch of
+  "Louisiana" and the Louisiana Purchase*, U.S. General Land Office (GPO, 1912), drawn by
+  I. P. Bartlett and C. J. Hein, printed by the Columbia Planograph Co. All four names are
+  legible on the plate itself. A 1912 **retrospective** — it draws Oklahoma, Wyoming and the
+  Dakotas over 1803 territory — which the caption now says outright.
+- **`ch2/new-orleans-1726.jpg`** — "La Nouvelle Orleans en 1728". Identified by aspect ratio:
+  the committed file is 960×729 and the source returns exactly 960×729 at `width=960`. The
+  filename says 1726; the map's own cartouche says 1728, and the caption already said 1728.
+
+**What the whole exercise established.** `audit_images.sh --strict` asks only whether a
+referenced file exists. It passed throughout, on every one of these. Existence is not
+provenance, and a caption with no provenance record behind it cannot be checked by anyone —
+which is exactly how a 1916 redraft, a modern West Point teaching map, a CC BY-SA map
+credited as public domain, and a painting labelled as a route map all survived on published
+pages.

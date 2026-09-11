@@ -175,6 +175,23 @@ jobs:
           done
           exit $fail
 
+  image-manifest:
+    name: Image provenance records
+    if: github.event_name == 'push' || github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Every image has a provenance record
+        # audit_images.sh --strict only asks whether a referenced file exists on disk.
+        # An image can be present, referenced and rendering while nobody has recorded
+        # its artist, date or licence -- which makes its caption unfalsifiable. Eight
+        # images across five chapters were in that state, and three of them turned out
+        # to carry wrong or missing licences once anyone looked.
+        run: bash scripts/check_image_manifest.sh
+
   status-drift:
     name: Chapter status tables match data/chapters.json
     if: github.event_name == 'push' || github.event_name == 'pull_request'

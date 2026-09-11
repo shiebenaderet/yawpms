@@ -18,6 +18,16 @@ mkdir -p "$IMG_DIR"
 echo "Downloading Chapter 7 images to $IMG_DIR ..."
 
 declare -A IMAGES=(
+  # "Territory of Louisiana, 1803-1819" (Map No. 4) from Frank Bond, Historical Sketch
+  # of "Louisiana" and the Louisiana Purchase, U.S. General Land Office (GPO, 1912).
+  # Drawn by I. P. Bartlett and C. J. Hein; printed by the Columbia Planograph Co.,
+  # Washington D.C. -- all four names are legible on the plate itself. Work of the
+  # U.S. government, public domain.
+  # NOTE: a 1912 RETROSPECTIVE map. It draws 20th-century state lines (Oklahoma,
+  # Wyoming, the Dakotas) over 1803 territory, so the caption must not present it as
+  # a period document.
+  ["louisiana-purchase.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/Frank_bond_1912_louisiana_and_the_louisiana_purchase.jpg?width=960"
+
   ["america-guided-by-wisdom.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/America_guided_by_wisdom.jpg?width=640"
   ["haitian-revolution.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/Bataille_de_San_Domingo.jpg?width=640"
   ["banneker-almanac.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/Benjamin_Banneker's_Pennsylvania%2C_Delaware%2C_Maryland%2C_and_Virginia_Almanac_and_Ephemeris%2C_for_the_Year_of_Our_Lord_1795.jpg?width=440"

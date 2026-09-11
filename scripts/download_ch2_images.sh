@@ -13,6 +13,13 @@ mkdir -p "$IMG_DIR"
 echo "Downloading Chapter 2 images to $IMG_DIR ..."
 
 declare -A IMAGES=(
+  # "La Nouvelle Orleans en 1728" -- French colonial town plan of New Orleans.
+  # Public domain. Identified 2026-09-11 by matching aspect ratio: the committed file
+  # is 960x729 and this source returns exactly 960x729 at width=960.
+  # NOTE: the committed FILENAME says 1726. The map's own title cartouche reads 1728,
+  # and the figcaption and alt text correctly say 1728 -- the filename is the outlier.
+  ["new-orleans-1726.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/Nouvelle_Orleans_1728_map.jpg?width=960"
+
   # New Amsterdam 1660 -- 1916 REDRAFT by John Wolcott Adams (1874-1925) of the original
   # Castello Plan survey. Public domain. NOT a 1660 document; the cartouche says "Redraft".
   ["castello-plan.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/Redraft_of_the_Castello_Plan_New_Amsterdam_in_1660_by_John_Wolcott_Adams.jpg?width=960"

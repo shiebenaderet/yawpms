@@ -141,15 +141,15 @@ timeline slots for pictures nobody ever sourced. Consequences for later mileston
   *Done when `git status --porcelain` is empty immediately after `bash scripts/audit_images.sh` runs.*  
   > Tracked three times historically and removed in 286963f, but never ignored — so every audit run reappears as an untracked file. Fixed once, never made unable to recur: the exact pattern M0 exists to correct.
 
-- [~] **M4-18** *(checker written and finding real defects; CI gate waits on M4-19)*  Add a manifest-integrity arm to site-check.yml: every `images/chN/` file referenced by a chapter has a manifest entry, and every manifest entry matches a file on disk  
+- [x] **M4-18**  Add a manifest-integrity arm to site-check.yml: every `images/chN/` file referenced by a chapter has a manifest entry, and every manifest entry matches a file on disk  
   `S` `[sonnet]` · after: `M0-6`  
   *Done when a PR that references an unmanifested image fails CI.*  
   > Found during the ch5 figure audit: two ch5 images were referenced with no provenance record and `audit_images.sh --strict` passed anyway, because existence on disk is not provenance.
 
-- [ ] **M4-19** Source the last two unmanifested images, then wire `check_image_manifest.sh` into site-check.yml  
+- [x] **M4-19** Source the last two unmanifested images, then wire `check_image_manifest.sh` into site-check.yml  
   `M` `[fable]` · after: `M4-18`  
-  *Done when `bash scripts/check_image_manifest.sh` exits 0 and the CI job is green on its first run.*  
-  > Four of six resolved 2026-09-09. **Still unidentified:** `images/ch2/new-orleans-1726.jpg` (the map is titled "La Nouvelle Orleans en 1728" — Commons search returns only book PDFs, so its source file could not be found) and `images/ch7/louisiana-purchase.jpg` (the obvious search hit is a 2023 upload, not the source). Do NOT paper over these with a guessed URL: an entry pointing at a 404 makes the checker pass while the provenance is still unknown, which is the exact failure this check exists to catch. Do NOT wire the CI gate until both resolve.
+  *Done: `check_image_manifest.sh` exits 0 and the CI job is wired.*  
+  > All eight resolved. `ch7/louisiana-purchase.jpg` is Frank Bond, *Historical Sketch of "Louisiana" and the Louisiana Purchase*, U.S. General Land Office 1912, Map No. 4 — drawn by I. P. Bartlett and C. J. Hein, printed by the Columbia Planograph Co., all four legible on the plate. `ch2/new-orleans-1726.jpg` matched by aspect ratio (960×729 at width=960). Three of the eight carried wrong or missing licences once identified.
 
 <details><summary>Why this order</summary>
 
