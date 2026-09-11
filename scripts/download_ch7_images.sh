@@ -1,6 +1,10 @@
 #!/usr/bin/env bash
 # Download images for Chapter 7: The Early Republic
-# Images sourced from Wikimedia Commons (public domain / CC BY-SA)
+# Image licences VARY BY FIGURE; each entry below records its own. Do NOT assume
+# public domain, and do NOT rely on this header for any individual image.
+# These require NAMED ATTRIBUTION in the caption:
+#   louisiana-purchase-map.png  Ernst Schuette, CC BY-SA 3.0
+#   monticello.jpg              Martin Falbisoner, CC BY-SA 3.0
 # Usage: bash scripts/download_ch7_images.sh
 
 set -euo pipefail

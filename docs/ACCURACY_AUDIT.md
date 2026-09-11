@@ -640,3 +640,33 @@ appears only in ch7.
 - **"visiting dozens of Native nations"** (ch7.html line 319, story-box) — "Dozens" implies 24 or more and no source I checked counts them. Yawp's own "many" is the defensible word. Downgrade rather than guess.
 - **Figcaption: "This 1812 political cartoon from Philadelphia … William Charles, 1812. Library of Congress."** (figcaption, line 383 (images/ch7/british-indians-cartoon.jpg) — Read the image: it does depict a British officer in red coat paying for scalps beside two Native figures over a fallen American soldier, so the caption describes the pict
 
+
+#### ch7 partial application — 2026-09-11
+
+Two confirmed licence violations fixed, both verified directly against Commons
+`extmetadata` rather than taken from an adjudicator's summary:
+
+- **`louisiana-purchase-map.png`** is **CC BY-SA 3.0 by Ernst Schütte**, `AttributionRequired:
+  true`. The caption read "(Wikimedia Commons, public domain)".
+- **`monticello.jpg`** is **CC BY-SA 3.0 by Martin Falbisoner**, `AttributionRequired: true`.
+  The caption ended in a bare "Wikimedia." — which names a host, not a creator or a licence.
+
+The manifest header claimed "public domain / CC BY-SA" across all nineteen figures. That
+hedge is *worse* than ch6's flatly wrong blanket claim, because it is unfalsifiable: it covers
+every outcome while committing to none, so no caption inheriting it could ever be checked
+against it. Replaced with a per-figure record naming the two that require attribution.
+
+#### Open editorial decision — the duplicate Lewis and Clark figure
+
+`images/ch7/lewis-clark-expedition-map.png` and `images/ch7/lewis-and-clark.jpg` are
+**byte-identical** (244,276 bytes each; the `.png` holds JPEG content). Both are Charles
+Marion Russell's painting *Lewis and Clark on the Lower Columbia* (1905), signed at lower
+left.
+
+The chapter therefore shows the same painting twice, and the duplicate carries a **`Map`
+badge** and the caption "The route of the Lewis and Clark Expedition, 1804–1806… from
+St. Louis up the Missouri River, crossed the Rocky Mountains, and reached the Pacific" — a
+route description attached to a painting of canoes on a river.
+
+This needs a decision rather than a correction: **remove the duplicate**, or **replace it with
+an actual route map**. Not applied.
