@@ -105,7 +105,7 @@ download 6 "us-territory-1789-map.png"   "${W}/United_States_1789-08-1790.png?wi
 # ── Chapter 7 — Early Republic ──
 echo "Chapter 7 (Early Republic)"
 download 7 "louisiana-purchase-map.png"       "${W}/LouisianaPurchase.png?width=800"
-download 7 "lewis-clark-expedition-map.png"   "${W}/Lewis_and_clark-expedition.jpg?width=800"
+download 7 "lewis-clark-route-map.png"        "${W}/Carte_Lewis-Clark_Expedition-en.png?width=1100"
 
 # ── Chapter 8 — Market Revolution ──
 echo "Chapter 8 (Market Revolution)"

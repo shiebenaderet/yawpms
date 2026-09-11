@@ -5,6 +5,7 @@
 # These require NAMED ATTRIBUTION in the caption:
 #   louisiana-purchase-map.png  Ernst Schuette, CC BY-SA 3.0
 #   monticello.jpg              Martin Falbisoner, CC BY-SA 3.0
+#   lewis-clark-route-map.png   EncMstr / Urban / Pandat, CC BY-SA 4.0
 # Usage: bash scripts/download_ch7_images.sh
 
 set -euo pipefail
@@ -36,7 +37,11 @@ declare -A IMAGES=(
 
   # Maps
   ["louisiana-purchase-map.png"]="https://commons.wikimedia.org/wiki/Special:FilePath/LouisianaPurchase.png?width=800"
-  ["lewis-clark-expedition-map.png"]="https://commons.wikimedia.org/wiki/Special:FilePath/Lewis_and_clark-expedition.jpg?width=800"
+  # Lewis and Clark route, 1804-1806. MODERN map (2007) by Wikimedia contributors
+  # EncMstr, Urban and Pandat. *** CC BY-SA 4.0 -- ATTRIBUTION REQUIRED in the caption.
+  # Replaced a figure that was byte-identical to lewis-and-clark.jpg -- a Russell
+  # painting carrying a "Map" badge and a route description.
+  ["lewis-clark-route-map.png"]="https://commons.wikimedia.org/wiki/Special:FilePath/Carte_Lewis-Clark_Expedition-en.png?width=1100"
 )
 
 for local in "${!IMAGES[@]}"; do
