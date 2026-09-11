@@ -177,6 +177,29 @@ is replaced, and the swap is logged in `IMAGES_AUDIT.md`.
 **A resolving reference is not a correct one.** A file existing on disk says nothing about
 whether the picture shows what the caption claims. Read the image.
 
+**Never apply corrections in a batch.** Two chapters were damaged this way. On ch6 a
+replacement containing an adjudicator's *instructions* was written into a live figcaption.
+On ch7 a batch shipped six duplicated sentences, because several replacements restate the
+sentence they replace and then extend it — so matching only the opening fragment leaves the
+original opening sitting in front of the new text.
+
+Apply one correction at a time, and after each one **read the surrounding paragraph**. A
+character-count delta is not a diff: on ch7 the text grew by 4,800 characters, which looked
+like caveats adding context, and five duplications were hiding inside that growth. Before
+committing any chapter edit, scan for repeated sentences, repeated phrases and repeated
+openers:
+
+```bash
+python3 - <<'EOF'
+import re, html
+s = open('chN.html').read()
+t = re.sub(r'\s+', ' ', html.unescape(re.sub(r'<[^>]+>', ' ', s)))
+for pat in (r'([A-Z][^.!?]{20,160}[.!?])\s*\1', r'\b(\w[\w ,\'’—:-]{20,110})\s*\1\b'):
+    for m in re.finditer(pat, t):
+        print('DUPLICATE:', m.group(1)[:90])
+EOF
+```
+
 **Watch for the confident false source.** Source 9.3 was quoted as eyewitness testimony
 for over a century before muster records showed the author was not there. A source being
 famous, moving, and widely reprinted is not evidence that it is real.
