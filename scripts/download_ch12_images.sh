@@ -15,9 +15,17 @@ echo "Downloading Chapter 12 images to $IMG_DIR ..."
 declare -A IMAGES=(
   ["american-progress.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/American_Progress_%28John_Gast_painting%29.jpg?width=640"
   ["oregon-trail.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/Bierstadt_Albert_Oregon_Trail.jpg?width=640"
-  ["battle-of-chapultepec.jpg"]="https://upload.wikimedia.org/wikipedia/commons/thumb/c/ce/Battle_of_Chapultepec.jpg/640px-Battle_of_Chapultepec.jpg"
-  ["gold-rush-miners.jpg"]="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2d/California_gold_rush_daguerreotype.jpg/640px-California_gold_rush_daguerreotype.jpg"
-  ["mexican-cession-map.jpg"]="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4f/Mexican_Cession.png/640px-Mexican_Cession.png"
+  # Battle of Chapultepec, 1851 lithograph. Public domain. The Commons file is 640x403 --
+  # exactly the local dimensions. Old URL was a thumb path that 400d.
+  ["battle-of-chapultepec.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/Battle_of_Chapultepec.jpg"
+  # California gold miners with a long tom, c.1850-52. Daguerreotype by George H. Johnson,
+  # Nelson-Atkins Museum of Art. Public domain. Commons file is 1000x772 = 1.2953 against the
+  # local 1.2955. Old URL was a thumb path that 400d.
+  ["gold-rush-miners.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/California_gold_miners_with_long_tom.jpg?width=960"
+  # The Mexican Cession. A MODERN map (2008) by Commons user Kballen.
+  # *** CC BY 3.0 -- ATTRIBUTION REQUIRED ***, now named in the caption, which carried no
+  # credit at all until 2026-09-11. Old URL was a thumb path that 400d.
+  ["mexican-cession-map.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/Mexican_Cession.png?width=960"
 
   # Maps
   ["oregon-territory-map.png"]="https://commons.wikimedia.org/wiki/Special:FilePath/Oregon_Territory_1848.svg?width=600"

@@ -21,38 +21,46 @@ start immediately.
 check in the repo can currently see. Both are the same shape as the bug that started this
 work: a check that verifies *presence* and is read as verifying *correctness*.
 
-- **M4-22 — `check_image_manifest.sh --check-urls`. BUILT, and the sweep is alarming.**
-  A curl sweep of all 19 ch7 manifest URLs found two 404s, both fabricated Commons titles
-  that never existed. The manifest check passed them because it only asks whether an entry
-  and a file exist. The flag now exists (network-gated and opt-in, so the default check stays
-  offline and deterministic; exits non-zero on any dead URL).
+- **M4-22 — `check_image_manifest.sh --check-urls`. BUILT, and the whole book is now clean.**
+  The manifest check asked whether an entry and a file exist, never whether the entry's URL
+  still led anywhere. The flag now exists (network-gated, opt-in, exits non-zero on any dead
+  URL) and treats a deliberate `UNKNOWN` marker as a *known gap* rather than a failure, so a
+  real regression still stands out.
 
-  Swept across the whole repo: **29 of 132 source URLs are dead (22%), in 11 of 15 chapters.**
+  The first sweep found **29 of 132 dead (22%), across 11 of 15 chapters**. All 29 are now
+  resolved: **129 resolve, 3 marked UNKNOWN with documented reasons, 0 dead.**
 
-  | | dead / total | | dead / total |
-  |---|---|---|---|
-  | ch2 | 4 / 10 | ch10 | 2 / 7 |
-  | ch3 | 2 / 7 | ch11 | 2 / 5 |
-  | ch4 | 1 / 5 | ch12 | 3 / 6 |
-  | ch5 | 3 / 7 | ch14 | 1 / 11 |
-  | ch6 | **7 / 9** | ch15 | 1 / 7 |
-  | ch8 | 3 / 6 | | |
+  What the dead URLs were hiding — these were not cosmetic:
 
-  Clean: ch1, ch7, ch9, ch13, and all 15 primary-source images. The 404s are Commons titles
-  that do not exist (verified case-by-case through the Commons API, not inferred from the
-  status code); the 400s are malformed `upload.wikimedia.org` thumb URLs whose underlying
-  files are also missing.
+  - **A modern photograph sitting under a "Map" badge.** `ch8/erie-canal-map.png` was a
+    present-day colour snapshot of a canal, inside a `map-figure` captioned with a 363-mile
+    route. Replaced with an actual 1834 map and profile.
+  - **A map off by 21 years, carrying an argument it cannot support.** `ch8/railroads-1860-map`
+    was captioned "Railroad map of the United States, 1861" and used to contrast Northern and
+    Southern rail on the eve of war. It is H.S. Tanner's **1840** canals-and-railroads map. The
+    edition is identifiable by aspect ratio (local 1.3169; 1840 plate 1.3163; 1830 plate 1.3380).
+  - **A painting presented as an event.** `ch8/first-locomotive` is a **1916** Clyde Osmer DeLand
+    painting of an 1829 trial run, uncredited and undated on the page. Its manifest LCCN pointed
+    at a different LOC item entirely ("The virgin's offering").
+  - **An oil painting called a 17th-century engraving.** `ch2/negotiating-peace` is Benjamin
+    West's *The Treaty of Penn with the Indians*, 1771–72 — an idealised commission from Penn's
+    son, painted ~90 years after the treaty it shows.
+  - **A live licensing violation.** `ch12/mexican-cession-map` is CC BY 3.0 by Kballen and
+    carried no credit at all.
+  - **A URL that would have fetched the wrong picture.** `ch6/shays-shattuck` pointed at
+    `File:Shays' Rebellion.jpg`, a 2017 CC BY-SA drawing. Our image is the 1787 Bickerstaff's
+    Almanack relief cut.
 
-  **ch5 and ch6 are on this list despite having been audited.** Those audits corrected
-  captions and licences but never asked whether the source URL resolved, because this check
-  did not exist yet. An audited chapter is not a sourced chapter. ch6 at 7/9 is the worst in
-  the book and was the chapter whose manifest header previously carried a blanket
-  "public domain" claim across all figures.
+  **ch5 and ch6 were on the dead list despite having been audited**, because those audits fixed
+  captions and licences without ever asking whether a source resolved. An audited chapter is not
+  a sourced chapter.
 
-  Each dead entry means a caption whose credit cannot be checked and an image a fresh clone
-  cannot re-download. ch7's two cost roughly an hour to resolve: one was misattributed
-  outright (a "Jefferson campaign banner" that is really an elector circular naming no
-  candidate), the other untraceable to any repository and replaced. Expect a similar rate.
+  Three images are kept and marked `UNKNOWN`: two ch6 cartoons and one ch2 de Bry plate. All are
+  authentic and public domain by date, and all self-identify — their titles are legible in the
+  scans — but none could be traced to a repository, and their old URLs named Commons files with
+  **no log entry at all**, meaning never uploaded rather than deleted. Their unverifiable
+  "Library of Congress" and "American Antiquarian Society" credits were removed.
+
 - **M4-23 — scan for stray tag fragments.** ch7 had two paragraphs ending `. /p></p>`,
   rendering a literal `/p>` to every reader. `html-validate` passes it: `/p>` is well-formed
   text and the real `</p>` closes the element. A repo-wide scan found no others, but nothing

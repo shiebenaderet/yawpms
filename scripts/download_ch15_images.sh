@@ -23,7 +23,12 @@ declare -A IMAGES=(
   ["freedmens-bureau.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/The_Freedmen%27s_Bureau_-_Drawn_by_A.R._Waud._LCCN92514996.jpg?width=640"
   ["kkk-cartoon.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/Worse_than_Slavery_%281874%29%2C_by_Thomas_Nast.jpg?width=640"
   ["fifteenth-amendment.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/15th-amendment-celebration-1870.jpg?width=640"
-  ["contrabands.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/Cumberland_Landing%2C_Va._Group_of_%22contrabands%22_at_Foller%27s_house_LOC_cwpb.00101.jpg?width=640"
+  # Cumberland Landing, Va., group of "contrabands" at Foller's house, May 1862. Photograph by
+  # James F. Gibson; LOC Civil War Glass Negatives, cwpb.01005. Public domain.
+  # The old URL named cwpb.00101 with %22 quotes; the real file is cwpb.01005 with straight
+  # quotes, so it 404d. The local file was a looser crop showing the glass-plate borders and
+  # was replaced 2026-09-11 with the Commons image so the manifest reproduces it exactly.
+  ["contrabands.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/Cumberland_Landing,_Va._Group_of_'contrabands'_at_Foller's_house_LOC_cwpb.01005.jpg?width=800"
 
   # Maps
   ["reconstruction-districts-map.png"]="https://commons.wikimedia.org/wiki/Special:FilePath/Reconstruction_military_districts.svg?width=600"

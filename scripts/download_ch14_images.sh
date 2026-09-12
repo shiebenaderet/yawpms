@@ -39,7 +39,9 @@ declare -A IMAGES=(
   ["fort-sumter.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/Bombardment_of_Fort_Sumter%2C_Charleston_Harbor.jpg?width=640"
   ["usct-soldiers.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/District_of_Columbia._Company_E%2C_4th_U.S._Colored_Infantry%2C_at_Fort_Lincoln_LOC_cwpb.04294.tif?width=640"
   ["field-hospital.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/Amputation_being_performed_in_a_hospital_tent%2C_Gettysburg%2C_07-1863_-_NARA_-_520203.jpg?width=640"
-  ["soldier-family.jpg"]="https://upload.wikimedia.org/wikipedia/commons/thumb/b/bf/Sgt._Samuel_Smith%2C_African_American_soldier_in_Union_uniform_with_wife_and_two_daughters.jpg/440px-Sgt._Samuel_Smith%2C_African_American_soldier_in_Union_uniform_with_wife_and_two_daughters.jpg"
+  # Sgt. Samuel Smith in Union uniform with his wife and two daughters, 1863-65. Public
+  # domain (Library of Congress). Aspect matches the local file. Old URL was a thumb path.
+  ["soldier-family.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/Sgt._Samuel_Smith,_African_American_soldier_in_Union_uniform_with_wife_and_two_daughters.jpg?width=440"
   ["antietam-dead.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/Bodies_on_the_battlefield_at_antietam.jpg?width=640"
 
   # Maps

@@ -19,8 +19,16 @@ declare -A IMAGES=(
   ["camp-meeting-revival.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/Camp_meeting_of_the_Methodists_in_N._America_J._Milbert_del_M._Dubourg_sculp_(cropped).jpg?width=640"
   ["frederick-douglass.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/Frederick_Douglass_%28circa_1879%29.jpg?width=440"
   ["seneca-falls.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/Woman%27s_Rights_Convention.jpg?width=640"
-  ["sojourner-truth.jpg"]="https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/Sojourner_truth_c1870.jpg/440px-Sojourner_truth_c1870.jpg"
-  ["dorothea-dix.jpg"]="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Dorothea_Lynde_Dix.jpg/440px-Dorothea_Lynde_Dix.jpg"
+  # Sojourner Truth, c.1870. Public domain. Aspect matches the local file (0.7154/0.7153).
+  # Old URL was an upload.wikimedia.org thumb path that 400d.
+  ["sojourner-truth.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/Sojourner_truth_c1870.jpg?width=440"
+  # Dorothea Dix, half-plate daguerreotype, c.1849, unidentified photographer. National
+  # Portrait Gallery, Smithsonian Institution. Public domain.
+  # Replaced 2026-09-11: the previous file was a vignetted copy print credited to the Library
+  # of Congress, but its URL 400d and no matching LOC item could be found (searched LOC
+  # Prints & Photographs, which returned only Dix letters). This portrait is sourced, and
+  # better: the quill and papers are the point of her career.
+  ["dorothea-dix.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/Dorothea_Dix_1802%E2%80%931887.jpg?width=520"
 
   # Maps
   ["underground-railroad-map.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/Undergroundrailroadsmall2.jpg?width=800"
