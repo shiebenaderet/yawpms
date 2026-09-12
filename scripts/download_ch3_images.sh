@@ -30,10 +30,16 @@ declare -A IMAGES=(
   ["pocahontas.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/Pocahontas_by_Simon_van_de_Passe.jpg?width=640"
   ["mayflower-compact.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/The_Mayflower_Compact_1620_cph.3g07155.jpg?width=640"
   ["slave-ship-brookes.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/Slaveshipposter.jpg?width=640"
-  ["old-plantation.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/The_Old_Plantation.jpg?width=640"
+  # "The Old Plantation", watercolour attributed to John Rose, c.1785-1795 (Abby Aldrich
+  # Rockefeller Folk Art Museum). Public domain. Aspect matches the local file exactly.
+  ["old-plantation.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/SlaveDanceand_MusicFXD.jpg?width=960"
 
   # Maps
-  ["thirteen-colonies-map.png"]="https://commons.wikimedia.org/wiki/Special:FilePath/Thirteen_Colonies_1775.svg?width=600"
+  # The Thirteen Colonies in 1775. A MODERN map (2007, Commons user "Urban"), public domain.
+  # Replaced 2026-09-11: the previous file was an unsourced modern line map whose URL 404d.
+  # A modern map's licence cannot be assumed safe from its age the way a 1788 print's can,
+  # so an unsourced one is a real licensing risk, not just an unverifiable credit.
+  ["thirteen-colonies-map.png"]="https://commons.wikimedia.org/wiki/Special:FilePath/Map_Thirteen_Colonies_1775.svg?width=900"
 )
 
 for local in "${!IMAGES[@]}"; do

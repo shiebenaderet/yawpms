@@ -14,18 +14,31 @@ echo "Downloading Chapter 5 images to $IMG_DIR ..."
 
 declare -A IMAGES=(
   ["boston-massacre.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/Boston_Massacre_high-res.jpg?width=640"
-  ["common-sense.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/Common_Sense_by_Thomas_Paine.jpg?width=440"
+  # Title page of Thomas Paine's Common Sense, 1776. Public domain.
+  # Commons File:Commonsense.jpg is 510x800 -- exactly the local file's dimensions.
+  ["common-sense.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/Commonsense.jpg"
   ["declaration-of-independence.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/Declaration_of_Independence_%281819%29%2C_by_John_Trumbull.jpg?width=640"
   ["surrender-cornwallis.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/Surrender_of_Lord_Cornwallis.jpg?width=640"
   # DeVerger watercolor, 1781. Four soldiers at Yorktown. Public domain.
   # NOTE: the file committed to images/ch5 is .gif, not .jpg -- ch5.html references
   # yorktown-soldiers.gif. Keeping both names in step is why this entry exists.
-  ["yorktown-soldiers.gif"]="https://commons.wikimedia.org/wiki/Special:FilePath/Soldats_de_l%27Arm%C3%A9e_Continentale_%C3%A0_Yorktown.jpg?width=640"
+  # American and French soldiers at the siege of Yorktown, watercolour by French officer
+  # Jean-Baptiste-Antoine de Verger, 1781. Public domain. The leftmost figure is a soldier of
+  # the 1st Rhode Island Regiment, which the caption points out. Verified 2026-09-11 against
+  # the local file (four figures, same order).
+  # NOTE: the Commons master is a .png while the local file is a genuine .gif, so re-running
+  # this script writes PNG bytes to a .gif name. Harmless (browsers sniff content) but the
+  # name is referenced by ch5.html, timeline.html and download_all_maps.sh, so it was not
+  # renamed. The old URL used a French title that does not exist on Commons.
+  ["yorktown-soldiers.gif"]="https://commons.wikimedia.org/wiki/Special:FilePath/Soldiers_at_the_siege_of_Yorktown_(1781),_by_Jean-Baptiste-Antoine_DeVerger.png?width=1100"
 
   # Siege of Yorktown, 6-20 October 1781. MODERN teaching map (US Military Academy
   # Department of History atlas, plate 42) -- uses NATO unit symbols, so it is not a
   # period document and the caption must not imply one. Public domain (US Govt work).
-  ["siege-of-yorktown.gif"]="https://commons.wikimedia.org/wiki/Special:FilePath/Siege_of_Yorktown_1781.gif?width=800"
+  # Siege of Yorktown, 6-20 October 1781. A MODERN teaching map by the U.S. Military Academy,
+  # public domain (US government work); the caption says it is modern. The Commons file is
+  # 736x911 -- byte-for-byte the dimensions of the local file.
+  ["siege-of-yorktown.gif"]="https://commons.wikimedia.org/wiki/Special:FilePath/US_Army_52415_Siege_of_Yorktown_Map.gif"
 
   # Maps
   ["revolution-battles-map.png"]="https://commons.wikimedia.org/wiki/Special:FilePath/American_Revolution_Campaigns_1775_to_1781.jpg?width=600"

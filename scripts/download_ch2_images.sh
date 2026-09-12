@@ -28,10 +28,29 @@ declare -A IMAGES=(
   # so the caption's "period painting" is accurate. Public domain.
   ["battle-gravelines.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/Escudo_real_hisp%C3%A1nico_no_English_ships_and_the_Spanish_Armada%2C_August_1588.jpg?width=960"
   ["champlain-habitation.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/Champlain_Habitation_de_Quebec.jpg?width=640"
-  ["waldseemuller-map.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/Waldseem%C3%BCller_map_2.jpg?width=640"
-  ["de-bry-spanish-cruelty.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/Perros_De_Bry.jpg?width=640"
-  ["secotan-village.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/Village_of_Secoton.jpg?width=640"
-  ["negotiating-peace.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/Negotiating_peace_with_the_Indians.jpg?width=640"
+  # Waldseemuller world map, 1507 -- the first to name "America". Public domain.
+  # The old URL spelled the title with an umlaut (Waldseem%C3%BCller); the Commons file uses
+  # a plain "u", so it 404d. Verified by aspect ratio against the 13708x7590 original.
+  ["waldseemuller-map.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/Waldseemuller_map_2.jpg?width=960"
+  # A Theodor de Bry engraving for Las Casas' Narratio regionum Indicarum, 1598: Spanish
+  # soldiers driving a column of Indigenous captives, including women carrying infants.
+  # Plate numbered "4" at the foot. Public domain by date.
+  # DIGITAL SOURCE NOT ESTABLISHED. The old URL ("Perros De Bry.jpg" -- perros = dogs) 404d,
+  # and did not describe this image either: there are no dogs in it. Checked the Commons
+  # Narratio/Brevisima categories and the BnF btv1b20000085 series of 18 plates (those are
+  # full book pages, 1024x1536); none matches this crop. A sourced 1598 de Bry plate does
+  # exist ("Conquistadors' abuses of Amerindians") but shows a different, considerably more
+  # graphic torture scene -- a poor swap for a grade 6-8 page. Kept and marked UNKNOWN.
+  ["de-bry-spanish-cruelty.jpg"]="UNKNOWN"
+  # The Algonquian village of Secoton, watercolour by John White, 1585. Public domain.
+  # Filed on Commons under a German title, which is why "Village of Secoton.jpg" 404d.
+  ["secotan-village.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/North_carolina_algonkin-dorf.jpg?width=960"
+  # Benjamin West, "The Treaty of Penn with the Indians", 1771-72 (Pennsylvania Academy of the
+  # Fine Arts). Public domain. Aspect matches the local file (1.4371 vs 1.4375).
+  # The caption called this "a 17th-century engraving" until 2026-09-11. It is neither an
+  # engraving nor 17th-century: it is an oil painting made ~90 years after the 1682 treaty it
+  # depicts, commissioned by Penn's son. The caption now says so.
+  ["negotiating-peace.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/Treaty_of_Penn_with_Indians_by_Benjamin_West.jpg?width=960"
 
   # Maps
   ["columbus-voyages-map.png"]="https://commons.wikimedia.org/wiki/Special:FilePath/Viajes_de_colon_en.svg?width=800"
