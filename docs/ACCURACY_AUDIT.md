@@ -656,6 +656,64 @@ hedge is *worse* than ch6's flatly wrong blanket claim, because it is unfalsifia
 every outcome while committing to none, so no caption inheriting it could ever be checked
 against it. Replaced with a per-figure record naming the two that require attribution.
 
+#### ch7 completed — 2026-09-11
+
+The seven outstanding corrections were applied one at a time, each followed by a read of the
+surrounding paragraph and by the widened duplicate scan. Final state: `html-validate` clean,
+manifest check passing, duplicate scan 0 hits.
+
+- **Polygenesis** (vocab, line 114) — "are actually different species" replaced with "instead of
+  all humans sharing one common origin". The old wording stated the racist theory's own claim as
+  if it were the definition of the word.
+- **Gabriel's trial** (story box, line 125) — the "General Washington" line was attributed to
+  Gabriel by name. No record survives of what Gabriel said at his own trial; a lawyer involved in
+  the prosecutions reported it of *one of the condemned men*. Now attributed as the source
+  attributes it, with the hanging date (October 10, 1800) added.
+- **David Walker** (line 133) — "terror of **the** tyrants" corrected to "terror of tyrants", and
+  the quotation placed in his 1829 *Appeal* rather than floating free.
+- **USS *Chesapeake*** (figure, line 279) — the caption called the picture "the British attack".
+  It actually shows *Chesapeake*'s own crew firing the single gun they managed — touched off with
+  a live coal from the galley — before surrendering. Now dated to its real source: an **1896**
+  illustration from Willis J. Abbot's *Naval History*, drawn ~90 years after the event, and the
+  caption says so.
+- **Frontier cartoon** (figure, line 382) — worse than the ledger recorded. The LOC abstract
+  identifies this impression as an **anonymous copy** after William Charles, "cruder but similar
+  in detail"; the caption credited Charles outright. Reattributed, and reframed as the wartime
+  propaganda it is rather than as evidence of "American outrage".
+- **Two unsourced images** — see below.
+
+##### Two manifest URLs were dead, and the manifest check could not see it
+
+`check_image_manifest.sh` asserts that every referenced image *has an entry* and every entry
+*has a file*. It never asks whether the entry's URL resolves. Sweeping all nineteen ch7 URLs with
+curl found **two 404s**, both fabricated Commons titles that never existed:
+
+- **`jefferson-banner.jpg`** — not a banner, and it names no candidate. It is a printed circular
+  headed "Richmond, August 9th, 1800" carrying the "Form of the Republican Ticket" and 21
+  electors. Traced to **LOC item 2020775530**, Printed Ephemera Portfolio 181, Folder 5, and
+  confirmed against the physical item (matching "850" stamp and pencil no. 116457). Refiled as
+  `republican-ticket-1800.jpg` from a LOC IIIF URL that resolves. The caption now explains why
+  Jefferson's name is absent — voters chose electors, not candidates.
+- **`banneker-almanac.jpg`** — genuinely the 1795 John Fisher Baltimore edition (verified by
+  reading the title page), but the scan could not be traced to **any** repository: absent from
+  Commons, LOC, and the Internet Archive, and its EXIF was stripped. Per the New Orleans
+  precedent an untraceable image is replaced, not left with a plausible-looking credit. Swapped
+  for the **1792 first edition** (LOC Rare Book, `rbcmisc/ody/ody0214`), which is also the better
+  figure: it is the work whose calculations Banneker sent Jefferson with the August 1791 letter
+  quoted directly above it. The 1795 caption's bare "Library of Congress." credit was exactly the
+  could_not_verify claim flagged at line 638.
+
+**Recommended follow-up:** extend `check_image_manifest.sh` with an opt-in `--check-urls` pass.
+A dead source URL passes every check in the repo today while leaving provenance unverifiable —
+the same failure class as an image that is present but unmanifested.
+
+##### A defect html-validate cannot catch
+
+Two paragraphs in ch7 ended `. /p></p>` — a literal `/p>` rendering as visible garbage to every
+reader (lines 191 and 276). `html-validate` passes it because `/p>` is well-formed *text* and the
+real `</p>` closes the element. Both removed. A repo-wide scan for stray tag fragments found no
+others; that scan is worth adding to the pre-commit checks.
+
 #### Open editorial decision — the duplicate Lewis and Clark figure
 
 `images/ch7/lewis-clark-expedition-map.png` and `images/ch7/lewis-and-clark.jpg` are

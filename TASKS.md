@@ -17,6 +17,28 @@ start immediately.
 
 ## Discovered during execution
 
+**2026-09-11 — ch7 accuracy ledger applied in full.** Two defect classes surfaced that no
+check in the repo can currently see. Both are the same shape as the bug that started this
+work: a check that verifies *presence* and is read as verifying *correctness*.
+
+- **M4-22 — `check_image_manifest.sh --check-urls`.** A curl sweep of all 19 ch7 manifest
+  URLs found **two 404s** (`banneker-almanac.jpg`, `jefferson-banner.jpg`), both fabricated
+  Commons titles that never existed. The manifest check passes them because it only asks
+  whether an entry and a file exist. A dead source URL leaves provenance unverifiable while
+  every check in the repo stays green. Add an opt-in pass (network-gated, so it does not
+  make the default check flaky) and run it over all 15 chapters — **assume this class exists
+  elsewhere**; ch7 had two in nineteen.
+- **M4-23 — scan for stray tag fragments.** ch7 had two paragraphs ending `. /p></p>`,
+  rendering a literal `/p>` to every reader. `html-validate` passes it: `/p>` is well-formed
+  text and the real `</p>` closes the element. A repo-wide scan found no others, but nothing
+  would have caught these either. Add to the pre-commit checks:
+  `(?<!<)/(?:p|div|em|strong|li|ul|ol|h[1-6]|figure|figcaption|section|span)>`
+- **The documented duplicate-scan regex was the broken one.** `MAINTENANCE.md` recorded the
+  lesson from the ch7 duplication incident but kept the single-sentence pattern that *missed
+  5 of the 7 duplications* — `[^.!?]` excludes the periods a multi-sentence block contains.
+  Widened to match runs of 1–5 sentences. Worth remembering that a doc can carry a true
+  post-mortem and a broken fix at the same time.
+
 **2026-09-08 — M0-3/M0-4/M0-5 landed.** The 14 broken references were not lost images:
 none appeared in any download script. They were filenames invented to fill slide and
 timeline slots for pictures nobody ever sourced. Consequences for later milestones:
