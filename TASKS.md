@@ -21,13 +21,38 @@ start immediately.
 check in the repo can currently see. Both are the same shape as the bug that started this
 work: a check that verifies *presence* and is read as verifying *correctness*.
 
-- **M4-22 — `check_image_manifest.sh --check-urls`.** A curl sweep of all 19 ch7 manifest
-  URLs found **two 404s** (`banneker-almanac.jpg`, `jefferson-banner.jpg`), both fabricated
-  Commons titles that never existed. The manifest check passes them because it only asks
-  whether an entry and a file exist. A dead source URL leaves provenance unverifiable while
-  every check in the repo stays green. Add an opt-in pass (network-gated, so it does not
-  make the default check flaky) and run it over all 15 chapters — **assume this class exists
-  elsewhere**; ch7 had two in nineteen.
+- **M4-22 — `check_image_manifest.sh --check-urls`. BUILT, and the sweep is alarming.**
+  A curl sweep of all 19 ch7 manifest URLs found two 404s, both fabricated Commons titles
+  that never existed. The manifest check passed them because it only asks whether an entry
+  and a file exist. The flag now exists (network-gated and opt-in, so the default check stays
+  offline and deterministic; exits non-zero on any dead URL).
+
+  Swept across the whole repo: **29 of 132 source URLs are dead (22%), in 11 of 15 chapters.**
+
+  | | dead / total | | dead / total |
+  |---|---|---|---|
+  | ch2 | 4 / 10 | ch10 | 2 / 7 |
+  | ch3 | 2 / 7 | ch11 | 2 / 5 |
+  | ch4 | 1 / 5 | ch12 | 3 / 6 |
+  | ch5 | 3 / 7 | ch14 | 1 / 11 |
+  | ch6 | **7 / 9** | ch15 | 1 / 7 |
+  | ch8 | 3 / 6 | | |
+
+  Clean: ch1, ch7, ch9, ch13, and all 15 primary-source images. The 404s are Commons titles
+  that do not exist (verified case-by-case through the Commons API, not inferred from the
+  status code); the 400s are malformed `upload.wikimedia.org` thumb URLs whose underlying
+  files are also missing.
+
+  **ch5 and ch6 are on this list despite having been audited.** Those audits corrected
+  captions and licences but never asked whether the source URL resolved, because this check
+  did not exist yet. An audited chapter is not a sourced chapter. ch6 at 7/9 is the worst in
+  the book and was the chapter whose manifest header previously carried a blanket
+  "public domain" claim across all figures.
+
+  Each dead entry means a caption whose credit cannot be checked and an image a fresh clone
+  cannot re-download. ch7's two cost roughly an hour to resolve: one was misattributed
+  outright (a "Jefferson campaign banner" that is really an elector circular naming no
+  candidate), the other untraceable to any repository and replaced. Expect a similar rate.
 - **M4-23 — scan for stray tag fragments.** ch7 had two paragraphs ending `. /p></p>`,
   rendering a literal `/p>` to every reader. `html-validate` passes it: `/p>` is well-formed
   text and the real `</p>` closes the element. A repo-wide scan found no others, but nothing

@@ -5,6 +5,8 @@
 // date or licence -- which makes its caption unfalsifiable. Two ch5 images were in exactly
 // that state while CI passed. Run via: bash scripts/check_image_manifest.sh
 const fs = require("fs");
+const { execFile } = require("child_process");
+const CHECK_URLS = process.argv.includes("--check-urls");
 let fail = 0;
 const problem = m => { console.log("  " + m); fail = 1; };
 
@@ -52,5 +54,50 @@ if (fs.existsSync(psScript)) {
     if (!referenced.has(f)) problem(`primary-sources: ${f} is on disk but referenced by no page (orphan)`);
 }
 
-if (!fail) console.log("  every referenced image has a manifest entry, and every entry matches a file");
-process.exit(fail);
+// --check-urls: does each provenance record actually RESOLVE?
+//
+// Everything above asks whether an entry and a file exist. Neither asks whether the URL the
+// entry names still leads anywhere. Two ch7 entries pointed at Commons titles that had never
+// existed: one was a Jefferson "campaign banner" that is really a Richmond elector circular
+// naming no candidate, the other an almanac scan traceable to no repository at all. Both
+// passed every check in this repo while their captions stayed unverifiable. A sweep on
+// 2026-09-11 found 29 of 132 entries dead across 11 chapters.
+//
+// Network-gated and opt-in, so the default check stays deterministic and offline.
+const UA = "AmericanYawpMS-ImageDownloader/1.0 (https://github.com/shiebenaderet/yawpms; contact via GitHub Issues)";
+const ENTRY_URL = /\["([^"]+)"\]="([^"]*)"/g;
+
+const status = url => new Promise(resolve => {
+  execFile("curl", ["-sS", "-o", "/dev/null", "-w", "%{http_code}", "-L", "--max-time", "60", "-A", UA, url],
+    { timeout: 90000 }, (err, stdout) => resolve((stdout || "000").trim()));
+});
+
+async function checkUrls() {
+  const entries = [];
+  for (const script of fs.readdirSync("scripts").filter(f => /^download_.*\.sh$/.test(f)))
+    for (const m of fs.readFileSync(`scripts/${script}`, "utf8").matchAll(ENTRY_URL))
+      entries.push({ script, name: m[1], url: m[2] });
+
+  console.log(`  checking ${entries.length} manifest URL(s) -- this makes network requests`);
+  const dead = [];
+  const CONCURRENCY = 4;
+  let next = 0;
+  await Promise.all(Array.from({ length: CONCURRENCY }, async () => {
+    while (next < entries.length) {
+      const e = entries[next++];
+      if (!e.url) { dead.push({ ...e, code: "empty" }); continue; }
+      const code = await status(e.url);
+      if (code !== "200") dead.push({ ...e, code });
+    }
+  }));
+
+  for (const d of dead.sort((a, b) => (a.script + a.name).localeCompare(b.script + b.name)))
+    problem(`${d.script}: ${d.name} -- source URL does not resolve (${d.code}); provenance unverifiable`);
+  if (!dead.length) console.log(`  all ${entries.length} source URLs resolve`);
+}
+
+(async () => {
+  if (CHECK_URLS) await checkUrls();
+  if (!fail) console.log("  every referenced image has a manifest entry, and every entry matches a file");
+  process.exit(fail);
+})();
