@@ -599,6 +599,49 @@ and diff the visible text afterwards.**
 
 ---
 
+## Cross-cutting: the dead-source-URL sweep (2026-09-11)
+
+Finishing ch7 surfaced two image entries whose manifest URLs 404d. Sweeping all 132 entries
+found **29 dead across 11 of 15 chapters**. All are now resolved: 129 resolve, 3 marked
+`UNKNOWN` with reasons, 0 dead. `check_image_manifest.sh --check-urls` detects regressions.
+
+**Findings that belong to chapters whose ledgers have not been written yet.** Record them here
+so those audits start from what is already known rather than rediscovering it:
+
+- **ch8 `erie-canal-map.png` was not a map.** A present-day colour snapshot of a canal, inside a
+  `map-figure` with a "Map" badge and a caption describing a 363-mile route. Replaced with
+  Poussin's 1834 map and profile.
+- **ch8 `railroads-1860-map.jpg` is 21 years earlier than its caption claimed** — H.S. Tanner's
+  1840 canals-and-railroads map, captioned "Railroad map of the United States, 1861" and used to
+  argue the Civil War rail disparity. That argument needs a map that supports it, in ch14.
+- **ch8 `first-locomotive.jpg` is a 1916 painting** by Clyde Osmer DeLand of an 1829 event, and
+  was undated and uncredited on the page.
+- **ch12 `mexican-cession-map.jpg` was a live licensing violation** — CC BY 3.0 by Kballen with
+  no credit at all. The same class as ch7's louisiana-purchase-map and monticello.
+- **ch2 `negotiating-peace.jpg` is Benjamin West's oil painting** *The Treaty of Penn with the
+  Indians* (1771–72), captioned as "a 17th-century engraving". An idealised commission from
+  Penn's son, ~90 years after the treaty.
+- **ch15 `contrabands.jpg` and ch11 `slave-auction.jpg` carried no creator credit at all.**
+
+**Three method notes worth keeping.**
+
+1. *Aspect ratio is a cheap, decisive identity test.* It caught that ch6's `madison.jpg` was a
+   16:9 banner crop, not the portrait it claimed; it distinguished Tanner's 1840 plate from his
+   1830 one; and it confirmed a dozen matches byte-exactly. It is the fastest way to tell "the
+   right artwork" from "the right artwork's file".
+2. *A plausible URL can name the wrong picture.* ch6's `shays-shattuck` pointed at
+   `File:Shays' Rebellion.jpg`, a 2017 CC BY-SA drawing; our image is the 1787 relief cut. Had
+   the URL resolved, the download script would have silently replaced a period woodcut with a
+   modern one. Resolving is not the same as correct — always compare against the local file.
+3. *No Commons log entry means never uploaded, not deleted.* That distinguishes a renamed file
+   (findable) from a fabricated URL (not), and it is what justified marking three images
+   `UNKNOWN` rather than hunting further.
+
+**ch5 and ch6 were both on the dead list despite having been audited.** Those audits corrected
+captions and licences but never asked whether a source resolved, because the check did not exist
+yet. An audited chapter is not a sourced chapter, and "already audited" is not a reason to skip
+a new class of check.
+
 ## Chapter 7 — The Early Republic
 
 **Audited 2026-09-09. Ledger complete; 64 corrections pending sign-off.**
