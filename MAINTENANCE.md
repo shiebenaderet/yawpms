@@ -194,9 +194,12 @@ python3 - <<'EOF'
 import re, html
 s = open('chN.html').read()
 t = re.sub(r'\s+', ' ', html.unescape(re.sub(r'<[^>]+>', ' ', s)))
-for pat in (r'([A-Z][^.!?]{20,160}[.!?])\s*\1', r'\b(\w[\w ,\'’—:-]{20,110})\s*\1\b'):
+# The first pattern must span RUNS of sentences, not one. A single-sentence regex
+# ([^.!?] excludes the periods a multi-sentence block contains) missed 5 of the 7
+# ch7 duplications, because the duplicated blocks were two and three sentences long.
+for pat in (r'((?:[A-Z][^.!?]{15,200}[.!?]\s*){1,5})\1', r'\b(\w[\w ,\'’—:-]{20,110})\s*\1\b'):
     for m in re.finditer(pat, t):
-        print('DUPLICATE:', m.group(1)[:90])
+        print('DUPLICATE:', m.group(1)[:120])
 EOF
 ```
 

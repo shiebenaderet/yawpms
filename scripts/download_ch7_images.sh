@@ -30,7 +30,14 @@ declare -A IMAGES=(
   # Library of Congress, LC control no. 2010634241; no known restrictions on publication
   ["america-guided-by-wisdom.jpg"]="https://tile.loc.gov/storage-services/service/pnp/ds/04700/04764r.jpg"
   ["haitian-revolution.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/January_Suchodolski_-_Legionaries_at_San_Domingo_-_MP_2606_-_National_Museum_in_Warsaw.jpg?width=960"
-  ["banneker-almanac.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/Benjamin_Banneker's_Pennsylvania%2C_Delaware%2C_Maryland%2C_and_Virginia_Almanac_and_Ephemeris%2C_for_the_Year_of_Our_Lord_1795.jpg?width=440"
+  # Banneker's ALMANACK AND EPHEMERIS for 1792 (first edition), Baltimore: William Goddard
+  # and James Angell, 1791. LOC Rare Book and Special Collections (rbcmisc/ody/ody0214).
+  # Replaced an unsourced scan of the 1795 John Fisher edition on 2026-09-11: its manifest URL
+  # was a Commons title that never existed and 404s, and the scan could not be traced to any
+  # repository (absent from Commons, LOC, Internet Archive; EXIF stripped). The 1792 edition is
+  # also the better fit -- it is the work whose calculations Banneker sent Jefferson with his
+  # August 1791 letter, quoted immediately above the figure. Public domain.
+  ["banneker-almanac-1792.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/BannekerAlmanac.jpg?width=640"
   # "The Peale Family" by CHARLES WILLSON Peale, begun c.1773, finished 1809.
   # New-York Historical Society. Public domain.
   # *** The Commons file is MISNAMED "The artist and his family james peale.jpg" and
@@ -40,10 +47,21 @@ declare -A IMAGES=(
   # *** Verified from the artifact, not from the Commons record.
   ["james-peale-family.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/The_artist_and_his_family_james_peale.jpg?width=640"
   ["camp-meeting.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/Camp_meeting_of_the_Methodists_in_N._America_J._Milbert_del_M._Dubourg_sculp_(cropped).jpg?width=640"
-  ["jefferson-banner.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/Jefferson_campaign_banner%2C_1800.jpg?width=640"
+  # Republican committee circular, Richmond, 9 Aug 1800 ("Form of the Republican Ticket").
+  # Was filed as "jefferson-banner.jpg" pointing at a Commons title that never existed and
+  # 404s; it is not a banner and names no candidate. Verified 2026-09-11 against the physical
+  # item (matching "850" stamp and pencil no. 116457) at LOC item 2020775530,
+  # Printed Ephemera Portfolio 181, Folder 5. Public domain.
+  ["republican-ticket-1800.jpg"]="https://tile.loc.gov/image-services/iiif/service:rbc:rbpe:rbpe18:rbpe181:18100500:001dr/full/640,/0/default.jpg"
   ["monticello.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/Thomas_Jefferson's_Monticello.JPG?width=640"
   ["lewis-and-clark.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/Lewis_and_clark-expedition.jpg?width=640"
   ["john-marshall.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/John_Marshall_by_Henry_Inman%2C_1832.jpg?width=440"
+  # The Chesapeake's single shot during the Chesapeake-Leopard affair, 22 June 1807. An 1896
+  # illustration from Willis J. Abbot, The Naval History of the United States, vol. 1 (Peter
+  # Fenelon Collier), Part II, ch. IX -- NOT a contemporary depiction; the caption says so.
+  # Artist signed the drawing but the signature is illegible and uncredited in the book.
+  # Public domain. The caption called this "the British attack" until 2026-09-11; it actually
+  # shows Chesapeake's own crew firing the one gun they managed before striking their colours.
   ["uss-chesapeake.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/Onlyshotofchesapeake.jpg"
   # LOC LC-DIG-pga-07567, item 2013645353 (public domain)
   ["red-jacket.jpg"]="https://tile.loc.gov/storage-services/service/pnp/pga/07500/07567r.jpg"
@@ -52,6 +70,11 @@ declare -A IMAGES=(
   # 2026-09-11; Catlin's Tenskwatawa is a full-colour oil and looks nothing like
   # this. Commons carries no artist or date for the file. Public domain.
   ["tenskwatawa.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/Tenskwatawa.jpg?width=440"
+  # "A scene on the frontiers as practiced by the humane British and their worthy allies!", 1812.
+  # Etching with watercolour, LOC Popular Graphic Arts, LCCN 2002708980 (ppmsca.10752).
+  # NOT the William Charles print: the LOC abstract identifies this impression as an anonymous
+  # copy after Charles, "cruder but similar in detail". The caption credited Charles outright
+  # until 2026-09-11. Public domain.
   ["british-indians-cartoon.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/A_scene_on_the_frontiers_as_practiced_by_the_humane_British_and_their_worthy_allies%21_LCCN2002708980.jpg?width=640"
   ["washington-burning.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/Burning_of_Washington_1814.jpg?width=640"
   ["battle-of-new-orleans.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/Battle_of_New_Orleans.jpg?width=640"
