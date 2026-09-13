@@ -12,7 +12,7 @@ before classrooms reach it — not in a single sweep that finishes after the yea
 | 5 | The American Revolution | Oct 15, 2026 | **applied 2026-09-08** | 130 | 34 applied | &mdash; | 3 |
 | 6 | A New Nation | Oct 31, 2026 | **applied 2026-09-09** | 198 | 35 | — | 7 |
 | 7 | The Early Republic | Nov 15, 2026 | **ledger complete, 64 pending** | 165 | — | — | 4 |
-| 8 | The Market Revolution | Dec 20, 2026 | not started | — | — | — | — |
+| 8 | The Market Revolution | Dec 20, 2026 | **applied 2026-09-12** | 135 | 28 applied | — | — |
 | 9–11 | — | Jan–Feb 2027 | M6 | — | — | — | — |
 | 12–15 | — | Mar 2027 | M6 | — | — | — | — |
 
@@ -598,6 +598,151 @@ multi-part instructions. **Screen every replacement for instruction language bef
 and diff the visible text afterwards.**
 
 ---
+
+## Chapter 8 — The Market Revolution
+
+**Audited and applied 2026-09-12.**
+
+188 claims across six sections and six figures, verified against
+[The American Yawp ch. 8](https://www.americanyawp.com/text/08-the-market-revolution/)
+plus an independent reference, then every flagged row re-checked by a pass instructed to
+*refute* it.
+
+| | Count |
+|---|---|
+| claims audited | 188 |
+| verified | 135 |
+| flagged | 53 |
+| **upheld** | **41** |
+| overturned | 12 |
+
+The 41 upheld rulings collapse to **28 corrections in the chapter** plus four in supporting
+files, because three lanes independently found the same defects — the Chicago travel time, the
+90%/95% contradiction and the rest-of-the-world railroad claim were each raised twice, and three
+quotation rulings were facets of one fabrication.
+
+**Overturn rate 23%**, against 40% (ch5), 70% (ch6) and 50% (ch7) — the lowest so far. But the
+refuters did more than reject: of 41 upheld rulings they **rewrote 29 of the proposed
+replacements** rather than passing them through. The value of the pass is not only the 12 it
+killed.
+
+### The chapter's primary source was fabricated
+
+The Primary Source box quoted Harriet Robinson's *Loom and Spindle* (1898). **The passage is not
+in the book.** Every distinctive fragment — "novelty wore off", "tedium", "animals and flowers",
+"wakened at five", "thirty minutes for dinner" — returns **zero hits** against the full 1898
+text. It carried a named author, a named book, a date, and a plausible voice, which is exactly
+why nothing caught it: no check in this repo reads a quotation back against its source.
+
+It was also wrong in a direction that flattered the chapter's argument. It gave the mill girls
+one thirty-minute break; Robinson gives a half hour each for breakfast *and* dinner. It said
+they were "wakened at five"; five was when work *began*, so the real day was longer than the
+fabricated one described.
+
+Replaced with two verbatim, contiguous runs from the 1898 text, verified fragment by fragment.
+
+**Two method notes from this one item.**
+
+1. ***Grep is line-based; Project Gutenberg wraps at ~70 characters.*** The first search made the
+   *correct replacement* look fabricated too — four of its phrases returned zero hits purely
+   because they spanned line breaks. Normalise whitespace before searching a plain-text book, or
+   you will reject good evidence and possibly conclude a true quotation is false.
+2. ***A refutation pass can be right about the verdict and wrong about the reason.*** One lane
+   traced the fabricated imagery to Lucy Larcom's *A New England Girlhood* (1889) and built a
+   corroborating argument on it. The refuter checked Larcom and found her text says the opposite
+   of what the argument required. The text still had to go — but the Larcom attribution is not
+   established, and is deliberately absent from the chapter, the citation and the commit message.
+   Correcting an unverified authorship claim with another unverified authorship claim is not a
+   correction.
+
+A third note, about the audit itself rather than the finding: an agent proposed cutting
+Robinson's own "they worked only about fifteen minutes in every hour" from the replacement
+because it complicates the chapter's argument. That is the selective quotation this book teaches
+students to detect. It was kept.
+
+### 41 invented quotations, book-wide
+
+The Multiple Perspectives box held four composite voices punctuated as direct quotations, fewer
+than forty lines below a Primary Source box using identical punctuation for what a named woman
+supposedly wrote in a named book. A student has no way to tell them apart. ch8 is fixed by
+converting them to reported speech — which is what `MAINTENANCE.md` actually specifies
+(`<strong>Person/Group:</strong> Their viewpoint.`), so no disclaimer is needed and none was
+added; a disclaimer would be narrator-breaking-frame meta-commentary.
+
+A scan of every chapter found **41 more across 9 chapters**: ch13 8, ch9 7, ch10 7, ch2 4, ch3 4,
+ch12 4, ch11 3, ch15 3, ch6 1. ch1, ch5, ch7 and ch14 are already clean — the house style exists,
+it simply was not applied everywhere. Logged as **M4-24**.
+
+### Images
+
+- **`erie-canal.jpg` was a 2016 photograph, CC BY-SA 4.0, attribution required.** Captioned
+  "(Public domain, 19th century)", credited to nobody, with alt text describing boats and
+  buildings that are not in the picture. It was in four places: the chapter figure, the
+  **chapter's title-page background**, a **timeline entry dated 1825**, and a slideshow slide
+  about the 1825 opening.
+
+  The decisive point was structural, not editorial: **a CSS `background-image` can carry neither
+  alt text nor a caption**, so a licence requiring named credit had nowhere on the title page to
+  be satisfied. Rewording the caption could not reach the violation. Replaced throughout with
+  John William Hill's 1831 watercolor *View on the Erie Canal* (NYPL, I.N. Phelps Stokes
+  Collection, no known restrictions) — already in the repo as primary-source 8.4 — and moved out
+  of the Railroads subsection, where a canal picture did not belong, into The Canal Craze.
+- **`lowell-mills.jpg` is a Detroit Publishing Co. photograph taken 1900–1910.** Its alt text
+  called it "a plan"; its figcaption carried no source, creator, date or licence of any kind.
+- **`south-street-nyc.jpg`** is watercolor, not a painting, and named no holding institution.
+- **The manifest header asserted "public domain" over all six entries** — the fourth chapter
+  running in which a blanket header claim was the thing concealing a real defect.
+- **`scripts/download_all_maps.sh` was a second, contradicting manifest** for the same two ch8
+  maps, still naming the files the 2026-09-11 pass removed, including the 1861 railroad map whose
+  date was that pass's original error. Both URLs 404d.
+
+### Text
+
+- **"more than the rest of the world combined"** (body *and* figcaption) is false. The US had
+  30,626 miles in 1860; the rest of the world roughly 35,000. Largest single network, not more
+  than everyone else. The claim is absent from the parent Yawp text — it was added in adaptation.
+- **"Four weeks from New York to Chicago in 1800."** Two lanes independently downloaded Paullin's
+  1932 atlas plate 138A, read the isochrones at high magnification, and both found the site of
+  Chicago on the **six**-week contour. There was also no Chicago in 1800. The figure had
+  propagated into the Stop and Think, which was corrected with it.
+- **90% in the body, 95% in a caption on the same screen.** The refuter settled the direction:
+  90% is the Erie-specific rate ($100 → $10 per ton); 95% is a generic canal-versus-packhorse
+  ratio that drifted into the caption.
+- **The "Clinton's Ditch" box carried four errors**: Clinton did not first propose the canal and
+  was not governor when the mockery began; the vessel was the packet boat *Seneca Chief*, which
+  sailed to Albany and then down the Hudson, so the water went into New York Harbor rather than
+  "the Atlantic end" of the canal; the construction loan ran to **1837**, not "within a year";
+  and "Dozens died" asserted a toll nobody counted. The box now carries the discredited
+  thousand-man rumour *and* the absence of evidence for it.
+- **Standard time zones** arrived in 1883, decades outside the chapter's span.
+- **The Lowell Female Labor Reform Association** was founded in 1845, not out of the 1834 and
+  1836 turn-outs the sentence followed; and the **1836 turn-out protested a boarding-house rent
+  increase**, not a wage cut.
+- **"Conditions deteriorated rapidly."** Lowell's first mill opened in 1823; the first wage cut
+  came in 1834 and the stretch-out belongs to the 1840s.
+- **"No Irish Need Apply signs were common"** asserted the least documentable form of a contested
+  claim. Recalibrated to the documented evidence — advertisements in quantity, clustered in the
+  1840s, signs attested but thinner. Deliberately *not* framed as "historians disagree": Jensen's
+  2002 position was refuted by Fried in 2015, and staging a live debate would teach false balance.
+- **"Cotton was grown entirely by enslaved people"** — non-slaveholding white farm families grew
+  cotton too. And the Key Idea box named only Northern mills as the destination when most of the
+  crop crossed the Atlantic to Britain.
+- **"Transformed the United States … into a commercial and industrial power"** states a completed
+  change: agriculture was still 58.9% of gainful employment in 1860.
+- **"Cult of domesticity"** is a label historians coined looking back. Americans at the time said
+  a woman's "sphere".
+
+### A note on running this audit
+
+Three of the six lanes **stalled and had to be re-run**. The cause was `WebFetch` against very
+large pages — full books on archive.org and Project Gutenberg. The re-run instructed every agent
+to `curl` such texts to disk with `--max-time` and `grep` them locally instead, and all three
+completed. Worth carrying into ch9: **never fetch a book through a rendered-page tool.**
+
+The redundancy paid for itself twice. The numbers lane found the Robinson fabrication even
+though the quotations lane owned it, and two lanes independently reading the same atlas plate is
+what made the six-week figure safe to ship.
+
 
 ## Cross-cutting: the dead-source-URL sweep (2026-09-11)
 

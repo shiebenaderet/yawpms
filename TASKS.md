@@ -66,6 +66,29 @@ work: a check that verifies *presence* and is read as verifying *correctness*.
   text and the real `</p>` closes the element. A repo-wide scan found no others, but nothing
   would have caught these either. Add to the pre-commit checks:
   `(?<!<)/(?:p|div|em|strong|li|ul|ol|h[1-6]|figure|figcaption|section|span)>`
+- **M4-24 — 41 invented quotations sit in quotation marks book-wide.** ch8's Multiple
+  Perspectives box carried four composite voices punctuated as direct quotations, fewer than
+  forty lines below a Primary Source box using identical punctuation for what a named woman
+  supposedly wrote in a named book. A student has no way to tell them apart, and one who writes
+  "a factory worker in 1840 said the air was poisonous" has been misled by the textbook.
+  ch8 is fixed; a scan of every chapter found **41 more across 9 chapters** — ch13 8, ch9 7,
+  ch10 7, ch2 4, ch3 4, ch12 4, ch11 3, ch15 3, ch6 1. ch1, ch5, ch7 and ch14 are already
+  clean, so the house style exists; it just was not applied everywhere. `MAINTENANCE.md`'s
+  spec is `<div class="perspective"><strong>Person/Group:</strong> Their viewpoint.</div>` —
+  a viewpoint, not a quotation — so the fix is reported speech, not a disclaimer. A disclaimer
+  would also be narrator-breaking-frame meta-commentary, which this project has been burned by.
+  Scan with: a `perspective` div whose text opens with a quotation mark.
+- **A fabricated primary source survived every check in the repo.** ch8 quoted a passage from
+  Harriet Robinson's *Loom and Spindle* (1898) that is not in the book: every distinctive
+  fragment returns **zero hits** against the full 1898 text. It had a named author, a named
+  book, a date, and a plausible voice, which is precisely why nothing caught it — no check here
+  reads a quotation back against its source. Two lessons worth keeping. First, **grep is
+  line-based and Project Gutenberg wraps at ~70 characters**: the first search made the
+  *correct replacement* look fabricated too, because its phrases spanned line breaks. Normalise
+  whitespace before searching a plain-text book, or you will reject good evidence. Second, an
+  agent proposed cutting Robinson's own "they worked only about fifteen minutes in every hour"
+  from the replacement because it complicated the chapter's argument — the selective quotation
+  this book teaches students to detect. It was kept.
 - **The documented duplicate-scan regex was the broken one.** `MAINTENANCE.md` recorded the
   lesson from the ch7 duplication incident but kept the single-sentence pattern that *missed
   5 of the 7 duplications* — `[^.!?]` excludes the periods a multi-sentence block contains.
