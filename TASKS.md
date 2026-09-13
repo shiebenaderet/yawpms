@@ -66,6 +66,29 @@ work: a check that verifies *presence* and is read as verifying *correctness*.
   text and the real `</p>` closes the element. A repo-wide scan found no others, but nothing
   would have caught these either. Add to the pre-commit checks:
   `(?<!<)/(?:p|div|em|strong|li|ul|ol|h[1-6]|figure|figcaption|section|span)>`
+- **M4-24 — 41 invented quotations sit in quotation marks book-wide.** ch8's Multiple
+  Perspectives box carried four composite voices punctuated as direct quotations, fewer than
+  forty lines below a Primary Source box using identical punctuation for what a named woman
+  supposedly wrote in a named book. A student has no way to tell them apart, and one who writes
+  "a factory worker in 1840 said the air was poisonous" has been misled by the textbook.
+  ch8 is fixed; a scan of every chapter found **41 more across 9 chapters** — ch13 8, ch9 7,
+  ch10 7, ch2 4, ch3 4, ch12 4, ch11 3, ch15 3, ch6 1. ch1, ch5, ch7 and ch14 are already
+  clean, so the house style exists; it just was not applied everywhere. `MAINTENANCE.md`'s
+  spec is `<div class="perspective"><strong>Person/Group:</strong> Their viewpoint.</div>` —
+  a viewpoint, not a quotation — so the fix is reported speech, not a disclaimer. A disclaimer
+  would also be narrator-breaking-frame meta-commentary, which this project has been burned by.
+  Scan with: a `perspective` div whose text opens with a quotation mark.
+- **A fabricated primary source survived every check in the repo.** ch8 quoted a passage from
+  Harriet Robinson's *Loom and Spindle* (1898) that is not in the book: every distinctive
+  fragment returns **zero hits** against the full 1898 text. It had a named author, a named
+  book, a date, and a plausible voice, which is precisely why nothing caught it — no check here
+  reads a quotation back against its source. Two lessons worth keeping. First, **grep is
+  line-based and Project Gutenberg wraps at ~70 characters**: the first search made the
+  *correct replacement* look fabricated too, because its phrases spanned line breaks. Normalise
+  whitespace before searching a plain-text book, or you will reject good evidence. Second, an
+  agent proposed cutting Robinson's own "they worked only about fifteen minutes in every hour"
+  from the replacement because it complicated the chapter's argument — the selective quotation
+  this book teaches students to detect. It was kept.
 - **The documented duplicate-scan regex was the broken one.** `MAINTENANCE.md` recorded the
   lesson from the ch7 duplication incident but kept the single-sentence pattern that *missed
   5 of the 7 duplications* — `[^.!?]` excludes the periods a multi-sentence block contains.
@@ -413,7 +436,7 @@ Three real ordering traps drive this sequence. (1) The generator must exist befo
 - [x] **M3-6** Create and commit `favicon.ico` and a 1200x630 `images/site/og-default.jpg`  
   `S` `[sonnet]`  
   *Done when `git ls-files favicon.ico images/site/og-default.jpg` lists both and `sips -g pixelWidth -g pixelHeight images/site/og-default.jpg` reports 1200 x 630.*  
-  > The repo has no favicon or icon file of any kind today (verified) and `images/site/` holds only `westward-banner.jpg`. Must land before M3-7/M3-8 or every card renders imageless. Chapter pages can instead point `og:image` at their existing title-page background (e.g. `images/ch5/boston-massacre.jpg`) — all 15 exist and are already licensed in `IMAGES_AUDIT.md`. Do not confuse `images/ch8/erie-canal.jpg` (a live chapter title image) with `primary-sources/images/ch8-erie-canal.jpg` (the orphan M4 resolves).  
+  > The repo has no favicon or icon file of any kind today (verified) and `images/site/` holds only `westward-banner.jpg`. Must land before M3-7/M3-8 or every card renders imageless. Chapter pages can instead point `og:image` at their existing title-page background (e.g. `images/ch5/boston-massacre.jpg`) — all 15 exist and are already licensed in `IMAGES_AUDIT.md`. (ch8's title-page background is now `images/ch8/erie-canal-1831.jpg`; the old `erie-canal.jpg` was deleted on 2026-09-12 as an unattributed CC BY-SA photograph.)  
 
 - [x] **M3-7** Add `meta description`, OG/Twitter card tags and the favicon link to all 33 root `*.html` files  
   `M` `[sonnet]` · after: `M3-6`  
@@ -507,7 +530,7 @@ M3-4, M3-5, M3-6 and M3-10 have no blockers and can start on day one. M3-13 is l
 - [x] **M4-8** Resolve the primary-sources/images/ch8-erie-canal.jpg orphan (16 image files against 15 manifest entries)  
   `S` `[sonnet]`  
   *Done when `ls primary-sources/images | wc -l` equals the count of `["…"]=` entries in scripts/download_primary_source_images.sh, either because the orphan was git rm'd or because it is now referenced by a primary-sources/*.html page and has its own manifest entry with artist/date/collection/license.*  
-  > ch8-sources.html Source 8.4 already uses ch8-erie-canal-1831.jpg, so the orphan is a duplicate rather than a gap — deletion is the likely answer. Do not confuse it with images/ch8/erie-canal.jpg, which ch8.html (title-page background and a figure), timeline.html and slideshows.html all reference and which must stay.  
+  > ch8-sources.html Source 8.4 already uses ch8-erie-canal-1831.jpg, so the orphan was a duplicate rather than a gap; it is gone. Resolved separately on 2026-09-12: images/ch8/erie-canal.jpg, which ch8.html, timeline.html and slideshows.html all referenced, turned out to be a 2016 CC BY-SA 4.0 photograph captioned "(Public domain, 19th century)". It was deleted; the chapter and its cover now use images/ch8/erie-canal-1831.jpg (the same Hill watercolor, fetched at a larger width) and the two companion tools use the 1834 Poussin map.  
 
 - [ ] **M4-9** Fill the Chapter 6 ledger in docs/ACCURACY_AUDIT.md against ch6.html (A New Nation)  
   `L` `[fable]` · after: `M4-1`  

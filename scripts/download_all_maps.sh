@@ -109,8 +109,11 @@ download 7 "lewis-clark-route-map.png"        "${W}/Carte_Lewis-Clark_Expedition
 
 # ── Chapter 8 — Market Revolution ──
 echo "Chapter 8 (Market Revolution)"
-download 8 "erie-canal-map.png"         "${W}/Erie_Canal_map.png?width=800"
-download 8 "railroads-1860-map.jpg"     "${W}/Railroad_map_of_the_United_States_1861.jpg?width=800"
+# Ch8's two maps are also listed in scripts/download_ch8_images.sh, which is the provenance
+# manifest of record. Keep these two URLs in step with it. The titles below were superseded on
+# 2026-09-11 (both 404): the old railroad entry named an 1861 map for what is Tanner's 1840 plate.
+download 8 "erie-canal-map.png"         "${W}/Map_and_profile_of_the_Erie_Canal,_1834_(cropped).jpg?width=960"
+download 8 "railroads-1860-map.jpg"     "${W}/Map_of_the_canals_%26_rail_roads_of_the_United_States,_reduced_from_the_large_map_of_the_U.S.;_engraved_by_J._Knight._LOC_98688305.jpg?width=960"
 
 # ── Chapter 9 — Democracy in America ──
 echo "Chapter 9 (Democracy in America)"
