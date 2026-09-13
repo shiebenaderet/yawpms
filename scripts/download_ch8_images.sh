@@ -1,10 +1,11 @@
 #!/usr/bin/env bash
 # Download images for Chapter 8: The Market Revolution
 # NOT all public domain. Check each entry before reusing:
-#   erie-canal.jpg       CC BY-SA 4.0 -- attribution REQUIRED, name Randall Reese in any caption
 #   south-street-nyc.jpg released CC0 by the Metropolitan Museum of Art; the 1827 watercolor is
 #                        also public domain by age
-#   the other four       public domain (Library of Congress, or by age)
+#   the other five       public domain (Library of Congress, NYPL, or by age)
+# Check each entry before reusing -- this header used to assert "public domain" over every file,
+# which is how a CC BY-SA photograph sat uncredited in the chapter until 2026-09-12.
 # Usage: bash scripts/download_ch8_images.sh
 
 set -euo pipefail
@@ -17,12 +18,15 @@ mkdir -p "$IMG_DIR"
 echo "Downloading Chapter 8 images to $IMG_DIR ..."
 
 declare -A IMAGES=(
-  # Modern colour photograph of the Erie Canal at the historic Medina, NY canal basin, taken
-  # 21 September 2016 by Randall Reese (Commons User:Randycsz) for Wiki Loves Monuments.
-  # CC BY-SA 4.0, AttributionRequired=true -- the caption MUST name him. It was captioned
-  # "(Public domain, 19th century)" until 2026-09-12. Not a period image; do not reuse it
-  # anywhere a caption cannot carry the attribution.
-  ["erie-canal.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/Erie_Canal.jpg?width=640"
+  # John William Hill, "View on the Erie Canal", watercolor, 1831 -- six years after the canal
+  # opened. I.N. Phelps Stokes Collection, New York Public Library; no known restrictions.
+  # Same work as primary-sources/images/ch8-erie-canal-1831.jpg (Source 8.4), fetched at a
+  # larger width here for the chapter figure and the title-page background. 760x542 is the
+  # source file's native resolution; ?width= above that returns the original.
+  # REPLACED 2026-09-12 the file erie-canal.jpg, which was a 2016 CC BY-SA 4.0 photograph by
+  # Randall Reese captioned "(Public domain, 19th century)" and credited to nobody, reused as
+  # the chapter cover where a CSS background can carry no attribution at all.
+  ["erie-canal-1831.jpg"]="https://commons.wikimedia.org/wiki/Special:FilePath/(View_on_the_Erie_Canal.)_(3990756054).jpg?width=1200"
   # "The First locomotive. Aug. 8th, 1829. Trial trip of the Stourbridge Lion", painted by
   # Clyde Osmer DeLand in 1916 -- NOT contemporary; the caption now says so. LOC, public
   # domain. Aspect matches the local file (4096x3279 = 1.2492 vs 1.2484).
