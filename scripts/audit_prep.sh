@@ -27,6 +27,11 @@ python3 - "$N" "$ROOT" "$OUT" <<'PY'
 import re, sys, io, os, json, html, collections, urllib.parse, urllib.request
 
 N, ROOT, OUT = sys.argv[1], sys.argv[2], sys.argv[3]
+FAIL = {"n": 0}
+def problem(msg):
+    FAIL["n"] += 1
+    print("  [!] " + msg)
+
 UA = "AmericanYawpMS-Audit/1.0 (https://github.com/shiebenaderet/yawpms; contact via GitHub Issues)"
 ch = io.open(f"{ROOT}/ch{N}.html", encoding="utf-8").read()
 lines = ch.split("\n")
@@ -98,9 +103,53 @@ if os.path.exists(man):
             break
     io.open(f"{OUT}/licences.tsv", "w", encoding="utf-8").write("\n".join("\t".join(r) for r in rows))
 
-    print("  --- images REQUIRING named attribution in the caption ---")
-    for r in flagged: print(f"      {r[0]:<28} {r[3]:<16} {r[1]}")
+    # "Requires attribution" is not a violation. NOT NAMING THE CREATOR IN THE CAPTION is.
+    # That distinction is the whole point: ch8 shipped a CC BY-SA photograph captioned
+    # "(Public domain, 19th century)" for months, and five more chapters asserted
+    # "(Wikimedia Commons, public domain)" over CC-licensed maps.
+    #
+    # Matching is deliberately forgiving. A Commons Artist field can be a derivative filename
+    # ("North_America_laea_location_map.svg: Uwe Dedering"), a handle with digits ("Kgv88"),
+    # or a bare URL. An earlier version of this check took the first few long words and so
+    # flagged three correctly-credited captions -- noise, which is the one thing a triage step
+    # must not produce, because it gets paid for downstream.
+    STOP = {"user","users","made","own","work","wikipedia","commons","wikimedia","https","http",
+            "media","twimg","file","svg","png","jpg","jpeg","shared","original","derivative"}
+    def creator_tokens(artist):
+        a = re.sub(r"https?://\S+", " ", artist)          # drop URLs
+        a = re.sub(r"\b[\w-]+\.(svg|png|jpe?g|gif)\b", " ", a, flags=re.I)  # drop filenames
+        toks = re.findall(r"[A-Za-z][A-Za-z0-9'\u00c0-\u024f-]{2,}", a)
+        return [t for t in toks if t.lower() not in STOP]
+
+    def caption_of(fname):
+        for fig in re.findall(r"<figure[^>]*>.*?</figure>", ch, re.S):
+            if fname in fig:
+                c = re.search(r"<figcaption>(.*?)</figcaption>", fig, re.S)
+                return re.sub(r"<[^>]*>", "", c.group(1)) if c else ""
+        return None
+
+    violations, unnameable = [], []
+    for r in flagged:
+        cap = caption_of(r[0])
+        if cap is None:
+            violations.append((r, "referenced by no <figure> - cannot carry a caption")); continue
+        toks = creator_tokens(r[1])
+        if not toks:
+            unnameable.append(r); continue
+        if not any(t.lower() in cap.lower() for t in toks):
+            violations.append((r, f"caption does not name {toks[0]}"))
+
+    print(f"  --- {len(flagged)} image(s) require named attribution ---")
+    for r in flagged: print(f"      {r[0]:<28} {r[3]:<16} {r[1][:46]}")
     if not flagged: print("      (none - every image is public domain or CC0)")
+    if violations:
+        problem(f"{len(violations)} LICENCE VIOLATION(S) - attribution required but not given:")
+        for r, why in violations: problem(f"    {r[0]} ({r[3]}): {why}")
+    elif flagged:
+        print("      all named in their captions - no violation")
+    for r in unnameable:
+        print(f"  known gap: {r[0]} requires attribution but its Commons Artist field names "
+              f"no person ({r[1][:40]}) - licence metadata unreliable, check by hand")
 
     # the manifest header claiming one licence for all files is a repeat offender: ch5, ch6,
     # ch7 and ch8 each had a blanket header that was the thing concealing a real defect.
