@@ -38,21 +38,34 @@ def get(url, timeout=45):
     except Exception as e:
         return f"__ERR__{e}"
 
-# ---------------------------------------------------------------- source text, prefetched
-# Fetched once so later passes grep locally. Fetching a rendered page per query is what
-# stalled three agents during the ch8 run; a local file cannot stall.
-if not os.path.exists(f"{OUT}/yawp.txt"):
-    title = re.search(r'<h1 class="chapter-title">(.*?)</h1>', ch)
-    slug = re.sub(r"[^a-z0-9]+", "-", (title.group(1) if title else "").lower()).strip("-")
-    url = f"https://www.americanyawp.com/text/{int(N):02d}-{slug}/"
-    body = get(url, 60)
-    if body.startswith("__ERR__"):
-        print(f"  [warn] could not fetch {url} ({body[7:60]}) - fetch it by hand")
-    else:
+# ---------------------------------------------------------------- parent text, prefetched
+# Cache ALL of Volume I once, not just the same-numbered chapter.
+#
+# The MS chapters do not map 1:1 onto the Yawp's. ch9 "Democracy in America" carries the whole
+# Indian Removal story, but the Yawp puts Cherokee removal in chapter 12: its own chapter 9 has
+# Cherokee=0, Worcester=0, "Removal Act"=0. Triaging ch9's quotations against Yawp ch9 alone
+# reported every one of them as "not in the parent text", which is noise, not signal.
+CACHE = f"{ROOT}/audit/_yawp"
+os.makedirs(CACHE, exist_ok=True)
+
+if not os.listdir(CACHE):
+    idx = get("https://www.americanyawp.com/text/", 60)
+    slugs = sorted(set(re.findall(r"americanyawp\.com/text/(\d{2}-[a-z0-9-]+)/", idx)))
+    slugs = [s for s in slugs if 1 <= int(s[:2]) <= 15 and not s.endswith("-2")]
+    print(f"  [fetch] caching {len(slugs)} Yawp chapters (once; reused by every chapter audit)")
+    for s in slugs:
+        body = get(f"https://www.americanyawp.com/text/{s}/", 60)
+        if body.startswith("__ERR__"):
+            print(f"  [warn] {s}: {body[7:60]}"); continue
         txt = re.sub(r"<(script|style)[^>]*>.*?</\1>", " ", body, flags=re.S)
         txt = html.unescape(re.sub(r"<[^>]*>", " ", txt))
-        io.open(f"{OUT}/yawp.txt", "w", encoding="utf-8").write(re.sub(r"\s+", " ", txt))
-        print(f"  [fetch] yawp.txt  {os.path.getsize(f'{OUT}/yawp.txt')} bytes")
+        io.open(f"{CACHE}/{s[:2]}.txt", "w", encoding="utf-8").write(re.sub(r"\s+", " ", txt))
+
+YAWP = {}
+for fn in sorted(os.listdir(CACHE)):
+    t = io.open(f"{CACHE}/{fn}", encoding="utf-8").read()
+    YAWP[fn[:2]] = t.replace("\u2019", "'").replace("\u201c", '"').replace("\u201d", '"')
+print(f"  [cache] {len(YAWP)} Yawp chapters available for triage")
 
 # ---------------------------------------------------------------- image licence truth table
 # THE highest-value free check: the real licence for every image the manifest names, so a
@@ -139,19 +152,22 @@ for i, l in enumerate(lines, 1):
     for m in re.finditer(r'[“"]([^“”"]{40,})[”"]', visible):
         quotes.append({"line": i, "text": re.sub(r"\s+", " ", html.unescape(m.group(1))).strip()})
 
-# Triage every quotation against the prefetched parent text. A run that also appears in the
-# Yawp is inherited and carries its sourcing; one that appears ONLY here was written or
-# altered during adaptation, and that is where fabrications live. ch8's fake Robinson
-# passage was in this second group. Free, and it cuts the paid verification list sharply.
-if os.path.exists(f"{OUT}/yawp.txt"):
-    yawp = re.sub(r"\s+", " ", io.open(f"{OUT}/yawp.txt", encoding="utf-8").read())
-    yawp = yawp.replace("’", "'").replace("“", '"').replace("”", '"')
+# Triage every quotation against the WHOLE cached corpus, and say which chapter it came from.
+# A run that appears anywhere in the Yawp is inherited and carries its sourcing; one that
+# appears nowhere was written or altered during adaptation, and that is where fabrications
+# live. ch8's fake Robinson passage was in the second group.
+if YAWP:
     for q in quotes:
-        probe = re.sub(r"\s+", " ", q["text"]).replace("’", "'")[:60]
-        q["in_yawp"] = probe in yawp
+        probe = re.sub(r"\s+", " ", q["text"]).replace("\u2019", "'")[:60]
+        q["in_yawp"] = next((c for c, t in sorted(YAWP.items()) if probe in t), None)
     only_here = [q for q in quotes if not q["in_yawp"]]
-    print(f"  --- quotations not found in the parent Yawp text: {len(only_here)} of {len(quotes)} ---")
-    print("      (these were written or altered in adaptation - verify these first)")
+    inherited = [q for q in quotes if q["in_yawp"]]
+    if inherited:
+        print(f"  --- {len(inherited)} quotation(s) inherited from the parent text ---")
+        for q in inherited[:6]:
+            print(f"      (Yawp ch{q['in_yawp']}) {q['text'][:62]}")
+    print(f"  --- quotations found nowhere in Yawp Volume I: {len(only_here)} of {len(quotes)} ---")
+    print("      (written or altered in adaptation - verify these first)")
     for q in only_here[:8]:
         print(f"      line {q['line']}: {q['text'][:72]}")
 

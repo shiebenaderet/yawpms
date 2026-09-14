@@ -834,6 +834,53 @@ Primary Source box rests on nothing the repo can point at — which is precisely
 ch8 Robinson fabrication. It needs a decision: source it to a specific printing, or replace it
 with a verifiable Jackson removal text such as the Second Annual Message of December 6, 1830.
 
+### Prose claims
+
+Thirty-seven numeric or dated sentences were checked. Most hold as written: Jackson born 1767
+and orphaned at fourteen, New Orleans 1815, the 1824 plurality without a majority, the Bank
+chartered 1816, recharter pushed four years early in 1832, the Jefferson Day dinner of April
+1830, the Ordinance nullifying the tariffs of 1828 *and* 1832, Van Buren losing to Harrison in
+1840. The Cherokee figures hold too: **over 16,000 signatures** on the Ross petition and
+**about 16,000 removed** under New Echota both match Prucha and the standard accounts.
+
+Two were corrected.
+
+**Turnout: 27% in 1824 to 80% in 1840.** Both figures verified exactly (26.9% and 80.2%) &mdash;
+but the chapter rested a democratisation argument on them without saying that **six of the
+twenty-four states held no popular vote for president at all in 1824**: Delaware, Georgia,
+Louisiana, New York, South Carolina and Vermont chose electors in the legislature. Part of the
+jump is a change in *how electors were chosen*, not only in who turned out. The chapter now says
+so, which strengthens its own argument rather than resting it on a number doing more work than
+it can bear. By 1832 only South Carolina still used legislative choice, and it kept it until
+seceding in December 1860.
+
+**"At least 4,000 Cherokee died."** That states a floor. Elizur Butler's 4,000 &mdash; the
+most-cited figure &mdash; is a central estimate reached by subtraction from the 1835 census, and
+other counts run lower (about 3,500) while some scholars argue considerably higher. Rewritten as
+an estimate, naming where it comes from. A textbook that teaches source-checking should not
+present an estimate as a minimum.
+
+**A self-caught error worth recording.** The replacement I wrote for the turnout sentence
+originally asserted "every state but South Carolina" without my having checked it &mdash; a new
+unsourced claim smuggled in by a correction, which is the failure mode the ch8 refutation pass
+caught repeatedly. It happened to be true, and is now verified. The lesson is that the author of
+a correction is the worst person to notice it: a replacement needs the same scrutiny as the text
+it replaces.
+
+### The parent text does not share the chapter number
+
+Tier 0 originally triaged ch9's quotations against Yawp chapter 9 alone and reported every one
+as unverified. The reason is not that they are suspect: **the Yawp's chapter 9 does not cover
+Indian Removal at all** (Cherokee=0, Worcester=0, "Removal Act"=0). It puts Cherokee removal in
+**chapter 12**. Half of this chapter &mdash; its moral centre &mdash; has no parent text at the
+same number.
+
+`scripts/audit_prep.sh` now caches all fifteen Volume I chapters once and searches the whole
+corpus, naming the chapter a quotation came from. Re-run against the full corpus, ch9's ten
+quoted runs still appear **nowhere in the Yawp**, which is itself a finding: ch9's quoted
+material is entirely the adaptation's own sourcing, none of it inherited from a vetted parent.
+That raises rather than lowers the stakes on the unverified Creek address above.
+
 ### A third form of the normalisation trap
 
 The King Mob search returned **zero hits** at first. The OCR renders Story's line as

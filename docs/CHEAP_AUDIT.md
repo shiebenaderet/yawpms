@@ -65,17 +65,24 @@ Writes `audit/ch9/` (gitignored):
 | `licences.tsv` | real artist / date / licence / `attribution_required` per image, from Commons |
 | `quotations.jsonl` | every quoted run of 40+ characters, flagged `in_yawp` true/false |
 | `numbers.txt` | every number with the lines it appears on &mdash; consistency candidates |
-| `yawp.txt` | the parent Yawp chapter, prefetched so nothing fetches it again |
+| `../_yawp/NN.txt` | **all fifteen** Yawp Volume I chapters, cached once and shared by every chapter audit |
 
 Read the terminal output before going further. On ch9 it reported, in about twenty seconds:
 7 composite voices punctuated as real quotations, 3 figcaptions with no credit line at all,
 and a quotation triage that correctly surfaced the Jackson/Marshall apocrypha and the Burnett
 letter as the two highest-risk quotations in the chapter.
 
-**`in_yawp: false` is the column that matters.** A quotation that also appears in the parent
-text is inherited and carries its sourcing. One that appears only here was written or altered
-during adaptation &mdash; and that is where fabrications live. ch8's fake Robinson passage was
-in that group.
+**`in_yawp` is the column that matters.** A quotation found anywhere in the Yawp is inherited
+and carries its sourcing; the report names the chapter it came from. One found nowhere was
+written or altered during adaptation &mdash; and that is where fabrications live. ch8's fake
+Robinson passage was in that group.
+
+**Why it searches all fifteen chapters, not the same-numbered one.** The MS chapters do not map
+1:1 onto the Yawp's. MS ch9 carries the entire Indian Removal story, but the Yawp puts Cherokee
+removal in **chapter 12**: its own chapter 9 has Cherokee=0, Worcester=0, "Removal Act"=0. The
+first version of this script compared ch9 only against Yawp ch9 and duly reported every
+quotation as unverified &mdash; noise, not signal, and noise that costs money downstream. Never
+assume the parent chapter shares the number.
 
 ### 3. Tier 1 &mdash; the local model
 
@@ -201,6 +208,19 @@ Not because it is rude to, but because its answers here cost more to check than 
 first search made the *correct* Robinson replacement look fabricated &mdash; four of its
 phrases spanned line breaks and returned zero hits. Normalise whitespace before searching a
 book, or you will delete a genuine passage. `check_handoff.sh` normalises for this reason.
+
+**Normalise punctuation, not just whitespace.** Searching Joseph Story's *Life and Letters* for
+"The reign of King Mob seemed triumphant" returned zero hits. The OCR renders it `King " Mob"`
+&mdash; Story put the words in quotation marks &mdash; so a literal substring search failed on
+*interior punctuation*, exactly as the ch8 search failed on *line wrapping*. Strip to letters
+and spaces before comparing. Both failures would have produced a confident, false "this
+quotation is fabricated."
+
+**Sanity-probe the substrate before concluding a quotation is absent.** Bassett's
+*Correspondence of Andrew Jackson* vol. 4 was genuinely searchable (Jackson 1110, Eaton 559,
+"my dear sir" 93), so an absence there is evidence. The *Papers of Andrew Jackson* vol. 7 is
+lending-restricted and returned 33k characters with "Jackson" appearing twice &mdash; an
+absence there means nothing. Only the first kind counts.
 
 **Strip tags before looking for quotations.** The first version of `audit_prep.sh` scraped
 `href`, `content` and inline `style` attributes as "quotations" and reported 34 of 34
