@@ -13,7 +13,8 @@ before classrooms reach it — not in a single sweep that finishes after the yea
 | 6 | A New Nation | Oct 31, 2026 | **applied 2026-09-09** | 198 | 35 | — | 7 |
 | 7 | The Early Republic | Nov 15, 2026 | **ledger complete, 64 pending** | 165 | — | — | 4 |
 | 8 | The Market Revolution | Dec 20, 2026 | **applied 2026-09-12** | 135 | 28 applied | — | — |
-| 9–11 | — | Jan–Feb 2027 | M6 | — | — | — | — |
+| 9 | Democracy in America | Jan 2027 | **images + quotations applied 2026-09-13** | — | 13 applied | — | 1 |
+| 10–11 | — | Feb 2027 | M6 | — | — | — | — |
 | 12–15 | — | Mar 2027 | M6 | — | — | — | — |
 
 **ch1–ch4 are deliberately not scheduled for an AI pass this year.** Classrooms pass them
@@ -743,6 +744,109 @@ The redundancy paid for itself twice. The numbers lane found the Robinson fabric
 though the quotations lane owned it, and two lanes independently reading the same atlas plate is
 what made the six-week figure safe to ship.
 
+
+## Chapter 9 — Democracy in America
+
+**Images, figures and quotations applied 2026-09-13. Prose claim audit still open.**
+
+The first chapter run under [the cheap audit protocol](CHEAP_AUDIT.md). Everything below
+started from `scripts/audit_prep.sh 9` — free, about twenty seconds, no model. **No general
+reasoning pass over the chapter was run at all**, and none of these findings needed one.
+
+### The same map twice, one copy captioned as a painting
+
+`images/ch9/trail-of-tears.jpg` was **byte-identical** to `trail-of-tears-map.png` ten lines
+above it — md5 `88a8e346…`, both 960×733, both fetched from `Trails_of_Tears_en.png`. It was
+captioned "Robert Lindneux, *The Trail of Tears* (1942)", with alt text describing families
+marching west. It was also the chapter's title-page background and a slideshow slide captioned
+"Depiction of the Trail of Tears showing the suffering of Cherokee people."
+
+The picture is a route map.
+
+**The manifest already knew.** An orphaned comment in it read: *"The Lindneux 'Trail of Tears'
+painting (1942) is under copyright… This URL points to a public-domain map of the Trail of
+Tears route as a fallback."* So the substitution was deliberate and documented — and the
+caption went on naming a painting nobody could see. That note is now a standing warning at the
+top of the manifest rather than a comment attached to a deleted entry.
+
+This is the ch8 `erie-canal-map.png` pattern inverted: there, a photograph wore a Map badge;
+here, a map wore a painting's caption. Both were caught by opening the file.
+
+### A manifest entry naming a different picture
+
+`trail-of-tears-map.jpg` is the NPS *Trail of Tears National Historic Trail* map, but its
+record pointed at `Trails_of_Tears_en.png` — the Nikater map. On a fresh checkout the download
+script would have silently replaced it. Corrected to `File:Trail_of_tears_map_NPS.jpg`,
+identified by aspect ratio: local and source are both 902×443 = 2.0361.
+
+### Attribution
+
+- **`andrew-jackson.jpg` was credited to Thomas Sully.** Both the Commons record *and the
+  manifest's own filename* say Ralph Eleaser Whiteside Earl, 1836–37. The repo was arguing
+  with itself, which costs nothing to detect and needs no world knowledge.
+- **`county-election.jpg` was dated 1854**; the Commons record for this file says 1852.
+  Bingham painted more than one version, so the manifest now records which.
+- **All three figcaptions carrying no source, creator or licence** now have one.
+
+All six ch9 images are genuinely public domain — worth knowing *before* spending anything.
+
+### M4-24 for ch9
+
+All seven Multiple Perspectives entries put invented words in quotation marks, the punctuation
+the chapter uses for real cited sources. Rewritten as reported speech, per `MAINTENANCE.md`'s
+spec ("Their viewpoint"). Genuine period epithets stay quoted — "King Andrew" really was said.
+**7 → 0.**
+
+While rewriting the fourth, *"he owns over 150 enslaved people"* turned out to be the figure
+at Jackson's **death in 1845**, eight years after he left office, inside a box about his
+presidency. He held over 100 by 1820 and over 150 by 1845; the box now says more than a hundred.
+
+### Quotations
+
+Tier 0 flagged 11 quoted runs absent from the parent Yawp text — the group where fabrications
+live. Two were false positives (scare quotes, not quotations). Of the rest:
+
+| Quotation | Verdict |
+|---|---|
+| Bank Veto Message, "It is to be regretted that the rich and powerful…" | **verified** verbatim against Avalon; ellipsis legitimate; date correct |
+| Joseph Story, "The reign of King Mob seemed triumphant." | **verified** verbatim, *Life and Letters* vol. 1 |
+| "John Marshall has made his decision; now let him enforce it." | already correctly hedged in the chapter ("reportedly", "whether or not Jackson actually said those exact words") |
+| The John Burnett letter | already reframed as the source-reliability case study |
+| **Jackson, "message to the Creek Nation, 1829"** | **could not verify** — see below |
+
+**The Bank Veto sentence was quoted twice**, six lines apart: once in the body and again in the
+Primary Source box. The body now paraphrases and lets the box carry the words.
+
+#### Could not verify — Jackson's address to the Creek Nation
+
+The Primary Source box at ch9.html line 205 quotes roughly ninety words ("…as long as the grass
+grows or the water runs…") attributed to "Andrew Jackson, message to the Creek Nation, 1829."
+
+What was checked: none of its distinctive phrases appear in Bassett's *Correspondence of Andrew
+Jackson* vol. 4 (1829–32) — but Bassett is a **selection**, so absence there is weak evidence.
+The modern *Papers of Andrew Jackson* vol. 7 is lending-restricted and returned no full text, so
+that attempt produced no evidence in either direction. ch9's own four primary sources do not
+carry it.
+
+**This is not a finding that the quotation is false.** The language is formulaic and consistent
+with Jackson's documented removal rhetoric. It is a finding that a named, dated quotation in a
+Primary Source box rests on nothing the repo can point at — which is precisely the shape of the
+ch8 Robinson fabrication. It needs a decision: source it to a specific printing, or replace it
+with a verifiable Jackson removal text such as the Second Annual Message of December 6, 1830.
+
+### A third form of the normalisation trap
+
+The King Mob search returned **zero hits** at first. The OCR renders Story's line as
+`King " Mob"` — he put the words in quotation marks — so a literal substring search failed on
+*interior punctuation*, exactly as the ch8 search failed on *line wrapping*. Stripping to
+letters and spaces before comparing found it immediately. Two chapters, two different forms of
+the same trap, both of which would have produced a confident "this quotation is fabricated."
+
+**Always sanity-probe the substrate before concluding a quotation is absent.** Bassett vol. 4
+was searchable (Jackson 1110, Eaton 559, "my dear sir" 93); *Papers* vol. 7 was not (Jackson
+twice, 33k chars). Only the first absence is evidence.
+
+---
 
 ## Cross-cutting: the dead-source-URL sweep (2026-09-11)
 
